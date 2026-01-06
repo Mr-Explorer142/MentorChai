@@ -7,9 +7,16 @@
             <p>Bio: {{ $mentor->profile->bio }}</p>
             <p>Date Of Birth: {{ $mentor->profile->date_of_birth }}</p>
             <p>Address: {{ $mentor->profile->address }}</p>
+            <p>Highest Education Level: {{ $mentor->profile->highgest_education_level }}</p>
+            <p>Skills: {{ $mentor->profile->skills }}</p>
+            <p>Institution Name: {{ $mentor->profile->institution_name }}</p>
+            <p>Hourly Rate: {{ $mentor->profile->hourly_rate }}</p>
+
+
+            
         @endif
 
-        @if(auth()->id() === $mentor->id)
+        @if (auth()->id() === $mentor->id)
             <a href="{{ route('edit_profile', $mentor->id) }}" class="btn btn-active">Edit Profile</a>
         @endif
 </x-layout>

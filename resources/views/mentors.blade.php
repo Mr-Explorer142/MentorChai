@@ -13,40 +13,44 @@
             @endif
         </div>
 
-        <div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             @forelse ($mentors as $mentor)
-                <div class="card bg-base-100 sm:w-90 h-auto shadow-sm float-left border p-2">
-
+                <div class="card bg-base-100 w-full h-auto shadow-sm border">
                     <div class="card-body">
-                        <h2 class="card-title">
-                            {{ $mentor->name }}
-                        </h2>
+                        <div class="flex flex-col gap-3">
+                            <div class="card-title">{{ $mentor->name }}</div>
 
-                        <div class="flex gap-2">
-                            <div class="badge badge-primary">DIU</div>
-                            <div class="badge badge-secondary">৳100 p/h</div>
-                            <div class="badge badge-warning">4.7★</div>
-                        </div>
+                            <div class="flex flex-col gap-2">
+                                <div class="font-semibold badge badge-secondary">
+                                    {{ $mentor->profile->institution_name }}
+                                </div>
+                                <div class="badge badge-secondary">
+                                    {{ $mentor->profile->highgest_education_level }}
+                                </div>
+                            </div>
 
-                        <p> I am FAANG Python develper with passionate teaching skills.
-                        </p>
-                        {{-- Badges --}}
-                        <div class="card-actions justify-start my-3">
-                            <div class="badge badge-outline badge-info">Python</div>
-                            <div class="badge badge-outline badge-secondary">Django</div>
-                            <div class="badge badge-outline badge-accent">Devops</div>
-                            <div class="badge badge-outline badge-warning">Linux</div>
-                        </div>
-                        {{-- Buttons --}}
-                        <div class="flex justify-end items-end gap-3">
-                            <a href="{{ route('mentor_profile', $mentor->id) }}" class="btn btn-info btn-soft">See Profile</a>
-                            <a class="justify-end btn btn-accent btn-soft">Hire</a>
+                            <div class="badge badge-warning">
+                                ৳{{ $mentor->profile->hourly_rate }} p/h
+                            </div>
+
+                            <div class="flex gap-2 flex-wrap">
+                                @foreach (explode(',', $mentor->profile->skills) as $skill)
+                                    <span class="badge badge-primary">{{ trim($skill) }}</span>
+                                @endforeach
+                            </div>
+
+                            <div class="flex gap-2 justify-end mt-3">
+                                <a class="btn btn-info btn-soft" href="{{ route('mentor_profile', $mentor->id) }}">
+                                    See Profile
+                                </a>
+                                <a class="btn btn-accent btn-soft">Hire</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             @empty
-                <p>No mentors found😢</p>
+                <p>No mentors found 😢</p>
             @endforelse
         </div>
-    </div>
+
 </x-layout>

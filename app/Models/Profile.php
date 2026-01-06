@@ -15,9 +15,14 @@ class Profile extends Model
         'avatar',
         'date_of_birth',
         'address',
+        'highgest_education_level',
+        'skills',
+        'institution_name',
+        'hourly_rate',
     ];
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 }

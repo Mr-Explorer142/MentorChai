@@ -20,6 +20,11 @@ return new class extends Migration
             $table->text('bio')->nullable();
             $table->date('date_of_birth')->nullable();
             $table->string('address')->nullable();
+            $table->string('highgest_education_level')->nullable();
+            $table->string('skills')->nullable();
+            $table->string('institution_name')->nullable();
+            $table->string('hourly_rate')->nullable();
+            
 
             $table->timestamps();
         });

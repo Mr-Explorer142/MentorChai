@@ -7,6 +7,12 @@
             <p>Bio: {{ $student->profile->bio }}</p>
             <p>Date Of Birth: {{ $student->profile->date_of_birth }}</p>
             <p>Address: {{ $student->profile->address }}</p>
+            <p>Highest Education Level: {{ $student->profile->highgest_education_level }}</p>
+            <p>Skills: {{ $student->profile->skills }}</p>
+            <p>Institution Name: {{ $student->profile->institution_name }}</p>
+            <p>Hourly Rate: {{ $student->profile->hourly_rate }}</p>
+
+
         @endif
 
         @if (auth()->id() === $student->id)

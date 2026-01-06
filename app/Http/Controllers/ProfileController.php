@@ -46,6 +46,10 @@ class ProfileController extends Controller
             'phone' => 'nullable|string|max:20',
             'address' => 'nullable|string|max:255',
             'date_of_birth' => 'nullable|date',
+            'highgest_education_level' => 'nullable|string|max:50',
+            'skills' => 'nullable|string|max:200',
+            'institution_name' => 'nullable|string|max:200',
+            'hourly_rate' => 'nullable|string|max:200',
         ]);
 
         $user = $request->user();

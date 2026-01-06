@@ -27,6 +27,24 @@
                 <label class="label">Bio</label>
                 <textarea placeholder="Bio" class="textarea textarea-info" name="bio">{{ old('bio', Auth::user()->profile?->bio) }}</textarea>
 
+                <label class="label">Highest Education Level</label>
+                <input type="text" name="highgest_education_level" class="input input-info"
+                    placeholder="Highest Education Level"
+                    value="{{ old('highgest_education_level', Auth::user()->profile?->highgest_education_level) }}" />
+
+                <label class="label">Skills</label>
+                <textarea placeholder="Skills (e.g. Compiler Design, Algorithm)" class="textarea textarea-info" name="skills">{{ old('skills', Auth::user()->profile?->skills) }}</textarea>
+
+                <label class="label">Institution Name</label>
+                <input type="text" name="institution_name" class="input input-info"
+                    placeholder="Last Institution Name"
+                    value="{{ old('institution_name', Auth::user()->profile?->institution_name) }}" />
+
+                <label class="label">Hourly Rate</label>
+                <input type="num" name="hourly_rate" class="input input-info" placeholder="Hourly Rate"
+                    value="{{ old('highgest_education_level', Auth::user()->profile?->hourly_rate) }}" />
+
+
                 <button class="btn btn-soft btn-info mt-4" type="submit">Update</button>
 
                 <a class="mt-3 font-semibold text-center text-secondary text-md fw-bold"
