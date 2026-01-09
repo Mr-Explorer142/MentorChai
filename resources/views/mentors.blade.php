@@ -2,7 +2,8 @@
     <div class="flex flex-col p-5 items-center min-h-screen">
         <div class="my-3">
             @if (session('success'))
-                <div role="alert" class="alert alert-success">
+                <div id="success-alert" role="alert"
+                    class="alert alert-success w-full max-w-2xl mx-auto transition-opacity duration-700 opacity-100">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none"
                         viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -11,6 +12,7 @@
                     <span>{{ session('success') }}</span>
                 </div>
             @endif
+
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -21,7 +23,7 @@
                             <div class="card-title">{{ $mentor->name }}</div>
 
                             <div class="flex flex-col gap-2">
-                                <div class="font-semibold badge badge-secondary">
+                                <div class="font-semibold badge badge-secondary badge-dash">
                                     {{ $mentor->profile->institution_name }}
                                 </div>
                                 <div class="badge badge-secondary">
@@ -40,10 +42,10 @@
                             </div>
 
                             <div class="flex gap-2 justify-end mt-3">
-                                <a class="btn btn-info btn-soft" href="{{ route('mentor_profile', $mentor->id) }}">
+                                <a class="btn btn-info btn-outline" href="{{ route('mentor_profile', $mentor->id) }}">
                                     See Profile
                                 </a>
-                                <a class="btn btn-accent btn-soft">Hire</a>
+                                <a class="btn btn-accent btn-outline">Hire</a>
                             </div>
                         </div>
                     </div>

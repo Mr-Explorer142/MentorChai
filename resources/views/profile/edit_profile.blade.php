@@ -40,7 +40,7 @@
                     placeholder="Last Institution Name"
                     value="{{ old('institution_name', Auth::user()->profile?->institution_name) }}" />
 
-                <label class="label">Hourly Rate</label>
+                <label class="label">Hourly Rate in BDT</label>
                 <input type="num" name="hourly_rate" class="input input-info" placeholder="Hourly Rate"
                     value="{{ old('highgest_education_level', Auth::user()->profile?->hourly_rate) }}" />
 
