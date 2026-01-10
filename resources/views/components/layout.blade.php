@@ -16,7 +16,7 @@
     {{-- Header --}}
     <header>
         <nav>
-            <div class="navbar bg-base-100 shadow-sm">
+            <div class="navbar bg-base-100 shadow-sm md:px-20">
                 {{-- Left Part --}}
                 <div class="navbar-start">
                     <div class="dropdown">
@@ -30,47 +30,48 @@
                         <ul tabindex="-1"
                             class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
                             <li><a href="{{ route('mentors') }}"
-                                    class="{{ Route::is('mentors') ? 'text-accent font-bold' : '' }}">Mentors</a></li>
+                                    class="{{ Route::is('mentors') ? 'text-primary font-bold' : '' }}">Mentors</a></li>
                             @auth
                                 @if (isMentor())
                                     <li><a href="{{ route('mentor_profile', auth()->user()->id) }}"
-                                            class="{{ Route::is('mentor_profile') ? 'text-accent font-bold' : '' }}">Profile</a>
+                                            class="{{ Route::is('mentor_profile') ? 'text-primary font-bold' : '' }}">Profile</a>
                                     </li>
                                     <li><a href="{{ route('mentor_dashboard') }}"
-                                            class="{{ Route::is('mentor_dashboard') ? 'text-accent font-bold' : '' }}">Dashboard</a>
+                                            class="{{ Route::is('mentor_dashboard') ? 'text-primary font-bold' : '' }}">Dashboard</a>
                                     </li>
                                 @elseif (isStudent())
                                     <li><a href="{{ route('student_dashboard') }}"
-                                            class="{{ Route::is('student_dashboard') ? 'text-accent font-bold' : '' }}">Dashboard</a>
+                                            class="{{ Route::is('student_dashboard') ? 'text-primary font-bold' : '' }}">Dashboard</a>
                                     </li>
                                     <li><a href="{{ route('student_profile', auth()->user()->id) }}"
-                                            class="{{ Route::is('student_profile') ? 'text-accent font-bold' : '' }}">Profile</a>
+                                            class="{{ Route::is('student_profile') ? 'text-primary font-bold' : '' }}">Profile</a>
                                     </li>
                                 @endif
                             @endauth
                         </ul>
                     </div>
-                    <a class="font-bold font-mono md:mx-3" href="{{ route('home') }}">MentorChai</a>
+                    <a class="font-bold text-primary text-lg font-mono md:mx-3"
+                        href="{{ route('home') }}">MentorChai</a>
                 </div>
                 {{-- Center Part --}}
                 <div class="navbar-center hidden lg:flex">
                     <ul class="menu menu-horizontal px-1">
                         <li><a href="{{ route('mentors') }}"
-                                class="btn {{ Route::is('mentors') ? 'text-accent btn-active' : '' }}">Mentors</a></li>
+                                class="btn md:mx-2 {{ Route::is('mentors') ? 'btn-primary' : '' }}">Mentors</a></li>
                         @auth
                             @if (isMentor())
                                 <li><a href="{{ route('mentor_dashboard') }}"
-                                        class="btn {{ Route::is('mentor_dashboard') ? 'text-accent btn-active' : '' }}">Dashboard</a>
+                                        class="btn {{ Route::is('mentor_dashboard') ? 'btn-primary' : '' }}">Dashboard</a>
                                 </li>
                                 <li><a href="{{ route('mentor_profile', auth()->user()->id) }}"
-                                        class="btn md:mx-2 {{ Route::is('mentor_profile') ? 'text-accent btn-active' : '' }}">Profile</a>
+                                        class="btn md:mx-2 {{ Route::is('mentor_profile') ? 'btn-primary' : '' }}">Profile</a>
                                 </li>
                             @elseif (isStudent())
                                 <li><a href="{{ route('student_dashboard', auth()->user()->id) }}"
-                                        class="btn {{ Route::is('student_dashboard') ? 'text-accent btn-active' : '' }}">Dashboard</a>
+                                        class="btn {{ Route::is('student_dashboard') ? 'btn-primary' : '' }}">Dashboard</a>
                                 </li>
                                 <li><a href="{{ route('student_profile', auth()->user()->id) }}"
-                                        class="btn md:mx-2 {{ Route::is('student_profile') ? 'text-accent btn-active' : '' }}">Profile</a>
+                                        class="btn md:mx-2 {{ Route::is('student_profile') ? 'btn-primary' : '' }}">Profile</a>
                                 </li>
                             @endif
                         @endauth
@@ -119,7 +120,7 @@
     </main>
 
     {{-- Footer --}}
-    <footer class="footer footer-horizontal footer-center bg-base-200 text-base-content rounded p-10">
+    <footer class="footer footer-horizontal footer-center bg-base-100 text-base-content rounded-xl p-10 shadow-sm">
         <nav class="grid grid-flow-col gap-4">
             <a href="{{ route('about') }}"
                 class="link link-hover {{ Route::is('about') ? 'text-accent font-bold' : '' }}">About

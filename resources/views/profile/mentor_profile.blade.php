@@ -24,31 +24,33 @@
                         </h1>
 
                         <!-- Student ID -->
-                        <p class="text-sm text-base-content/60 mt-1">
+                        <p class="font-medium text-sm text-base-content/60 mt-1">
                             User ID : {{ $mentor->id }}
                         </p>
 
                         <!-- Bio -->
-                        <p class="mt-2 text-base-content/70 max-w-xl">
-                            {{ $student->profile->bio ?? 'Short bio not added yet' }}
+                        <p class="font-medium text-base-content/70 max-w-xl">
+                            {{ $mentor->profile->bio ?? 'Short bio not added yet' }}
                         </p>
                     </div>
 
                     <!-- Upload -->
-                    <div class="text-center lg:text-right text-sm">
-                        <button class="btn btn-outline btn-sm gap-2">
-                            <!-- Heroicon: Arrow Up Tray -->
-                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M12 16V4m0 0l-4 4m4-4l4 4M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2" />
-                            </svg>
-                            Upload Photo
-                        </button>
-                        <p class="mt-2 text-base-content/60">
-                            800×800 recommended<br>JPG or PNG
-                        </p>
-                    </div>
+                    @if (auth()->id() === $mentor->id)
+                        <div class="text-center lg:text-right text-sm">
+                            <button class="btn btn-outline btn-sm gap-2">
+                                <!-- Heroicon: Arrow Up Tray -->
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M12 16V4m0 0l-4 4m4-4l4 4M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2" />
+                                </svg>
+                                Upload Photo
+                            </button>
+                            <p class="mt-2 text-base-content/60">
+                                800×800 recommended<br>JPG or PNG
+                            </p>
+                        </div>
+                    @endif
                 </div>
             </div>
 
@@ -210,8 +212,6 @@
                 </div>
             </div>
 
-
-            <!-- SKILLS -->
             <!-- SKILLS -->
             <div class="card-body">
                 <div class="flex items-center justify-between mb-4">
@@ -230,7 +230,7 @@
                                 d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
 
-                        Show Skills Demo
+                        See Skills Demo
                     </a>
                 </div>
 

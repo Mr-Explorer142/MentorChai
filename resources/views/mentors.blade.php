@@ -1,5 +1,6 @@
 <x-layout>
-    <div class="flex flex-col p-5 items-center min-h-screen">
+    <div class="flex flex-col p-5 min-h-screen">
+        {{-- Success Message --}}
         <div class="my-3">
             @if (session('success'))
                 <div id="success-alert" role="alert"
@@ -15,9 +16,10 @@
 
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {{-- Cards --}}
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:ml-15">
             @forelse ($mentors as $mentor)
-                <div class="card bg-base-100 w-full h-auto shadow-sm border">
+                <div class="card bg-base-100 w-auto h-auto shadow-sm border border-primary">
                     <div class="card-body">
                         <div class="flex flex-col gap-3">
                             <div class="card-title">{{ $mentor->name }}</div>
