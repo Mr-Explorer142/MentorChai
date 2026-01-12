@@ -57,6 +57,24 @@ Route::get('/profile/edit', [ProfileController::class, 'editProfile'])->middlewa
 
 Route::put('profile', [ProfileController::class, 'updateprofile'])->middleware('auth')->name('update_profile');
 
+/* checkout routes */
+Route::get('/checkout', function () {
+    return view('checkout.checkout', [
+        'student' => (object)[
+            'id' => 'STU-101',
+            'name' => 'John Doe',
+        ],
+        'mentor' => (object)[
+            'id' => 'MEN-55',
+            'name' => 'Jane Smith',
+        ],
+        'topic' => 'Laravel Basics',
+        'hourlyRate' => 50,
+        'hours' => 2,
+        'paidAmount' => 100,
+    ]);
+})->name('checkout')->middleware('student');
+
 // Login routes
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 

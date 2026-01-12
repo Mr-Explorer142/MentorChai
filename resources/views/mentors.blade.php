@@ -47,7 +47,7 @@
                                 <a class="btn btn-info btn-outline" href="{{ route('mentor_profile', $mentor->id) }}">
                                     See Profile
                                 </a>
-                                <a class="btn btn-accent btn-outline">Hire</a>
+                                <a href="{{ route('checkout') }}" class="btn btn-accent btn-outline">Hire</a>
                             </div>
                         </div>
                     </div>
