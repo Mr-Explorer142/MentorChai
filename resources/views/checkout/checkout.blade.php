@@ -137,9 +137,9 @@
                         </span>
                     </div>
 
-                    <button class="btn btn-warning btn-wide text-lg">
+                    <a href="{{ route('success') }}" class="btn btn-warning btn-wide text-lg">
                         Confirm & Pay
-                    </button>
+                    </a>
                 </div>
 
             </div>

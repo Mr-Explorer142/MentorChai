@@ -67,7 +67,7 @@
                                         class="btn md:mx-2 {{ Route::is('mentor_profile') ? 'btn-primary' : '' }}">Profile</a>
                                 </li>
                             @elseif (isStudent())
-                                <li><a href="{{ route('student_dashboard', auth()->user()->id) }}"
+                                <li><a href="{{ route('student_dashboard') }}"
                                         class="btn {{ Route::is('student_dashboard') ? 'btn-primary' : '' }}">Dashboard</a>
                                 </li>
                                 <li><a href="{{ route('student_profile', auth()->user()->id) }}"

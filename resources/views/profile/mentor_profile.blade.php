@@ -1,9 +1,9 @@
 <x-layout>
-    <div class="min-h-screen bg-base-200 py-10 px-4">
-        <div class="max-w-5xl mx-auto card bg-base-100 shadow-xl">
+    <div class="min-h-screen bg-base-200 p-6 md:p-22 space-y-8">
 
-            <!-- HEADER -->
-            <div class="card-body border-b">
+        {{-- Header --}}
+        <div class="mx-auto card bg-base-100 shadow-sm">
+            <div class="card-body">
                 <div class="flex flex-col lg:flex-row gap-6 items-center lg:items-start">
 
                     <!-- Avatar -->
@@ -53,9 +53,11 @@
                     @endif
                 </div>
             </div>
+        </div>
 
+        <div class="mx-auto card bg-base-100 shadow-sm">
             <!-- PERSONAL INFO -->
-            <div class="card-body border-b">
+            <div class="card-body border-b border-gray-600">
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-lg font-semibold">Personal Info</h2>
 
@@ -167,7 +169,7 @@
             </div>
 
             <!-- EDUCATION -->
-            <div class="card-body border-b">
+            <div class="card-body border-b border-gray-600">
                 <h2 class="text-lg font-semibold mb-6">Education</h2>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -213,7 +215,7 @@
             </div>
 
             <!-- SKILLS -->
-            <div class="card-body">
+            <div class="card-body border-gray-600">
                 <div class="flex items-center justify-between mb-4">
                     <h2 class="text-lg font-semibold">Skills</h2>
 
@@ -248,5 +250,165 @@
             </div>
 
         </div>
+
+        <div class="mx-auto card bg-base-100 shadow-sm">
+            {{-- Review section --}}
+            <div class="card-body">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-lg font-semibold">Student Reviews</h2>
+
+                    <div class="flex items-center gap-2 text-sm text-base-content/60">
+                        <!-- Heroicon: Star -->
+                        <svg class="w-5 h-5 text-warning" fill="currentColor" viewBox="0 0 20 20">
+                            <path
+                                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.173c.969 0 1.371 1.24.588 1.81l-3.376 2.454a1 1 0 00-.364 1.118l1.286 3.967c.3.921-.755 1.688-1.54 1.118l-3.376-2.454a1 1 0 00-1.176 0l-3.376 2.454c-.784.57-1.838-.197-1.539-1.118l1.285-3.967a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.173a1 1 0 00.95-.69l1.287-3.967z" />
+                        </svg>
+                        <span class="font-medium">4.8</span>
+                        <span>(5 reviews)</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                    <!-- Review Card -->
+                    <div class="card bg-base-100 border shadow-sm">
+                        <div class="card-body gap-3">
+                            <div class="flex items-center gap-4">
+                                <div class="avatar placeholder">
+                                    <div class="bg-primary text-primary-content rounded-full w-10 text-center">
+                                        <span>A</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Ahsan Rahman</p>
+                                    <div class="rating rating-sm">
+                                        <input type="radio" class="mask mask-star-2 bg-warning" checked />
+                                        <input type="radio" class="mask mask-star-2 bg-warning" checked />
+                                        <input type="radio" class="mask mask-star-2 bg-warning" checked />
+                                        <input type="radio" class="mask mask-star-2 bg-warning" checked />
+                                        <input type="radio" class="mask mask-star-2 bg-warning" checked />
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-sm text-base-content/70">
+                                Very clear explanations and practical guidance. The mentor helped me understand complex
+                                topics
+                                easily.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Review Card -->
+                    <div class="card bg-base-100 border shadow-sm">
+                        <div class="card-body gap-3">
+                            <div class="flex items-center gap-4">
+                                <div class="avatar placeholder">
+                                    <div class="bg-secondary text-secondary-content rounded-full w-10 text-center">
+                                        <span>S</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Sara Islam</p>
+                                    <div class="rating rating-sm">
+                                        <input type="radio" class="mask mask-star-2 bg-warning" checked />
+                                        <input type="radio" class="mask mask-star-2 bg-warning" checked />
+                                        <input type="radio" class="mask mask-star-2 bg-warning" checked />
+                                        <input type="radio" class="mask mask-star-2 bg-warning" checked />
+                                        <input type="radio" class="mask mask-star-2 bg-warning" />
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-sm text-base-content/70">
+                                Sessions were well-structured and focused. I gained confidence applying concepts in real
+                                projects.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Review Card -->
+                    <div class="card bg-base-100 border shadow-sm">
+                        <div class="card-body gap-3">
+                            <div class="flex items-center gap-4">
+                                <div class="avatar placeholder">
+                                    <div class="bg-accent text-accent-content rounded-full w-10 text-center">
+                                        <span>M</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Mahmud Hasan</p>
+                                    <div class="rating rating-sm">
+                                        <input type="radio" class="mask mask-star-2 bg-warning" checked />
+                                        <input type="radio" class="mask mask-star-2 bg-warning" checked />
+                                        <input type="radio" class="mask mask-star-2 bg-warning" checked />
+                                        <input type="radio" class="mask mask-star-2 bg-warning" checked />
+                                        <input type="radio" class="mask mask-star-2 bg-warning" />
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-sm text-base-content/70">
+                                Friendly and professional mentoring style. Always responsive to questions and feedback.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Review Card -->
+                    <div class="card bg-base-100 border shadow-sm">
+                        <div class="card-body gap-3">
+                            <div class="flex items-center gap-4">
+                                <div class="avatar placeholder">
+                                    <div class="bg-info text-info-content rounded-full w-10 text-center">
+                                        <span>N</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Nusrat Jahan</p>
+                                    <div class="rating rating-sm">
+                                        <input type="radio" class="mask mask-star-2 bg-warning" checked />
+                                        <input type="radio" class="mask mask-star-2 bg-warning" checked />
+                                        <input type="radio" class="mask mask-star-2 bg-warning" checked />
+                                        <input type="radio" class="mask mask-star-2 bg-warning" />
+                                        <input type="radio" class="mask mask-star-2 bg-warning" />
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-sm text-base-content/70">
+                                Good pacing and detailed explanations. Helpful for both beginners and intermediate
+                                learners.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Review Card -->
+                    <div class="card bg-base-100 border shadow-sm">
+                        <div class="card-body gap-3">
+                            <div class="flex items-center gap-4">
+                                <div class="avatar placeholder">
+                                    <div class="bg-success text-success-content rounded-full w-10 text-center">
+                                        <span>R</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Rakib Chowdhury</p>
+                                    <div class="rating rating-sm">
+                                        <input type="radio" class="mask mask-star-2 bg-warning" checked />
+                                        <input type="radio" class="mask mask-star-2 bg-warning" checked />
+                                        <input type="radio" class="mask mask-star-2 bg-warning" checked />
+                                        <input type="radio" class="mask mask-star-2 bg-warning" checked />
+                                        <input type="radio" class="mask mask-star-2 bg-warning" />
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-sm text-base-content/70">
+                                Strong subject knowledge and excellent communication. Highly recommended for serious
+                                learners.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
     </div>
+
 </x-layout>

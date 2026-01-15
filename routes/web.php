@@ -2,6 +2,7 @@
 
 use App\Enums\UserRole;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Models\User;
@@ -37,14 +38,10 @@ Route::get('/register/teacher', [RegisterController::class, 'showTeacherForm'])-
 
 Route::post("/register", [RegisterController::class, "register"])->name('register');
 
-// Dashboard routes
-Route::get('/dashboard/student', function () {
-    return view('dashboard.student_dashboard');
-})->name('student_dashboard')->middleware('student');
+// Dashboard 
+Route::get('/dashboard/student', [DashboardController::class, 'studentDashboard'])->name('student_dashboard')->middleware('student');
 
-Route::get('/dashboard/mentor', function () {
-    return view('dashboard.mentor_dashboard');
-})->name('mentor_dashboard')->middleware('mentor');
+Route::get('/dashboard/mentor', [DashboardController::class, 'mentorDashboard'])->name('mentor_dashboard')->middleware('mentor');
 
 // Proifle routes
 // Route::get('/profile/{user}', [ProfileController::class, 'showProfile'])->middleware('auth')->name('showProfile');
@@ -74,6 +71,19 @@ Route::get('/checkout', function () {
         'paidAmount' => 100,
     ]);
 })->name('checkout')->middleware('student');
+
+/* success route */
+Route::get('/success', function () {
+    return view('checkout.success', [
+        'paymentMethod' => session('payment_method', 'bKash'),
+        'amount' => session('amount', 0),
+    ]);
+})->name('success')->middleware('student');
+
+/* Video Calling route */
+Route::get('/live-session', function() {
+    return view('session.live-session');
+})->name('live-session')->middleware('student');
 
 // Login routes
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');

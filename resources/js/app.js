@@ -38,5 +38,44 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+/* Success Page animation */
+import confetti from "canvas-confetti";
 
-/* Theme switching */
+document.addEventListener("DOMContentLoaded", () => {
+    const loader = document.getElementById("loader");
+    const card = document.getElementById("successCard");
+    const checkWrapper = document.getElementById("checkWrapper");
+
+    if (!loader || !card) return;
+
+    // 1️⃣ Simulate processing delay
+    setTimeout(() => {
+        loader.classList.add("hidden");
+        card.classList.remove("hidden");
+
+        // 2️⃣ Animate card in
+        requestAnimationFrame(() => {
+            card.classList.remove("opacity-0", "scale-95");
+            card.classList.add("opacity-100", "scale-100");
+        });
+    }, 1500);
+
+    // 3️⃣ Checkmark bounce
+    setTimeout(() => {
+        checkWrapper.classList.add("animate-bounce");
+    }, 2000);
+
+    // 4️⃣ Confetti 🎉
+    setTimeout(() => {
+        confetti({
+            particleCount: 120,
+            spread: 70,
+            origin: { y: 0.6 },
+        });
+    }, 2200);
+
+    // Optional auto redirect
+    // setTimeout(() => {
+    //     window.location.href = "/dashboard";
+    // }, 6000);
+});
