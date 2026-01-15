@@ -117,16 +117,31 @@
 
                 <!-- Contact Form -->
                 <div class="w-full md:w-1/2 order-1 md:order-2">
-                    <div class="bg-white rounded-xl shadow-md p-6">
+                    <div class="rounded-xl shadow-md p-6 bg-white">
                         <form class="space-y-4">
-                            <input type="text" placeholder="Name" class="input input-bordered w-full" />
-                            <input type="email" placeholder="Email" class="input input-bordered w-full" />
-                            <input type="text" placeholder="Subject" class="input input-bordered w-full" />
-                            <textarea placeholder="Message" rows="5" class="textarea textarea-bordered w-full"></textarea>
+
+                            <input type="text" placeholder="Name"
+                                class="input w-full bg-white text-gray-900 border border-gray-300
+                       placeholder-gray-500 focus:border-blue-500 focus:outline-none" />
+
+                            <input type="email" placeholder="Email"
+                                class="input w-full bg-white text-gray-900 border border-gray-300
+                       placeholder-gray-500 focus:border-blue-500 focus:outline-none" />
+
+                            <input type="text" placeholder="Subject"
+                                class="input w-full bg-white text-gray-900 border border-gray-300
+                       placeholder-gray-500 focus:border-blue-500 focus:outline-none" />
+
+                            <textarea rows="5" placeholder="Message"
+                                class="textarea w-full bg-white text-gray-900 border border-gray-300
+                       placeholder-gray-500 focus:border-blue-500 focus:outline-none"></textarea>
+
                             <button type="submit"
-                                class="btn w-full bg-linear-to-r from-blue-600 to-purple-600 text-white hover:opacity-90 transition">
+                                class="btn w-full bg-gradient-to-r from-blue-600 to-purple-600
+                       text-white border-none hover:opacity-90 transition">
                                 Send Message
                             </button>
+
                         </form>
                     </div>
                 </div>
