@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="flex flex-col p-5 min-h-screen">
+    <div class="flex flex-col p-5 min-h-screen bg-base-200">
         {{-- Success Message --}}
         <div class="my-3">
             @if (session('success'))

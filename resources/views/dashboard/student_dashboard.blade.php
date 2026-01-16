@@ -77,10 +77,10 @@
             </div>
 
             <!-- Payment Card -->
-            <div class="card bg-base-100 shadow-xl border-l-8 border-success">
+            <div class="card bg-base-100 shadow-xl border-l-8 border-secondary">
                 <div class="card-body">
                     <div class="flex justify-between items-center">
-                        <h2 class="card-title text-success flex items-center gap-2">
+                        <h2 class="card-title text-secondary flex items-center gap-2">
                             <!-- Heroicon: Credit Card -->
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -90,7 +90,7 @@
 
                             Total Paid
                         </h2>
-                        <span class="badge badge-success badge-lg">৳10,000</span>
+                        <span class="badge badge-secondary badge-lg">৳10,000</span>
                     </div>
 
                     <div class="space-y-2 mt-4">
@@ -132,7 +132,7 @@
                                 <th>Mentor</th>
                                 <th>Topic</th>
                                 <th>Duration</th>
-                                <th>Payment</th>
+                                <th>Amount</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -154,7 +154,7 @@
                                 <td>18</td>
                                 <td>Alex Brown</td>
                                 <td>Vue Integration</td>
-                                <td><span class="badge badge-success">2 hrs</span></td>
+                                <td><span class="badge badge-secondary">2 hrs</span></td>
                                 <td class="font-semibold">৳1,200</td>
                             </tr>
                         </tbody>
@@ -166,7 +166,7 @@
         <!-- Recent Payments Table -->
         <div class="card bg-base-100 shadow-xl">
             <div class="card-body">
-                <h2 class="card-title text-success mb-4 flex items-center gap-2">
+                <h2 class="card-title text-secondary mb-4 flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -178,7 +178,7 @@
 
                 <div class="overflow-x-auto">
                     <table class="table table-zebra">
-                        <thead class="bg-success text-success-content">
+                        <thead class="bg-secondary text-secondary-content">
                             <tr>
                                 <th>Mentor ID</th>
                                 <th>Mentor</th>

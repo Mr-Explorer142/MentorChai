@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="bg-linear-to-br from-blue-50 via-white to-purple-50 text-gray-800 min-h-screen">
+    <div class="min-h-screen bg-base-200 px-6 md:px-18 space-y-6">
 
         <!-- Contact Section -->
         <section class="max-w-7xl mx-auto px-6 py-20">
@@ -16,7 +16,7 @@
 
                         <!-- Phone -->
                         <div
-                            class="relative bg-white p-5 rounded-xl shadow-md border-l-4 border-blue-500 cursor-pointer
+                            class="relative p-5 rounded-xl shadow-md border-l-4 border-blue-500 cursor-pointer
                                     transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg flex items-center gap-4">
                             <button
                                 class="copy-btn absolute top-2 right-2 text-gray-400 hover:text-gray-700 transition text-lg"
@@ -40,7 +40,7 @@
 
                         <!-- Email -->
                         <div
-                            class="relative bg-white p-5 rounded-xl shadow-md border-l-4 border-blue-500 cursor-pointer
+                            class="relative p-5 rounded-xl shadow-md border-l-4 border-blue-500 cursor-pointer
                                     transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg flex items-center gap-4">
                             <button
                                 class="copy-btn absolute top-2 right-2 text-gray-400 hover:text-gray-700 transition text-lg"
@@ -64,7 +64,7 @@
 
                         <!-- WhatsApp -->
                         <div
-                            class="relative bg-white p-5 rounded-xl shadow-md border-l-4 border-green-500 cursor-pointer
+                            class="relative p-5 rounded-xl shadow-md border-l-4 border-green-500 cursor-pointer
                                     transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg flex items-center gap-4">
                             <button
                                 class="copy-btn absolute top-2 right-2 text-gray-400 hover:text-gray-700 transition text-lg"
@@ -88,7 +88,7 @@
 
                         <!-- Location -->
                         <div
-                            class="relative bg-white p-5 rounded-xl shadow-md border-l-4 border-red-500 cursor-pointer
+                            class="relative p-5 rounded-xl shadow-md border-l-4 border-red-500 cursor-pointer
                                     transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg flex items-center gap-4">
                             <button
                                 class="copy-btn absolute top-2 right-2 text-gray-400 hover:text-gray-700 transition text-lg"
@@ -117,28 +117,26 @@
 
                 <!-- Contact Form -->
                 <div class="w-full md:w-1/2 order-1 md:order-2">
-                    <div class="rounded-xl shadow-md p-6 bg-white">
+                    <div class="rounded-xl shadow-md p-6">
                         <form class="space-y-4">
 
                             <input type="text" placeholder="Name"
-                                class="input w-full bg-white text-gray-900 border border-gray-300
+                                class="input w-full text-gray-900 border border-gray-300
                        placeholder-gray-500 focus:border-blue-500 focus:outline-none" />
 
                             <input type="email" placeholder="Email"
-                                class="input w-full bg-white text-gray-900 border border-gray-300
+                                class="input w-full text-gray-900 border border-gray-300
                        placeholder-gray-500 focus:border-blue-500 focus:outline-none" />
 
                             <input type="text" placeholder="Subject"
-                                class="input w-full bg-white text-gray-900 border border-gray-300
+                                class="input w-full text-gray-900 border border-gray-300
                        placeholder-gray-500 focus:border-blue-500 focus:outline-none" />
 
                             <textarea rows="5" placeholder="Message"
-                                class="textarea w-full bg-white text-gray-900 border border-gray-300
+                                class="textarea w-full text-gray-900 border border-gray-300
                        placeholder-gray-500 focus:border-blue-500 focus:outline-none"></textarea>
 
-                            <button type="submit"
-                                class="btn w-full bg-gradient-to-r from-blue-600 to-purple-600
-                       text-white border-none hover:opacity-90 transition">
+                            <button type="submit" class="btn w-full btn-primary">
                                 Send Message
                             </button>
 
@@ -153,7 +151,7 @@
                 <h3 class="text-center font-medium mb-4 text-base-content">Find Us on Google Map</h3>
                 <a href="https://www.google.com/maps/place/Uttara,+Dhaka/@23.8766874,90.3576454,14z/data=!3m1!4b1!4m6!3m5!1s0x3755c5d05e7074dd:0xd1c58803049f00c7!8m2!3d23.8758547!4d90.3795438!16s%2Fm%2F02phgnn?entry=ttu&g_ep=EgoyMDI2MDEwNy4wIKXMDSoASAFQAw%3D%3D"
                     target="_blank" rel="noopener noreferrer">
-                    <div class="bg-white shadow-md rounded-xl overflow-hidden inline-block w-full max-w-3xl h-64">
+                    <div class="shadow-md rounded-xl overflow-hidden inline-block w-full max-w-3xl h-64">
                         <img src="{{ asset('images/Contact Page/map.png') }}" alt="Location Map"
                             class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
                     </div>

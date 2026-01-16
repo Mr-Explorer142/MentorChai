@@ -31,6 +31,11 @@ Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
 
+/* FAQ Route */
+Route::get('/faq', function() {
+    return view('faq');
+})->name('faq');
+
 // Register routes
 Route::get('/register/student', [RegisterController::class, 'showStudentForm'])->name('student_register');
 
