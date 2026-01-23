@@ -20,6 +20,7 @@
                 {{-- Left Part --}}
                 <div class="navbar-start">
                     <div class="dropdown">
+                        <!-- Hamburger -->
                         <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
@@ -27,29 +28,152 @@
                                     d="M4 6h16M4 12h8m-8 6h16" />
                             </svg>
                         </div>
-                        <ul tabindex="-1"
-                            class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                            <li><a href="{{ route('mentors') }}"
-                                    class="{{ Route::is('mentors') ? 'text-primary font-bold' : '' }}">Mentors</a></li>
-                            @auth
-                                @if (isMentor())
-                                    <li><a href="{{ route('mentor_profile', auth()->user()->id) }}"
-                                            class="{{ Route::is('mentor_profile') ? 'text-primary font-bold' : '' }}">Profile</a>
-                                    </li>
-                                    <li><a href="{{ route('mentor_dashboard') }}"
-                                            class="{{ Route::is('mentor_dashboard') ? 'text-primary font-bold' : '' }}">Dashboard</a>
-                                    </li>
-                                @elseif (isStudent())
-                                    <li><a href="{{ route('student_dashboard') }}"
-                                            class="{{ Route::is('student_dashboard') ? 'text-primary font-bold' : '' }}">Dashboard</a>
-                                    </li>
-                                    <li><a href="{{ route('student_profile', auth()->user()->id) }}"
-                                            class="{{ Route::is('student_profile') ? 'text-primary font-bold' : '' }}">Profile</a>
-                                    </li>
-                                @endif
-                            @endauth
-                        </ul>
+
+                        <!-- PANEL (NOT menu) -->
+                        <div tabindex="-1"
+                            class="dropdown-content fixed top-0 left-0 z-50
+               h-screen w-[75%] bg-base-100 shadow
+               overflow-y-auto">
+
+                            <!-- Inner wrapper (important for scrolling) -->
+                            <div class="flex flex-col p-5 min-h-screen">
+
+                                <!-- Header -->
+                                <div class="flex items-center justify-between mb-4">
+                                    <h2 class="text-lg font-bold">Menu</h2>
+                                    <button class="btn btn-sm btn-circle btn-ghost">✕</button>
+                                </div>
+
+                                <!-- NAV ITEMS -->
+                                <nav class="space-y-2">
+                                    <a href="{{ route('mentors') }}"
+                                        class="block px-3 py-2 rounded hover:bg-base-200
+                          {{ Route::is('mentors') ? 'text-primary font-bold' : '' }}">
+                                        Mentors
+                                    </a>
+
+                                    @auth
+                                        @if (isMentor())
+                                            <a href="{{ route('mentor_profile', auth()->user()->id) }}"
+                                                class="block px-3 py-2 rounded hover:bg-base-200
+                                  {{ Route::is('mentor_profile') ? 'text-primary font-bold' : '' }}">
+                                                Profile
+                                            </a>
+
+                                            <a href="{{ route('mentor_dashboard') }}"
+                                                class="block px-3 py-2 rounded hover:bg-base-200
+                                  {{ Route::is('mentor_dashboard') ? 'text-primary font-bold' : '' }}">
+                                                Dashboard
+                                            </a>
+                                        @elseif (isStudent())
+                                            <a href="{{ route('student_dashboard') }}"
+                                                class="block px-3 py-2 rounded hover:bg-base-200
+                                  {{ Route::is('student_dashboard') ? 'text-primary font-bold' : '' }}">
+                                                Dashboard
+                                            </a>
+
+                                            <a href="{{ route('student_profile', auth()->user()->id) }}"
+                                                class="block px-3 py-2 rounded hover:bg-base-200
+                                  {{ Route::is('student_profile') ? 'text-primary font-bold' : '' }}">
+                                                Profile
+                                            </a>
+                                        @endif
+                                    @endauth
+                                </nav>
+
+                                <div class="divider my-4"></div>
+
+                                <!-- FILTERS -->
+                                <h3 class="font-semibold mb-3">Filter Mentors</h3>
+
+                                <!-- Universities -->
+                                <section class="mb-5">
+                                    <p class="text-secondary font-semibold mb-2">Universities</p>
+
+                                    <label class="flex items-center gap-2 mb-2 text-secondary">
+                                        <input type="checkbox" class="checkbox checkbox-secondary">
+                                        University of Dhaka
+                                    </label>
+                                    <label class="flex items-center gap-2 mb-2 text-secondary">
+                                        <input type="checkbox" class="checkbox checkbox-secondary">
+                                        BUET
+                                    </label>
+                                    <label class="flex items-center gap-2 mb-2 text-secondary">
+                                        <input type="checkbox" class="checkbox checkbox-secondary">
+                                        North South University
+                                    </label>
+                                    <label class="flex items-center gap-2 mb-2 text-secondary">
+                                        <input type="checkbox" class="checkbox checkbox-secondary">
+                                        BRAC University
+                                    </label>
+                                    <label class="flex items-center gap-2 text-secondary">
+                                        <input type="checkbox" class="checkbox checkbox-secondary">
+                                        AIUB
+                                    </label>
+                                </section>
+
+                                <!-- Degrees -->
+                                <section class="mb-5">
+                                    <p class="text-secondary font-semibold mb-2">Degree</p>
+
+                                    <label class="flex items-center gap-2 mb-2 text-secondary">
+                                        <input type="checkbox" class="checkbox checkbox-secondary">
+                                        BSc in CSE
+                                    </label>
+                                    <label class="flex items-center gap-2 mb-2 text-secondary">
+                                        <input type="checkbox" class="checkbox checkbox-secondary">
+                                        BSc in EEE
+                                    </label>
+                                    <label class="flex items-center gap-2 mb-2 text-secondary">
+                                        <input type="checkbox" class="checkbox checkbox-secondary">
+                                        MSc in CSE
+                                    </label>
+                                    <label class="flex items-center gap-2 mb-2 text-secondary">
+                                        <input type="checkbox" class="checkbox checkbox-secondary">
+                                        MSc in Data Science
+                                    </label>
+                                    <label class="flex items-center gap-2 text-secondary">
+                                        <input type="checkbox" class="checkbox checkbox-secondary">
+                                        MSc in AI
+                                    </label>
+                                </section>
+
+                                <!-- Rate -->
+                                <section class="mb-6">
+                                    <p class="text-warning font-semibold mb-3">Rate Range (৳)</p>
+
+                                    <label class="flex items-center gap-2 mb-2 text-warning">
+                                        <input type="radio" name="rate" class="radio radio-warning">
+                                        💰 ৳100 – ৳200
+                                    </label>
+                                    <label class="flex items-center gap-2 mb-2 text-warning">
+                                        <input type="radio" name="rate" class="radio radio-warning">
+                                        💰 ৳200 – ৳400
+                                    </label>
+                                    <label class="flex items-center gap-2 mb-2 text-warning">
+                                        <input type="radio" name="rate" class="radio radio-warning">
+                                        💰 ৳400 – ৳600
+                                    </label>
+                                    <label class="flex items-center gap-2 mb-2 text-warning">
+                                        <input type="radio" name="rate" class="radio radio-warning">
+                                        💰 ৳600 – ৳800
+                                    </label>
+                                    <label class="flex items-center gap-2 text-warning">
+                                        <input type="radio" name="rate" class="radio radio-warning">
+                                        💰 ৳800 – ৳1000
+                                    </label>
+                                </section>
+
+                                <!-- ACTIONS (always bottom, scrolling works) -->
+                                <div class="mt-auto pt-4 flex gap-3 bg-base-100">
+                                    <button class="btn btn-outline w-1/2">Reset</button>
+                                    <button class="btn btn-primary w-1/2">Apply</button>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
+
                     <a class="font-bold text-primary text-lg font-mono md:mx-3"
                         href="{{ route('home') }}">MentorChai</a>
                 </div>
