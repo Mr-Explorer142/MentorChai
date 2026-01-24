@@ -57,6 +57,6 @@ class ProfileController extends Controller
 
         $user->profile->updateOrCreate(['user_id' => $user->id], collect($data)->except('name')->toArray());
 
-        return redirect()->route('mentors')->with('success', 'Profile updated successfuly😁');
+        return redirect()->route('mentors')->with('success', 'প্রোফাইল সফলভাবে আপডেট করা হয়েছে 😁');
     }
 }

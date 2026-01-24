@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Layout</title>
+    <title>MentorChai</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/icon.png') }}">
     @vite(['resources/css/app.css'])
     @vite(['resources/js/app.js'])
 
@@ -30,56 +31,82 @@
                         <ul tabindex="-1"
                             class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
                             <li><a href="{{ route('mentors') }}"
-                                    class="{{ Route::is('mentors') ? 'text-primary font-bold' : '' }}">Mentors</a></li>
+                                    class="text-secondary font-bold justify-center {{ Route::is('mentors') ? 'bg-secondary  text-secondary-content' : '' }}">মেন্টর
+                                    দেখুন</a>
+                            </li>
+                            @guest
+                            <li>
+                                <a class="text-success font-bold justify-center {{ Route::is('student_register') ? 'bg-success text-success-content' : '' }}"
+                                    href="{{ route('student_register') }}">একাউন্ট খুলুন</a>
+                            </li>
+                            @endguest
                             @auth
-                                @if (isMentor())
-                                    <li><a href="{{ route('mentor_profile', auth()->user()->id) }}"
-                                            class="{{ Route::is('mentor_profile') ? 'text-primary font-bold' : '' }}">Profile</a>
-                                    </li>
-                                    <li><a href="{{ route('mentor_dashboard') }}"
-                                            class="{{ Route::is('mentor_dashboard') ? 'text-primary font-bold' : '' }}">Dashboard</a>
-                                    </li>
-                                @elseif (isStudent())
-                                    <li><a href="{{ route('student_dashboard') }}"
-                                            class="{{ Route::is('student_dashboard') ? 'text-primary font-bold' : '' }}">Dashboard</a>
-                                    </li>
-                                    <li><a href="{{ route('student_profile', auth()->user()->id) }}"
-                                            class="{{ Route::is('student_profile') ? 'text-primary font-bold' : '' }}">Profile</a>
-                                    </li>
-                                @endif
+                            @if (isMentor())
+                            <li><a href="{{ route('mentor_profile', auth()->user()->id) }}"
+                                    class="text-primary font-bold justify-center {{ Route::is('mentor_profile') ? 'bg-primary text-primary-content' : '' }}">Profile</a>
+                            </li>
+                            <li><a href="{{ route('mentor_dashboard') }}"
+                                    class="text-primary font-bold justify-center {{ Route::is('mentor_dashboard') ? 'bg-primary text-primary-content' : '' }}">Dashboard</a>
+                            </li>
+                            @elseif (isStudent())
+                            <li><a href="{{ route('student_dashboard') }}"
+                                    class="text-primary font-bold justify-center {{ Route::is('student_dashboard') ? 'bg-primary text-primary-content' : '' }}">Dashboard</a>
+                            </li>
+                            <li><a href="{{ route('student_profile', auth()->user()->id) }}"
+                                    class="text-primary font-bold justify-center {{ Route::is('student_profile') ? 'bg-primary text-primary-content' : '' }}">Profile</a>
+                            </li>
+                            @endif
                             @endauth
                         </ul>
                     </div>
-                    <a class="font-bold text-primary text-lg font-mono md:mx-3"
+                    <a class="font-bold text-primary text-xl md:text-2xl font-mono md:mx-3"
                         href="{{ route('home') }}">MentorChai</a>
-                </div>
-                {{-- Center Part --}}
-                <div class="navbar-center hidden lg:flex">
-                    <ul class="menu menu-horizontal px-1">
-                        <li><a href="{{ route('mentors') }}"
-                                class="btn md:mx-2 {{ Route::is('mentors') ? 'btn-primary' : '' }}">Mentors</a></li>
-                        @auth
-                            @if (isMentor())
-                                <li><a href="{{ route('mentor_dashboard') }}"
-                                        class="btn {{ Route::is('mentor_dashboard') ? 'btn-primary' : '' }}">Dashboard</a>
-                                </li>
-                                <li><a href="{{ route('mentor_profile', auth()->user()->id) }}"
-                                        class="btn md:mx-2 {{ Route::is('mentor_profile') ? 'btn-primary' : '' }}">Profile</a>
-                                </li>
-                            @elseif (isStudent())
-                                <li><a href="{{ route('student_dashboard') }}"
-                                        class="btn {{ Route::is('student_dashboard') ? 'btn-primary' : '' }}">Dashboard</a>
-                                </li>
-                                <li><a href="{{ route('student_profile', auth()->user()->id) }}"
-                                        class="btn md:mx-2 {{ Route::is('student_profile') ? 'btn-primary' : '' }}">Profile</a>
-                                </li>
-                            @endif
-                        @endauth
-                    </ul>
                 </div>
                 {{-- Right Part --}}
                 <div class="navbar-end">
-                    <label class="swap swap-rotate">
+                    {{-- Center Part is here --}}
+                    <div class="navbar-center hidden lg:flex">
+                        <ul class="menu menu-horizontal px-1">
+                            <li><a href="{{ route('mentors') }}"
+                                    class="btn btn-outline btn-secondary md:mx-2 {{ Route::is('mentors') ? 'bg-secondary text-secondary-content' : '' }}">মেন্টর
+                                    দেখুন </a>
+                            </li>
+                            @auth
+                            @if (isMentor())
+                            <li><a href="{{ route('mentor_dashboard') }}"
+                                    class="btn btn-soft btn-primary {{ Route::is('mentor_dashboard') ? 'bg-primary text-primary-content' : '' }}">ড্যাশবোর্ড</a>
+                            </li>
+                            <li><a href="{{ route('mentor_profile', auth()->user()->id) }}"
+                                    class="btn btn-soft btn-primary md:mx-2 {{ Route::is('mentor_profile') ? 'bg-primary text-primary-content' : '' }}">প্রোফাইল</a>
+                            </li>
+                            @elseif (isStudent())
+                            <li><a href="{{ route('student_dashboard') }}"
+                                    class="btn btn-soft btn-primary {{ Route::is('student_dashboard') ? 'bg-primary text-primary-content' : '' }}">ড্যাশবোর্ড</a>
+                            </li>
+                            <li><a href="{{ route('student_profile', auth()->user()->id) }}"
+                                    class="btn btn-soft btn-primary md:mx-2 {{ Route::is('student_profile') ? 'bg-primary text-primary-content' : '' }}">প্রোফাইল</a>
+                            </li>
+                            @endif
+                            @endauth
+                        </ul>
+                    </div>
+                    {{-- Content of Right part --}}
+                    @guest
+                    <a href="{{ route('login') }}"
+                        class="btn btn-soft btn-primary mr-5 md:mx-2 {{ Route::is('login') ? 'bg-primary text-primary-content' : '' }}">লগইন
+                        করুন</a>
+                    <a class="btn btn-soft btn-success hidden lg:inline-flex ml-2 {{ Route::is('student_register') ? 'bg-success text-success-content' : '' }}"
+                        href="{{ route('student_register') }}">একাউন্ট খুলুন</a>
+                    @endguest
+                    @auth
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button class="btn btn-outline btn-warning mr-3 md:mr-0 text-amber-500 hover:text-white"
+                            type="submit">লগআউট</button>
+                    </form>
+                    @endauth
+                    {{-- Icon of dark mode --}}
+                    <label class="swap swap-rotate md:ml-3">
                         <!-- this hidden checkbox controls the state -->
                         <input type="checkbox" class="theme-controller" value="dark" />
 
@@ -97,18 +124,6 @@
                                 d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
                         </svg>
                     </label>
-                    @guest
-                        <a href="{{ route('login') }}"
-                            class="btn btn-soft btn-primary md:mx-2 {{ Route::is('login') ? 'btn-active btn-primary' : '' }}">Login</a>
-                        <a class="btn btn-soft btn-success ml-2 {{ Route::is('student_register') ? 'btn-active btn-primary' : '' }}"
-                            href="{{ route('student_register') }}">Sign Up</a>
-                    @endguest
-                    @auth
-                        <form action="{{ route('logout') }}" method="POST">
-                            @csrf
-                            <button class="btn btn-soft btn-warning md:mx-2" type="submit">Logout</button>
-                        </form>
-                    @endauth
                 </div>
             </div>
         </nav>
@@ -121,17 +136,16 @@
 
     {{-- Footer --}}
     <footer class="footer footer-horizontal footer-center bg-base-100 text-base-content rounded-xl p-10 shadow-sm">
-        <nav class="grid grid-flow-col gap-4">
+        <nav class="flex flex-col md:flex-row gap-4">
             {{-- About --}}
             <a href="{{ route('about') }}"
-                class="link link-hover {{ Route::is('about') ? 'text-primary font-bold' : '' }}">About
-                us</a>
+                class="link link-hover {{ Route::is('about') ? 'text-primary font-bold' : '' }}">আমাদের সম্পর্কে</a>
             {{-- Contact --}}
             <a href="{{ route('contact') }}"
-                class="link link-hover {{ Route::is('contact') ? 'text-primary font-bold' : '' }}">Contact us</a>
+                class="link link-hover {{ Route::is('contact') ? 'text-primary font-bold' : '' }}">যোগাযোগ করুন</a>
             {{-- FAQ --}}
             <a href="{{ route('faq') }}"
-                class="link link-hover {{ Route::is('faq') ? 'text-primary font-bold' : '' }}">FAQ</a>
+                class="link link-hover {{ Route::is('faq') ? 'text-primary font-bold' : '' }}">প্রায়শই জিজ্ঞাসিত প্রশ্নাবলী</a>
         </nav>
         <nav>
             <div class="grid grid-flow-col gap-4">

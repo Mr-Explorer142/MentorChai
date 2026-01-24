@@ -2,7 +2,7 @@
 
     <div class="min-h-screen bg-base-200 px-6 md:px-14 space-y-6">
         <!-- Hero / About Section -->
-        <section class="max-w-7xl mx-auto px-6 py-20 relative overflow-hidden">
+        <section class="mx-auto px-6 py-20 relative overflow-hidden">
 
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
@@ -518,8 +518,8 @@
                         করুন।
                     </p>
 
-                    <button class="w-full cursor-pointer btn btn-outline btn-primary shadow-sm">বিস্তারিত
-                        জানতে এখানে ক্লিক করুন</button>
+                    <a href="{{ route('faq') }}" class="w-full cursor-pointer btn btn-outline btn-primary shadow-sm">বিস্তারিত
+                        জানতে এখানে ক্লিক করুন</a>
                 </div>
 
                 <div class="relative flex justify-center lg:justify-end">

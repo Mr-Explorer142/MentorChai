@@ -193,7 +193,7 @@
             <div class="max-w-7xl mx-auto px-6">
                 <div class="text-center mb-16">
                     <h2 class="text-2xl lg:text-4xl font-bold mb-4">
-                        ডেভেলপারদ্বয়
+                        ডেভেলপারগণ
                     </h2>
 
                 </div>
@@ -212,7 +212,6 @@
 
                         <h3 class="font-bold text-2xl mb-2 text-center">তাহমিদ আলম তামিম</h3>
                         <p class="text-lg mb-6 text-center">সিনিয়র ডেভেলপার</p>
-
                         <div class="flex justify-center gap-4">
 
                             <!-- LinkedIn -->
@@ -260,7 +259,7 @@
                         </div>
 
                         <h3 class="font-bold text-2xl mb-2 text-center">ওয়াসিফ খাঁন লোদী আদিব</h3>
-                        <p class="text-lg mb-6 text-center">দুধভাত</p>
+                        <p class="text-lg mb-6 text-center">সহকারী ডেভেলপার</p>
 
                         <div class="flex justify-center gap-4">
 
