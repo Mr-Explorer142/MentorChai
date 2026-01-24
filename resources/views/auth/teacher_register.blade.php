@@ -22,7 +22,9 @@
 
                 <button class="btn btn-success  mt-4" type="submit">Register</button>
 
-                <a class="mt-3 text-center font-semibold text-md fw-bold" href="{{ route('student_register') }}">স্টুডেন্ট একাউন্ট খুলুন</a>
+                <p class="text-center my-5 leading-loose font-semibold">স্টুডেন্ট হিসেবে যুক্ত হতে চান?</p>
+
+                <a class="mb-3 btn btn-success btn-outline text-center font-semibold text-md fw-bold" href="{{ route('student_register') }}">স্টুডেন্ট একাউন্ট খুলুন</a>
 
             </fieldset>
         </form>
