@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Layout</title>
+    <title>MentorChai</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/icon.png') }}">
     @vite(['resources/css/app.css'])
     @vite(['resources/js/app.js'])
 
@@ -16,226 +17,184 @@
     {{-- Header --}}
     <header>
         <nav>
-            <div class="navbar bg-base-100 shadow-sm md:px-20">
-                {{-- Left Part --}}
-                <div class="navbar-start">
-                    <div class="dropdown">
-                        <!-- Hamburger -->
-                        <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M4 6h16M4 12h8m-8 6h16" />
-                            </svg>
+            <!-- MOBILE DRAWER ROOT -->
+            <div class="drawer">
+                <input id="mobile-menu" type="checkbox" class="drawer-toggle" />
+
+                <!-- NAVBAR CONTENT -->
+                <div class="drawer-content">
+                    <div class="navbar bg-base-100 shadow-sm p-6">
+
+                        <!-- LEFT -->
+                        <div class="flex-1 items-center gap-3">
+
+                            <!-- HAMBURGER -->
+                            <label for="mobile-menu" class="md:hidden cursor-pointer">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="size-8">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                                </svg>
+                            </label>
+
+                            <!-- LOGO -->
+                            <a href="{{ route('home') }}" class="btn btn-ghost hidden md:inline
+                               text-xl md:text-2xl font-mono text-primary">
+                                MentorChai
+                            </a>
                         </div>
 
-                        <!-- PANEL (NOT menu) -->
-                        <div tabindex="-1"
-                            class="dropdown-content fixed top-0 left-0 z-50
-               h-screen w-[75%] bg-base-100 shadow
-               overflow-y-auto">
+                        <!-- RIGHT -->
+                        <div class="flex items-center gap-3">
 
-                            <!-- Inner wrapper (important for scrolling) -->
-                            <div class="flex flex-col p-5 min-h-screen">
+                            <!-- DESKTOP MENTORS -->
+                            <a href="{{ route('mentors') }}" class="btn btn-secondary btn-outline hidden md:flex">
+                                মেন্টর দেখুন
+                            </a>
 
-                                <!-- Header -->
-                                <div class="flex items-center justify-between mb-4">
-                                    <h2 class="text-lg font-bold">Menu</h2>
-                                    <button class="btn btn-sm btn-circle btn-ghost">✕</button>
+                            <div class="divider divider-horizontal hidden md:flex"></div>
+
+                            <!-- DESKTOP SEARCH -->
+                            <label class="input hidden md:flex input-primary border-2">
+                                <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <g stroke-linejoin="round" stroke-linecap="round" stroke-width="3" fill="none"
+                                        stroke="currentColor">
+                                        <circle cx="11" cy="11" r="8"></circle>
+                                        <path d="m21 21-4.3-4.3"></path>
+                                    </g>
+                                </svg>
+                                <input type="search" placeholder="সার্চ করুন..." />
+                            </label>
+
+                            <!-- MOBILE SEARCH ICON -->
+                            <label for="mobile-search" class="md:hidden cursor-pointer">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                    stroke="currentColor" class="size-8">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0
+                                   A7.5 7.5 0 1 0 5.196 5.196
+                                   a7.5 7.5 0 0 0 10.607 10.607Z" />
+                                </svg>
+                            </label>
+
+                            <div class="divider divider-horizontal"></div>
+
+                            <!-- AUTH -->
+                            @guest
+                            <a href="{{ route('login') }}"
+                                class="btn btn-primary btn-outline {{ Route::is('login') ? 'bg-primary text-primary-content' : '' }}">
+                                লগইন করুন
+                            </a>
+                            @endguest
+
+                            @auth
+                            <div class="dropdown dropdown-end">
+                                <div tabindex="0" class="btn btn-ghost btn-circle avatar">
+                                    <div class="w-10 rounded-full">
+                                        <img
+                                            src="{{ asset('images/About Page/tamim.jpg') }}" />
+                                    </div>
                                 </div>
 
-                                <!-- NAV ITEMS -->
-                                <nav class="space-y-2">
-                                    <a href="{{ route('mentors') }}"
-                                        class="block px-3 py-2 rounded hover:bg-base-200
-                          {{ Route::is('mentors') ? 'text-primary font-bold' : '' }}">
-                                        Mentors
-                                    </a>
-
-                                    @auth
-                                        @if (isMentor())
-                                            <a href="{{ route('mentor_profile', auth()->user()->id) }}"
-                                                class="block px-3 py-2 rounded hover:bg-base-200
-                                  {{ Route::is('mentor_profile') ? 'text-primary font-bold' : '' }}">
-                                                Profile
-                                            </a>
-
-                                            <a href="{{ route('mentor_dashboard') }}"
-                                                class="block px-3 py-2 rounded hover:bg-base-200
-                                  {{ Route::is('mentor_dashboard') ? 'text-primary font-bold' : '' }}">
-                                                Dashboard
-                                            </a>
-                                        @elseif (isStudent())
-                                            <a href="{{ route('student_dashboard') }}"
-                                                class="block px-3 py-2 rounded hover:bg-base-200
-                                  {{ Route::is('student_dashboard') ? 'text-primary font-bold' : '' }}">
-                                                Dashboard
-                                            </a>
-
-                                            <a href="{{ route('student_profile', auth()->user()->id) }}"
-                                                class="block px-3 py-2 rounded hover:bg-base-200
-                                  {{ Route::is('student_profile') ? 'text-primary font-bold' : '' }}">
-                                                Profile
-                                            </a>
-                                        @endif
-                                    @endauth
-                                </nav>
-
-                                <div class="divider my-4"></div>
-
-                                <!-- FILTERS -->
-                                <h3 class="font-semibold mb-3">Filter Mentors</h3>
-
-                                <!-- Universities -->
-                                <section class="mb-5">
-                                    <p class="text-secondary font-semibold mb-2">Universities</p>
-
-                                    <label class="flex items-center gap-2 mb-2 text-secondary">
-                                        <input type="checkbox" class="checkbox checkbox-secondary">
-                                        University of Dhaka
-                                    </label>
-                                    <label class="flex items-center gap-2 mb-2 text-secondary">
-                                        <input type="checkbox" class="checkbox checkbox-secondary">
-                                        BUET
-                                    </label>
-                                    <label class="flex items-center gap-2 mb-2 text-secondary">
-                                        <input type="checkbox" class="checkbox checkbox-secondary">
-                                        North South University
-                                    </label>
-                                    <label class="flex items-center gap-2 mb-2 text-secondary">
-                                        <input type="checkbox" class="checkbox checkbox-secondary">
-                                        BRAC University
-                                    </label>
-                                    <label class="flex items-center gap-2 text-secondary">
-                                        <input type="checkbox" class="checkbox checkbox-secondary">
-                                        AIUB
-                                    </label>
-                                </section>
-
-                                <!-- Degrees -->
-                                <section class="mb-5">
-                                    <p class="text-secondary font-semibold mb-2">Degree</p>
-
-                                    <label class="flex items-center gap-2 mb-2 text-secondary">
-                                        <input type="checkbox" class="checkbox checkbox-secondary">
-                                        BSc in CSE
-                                    </label>
-                                    <label class="flex items-center gap-2 mb-2 text-secondary">
-                                        <input type="checkbox" class="checkbox checkbox-secondary">
-                                        BSc in EEE
-                                    </label>
-                                    <label class="flex items-center gap-2 mb-2 text-secondary">
-                                        <input type="checkbox" class="checkbox checkbox-secondary">
-                                        MSc in CSE
-                                    </label>
-                                    <label class="flex items-center gap-2 mb-2 text-secondary">
-                                        <input type="checkbox" class="checkbox checkbox-secondary">
-                                        MSc in Data Science
-                                    </label>
-                                    <label class="flex items-center gap-2 text-secondary">
-                                        <input type="checkbox" class="checkbox checkbox-secondary">
-                                        MSc in AI
-                                    </label>
-                                </section>
-
-                                <!-- Rate -->
-                                <section class="mb-6">
-                                    <p class="text-warning font-semibold mb-3">Rate Range (৳)</p>
-
-                                    <label class="flex items-center gap-2 mb-2 text-warning">
-                                        <input type="radio" name="rate" class="radio radio-warning">
-                                        💰 ৳100 – ৳200
-                                    </label>
-                                    <label class="flex items-center gap-2 mb-2 text-warning">
-                                        <input type="radio" name="rate" class="radio radio-warning">
-                                        💰 ৳200 – ৳400
-                                    </label>
-                                    <label class="flex items-center gap-2 mb-2 text-warning">
-                                        <input type="radio" name="rate" class="radio radio-warning">
-                                        💰 ৳400 – ৳600
-                                    </label>
-                                    <label class="flex items-center gap-2 mb-2 text-warning">
-                                        <input type="radio" name="rate" class="radio radio-warning">
-                                        💰 ৳600 – ৳800
-                                    </label>
-                                    <label class="flex items-center gap-2 text-warning">
-                                        <input type="radio" name="rate" class="radio radio-warning">
-                                        💰 ৳800 – ৳1000
-                                    </label>
-                                </section>
-
-                                <!-- ACTIONS (always bottom, scrolling works) -->
-                                <div class="mt-auto pt-4 flex gap-3 bg-base-100">
-                                    <button class="btn btn-outline w-1/2">Reset</button>
-                                    <button class="btn btn-primary w-1/2">Apply</button>
-                                </div>
-
+                                <ul tabindex="-1" class="menu menu-sm dropdown-content
+                                       bg-base-100 rounded-box z-10
+                                       mt-3 w-52 p-2 shadow gap-2">
+                                    @if (isMentor())
+                                    <li><a href="{{ route('mentor_profile', auth()->user()->id) }}"
+                                            class="font-bold justify-center {{ Route::is('mentor_profile') ? 'bg-primary text-primary-content' : '' }}">প্রোফাইল</a>
+                                    </li>
+                                    <li><a href="{{ route('mentor_dashboard') }}"
+                                            class="font-bold justify-center {{ Route::is('mentor_dashboard') ? 'bg-primary text-primary-content' : '' }}">ড্যাশবোর্ড</a>
+                                    </li>
+                                    @elseif (isStudent())
+                                    <li><a href="{{ route('student_profile', auth()->user()->id) }}"
+                                            class="justify-center font-bold {{ Route::is('student_profile') ? 'bg-primary text-primary-content' : '' }}">প্রোফাইল</a>
+                                    </li>
+                                    <li><a href="{{ route('student_dashboard') }}"
+                                            class="justify-center font-bold {{ Route::is('student_dashboard') ? 'bg-primary text-primary-content' : '' }}">ড্যাশবোর্ড</a>
+                                    </li>
+                                    @endif
+                                    <li>
+                                        <form action="{{ route('logout') }}" method="POST" class="justify-center">
+                                            @csrf
+                                            <button type="submit" class="font-bold">
+                                                লগআউট
+                                            </button>
+                                        </form>
+                                    </li>
+                                </ul>
                             </div>
+                            @endauth
                         </div>
                     </div>
-
-                    <a class="font-bold text-primary text-lg font-mono md:mx-3"
-                        href="{{ route('home') }}">MentorChai</a>
                 </div>
-                {{-- Center Part --}}
-                <div class="navbar-center hidden lg:flex">
-                    <ul class="menu menu-horizontal px-1">
-                        <li><a href="{{ route('mentors') }}"
-                                class="btn md:mx-2 {{ Route::is('mentors') ? 'btn-primary' : '' }}">Mentors</a></li>
-                        @auth
-                            @if (isMentor())
-                                <li><a href="{{ route('mentor_dashboard') }}"
-                                        class="btn {{ Route::is('mentor_dashboard') ? 'btn-primary' : '' }}">Dashboard</a>
-                                </li>
-                                <li><a href="{{ route('mentor_profile', auth()->user()->id) }}"
-                                        class="btn md:mx-2 {{ Route::is('mentor_profile') ? 'btn-primary' : '' }}">Profile</a>
-                                </li>
-                            @elseif (isStudent())
-                                <li><a href="{{ route('student_dashboard') }}"
-                                        class="btn {{ Route::is('student_dashboard') ? 'btn-primary' : '' }}">Dashboard</a>
-                                </li>
-                                <li><a href="{{ route('student_profile', auth()->user()->id) }}"
-                                        class="btn md:mx-2 {{ Route::is('student_profile') ? 'btn-primary' : '' }}">Profile</a>
-                                </li>
-                            @endif
-                        @endauth
-                    </ul>
-                </div>
-                {{-- Right Part --}}
-                <div class="navbar-end">
-                    <label class="swap swap-rotate">
-                        <!-- this hidden checkbox controls the state -->
-                        <input type="checkbox" class="theme-controller" value="dark" />
 
-                        <!-- sun icon -->
-                        <svg class="swap-off mr-2 h-6 w-6 fill-current" xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24">
-                            <path
-                                d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z" />
-                        </svg>
+                <!-- MOBILE DRAWER -->
+                <div class="drawer-side z-50">
+                    <label for="mobile-menu" class="drawer-overlay"></label>
 
-                        <!-- moon icon -->
-                        <svg class="swap-on mr-2 h-6 w-6 fill-current" xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24">
-                            <path
-                                d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
-                        </svg>
-                    </label>
-                    @guest
-                        <a href="{{ route('login') }}"
-                            class="btn btn-soft btn-primary md:mx-2 {{ Route::is('login') ? 'btn-active btn-primary' : '' }}">Login</a>
-                        <a class="btn btn-soft btn-success ml-2 {{ Route::is('student_register') ? 'btn-active btn-primary' : '' }}"
-                            href="{{ route('student_register') }}">Sign Up</a>
-                    @endguest
-                    @auth
-                        <form action="{{ route('logout') }}" method="POST">
-                            @csrf
-                            <button class="btn btn-soft btn-warning md:mx-2" type="submit">Logout</button>
-                        </form>
-                    @endauth
+                    <aside class="w-[75%] min-h-screen bg-base-100 flex flex-col">
+
+                        <!-- DRAWER HEADER -->
+                        <div class="flex items-center justify-between
+                            p-6 border-b border-gray-600">
+                            <h2 class="text-xl font-bold text-primary">
+                                MentorChai
+                            </h2>
+
+                            <!-- CLOSE BUTTON -->
+                            <label for="mobile-menu" class="btn  btn-ghost btn-circle">
+                                ✕
+                            </label>
+                        </div>
+
+                        <!-- SCROLLABLE MENU -->
+                        <div class="flex-1 overflow-y-auto p-6">
+                            <ul class="menu gap-2">
+
+                                <li>
+                                    <a href="{{ route('mentors') }}"
+                                        class="font-semibold {{ Route::is('mentors') ? 'bg-secondary text-secondary-content' : '' }}">
+                                        মেন্টর দেখুন
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="{{ route('home') }}"
+                                        class="{{ Route::is('home') ? 'bg-primary text-primary-content' : '' }}">
+                                        হোম
+                                    </a>
+                                </li>
+
+                                @guest
+                                <li>
+                                    <a href="{{ route('student_register') }}"
+                                        class="{{ Route::is('student_register') ? 'bg-success text-success-content' : '' }}">
+                                        অ্যাকাউন্ট খুলুন
+                                    </a>
+                                </li>
+                                @endguest
+                            </ul>
+                        </div>
+                    </aside>
                 </div>
             </div>
         </nav>
+
+        <!-- MOBILE SEARCH MODAL -->
+        <input type="checkbox" id="mobile-search" class="modal-toggle" />
+        <div class="modal">
+            <div class="modal-box w-full h-full max-w-none rounded-none">
+                <label for="mobile-search" class="btn btn-sm btn-circle absolute right-4 top-4">
+                    ✕
+                </label>
+
+                <h3 class="font-bold text-lg mb-4">
+                    সার্চ করুন
+                </h3>
+
+                <input type="search" placeholder="সার্চ করুন..." class="input input-bordered w-full text-lg" />
+            </div>
+        </div>
     </header>
 
     {{-- Main --}}
@@ -245,17 +204,17 @@
 
     {{-- Footer --}}
     <footer class="footer footer-horizontal footer-center bg-base-100 text-base-content rounded-xl p-10 shadow-sm">
-        <nav class="grid grid-flow-col gap-4">
+        <nav class="flex flex-col md:flex-row gap-4">
             {{-- About --}}
             <a href="{{ route('about') }}"
-                class="link link-hover {{ Route::is('about') ? 'text-primary font-bold' : '' }}">About
-                us</a>
+                class="link link-hover {{ Route::is('about') ? 'text-primary font-bold' : '' }}">আমাদের সম্পর্কে</a>
             {{-- Contact --}}
             <a href="{{ route('contact') }}"
-                class="link link-hover {{ Route::is('contact') ? 'text-primary font-bold' : '' }}">Contact us</a>
+                class="link link-hover {{ Route::is('contact') ? 'text-primary font-bold' : '' }}">যোগাযোগ করুন</a>
             {{-- FAQ --}}
             <a href="{{ route('faq') }}"
-                class="link link-hover {{ Route::is('faq') ? 'text-primary font-bold' : '' }}">FAQ</a>
+                class="link link-hover {{ Route::is('faq') ? 'text-primary font-bold' : '' }}">প্রায়শই জিজ্ঞাসিত
+                প্রশ্নাবলী</a>
         </nav>
         <nav>
             <div class="grid grid-flow-col gap-4">

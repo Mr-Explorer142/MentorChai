@@ -38,39 +38,39 @@
 
             <!-- Text -->
             <h2 class="text-3xl font-bold mb-1 text-success">
-                Thank You!
+                ধন্যবাদ!
             </h2>
 
             <p class="text-lg font-medium">
-                Payment Successful 🎉
+                আপনার পেমেন্ট সফলভাবে সম্পন্ন হয়েছে 🎉
             </p>
 
             <!-- Payment Info -->
             <div class="bg-base-200 rounded-lg p-4 my-4 text-sm">
                 <p>
-                    <span class="font-medium">Payment Method:</span>
+                    <span class="font-bold">পেমেন্ট মেথড : </span>
                     {{ ucfirst($paymentMethod) }}
                 </p>
                 <p>
-                    <span class="font-medium">Amount Paid:</span>
+                    <span class="font-bold">মোট এমাউন্ট : </span>
                     ৳{{ number_format($amount, 2) }}
                 </p>
             </div>
 
             <p class="text-sm text-gray-500 mb-6">
-                Your session has been booked successfully.
+                আপনার সেশনটি সফলভাবে বুক করা হয়েছে
             </p>
 
             <!-- Actions -->
             <div class="space-y-3">
                 <a href="{{ route('live-session') }}"
                    class="btn btn-success btn-wide">
-                    Request for a session
+                    সেশনে যুক্ত হন
                 </a>
 
                 <a href="{{ route('student_dashboard') }}"
                    class="btn btn-outline btn-wide">
-                    Go to dashboard
+                    ড্যাশবোর্ডে ফিরে যান
                 </a>
             </div>
 
