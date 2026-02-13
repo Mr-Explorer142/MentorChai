@@ -25,7 +25,7 @@ Before you begin, ensure you have the following installed on your system:
 ### Clone the Repository
 
 ```bash
-git clone <your-repository-url>
+git clone https://github.com/Mr-Explorer142/MentorChai.git
 cd <project-directory-name>
 ```
 
