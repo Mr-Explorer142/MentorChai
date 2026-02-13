@@ -1,6 +1,6 @@
 <x-layout>
     <div
-        class="min-h-screen bg-gradient-to-br from-base-200 via-base-100 to-base-200 flex items-center justify-center px-4 py-8">
+        class="min-h-screen bg-linear-to-br from-base-200 via-base-100 to-base-200 flex items-center justify-center px-4 py-8">
 
         <!-- Animated Background Elements -->
         <div class="absolute inset-0 overflow-hidden pointer-events-none">
@@ -35,15 +35,15 @@
                         <div class="flex justify-center mb-6">
                             <div id="checkWrapper" class="relative">
                                 <!-- Outer Ring -->
-                                <div class="absolute inset-0 w-28 h-28 rounded-full bg-gradient-to-br from-success/30 to-success/10 animate-ping"
+                                <div class="absolute inset-0 w-28 h-28 rounded-full bg-linear-to-br from-success/30 to-success/10 animate-ping"
                                     style="animation-duration: 2s;"></div>
 
                                 <!-- Middle Ring -->
                                 <div
-                                    class="relative w-28 h-28 rounded-full bg-gradient-to-br from-success/20 to-success/5 flex items-center justify-center border-4 border-success/30">
+                                    class="relative w-28 h-28 rounded-full bg-linear-to-br from-success/20 to-success/5 flex items-center justify-center border-4 border-success/30">
                                     <!-- Inner Circle -->
                                     <div
-                                        class="w-20 h-20 rounded-full bg-gradient-to-br from-success to-success/80 flex items-center justify-center shadow-lg">
+                                        class="w-20 h-20 rounded-full bg-linear-to-br from-success to-success/80 flex items-center justify-center shadow-lg">
                                         <svg class="w-12 h-12 text-white animate-bounce"
                                             style="animation-duration: 1s; animation-iteration-count: 3;" fill="none"
                                             viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
@@ -57,7 +57,7 @@
                         <!-- Success Message -->
                         <div class="text-center space-y-3 mb-6">
                             <h2
-                                class="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-success to-success/70 bg-clip-text text-transparent">
+                                class="text-3xl sm:text-4xl font-bold bg-linear-to-r from-success to-success/70 bg-clip-text text-transparent">
                                 পেমেন্ট সফল!
                             </h2>
                             <p class="text-lg font-medium text-base-content/80">
@@ -67,7 +67,7 @@
 
                         <!-- Payment Details Card -->
                         <div
-                            class="bg-gradient-to-br from-base-200 to-base-100 rounded-2xl p-6 mb-6 border border-base-300 shadow-sm">
+                            class="bg-linear-to-br from-base-200 to-base-100 rounded-2xl p-6 mb-6 border border-base-300 shadow-sm">
                             <div class="space-y-4">
                                 <!-- Payment Method -->
                                 <div class="flex items-center justify-between pb-4 border-b border-base-300">
