@@ -185,10 +185,11 @@ php artisan queue:work
 
 ## 🛠️ Tech Stack
 
-- **Backend**: Laravel (PHP Framework)
-- **Frontend**: Blade Templates / Vue.js / React (specify your choice)
-- **Database**: MySQL / PostgreSQL
-- **Real-time**: Laravel Echo / Pusher / WebSockets
+- **Backend**: PHP-Laravel
+- **Frontend**: Tailwind CSS(DaisyUI), JavaScript 
+- **Database**: MySQL
+- **Real-time**: Laravel Echo and Pusher 
+- **Cloud Platform**: AWS
 - **Package Manager**: Composer, NPM
 
 ## 📂 Project Structure
