@@ -186,7 +186,7 @@ php artisan queue:work
 ## 🛠️ Tech Stack
 
 - **Backend**: PHP-Laravel
-- **Frontend**: Tailwind CSS(DaisyUI), JavaScript 
+- **Frontend**: HTML, Tailwind CSS(DaisyUI), JavaScript 
 - **Database**: MySQL
 - **Real-time**: Laravel Echo and Pusher 
 - **Cloud Platform**: AWS
