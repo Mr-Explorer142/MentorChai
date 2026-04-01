@@ -7,5 +7,4 @@ enum UserRole: string
 {
     case Student = 'student';
     case Mentor = 'mentor';
-
 }

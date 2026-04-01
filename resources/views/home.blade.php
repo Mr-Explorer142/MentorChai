@@ -1,497 +1,476 @@
 <x-layout>
+    <div class="min-h-screen" style="background: #f0fafa;">
 
-    <div class="min-h-screen bg-base-200 px-6 md:px-14 space-y-6">
-        <!-- Hero / About Section -->
-        <section class="mx-auto px-6 py-20 relative overflow-hidden">
+        {{-- ═══════════════════════════════════════════
+        HERO SECTION
+        ═══════════════════════════════════════════ --}}
+        <section class="relative overflow-hidden py-28 lg:py-36"
+            style="background: linear-gradient(135deg, #f0fafa 0%, #e6f7f7 40%, #d1f0ef 100%);">
 
+            {{-- Decorative blobs --}}
+            <div class="pointer-events-none absolute inset-0 overflow-hidden">
+                <div class="absolute -top-32 -right-32 h-[500px] w-[500px] rounded-full"
+                    style="background: radial-gradient(circle, rgba(26,153,152,0.18), transparent 70%); filter: blur(60px);">
+                </div>
+                <div class="absolute -bottom-24 -left-24 h-[380px] w-[380px] rounded-full"
+                    style="background: radial-gradient(circle, rgba(21,86,101,0.12), transparent 70%); filter: blur(50px);">
+                </div>
+                <div class="absolute right-1/3 top-1/4 h-[250px] w-[250px] rounded-full"
+                    style="background: radial-gradient(circle, rgba(26,153,152,0.1), transparent 70%); filter: blur(70px);">
+                </div>
+            </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
-                <div class="space-y-6">
-                    <h1
-                        class="text-2xl lg:text-4xl font-extrabold leading-tight  from-cyan-400 via-blue-400 to-purple-400 bg-clip-text drop-shadow-lg">
-                        পরীক্ষার আগের রাতে শিক্ষক খোজার ভয় ? আর নয়,আর নয়...
-                    </h1>
-                    <p class="text-gray-500 text-lg leading-relaxed">
-                        পরীক্ষার আগের রাতে হঠাৎ <strong>Calculus</strong> বুঝতে অসুবিধা হচ্ছে?কিংবা <strong>Binary
-                            Search
-                            Algorithm</strong>?শুধুমাত্র <strong>Kirchhoff's Laws</strong> বুঝতে মাত্র একঘন্টার জন্য
-                        একজন
-                        শিক্ষকের সহায়তা দরকার?
+            {{-- Subtle dot pattern --}}
+            <div class="pointer-events-none absolute inset-0"
+                style="background-image: radial-gradient(rgba(26,153,152,0.12) 1px, transparent 1px); background-size: 28px 28px;">
+            </div>
+
+            <div class="container relative z-10 mx-auto px-6 lg:px-12">
+                <div class="grid items-center gap-14 lg:grid-cols-2">
+
+                    {{-- LEFT CONTENT --}}
+                    <div class="space-y-8">
+                        {{-- Badge --}}
+                        <span class="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-semibold"
+                            style="background: rgba(26,153,152,0.1); border: 1px solid rgba(26,153,152,0.3); color: #155665;">
+                            <span class="h-1.5 w-1.5 animate-pulse rounded-full" style="background:#1A9998;"></span>
+                            পরীক্ষার আগে শেষ মুহূর্তের সহায়তা
+                        </span>
+
+                        {{-- Heading --}}
+                        <h1 class="text-4xl font-extrabold leading-tight tracking-tight md:text-5xl lg:text-6xl"
+                            style="color: #0d3d3d;">
+                            <span
+                                style="background: linear-gradient(135deg, #1A9998, #155665); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                                শেষ রাতে পড়া আটকে গেছে?
+                            </span>
+                            <br />
+                            <span style="color: #1a2e2e;">টিচার এখনই পেয়ে যান</span>
+                        </h1>
+
+                        {{-- Subtext --}}
+                        <p class="max-w-xl text-lg leading-relaxed" style="color: #4a7070;">
+                            Calculus, Binary Search বা Kirchhoff's Laws —
+                            যেকোনো কঠিন টপিক বুঝতে এখন আর অপেক্ষা নয়।
+                            প্রয়োজন শুধু কয়েক মিনিট।
+                        </p>
+
+                        {{-- CTA Buttons --}}
+                        <div class="flex flex-col gap-4 pt-2 sm:flex-row">
+                            <a href="#"
+                                class="inline-flex items-center justify-center gap-2 rounded-xl px-7 py-3.5 text-base font-bold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5"
+                                style="background: linear-gradient(135deg, #1A9998, #155665); box-shadow: 0 8px 24px rgba(26,153,152,0.35);">
+                                এখনই শিক্ষক খুঁজুন
+                                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    stroke-width="2.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7-7 7" />
+                                </svg>
+                            </a>
+                            <a href="#"
+                                class="inline-flex items-center justify-center gap-2 rounded-xl px-7 py-3.5 text-base font-semibold transition-all duration-300 hover:-translate-y-0.5"
+                                style="border: 1.5px solid rgba(26,153,152,0.4); color: #155665; background: white;">
+                                কিভাবে কাজ করে?
+                                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </a>
+                        </div>
+
+                        {{-- Trust pills --}}
+                        <div class="flex flex-wrap gap-4 pt-2">
+                            @foreach(['⏱ ২৪/৭ সাপোর্ট', '💸 সাশ্রয়ী', '🎯 টপিক ভিত্তিক'] as $pill)
+                            <div class="flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium"
+                                style="background: white; border: 1px solid rgba(26,153,152,0.2); color: #2d6e6e; box-shadow: 0 2px 8px rgba(26,153,152,0.08);">
+                                {{ $pill }}
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    {{-- RIGHT IMAGE --}}
+                    <div class="relative flex justify-center lg:justify-end">
+                        <div class="absolute inset-4 rounded-3xl"
+                            style="background: radial-gradient(ellipse, rgba(26,153,152,0.2), transparent 70%); filter: blur(40px);">
+                        </div>
+
+                        <div class="relative w-full ">
+                            <img src="{{ asset('images/Home Page/mentorship-session.png') }}" alt="Mentorship session"
+                                class="relative w-full rounded-3xl"
+                                style="border: 1px solid rgba(26,153,152,0.2); box-shadow: 0 24px 60px rgba(26,153,152,0.15), 0 4px 16px rgba(0,0,0,0.08);" />
+
+                            {{-- Floating rating --}}
+                            <div class="absolute -bottom-14 -left-5 flex items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-xl"
+                                style="border: 1px solid rgba(26,153,152,0.2);">
+                                <div class="flex h-9 w-9 items-center justify-center rounded-xl"
+                                    style="background: linear-gradient(135deg, #1A9998, #155665);">
+                                    <svg class="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-bold" style="color:#155665;">4.9 Rated</p>
+                                    <p class="text-xs" style="color:#4a7070;">Verified Mentors</p>
+                                </div>
+                            </div>
+
+                            {{-- Online badge --}}
+                            <div class="absolute -right-4 -top-6 flex items-center gap-2 rounded-xl bg-white px-3 py-2 shadow-lg"
+                                style="border: 1px solid rgba(26,153,152,0.2);">
+                                <span class="h-2 w-2 animate-pulse rounded-full" style="background:#10b981;"></span>
+                                <span class="text-xs font-semibold" style="color:#155665;">৩২ জন অনলাইন</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        {{-- Divider wave --}}
+        <div style="background:#f0fafa; line-height:0;">
+            <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"
+                style="width:100%; display:block;">
+                <path d="M0 60 C360 0 1080 0 1440 60 L1440 0 L0 0 Z" fill="#d1f0ef" />
+            </svg>
+        </div>
+
+        {{-- ═══════════════════════════════════════════
+        POPULAR TOPICS CAROUSEL
+        ═══════════════════════════════════════════ --}}
+        <section class="py-24" style="background: #f0fafa;">
+            <div class="mx-auto max-w-7xl px-6">
+
+                {{-- Heading --}}
+                <div class="mb-14 text-center">
+                    <p class="mb-2 text-sm font-bold uppercase tracking-widest" style="color: #1A9998;">এক্সপ্লোর করুন
                     </p>
-                    <p class="text-cyan-500 text-xl font-semibold">
-                        ভয় নেই, MentorChai আছে আপনার সাথে
-                    </p>
-
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">
-                        <div
-                            class="group relative bg-linear-to-br from-cyan-500/10 to-blue-500/10 backdrop-blur-sm border border-cyan-500/20 p-6 rounded-2xl transform transition-all duration-500 hover:scale-110 hover:shadow-2xl hover:shadow-cyan-500/50 cursor-pointer overflow-hidden">
-                            <div
-                                class="absolute inset-0 bg-linear-to-br from-cyan-500/0 to-blue-500/0 group-hover:from-cyan-500/20 group-hover:to-blue-500/20 transition-all duration-500">
-                            </div>
-                            <div class="relative flex flex-col items-center text-center space-y-4">
-                                <div
-                                    class="w-20 h-20 flex items-center justify-center transform transition-transform duration-500 group-hover:rotate-12 group-hover:scale-125">
-                                    <img src="{{ asset('images/Home Page/24-7-night.png') }}" alt="24/7"
-                                        class="w-full h-full object-contain drop-shadow-lg">
-                                </div>
-                                <p class="text-sm font-medium">দুপুর ৩টা হোক বা রাত ৩টা,টিচার খুজে নিন যেকোনো
-                                    সময়</p>
-                            </div>
-                        </div>
-
-                        <div
-                            class="group relative bg-linear-to-br from-purple-500/10 to-pink-500/10 backdrop-blur-sm border border-purple-500/20 p-6 rounded-2xl transform transition-all duration-500 hover:scale-110 hover:shadow-2xl hover:shadow-purple-500/50 cursor-pointer overflow-hidden">
-                            <div
-                                class="absolute inset-0 bg-linear-to-br from-purple-500/0 to-pink-500/0 group-hover:from-purple-500/20 group-hover:to-pink-500/20 transition-all duration-500">
-                            </div>
-                            <div class="relative flex flex-col items-center text-center space-y-4">
-                                <div
-                                    class="w-20 h-20 flex items-center justify-center transform transition-transform duration-500 group-hover:rotate-12 group-hover:scale-125">
-                                    <img src="{{ asset('images/Home Page/cheap.png') }}" alt="Affordable"
-                                        class="w-full h-full object-contain drop-shadow-lg">
-                                </div>
-                                <p class="text-sm font-medium">মাস কিংবা বছর নয়,স্বল্পখরচে টিচার হায়ার করুন
-                                    মিনিট কিংবা ঘণ্টা হিসেবে</p>
-                            </div>
-                        </div>
-
-                        <div
-                            class="group relative bg-linear-to-br from-green-500/10 to-emerald-500/10 backdrop-blur-sm border border-green-500/20 p-6 rounded-2xl transform transition-all duration-500 hover:scale-110 hover:shadow-2xl hover:shadow-green-500/50 cursor-pointer overflow-hidden">
-                            <div
-                                class="absolute inset-0 bg-linear-to-br from-green-500/0 to-emerald-500/0 group-hover:from-green-500/20 group-hover:to-emerald-500/20 transition-all duration-500">
-                            </div>
-                            <div class="relative flex flex-col items-center text-center space-y-4">
-                                <div
-                                    class="w-20 h-20 flex items-center justify-center transform transition-transform duration-500 group-hover:rotate-12 group-hover:scale-125">
-                                    <img src="{{ asset('images/Home Page/topic.png') }}" alt="Topic-based"
-                                        class="w-full h-full object-contain drop-shadow-lg">
-                                </div>
-                                <p class="text-sm font-medium">সম্পূর্ণ কোর্স নয়,টিচার খুজে নিন নিজের পছন্দসই
-                                    টপিকের জন্য</p>
-                            </div>
-                        </div>
-                    </div>
+                    <h2 class="text-3xl font-extrabold tracking-tight lg:text-4xl" style="color: #0d3d3d;">
+                        জনপ্রিয়
+                        <span
+                            style="background: linear-gradient(135deg, #1A9998, #155665); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                            টপিকসমূহ
+                        </span>
+                    </h2>
+                    <div class="mx-auto mt-4 h-1 w-14 rounded-full"
+                        style="background: linear-gradient(90deg, #1A9998, #155665);"></div>
                 </div>
 
-                <div class="relative flex justify-center lg:justify-end">
-                    <div class="relative">
-                        <div class="absolute inset-0  from-cyan-500 to-purple-500 rounded-3xl blur-2xl opacity-30">
-                        </div>
-                        <img src="{{ asset('images/Home Page/darkroom.png') }}" alt="Mentorship session"
-                            class="relative w-full rounded-3xl shadow-2xl border-4 border-cyan-500/30 transform hover:scale-105 transition-transform duration-500" />
-                    </div>
-                </div>
-            </div>
-        </section>
+                {{-- Carousel --}}
+                <div class="relative">
+                    <div id="scrollContainer" class="overflow-hidden">
+                        <div id="cardsContainer" class="flex gap-6 pb-4 transition-transform duration-500 ease-out"
+                            style="width: max-content;">
 
-        <!-- Popular Topics -->
-        <section class="max-w-7xl mx-auto px-6 py-20">
-            <h2
-                class="text-2xl lg:text-4xl font-extrabold text-center mb-16  from-cyan-400 via-blue-400 to-purple-400 bg-clip-text ">
-                জনপ্রিয় টপিকসমূহ</h2>
+                            @php
+                            $topics = [
+                            ['img'=>'cse.png', 'title'=>'Functions & Array in C', 'dept'=>'CSE, SWE',
+                            'color'=>'#1A9998', 'light'=>'#e6f7f7'],
+                            ['img'=>'eee.png', 'title'=>'KVL & KCL', 'dept'=>'EEE, CSE', 'color'=>'#187F87',
+                            'light'=>'#e3f5f4'],
+                            ['img'=>'swe.png', 'title'=>"Dijkstra's Algorithm", 'dept'=>'CSE, SWE', 'color'=>'#155665',
+                            'light'=>'#dff0ee'],
+                            ['img'=>'textile.png', 'title'=>'Fabric Mechanics (Stress-Strain)', 'dept'=>'TE',
+                            'color'=>'#1A9998', 'light'=>'#e6f7f7'],
+                            ['img'=>'pharmacy.png', 'title'=>'Drug Receptor Interaction Mechanisms', 'dept'=>'Pharmacy',
+                            'color'=>'#187F87', 'light'=>'#e3f5f4'],
+                            ['img'=>'nfe.png', 'title'=>'Nutrient Bioavailability & Absorption', 'dept'=>'NFE',
+                            'color'=>'#155665', 'light'=>'#dff0ee'],
+                            ['img'=>'environmentalsc.png','title'=>'Environmental Fate & Transport of Pollutants',
+                            'dept'=>'Environmental Science', 'color'=>'#1A9998', 'light'=>'#e6f7f7'],
+                            ];
+                            @endphp
 
-            <div class="relative">
-                <div id="scrollContainer" class="overflow-hidden">
-                    <div id="cardsContainer" class="flex gap-8 pb-4 transition-transform duration-500 ease-out"
-                        style="width: max-content;">
+                            @foreach($topics as $topic)
+                            <div class="group relative w-72 shrink-0 cursor-pointer overflow-hidden rounded-2xl bg-white transition-all duration-500 hover:-translate-y-2"
+                                style="border: 1px solid rgba(26,153,152,0.15); box-shadow: 0 4px 20px rgba(26,153,152,0.08);">
 
-                        {{-- Card 1 --}}
-                        <div
-                            class="w-80 cursor-pointer shrink group relative bg-linear-to-br from-slate-800 to-slate-900 rounded-2xl overflow-hidden border border-cyan-500/30 shadow-lg hover:shadow-2xl hover:shadow-cyan-500/50 transition-all duration-500 hover:-translate-y-2">
-                            <div class="relative overflow-hidden">
-                                <img src="{{ asset('images/Home Page/cse.png') }}" alt="CSE"
-                                    class="w-full h-48 object-cover transform group-hover:scale-110 transition-transform duration-500">
-                                <div
-                                    class="absolute inset-0 bg-linear-to-t from-slate-900 via-transparent to-transparent">
+                                {{-- Image --}}
+                                <div class="relative overflow-hidden">
+                                    <img src="{{ asset('images/Home Page/' . $topic['img']) }}"
+                                        alt="{{ $topic['title'] }}"
+                                        class="h-44 w-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                                    {{-- Tint overlay on hover --}}
+                                    <div class="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                                        style="background: linear-gradient(to top, {{ $topic['color'] }}44, transparent 60%);">
+                                    </div>
+                                </div>
+
+                                {{-- Content --}}
+                                <div class="space-y-3 p-5">
+                                    <h3 class="text-center text-base font-bold leading-snug" style="color: #0d3d3d;">
+                                        {{ $topic['title'] }}
+                                    </h3>
+                                    <p class="text-center text-xs font-semibold" style="color: {{ $topic['color'] }};">
+                                        ডিপার্টমেন্ট: {{ $topic['dept'] }}
+                                    </p>
+                                    <button
+                                        class="w-full rounded-xl py-2.5 text-sm font-bold text-white transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
+                                        style="background: linear-gradient(135deg, {{ $topic['color'] }}, #102E3C); box-shadow: 0 4px 12px {{ $topic['color'] }}30;">
+                                        অ্যাভেইলেবল টিচারলিস্ট দেখুন
+                                    </button>
                                 </div>
                             </div>
-                            <div class="p-6 space-y-3">
-                                <h3 class="font-bold text-xl text-center text-cyan-300">Functions & Array in C</h3>
-                                <p class="text-gray-400 text-sm text-center">ডিপার্টমেন্ট : CSE,SWE</p>
-                                <button
-                                    class="w-full cursor-pointer from-cyan-500 to-blue-500 text-white font-semibold py-3 rounded-xl hover:from-cyan-600 hover:to-blue-600 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-cyan-500/50">অ্যাভেইলেবল
-                                    টিচারলিস্ট দেখুন</button>
-                            </div>
-                        </div>
+                            @endforeach
 
-                        {{-- Card 2 --}}
-                        <div
-                            class="w-80 cursor-pointer shrink group relative bg-linear-to-br from-slate-800 to-slate-900 rounded-2xl overflow-hidden border border-purple-500/30 shadow-lg hover:shadow-2xl hover:shadow-purple-500/50 transition-all duration-500 hover:-translate-y-2">
-                            <div class="relative overflow-hidden">
-                                <img src="{{ asset('images/Home Page/eee.png') }}" alt="EEE"
-                                    class="w-full h-48 object-cover transform group-hover:scale-110 transition-transform duration-500">
-                                <div
-                                    class="absolute inset-0 bg-linear-to-t from-slate-900 via-transparent to-transparent">
-                                </div>
-                            </div>
-                            <div class="p-6 space-y-3">
-                                <h3 class="font-bold text-xl text-center text-purple-300">KVL-KCL</h3>
-                                <p class="text-gray-400 text-sm text-center">ডিপার্টমেন্টঃEEE,CSE</p>
-                                <button
-                                    class="w-full cursor-pointer from-purple-500 to-pink-500 text-white font-semibold py-3 rounded-xl hover:from-purple-600 hover:to-pink-600 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-purple-500/50">অ্যাভেইলেবল
-                                    টিচারলিস্ট দেখুন</button>
-                            </div>
-                        </div>
-
-                        <div
-                            class="w-80 shrink cursor-pointer group relative bg-linear-to-br from-slate-800 to-slate-900 rounded-2xl overflow-hidden border border-blue-500/30 shadow-lg hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-500 hover:-translate-y-2">
-                            <div class="relative overflow-hidden">
-                                <img src="{{ asset('images/Home Page/swe.png') }}" alt="SWE"
-                                    class="w-full h-48 object-cover transform group-hover:scale-110 transition-transform duration-500">
-                                <div
-                                    class="absolute inset-0 bg-linear-to-t from-slate-900 via-transparent to-transparent">
-                                </div>
-                            </div>
-                            <div class="p-6 space-y-3">
-                                <h3 class="font-bold text-xl text-center text-blue-300">Dijkstra's Algorithm</h3>
-                                <p class="text-gray-400 text-sm text-center">ডিপার্টমেন্টঃCSE,SWE</p>
-                                <button
-                                    class="w-full cursor-pointer from-blue-500 to-cyan-500 text-white font-semibold py-3 rounded-xl hover:from-blue-600 hover:to-cyan-600 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-blue-500/50">অ্যাভেইলেবল
-                                    টিচারলিস্ট দেখুন</button>
-                            </div>
-                        </div>
-
-                        <div
-                            class="w-80 shrink cursor-pointer group relative bg-linear-to-br from-slate-800 to-slate-900 rounded-2xl overflow-hidden border border-green-500/30 shadow-lg hover:shadow-2xl hover:shadow-green-500/50 transition-all duration-500 hover:-translate-y-2">
-                            <div class="relative overflow-hidden">
-                                <img src="{{ asset('images/Home Page/textile.png') }}" alt="Textile"
-                                    class="w-full h-48 object-cover transform group-hover:scale-110 transition-transform duration-500">
-                                <div
-                                    class="absolute inset-0 bg-linear-to-t from-slate-900 via-transparent to-transparent">
-                                </div>
-                            </div>
-                            <div class="p-6 space-y-3">
-                                <h3 class="font-bold text-xl text-center text-green-300">Fabric Mechanics(Stress-Strain
-                                    Behavior of Fabrics)</h3>
-                                <p class="text-gray-400 text-sm text-center">ডিপার্টপমেন্টঃTE</p>
-                                <button
-                                    class="w-full cursor-pointer from-green-500 to-emerald-500 text-white font-semibold py-3 rounded-xl hover:from-green-600 hover:to-emerald-600 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-green-500/50">অ্যাভেইলেবল
-                                    টিচারলিস্ট দেখুন</button>
-                            </div>
-                        </div>
-
-                        <div
-                            class="w-80 shrink cursor-pointer group relative bg-linear-to-br from-slate-800 to-slate-900 rounded-2xl overflow-hidden border border-pink-500/30 shadow-lg hover:shadow-2xl hover:shadow-pink-500/50 transition-all duration-500 hover:-translate-y-2">
-                            <div class="relative overflow-hidden">
-                                <img src="{{ asset('images/Home Page/pharmacy.png') }}" alt="Pharmacy"
-                                    class="w-full h-48 object-cover transform group-hover:scale-110 transition-transform duration-500">
-                                <div
-                                    class="absolute inset-0 bg-linear-to-t from-slate-900 via-transparent to-transparent">
-                                </div>
-                            </div>
-                            <div class="p-6 space-y-3">
-                                <h3 class="font-bold text-xl text-center text-pink-300">Drug Receptor Interaction
-                                    Mechanisms
-                                </h3>
-                                <p class="text-gray-400 text-sm text-center">ডিপার্টমেন্টঃPharmacy</p>
-                                <button
-                                    class="w-full cursor-pointer from-pink-500 to-rose-500 text-white font-semibold py-3 rounded-xl hover:from-pink-600 hover:to-rose-600 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-pink-500/50">অ্যাভেইলেবল
-                                    টিচারলিস্ট দেখুন</button>
-                            </div>
-                        </div>
-
-                        <div
-                            class="w-80 shrink cursor-pointer group relative bg-linear-to-br from-slate-800 to-slate-900 rounded-2xl overflow-hidden border border-orange-500/30 shadow-lg hover:shadow-2xl hover:shadow-orange-500/50 transition-all duration-500 hover:-translate-y-2">
-                            <div class="relative overflow-hidden">
-                                <img src="{{ asset('images/Home Page/nfe.png') }}" alt="NFE"
-                                    class="w-full h-48 object-cover transform group-hover:scale-110 transition-transform duration-500">
-                                <div
-                                    class="absolute inset-0 bg-linear-to-t from-slate-900 via-transparent to-transparent">
-                                </div>
-                            </div>
-                            <div class="p-6 space-y-3">
-                                <h3 class="font-bold text-xl text-center text-orange-300">Nutrient Bioavailability &
-                                    Absorption Mechanisms </h3>
-                                <p class="text-gray-400 text-sm text-center">ডিপার্টমেন্টঃNFE</p>
-                                <button
-                                    class="w-full cursor-pointer from-orange-500 to-amber-500 text-white font-semibold py-3 rounded-xl hover:from-orange-600 hover:to-amber-600 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-orange-500/50">অ্যাভেইলেবল
-                                    টিচারলিস্ট দেখুন</button>
-                            </div>
-                        </div>
-
-                        <div
-                            class="w-80 shrink cursor-pointer group relative bg-linear-to-br from-slate-800 to-slate-900 rounded-2xl overflow-hidden border border-teal-500/30 shadow-lg hover:shadow-2xl hover:shadow-teal-500/50 transition-all duration-500 hover:-translate-y-2">
-                            <div class="relative overflow-hidden">
-                                <img src="{{ asset('images/Home Page/environmentalsc.png') }}"
-                                    alt="Environmental Science"
-                                    class="w-full h-48 object-cover transform group-hover:scale-110 transition-transform duration-500">
-                                <div
-                                    class="absolute inset-0 bg-linear-to-t from-slate-900 via-transparent to-transparent">
-                                </div>
-                            </div>
-                            <div class="p-6 space-y-3">
-                                <h3 class="font-bold text-xl text-center text-teal-300">Environmental Fate & Transport
-                                    of
-                                    Pollutants</h3>
-                                <p class="text-gray-400 text-sm text-center">ডিপার্টমেন্টঃEnvironmental Science</p>
-                                <button
-                                    class="w-full cursor-pointer from-teal-500 to-cyan-500 text-white font-semibold py-3 rounded-xl hover:from-teal-600 hover:to-cyan-600 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-teal-500/50">অ্যাভেইলেবল
-                                    টিচারলিস্ট দেখুন</button>
-                            </div>
                         </div>
                     </div>
-                </div>
 
-                <button id="scrollLeft"
-                    class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4  from-cyan-500 to-blue-500 rounded-full p-4 shadow-2xl hover:shadow-cyan-500/50 transition-all duration-300 hover:scale-110 z-10 backdrop-blur-sm">
-                    <svg class="cursor-pointer w-6 h-6 text-white" fill="none" stroke="currentColor"
-                        viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7">
-                        </path>
-                    </svg>
-                </button>
-
-                <button id="scrollRight"
-                    class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4  from-blue-500 to-purple-500 rounded-full p-4 shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 hover:scale-110 z-10 backdrop-blur-sm">
-                    <svg class="cursor-pointer w-6 h-6 text-white" fill="none" stroke="currentColor"
-                        viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7">
-                        </path>
-                    </svg>
-                </button>
-            </div>
-        </section>
-
-        <!-- Popular Departments -->
-        <section class="max-w-7xl mx-auto px-6 py-20">
-            <h2
-                class="text-2xl lg:text-4xl font-extrabold text-center mb-16  from-cyan-400 via-blue-400 to-purple-400 bg-clip-text ">
-                প্রায়শই অনুসন্ধানকৃত ডিপার্টমেন্টসমূহ</h2>
-
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 max-w-6xl mx-auto">
-
-                {{-- Card 1 --}}
-                <div
-                    class="group relative bg-linear-to-br from-cyan-500/0 to-blue-500/0 rounded-2xl p-6 border border-cyan-500/30 shadow-lg hover:shadow-2xl hover:shadow-cyan-500/50 transition-all duration-500 hover:-translate-y-3 cursor-pointer overflow-hidden">
-                    <div
-                        class="absolute inset-0 bg-linear-to-br from-cyan-500/0 to-blue-500/0 group-hover:from-cyan-500/20 group-hover:to-blue-500/20 transition-all duration-500">
-                    </div>
-                    <div class="relative flex flex-col items-center space-y-4">
-                        <div
-                            class="w-20 h-20 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-500">
-                            <img src="{{ asset('images/Home Page/cseicon.png') }}" alt="CSE"
-                                class="w-full h-full object-contain drop-shadow-lg">
-                        </div>
-                        <h3 class="font-semibold text-xs md:text-sm text-center leading-tight">Computer Science &
-                            Engineering</h3>
-                    </div>
-                </div>
-
-                {{-- Card 2 --}}
-                <div
-                    class="group relative bg-linear-to-br from-purple-500/0 to-pink-500/0 rounded-2xl p-6 border border-purple-500/30 shadow-lg hover:shadow-2xl hover:shadow-purple-500/50 transition-all duration-500 hover:-translate-y-3 cursor-pointer overflow-hidden">
-                    <div
-                        class="absolute inset-0 bg-linear-to-br from-purple-500/0 to-pink-500/0 group-hover:from-purple-500/20 group-hover:to-pink-500/20 transition-all duration-500">
-                    </div>
-                    <div class="relative flex flex-col items-center space-y-4">
-                        <div
-                            class="w-20 h-20 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-500">
-                            <img src="{{ asset('images/Home Page/eeeicon.png') }}" alt="EEE"
-                                class="w-full h-full object-contain drop-shadow-lg">
-                        </div>
-                        <h3 class="font-semibold text-xs md:text-sm text-center leading-tight">Electrical &
-                            Electronics Engineering</h3>
-                    </div>
-                </div>
-
-                {{-- Card 3 --}}
-                <div
-                    class="group relative bg-linear-to-br from-pink-500/0 to-rose-500/0 rounded-2xl p-6 border border-pink-500/30 shadow-lg hover:shadow-2xl hover:shadow-pink-500/50 transition-all duration-500 hover:-translate-y-3 cursor-pointer overflow-hidden">
-                    <div
-                        class="absolute inset-0 bg-linear-to-br from-pink-500/0 to-rose-500/0 group-hover:from-pink-500/20 group-hover:to-rose-500/20 transition-all duration-500">
-                    </div>
-                    <div class="relative flex flex-col items-center space-y-4">
-                        <div
-                            class="w-20 h-20 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-500">
-                            <img src="{{ asset('images/Home Page/pharmacyicon.png') }}" alt="Pharmacy"
-                                class="w-full h-full object-contain drop-shadow-lg">
-                        </div>
-                        <h3 class="font-semibold text-xs md:text-sm text-center leading-tight">Pharmacy</h3>
-                    </div>
-                </div>
-
-                {{-- Card 4 --}}
-                <div
-                    class="group relative bg-linear-to-br from-green-500/0 to-emerald-500/0 rounded-2xl p-6 border border-green-500/30 shadow-lg hover:shadow-2xl hover:shadow-green-500/50 transition-all duration-500 hover:-translate-y-3 cursor-pointer overflow-hidden">
-                    <div
-                        class="absolute inset-0 bg-linear-to-br from-green-500/0 to-emerald-500/0 group-hover:from-green-500/20 group-hover:to-emerald-500/20 transition-all duration-500">
-                    </div>
-                    <div class="relative flex flex-col items-center space-y-4">
-                        <div
-                            class="w-20 h-20 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-500">
-                            <img src="{{ asset('images/Home Page/textileicon.png') }}" alt="Textile"
-                                class="w-full h-full object-contain drop-shadow-lg">
-                        </div>
-                        <h3 class="font-semibold text-xs md:text-sm text-center leading-tight">Textile Engineering
-                        </h3>
-                    </div>
-                </div>
-
-                {{-- Card 5 --}}
-                <div
-                    class="group relative bg-linear-to-br from-blue-500/0 to-cyan-500/0 rounded-2xl p-6 border border-blue-500/30 shadow-lg hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-500 hover:-translate-y-3 cursor-pointer overflow-hidden">
-                    <div
-                        class="absolute inset-0 bg-linear-to-br from-blue-500/0 to-cyan-500/0 group-hover:from-blue-500/20 group-hover:to-cyan-500/20 transition-all duration-500">
-                    </div>
-                    <div class="relative flex flex-col items-center space-y-4">
-                        <div
-                            class="w-20 h-20 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-500">
-                            <img src="{{ asset('images/Home Page/sweicon.png') }}" alt="SWE"
-                                class="w-full h-full object-contain drop-shadow-lg">
-                        </div>
-                        <h3 class="font-semibold text-xs md:text-sm text-center leading-tight">Software Engineering
-                        </h3>
-                    </div>
-                </div>
-
-                {{-- Card 6 --}}
-                <div
-                    class="group relative bg-linear-to-br from-orange-500/0 to-amber-500/0 rounded-2xl p-6 border border-orange-500/30 shadow-lg hover:shadow-2xl hover:shadow-orange-500/50 transition-all duration-500 hover:-translate-y-3 cursor-pointer overflow-hidden">
-                    <div
-                        class="absolute inset-0 bg-linear-to-br from-orange-500/0 to-amber-500/0 group-hover:from-orange-500/20 group-hover:to-amber-500/20 transition-all duration-500">
-                    </div>
-                    <div class="relative flex flex-col items-center space-y-4">
-                        <div
-                            class="w-20 h-20 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-500">
-                            <img src="{{ asset('images/Home Page/nfeicon.png') }}" alt="NFE"
-                                class="w-full h-full object-contain drop-shadow-lg">
-                        </div>
-                        <h3 class="font-semibold text-xs md:text-sm text-center leading-tight">Nutrition & Food
-                            Engineering</h3>
-                    </div>
+                    {{-- Scroll buttons --}}
+                    <button id="scrollLeft"
+                        class="absolute -left-5 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-xl transition-all duration-300 hover:scale-110"
+                        style="border: 1.5px solid rgba(26,153,152,0.3); box-shadow: 0 4px 16px rgba(26,153,152,0.2);">
+                        <svg class="h-5 w-5" fill="none" stroke="#1A9998" viewBox="0 0 24 24" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+                    <button id="scrollRight"
+                        class="absolute -right-5 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-xl transition-all duration-300 hover:scale-110"
+                        style="border: 1.5px solid rgba(26,153,152,0.3); box-shadow: 0 4px 16px rgba(26,153,152,0.2);">
+                        <svg class="h-5 w-5" fill="none" stroke="#1A9998" viewBox="0 0 24 24" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
                 </div>
             </div>
         </section>
 
-        <!-- Features Section -->
-        <section class="py-20 relative overflow-hidden">
+        {{-- ═══════════════════════════════════════════
+        POPULAR DEPARTMENTS
+        ═══════════════════════════════════════════ --}}
+        <section class="py-24" style="background: linear-gradient(180deg, #e6f7f7 0%, #f0fafa 100%);">
+            <div class="mx-auto max-w-7xl px-6">
 
+                {{-- Heading --}}
+                <div class="mb-14 text-center">
+                    <p class="mb-2 text-sm font-bold uppercase tracking-widest" style="color: #1A9998;">ডিপার্টমেন্ট</p>
+                    <h2 class="text-3xl font-extrabold tracking-tight lg:text-4xl" style="color: #0d3d3d;">
+                        প্রায়শই অনুসন্ধানকৃত
+                        <span
+                            style="background: linear-gradient(135deg, #1A9998, #155665); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                            ডিপার্টমেন্টসমূহ
+                        </span>
+                    </h2>
+                    <div class="mx-auto mt-4 h-1 w-14 rounded-full"
+                        style="background: linear-gradient(90deg, #1A9998, #155665);"></div>
+                </div>
 
-            <div class="max-w-6xl mx-auto px-6 relative z-10">
-                <h2
-                    class="text-2xl lg:text-4xl font-extrabold text-center mb-16  from-cyan-400 via-blue-400 to-purple-400 bg-clip-text ">
-                    আমাদের সুবিধাসমূহ
-                </h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {{-- Card 1 --}}
-                    <div
-                        class="group cursor-pointer relative bg-linear-to-br backdrop-blur-sm p-6 rounded-2xl border border-cyan-500/30 transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl hover:shadow-cyan-500/50 overflow-hidden">
-                        <div
-                            class="absolute inset-0 bg-linear-to-br from-cyan-500/0 to-blue-500/0 group-hover:from-cyan-500/10 group-hover:to-blue-500/10 transition-all duration-500">
-                        </div>
-                        <div class="relative space-y-4">
-                            <div
-                                class="w-16 h-16 bg-linear-to-br from-cyan-500 to-blue-500 rounded-2xl flex items-center justify-center shadow-lg shadow-cyan-500/50 transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
-                                <img src="{{ asset('images/Home Page/payasyougo.png') }}" alt="feature icon"
-                                    class="w-10 h-10 object-contain" />
+                @php
+                $departments = [
+                ['icon'=>'cseicon.png', 'name'=>'Computer Science & Engineering', 'color'=>'#1A9998'],
+                ['icon'=>'eeeicon.png', 'name'=>'Electrical & Electronics Engg.', 'color'=>'#187F87'],
+                ['icon'=>'pharmacyicon.png', 'name'=>'Pharmacy', 'color'=>'#155665'],
+                ['icon'=>'textileicon.png', 'name'=>'Textile Engineering', 'color'=>'#1A9998'],
+                ['icon'=>'sweicon.png', 'name'=>'Software Engineering', 'color'=>'#187F87'],
+                ['icon'=>'nfeicon.png', 'name'=>'Nutrition & Food Engineering', 'color'=>'#155665'],
+                ];
+                @endphp
+
+                <div class="grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-6">
+                    @foreach($departments as $dept)
+                    <div class="group cursor-pointer overflow-hidden rounded-2xl bg-white p-6 text-center transition-all duration-500 hover:-translate-y-2 hover:shadow-xl"
+                        style="border: 1px solid rgba(26,153,152,0.15); box-shadow: 0 2px 12px rgba(26,153,152,0.07);">
+
+                        <div class="flex flex-col items-center gap-4">
+                            {{-- Icon ring --}}
+                            <div class="flex h-20 w-20 items-center justify-center rounded-2xl transition-all duration-500 group-hover:scale-110"
+                                style="background: {{ $dept['color'] }}14; border: 1.5px solid {{ $dept['color'] }}30;">
+                                <img src="{{ asset('images/Home Page/' . $dept['icon']) }}" alt="{{ $dept['name'] }}"
+                                    class="h-12 w-12 object-contain drop-shadow" />
                             </div>
-                            <h3 class="font-bold text-lg text-blue-400">যতটুকু সময়, ঠিক ততটুকুর খরচ</h3>
-                            <p class="text-sm leading-relaxed">
-                                ৩০ বা ৬০ মিনিটের জন্য মেন্টর বুক করুন এবং শুধুমাত্র সেটুকু সময়ের জন্যই ফি প্রদান
-                                করুন।মাসিক সাবস্ক্রিপশন বা দীর্ঘমেয়াদী কোর্সের ঝামেলা নেই।
-                            </p>
+                            <h3 class="text-xs font-semibold leading-tight transition-colors duration-300 md:text-sm"
+                                style="color: #2d5f5f;">
+                                {{ $dept['name'] }}
+                            </h3>
                         </div>
                     </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
 
-                    {{-- Card 2 --}}
-                    <div
-                        class="group cursor-pointer relative bg-linear-to-br backdrop-blur-sm p-6 rounded-2xl border border-green-500/30 transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl hover:shadow-green-500/50 overflow-hidden">
-                        <div
-                            class="absolute inset-0 bg-linear-to-br from-green-500/0 to-emerald-500/0 group-hover:from-green-500/10 group-hover:to-emerald-500/10 transition-all duration-500">
-                        </div>
-                        <div class="relative space-y-4">
-                            <div
-                                class="w-16 h-16 bg-linear-to-br from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center shadow-lg shadow-green-500/50 transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
-                                <img src="{{ asset('images/Home Page/cheap.png') }}" alt="feature icon"
-                                    class="w-10 h-10 object-contain" />
+        {{-- ═══════════════════════════════════════════
+        FEATURES SECTION
+        ═══════════════════════════════════════════ --}}
+        <section class="py-24" style="background: #f0fafa;">
+            <div class="mx-auto max-w-6xl px-6">
+
+                {{-- Heading --}}
+                <div class="mb-14 text-center">
+                    <p class="mb-2 text-sm font-bold uppercase tracking-widest" style="color: #1A9998;">কেন আমরা?</p>
+                    <h2 class="text-3xl font-extrabold tracking-tight lg:text-4xl" style="color: #0d3d3d;">
+                        আমাদের
+                        <span
+                            style="background: linear-gradient(135deg, #1A9998, #155665); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                            সুবিধাসমূহ
+                        </span>
+                    </h2>
+                    <div class="mx-auto mt-4 h-1 w-14 rounded-full"
+                        style="background: linear-gradient(90deg, #1A9998, #155665);"></div>
+                </div>
+
+                @php
+                $features = [
+                ['icon'=>'payasyougo.png', 'cf'=>'#1A9998', 'ct'=>'#187F87',
+                'title'=>'যতটুকু সময়, ঠিক ততটুকুর খরচ',
+                'desc'=>'৩০ বা ৬০ মিনিটের জন্য মেন্টর বুক করুন এবং শুধুমাত্র সেটুকু সময়ের জন্যই ফি প্রদান করুন। মাসিক
+                সাবস্ক্রিপশন বা দীর্ঘমেয়াদী কোর্সের ঝামেলা নেই।'],
+                ['icon'=>'cheap.png', 'cf'=>'#187F87', 'ct'=>'#155665',
+                'title'=>'সাধ্যের ভেতরে সাশ্রয়ী সেশন',
+                'desc'=>'ছাত্র-ছাত্রীদের বাজেটের কথা মাথায় রেখে মেন্টরশিপ সেশনগুলোর খরচ নির্ধারণ করা হয়েছে। কম সময়ের
+                সেশন হওয়ায় খরচও একদম হাতের নাগালে।'],
+                ['icon'=>'topic.png', 'cf'=>'#155665', 'ct'=>'#102E3C',
+                'title'=>'পুরো কোর্স নয়, শিখুন নির্দিষ্ট টপিক',
+                'desc'=>'অপ্রয়োজনীয় কনটেন্ট বা পুরো কোর্সে ভর্তি হওয়ার প্রয়োজন নেই। ঠিক যে টপিকটিতে সমস্যা রয়েছে,
+                শুধুমাত্র সেটির সমাধানের জন্যই মেন্টরের সাহায্য নিতে পারবেন।'],
+                ['icon'=>'24-hours-support.png', 'cf'=>'#102E3C', 'ct'=>'#155665',
+                'title'=>'২৪/৭ মেন্টরশিপ',
+                'desc'=>'গভীর রাত হোক কিংবা পরীক্ষার ঠিক আগের মুহূর্ত — যেকোনো সময়েই সাহায্য নিতে পারবেন মেন্টরদের।'],
+                ['icon'=>'flexibleincome.png', 'cf'=>'#155665', 'ct'=>'#187F87',
+                'title'=>'মেন্টরদের জন্য ফ্লেক্সিবল শিডিউল',
+                'desc'=>'বিশ্ববিদ্যালয় শিক্ষার্থী বা পেশাজীবীরা নিজেদের অবসর সময়ে মেন্টর হিসেবে কাজ করতে পারেন এবং ঘরে
+                বসেই অর্থ উপার্জন করতে পারেন।'],
+                ['icon'=>'findteacher.png', 'cf'=>'#187F87', 'ct'=>'#1A9998',
+                'title'=>'দ্রুততম সময়ে মেন্টর ম্যাচিং',
+                'desc'=>'দীর্ঘ অপেক্ষা বা জটিল কোনো প্রক্রিয়ার ঝামেলা ছাড়াই বিষয় এবং সময় অনুযায়ী খুব সহজেই মেন্টর
+                খুঁজে পাবেন।'],
+                ];
+                @endphp
+
+                <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                    @foreach($features as $f)
+                    <div class="group cursor-pointer overflow-hidden rounded-2xl bg-white p-6 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl"
+                        style="border: 1px solid rgba(26,153,152,0.15); box-shadow: 0 2px 12px rgba(26,153,152,0.07);">
+
+                        {{-- Top color bar on hover --}}
+                        <div class="absolute left-0 right-0 top-0 h-0.5 rounded-t-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                            style="background: linear-gradient(90deg, {{ $f['cf'] }}, {{ $f['ct'] }});"></div>
+
+                        <div class="space-y-4">
+                            {{-- Icon --}}
+                            <div class="flex h-14 w-14 items-center justify-center rounded-2xl shadow-md transition-all duration-500 group-hover:scale-110 group-hover:rotate-3"
+                                style="background: linear-gradient(135deg, {{ $f['cf'] }}, {{ $f['ct'] }}); box-shadow: 0 6px 18px {{ $f['cf'] }}30;">
+                                <img src="{{ asset('images/Home Page/' . $f['icon']) }}" alt="{{ $f['title'] }}"
+                                    class="h-8 w-8 object-contain" />
                             </div>
-                            <h3 class="font-bold text-lg text-green-400">সাধ্যের ভেতরে সাশ্রয়ী সেশন</h3>
-                            <p class="text-sm leading-relaxed">
-                                ছাত্র-ছাত্রীদের বাজেটের কথা মাথায় রেখে মেন্টরশিপ সেশনগুলোর খরচ নির্ধারণ করা হয়েছে।কম
-                                সময়ের সেশন হওয়ায় খরচও একদম হাতের নাগালে।
-                            </p>
+
+                            {{-- Title --}}
+                            <h3 class="text-base font-bold leading-snug" style="color: #0d3d3d;">{{ $f['title'] }}</h3>
+
+                            {{-- Desc --}}
+                            <p class="text-sm leading-relaxed" style="color: #4a7070;">{{ $f['desc'] }}</p>
                         </div>
                     </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
 
-                    {{-- Card 3 --}}
-                    <div
-                        class="group cursor-pointer relative bg-linear-to-br backdrop-blur-sm p-6 rounded-2xl border border-purple-500/30 transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl hover:shadow-purple-500/50 overflow-hidden">
-                        <div
-                            class="absolute inset-0 bg-linear-to-br from-purple-500/0 to-pink-500/0 group-hover:from-purple-500/10 group-hover:to-pink-500/10 transition-all duration-500">
-                        </div>
-                        <div class="relative space-y-4">
-                            <div
-                                class="w-16 h-16 bg-linear-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center shadow-lg shadow-purple-500/50 transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
-                                <img src="{{ asset('images/Home Page/topic.png') }}" alt="feature icon"
-                                    class="w-10 h-10 object-contain" />
-                            </div>
-                            <h3 class="font-bold text-lg text-purple-400">পুরো কোর্স নয়, শিখুন নির্দিষ্ট টপিক</h3>
-                            <p class="text-sm leading-relaxed">
-                                অপ্রয়োজনীয় কনটেন্ট বা পুরো কোর্সে ভর্তি হওয়ার কোনোই প্রয়োজন নেই।ঠিক যে টপিকটিতে
-                                আপনার
-                                সমস্যা রয়েছে,শুধুমাত্র সেটি সমাধানের জন্যই মেন্টরের সাহায্য নিতে পারবেন।
+        {{-- ═══════════════════════════════════════════
+        JOIN AS MENTOR SECTION
+        ═══════════════════════════════════════════ --}}
+        <section class="relative overflow-hidden py-24"
+            style="background: linear-gradient(135deg, #e6f7f7 0%, #d5f0ee 50%, #e8f4e8 100%);">
+
+            {{-- Decorative shapes --}}
+            <div class="pointer-events-none absolute inset-0 overflow-hidden">
+                <div class="absolute -right-32 -top-32 h-[400px] w-[400px] rounded-full"
+                    style="background: radial-gradient(circle, rgba(26,153,152,0.12), transparent 70%); filter: blur(50px);">
+                </div>
+                <div class="absolute -bottom-20 left-1/4 h-[300px] w-[300px] rounded-full"
+                    style="background: radial-gradient(circle, rgba(40,102,110,0.1), transparent 70%); filter: blur(50px);">
+                </div>
+            </div>
+
+            <div class="relative z-10 mx-auto max-w-7xl px-6">
+
+                {{-- Heading --}}
+                <div class="mb-12 text-center">
+                    <p class="mb-2 text-sm font-bold uppercase tracking-widest" style="color: #28666e;">মেন্টর হোন</p>
+                    <div class="mx-auto h-1 w-14 rounded-full"
+                        style="background: linear-gradient(90deg, #28666e, #7c9885);"></div>
+                </div>
+
+                <div class="grid items-center gap-14 lg:grid-cols-2">
+
+                    {{-- LEFT --}}
+                    <div class="space-y-7">
+                        <h2 class="text-3xl font-extrabold leading-tight tracking-tight lg:text-4xl"
+                            style="color: #0d3d3d;">
+                            যুক্ত হোন আমাদের
+                            <span
+                                style="background: linear-gradient(135deg, #28666e, #7c9885); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                                মেন্টর হিসেবে
+                            </span>
+                            <br />এবং ঘরে বসে উপার্জন করুন
+                        </h2>
+
+                        <div class="space-y-3">
+                            <p class="text-base leading-relaxed" style="color: #3a6060;">
+                                পড়াতে ভালোবাসেন? টিউশনি করানোর সুযোগ কিংবা উপযুক্ত সময় মিলছেনা? কিংবা ঘরের বাইরে
+                                টিউশনি করানো কষ্টসাধ্য?
+                            </p>
+                            <p class="text-base leading-relaxed" style="color: #3a6060;">
+                                MentorChai এর সাথে যুক্ত হোন মেন্টর হিসেবে। নিজের সুবিধামতো সময় অনুযায়ী দিন-রাত যেকোনো
+                                সময়ে মেন্টরশিপ প্রদান করুন। দেশব্যাপী শিক্ষার্থীদের সাথে সংযুক্ত হয়ে ঘরে বসেই অর্থ
+                                উপার্জন করুন।
                             </p>
                         </div>
+
+                        {{-- Perks --}}
+                        <div class="grid grid-cols-2 gap-3">
+                            @foreach(['ফ্লেক্সিবল শিডিউল', 'ঘরে বসে আয়', 'দ্রুত পেমেন্ট', 'যেকোনো বিষয়'] as $perk)
+                            <div class="flex items-center gap-2.5 rounded-xl bg-white px-4 py-3"
+                                style="border: 1px solid rgba(40,102,110,0.2); box-shadow: 0 2px 8px rgba(40,102,110,0.06);">
+                                <div class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full"
+                                    style="background: rgba(40,102,110,0.12);">
+                                    <svg class="h-3 w-3" fill="none" stroke="#28666e" viewBox="0 0 24 24"
+                                        stroke-width="3">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </div>
+                                <span class="text-sm font-semibold" style="color: #2d5f5f;">{{ $perk }}</span>
+                            </div>
+                            @endforeach
+                        </div>
+
+                        <a href="{{ route('faq') }}"
+                            class="inline-flex items-center gap-3 rounded-2xl px-8 py-4 text-base font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
+                            style="background: linear-gradient(135deg, #28666e, #7c9885); box-shadow: 0 8px 28px rgba(40,102,110,0.3);">
+                            বিস্তারিত জানতে এখানে ক্লিক করুন
+                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                stroke-width="2.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7-7 7" />
+                            </svg>
+                        </a>
                     </div>
 
-                    {{-- Card 4 --}}
-                    <div
-                        class="group cursor-pointer relative bg-linear-to-br backdrop-blur-sm p-6 rounded-2xl border border-orange-500/30 transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl hover:shadow-orange-500/50 overflow-hidden">
-                        <div
-                            class="absolute inset-0 bg-linear-to-br from-orange-500/0 to-amber-500/0 group-hover:from-orange-500/10 group-hover:to-amber-500/10 transition-all duration-500">
+                    {{-- RIGHT IMAGE --}}
+                    <div class="relative flex justify-center lg:justify-end">
+                        <div class="absolute inset-4 rounded-3xl"
+                            style="background: radial-gradient(ellipse, rgba(40,102,110,0.15), transparent 70%); filter: blur(40px);">
                         </div>
-                        <div class="relative space-y-4">
-                            <div
-                                class="w-16 h-16 bg-linear-to-br from-orange-500 to-amber-500 rounded-2xl flex items-center justify-center shadow-lg shadow-orange-500/50 transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
-                                <img src="{{ asset('images/Home Page/24-hours-support.png') }}" alt="feature icon"
-                                    class="w-10 h-10 object-contain" />
-                            </div>
-                            <h3 class="font-bold text-lg text-orange-400">২৪/৭ মেন্টরশিপ</h3>
-                            <p class="text-sm leading-relaxed">
-                                গভীর রাত হোক কিংবা পরীক্ষার ঠিক আগের মুহূর্ত-যেকোনো সময়েই সাহায্য নিতে পারবেন
-                                মেন্টরদের।
-                            </p>
-                        </div>
-                    </div>
 
-                    {{-- Card 5 --}}
-                    <div
-                        class="group cursor-pointer relative bg-linear-to-br backdrop-blur-sm p-6 rounded-2xl border border-indigo-500/30 transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl hover:shadow-indigo-500/50 overflow-hidden">
-                        <div
-                            class="absolute inset-0 bg-linear-to-br from-indigo-500/0 to-purple-500/0 group-hover:from-indigo-500/10 group-hover:to-purple-500/10 transition-all duration-500">
-                        </div>
-                        <div class="relative space-y-4">
-                            <div
-                                class="w-16 h-16 bg-linear-to-br from-indigo-500 to-purple-500 rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-500/50 transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
-                                <img src="{{ asset('images/Home Page/flexibleincome.png') }}" alt="feature icon"
-                                    class="w-10 h-10 object-contain" />
-                            </div>
-                            <h3 class="font-bold text-lg text-indigo-400">মেন্টরদের জন্য ফ্লেক্সিবল শিডিউল</h3>
-                            <p class="text-sm leading-relaxed">
-                                বিশ্ববিদ্যালয় শিক্ষার্থী বা পেশাজীবীরা নিজেদের অবসর সময়ে মেন্টর হিসেবে কাজ করতে পারেন
-                                এবং
-                                ঘরে বসেই অর্থ উপার্জন করতে পারেন।
-                            </p>
-                        </div>
-                    </div>
+                        <div class="relative w-full max-w-md">
+                            <img src="{{ asset('images/Home Page/mentor-earning.png') }}"
+                                alt="Mentor teaching from home"
+                                class="relative w-full rounded-3xl transition-all duration-500 hover:scale-[1.01]"
+                                style="border: 1px solid rgba(40,102,110,0.2); box-shadow: 0 24px 60px rgba(40,102,110,0.15), 0 4px 16px rgba(0,0,0,0.06);" />
 
-                    {{-- Card 6 --}}
-                    <div
-                        class="group cursor-pointer relative bg-linear-to-br backdrop-blur-sm p-6 rounded-2xl border border-pink-500/30 transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl hover:shadow-pink-500/50 overflow-hidden">
-                        <div
-                            class="absolute inset-0 bg-linear-to-br from-pink-500/0 to-rose-500/0 group-hover:from-pink-500/10 group-hover:to-rose-500/10 transition-all duration-500">
-                        </div>
-                        <div class="relative space-y-4">
-                            <div
-                                class="w-16 h-16 bg-linear-to-br from-pink-500 to-rose-500 rounded-2xl flex items-center justify-center shadow-lg shadow-pink-500/50 transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
-                                <img src="{{ asset('images/Home Page/findteacher.png') }}" alt="feature icon"
-                                    class="w-10 h-10 object-contain" />
+                            {{-- Badge --}}
+                            <div class="absolute -right-4 -top-4 flex items-center gap-2.5 rounded-2xl bg-white px-4 py-3 shadow-xl"
+                                style="border: 1px solid rgba(40,102,110,0.2);">
+                                <div class="h-2.5 w-2.5 animate-pulse rounded-full" style="background: #f59e0b;"></div>
+                                <span class="text-sm font-bold" style="color: #28666e;">ঘরে বসে আয়</span>
                             </div>
-                            <h3 class="font-bold text-lg text-pink-400">দ্রুততম সময়ে মেন্টর ম্যাচিং</h3>
-                            <p class="text-sm leading-relaxed">
-                                দীর্ঘ অপেক্ষা বা জটিল কোনো প্রক্রিয়ার ঝামেলা ছাড়াই বিষয় এবং সময় অনুযায়ী খুব সহজেই
-                                মেন্টর খুঁজে পাবেন।
-                            </p>
+
+                            {{-- Earnings card --}}
+                            <div class="absolute -bottom-5 -left-4 rounded-2xl bg-white px-5 py-3.5 shadow-xl"
+                                style="border: 1px solid rgba(40,102,110,0.2);">
+                                <p class="text-xs" style="color: #4a7070;">এই মাসে উপার্জন</p>
+                                <p class="text-xl font-extrabold" style="color: #28666e;">৳ ১২,৫০০</p>
+                            </div>
                         </div>
                     </div>
 
@@ -499,37 +478,23 @@
             </div>
         </section>
 
-        <!-- Join as Mentor Section -->
-        <section class="max-w-7xl mx-auto px-6 py-20 relative overflow-hidden">
-
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
-                <div class="space-y-6">
-                    <h1 class="text-2xl lg:text-4xl font-extrabold">
-                        যুক্ত হোন আমাদের মেন্টর হিসেবে এবং ঘরে বসে উপার্জন করুন
-                    </h1>
-                    <p class="text-lg">
-                        পড়াতে ভালোবাসেন?টিউশনি করানোর সু্যোগ কিংবা উপযুক্ত সময় মিলছেনা?কিংবা ঘরের বাইরে টিউশনি করানো
-                        কষ্টসাধ্য?
-                    </p>
-                    <p class="text-lg">
-                        MentorChai এর সাথে যুক্ত হোন মেন্টর হিসেবে,নিজের সুবিধামতো সময় অনুযায়ী দিন-রাত যেকোনো সময়ে
-                        মেন্টরশিপ প্রদান করুন,দেশব্যাপী শিক্ষার্থীদের সাথে সংযুক্ত হওয়ার মাধ্যমে ঘরে বসেই অর্থ উপার্জন
-                        করুন।
-                    </p>
-
-                    <a href="{{ route('faq') }}" class="w-full cursor-pointer btn btn-outline btn-primary shadow-sm">বিস্তারিত
-                        জানতে এখানে ক্লিক করুন</a>
-                </div>
-
-                <div class="relative flex justify-center lg:justify-end">
-                    <div class="relative">
-                        <img src="{{ asset('images/Home Page/onlineteaching.png') }}" alt="Mentorship session"
-                            class="relative w-full rounded-3xl border border-blue-200" />
-                    </div>
-                </div>
-            </div>
-        </section>
     </div>
 
+    <script>
+        let scrollPos = 0;
+        const container = document.getElementById('cardsContainer');
+        const wrapper   = document.getElementById('scrollContainer');
+        const cardWidth = 312; // 288px card + 24px gap
+
+        document.getElementById('scrollRight').addEventListener('click', () => {
+            const max = container.scrollWidth - wrapper.offsetWidth;
+            scrollPos = Math.min(scrollPos + cardWidth, max);
+            container.style.transform = `translateX(-${scrollPos}px)`;
+        });
+
+        document.getElementById('scrollLeft').addEventListener('click', () => {
+            scrollPos = Math.max(scrollPos - cardWidth, 0);
+            container.style.transform = `translateX(-${scrollPos}px)`;
+        });
+    </script>
 </x-layout>
