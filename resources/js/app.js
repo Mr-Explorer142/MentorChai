@@ -1,4 +1,7 @@
 import "./bootstrap";
+import Alpine from "alpinejs";
+window.Alpine = Alpine;
+Alpine.start();
 
 /* successfully updated profile effect */
 document.addEventListener("DOMContentLoaded", () => {
@@ -182,3 +185,10 @@ leftBtn.addEventListener("click", () => {
 
 // Initialize
 updatePosition();
+
+// admin dashboard JS, swap chart colors on toggle:
+document.getElementById("theme-toggle").addEventListener("click", () => {
+    const style = getComputedStyle(document.documentElement);
+    const stroke = style.getPropertyValue("--mc-chart-stroke").trim();
+    const fill = style.getPropertyValue("--mc-chart-fill").trim();
+});

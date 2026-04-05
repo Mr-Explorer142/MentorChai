@@ -1,11 +1,10 @@
 <x-layout>
-    <div class="min-h-screen" style="background: #f0fafa;">
+    <div class="min-h-screen transition-colors duration-300" style="background-color: var(--mc-bg);">
 
         {{-- ═══════════════════════════════════════════
         HERO SECTION
         ═══════════════════════════════════════════ --}}
-        <section class="relative overflow-hidden py-28 lg:py-36"
-            style="background: linear-gradient(135deg, #f0fafa 0%, #e6f7f7 40%, #d1f0ef 100%);">
+        <section class="relative overflow-hidden py-28 lg:py-36" style="background-color: var(--mc-bg);">
 
             {{-- Decorative blobs --}}
             <div class="pointer-events-none absolute inset-0 overflow-hidden">
@@ -22,7 +21,7 @@
 
             {{-- Subtle dot pattern --}}
             <div class="pointer-events-none absolute inset-0"
-                style="background-image: radial-gradient(rgba(26,153,152,0.12) 1px, transparent 1px); background-size: 28px 28px;">
+                style="background-image: radial-gradient(rgba(26,153,152,0.1) 1px, transparent 1px); background-size: 28px 28px; opacity: 0.6;">
             </div>
 
             <div class="container relative z-10 mx-auto px-6 lg:px-12">
@@ -32,24 +31,25 @@
                     <div class="space-y-8">
                         {{-- Badge --}}
                         <span class="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-semibold"
-                            style="background: rgba(26,153,152,0.1); border: 1px solid rgba(26,153,152,0.3); color: #155665;">
-                            <span class="h-1.5 w-1.5 animate-pulse rounded-full" style="background:#1A9998;"></span>
+                            style="background: rgba(26,153,152,0.12); border: 1px solid rgba(26,153,152,0.3); color: var(--mc-primary);">
+                            <span class="h-1.5 w-1.5 animate-pulse rounded-full"
+                                style="background: var(--mc-primary);"></span>
                             পরীক্ষার আগে শেষ মুহূর্তের সহায়তা
                         </span>
 
                         {{-- Heading --}}
                         <h1 class="text-4xl font-extrabold leading-tight tracking-tight md:text-5xl lg:text-6xl"
-                            style="color: #0d3d3d;">
+                            style="color: var(--mc-text);">
                             <span
                                 style="background: linear-gradient(135deg, #1A9998, #155665); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
                                 শেষ রাতে পড়া আটকে গেছে?
                             </span>
                             <br />
-                            <span style="color: #1a2e2e;">টিচার এখনই পেয়ে যান</span>
+                            <span style="color: var(--mc-text);">টিচার এখনই পেয়ে যান</span>
                         </h1>
 
                         {{-- Subtext --}}
-                        <p class="max-w-xl text-lg leading-relaxed" style="color: #4a7070;">
+                        <p class="max-w-xl text-lg leading-relaxed" style="color: var(--mc-text-muted);">
                             Calculus, Binary Search বা Kirchhoff's Laws —
                             যেকোনো কঠিন টপিক বুঝতে এখন আর অপেক্ষা নয়।
                             প্রয়োজন শুধু কয়েক মিনিট।
@@ -68,7 +68,7 @@
                             </a>
                             <a href="#"
                                 class="inline-flex items-center justify-center gap-2 rounded-xl px-7 py-3.5 text-base font-semibold transition-all duration-300 hover:-translate-y-0.5"
-                                style="border: 1.5px solid rgba(26,153,152,0.4); color: #155665; background: white;">
+                                style="border: 1.5px solid rgba(26,153,152,0.4); color: var(--mc-primary); background: var(--mc-surface);">
                                 কিভাবে কাজ করে?
                                 <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                     stroke-width="2">
@@ -81,7 +81,7 @@
                         <div class="flex flex-wrap gap-4 pt-2">
                             @foreach(['⏱ ২৪/৭ সাপোর্ট', '💸 সাশ্রয়ী', '🎯 টপিক ভিত্তিক'] as $pill)
                             <div class="flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium"
-                                style="background: white; border: 1px solid rgba(26,153,152,0.2); color: #2d6e6e; box-shadow: 0 2px 8px rgba(26,153,152,0.08);">
+                                style="background: var(--mc-surface); border: 1px solid var(--mc-border-teal-sub); color: var(--mc-primary); box-shadow: var(--mc-shadow-sm);">
                                 {{ $pill }}
                             </div>
                             @endforeach
@@ -94,14 +94,14 @@
                             style="background: radial-gradient(ellipse, rgba(26,153,152,0.2), transparent 70%); filter: blur(40px);">
                         </div>
 
-                        <div class="relative w-full ">
+                        <div class="relative w-full">
                             <img src="{{ asset('images/Home Page/mentorship-session.png') }}" alt="Mentorship session"
                                 class="relative w-full rounded-3xl"
-                                style="border: 1px solid rgba(26,153,152,0.2); box-shadow: 0 24px 60px rgba(26,153,152,0.15), 0 4px 16px rgba(0,0,0,0.08);" />
+                                style="border: 1px solid var(--mc-border-teal); box-shadow: 0 24px 60px rgba(26,153,152,0.15), 0 4px 16px rgba(0,0,0,0.08);" />
 
                             {{-- Floating rating --}}
-                            <div class="absolute -bottom-14 -left-5 flex items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-xl"
-                                style="border: 1px solid rgba(26,153,152,0.2);">
+                            <div class="absolute -bottom-14 -left-5 flex items-center gap-3 rounded-2xl px-4 py-3 shadow-xl"
+                                style="background: var(--mc-surface); border: 1px solid var(--mc-border-teal);">
                                 <div class="flex h-9 w-9 items-center justify-center rounded-xl"
                                     style="background: linear-gradient(135deg, #1A9998, #155665);">
                                     <svg class="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -110,16 +110,18 @@
                                     </svg>
                                 </div>
                                 <div>
-                                    <p class="text-sm font-bold" style="color:#155665;">4.9 Rated</p>
-                                    <p class="text-xs" style="color:#4a7070;">Verified Mentors</p>
+                                    <p class="text-sm font-bold" style="color: var(--mc-primary);">4.9 Rated</p>
+                                    <p class="text-xs" style="color: var(--mc-text-muted);">Verified Mentors</p>
                                 </div>
                             </div>
 
                             {{-- Online badge --}}
-                            <div class="absolute -right-4 -top-6 flex items-center gap-2 rounded-xl bg-white px-3 py-2 shadow-lg"
-                                style="border: 1px solid rgba(26,153,152,0.2);">
-                                <span class="h-2 w-2 animate-pulse rounded-full" style="background:#10b981;"></span>
-                                <span class="text-xs font-semibold" style="color:#155665;">৩২ জন অনলাইন</span>
+                            <div class="absolute -right-4 -top-6 flex items-center gap-2 rounded-xl px-3 py-2 shadow-lg"
+                                style="background: var(--mc-surface); border: 1px solid var(--mc-border-teal);">
+                                <span class="h-2 w-2 animate-pulse rounded-full"
+                                    style="background: var(--mc-online);"></span>
+                                <span class="text-xs font-semibold" style="color: var(--mc-primary);">৩২ জন
+                                    অনলাইন</span>
                             </div>
                         </div>
                     </div>
@@ -129,24 +131,24 @@
         </section>
 
         {{-- Divider wave --}}
-        <div style="background:#f0fafa; line-height:0;">
+        <div style="line-height:0; background-color: var(--mc-bg);">
             <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"
                 style="width:100%; display:block;">
-                <path d="M0 60 C360 0 1080 0 1440 60 L1440 0 L0 0 Z" fill="#d1f0ef" />
+                <path id="hero-wave" d="M0 60 C360 0 1080 0 1440 60 L1440 0 L0 0 Z" />
             </svg>
         </div>
 
         {{-- ═══════════════════════════════════════════
         POPULAR TOPICS CAROUSEL
         ═══════════════════════════════════════════ --}}
-        <section class="py-24" style="background: #f0fafa;">
+        <section class="py-24 transition-colors duration-300" style="background-color: var(--mc-bg);">
             <div class="mx-auto max-w-7xl px-6">
 
                 {{-- Heading --}}
                 <div class="mb-14 text-center">
-                    <p class="mb-2 text-sm font-bold uppercase tracking-widest" style="color: #1A9998;">এক্সপ্লোর করুন
-                    </p>
-                    <h2 class="text-3xl font-extrabold tracking-tight lg:text-4xl" style="color: #0d3d3d;">
+                    <p class="mb-2 text-sm font-bold uppercase tracking-widest" style="color: var(--mc-primary);">
+                        এক্সপ্লোর করুন</p>
+                    <h2 class="text-3xl font-extrabold tracking-tight lg:text-4xl" style="color: var(--mc-text);">
                         জনপ্রিয়
                         <span
                             style="background: linear-gradient(135deg, #1A9998, #155665); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
@@ -166,40 +168,39 @@
                             @php
                             $topics = [
                             ['img'=>'cse.png', 'title'=>'Functions & Array in C', 'dept'=>'CSE, SWE',
-                            'color'=>'#1A9998', 'light'=>'#e6f7f7'],
-                            ['img'=>'eee.png', 'title'=>'KVL & KCL', 'dept'=>'EEE, CSE', 'color'=>'#187F87',
-                            'light'=>'#e3f5f4'],
-                            ['img'=>'swe.png', 'title'=>"Dijkstra's Algorithm", 'dept'=>'CSE, SWE', 'color'=>'#155665',
-                            'light'=>'#dff0ee'],
+                            'color'=>'#1A9998'],
+                            ['img'=>'eee.png', 'title'=>'KVL & KCL', 'dept'=>'EEE, CSE', 'color'=>'#187F87'],
+                            ['img'=>'swe.png', 'title'=>"Dijkstra's Algorithm", 'dept'=>'CSE, SWE', 'color'=>'#155665'],
                             ['img'=>'textile.png', 'title'=>'Fabric Mechanics (Stress-Strain)', 'dept'=>'TE',
-                            'color'=>'#1A9998', 'light'=>'#e6f7f7'],
+                            'color'=>'#1A9998'],
                             ['img'=>'pharmacy.png', 'title'=>'Drug Receptor Interaction Mechanisms', 'dept'=>'Pharmacy',
-                            'color'=>'#187F87', 'light'=>'#e3f5f4'],
+                            'color'=>'#187F87'],
                             ['img'=>'nfe.png', 'title'=>'Nutrient Bioavailability & Absorption', 'dept'=>'NFE',
-                            'color'=>'#155665', 'light'=>'#dff0ee'],
-                            ['img'=>'environmentalsc.png','title'=>'Environmental Fate & Transport of Pollutants',
-                            'dept'=>'Environmental Science', 'color'=>'#1A9998', 'light'=>'#e6f7f7'],
+                            'color'=>'#155665'],
+                            ['img'=>'environmentalsc.png','title'=>'Environmental Fate & Transport of
+                            Pollutants','dept'=>'Environmental Science','color'=>'#1A9998'],
                             ];
                             @endphp
 
                             @foreach($topics as $topic)
-                            <div class="group relative w-72 shrink-0 cursor-pointer overflow-hidden rounded-2xl bg-white transition-all duration-500 hover:-translate-y-2"
-                                style="border: 1px solid rgba(26,153,152,0.15); box-shadow: 0 4px 20px rgba(26,153,152,0.08);">
+                            <div class="group relative w-72 shrink-0 cursor-pointer overflow-hidden rounded-2xl
+                                        transition-all duration-500 hover:-translate-y-2"
+                                style="background: var(--mc-surface); border: 1px solid var(--mc-border-teal-sub); box-shadow: var(--mc-shadow-md);">
 
                                 {{-- Image --}}
                                 <div class="relative overflow-hidden">
                                     <img src="{{ asset('images/Home Page/' . $topic['img']) }}"
                                         alt="{{ $topic['title'] }}"
                                         class="h-44 w-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                                    {{-- Tint overlay on hover --}}
                                     <div class="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                                        style="background: linear-gradient(to top, {{ $topic['color'] }}44, transparent 60%);">
+                                        style="background: linear-gradient(to top, {{ $topic['color'] }}55, transparent 60%);">
                                     </div>
                                 </div>
 
                                 {{-- Content --}}
                                 <div class="space-y-3 p-5">
-                                    <h3 class="text-center text-base font-bold leading-snug" style="color: #0d3d3d;">
+                                    <h3 class="text-center text-base font-bold leading-snug"
+                                        style="color: var(--mc-text);">
                                         {{ $topic['title'] }}
                                     </h3>
                                     <p class="text-center text-xs font-semibold" style="color: {{ $topic['color'] }};">
@@ -219,16 +220,18 @@
 
                     {{-- Scroll buttons --}}
                     <button id="scrollLeft"
-                        class="absolute -left-5 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-xl transition-all duration-300 hover:scale-110"
-                        style="border: 1.5px solid rgba(26,153,152,0.3); box-shadow: 0 4px 16px rgba(26,153,152,0.2);">
-                        <svg class="h-5 w-5" fill="none" stroke="#1A9998" viewBox="0 0 24 24" stroke-width="2.5">
+                        class="absolute -left-5 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full shadow-xl transition-all duration-300 hover:scale-110"
+                        style="background: var(--mc-surface); border: 1.5px solid var(--mc-border-teal); box-shadow: var(--mc-shadow-lg);">
+                        <svg class="h-5 w-5" fill="none" stroke="var(--mc-primary)" viewBox="0 0 24 24"
+                            stroke-width="2.5">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
                         </svg>
                     </button>
                     <button id="scrollRight"
-                        class="absolute -right-5 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-xl transition-all duration-300 hover:scale-110"
-                        style="border: 1.5px solid rgba(26,153,152,0.3); box-shadow: 0 4px 16px rgba(26,153,152,0.2);">
-                        <svg class="h-5 w-5" fill="none" stroke="#1A9998" viewBox="0 0 24 24" stroke-width="2.5">
+                        class="absolute -right-5 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full shadow-xl transition-all duration-300 hover:scale-110"
+                        style="background: var(--mc-surface); border: 1.5px solid var(--mc-border-teal); box-shadow: var(--mc-shadow-lg);">
+                        <svg class="h-5 w-5" fill="none" stroke="var(--mc-primary)" viewBox="0 0 24 24"
+                            stroke-width="2.5">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
                         </svg>
                     </button>
@@ -239,13 +242,16 @@
         {{-- ═══════════════════════════════════════════
         POPULAR DEPARTMENTS
         ═══════════════════════════════════════════ --}}
-        <section class="py-24" style="background: linear-gradient(180deg, #e6f7f7 0%, #f0fafa 100%);">
-            <div class="mx-auto max-w-7xl px-6">
+        <section class="py-24 transition-colors duration-300"
+            style="background: linear-gradient(180deg, var(--mc-surface) 0%, var(--mc-bg) 100%);">
+
+            <div class="relative mx-auto max-w-7xl px-6">
 
                 {{-- Heading --}}
                 <div class="mb-14 text-center">
-                    <p class="mb-2 text-sm font-bold uppercase tracking-widest" style="color: #1A9998;">ডিপার্টমেন্ট</p>
-                    <h2 class="text-3xl font-extrabold tracking-tight lg:text-4xl" style="color: #0d3d3d;">
+                    <p class="mb-2 text-sm font-bold uppercase tracking-widest" style="color: var(--mc-primary);">
+                        ডিপার্টমেন্ট</p>
+                    <h2 class="text-3xl font-extrabold tracking-tight lg:text-4xl" style="color: var(--mc-text);">
                         প্রায়শই অনুসন্ধানকৃত
                         <span
                             style="background: linear-gradient(135deg, #1A9998, #155665); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
@@ -269,18 +275,16 @@
 
                 <div class="grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-6">
                     @foreach($departments as $dept)
-                    <div class="group cursor-pointer overflow-hidden rounded-2xl bg-white p-6 text-center transition-all duration-500 hover:-translate-y-2 hover:shadow-xl"
-                        style="border: 1px solid rgba(26,153,152,0.15); box-shadow: 0 2px 12px rgba(26,153,152,0.07);">
-
+                    <div class="group cursor-pointer overflow-hidden rounded-2xl p-6 text-center transition-all duration-500 hover:-translate-y-2 hover:shadow-xl"
+                        style="background: var(--mc-surface); border: 1px solid var(--mc-border-teal-sub); box-shadow: var(--mc-shadow-sm);">
                         <div class="flex flex-col items-center gap-4">
-                            {{-- Icon ring --}}
                             <div class="flex h-20 w-20 items-center justify-center rounded-2xl transition-all duration-500 group-hover:scale-110"
-                                style="background: {{ $dept['color'] }}14; border: 1.5px solid {{ $dept['color'] }}30;">
+                                style="background: {{ $dept['color'] }}18; border: 1.5px solid {{ $dept['color'] }}30;">
                                 <img src="{{ asset('images/Home Page/' . $dept['icon']) }}" alt="{{ $dept['name'] }}"
                                     class="h-12 w-12 object-contain drop-shadow" />
                             </div>
                             <h3 class="text-xs font-semibold leading-tight transition-colors duration-300 md:text-sm"
-                                style="color: #2d5f5f;">
+                                style="color: var(--mc-text-sub);">
                                 {{ $dept['name'] }}
                             </h3>
                         </div>
@@ -293,13 +297,14 @@
         {{-- ═══════════════════════════════════════════
         FEATURES SECTION
         ═══════════════════════════════════════════ --}}
-        <section class="py-24" style="background: #f0fafa;">
+        <section class="py-24 transition-colors duration-300" style="background-color: var(--mc-bg);">
             <div class="mx-auto max-w-6xl px-6">
 
                 {{-- Heading --}}
                 <div class="mb-14 text-center">
-                    <p class="mb-2 text-sm font-bold uppercase tracking-widest" style="color: #1A9998;">কেন আমরা?</p>
-                    <h2 class="text-3xl font-extrabold tracking-tight lg:text-4xl" style="color: #0d3d3d;">
+                    <p class="mb-2 text-sm font-bold uppercase tracking-widest" style="color: var(--mc-primary);">কেন
+                        আমরা?</p>
+                    <h2 class="text-3xl font-extrabold tracking-tight lg:text-4xl" style="color: var(--mc-text);">
                         আমাদের
                         <span
                             style="background: linear-gradient(135deg, #1A9998, #155665); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
@@ -340,26 +345,24 @@
 
                 <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                     @foreach($features as $f)
-                    <div class="group cursor-pointer overflow-hidden rounded-2xl bg-white p-6 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl"
-                        style="border: 1px solid rgba(26,153,152,0.15); box-shadow: 0 2px 12px rgba(26,153,152,0.07);">
+                    <div class="group relative cursor-pointer overflow-hidden rounded-2xl p-6
+                                transition-all duration-500 hover:-translate-y-2 hover:shadow-xl"
+                        style="background: var(--mc-surface); border: 1px solid var(--mc-border-teal-sub); box-shadow: var(--mc-shadow-sm);">
 
                         {{-- Top color bar on hover --}}
                         <div class="absolute left-0 right-0 top-0 h-0.5 rounded-t-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                             style="background: linear-gradient(90deg, {{ $f['cf'] }}, {{ $f['ct'] }});"></div>
 
                         <div class="space-y-4">
-                            {{-- Icon --}}
                             <div class="flex h-14 w-14 items-center justify-center rounded-2xl shadow-md transition-all duration-500 group-hover:scale-110 group-hover:rotate-3"
                                 style="background: linear-gradient(135deg, {{ $f['cf'] }}, {{ $f['ct'] }}); box-shadow: 0 6px 18px {{ $f['cf'] }}30;">
                                 <img src="{{ asset('images/Home Page/' . $f['icon']) }}" alt="{{ $f['title'] }}"
                                     class="h-8 w-8 object-contain" />
                             </div>
 
-                            {{-- Title --}}
-                            <h3 class="text-base font-bold leading-snug" style="color: #0d3d3d;">{{ $f['title'] }}</h3>
-
-                            {{-- Desc --}}
-                            <p class="text-sm leading-relaxed" style="color: #4a7070;">{{ $f['desc'] }}</p>
+                            <h3 class="text-base font-bold leading-snug" style="color: var(--mc-text);">{{ $f['title']
+                                }}</h3>
+                            <p class="text-sm leading-relaxed" style="color: var(--mc-text-muted);">{{ $f['desc'] }}</p>
                         </div>
                     </div>
                     @endforeach
@@ -370,16 +373,16 @@
         {{-- ═══════════════════════════════════════════
         JOIN AS MENTOR SECTION
         ═══════════════════════════════════════════ --}}
-        <section class="relative overflow-hidden py-24"
-            style="background: linear-gradient(135deg, #e6f7f7 0%, #d5f0ee 50%, #e8f4e8 100%);">
+        <section class="relative overflow-hidden py-24 transition-colors duration-300"
+            style="background: linear-gradient(135deg, var(--mc-surface) 0%, var(--mc-surface-hover) 50%, var(--mc-bg) 100%);">
 
             {{-- Decorative shapes --}}
             <div class="pointer-events-none absolute inset-0 overflow-hidden">
                 <div class="absolute -right-32 -top-32 h-[400px] w-[400px] rounded-full"
-                    style="background: radial-gradient(circle, rgba(26,153,152,0.12), transparent 70%); filter: blur(50px);">
+                    style="background: radial-gradient(circle, rgba(26,153,152,0.1), transparent 70%); filter: blur(50px);">
                 </div>
                 <div class="absolute -bottom-20 left-1/4 h-[300px] w-[300px] rounded-full"
-                    style="background: radial-gradient(circle, rgba(40,102,110,0.1), transparent 70%); filter: blur(50px);">
+                    style="background: radial-gradient(circle, rgba(21,86,101,0.08), transparent 70%); filter: blur(50px);">
                 </div>
             </div>
 
@@ -387,9 +390,10 @@
 
                 {{-- Heading --}}
                 <div class="mb-12 text-center">
-                    <p class="mb-2 text-sm font-bold uppercase tracking-widest" style="color: #28666e;">মেন্টর হোন</p>
+                    <p class="mb-2 text-sm font-bold uppercase tracking-widest" style="color: var(--mc-primary);">মেন্টর
+                        হোন</p>
                     <div class="mx-auto h-1 w-14 rounded-full"
-                        style="background: linear-gradient(90deg, #28666e, #7c9885);"></div>
+                        style="background: linear-gradient(90deg, var(--mc-primary), var(--mc-sage));"></div>
                 </div>
 
                 <div class="grid items-center gap-14 lg:grid-cols-2">
@@ -397,21 +401,21 @@
                     {{-- LEFT --}}
                     <div class="space-y-7">
                         <h2 class="text-3xl font-extrabold leading-tight tracking-tight lg:text-4xl"
-                            style="color: #0d3d3d;">
+                            style="color: var(--mc-text);">
                             যুক্ত হোন আমাদের
                             <span
-                                style="background: linear-gradient(135deg, #28666e, #7c9885); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                                style="background: linear-gradient(135deg, var(--mc-primary), var(--mc-sage)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
                                 মেন্টর হিসেবে
                             </span>
                             <br />এবং ঘরে বসে উপার্জন করুন
                         </h2>
 
                         <div class="space-y-3">
-                            <p class="text-base leading-relaxed" style="color: #3a6060;">
+                            <p class="text-base leading-relaxed" style="color: var(--mc-text-muted);">
                                 পড়াতে ভালোবাসেন? টিউশনি করানোর সুযোগ কিংবা উপযুক্ত সময় মিলছেনা? কিংবা ঘরের বাইরে
                                 টিউশনি করানো কষ্টসাধ্য?
                             </p>
-                            <p class="text-base leading-relaxed" style="color: #3a6060;">
+                            <p class="text-base leading-relaxed" style="color: var(--mc-text-muted);">
                                 MentorChai এর সাথে যুক্ত হোন মেন্টর হিসেবে। নিজের সুবিধামতো সময় অনুযায়ী দিন-রাত যেকোনো
                                 সময়ে মেন্টরশিপ প্রদান করুন। দেশব্যাপী শিক্ষার্থীদের সাথে সংযুক্ত হয়ে ঘরে বসেই অর্থ
                                 উপার্জন করুন।
@@ -421,23 +425,24 @@
                         {{-- Perks --}}
                         <div class="grid grid-cols-2 gap-3">
                             @foreach(['ফ্লেক্সিবল শিডিউল', 'ঘরে বসে আয়', 'দ্রুত পেমেন্ট', 'যেকোনো বিষয়'] as $perk)
-                            <div class="flex items-center gap-2.5 rounded-xl bg-white px-4 py-3"
-                                style="border: 1px solid rgba(40,102,110,0.2); box-shadow: 0 2px 8px rgba(40,102,110,0.06);">
+                            <div class="flex items-center gap-2.5 rounded-xl px-4 py-3"
+                                style="background: var(--mc-surface); border: 1px solid var(--mc-border-teal-sub); box-shadow: var(--mc-shadow-sm);">
                                 <div class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full"
-                                    style="background: rgba(40,102,110,0.12);">
-                                    <svg class="h-3 w-3" fill="none" stroke="#28666e" viewBox="0 0 24 24"
-                                        stroke-width="3">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                    style="background: rgba(26,153,152,0.12);">
+                                    <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke-width="3">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"
+                                            stroke="var(--mc-primary)" />
                                     </svg>
                                 </div>
-                                <span class="text-sm font-semibold" style="color: #2d5f5f;">{{ $perk }}</span>
+                                <span class="text-sm font-semibold" style="color: var(--mc-text-sub);">{{ $perk
+                                    }}</span>
                             </div>
                             @endforeach
                         </div>
 
                         <a href="{{ route('faq') }}"
                             class="inline-flex items-center gap-3 rounded-2xl px-8 py-4 text-base font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
-                            style="background: linear-gradient(135deg, #28666e, #7c9885); box-shadow: 0 8px 28px rgba(40,102,110,0.3);">
+                            style="background: linear-gradient(135deg, var(--mc-primary), var(--mc-sage)); box-shadow: 0 8px 28px rgba(40,102,110,0.3);">
                             বিস্তারিত জানতে এখানে ক্লিক করুন
                             <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                 stroke-width="2.5">
@@ -456,20 +461,20 @@
                             <img src="{{ asset('images/Home Page/mentor-earning.png') }}"
                                 alt="Mentor teaching from home"
                                 class="relative w-full rounded-3xl transition-all duration-500 hover:scale-[1.01]"
-                                style="border: 1px solid rgba(40,102,110,0.2); box-shadow: 0 24px 60px rgba(40,102,110,0.15), 0 4px 16px rgba(0,0,0,0.06);" />
+                                style="border: 1px solid var(--mc-border-teal); box-shadow: var(--mc-shadow-lg), 0 4px 16px rgba(0,0,0,0.06);" />
 
                             {{-- Badge --}}
-                            <div class="absolute -right-4 -top-4 flex items-center gap-2.5 rounded-2xl bg-white px-4 py-3 shadow-xl"
-                                style="border: 1px solid rgba(40,102,110,0.2);">
+                            <div class="absolute -right-4 -top-4 flex items-center gap-2.5 rounded-2xl px-4 py-3 shadow-xl"
+                                style="background: var(--mc-surface); border: 1px solid var(--mc-border-teal);">
                                 <div class="h-2.5 w-2.5 animate-pulse rounded-full" style="background: #f59e0b;"></div>
-                                <span class="text-sm font-bold" style="color: #28666e;">ঘরে বসে আয়</span>
+                                <span class="text-sm font-bold" style="color: var(--mc-primary);">ঘরে বসে আয়</span>
                             </div>
 
                             {{-- Earnings card --}}
-                            <div class="absolute -bottom-5 -left-4 rounded-2xl bg-white px-5 py-3.5 shadow-xl"
-                                style="border: 1px solid rgba(40,102,110,0.2);">
-                                <p class="text-xs" style="color: #4a7070;">এই মাসে উপার্জন</p>
-                                <p class="text-xl font-extrabold" style="color: #28666e;">৳ ১২,৫০০</p>
+                            <div class="absolute -bottom-5 -left-4 rounded-2xl px-5 py-3.5 shadow-xl"
+                                style="background: var(--mc-surface); border: 1px solid var(--mc-border-teal);">
+                                <p class="text-xs" style="color: var(--mc-text-muted);">এই মাসে উপার্জন</p>
+                                <p class="text-xl font-extrabold" style="color: var(--mc-primary);">৳ ১২,৫০০</p>
                             </div>
                         </div>
                     </div>
@@ -480,11 +485,28 @@
 
     </div>
 
+    {{-- Wave color sync script --}}
+    <script>
+        function syncWave() {
+            const isDark = document.documentElement.classList.contains('dark');
+            const wavePath = document.getElementById('hero-wave');
+            if (wavePath) {
+                wavePath.setAttribute('fill', isDark ? '#1a2e3b' : '#e6f7f7');
+            }
+        }
+        syncWave();
+
+        // Watch for dark mode toggle
+        const observer = new MutationObserver(syncWave);
+        observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    </script>
+
+    {{-- Carousel script --}}
     <script>
         let scrollPos = 0;
         const container = document.getElementById('cardsContainer');
         const wrapper   = document.getElementById('scrollContainer');
-        const cardWidth = 312; // 288px card + 24px gap
+        const cardWidth = 312;
 
         document.getElementById('scrollRight').addEventListener('click', () => {
             const max = container.scrollWidth - wrapper.offsetWidth;

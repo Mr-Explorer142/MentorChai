@@ -1,23 +1,36 @@
 <x-layout>
-    <div class="min-h-screen flex items-center justify-center px-4 relative overflow-hidden"
-        style="background-color: #f0f4f4;">
 
-        {{-- Background Glow --}}
-        <div class="absolute inset-0">
-            <div class="absolute top-[-120px] left-[-120px] w-[400px] h-[400px] rounded-full"
-                style="background: rgba(26,153,143,0.12); filter: blur(120px);"></div>
-            <div class="absolute bottom-[-120px] right-[-120px] w-[400px] h-[400px] rounded-full"
-                style="background: rgba(16,46,60,0.15); filter: blur(120px);"></div>
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full"
-                style="background: rgba(24,127,135,0.06); filter: blur(100px);"></div>
+    {{-- ═══════════════════════════════════════════
+    ADMIN LOGIN PAGE
+    ═══════════════════════════════════════════ --}}
+
+    <div class="relative min-h-screen overflow-hidden flex items-center justify-center px-4 py-16
+                bg-[#f0f4f4] dark:bg-[#0f1f2e]
+                transition-colors duration-300">
+
+        {{-- Background Glows --}}
+        <div class="pointer-events-none absolute inset-0">
+            <div class="absolute -top-28 -left-28 w-[400px] h-[400px] rounded-full
+                        bg-[radial-gradient(circle,rgba(26,153,143,0.12),transparent_70%)]
+                        dark:bg-[radial-gradient(circle,rgba(77,182,193,0.1),transparent_70%)]
+                        blur-[120px]"></div>
+            <div class="absolute -bottom-28 -right-28 w-[400px] h-[400px] rounded-full
+                        bg-[radial-gradient(circle,rgba(16,46,60,0.15),transparent_70%)]
+                        dark:bg-[radial-gradient(circle,rgba(15,42,56,0.5),transparent_70%)]
+                        blur-[120px]"></div>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full
+                        bg-[radial-gradient(circle,rgba(24,127,135,0.06),transparent_70%)]
+                        dark:bg-[radial-gradient(circle,rgba(77,182,193,0.05),transparent_70%)]
+                        blur-[100px]"></div>
         </div>
 
         <div class="relative w-full max-w-md">
 
-            {{-- HEADER --}}
+            {{-- Header --}}
             <div class="text-center mb-8">
-                <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl shadow-xl mb-4 text-white"
-                    style="background: linear-gradient(135deg, #102E3C, #1A998F);">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl shadow-xl mb-4 text-white
+                            bg-linear-to-br from-[#102E3C] to-[#1A998F]
+                            dark:from-[#1a2e3b] dark:to-[#4db6c1]">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-8 h-8">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -25,36 +38,46 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4" />
                     </svg>
                 </div>
-
-                <h1 class="text-3xl font-bold tracking-tight" style="color: #102E3C;">Admin Panel</h1>
-                <p class="text-sm mt-1" style="color: #155665; opacity: 0.7;">Secure admin login</p>
+                <h1 class="text-3xl font-bold tracking-tight text-[#102E3C] dark:text-[#7ec8e3]">
+                    অ্যাডমিন প্যানেল
+                </h1>
+                <p class="text-sm mt-1 text-[#155665]/70 dark:text-[#4db6c1]/70">
+                    নিরাপদ অ্যাডমিন লগইন
+                </p>
             </div>
 
-            {{-- CARD --}}
-            <div class="rounded-2xl shadow-2xl border"
-                style="background: rgba(255,255,255,0.75); backdrop-filter: blur(20px); border-color: #C4CFCE;">
+            {{-- Card --}}
+            <div class="rounded-2xl shadow-2xl
+                        border border-[#C4CFCE] dark:border-[#4db6c1]/15
+                        bg-white/75 dark:bg-[#1a2e3b]/80
+                        backdrop-blur-[20px]
+                        transition-colors duration-300">
 
                 <div class="p-8 space-y-6">
 
-                    {{-- FORM --}}
-                    <form method="POST" action="#" class="space-y-5">
+                    {{-- Form --}}
+                    <form method="POST" action="{{ route('admin_login') }}" class="space-y-5">
                         @csrf
 
-                        {{-- EMAIL --}}
-                        <div class="form-control">
-                            <label class="label pb-1">
-                                <span class="text-xs font-semibold" style="color: #155665;">Admin Email</span>
+                        {{-- Email --}}
+                        <div>
+                            <label class="block text-xs font-semibold mb-1.5
+                                          text-[#155665] dark:text-[#7ec8e3]">
+                                অ্যাডমিন ই-মেইল
                             </label>
-
                             <div class="relative">
-                                <input type="email" name="email" placeholder="admin@email.com"
-                                    class="input input-bordered w-full pl-10"
-                                    style="border-color: #C4CFCE; background-color: #fafcfc; color: #102E3C;"
-                                    onfocus="this.style.borderColor='#1A998F'; this.style.outline='none'; this.style.boxShadow='0 0 0 2px rgba(26,153,143,0.15)';"
-                                    onblur="this.style.borderColor='#C4CFCE'; this.style.boxShadow='none';" required>
-
-                                <span class="absolute left-3 top-1/2 -translate-y-1/2"
-                                    style="color: #155665; opacity: 0.5;">
+                                <input type="email" name="email" placeholder="admin@email.com" required class="w-full pl-10 pr-4 py-2.5 rounded-xl
+                                              text-sm font-[Nunito,sans-serif] outline-none
+                                              border-[1.5px] border-[#C4CFCE] dark:border-[#4db6c1]/20
+                                              bg-[#fafcfc] dark:bg-[#0f1f2e]/60
+                                              text-[#102E3C] dark:text-[#7ec8e3]
+                                              placeholder:text-[#155665]/40 dark:placeholder:text-[#7ec8e3]/30
+                                              transition-all duration-200
+                                              focus:border-[#1A998F] dark:focus:border-[#4db6c1]
+                                              focus:ring-[3px] focus:ring-[#1A998F]/15 dark:focus:ring-[#4db6c1]/10
+                                              focus:bg-white dark:focus:bg-[#243d4d]" />
+                                <span class="absolute left-3 top-1/2 -translate-y-1/2
+                                             text-[#155665]/50 dark:text-[#4db6c1]/50">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -64,21 +87,25 @@
                             </div>
                         </div>
 
-                        {{-- PASSWORD --}}
-                        <div class="form-control">
-                            <label class="label pb-1">
-                                <span class="text-xs font-semibold" style="color: #155665;">Password</span>
+                        {{-- Password --}}
+                        <div>
+                            <label class="block text-xs font-semibold mb-1.5
+                                          text-[#155665] dark:text-[#7ec8e3]">
+                                পাসওয়ার্ড
                             </label>
-
                             <div class="relative">
-                                <input type="password" name="password" placeholder="••••••••"
-                                    class="input input-bordered w-full pl-10"
-                                    style="border-color: #C4CFCE; background-color: #fafcfc; color: #102E3C;"
-                                    onfocus="this.style.borderColor='#1A998F'; this.style.outline='none'; this.style.boxShadow='0 0 0 2px rgba(26,153,143,0.15)';"
-                                    onblur="this.style.borderColor='#C4CFCE'; this.style.boxShadow='none';" required>
-
-                                <span class="absolute left-3 top-1/2 -translate-y-1/2"
-                                    style="color: #155665; opacity: 0.5;">
+                                <input type="password" name="password" placeholder="••••••••" required class="w-full pl-10 pr-4 py-2.5 rounded-xl
+                                              text-sm font-[Nunito,sans-serif] outline-none
+                                              border-[1.5px] border-[#C4CFCE] dark:border-[#4db6c1]/20
+                                              bg-[#fafcfc] dark:bg-[#0f1f2e]/60
+                                              text-[#102E3C] dark:text-[#7ec8e3]
+                                              placeholder:text-[#155665]/40 dark:placeholder:text-[#7ec8e3]/30
+                                              transition-all duration-200
+                                              focus:border-[#1A998F] dark:focus:border-[#4db6c1]
+                                              focus:ring-[3px] focus:ring-[#1A998F]/15 dark:focus:ring-[#4db6c1]/10
+                                              focus:bg-white dark:focus:bg-[#243d4d]" />
+                                <span class="absolute left-3 top-1/2 -translate-y-1/2
+                                             text-[#155665]/50 dark:text-[#4db6c1]/50">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -90,60 +117,74 @@
                             </div>
                         </div>
 
-                        {{-- REMEMBER --}}
-                        <div class="flex justify-between items-center text-sm">
-                            <label class="flex items-center gap-2 cursor-pointer" style="color: #155665;">
-                                <input type="checkbox" class="checkbox checkbox-sm"
-                                    style="border-color: #1A998F; accent-color: #1A998F;">
-                                Remember me
+                        {{-- Remember me --}}
+                        <div class="flex items-center justify-between text-sm">
+                            <label class="flex items-center gap-2 cursor-pointer
+                                          text-[#155665] dark:text-[#7ec8e3]">
+                                <input type="checkbox" class="w-4 h-4 rounded cursor-pointer
+                                              accent-[#1A998F] dark:accent-[#4db6c1]" />
+                                তথ্য সেভ রাখুন
                             </label>
                         </div>
 
-                        {{-- BUTTON --}}
-                        <a href="{{ route('admin_dashboard') }}" type="submit"
-                            class="btn w-full shadow-lg transition-all duration-200 text-white border-0 hover:opacity-90 hover:shadow-xl"
-                            style="background: linear-gradient(135deg, #155665, #1A998F);">
+                        {{-- Submit Button --}}
+                        <a href="{{ route('admin_dashboard') }}" class="w-full flex items-center justify-center gap-2
+                                  py-3 rounded-xl
+                                  bg-linear-to-br from-[#155665] to-[#1A998F]
+                                  dark:from-[#28666e] dark:to-[#4db6c1]
+                                  text-white dark:text-[#0f1f2e]
+                                  text-sm font-bold font-[Nunito,sans-serif]
+                                  shadow-lg no-underline
+                                  transition-all duration-200
+                                  hover:opacity-90
+                                  hover:shadow-[0_8px_24px_rgba(26,153,143,0.3)] dark:hover:shadow-[0_8px_24px_rgba(77,182,193,0.25)]
+                                  hover:-translate-y-px active:translate-y-0">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                                stroke="currentColor" class="w-5 h-5 mr-1">
+                                stroke="currentColor" class="w-5 h-5">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                             </svg>
-                            Login as Admin
+                            অ্যাডমিন হিসেবে লগইন করুন
                         </a>
 
                     </form>
 
-                    {{-- DIVIDER --}}
+                    {{-- Divider --}}
                     <div class="flex items-center gap-3">
-                        <div class="flex-1 h-px" style="background-color: #C4CFCE;"></div>
-                        <span class="text-xs" style="color: #155665; opacity: 0.6;">or</span>
-                        <div class="flex-1 h-px" style="background-color: #C4CFCE;"></div>
+                        <div class="flex-1 h-px bg-[#C4CFCE] dark:bg-[#4db6c1]/15"></div>
+                        <span class="text-xs text-[#155665]/60 dark:text-[#7ec8e3]/40">অথবা</span>
+                        <div class="flex-1 h-px bg-[#C4CFCE] dark:bg-[#4db6c1]/15"></div>
                     </div>
 
-                    {{-- BACK LINK --}}
-                    <div class="text-center text-sm" style="color: #155665; opacity: 0.8;">
-                        Not an admin?
-                        <a href="{{ route('login') }}" class="font-semibold hover:underline" style="color: #1A998F;">
-                            User Login
+                    {{-- Back link --}}
+                    <p class="text-center text-sm text-[#155665]/80 dark:text-[#7ec8e3]/60">
+                        অ্যাডমিন নন?
+                        <a href="{{ route('login') }}"
+                            class="font-semibold text-[#1A998F] dark:text-[#4db6c1] hover:underline">
+                            ইউজার লগইন
                         </a>
-                    </div>
+                    </p>
 
                 </div>
             </div>
 
-            {{-- ERROR --}}
+            {{-- Error --}}
             @if ($errors->any())
-            <div class="flex items-start gap-3 p-4 rounded-xl mt-6 shadow-lg border"
-                style="background: rgba(255,255,255,0.85); border-color: rgba(21,86,101,0.3);">
-                <svg class="w-5 h-5 flex-shrink-0 mt-0.5" style="color: #102E3C;" fill="none" viewBox="0 0 24 24"
+            <div class="flex items-start gap-3 p-4 rounded-xl mt-6 shadow-lg
+                        bg-white/85 dark:bg-[#1a2e3b]
+                        border border-[#155665]/30 dark:border-red-700/40">
+                <svg class="w-5 h-5 shrink-0 mt-0.5 text-[#102E3C] dark:text-red-400" fill="none" viewBox="0 0 24 24"
                     stroke-width="2" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
                 </svg>
-                <span class="text-sm font-medium" style="color: #102E3C;">{{ $errors->first() }}</span>
+                <span class="text-sm font-medium text-[#102E3C] dark:text-red-400">
+                    {{ $errors->first() }}
+                </span>
             </div>
             @endif
 
         </div>
     </div>
+
 </x-layout>

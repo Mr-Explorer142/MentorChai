@@ -6,10 +6,6 @@
         rel="stylesheet">
 
     <style>
-        body {
-            font-family: 'Sora', sans-serif;
-        }
-
         .font-mono-custom {
             font-family: 'DM Mono', monospace;
         }
@@ -72,107 +68,105 @@
     <div class="drawer lg:drawer-open">
         <input id="sidebar-drawer" type="checkbox" class="drawer-toggle" />
 
-        {{-- ══════════════ PAGE CONTENT ══════════════ --}}
-        <div class="drawer-content flex flex-col min-h-screen bg-[#f0fafa]">
+        <div class="drawer-content flex flex-col min-h-screen bg-(--mc-bg)">
 
             {{-- NAVBAR --}}
-            <header class="navbar bg-white border-b sticky top-0 z-30 px-4 lg:px-6 shadow-sm"
-                style="border-color:rgba(26,153,152,0.15);">
+            <header
+                class="navbar bg-(--mc-surface) border-b border-(--mc-border-teal-sub) sticky top-0 z-30 px-4 lg:px-6 shadow-(--mc-shadow-sm)">
                 <div class="navbar-start gap-2">
-                    <label for="sidebar-drawer" class="btn btn-ghost btn-sm btn-square lg:hidden drawer-button">
+                    <label for="sidebar-drawer"
+                        class="btn btn-ghost btn-sm btn-square lg:hidden drawer-button text-(--mc-text-muted)">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor" stroke-width="1.8">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
                     </label>
                     <div>
-                        <p class="font-bold text-base leading-tight" style="color:#0d3d3d;">Sessions</p>
-                        <p class="text-xs font-mono-custom" style="color:rgba(21,86,101,0.5);">Saturday, 28 March 2026
-                        </p>
+                        <p class="font-bold text-base leading-tight text-(--mc-text)">Sessions</p>
+                        <p class="text-xs font-mono-custom text-(--mc-text-muted)">Saturday, 28 March 2026</p>
                     </div>
                 </div>
                 <div class="navbar-end gap-3">
                     <button class="btn btn-ghost btn-sm btn-circle">
                         <div class="indicator">
-                            <span class="indicator-item badge badge-xs border-0" style="background:#1A9998;"></span>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor" stroke-width="1.8" style="color:#4a7070;">
+                            <span class="indicator-item badge badge-xs border-0 bg-(--mc-primary)"></span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-(--mc-text-muted)"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                             </svg>
                         </div>
                     </button>
                     <div class="avatar placeholder">
-                        <div class="w-9 rounded-full font-bold text-sm grid place-items-center text-white"
-                            style="background: linear-gradient(135deg, #1A9998, #155665);">A</div>
+                        <div
+                            class="w-9 rounded-full font-bold text-sm grid place-items-center text-white bg-linear-to-br from-[#1A9998] to-[#155665]">
+                            A</div>
                     </div>
                 </div>
             </header>
 
-            {{-- MAIN --}}
-            <main class="flex-1 p-4 lg:p-6 flex flex-col gap-6">
+            <main class="flex-1 p-4 lg:p-6 flex flex-col gap-6 font-[Sora,sans-serif]">
 
                 {{-- STATS --}}
                 <div class="grid grid-cols-2 xl:grid-cols-4 gap-4">
-                    <div class="stat bg-white rounded-2xl shadow-sm stat-bar bar-teal"
-                        style="border:1px solid rgba(26,153,152,0.12);">
+                    <div
+                        class="stat bg-(--mc-surface) rounded-2xl shadow-(--mc-shadow-sm) border border-(--mc-border-teal-sub) stat-bar bar-teal">
                         <div class="flex justify-between items-start">
-                            <div class="stat-title text-xs font-semibold uppercase tracking-widest"
-                                style="color:rgba(21,86,101,0.6);">Total Sessions</div>
+                            <div
+                                class="stat-title text-xs font-semibold uppercase tracking-widest text-(--mc-text-muted)">
+                                Total Sessions</div>
                             <span>🎬</span>
                         </div>
-                        <div class="stat-value font-mono-custom text-3xl mt-1" style="color:#1A9998;">1,284</div>
-                        <div class="stat-desc mt-1">
-                            <span class="badge badge-sm text-white border-0" style="background:#10b981;">↑ +12% this
-                                month</span>
+                        <div class="stat-value font-mono-custom text-3xl mt-1 text-(--mc-stat-teal-text)">1,284
                         </div>
+                        <div class="stat-desc mt-1"><span class="badge badge-sm text-white border-0 bg-emerald-500">↑
+                                +12% this month</span></div>
                     </div>
-                    <div class="stat bg-white rounded-2xl shadow-sm stat-bar bar-red"
-                        style="border:1px solid rgba(26,153,152,0.12);">
+                    <div
+                        class="stat bg-(--mc-surface) rounded-2xl shadow-(--mc-shadow-sm) border border-(--mc-border-teal-sub) stat-bar bar-red">
                         <div class="flex justify-between items-start">
-                            <div class="stat-title text-xs font-semibold uppercase tracking-widest"
-                                style="color:rgba(21,86,101,0.6);">Live Now</div>
+                            <div
+                                class="stat-title text-xs font-semibold uppercase tracking-widest text-(--mc-text-muted)">
+                                Live Now</div>
                             <span>🔴</span>
                         </div>
-                        <div class="stat-value font-mono-custom text-3xl mt-1 text-error">3</div>
-                        <div class="stat-desc mt-1">
-                            <span class="badge badge-sm badge-error badge-outline">In progress</span>
-                        </div>
+                        <div class="stat-value font-mono-custom text-3xl mt-1 text-(--mc-stat-red-text)">3</div>
+                        <div class="stat-desc mt-1"><span class="badge badge-sm badge-error badge-outline">In
+                                progress</span></div>
                     </div>
-                    <div class="stat bg-white rounded-2xl shadow-sm stat-bar bar-blue"
-                        style="border:1px solid rgba(26,153,152,0.12);">
+                    <div
+                        class="stat bg-(--mc-surface) rounded-2xl shadow-(--mc-shadow-sm) border border-(--mc-border-teal-sub) stat-bar bar-blue">
                         <div class="flex justify-between items-start">
-                            <div class="stat-title text-xs font-semibold uppercase tracking-widest"
-                                style="color:rgba(21,86,101,0.6);">Recorded</div>
+                            <div
+                                class="stat-title text-xs font-semibold uppercase tracking-widest text-(--mc-text-muted)">
+                                Recorded</div>
                             <span>📹</span>
                         </div>
-                        <div class="stat-value font-mono-custom text-3xl mt-1" style="color:#187F87;">947</div>
-                        <div class="stat-desc mt-1">
-                            <span class="badge badge-sm"
-                                style="background:rgba(26,153,152,0.1); color:#155665; border:1px solid rgba(26,153,152,0.2);">Available
-                                on-demand</span>
-                        </div>
+                        <div class="stat-value font-mono-custom text-3xl mt-1 text-(--mc-stat-blue-text)">947</div>
+                        <div class="stat-desc mt-1"><span
+                                class="badge badge-sm bg-(--mc-badge-teal-bg) text-(--mc-badge-teal-text) border border-(--mc-badge-teal-border)">Available
+                                on-demand</span></div>
                     </div>
-                    <div class="stat bg-white rounded-2xl shadow-sm stat-bar bar-green"
-                        style="border:1px solid rgba(26,153,152,0.12);">
+                    <div
+                        class="stat bg-(--mc-surface) rounded-2xl shadow-(--mc-shadow-sm) border border-(--mc-border-teal-sub) stat-bar bar-green">
                         <div class="flex justify-between items-start">
-                            <div class="stat-title text-xs font-semibold uppercase tracking-widest"
-                                style="color:rgba(21,86,101,0.6);">Scheduled</div>
+                            <div
+                                class="stat-title text-xs font-semibold uppercase tracking-widest text-(--mc-text-muted)">
+                                Scheduled</div>
                             <span>📅</span>
                         </div>
-                        <div class="stat-value font-mono-custom text-3xl mt-1" style="color:#155665;">42</div>
-                        <div class="stat-desc mt-1">
-                            <span class="badge badge-sm badge-outline"
-                                style="color:#155665; border-color:rgba(21,86,101,0.3);">Upcoming</span>
+                        <div class="stat-value font-mono-custom text-3xl mt-1 text-(--mc-stat-green-text)">42</div>
+                        <div class="stat-desc mt-1"><span
+                                class="badge badge-sm badge-outline border-(--mc-border-teal) text-(--mc-primary)">Upcoming</span>
                         </div>
                     </div>
                 </div>
 
                 {{-- TOOLBAR --}}
                 <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-                    <div class="join rounded-xl overflow-hidden" style="border:1px solid rgba(26,153,152,0.2);">
-                        <button class="btn btn-sm join-item border-0 text-white" id="filter-all"
-                            style="background:#1A9998;" onclick="filterSessions('all')">All</button>
+                    <div class="join rounded-xl overflow-hidden border border-(--mc-border-teal)">
+                        <button class="btn btn-sm join-item border-0 text-white bg-(--mc-primary)" id="filter-all"
+                            onclick="filterSessions('all')">All</button>
                         <button class="btn btn-sm join-item btn-ghost border-0" id="filter-live"
                             onclick="filterSessions('live')">Live</button>
                         <button class="btn btn-sm join-item btn-ghost border-0" id="filter-recorded"
@@ -181,18 +175,18 @@
                             onclick="filterSessions('scheduled')">Scheduled</button>
                     </div>
                     <div class="flex items-center gap-2 w-full sm:w-auto">
-                        <label class="input input-sm input-bordered flex items-center gap-2 flex-1 sm:w-64"
-                            style="background:white; border-color:rgba(26,153,152,0.25);">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor" stroke-width="1.8" style="color:rgba(21,86,101,0.4);">
+                        <label
+                            class="input input-sm input-bordered flex items-center gap-2 flex-1 sm:w-64 bg-(--mc-surface) border-(--mc-border-teal)">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-(--mc-text-muted)"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                             </svg>
                             <input type="text" placeholder="Search sessions…"
-                                class="grow bg-transparent outline-none text-sm" style="color:#2d6e6e;" />
+                                class="grow bg-transparent outline-none text-sm text-(--mc-text) placeholder:text-(--mc-text-faint)" />
                         </label>
-                        <button class="btn btn-sm gap-1.5 text-white border-0"
-                            style="background: linear-gradient(135deg, #1A9998, #155665);"
+                        <button
+                            class="btn btn-sm gap-1.5 text-white border-0 bg-linear-to-br from-[#1A9998] to-[#155665] hover:-translate-y-0.5 transition-transform"
                             onclick="document.getElementById('create-modal').showModal()">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor" stroke-width="2">
@@ -205,64 +199,62 @@
 
                 {{-- LIVE SESSION CARDS --}}
                 <div>
-                    <p class="text-xs font-semibold uppercase tracking-widest mb-3 flex items-center gap-2"
-                        style="color:rgba(21,86,101,0.5);">
+                    <p
+                        class="text-xs font-semibold uppercase tracking-widest mb-3 flex items-center gap-2 text-(--mc-text-muted)">
                         <span class="live-dot"></span> Live Sessions
                     </p>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4" id="live-sessions">
-
+                    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
                         @foreach([
                         ['Python Bootcamp – Ep. 12','Dr. Ahmed R.','42 min ago','142'],
                         ['UI Design Fundamentals','Sara K.','18 min ago','87'],
                         ['React Masterclass – Hooks','Lena T.','5 min ago','63'],
                         ] as $sess)
-                        <div class="bg-white rounded-2xl shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
-                            data-type="live" style="border:1px solid rgba(26,153,152,0.15);">
+                        <div class="bg-(--mc-surface) rounded-2xl shadow-(--mc-shadow-sm) border border-(--mc-border-teal-sub) transition-all duration-300 hover:-translate-y-1 hover:shadow-(--mc-shadow-md)"
+                            data-type="live">
                             <div class="p-4 flex flex-col gap-3">
                                 <div class="flex items-start justify-between gap-2">
-                                    <div class="w-10 h-10 rounded-xl grid place-items-center flex-shrink-0"
-                                        style="background:rgba(239,68,68,0.08);">
+                                    <div
+                                        class="w-10 h-10 rounded-xl grid place-items-center shrink-0 bg-red-500/10">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-error" fill="none"
                                             viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                 d="M15 10l4.5-4.5v13L15 14M4 6h8a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2z" />
                                         </svg>
                                     </div>
-                                    <span class="badge badge-sm badge-error gap-1 font-bold flex-shrink-0">
-                                        <span class="live-dot !w-1.5 !h-1.5"></span> LIVE
+                                    <span class="badge badge-sm badge-error gap-1 font-bold shrink-0">
+                                        <span class="live-dot w-1.5! h-1.5!"></span> LIVE
                                     </span>
                                 </div>
                                 <div>
-                                    <h3 class="font-bold text-sm leading-tight" style="color:#0d3d3d;">{{ $sess[0] }}
+                                    <h3 class="font-bold text-sm leading-tight text-(--mc-text)">{{ $sess[0] }}
                                     </h3>
-                                    <p class="text-xs mt-0.5 font-mono-custom" style="color:rgba(21,86,101,0.5);">{{
-                                        $sess[1] }} · Started {{ $sess[2] }}</p>
+                                    <p class="text-xs mt-0.5 font-mono-custom text-(--mc-text-muted)">{{ $sess[1]
+                                        }} · Started {{ $sess[2] }}</p>
                                 </div>
-                                <div class="flex items-center justify-between pt-2"
-                                    style="border-top:1px solid rgba(26,153,152,0.1);">
-                                    <span class="text-xs font-mono-custom" style="color:rgba(21,86,101,0.5);">👥 {{
-                                        $sess[3] }} watching</span>
+                                <div
+                                    class="flex items-center justify-between pt-2 border-t border-(--mc-border-teal-sub)">
+                                    <span class="text-xs font-mono-custom text-(--mc-text-muted)">👥 {{ $sess[3] }}
+                                        watching</span>
                                     <div class="flex gap-1">
-                                        <button class="btn btn-xs btn-ghost" style="color:#2d6e6e;">View</button>
+                                        <button class="btn btn-xs btn-ghost text-(--mc-text-sub)">View</button>
                                         <button class="btn btn-xs btn-error btn-outline">End</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         @endforeach
-
                     </div>
                 </div>
 
                 {{-- ALL SESSIONS TABLE --}}
-                <div class="bg-white rounded-2xl shadow-sm p-6 flex flex-col gap-4"
-                    style="border:1px solid rgba(26,153,152,0.12);">
-                    <h2 class="text-xs font-bold uppercase tracking-widest" style="color:rgba(21,86,101,0.5);">All
-                        Sessions</h2>
+                <div
+                    class="bg-(--mc-surface) rounded-2xl shadow-(--mc-shadow-sm) border border-(--mc-border-teal-sub) p-6 flex flex-col gap-4">
+                    <h2 class="text-xs font-bold uppercase tracking-widest text-(--mc-text-muted)">All Sessions
+                    </h2>
                     <div class="overflow-x-auto">
                         <table class="table table-sm">
                             <thead>
-                                <tr class="text-xs uppercase tracking-widest" style="color:rgba(21,86,101,0.45);">
+                                <tr class="text-xs uppercase tracking-widest text-(--mc-text-muted)">
                                     <th>Title</th>
                                     <th class="hidden md:table-cell">Instructor</th>
                                     <th>Type</th>
@@ -282,35 +274,37 @@
                                 ['Figma for Developers','Sara K.','REC','Mar 22 · 5:00 PM','289','recorded'],
                                 ] as $row)
                                 <tr class="hover">
-                                    <td class="font-semibold text-sm" style="color:#0d3d3d;">{{ $row[0] }}</td>
-                                    <td class="hidden md:table-cell text-xs font-mono-custom"
-                                        style="color:rgba(21,86,101,0.6);">{{ $row[1] }}</td>
+                                    <td class="font-semibold text-sm text-(--mc-text)">{{ $row[0] }}</td>
+                                    <td
+                                        class="hidden md:table-cell text-xs font-mono-custom text-(--mc-text-muted)">
+                                        {{ $row[1] }}</td>
                                     <td>
                                         <span
-                                            class="badge badge-xs font-mono-custom {{ $row[2]==='LIVE' ? 'badge-outline' : 'badge-ghost' }}"
-                                            style="{{ $row[2]==='LIVE' ? 'color:#1A9998; border-color:rgba(26,153,152,0.35);' : '' }}">
+                                            class="badge badge-xs font-mono-custom {{ $row[2]==='LIVE' ? 'badge-outline border-(--mc-border-teal) text-(--mc-primary)' : 'badge-ghost' }}">
                                             {{ $row[2] }}
                                         </span>
                                     </td>
-                                    <td class="hidden sm:table-cell font-mono-custom text-xs"
-                                        style="color:rgba(21,86,101,0.6);">{{ $row[3] }}</td>
-                                    <td class="hidden lg:table-cell text-xs" style="color:#2d6e6e;">{{ $row[4] }}</td>
+                                    <td
+                                        class="hidden sm:table-cell font-mono-custom text-xs text-(--mc-text-muted)">
+                                        {{ $row[3] }}</td>
+                                    <td class="hidden lg:table-cell text-xs text-(--mc-text-sub)">{{ $row[4] }}
+                                    </td>
                                     <td>
                                         @if($row[5]==='running')
                                         <span class="badge badge-sm badge-success gap-1">● Running</span>
                                         @elseif($row[5]==='upcoming')
                                         <span class="badge badge-sm badge-warning">Upcoming</span>
                                         @elseif($row[5]==='scheduled')
-                                        <span class="badge badge-sm badge-outline"
-                                            style="color:#1A9998; border-color:rgba(26,153,152,0.4);">Scheduled</span>
+                                        <span
+                                            class="badge badge-sm badge-outline border-(--mc-border-teal) text-(--mc-primary)">Scheduled</span>
                                         @else
-                                        <span class="badge badge-sm"
-                                            style="background:rgba(21,86,101,0.08); color:#4a7070;">Recorded</span>
+                                        <span
+                                            class="badge badge-sm bg-(--mc-badge-teal-bg) text-(--mc-text-muted)">Recorded</span>
                                         @endif
                                     </td>
                                     <td>
                                         <div class="flex gap-1">
-                                            <button class="btn btn-xs btn-ghost" style="color:#2d6e6e;">Edit</button>
+                                            <button class="btn btn-xs btn-ghost text-(--mc-text-sub)">Edit</button>
                                             <button class="btn btn-xs btn-ghost text-error">Delete</button>
                                         </div>
                                     </td>
@@ -320,15 +314,13 @@
                         </table>
                     </div>
 
-                    {{-- Pagination --}}
-                    <div class="flex items-center justify-between flex-wrap gap-2 pt-3"
-                        style="border-top:1px solid rgba(26,153,152,0.1);">
-                        <p class="text-xs font-mono-custom" style="color:rgba(21,86,101,0.5);">Showing 1–6 of 1,284
-                            sessions</p>
+                    <div
+                        class="flex items-center justify-between flex-wrap gap-2 pt-3 border-t border-(--mc-border-teal-sub)">
+                        <p class="text-xs font-mono-custom text-(--mc-text-muted)">Showing 1–6 of 1,284 sessions
+                        </p>
                         <div class="join">
                             <button class="btn btn-xs join-item btn-ghost opacity-40" disabled>«</button>
-                            <button class="btn btn-xs join-item text-white border-0"
-                                style="background:#1A9998;">1</button>
+                            <button class="btn btn-xs join-item text-white border-0 bg-(--mc-primary)">1</button>
                             <button class="btn btn-xs join-item btn-ghost">2</button>
                             <button class="btn btn-xs join-item btn-ghost">3</button>
                             <button class="btn btn-xs join-item btn-ghost">»</button>
@@ -339,15 +331,14 @@
             </main>
         </div>
 
-        {{-- ══════════════ SIDEBAR ══════════════ --}}
+        {{-- SIDEBAR --}}
         <div class="drawer-side z-40">
             <label for="sidebar-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
-            <aside class="w-60 min-h-full flex flex-col p-4 bg-white"
-                style="border-right:1px solid rgba(26,153,152,0.12);">
-                <div class="flex items-center gap-3 px-2 py-3 mb-3"
-                    style="border-bottom:1px solid rgba(26,153,152,0.12);">
-                    <div class="w-9 h-9 rounded-xl grid place-items-center flex-shrink-0"
-                        style="background: linear-gradient(135deg, #1A9998, #155665);">
+            <aside
+                class="w-60 min-h-full flex flex-col p-4 bg-(--mc-surface) border-r border-(--mc-border-teal-sub)">
+                <div class="flex items-center gap-3 px-2 py-3 mb-3 border-b border-(--mc-border-teal-sub)">
+                    <div
+                        class="w-9 h-9 rounded-xl grid place-items-center shrink-0 bg-linear-to-br from-[#1A9998] to-[#155665]">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -355,15 +346,15 @@
                         </svg>
                     </div>
                     <div>
-                        <h2 class="font-bold text-sm leading-tight" style="color:#0d3d3d;">MentorChai</h2>
-                        <p class="text-xs" style="color:rgba(21,86,101,0.5);">Admin Panel</p>
+                        <h2 class="font-bold text-sm leading-tight text-(--mc-text)">MentorChai</h2>
+                        <p class="text-xs text-(--mc-text-muted)">Admin Panel</p>
                     </div>
                 </div>
                 <ul class="menu menu-sm flex-1 gap-0.5 px-0">
-                    <li class="menu-title text-xs tracking-widest" style="color:rgba(21,86,101,0.4);">Main</li>
+                    <li class="menu-title text-xs tracking-widest text-(--mc-text-faint)">Main</li>
                     <li>
-                        <a href="{{ route('admin_dashboard') }}" class="font-medium text-sm rounded-xl"
-                            style="color:#2d6e6e;">
+                        <a href="{{ route('admin_dashboard') }}"
+                            class="font-medium text-sm rounded-xl text-(--mc-text-sub) hover:bg-(--mc-bg)">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor" stroke-width="1.8">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -373,8 +364,8 @@
                         </a>
                     </li>
                     <li>
-                        <a class="font-medium text-sm rounded-xl text-white"
-                            style="background: linear-gradient(135deg, #1A9998, #155665);">
+                        <a
+                            class="font-medium text-sm rounded-xl text-white bg-linear-to-br from-[#1A9998] to-[#155665]">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor" stroke-width="1.8">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -384,8 +375,8 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('admin_users') }}" class="font-medium text-sm rounded-xl"
-                            style="color:#2d6e6e;">
+                        <a href="{{ route('admin_users') }}"
+                            class="font-medium text-sm rounded-xl text-(--mc-text-sub) hover:bg-(--mc-bg)">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor" stroke-width="1.8">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -395,8 +386,8 @@
                         </a>
                     </li>
                 </ul>
-                <a href="{{ route('admin_login') }}" class="btn btn-sm gap-2 mt-4 border-0 text-white"
-                    style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+                <a href="{{ route('admin_login') }}"
+                    class="btn btn-sm gap-2 mt-4 border-0 text-white bg-linear-to-br from-red-500 to-red-600 hover:from-red-600 hover:to-red-700">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor" stroke-width="1.8">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -410,24 +401,23 @@
 
     {{-- CREATE SESSION MODAL --}}
     <dialog id="create-modal" class="modal">
-        <div class="modal-box max-w-md bg-white" style="border:1px solid rgba(26,153,152,0.2);">
+        <div class="modal-box max-w-md bg-(--mc-surface) border border-(--mc-border-teal)">
             <form method="dialog">
                 <button class="btn btn-sm btn-circle btn-ghost absolute right-4 top-4 opacity-50">✕</button>
             </form>
-            <h3 class="font-bold text-base mb-4" style="color:#0d3d3d;">Create New Session</h3>
+            <h3 class="font-bold text-base mb-4 text-(--mc-text)">Create New Session</h3>
             <div class="flex flex-col gap-3">
                 <div class="flex flex-col gap-1">
-                    <label class="text-xs font-semibold uppercase tracking-wider"
-                        style="color:rgba(21,86,101,0.5);">Title</label>
+                    <label
+                        class="text-xs font-semibold uppercase tracking-wider text-(--mc-text-muted)">Title</label>
                     <input type="text" placeholder="e.g. Python for Beginners"
-                        class="input input-sm input-bordered w-full"
-                        style="background:#f7fdfd; border-color:rgba(26,153,152,0.25);" />
+                        class="input input-sm input-bordered w-full bg-(--mc-bg) border-(--mc-border-teal) text-(--mc-text)" />
                 </div>
                 <div class="flex flex-col gap-1">
-                    <label class="text-xs font-semibold uppercase tracking-wider"
-                        style="color:rgba(21,86,101,0.5);">Instructor</label>
-                    <select class="select select-sm select-bordered w-full"
-                        style="background:#f7fdfd; border-color:rgba(26,153,152,0.25);">
+                    <label
+                        class="text-xs font-semibold uppercase tracking-wider text-(--mc-text-muted)">Instructor</label>
+                    <select
+                        class="select select-sm select-bordered w-full bg-(--mc-bg) border-(--mc-border-teal) text-(--mc-text)">
                         <option>Dr. Ahmed R.</option>
                         <option>Sara K.</option>
                         <option>Prof. Nabil M.</option>
@@ -436,40 +426,41 @@
                 </div>
                 <div class="grid grid-cols-2 gap-3">
                     <div class="flex flex-col gap-1">
-                        <label class="text-xs font-semibold uppercase tracking-wider"
-                            style="color:rgba(21,86,101,0.5);">Type</label>
-                        <select class="select select-sm select-bordered w-full"
-                            style="background:#f7fdfd; border-color:rgba(26,153,152,0.25);">
+                        <label
+                            class="text-xs font-semibold uppercase tracking-wider text-(--mc-text-muted)">Type</label>
+                        <select
+                            class="select select-sm select-bordered w-full bg-(--mc-bg) border-(--mc-border-teal) text-(--mc-text)">
                             <option>Live</option>
                             <option>Recorded</option>
                         </select>
                     </div>
                     <div class="flex flex-col gap-1">
-                        <label class="text-xs font-semibold uppercase tracking-wider"
-                            style="color:rgba(21,86,101,0.5);">Max Students</label>
-                        <input type="number" placeholder="250" class="input input-sm input-bordered w-full"
-                            style="background:#f7fdfd; border-color:rgba(26,153,152,0.25);" />
+                        <label class="text-xs font-semibold uppercase tracking-wider text-(--mc-text-muted)">Max
+                            Students</label>
+                        <input type="number" placeholder="250"
+                            class="input input-sm input-bordered w-full bg-(--mc-bg) border-(--mc-border-teal) text-(--mc-text)" />
                     </div>
                 </div>
                 <div class="flex flex-col gap-1">
-                    <label class="text-xs font-semibold uppercase tracking-wider"
-                        style="color:rgba(21,86,101,0.5);">Scheduled Time</label>
-                    <input type="datetime-local" class="input input-sm input-bordered w-full"
-                        style="background:#f7fdfd; border-color:rgba(26,153,152,0.25);" />
+                    <label class="text-xs font-semibold uppercase tracking-wider text-(--mc-text-muted)">Scheduled
+                        Time</label>
+                    <input type="datetime-local"
+                        class="input input-sm input-bordered w-full bg-(--mc-bg) border-(--mc-border-teal) text-(--mc-text)" />
                 </div>
                 <div class="flex flex-col gap-1">
-                    <label class="text-xs font-semibold uppercase tracking-wider"
-                        style="color:rgba(21,86,101,0.5);">Description</label>
-                    <textarea class="textarea textarea-bordered textarea-sm w-full resize-none" rows="2"
-                        placeholder="Short description…"
-                        style="background:#f7fdfd; border-color:rgba(26,153,152,0.25);"></textarea>
+                    <label
+                        class="text-xs font-semibold uppercase tracking-wider text-(--mc-text-muted)">Description</label>
+                    <textarea
+                        class="textarea textarea-bordered textarea-sm w-full resize-none bg-(--mc-bg) border-(--mc-border-teal) text-(--mc-text)"
+                        rows="2" placeholder="Short description…"></textarea>
                 </div>
             </div>
             <div class="modal-action mt-4">
                 <form method="dialog" class="flex gap-2 w-full">
                     <button class="btn btn-sm btn-ghost flex-1">Cancel</button>
-                    <button class="btn btn-sm flex-1 text-white border-0"
-                        style="background: linear-gradient(135deg, #1A9998, #155665);">Create Session</button>
+                    <button
+                        class="btn btn-sm flex-1 text-white border-0 bg-linear-to-br from-[#1A9998] to-[#155665]">Create
+                        Session</button>
                 </form>
             </div>
         </div>
@@ -477,17 +468,12 @@
     </dialog>
 
     <script>
-        const filterColors = { active: '#1A9998', inactive: '' };
         function filterSessions(type) {
             ['all','live','recorded','scheduled'].forEach(t => {
                 const el = document.getElementById('filter-' + t);
-                if (t === type) {
-                    el.style.background = '#1A9998';
-                    el.className = 'btn btn-sm join-item border-0 text-white';
-                } else {
-                    el.style.background = '';
-                    el.className = 'btn btn-sm join-item btn-ghost border-0';
-                }
+                const primary = getComputedStyle(document.documentElement).getPropertyValue('--mc-primary').trim();
+                el.className = 'btn btn-sm join-item border-0 ' + (t === type ? 'text-white bg-(--mc-primary)' : 'btn-ghost');
+                el.style.background = t === type ? `var(--mc-primary)` : '';
             });
         }
     </script>

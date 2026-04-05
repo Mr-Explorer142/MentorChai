@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @plugin "daisyui" {
-  themes: light --default, dark --prefersdark, dark;
+  themes: light --default;
 }
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
@@ -13,3 +13,132 @@
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
+/* ═══════════════════════════════════════════════════
+   DARK MODE — class-based (.dark on <html>)
+   ═══════════════════════════════════════════════════ */
+@variant dark (&:where(.dark, .dark *));
+
+/* ═══════════════════════════════════════════════════
+   MENTORCHAI COLOR TOKENS
+   ═══════════════════════════════════════════════════ */
+:root {
+    /* Backgrounds */
+    --mc-bg:              #eef7f8;
+    --mc-surface:         #ffffff;
+    --mc-surface-hover:   #f8fffe;
+
+    /* Brand */
+    --mc-primary:         #28666e;
+    --mc-navy:            #033f63;
+    --mc-sage:            #7c9885;
+
+    /* Text */
+    --mc-text:            #111827;   /* gray-900 */
+    --mc-text-sub:        #374151;   /* gray-700 */
+    --mc-text-muted:      #6b7280;   /* gray-500 */
+    --mc-text-faint:      #9ca3af;   /* gray-400 */
+
+    /* Borders */
+    --mc-border:          #e5e7eb;   /* gray-200 */
+    --mc-border-subtle:   #f3f4f6;   /* gray-100 */
+    --mc-border-teal:     #99d4d8;   /* teal-200 */
+    --mc-border-teal-sub: #ccecee;   /* teal-100 */
+
+    /* Shadows */
+    --mc-shadow-sm:       0 1px 3px  rgba(40, 102, 110, 0.08);
+    --mc-shadow-md:       0 4px 12px rgba(40, 102, 110, 0.12);
+    --mc-shadow-lg:       0 8px 30px rgba(40, 102, 110, 0.14);
+
+    /* Status */
+    --mc-online:          #4ade80;   /* green-400 */
+    --mc-offline:         #d1d5db;   /* gray-300 */
+
+    /* Chart / SVG */
+    --mc-chart-stroke:    #28666e;
+    --mc-chart-fill:      #eef7f8;
+}
+
+html.dark {
+    /* Backgrounds */
+    --mc-bg:              #0f1f2e;
+    --mc-surface:         #1a2e3b;
+    --mc-surface-hover:   #243d4d;
+
+    /* Brand */
+    --mc-primary:         #4db6c1;
+    --mc-navy:            #7ec8e3;
+    --mc-sage:            #9ab8a5;
+
+    /* Text */
+    --mc-text:            #f3f4f6;   /* gray-100 */
+    --mc-text-sub:        #d1d5db;   /* gray-300 */
+    --mc-text-muted:      #9ca3af;   /* gray-400 */
+    --mc-text-faint:      #6b7280;   /* gray-500 */
+
+    /* Borders */
+    --mc-border:          #374151;   /* gray-700 */
+    --mc-border-subtle:   #1f2937;   /* gray-800 */
+    --mc-border-teal:     #1f4f54;   /* teal-900 */
+    --mc-border-teal-sub: #172f33;   /* teal-900/40 */
+
+    /* Shadows */
+    --mc-shadow-sm:       0 1px 3px  rgba(0, 0, 0, 0.4);
+    --mc-shadow-md:       0 4px 12px rgba(0, 0, 0, 0.5);
+    --mc-shadow-lg:       0 8px 30px rgba(0, 0, 0, 0.4);
+
+    /* Status */
+    --mc-online:          #4ade80;   /* stays same */
+    --mc-offline:         #4b5563;   /* gray-600 */
+
+    /* Chart / SVG */
+    --mc-chart-stroke:    #4db6c1;
+    --mc-chart-fill:      #1a2e3b;
+}
+
+/* ═══════════════════════════════════════════════════
+   BADGE / TAG COLORS  (skill chips on mentor cards)
+   ═══════════════════════════════════════════════════ */
+:root {
+    --mc-badge-teal-bg:     #f0fdfe;  --mc-badge-teal-text:   #0f766e;  --mc-badge-teal-border:   #99d4d8;
+    --mc-badge-purple-bg:   #faf5ff;  --mc-badge-purple-text: #7e22ce;  --mc-badge-purple-border: #d8b4fe;
+    --mc-badge-orange-bg:   #fff7ed;  --mc-badge-orange-text: #c2410c;  --mc-badge-orange-border: #fed7aa;
+    --mc-badge-blue-bg:     #eff6ff;  --mc-badge-blue-text:   #1d4ed8;  --mc-badge-blue-border:   #bfdbfe;
+    --mc-badge-green-bg:    #f0fdf4;  --mc-badge-green-text:  #15803d;  --mc-badge-green-border:  #bbf7d0;
+    --mc-badge-pink-bg:     #fdf2f8;  --mc-badge-pink-text:   #be185d;  --mc-badge-pink-border:   #fbcfe8;
+}
+
+html.dark {
+    --mc-badge-teal-bg:     rgba(13,  148, 136, 0.15);  --mc-badge-teal-text:   #5eead4;  --mc-badge-teal-border:   rgba(13,  148, 136, 0.3);
+    --mc-badge-purple-bg:   rgba(126, 34,  206, 0.15);  --mc-badge-purple-text: #d8b4fe;  --mc-badge-purple-border: rgba(126, 34,  206, 0.3);
+    --mc-badge-orange-bg:   rgba(194, 65,  12,  0.15);  --mc-badge-orange-text: #fdba74;  --mc-badge-orange-border: rgba(194, 65,  12,  0.3);
+    --mc-badge-blue-bg:     rgba(29,  78,  216, 0.15);  --mc-badge-blue-text:   #93c5fd;  --mc-badge-blue-border:   rgba(29,  78,  216, 0.3);
+    --mc-badge-green-bg:    rgba(21,  128, 61,  0.15);  --mc-badge-green-text:  #86efac;  --mc-badge-green-border:  rgba(21,  128, 61,  0.3);
+    --mc-badge-pink-bg:     rgba(190, 24,  93,  0.15);  --mc-badge-pink-text:   #f9a8d4;  --mc-badge-pink-border:   rgba(190, 24,  93,  0.3);
+}
+
+/* ═══════════════════════════════════════════════════
+   STAT CARD COLORS  (admin dashboard)
+   ═══════════════════════════════════════════════════ */
+:root {
+    --mc-stat-teal-bg:   #f0fdfe;  --mc-stat-teal-text:   #0f766e;
+    --mc-stat-blue-bg:   #eff6ff;  --mc-stat-blue-text:   #1d4ed8;
+    --mc-stat-green-bg:  #f0fdf4;  --mc-stat-green-text:  #15803d;
+    --mc-stat-red-bg:    #fef2f2;  --mc-stat-red-text:    #b91c1c;
+    --mc-stat-purple-bg: #faf5ff;  --mc-stat-purple-text: #7e22ce;
+}
+
+html.dark {
+    --mc-stat-teal-bg:   rgba(13,  148, 136, 0.15);  --mc-stat-teal-text:   #5eead4;
+    --mc-stat-blue-bg:   rgba(29,  78,  216, 0.15);  --mc-stat-blue-text:   #93c5fd;
+    --mc-stat-green-bg:  rgba(21,  128, 61,  0.15);  --mc-stat-green-text:  #86efac;
+    --mc-stat-red-bg:    rgba(185, 28,  28,  0.15);  --mc-stat-red-text:    #fca5a5;
+    --mc-stat-purple-bg: rgba(126, 34,  206, 0.15);  --mc-stat-purple-text: #d8b4fe;
+}
+
+/* ═══════════════════════════════════════════════════
+   PAGE FADE-IN ANIMATION
+   ═══════════════════════════════════════════════════ */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0);    }
+}
