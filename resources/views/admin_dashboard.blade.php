@@ -85,16 +85,16 @@
                         </svg>
                     </label>
                     <div>
-                        <p class="font-bold text-base leading-tight text-(--mc-text)">Dashboard</p>
-                        <p class="text-xs font-mono-custom text-(--mc-text-muted)">Saturday, 28 March 2026</p>
+                        <p class="font-bold text-base leading-tight text-(--mc-text)">ড্যাশবোর্ড</p>
+                        <p class="text-xs font-mono-custom text-(--mc-text-muted)">শনিবার, ২৮ মার্চ ২০২৬</p>
                     </div>
                 </div>
                 <div class="navbar-end gap-3">
                     <button class="btn btn-ghost btn-sm btn-circle">
                         <div class="indicator">
                             <span class="indicator-item badge badge-xs border-0 bg-(--mc-primary)"></span>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-(--mc-text-muted)"
-                                fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-(--mc-text-muted)" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                             </svg>
@@ -119,13 +119,13 @@
                         <div class="flex justify-between items-start">
                             <div
                                 class="stat-title text-xs font-semibold uppercase tracking-widest text-(--mc-text-muted)">
-                                Students</div>
+                                ছাত্রছাত্রী</div>
                             <span>👥</span>
                         </div>
                         <div class="stat-value font-mono-custom text-3xl mt-1 text-(--mc-stat-teal-text)">12,847
                         </div>
                         <div class="stat-desc mt-1">
-                            <span class="badge badge-sm text-white border-0 bg-emerald-500">↑ +8% this month</span>
+                            <span class="badge badge-sm text-white border-0 bg-emerald-500">↑ +৮% এই মাসে</span>
                         </div>
                     </div>
 
@@ -134,14 +134,14 @@
                         <div class="flex justify-between items-start">
                             <div
                                 class="stat-title text-xs font-semibold uppercase tracking-widest text-(--mc-text-muted)">
-                                Teachers</div>
+                                শিক্ষক</div>
                             <span>🎓</span>
                         </div>
                         <div class="stat-value font-mono-custom text-3xl mt-1 text-(--mc-stat-blue-text)">348</div>
                         <div class="stat-desc mt-1">
                             <span
-                                class="badge badge-sm bg-(--mc-badge-teal-bg) text-(--mc-badge-teal-text) border border-(--mc-badge-teal-border)">Active
-                                mentors</span>
+                                class="badge badge-sm bg-(--mc-badge-teal-bg) text-(--mc-badge-teal-text) border border-(--mc-badge-teal-border)">সক্রিয়
+                                মেন্টর</span>
                         </div>
                     </div>
 
@@ -150,12 +150,12 @@
                         <div class="flex justify-between items-start">
                             <div
                                 class="stat-title text-xs font-semibold uppercase tracking-widest text-(--mc-text-muted)">
-                                Live Now</div>
+                                এখন লাইভ</div>
                             <span>🔴</span>
                         </div>
                         <div class="stat-value font-mono-custom text-3xl mt-1 text-(--mc-stat-red-text)">3</div>
                         <div class="stat-desc mt-1">
-                            <span class="badge badge-sm badge-error badge-outline">Sessions running</span>
+                            <span class="badge badge-sm badge-error badge-outline">সেশন চলছে</span>
                         </div>
                     </div>
 
@@ -164,14 +164,13 @@
                         <div class="flex justify-between items-start">
                             <div
                                 class="stat-title text-xs font-semibold uppercase tracking-widest text-(--mc-text-muted)">
-                                Today</div>
+                                আজ</div>
                             <span>📅</span>
                         </div>
                         <div class="stat-value font-mono-custom text-3xl mt-1 text-(--mc-stat-green-text)">18</div>
                         <div class="stat-desc mt-1">
-                            <span
-                                class="badge badge-sm badge-outline border-(--mc-border-teal) text-(--mc-primary)">Sessions
-                                total</span>
+                            <span class="badge badge-sm badge-outline border-(--mc-border-teal) text-(--mc-primary)">মোট
+                                সেশন</span>
                         </div>
                     </div>
 
@@ -183,37 +182,37 @@
                     {{-- Create Session --}}
                     <div
                         class="bg-(--mc-surface) rounded-2xl shadow-(--mc-shadow-sm) border border-(--mc-border-teal-sub) p-6 flex flex-col gap-4">
-                        <h2 class="text-xs font-bold uppercase tracking-widest text-(--mc-text-muted)">Create
-                            Session</h2>
+                        <h2 class="text-xs font-bold uppercase tracking-widest text-(--mc-text-muted)">সেশন
+                            তৈরি করুন</h2>
 
                         <div class="flex flex-col gap-1">
                             <label
-                                class="text-xs font-semibold uppercase tracking-wider text-(--mc-text-muted)">Title</label>
-                            <input type="text" placeholder="e.g. Python for Beginners"
+                                class="text-xs font-semibold uppercase tracking-wider text-(--mc-text-muted)">শিরোনাম</label>
+                            <input type="text" placeholder="যেমন: শুরু করার জন্য পাইথন"
                                 class="input input-sm input-bordered w-full focus:outline-none bg-(--mc-bg) border-(--mc-border-teal) text-(--mc-text) placeholder:text-(--mc-text-faint)" />
                         </div>
 
                         <div class="flex flex-col gap-1">
                             <label
-                                class="text-xs font-semibold uppercase tracking-wider text-(--mc-text-muted)">Type</label>
+                                class="text-xs font-semibold uppercase tracking-wider text-(--mc-text-muted)">ধরন</label>
                             <select
                                 class="select select-sm select-bordered w-full bg-(--mc-bg) border-(--mc-border-teal) text-(--mc-text)">
-                                <option>Live</option>
-                                <option>Recorded</option>
+                                <option>লাইভ</option>
+                                <option>রেকর্ডেড</option>
                             </select>
                         </div>
 
                         <div class="flex flex-col gap-1">
                             <label
-                                class="text-xs font-semibold uppercase tracking-wider text-(--mc-text-muted)">Scheduled
-                                Time</label>
+                                class="text-xs font-semibold uppercase tracking-wider text-(--mc-text-muted)">নির্ধারিত
+                                সময়</label>
                             <input type="datetime-local"
                                 class="input input-sm input-bordered w-full bg-(--mc-bg) border-(--mc-border-teal) text-(--mc-text)" />
                         </div>
 
                         <button
                             class="btn btn-sm w-full gap-2 mt-1 text-white border-0 bg-linear-to-br from-[#1A9998] to-[#155665] shadow-[0_4px_14px_rgba(26,153,152,0.3)] hover:shadow-[0_6px_20px_rgba(26,153,152,0.4)] hover:-translate-y-0.5 transition-all">
-                            Create Session
+                            সেশন তৈরি করুন
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -225,16 +224,16 @@
                     <div
                         class="bg-(--mc-surface) rounded-2xl shadow-(--mc-shadow-sm) border border-(--mc-border-teal-sub) p-6 flex flex-col gap-3">
                         <div class="flex items-center justify-between">
-                            <h2 class="text-xs font-bold uppercase tracking-widest text-(--mc-text-muted)">Live
-                                Sessions</h2>
+                            <h2 class="text-xs font-bold uppercase tracking-widest text-(--mc-text-muted)">লাইভ
+                                সেশন</h2>
                             <span class="badge badge-sm badge-error badge-outline gap-1.5 font-bold">
-                                <span class="live-dot w-1.5! h-1.5!"></span> 3 Active
+                                <span class="live-dot w-1.5! h-1.5!"></span> ৩ সক্রিয়
                             </span>
                         </div>
 
                         <div class="flex flex-col gap-2">
-                            @foreach([['Python Bootcamp','142'],['UI Design Fundamentals','87'],['React
-                            Masterclass','63']] as $s)
+                            @foreach([['পাইথন বুটক্যাম্প','142'],['ইউআই ডিজাইন ফান্ডামেন্টালস','87'],['রিয়্যাক্ট
+                            মাস্টারক্লাস','63']] as $s)
                             <div
                                 class="flex items-center justify-between p-3 rounded-xl transition-colors cursor-default bg-(--mc-bg) border border-(--mc-border-teal-sub)">
                                 <div class="flex items-center gap-3">
@@ -242,10 +241,10 @@
                                     <div>
                                         <p class="text-sm font-semibold text-(--mc-text)">{{ $s[0] }}</p>
                                         <p class="text-xs font-mono-custom text-(--mc-text-muted)">{{ $s[1] }}
-                                            participants</p>
+                                            অংশগ্রহণকারী</p>
                                     </div>
                                 </div>
-                                <span class="badge badge-sm badge-error font-bold">LIVE</span>
+                                <span class="badge badge-sm badge-error font-bold">লাইভ</span>
                             </div>
                             @endforeach
                         </div>
@@ -256,25 +255,25 @@
                 {{-- TABLE --}}
                 <div
                     class="bg-(--mc-surface) rounded-2xl shadow-(--mc-shadow-sm) border border-(--mc-border-teal-sub) p-6 flex flex-col gap-4">
-                    <h2 class="text-xs font-bold uppercase tracking-widest text-(--mc-text-muted)">Upcoming
-                        Sessions</h2>
+                    <h2 class="text-xs font-bold uppercase tracking-widest text-(--mc-text-muted)">আগামী
+                        সেশন</h2>
                     <div class="overflow-x-auto">
                         <table class="table table-sm">
                             <thead>
                                 <tr class="text-xs uppercase tracking-widest text-(--mc-text-muted)">
-                                    <th>Session</th>
-                                    <th class="hidden md:table-cell">Instructor</th>
-                                    <th>Date & Time</th>
-                                    <th class="hidden sm:table-cell">Enrolled</th>
-                                    <th>Status</th>
+                                    <th>সেশন</th>
+                                    <th class="hidden md:table-cell">প্রশিক্ষক</th>
+                                    <th>তারিখ ও সময়</th>
+                                    <th class="hidden sm:table-cell">নিবন্ধিত</th>
+                                    <th>স্থিতি</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach([
-                                ['Python Bootcamp','Dr. Ahmed R.','Today · 4:00 PM','142','running'],
-                                ['Web Design Essentials','Sara K.','Today · 6:00 PM','98','upcoming'],
-                                ['Data Science 101','Prof. Nabil M.','Tmrw · 10:00 AM','210','scheduled'],
-                                ['JavaScript Advanced','Lena T.','Tmrw · 2:00 PM','176','scheduled'],
+                                ['পাইথন বুটক্যাম্প','Dr. Ahmed R.','আজ · 4:00 PM','142','running'],
+                                ['ওয়েব ডিজাইন এসেনশিয়ালস','Sara K.','আজ · 6:00 PM','98','upcoming'],
+                                ['ডেটা সায়েন্স ১০১','Prof. Nabil M.','আগামীকাল · 10:00 AM','210','scheduled'],
+                                ['জাভাস্ক্রিপ্ট অ্যাডভান্সড','Lena T.','আগামীকাল · 2:00 PM','176','scheduled'],
                                 ] as $row)
                                 <tr class="hover">
                                     <td class="font-semibold text-sm text-(--mc-text)">{{ $row[0] }}</td>
@@ -285,12 +284,12 @@
                                     </td>
                                     <td>
                                         @if($row[4]==='running')
-                                        <span class="badge badge-sm badge-success gap-1">● Running</span>
+                                        <span class="badge badge-sm badge-success gap-1">● চলছে</span>
                                         @elseif($row[4]==='upcoming')
-                                        <span class="badge badge-sm badge-warning">Upcoming</span>
+                                        <span class="badge badge-sm badge-warning">আগামী</span>
                                         @else
                                         <span
-                                            class="badge badge-sm badge-outline border-(--mc-border-teal) text-(--mc-primary)">Scheduled</span>
+                                            class="badge badge-sm badge-outline border-(--mc-border-teal) text-(--mc-primary)">নির্ধারিত</span>
                                         @endif
                                     </td>
                                 </tr>
@@ -310,13 +309,13 @@
                                 viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M3 3v18h18M7 14l3-3 4 4 5-7" />
                             </svg>
-                            Analytics Overview
+                            অ্যানালিটিক্স ওভারভিউ
                         </h2>
                         <div class="join">
                             <button id="tab-week" onclick="switchChart('week')"
-                                class="btn btn-xs join-item text-white border-0 bg-(--mc-primary)">Week</button>
+                                class="btn btn-xs join-item text-white border-0 bg-(--mc-primary)">সপ্তাহ</button>
                             <button id="tab-month" onclick="switchChart('month')"
-                                class="btn btn-xs join-item btn-ghost">Month</button>
+                                class="btn btn-xs join-item btn-ghost">মাস</button>
                         </div>
                     </div>
                     <div class="relative h-64">
@@ -330,8 +329,7 @@
         {{-- ══════════════ SIDEBAR ══════════════ --}}
         <div class="drawer-side z-40">
             <label for="sidebar-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
-            <aside
-                class="w-60 min-h-full flex flex-col p-4 bg-(--mc-surface) border-r border-(--mc-border-teal-sub)">
+            <aside class="w-60 min-h-full flex flex-col p-4 bg-(--mc-surface) border-r border-(--mc-border-teal-sub)">
 
                 {{-- Logo --}}
                 <div class="flex items-center gap-3 px-2 py-3 mb-3 border-b border-(--mc-border-teal-sub)">
@@ -345,12 +343,12 @@
                     </div>
                     <div>
                         <h2 class="font-bold text-sm leading-tight text-(--mc-text)">MentorChai</h2>
-                        <p class="text-xs text-(--mc-text-muted)">Admin Panel</p>
+                        <p class="text-xs text-(--mc-text-muted)">অ্যাডমিন প্যানেল</p>
                     </div>
                 </div>
 
                 <ul class="menu menu-sm flex-1 gap-0.5 px-0">
-                    <li class="menu-title text-xs tracking-widest text-(--mc-text-faint)">Main</li>
+                    <li class="menu-title text-xs tracking-widest text-(--mc-text-faint)">প্রধান</li>
                     <li>
                         <a
                             class="font-medium text-sm rounded-xl text-white bg-linear-to-br from-[#1A9998] to-[#155665]">
@@ -359,7 +357,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M3 10l9-7 9 7v9a2 2 0 01-2 2h-4v-6H9v6H5a2 2 0 01-2-2v-9z" />
                             </svg>
-                            Dashboard
+                            ড্যাশবোর্ড
                         </a>
                     </li>
                     <li>
@@ -370,7 +368,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M15 10l4.5-4.5v13L15 14M4 6h8a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2z" />
                             </svg>
-                            Sessions
+                            সেশনসমূহ
                         </a>
                     </li>
                     <li>
@@ -381,7 +379,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M17 20h5v-2a4 4 0 00-5-3.87M9 20H4v-2a4 4 0 015-3.87m8-4a4 4 0 11-8 0 4 4 0 018 0zM9 10a4 4 0 11-8 0 4 4 0 018 0z" />
                             </svg>
-                            Users
+                            ব্যবহারকারী
                         </a>
                     </li>
                 </ul>
@@ -393,7 +391,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                     </svg>
-                    Logout
+                    লগআউট
                 </a>
             </aside>
         </div>
@@ -405,8 +403,8 @@
         const TICK = () => isDark() ? 'rgba(156,163,175,0.7)' : 'rgba(21,86,101,0.4)';
         const GRID = () => isDark() ? 'rgba(55,65,81,0.5)'   : 'rgba(26,153,152,0.08)';
 
-        const weekData  = { labels:['Sat','Sun','Mon','Tue','Wed','Thu','Fri'], students:[120,150,170,200,220,250,280], sessions:[30,45,50,65,70,80,90] };
-        const monthData = { labels:['Week 1','Week 2','Week 3','Week 4'], students:[820,1050,1200,1480], sessions:[210,280,330,410] };
+        const weekData  = { labels:['শনি','রবি','সোম','মঙ্গল','বুধ','বৃহস্পতি','শুক্র'], students:[120,150,170,200,220,250,280], sessions:[30,45,50,65,70,80,90] };
+        const monthData = { labels:['১ম সপ্তাহ','২য় সপ্তাহ','৩য় সপ্তাহ','৪র্থ সপ্তাহ'], students:[820,1050,1200,1480], sessions:[210,280,330,410] };
 
         function buildDatasets(data, ctx) {
             const g1 = ctx.createLinearGradient(0,0,0,260);
@@ -416,10 +414,10 @@
             g2.addColorStop(0, isDark() ? 'rgba(21,86,101,0.30)' : 'rgba(21,86,101,0.15)');
             g2.addColorStop(1, 'rgba(21,86,101,0)');
             return [
-                { label:'Students', data:data.students, borderColor:'#1A9998', backgroundColor:g1,
+                { label:'ছাত্রছাত্রী', data:data.students, borderColor:'#1A9998', backgroundColor:g1,
                   tension:.4, fill:true, pointRadius:5, pointHoverRadius:7,
                   pointBackgroundColor:'#1A9998', pointBorderColor: isDark() ? '#1a2e3b' : '#fff', pointBorderWidth:2 },
-                { label:'Sessions', data:data.sessions, borderColor:'#155665', backgroundColor:g2,
+                { label:'সেশন', data:data.sessions, borderColor:'#155665', backgroundColor:g2,
                   tension:.4, fill:true, pointRadius:5, pointHoverRadius:7,
                   pointBackgroundColor:'#155665', pointBorderColor: isDark() ? '#1a2e3b' : '#fff', pointBorderWidth:2 },
             ];

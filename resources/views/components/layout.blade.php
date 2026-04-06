@@ -27,7 +27,7 @@
     class="font-[Nunito,sans-serif] bg-[#eef7f8] dark:bg-[#0f1f2e] min-h-screen flex flex-col transition-colors duration-300">
 
     {{-- ═══════════════ HEADER ═══════════════ --}}
-    <header>
+    <header class="sticky top-0 z-50">
         <nav>
             <div class="drawer">
                 <input id="mobile-menu" type="checkbox" class="drawer-toggle" />
@@ -120,8 +120,68 @@
                                 </svg>
                             </label>
 
+                            @auth
                             {{-- Vertical divider --}}
                             <div class="w-px h-7 bg-#28666e/0.18 dark:bg-#4db6c1/0.25 rounded-sm"></div>
+
+                            {{-- Notification button --}}
+                            <div class="relative">
+                                <button id="notificationToggle" onclick="toggleNotifications()"
+                                    class="relative p-1.5 rounded-lg hover:bg-teal-50 dark:hover:bg-teal-900/30 transition-colors"
+                                    title="নোটিফিকেশন">
+                                    <span id="notificationDot"
+                                        class="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-[#ef4444] border border-white dark:border-[#0f1f2e]"></span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.8" stroke="#28666e" class="w-5 h-5 dark:stroke-[#4db6c1]">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                                    </svg>
+                                </button>
+
+                                <div id="notificationPanel"
+                                    class="hidden fixed md:absolute left-4 right-4 md:left-auto md:right-0 top-[4rem] md:top-auto md:mt-2 w-auto md:w-[22rem] rounded-3xl bg-white dark:bg-[#122333] border border-[#28666e]/15 dark:border-[#4db6c1]/20 shadow-[0_20px_45px_rgba(40,102,110,0.12)] dark:shadow-[0_20px_45px_rgba(0,0,0,0.35)] z-[999] overflow-hidden">
+                                    <div
+                                        class="px-4 py-3 bg-[#eaf7f8] dark:bg-[#102d3b] border-b border-[#28666e]/10 dark:border-[#4db6c1]/10">
+                                        <div class="flex items-center justify-between gap-3">
+                                            <p class="font-semibold text-[#033f63] dark:text-[#7ec8e3]">নোটিফিকেশন</p>
+                                            <div class="flex items-center gap-2">
+                                                <button onclick="markAllAsRead()"
+                                                    class="text-[0.7rem] font-semibold text-[#033f63] dark:text-[#d2f1ff] bg-[#28666e]/10 dark:bg-[#4db6c1]/15 px-2 py-1 rounded-full hover:bg-[#28666e]/15 dark:hover:bg-[#4db6c1]/25 transition-colors">
+                                                    সবগুলো পড়া চিহ্নিত করুন
+                                                </button>
+                                                <span id="notificationCount"
+                                                    class="badge badge-sm bg-[#28666e] text-white border-0">৩</span>
+                                            </div>
+                                        </div>
+                                        <p class="text-xs text-[#28666e]/70 dark:text-[#7ec8e3]/70 mt-1">সর্বশেষ আপডেট
+                                        </p>
+                                    </div>
+                                    <div class="p-3 space-y-2">
+                                        <div
+                                            class="rounded-3xl bg-[#f6fbfb] dark:bg-[#0f2430] p-3 border border-[#28666e]/10 dark:border-[#4db6c1]/10">
+                                            <p class="text-sm text-[#033f63] dark:text-[#d2f1ff]">নতুন সেশন “রিয়্যাক্ট
+                                                মাস্টারক্লাস” এখন লাইভ।</p>
+                                            <p class="text-xs text-[#28666e]/60 dark:text-[#7ec8e3]/70 mt-1">৫ মিনিট আগে
+                                            </p>
+                                        </div>
+                                        <div
+                                            class="rounded-3xl bg-[#f6fbfb] dark:bg-[#0f2430] p-3 border border-[#28666e]/10 dark:border-[#4db6c1]/10">
+                                            <p class="text-sm text-[#033f63] dark:text-[#d2f1ff]">১২ জন নতুন শিক্ষার্থী
+                                                আজ সাইন আপ করেছেন।</p>
+                                            <p class="text-xs text-[#28666e]/60 dark:text-[#7ec8e3]/70 mt-1">২০ মিনিট
+                                                আগে</p>
+                                        </div>
+                                        <div
+                                            class="rounded-3xl bg-[#f6fbfb] dark:bg-[#0f2430] p-3 border border-[#28666e]/10 dark:border-[#4db6c1]/10">
+                                            <p class="text-sm text-[#033f63] dark:text-[#d2f1ff]">নতুন নিরাপত্তা আপডেট
+                                                সফলভাবে ইনস্টল হয়েছে।</p>
+                                            <p class="text-xs text-[#28666e]/60 dark:text-[#7ec8e3]/70 mt-1">১ ঘন্টা আগে
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endauth
 
                             {{-- Dark Mode Toggle --}}
                             <button id="theme-toggle"
@@ -154,7 +214,7 @@
                                       transition-all duration-200
                                       hover:bg-[#28666e] hover:text-white hover:border-[#28666e] hover:shadow-[0_4px_12px_rgba(40,102,110,0.22)]
                                       dark:hover:bg-[#4db6c1] dark:hover:text-[#0f1f2e] dark:hover:border-[#4db6c1]
-                                      {{ Route::is('login') ? 'bg-[#28666e] text-white! border-[#28666e]' : '' }}">
+                                      {{ Route::is('login') ? 'bg-[#28666e] border-[#28666e]' : '' }}">
                                 লগইন করুন
                             </a>
                             @endguest
@@ -186,7 +246,8 @@
                                               {{ Route::is('mentor_profile') ? 'bg-![#28666e] text-gray-500!' : '' }}">
                                         প্রোফাইল
                                     </a>
-                                    <a href="{{ route('mentor_dashboard') }}" class="block w-full text-center text-sm font-semibold
+                                    <a href="{{ route('mentor_dashboard') }}"
+                                        class="block w-full text-center text-sm font-semibold
                                               text-[#033f63] dark:text-[#7ec8e3]
                                               px-4 py-[0.55rem] rounded-[10px] no-underline
                                               transition-all duration-150
@@ -195,7 +256,8 @@
                                         ড্যাশবোর্ড
                                     </a>
                                     @elseif (isStudent())
-                                    <a href="{{ route('student_profile', auth()->user()->id) }}" class="block w-full text-center text-sm font-semibold
+                                    <a href="{{ route('student_profile', auth()->user()->id) }}"
+                                        class="block w-full text-center text-sm font-semibold
                                               text-[#033f63] dark:text-[#7ec8e3]
                                               px-4 py-[0.55rem] rounded-[10px] no-underline
                                               transition-all duration-150
@@ -203,7 +265,8 @@
                                               {{ Route::is('student_profile') ? 'bg-![#28666e] text-gray-500!' : '' }}">
                                         প্রোফাইল
                                     </a>
-                                    <a href="{{ route('student_dashboard') }}" class="block w-full text-center text-sm font-semibold
+                                    <a href="{{ route('student_dashboard') }}"
+                                        class="block w-full text-center text-sm font-semibold
                                               text-[#033f63] dark:text-[#7ec8e3]
                                               px-4 py-[0.55rem] rounded-[10px] no-underline
                                               transition-all duration-150
@@ -464,11 +527,30 @@
         document.addEventListener('click', function(event) {
             const dropdown = document.getElementById('profile-dropdown');
             const menu = document.getElementById('dropdown-menu');
+            const panel = document.getElementById('notificationPanel');
+            const notifyToggle = document.getElementById('notificationToggle');
 
             if (dropdown && menu && !dropdown.contains(event.target)) {
                 menu.classList.add('hidden');
             }
+
+            if (panel && notifyToggle && !notifyToggle.contains(event.target) && !panel.contains(event.target)) {
+                panel.classList.add('hidden');
+            }
         });
+
+        function toggleNotifications() {
+            const panel = document.getElementById('notificationPanel');
+            if (!panel) return;
+            panel.classList.toggle('hidden');
+        }
+
+        function markAllAsRead() {
+            const dot = document.getElementById('notificationDot');
+            const count = document.getElementById('notificationCount');
+            if (dot) dot.classList.add('hidden');
+            if (count) count.textContent = '০';
+        }
 
         const toggle = document.getElementById('theme-toggle');
         const sun    = document.getElementById('icon-sun');
