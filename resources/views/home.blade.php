@@ -42,10 +42,10 @@
                             style="color: var(--mc-text);">
                             <span
                                 style="background: linear-gradient(135deg, #1A9998, #155665); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-                                শেষ রাতে পড়া আটকে গেছে?
+                                জরুরি মূহুর্তে হঠাৎ একজন শিক্ষকের সাহায্য প্রয়োজন?
                             </span>
                             <br />
-                            <span style="color: var(--mc-text);">টিচার এখনই পেয়ে যান</span>
+                            <span style="color: var(--mc-text);">MentorChai আছে আপনার সাথে ।</span>
                         </h1>
 
                         {{-- Subtext --}}

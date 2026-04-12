@@ -116,31 +116,31 @@
         });
 
         // Accordion toggle
-        document.querySelectorAll('.faq-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const item   = btn.closest('.faq-item');
-                const answer = item.querySelector('.faq-answer');
-                const arrow  = item.querySelector('.faq-arrow');
-                const isOpen = item.dataset.open === 'true';
+document.querySelectorAll('.faq-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const item   = btn.closest('.faq-item');
+        const answer = item.querySelector('.faq-answer');
+        const arrow  = item.querySelector('.faq-arrow');
+        const isOpen = item.dataset.open === 'true';
 
-                // Close all
-                document.querySelectorAll('.faq-item').forEach(i => {
-                    i.dataset.open = 'false';
-                    i.querySelector('.faq-answer').style.maxHeight = '0';
-                    i.querySelector('.faq-arrow').style.transform = 'rotate(0deg)';
-                    i.querySelector('.faq-btn').style.color = 'var(--mc-text-sub)';
-                    i.style.borderColor = 'var(--mc-border-teal-sub)';
-                });
-
-                // Open clicked
-                if (isOpen!) {
-                    item.dataset.open = 'true';
-                    answer.style.maxHeight = answer.scrollHeight + 'px';
-                    arrow.style.transform = 'rotate(180deg)';
-                    btn.style.color = 'var(--mc-primary)';
-                    item.style.borderColor = 'var(--mc-border-teal)';
-                }
-            });
+        // Close all
+        document.querySelectorAll('.faq-item').forEach(i => {
+            i.dataset.open = 'false';
+            i.querySelector('.faq-answer').style.maxHeight = '0';
+            i.querySelector('.faq-arrow').style.transform = 'rotate(0deg)';
+            i.querySelector('.faq-btn').style.color = 'var(--mc-text-sub)';
+            i.style.borderColor = 'var(--mc-border-teal-sub)';
         });
+
+        // Open clicked
+        if (!isOpen) {
+            item.dataset.open = 'true';
+            answer.style.maxHeight = answer.scrollHeight + 'px';
+            arrow.style.transform = 'rotate(180deg)';
+            btn.style.color = 'var(--mc-primary)';
+            item.style.borderColor = 'var(--mc-border-teal)';
+        }
+    });
+});
     </script>
 </x-layout>
