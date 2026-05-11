@@ -47,9 +47,9 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
 Route::prefix('admin')->name('admin_')->group(function () {
     Route::get('/login', fn() => view('admin_login'))->name('login');
 
-    Route::get('/dashboard', fn() => view('admin_dashboard'))->name('dashboard');
-    Route::get('/dashboard/sessions', fn() => view('admin_sessions'))->name('sessions');
-    Route::get('/dashboard/users', fn() => view('admin_users'))->name('users');
+    Route::get('/dashboard', fn() => view('dashboard.admin-dashboard', ['adminInitialSection' => 'dashboard']))->name('dashboard');
+    Route::get('/dashboard/sessions', fn() => view('dashboard.admin-dashboard', ['adminInitialSection' => 'sessions']))->name('sessions');
+    Route::get('/dashboard/users', fn() => view('dashboard.admin-dashboard', ['adminInitialSection' => 'users']))->name('users');
 });
 
 /*
