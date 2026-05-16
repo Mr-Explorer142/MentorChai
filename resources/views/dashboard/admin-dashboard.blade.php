@@ -80,6 +80,8 @@ body{font-family:'Instrument Sans',ui-sans-serif,system-ui,sans-serif;background
   position:fixed;top:0;left:0;z-index:40;
 }
 .logo-wrap{padding:15px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+a.logo-wrap{text-decoration:none;color:inherit;cursor:pointer}
+a.logo-wrap:hover{opacity:.92}
 .logo-icon{width:32px;height:32px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;flex-shrink:0}
 .logo-name{font-size:15px;font-weight:600}
 .logo-role{font-size:10.5px;color:var(--text3);margin-top:1px}
@@ -273,13 +275,13 @@ textarea.fc{resize:vertical;min-height:80px}
 
 {{-- ═══════════════════ SIDEBAR ═══════════════════ --}}
 <aside id="sidebar">
-  <div class="logo-wrap">
+  <a href="{{ route('home') }}" class="logo-wrap" title="Go to homepage">
     <div class="logo-icon"><x-heroicon name="academic-cap" class="h-icon" style="width:17px;height:17px" /></div>
     <div>
       <div class="logo-name">MentorChai</div>
       <div class="logo-role">Admin Console</div>
     </div>
-  </div>
+  </a>
   <div style="flex:1;overflow-y:auto;padding:6px 0">
     <div class="nav-section">Overview</div>
     <a class="nav-item active" onclick="nav('dashboard',this)"><x-heroicon name="squares-2x2" class="h-icon" style="width:20px;height:20px" />Dashboard</a>
