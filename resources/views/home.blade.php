@@ -50,9 +50,7 @@
 
                         {{-- Subtext --}}
                         <p class="max-w-xl text-lg leading-relaxed" style="color: var(--mc-text-muted);">
-                            Calculus, Binary Search বা Kirchhoff's Laws —
-                            যেকোনো কঠিন টপিক বুঝতে এখন আর অপেক্ষা নয়।
-                            প্রয়োজন শুধু কয়েক মিনিট।
+                            পরীক্ষার আগের রাতে হঠাৎ Calculus বুঝতে অসুবিধা হচ্ছে? কিংবা Binary Search Algorithm? শুধুমাত্র Kirchhoff's Laws বুঝতে মাত্র এক ঘণ্টার জন্য একজন শিক্ষকের সহায়তা দরকার?
                         </p>
 
                         {{-- CTA Buttons --}}
@@ -69,7 +67,7 @@
                             <a href="#"
                                 class="inline-flex items-center justify-center gap-2 rounded-xl px-7 py-3.5 text-base font-semibold transition-all duration-300 hover:-translate-y-0.5"
                                 style="border: 1.5px solid rgba(26,153,152,0.4); color: var(--mc-primary); background: var(--mc-surface);">
-                                কিভাবে কাজ করে?
+                                কীভাবে কাজ করে?
                                 <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                     stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
@@ -323,7 +321,7 @@
                 সাবস্ক্রিপশন বা দীর্ঘমেয়াদী কোর্সের ঝামেলা নেই।'],
                 ['icon'=>'cheap.png', 'cf'=>'#187F87', 'ct'=>'#155665',
                 'title'=>'সাধ্যের ভেতরে সাশ্রয়ী সেশন',
-                'desc'=>'ছাত্র-ছাত্রীদের বাজেটের কথা মাথায় রেখে মেন্টরশিপ সেশনগুলোর খরচ নির্ধারণ করা হয়েছে। কম সময়ের
+                'desc'=>'শিক্ষার্থীদের সাধ্যের ব্যাপারটি মাথায় রেখে মেন্টরশিপ সেশনগুলোর খরচ নির্ধারণ করা হয়েছে। কম সময়ের
                 সেশন হওয়ায় খরচও একদম হাতের নাগালে।'],
                 ['icon'=>'topic.png', 'cf'=>'#155665', 'ct'=>'#102E3C',
                 'title'=>'পুরো কোর্স নয়, শিখুন নির্দিষ্ট টপিক',
@@ -331,9 +329,9 @@
                 শুধুমাত্র সেটির সমাধানের জন্যই মেন্টরের সাহায্য নিতে পারবেন।'],
                 ['icon'=>'24-hours-support.png', 'cf'=>'#102E3C', 'ct'=>'#155665',
                 'title'=>'২৪/৭ মেন্টরশিপ',
-                'desc'=>'গভীর রাত হোক কিংবা পরীক্ষার ঠিক আগের মুহূর্ত — যেকোনো সময়েই সাহায্য নিতে পারবেন মেন্টরদের।'],
+                'desc'=>'গভীর রাত হোক কিংবা পরীক্ষার ঠিক আগের মুহূর্ত - যেকোনো সময়েই সাহায্য নিতে পারবেন মেন্টরদের।'],
                 ['icon'=>'flexibleincome.png', 'cf'=>'#155665', 'ct'=>'#187F87',
-                'title'=>'মেন্টরদের জন্য ফ্লেক্সিবল শিডিউল',
+                'title'=>'মেন্টরদের জন্য ফ্লেক্সিবল স্কেডিউল',
                 'desc'=>'বিশ্ববিদ্যালয় শিক্ষার্থী বা পেশাজীবীরা নিজেদের অবসর সময়ে মেন্টর হিসেবে কাজ করতে পারেন এবং ঘরে
                 বসেই অর্থ উপার্জন করতে পারেন।'],
                 ['icon'=>'findteacher.png', 'cf'=>'#187F87', 'ct'=>'#1A9998',
@@ -412,11 +410,11 @@
 
                         <div class="space-y-3">
                             <p class="text-base leading-relaxed" style="color: var(--mc-text-muted);">
-                                পড়াতে ভালোবাসেন? টিউশনি করানোর সুযোগ কিংবা উপযুক্ত সময় মিলছেনা? কিংবা ঘরের বাইরে
+                                পড়াতে ভালোবাসেন? টিউশনি করানোর সুযোগ অথবা উপযুক্ত সময় মিলছেনা? কিংবা ঘরের বাইরে
                                 টিউশনি করানো কষ্টসাধ্য?
                             </p>
                             <p class="text-base leading-relaxed" style="color: var(--mc-text-muted);">
-                                MentorChai এর সাথে যুক্ত হোন মেন্টর হিসেবে। নিজের সুবিধামতো সময় অনুযায়ী দিন-রাত যেকোনো
+                                MentorChai এর সাথে যুক্ত হোন মেন্টর হিসেবে। নিজের সুবিধামতো সময় অনুযায়ী দিন কিংবা রাত যেকোনো
                                 সময়ে মেন্টরশিপ প্রদান করুন। দেশব্যাপী শিক্ষার্থীদের সাথে সংযুক্ত হয়ে ঘরে বসেই অর্থ
                                 উপার্জন করুন।
                             </p>
@@ -424,7 +422,7 @@
 
                         {{-- Perks --}}
                         <div class="grid grid-cols-2 gap-3">
-                            @foreach(['ফ্লেক্সিবল শিডিউল', 'ঘরে বসে আয়', 'দ্রুত পেমেন্ট', 'যেকোনো বিষয়'] as $perk)
+                            @foreach(['ফ্লেক্সিবল স্কেডিউল', 'ঘরে বসে আয়', 'দ্রুত পেমেন্ট', 'যেকোনো বিষয়'] as $perk)
                             <div class="flex items-center gap-2.5 rounded-xl px-4 py-3"
                                 style="background: var(--mc-surface); border: 1px solid var(--mc-border-teal-sub); box-shadow: var(--mc-shadow-sm);">
                                 <div class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full"
