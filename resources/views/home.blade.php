@@ -78,10 +78,10 @@
                         </div>
 
                         {{-- Trust pills --}}
-                        <div class="flex flex-wrap gap-4 pt-2">
+                        <div class="flex flex-wrap gap-5 pt-3">
                             @foreach(['⏱ ২৪/৭ সাপোর্ট', '💸 সাশ্রয়ী', '🎯 টপিক ভিত্তিক'] as $pill)
-                            <div class="flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium"
-                                style="background: var(--mc-surface); border: 1px solid var(--mc-border-teal-sub); color: var(--mc-primary); box-shadow: var(--mc-shadow-sm);">
+                            <div class="flex cursor-pointer items-center gap-2 rounded-full px-6 py-3 text-base font-extrabold tracking-wide transition-all duration-300 hover:-translate-y-2 hover:scale-105 hover:shadow-2xl"
+                                style="background: linear-gradient(135deg, rgba(26,153,152,0.15), rgba(21,86,101,0.08)); border: 2px solid rgba(26,153,152,0.75); color: var(--mc-primary); box-shadow: 0 4px 20px rgba(26,153,152,0.25);">
                                 {{ $pill }}
                             </div>
                             @endforeach
