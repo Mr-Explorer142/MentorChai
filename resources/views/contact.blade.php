@@ -15,7 +15,7 @@
                 <div class="mx-auto mt-4 mb-4 h-1 w-14 rounded-full"
                     style="background: linear-gradient(90deg, #1A9998, #155665);"></div>
                 <p class="text-sm max-w-md mx-auto" style="color: var(--mc-text-muted);">
-                    আমরা সবসময় আপনার পাশে আছি — যেকোনো প্রশ্নে নির্দ্বিধায় লিখুন
+                    যেকোনো তথ্যের জন্য নিচের ফর্মটি পূরণ করুন অথবা সরাসরি আমাদের সাথে যোগাযোগ করুন।
                 </p>
             </div>
 
@@ -37,7 +37,7 @@
                     ',
                     ],
                     [
-                    'label' => 'ই-মেইল',
+                    'label' => 'ইমেইল',
                     'value' => 'abcd@example.com',
                     'color' => 'rgba(24,127,135,0.12)',
                     'stroke'=> '#187F87',
@@ -47,7 +47,7 @@
                     ',
                     ],
                     [
-                    'label' => 'টেলিগ্রাম / ওয়াটস্যাপ',
+                    'label' => 'টেলিগ্রাম / হোয়াটসঅ্যাপ',
                     'value' => '+8801122334455',
                     'color' => 'rgba(21,86,101,0.12)',
                     'stroke'=> '#155665',
@@ -104,7 +104,7 @@
                         <div class="card-body p-7 md:p-8 gap-5">
 
                             <h3 class="card-title text-lg" style="color: var(--mc-text); font-family: 'Lora', serif;">
-                                সরাসরি মেসেজ পাঠান
+                                সরাসরি বার্তা পাঠান
                             </h3>
 
                             <form class="flex flex-col gap-4">
@@ -121,9 +121,9 @@
                                 <div class="form-control gap-1.5">
                                     <label class="label py-0">
                                         <span class="label-text text-xs font-bold uppercase tracking-wide"
-                                            style="color: var(--mc-text-muted);">ই-মেইল</span>
+                                            style="color: var(--mc-text-muted);">ইমেইল</span>
                                     </label>
-                                    <input type="email" placeholder="আপনার ই-মেইল লিখুন"
+                                    <input type="email" placeholder="আপনার ইমেইল অ্যাড্রেস লিখুন"
                                         class="input input-bordered w-full text-sm"
                                         style="background: var(--mc-bg); border-color: var(--mc-border-teal-sub); color: var(--mc-text);" />
                                 </div>
@@ -141,9 +141,9 @@
                                 <div class="form-control gap-1.5">
                                     <label class="label py-0">
                                         <span class="label-text text-xs font-bold uppercase tracking-wide"
-                                            style="color: var(--mc-text-muted);">মেসেজ</span>
+                                            style="color: var(--mc-text-muted);">বার্তা</span>
                                     </label>
-                                    <textarea placeholder="মেসেজ লিখুন..." rows="5"
+                                    <textarea placeholder=" আপনার প্রশ্ন কিংবা বার্তাটি লিখুন....." rows="5"
                                         class="textarea textarea-bordered w-full text-sm resize-y"
                                         style="background: var(--mc-bg); border-color: var(--mc-border-teal-sub); color: var(--mc-text); min-height: 130px;"></textarea>
                                 </div>
@@ -151,7 +151,7 @@
                                 <button type="submit"
                                     class="btn w-full text-white border-0 font-bold hover:-translate-y-0.5 transition-all duration-200"
                                     style="background: linear-gradient(135deg, #1A9998, #155665); box-shadow: 0 4px 14px rgba(26,153,143,0.28);">
-                                    মেসেজ পাঠান →
+                                    বার্তাটি প্রেরণ করুন →
                                 </button>
                             </form>
 
