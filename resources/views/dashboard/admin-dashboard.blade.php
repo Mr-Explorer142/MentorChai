@@ -1309,10 +1309,10 @@ textarea.fc{resize:vertical;min-height:80px}
     <div class="pg-hd"><h2>সেটিংস</h2></div>
     <div class="sgrid g2">
       <div class="card">
-        <div class="card-head"><h3>্প্ল্যাটফর্ম সেটিংস</h3></div>
+        <div class="card-head"><h3>প্ল্যাটফর্ম সেটিংস</h3></div>
         <div style="padding:18px;display:flex;flex-direction:column;gap:13px">
           {{-- In real Laravel: wrap in <form> with @csrf and action="{{ route('admin.settings.update') }}" --}}
-          <div class="fg"><label>্প্ল্যাটফর্মের নাম</label><input type="text" class="fc" name="platform_name" value="{{ $settings['platform_name'] ?? 'MentorChai' }}"/></div>
+          <div class="fg"><label>প্ল্যাটফর্মের নাম</label><input type="text" class="fc" name="platform_name" value="{{ $settings['platform_name'] ?? 'MentorChai' }}"/></div>
           <div class="fg"><label>সেশনপ্রতি কমিশন (%)</label><input type="number" class="fc" name="commission" value="{{ $settings['commission'] ?? 20 }}"/></div>
           <div class="fg"><label>মেন্টর জয়েনিং ফী (৳)</label><input type="number" class="fc" name="joining_fee" value="{{ $settings['joining_fee'] ?? 350 }}"/></div>
           <div class="fg"><label>সাপোর্ট ইমেইল</label><input type="email" class="fc" name="support_email" value="{{ $settings['support_email'] ?? 'support@eduflow.com' }}"/></div>
