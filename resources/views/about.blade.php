@@ -97,7 +97,7 @@
                 <div class="text-center mb-14">
                     <span class="badge badge-outline font-bold uppercase tracking-widest text-xs px-4 py-3 mb-4"
                         style="border-color: var(--mc-border-teal); color: var(--mc-primary); background: rgba(40,102,110,0.08);">
-                        ✦ কেন MentorChai
+                        কেন MentorChai
                     </span>
                     <h2 class="text-2xl lg:text-4xl font-extrabold mt-3 mb-3"
                         style="color: var(--mc-text); font-family: 'Lora', serif;">
@@ -109,9 +109,7 @@
                     </h2>
                     <div class="mx-auto h-1 w-14 rounded-full mb-4"
                         style="background: linear-gradient(90deg, #1A9998, #155665);"></div>
-                    <p class="text-base max-w-xl mx-auto" style="color: var(--mc-text-muted);">
-                        যা MentorChai কে অনন্য করে তুলেছে
-                    </p>
+                    
                 </div>
 
                 @php
@@ -179,30 +177,25 @@
             <div class="max-w-5xl mx-auto px-5">
 
                 <div class="text-center mb-16">
-                    <span class="badge badge-outline font-bold uppercase tracking-widest text-xs px-4 py-3 mb-4"
-                        style="border-color: var(--mc-border-teal); color: var(--mc-primary); background: rgba(40,102,110,0.08);">
-                        👥 দলের সদস্য
-                    </span>
+                    
                     <h2 class="text-2xl lg:text-4xl font-bold mt-3"
                         style="color: var(--mc-text); font-family: 'Lora', serif;">
-                        পরিচয় করুন
+                        
                         <span
                             style="background: linear-gradient(135deg, #1A9998, #155665); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-                            ডেভেলপারদের সাথে
+                            ডেভেলপার টিম
                         </span>
                     </h2>
                     <div class="mx-auto mt-4 h-1 w-14 rounded-full"
                         style="background: linear-gradient(90deg, #1A9998, #155665);"></div>
-                    <p class="mt-4 text-sm max-w-md mx-auto" style="color: var(--mc-text-muted);">
-                        MentorChai-এর পেছনের দলটি — যারা এই প্ল্যাটফর্মটিকে বাস্তবে রূপ দিয়েছেন
-                    </p>
+                    
                 </div>
 
                 @php
                 $team = [
-                ['img'=>'tamim.jpg', 'name'=>'তাহমিদ আলম তামিম', 'role'=>'সিনিয়র ডেভেলপার', 'color'=>'#1A9998',
+                ['img'=>'tamim.jpg', 'name'=>'তাহমিদ আলম তামিম', 'role'=>'Bsc in CSE', 'color'=>'#1A9998',
                 'li'=>'https://linkedin.com/in/xyz', 'gh'=>'https://github.com/xyz', 'em'=>'xyz@example.com'],
-                ['img'=>'adib.jpg', 'name'=>'ওয়াসিফ খাঁন লোদী আদিব', 'role'=>'সহকারী ডেভেলপার', 'color'=>'#187F87',
+                ['img'=>'adib.jpg', 'name'=>'ওয়াসিফ খাঁন লোদী আদিব', 'role'=>'Bsc in CSE', 'color'=>'#187F87',
                 'li'=>'https://linkedin.com/in/abc', 'gh'=>'https://github.com/abc', 'em'=>'abc@example.com'],
                 ];
                 @endphp
