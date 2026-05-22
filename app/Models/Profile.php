@@ -19,6 +19,7 @@ class Profile extends Model
         'skills',
         'institution_name',
         'hourly_rate',
+        'department',
     ];
 
     public function user()

@@ -15,7 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->enum('role', ['student', 'mentor'])->default('student');
+            $table->enum('status', ['active', 'pending', 'banned'])->default('active');
             $table->string('email')->unique();
+            $table->timestamp('banned_at')->nullable();
+            $table->string('banned_reason')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
