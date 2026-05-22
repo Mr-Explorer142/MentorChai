@@ -24,7 +24,11 @@ return new class extends Migration
             $table->string('skills')->nullable();
             $table->string('institution_name')->nullable();
             $table->string('hourly_rate')->nullable();
-            
+            $table->string('department', 20)->nullable();
+            $table->boolean('is_online')->default(false);
+            $table->decimal('rating', 2, 1)->nullable();
+            $table->integer('total_sessions')->default(0);
+            $table->text('document_path')->nullable();
 
             $table->timestamps();
         });
