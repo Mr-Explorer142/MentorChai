@@ -11,9 +11,14 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        $middleware->appendToGroup('web', [
+            \App\Http\Middleware\UpdateLastSeen::class,
+        ]);
+
         $middleware->alias([
-            'mentor' => \App\Http\Middleware\MentorMiddleware::class,
-            'student' => \App\Http\Middleware\StudentMiddleware::class,
+            'mentor'       => \App\Http\Middleware\MentorMiddleware::class,
+            'student'      => \App\Http\Middleware\StudentMiddleware::class,
+            'last_seen_at' => \App\Http\Middleware\UpdateLastSeen::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

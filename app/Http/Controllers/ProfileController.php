@@ -17,13 +17,13 @@ class ProfileController extends Controller
     //     return view('show_profile', compact('user'));
     // }
 
-    function showStudentProfile($id)
+    function showStudentProfile(int $id)
     {
         $student = User::with('profile')->findOrFail($id);
         return view('profile.student_profile', compact('student'));
     }
 
-    function showMentorProfile($id)
+    function showMentorProfile(int $id)
     {
         $mentor = User::with('profile')->findOrFail($id);
         return view('profile.mentor_profile', compact('mentor'));
