@@ -27,6 +27,7 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
+        'last_seen_at',
     ];
 
     /**
@@ -48,15 +49,25 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
+            'last_seen_at' => 'datetime',
             'password' => 'hashed',
             'role' => UserRole::class,
-            'status' => UserStatus::class,
+            'status' => UserStatus::class
         ];
     }
 
-    public function profile() {
+    public function profile()
+    {
         return $this->hasOne(Profile::class);
     }
 
+    public function isOnline()
+    {
+        return $this->last_seen_at && $this->last_seen_at >= now()->subMinutes(5);
+    }
 
+    public function lastSeenAgo()
+    {
+        return $this->last_seen_at->diffForHumans();
+    }
 }

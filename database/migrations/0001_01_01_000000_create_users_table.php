@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('banned_reason')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->timestamp('last_seen_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
