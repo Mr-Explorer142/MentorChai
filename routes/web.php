@@ -1,12 +1,14 @@
 <?php
 
-use App\Enums\UserRole;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
-use App\Models\User;
+use App\Http\Controllers\MentorsController;
 use Illuminate\Support\Facades\Route;
+// web.php
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,11 +20,7 @@ Route::get('/', fn() => view('home'))->name('home');
 Route::get('/about', fn() => view('about'))->name('about');
 Route::get('/contact', fn() => view('contact'))->name('contact');
 Route::get('/faq', fn() => view('faq'))->name('faq');
-
-Route::get('/mentors', function () {
-    $mentors = User::where('role', UserRole::Mentor)->get();
-    return view('mentors', compact('mentors'));
-})->name('mentors');
+Route::get('/mentors', [MentorsController::class, 'index'])->name('mentors');
 
 /*
 |--------------------------------------------------------------------------
