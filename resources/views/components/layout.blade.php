@@ -226,7 +226,8 @@
                                     class="cursor-pointer w-10 h-10 rounded-full overflow-hidden
                                             border-2 border-[#28666e]/30 dark:border-[#4db6c1]/30 p-px
                                             transition-all duration-200 hover:border-[#28666e] dark:hover:border-[#4db6c1]">
-                                    <img src="{{ asset('images/About Page/tamim.jpg') }}" alt="avatar"
+                                    @php $navProfile = auth()->user()->profile; @endphp
+                                    <img src="{{ $navProfile && $navProfile->avatar ? asset('storage/' . $navProfile->avatar) : 'https://ui-avatars.com/api/?name=' . urlencode(auth()->user()->name) . '&background=1A998F&color=ffffff&size=80&font-size=0.4&bold=true' }}" alt="avatar"
                                         class="w-full h-full object-cover rounded-full" />
                                 </div>
 

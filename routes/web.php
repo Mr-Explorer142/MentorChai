@@ -63,6 +63,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/mentor/{id}', [ProfileController::class, 'showMentorProfile'])->name('mentor_profile');
     Route::get('/profile/edit', [ProfileController::class, 'editProfile'])->name('edit_profile');
     Route::put('/profile', [ProfileController::class, 'updateprofile'])->name('update_profile');
+    Route::post('/profile/avatar', [ProfileController::class, 'updateAvatar'])->name('update_avatar');
+    Route::delete('/profile/avatar', [ProfileController::class, 'removeAvatar'])->name('remove_avatar');
     Route::get('/checkout', function () {
         return view('checkout.checkout', [
             'student' => (object)['id' => 'STU-101', 'name' => 'Wasif Khan Lodi Adib'],

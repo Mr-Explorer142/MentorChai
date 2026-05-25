@@ -38,13 +38,24 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="avatar online">
-                            <div class="w-20 h-20 rounded-full shadow-2xl">
-                                <img src="https://ui-avatars.com/api/?name={{ urlencode($student->name) }}&background=1A998F&color=ffffff&size=200&font-size=0.4&bold=true"
-                                     alt="Student Avatar"
-                                     class="object-cover rounded-full border-4 border-[#C4CFCE]" />
+
+                        {{-- ─── Avatar (display only — edit via Profile page) ─── --}}
+                        <a href="{{ route('student_profile', $student->id) }}"
+                           title="প্রোফাইল দেখুন"
+                           class="shrink-0"
+                           style="width:96px;height:96px;min-width:96px;min-height:96px;display:block;">
+                            <div style="width:96px;height:96px;border-radius:9999px;overflow:hidden;box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);outline:4px solid rgba(196,207,206,0.6);outline-offset:2px;">
+                                @if($student->profile && $student->profile->avatar)
+                                    <img src="{{ asset('storage/' . $student->profile->avatar) }}"
+                                         alt="Student Avatar"
+                                         style="width:100%;height:100%;object-fit:cover;display:block;" />
+                                @else
+                                    <img src="https://ui-avatars.com/api/?name={{ urlencode($student->name) }}&background=1A998F&color=ffffff&size=200&font-size=0.4&bold=true"
+                                         alt="Student Avatar"
+                                         style="width:100%;height:100%;object-fit:cover;display:block;" />
+                                @endif
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>
