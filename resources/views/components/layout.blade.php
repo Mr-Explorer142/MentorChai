@@ -40,10 +40,10 @@
                             shadow-[0_2px_16px_rgba(40,102,110,0.07)] dark:shadow-[0_2px_16px_rgba(0,0,0,0.3)]
                             transition-colors duration-300">
 
-                    <div class="flex items-center justify-between px-4 sm:px-10 py-3 mx-auto">
+                    <div class="flex items-center justify-between px-2 sm:px-10 py-3 mx-auto w-full">
 
                         {{-- LEFT: Hamburger + Brand --}}
-                        <div class="flex items-center gap-3">
+                        <div class="flex items-center gap-1.5 sm:gap-3">
 
                             {{-- Hamburger (mobile only) --}}
                             <label for="mobile-menu"
@@ -61,7 +61,7 @@
                             </label>
 
                             {{-- Brand --}}
-                            <a href="{{ route('home') }}" class="font-[Lora,serif] text-2xl font-bold tracking-[-0.3px]
+                            <a href="{{ route('home') }}" class="font-[Lora,serif] text-xl sm:text-2xl font-bold tracking-[-0.3px]
                                       bg-linear-to-r from-[#28666e] via-[#033f63] to-[#7c9885]
                                       dark:from-[#4db6c1] dark:via-[#7ec8e3] dark:to-[#9ab8a5]
                                       bg-clip-text text-transparent">
@@ -70,7 +70,7 @@
                         </div>
 
                         {{-- RIGHT --}}
-                        <div class="flex items-center gap-3">
+                        <div class="flex items-center gap-1.5 sm:gap-3">
 
                             {{-- Mentor browse link (desktop) --}}
                             <a href="{{ route('mentors') }}" class="hidden md:inline-flex items-center
@@ -122,7 +122,7 @@
 
                             @auth
                             {{-- Vertical divider --}}
-                            <div class="w-px h-7 bg-#28666e/0.18 dark:bg-#4db6c1/0.25 rounded-sm"></div>
+                            <div class="hidden sm:block w-px h-7 bg-#28666e/0.18 dark:bg-#4db6c1/0.25 rounded-sm"></div>
 
                             {{-- Notification button --}}
                             <div class="relative">
@@ -203,12 +203,12 @@
                             </button>
 
                             {{-- Vertical divider --}}
-                            <div class="w-px h-7 bg-#28666e/0.18 dark:bg-#4db6c1/0.25 rounded-sm"></div>
+                            <div class="hidden sm:block w-px h-7 bg-#28666e/0.18 dark:bg-#4db6c1/0.25 rounded-sm"></div>
 
                             {{-- Guest: Login --}}
                             @guest
-                            <a href="{{ route('login') }}" class="text-sm font-semibold text-[#28666e] dark:text-[#4db6c1]
-                                      px-[1.1rem] py-[0.45rem] rounded-[10px]
+                            <a href="{{ route('login') }}" class="text-xs sm:text-sm font-semibold text-[#28666e] dark:text-[#4db6c1]
+                                      px-3 sm:px-[1.1rem] py-[0.45rem] rounded-[10px]
                                       border-[1.5px] border-[#28666e]/35 dark:border-[#4db6c1]/35
                                       bg-transparent
                                       transition-all duration-200
