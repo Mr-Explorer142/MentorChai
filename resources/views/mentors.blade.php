@@ -11,36 +11,67 @@
                 <h1 class="text-2xl font-extrabold text-gray-900 dark:text-gray-100">মেন্টর খুঁজুন</h1>
             </div>
 
-            <div class="flex items-center gap-3">
-                {{-- Search --}}
-                <div class="relative hidden sm:block">
-                    <input type="text" placeholder="নাম বা দক্ষতা খুঁজুন..." class="border border-teal-200 dark:border-teal-800
-                               rounded-xl pl-10 pr-4 py-2 text-sm
-                               text-gray-600 dark:text-gray-300
-                               bg-white dark:bg-[#1a2e3b]
-                               placeholder:text-gray-400 dark:placeholder:text-gray-500
-                               focus:outline-none focus:ring-2 focus:ring-teal-400 dark:focus:ring-teal-500
-                               w-56 transition-colors duration-200">
-                    <svg class="absolute left-3 top-2.5 w-4 h-4 text-teal-400 dark:text-teal-500" fill="none"
-                        stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <circle cx="11" cy="11" r="8" />
-                        <path d="m21 21-4.35-4.35" />
-                    </svg>
+            <form method="GET" action="{{ route('mentors') }}" class="flex items-center gap-3">
+
+                <div class="relative">
+                    <div class="flex items-center
+                    rounded-xl overflow-hidden
+                    border border-teal-200 dark:border-teal-800
+                    focus-within:ring-2 focus-within:ring-teal-400 dark:focus-within:ring-teal-500
+                    bg-white dark:bg-[#1a2e3b]">
+
+                        <svg class="absolute left-3 w-4 h-4 text-teal-400 dark:text-teal-500 pointer-events-none"
+                            fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <circle cx="11" cy="11" r="8" />
+                            <path d="m21 21-4.35-4.35" />
+                        </svg>
+
+                        <input type="text" id="search-input" value="{{ request('search') }}" name="search"
+                            placeholder="নাম বা দক্ষতা খুঁজুন..." autocomplete="off" class="pl-10 pr-2 py-2 text-sm
+                          w-32 sm:w-44 md:w-56
+                          text-gray-600 dark:text-gray-300
+                          bg-transparent
+                          placeholder:text-gray-400 dark:placeholder:text-gray-500
+                          focus:outline-none">
+
+                        <button type="submit" class="bg-teal-600 dark:bg-teal-500
+                           hover:bg-teal-700 dark:hover:bg-teal-400
+                           text-white px-3 sm:px-4 py-2 text-sm font-semibold
+                           transition-colors duration-200
+                           flex items-center gap-1.5 shrink-0">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <circle cx="11" cy="11" r="8" />
+                                <path d="m21 21-4.35-4.35" />
+                            </svg>
+                            <span class="hidden sm:inline">খুঁজুন</span>
+                        </button>
+                    </div>
+
+                    {{-- Suggestions Dropdown --}}
+                    <div id="search-suggestions" class="absolute top-full left-0 mt-1 w-full z-50
+                    bg-white dark:bg-[#1a2e3b]
+                    border border-teal-100 dark:border-teal-800
+                    rounded-xl shadow-lg dark:shadow-[0_4px_12px_rgba(0,0,0,0.4)]
+                    overflow-hidden hidden">
+                    </div>
                 </div>
 
                 {{-- Sort --}}
-                <select class="border border-teal-200 dark:border-teal-800
-                           rounded-xl px-4 py-2 text-sm
-                           text-gray-600 dark:text-gray-300
-                           bg-white dark:bg-[#1a2e3b]
-                           focus:outline-none focus:ring-2 focus:ring-teal-400 dark:focus:ring-teal-500
-                           transition-colors duration-200">
-                    <option>মূল্য অনুযায়ী বাছাই</option>
-                    <option>মূল্য: কম থেকে বেশি</option>
-                    <option>মূল্য: বেশি থেকে কম</option>
-                    <option>রেটিং অনুযায়ী</option>
+                <select name="sort" onchange="this.form.submit()" class="border border-teal-200 dark:border-teal-800
+                   rounded-xl px-2 sm:px-4 py-2 text-sm
+                   text-gray-600 dark:text-gray-300
+                   bg-white dark:bg-[#1a2e3b]
+                   focus:outline-none focus:ring-2 focus:ring-teal-400 dark:focus:ring-teal-500
+                   transition-colors duration-200
+                   max-w-[130px] sm:max-w-none">
+                    <option value="" {{ request('sort')=='' ? 'selected' : '' }}>মূল্য অনুযায়ী বাছাই</option>
+                    <option value="price_asc" {{ request('sort')=='price_desc' ? 'selected' : '' }}>মূল্য: কম থেকে বেশি
+                    </option>
+                    <option value="price_desc" {{ request('sort')=='price_asc' ? 'selected' : '' }}>মূল্য: বেশি থেকে কম
+                    </option>
                 </select>
-            </div>
+
+            </form>
         </div>
 
         <div class="flex gap-8">
@@ -124,25 +155,6 @@
                         </div>
                     </div>
 
-                    {{-- Status --}}
-                    <div>
-                        <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">স্ট্যাটাস</p>
-                        <div class="space-y-2 text-sm text-gray-700 dark:text-gray-300">
-                            <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="radio" name="status" class="accent-teal-600 dark:accent-teal-400 w-4 h-4"
-                                    checked> সবাই
-                            </label>
-                            <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="radio" name="status" class="accent-teal-600 dark:accent-teal-400 w-4 h-4">
-                                অনলাইন
-                            </label>
-                            <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="radio" name="status" class="accent-teal-600 dark:accent-teal-400 w-4 h-4">
-                                অফলাইন
-                            </label>
-                        </div>
-                    </div>
-
                     {{-- Rating --}}
                     <div>
                         <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">সর্বনিম্ন রেটিং</p>
@@ -181,8 +193,15 @@
                 {{-- Results count & mobile filter --}}
                 <div class="flex items-center justify-between mb-5">
                     <p class="text-sm text-gray-500 dark:text-gray-400">
+                        @if (request('search'))
+                        "<span class="font-semibold text-teal-600 dark:text-teal-400">{{ request('search') }}</span>"
+                        নামে / টপিকে
+                        <span class="font-semibold text-gray-800 dark:text-gray-200">{{ $totalMentors }} জন</span>
+                        মেন্টর পাওয়া গিয়েছে
+                        @else
                         <span class="font-semibold text-gray-800 dark:text-gray-200">{{ $totalMentors }} জন</span>
                         মেন্টর পাওয়া গেছে
+                        @endif
                     </p>
                     <button class="lg:hidden flex items-center gap-2 text-sm
                                border border-teal-300 dark:border-teal-700
@@ -393,5 +412,108 @@
             </div>
         </div>
     </div>
+
+    @push('scripts')
+    <script>
+        const input = document.getElementById('search-input');
+    const dropdown = document.getElementById('search-suggestions');
+    let debounceTimer;
+
+    input.addEventListener('input', function () {
+        clearTimeout(debounceTimer);
+        const query = this.value.trim();
+
+        if (query.length < 2) {
+            dropdown.classList.add('hidden');
+            dropdown.innerHTML = '';
+            return;
+        }
+
+        debounceTimer = setTimeout(() => {
+            fetch(`/mentors/suggestions?q=${encodeURIComponent(query)}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.length === 0) {
+                        dropdown.classList.add('hidden');
+                        dropdown.innerHTML = '';
+                        return;
+                    }
+
+                    const isDark = document.documentElement.classList.contains('dark');
+
+                    dropdown.innerHTML = data.map(item => {
+                        const isMentor = item.type === 'mentor';
+
+                        const icon = isMentor
+                            ? `<svg style="width:14px;height:14px;flex-shrink:0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                   <path stroke-linecap="round" stroke-linejoin="round"
+                                       d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
+                               </svg>`
+                            : `<svg style="width:14px;height:14px;flex-shrink:0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                   <path stroke-linecap="round" stroke-linejoin="round"
+                                       d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/>
+                               </svg>`;
+
+                        // Use inline styles so dark mode works inside JS-injected HTML
+                        const iconColor  = isDark ? '#2dd4bf' : '#0d9488';   // teal-400 / teal-600
+                        const textColor  = isDark ? '#d1d5db' : '#374151';   // gray-300 / gray-700
+                        const hoverBg   = isDark ? '#0f2d3a' : '#f0fdfa';    // dark teal / teal-50
+                        const badgeBg   = isMentor
+                            ? (isDark ? '#0d2d2a' : '#f0fdfa')
+                            : (isDark ? '#1e1040' : '#faf5ff');
+                        const badgeText = isMentor
+                            ? (isDark ? '#2dd4bf' : '#0d9488')
+                            : (isDark ? '#c084fc' : '#9333ea');
+                        const badgeBorder = isMentor
+                            ? (isDark ? '#134e4a' : '#99f6e4')
+                            : (isDark ? '#4c1d95' : '#e9d5ff');
+                        const badgeLabel = isMentor ? 'মেন্টর' : 'দক্ষতা';
+                        const divider    = isDark ? '#1e3a47' : '#f0fdfa';
+
+                        return `
+                            <button type="button"
+                                    onclick="selectSuggestion('${item.label.replace(/'/g, "\\'")}')"
+                                    style="width:100%;text-align:left;padding:10px 16px;
+                                           display:flex;align-items:center;justify-content:space-between;gap:8px;
+                                           background:transparent;border:none;cursor:pointer;
+                                           transition:background 0.15s;"
+                                    onmouseover="this.style.background='${hoverBg}'"
+                                    onmouseout="this.style.background='transparent'">
+                                <span style="display:flex;align-items:center;gap:8px;
+                                             font-size:14px;font-weight:500;color:${textColor}">
+                                    <span style="color:${iconColor}">${icon}</span>
+                                    ${item.label}
+                                </span>
+                                <span style="font-size:11px;padding:2px 8px;border-radius:999px;
+                                             border:1px solid ${badgeBorder};
+                                             background:${badgeBg};color:${badgeText};
+                                             white-space:nowrap;flex-shrink:0">
+                                    ${badgeLabel}
+                                </span>
+                            </button>
+                        `;
+                    }).join(`<hr style="border-color:${document.documentElement.classList.contains('dark') ? '#1e3a47' : '#f0fdfa'};margin:0">`);
+
+                    dropdown.classList.remove('hidden');
+                })
+                .catch(() => {
+                    dropdown.classList.add('hidden');
+                });
+        }, 300);
+    });
+
+    function selectSuggestion(label) {
+        input.value = label;
+        dropdown.classList.add('hidden');
+        input.closest('form').submit();
+    }
+
+    document.addEventListener('click', function (e) {
+        if (!input.contains(e.target) && !dropdown.contains(e.target)) {
+            dropdown.classList.add('hidden');
+        }
+    });
+    </script>
+    @endpush
 
 </x-layout>
