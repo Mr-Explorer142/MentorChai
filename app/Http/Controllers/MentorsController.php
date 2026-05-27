@@ -11,32 +11,29 @@ class MentorsController extends Controller
     public function index(Request $request)
     {
         $query = User::where('role', UserRole::Mentor)
-            ->with('profile'); // eager load profile to avoid N+1 queries
+            ->with('profile')
+            ->join('profiles', 'users.id', '=', 'profiles.user_id') // always join
+            ->select('users.*'); // always select only users columns
 
         // Search by name or skills
         if ($request->filled('search')) {
             $query->where(function ($q) use ($request) {
-                $q->where('name', 'like', '%' . $request->search . '%')
-                    ->orWhereHas('profile', function ($q) use ($request) {
-                        $q->where('skills', 'like', '%' . $request->search . '%');
-                    });
+                $q->where('users.name', 'like', '%' . $request->search . '%')
+                    ->orWhere('profiles.skills', 'like', '%' . $request->search . '%');
             });
         }
 
         // Sorting
+        // Sorting
         if ($request->sort === 'price_asc') {
-            $query->join('profiles', 'users.id', '=', 'profiles.user_id')
-                ->orderBy('profiles.hourly_rate', 'asc')
-                ->select('users.*');
+            $query->orderByRaw('CAST(profiles.hourly_rate AS UNSIGNED) asc');
         } elseif ($request->sort === 'price_desc') {
-            $query->join('profiles', 'users.id', '=', 'profiles.user_id')
-                ->orderBy('profiles.hourly_rate', 'desc')
-                ->select('users.*');
+            $query->orderByRaw('CAST(profiles.hourly_rate AS UNSIGNED) desc');
         } else {
-            $query->latest();
+            $query->orderBy('users.created_at', 'desc');
         }
 
-        $mentors = $query->paginate(9)->withQueryString(); // withQueryString keeps search/sort in pagination links
+        $mentors = $query->paginate(9)->withQueryString();
         $totalMentors = $mentors->total();
 
         return view('mentors', compact('mentors', 'totalMentors'));
