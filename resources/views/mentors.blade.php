@@ -58,16 +58,20 @@
 
                 {{-- Sort --}}
                 <select name="sort" onchange="this.form.submit()" class="border border-teal-200 dark:border-teal-800
-                   rounded-xl px-2 sm:px-4 py-2 text-sm
-                   text-gray-600 dark:text-gray-300
-                   bg-white dark:bg-[#1a2e3b]
-                   focus:outline-none focus:ring-2 focus:ring-teal-400 dark:focus:ring-teal-500
-                   transition-colors duration-200
-                   max-w-[130px] sm:max-w-none">
-                    <option value="" {{ request('sort')=='' ? 'selected' : '' }}>মূল্য অনুযায়ী বাছাই</option>
-                    <option value="price_asc" {{ request('sort')=='price_desc' ? 'selected' : '' }}>মূল্য: কম থেকে বেশি
+   rounded-xl px-2 sm:px-4 py-2 text-sm
+   text-gray-600 dark:text-gray-300
+   bg-white dark:bg-[#1a2e3b]
+   focus:outline-none focus:ring-2 focus:ring-teal-400 dark:focus:ring-teal-500
+   transition-colors duration-200
+   max-w-[130px] sm:max-w-none">
+                    <option value="" {{ request('sort')=='' ? 'selected' : '' }}>
+                        মূল্য অনুযায়ী বাছাই
                     </option>
-                    <option value="price_desc" {{ request('sort')=='price_asc' ? 'selected' : '' }}>মূল্য: বেশি থেকে কম
+                    <option value="price_asc" {{ request('sort')=='price_asc' ? 'selected' : '' }}>
+                        মূল্য: কম থেকে বেশি
+                    </option>
+                    <option value="price_desc" {{ request('sort')=='price_desc' ? 'selected' : '' }}>
+                        মূল্য: বেশি থেকে কম
                     </option>
                 </select>
 
