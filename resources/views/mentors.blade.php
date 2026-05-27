@@ -57,23 +57,40 @@
                 </div>
 
                 {{-- Sort --}}
-                <select name="sort" onchange="this.form.submit()" class="border border-teal-200 dark:border-teal-800
-   rounded-xl px-2 sm:px-4 py-2 text-sm
-   text-gray-600 dark:text-gray-300
-   bg-white dark:bg-[#1a2e3b]
-   focus:outline-none focus:ring-2 focus:ring-teal-400 dark:focus:ring-teal-500
-   transition-colors duration-200
-   max-w-[130px] sm:max-w-none">
-                    <option value="" {{ request('sort')=='' ? 'selected' : '' }}>
-                        মূল্য অনুযায়ী বাছাই
-                    </option>
-                    <option value="price_asc" {{ request('sort')=='price_asc' ? 'selected' : '' }}>
-                        মূল্য: কম থেকে বেশি
-                    </option>
-                    <option value="price_desc" {{ request('sort')=='price_desc' ? 'selected' : '' }}>
-                        মূল্য: বেশি থেকে কম
-                    </option>
-                </select>
+                <div class="relative">
+                    <select name="sort" onchange="this.form.submit()" class="border border-teal-200 dark:border-teal-800
+                   rounded-xl py-2 text-sm
+                   text-gray-600 dark:text-gray-300
+                   bg-white dark:bg-[#1a2e3b]
+                   focus:outline-none focus:ring-2 focus:ring-teal-400 dark:focus:ring-teal-500
+                   transition-colors duration-200
+                   pl-8 pr-2 sm:pl-4 sm:pr-8
+                   w-9 sm:w-auto
+                   appearance-none cursor-pointer">
+                        <option value="" {{ request('sort')=='' ? 'selected' : '' }}>মূল্য অনুযায়ী বাছাই</option>
+                        <option value="price_asc" {{ request('sort')=='price_asc' ? 'selected' : '' }}>মূল্য: কম থেকে
+                            বেশি</option>
+                        <option value="price_desc" {{ request('sort')=='price_desc' ? 'selected' : '' }}>মূল্য: বেশি
+                            থেকে কম</option>
+                    </select>
+
+                    {{-- Icon shown on small screens --}}
+                    <div class="pointer-events-none absolute inset-0 flex items-center justify-center sm:hidden">
+                        <svg class="w-4 h-4 text-teal-500 dark:text-teal-400" fill="none" stroke="currentColor"
+                            stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M3 4.5h14.25M3 9h9.75M3 13.5h9.75m4.5-4.5v12m0 0-3.75-3.75M17.25 21 21 17.25" />
+                        </svg>
+                    </div>
+
+                    {{-- Default dropdown arrow shown on larger screens --}}
+                    <div class="pointer-events-none absolute inset-y-0 right-3 hidden sm:flex items-center">
+                        <svg class="w-4 h-4 text-teal-500 dark:text-teal-400" fill="none" stroke="currentColor"
+                            stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                </div>
 
             </form>
         </div>
