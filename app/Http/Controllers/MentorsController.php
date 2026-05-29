@@ -10,12 +10,31 @@ class MentorsController extends Controller
 {
     public function index(Request $request)
     {
+        // Get top 10 most common skills for filter sidebar
+        $allSkills = \App\Models\Profile::whereNotNull('skills')
+            ->pluck('skills')
+            ->flatMap(fn($s) => array_map('trim', explode(',', $s)))
+            ->filter()
+            ->countBy()
+            ->sortDesc()
+            ->take(10)
+            ->keys();
+
+        // Get top 10 most common departments
+        $allDepartments = \App\Models\Profile::whereNotNull('department')
+            ->pluck('department')
+            ->filter()
+            ->countBy()
+            ->sortDesc()
+            ->take(10)
+            ->keys();
+
         $query = User::where('role', UserRole::Mentor)
             ->with('profile')
-            ->join('profiles', 'users.id', '=', 'profiles.user_id') // always join
-            ->select('users.*'); // always select only users columns
+            ->join('profiles', 'users.id', '=', 'profiles.user_id')
+            ->select('users.*');
 
-        // Search by name or skills
+        // Search
         if ($request->filled('search')) {
             $query->where(function ($q) use ($request) {
                 $q->where('users.name', 'like', '%' . $request->search . '%')
@@ -23,7 +42,26 @@ class MentorsController extends Controller
             });
         }
 
-        // Sorting
+        // Filter by price range
+        if ($request->filled('price_min')) {
+            $query->where('profiles.hourly_rate', '>=', (int) $request->price_min);
+        }
+        if ($request->filled('price_max')) {
+            $query->where('profiles.hourly_rate', '<=', (int) $request->price_max);
+        }
+
+        // Filter by skills (multiple checkboxes)
+        if ($request->filled('skills')) {
+            foreach ($request->skills as $skill) {
+                $query->where('profiles.skills', 'like', '%' . $skill . '%');
+            }
+        }
+
+        // Filter by department
+        if ($request->filled('departments')) {
+            $query->whereIn('profiles.department', $request->departments);
+        }
+
         // Sorting
         if ($request->sort === 'price_asc') {
             $query->orderByRaw('CAST(profiles.hourly_rate AS UNSIGNED) asc');
@@ -36,7 +74,7 @@ class MentorsController extends Controller
         $mentors = $query->paginate(9)->withQueryString();
         $totalMentors = $mentors->total();
 
-        return view('mentors', compact('mentors', 'totalMentors'));
+        return view('mentors', compact('mentors', 'totalMentors', 'allSkills', 'allDepartments'));
     }
 
     public function suggestions(Request $request)
