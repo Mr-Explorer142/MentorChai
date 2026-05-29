@@ -98,119 +98,127 @@
         <div class="flex gap-8">
 
             {{-- Sidebar Filters --}}
-            <aside class="hidden lg:block w-72 shrink">
-                <div class="bg-white dark:bg-[#1a2e3b]
-                            rounded-2xl shadow-sm dark:shadow-[0_1px_3px_rgba(0,0,0,0.4)]
-                            border border-teal-100 dark:border-teal-900/40
-                            p-5 space-y-6 sticky top-6 transition-colors duration-300">
+            {{-- Sidebar Filters --}}
+            <aside class="hidden lg:block w-72 shrink-0">
+                <form method="GET" action="{{ route('mentors') }}" id="filter-form">
 
-                    <div class="flex items-center justify-between">
-                        <h3 class="font-bold text-gray-800 dark:text-gray-200 text-sm">ফিল্টার</h3>
-                        <button class="text-xs text-teal-600 dark:text-teal-400 hover:underline">রিসেট</button>
-                    </div>
+                    {{-- Keep search and sort values when filtering --}}
+                    @if(request('search'))
+                    <input type="hidden" name="search" value="{{ request('search') }}">
+                    @endif
+                    @if(request('sort'))
+                    <input type="hidden" name="sort" value="{{ request('sort') }}">
+                    @endif
 
-                    {{-- Price Range --}}
-                    <div>
-                        <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">মূল্য পরিসীমা (ঘণ্টা)</p>
-                        <div class="flex items-center gap-2">
-                            <input type="number" placeholder="৳ সর্বনিম্ন" class="w-full border border-gray-200 dark:border-gray-700
-                                       text-gray-600 dark:text-gray-300
-                                       bg-white dark:bg-[#243d4d]
-                                       placeholder:text-gray-400 dark:placeholder:text-gray-500
-                                       rounded-lg px-3 py-1.5 text-sm
-                                       focus:outline-none focus:ring-1 focus:ring-teal-400 dark:focus:ring-teal-500
-                                       transition-colors duration-200">
-                            <span class="text-gray-400 dark:text-gray-500 text-xs">—</span>
-                            <input type="number" placeholder="৳ সর্বোচ্চ" class="w-full border border-gray-200 dark:border-gray-700
-                                       text-gray-600 dark:text-gray-300
-                                       bg-white dark:bg-[#243d4d]
-                                       placeholder:text-gray-400 dark:placeholder:text-gray-500
-                                       rounded-lg px-3 py-1.5 text-sm
-                                       focus:outline-none focus:ring-1 focus:ring-teal-400 dark:focus:ring-teal-500
-                                       transition-colors duration-200">
+                    <div class="bg-white dark:bg-[#1a2e3b]
+                    rounded-2xl shadow-sm dark:shadow-[0_1px_3px_rgba(0,0,0,0.4)]
+                    border border-teal-100 dark:border-teal-900/40
+                    p-5 space-y-6 sticky top-6 transition-colors duration-300">
+
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-bold text-gray-800 dark:text-gray-200 text-sm">ফিল্টার</h3>
+                            <a href="{{ route('mentors', array_filter(['search' => request('search'), 'sort' => request('sort')])) }}"
+                                class="text-xs text-teal-600 dark:text-teal-400 hover:underline">
+                                রিসেট
+                            </a>
                         </div>
-                    </div>
 
-                    {{-- Skills --}}
-                    <div>
-                        <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">দক্ষতা</p>
-                        <div class="space-y-2 text-sm text-gray-700 dark:text-gray-300">
-                            <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="checkbox" class="accent-teal-600 dark:accent-teal-400 w-4 h-4"> PHP
-                            </label>
-                            <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="checkbox" class="accent-teal-600 dark:accent-teal-400 w-4 h-4"> Laravel
-                            </label>
-                            <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="checkbox" class="accent-teal-600 dark:accent-teal-400 w-4 h-4"> JavaScript
-                            </label>
-                            <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="checkbox" class="accent-teal-600 dark:accent-teal-400 w-4 h-4"> Python
-                            </label>
-                            <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="checkbox" class="accent-teal-600 dark:accent-teal-400 w-4 h-4"> React
-                            </label>
-                            <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="checkbox" class="accent-teal-600 dark:accent-teal-400 w-4 h-4"> Machine
-                                Learning
-                            </label>
+                        {{-- Price Range --}}
+                        <div>
+                            <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">মূল্য পরিসীমা (ঘণ্টা)</p>
+                            <div class="flex items-center gap-2">
+                                <input type="number" name="price_min" value="{{ request('price_min') }}"
+                                    placeholder="৳ সর্বনিম্ন" class="w-full border border-gray-200 dark:border-gray-700
+                                  text-gray-600 dark:text-gray-300
+                                  bg-white dark:bg-[#243d4d]
+                                  placeholder:text-gray-400 dark:placeholder:text-gray-500
+                                  rounded-lg px-3 py-1.5 text-sm
+                                  focus:outline-none focus:ring-1 focus:ring-teal-400
+                                  transition-colors duration-200">
+                                <span class="text-gray-400 dark:text-gray-500 text-xs shrink-0">—</span>
+                                <input type="number" name="price_max" value="{{ request('price_max') }}"
+                                    placeholder="৳ সর্বোচ্চ" class="w-full border border-gray-200 dark:border-gray-700
+                                  text-gray-600 dark:text-gray-300
+                                  bg-white dark:bg-[#243d4d]
+                                  placeholder:text-gray-400 dark:placeholder:text-gray-500
+                                  rounded-lg px-3 py-1.5 text-sm
+                                  focus:outline-none focus:ring-1 focus:ring-teal-400
+                                  transition-colors duration-200">
+                            </div>
                         </div>
-                    </div>
 
-                    {{-- Department --}}
-                    <div>
-                        <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">ডিপার্টমেন্ট</p>
-                        <div class="space-y-2 text-sm text-gray-700 dark:text-gray-300">
-                            <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="checkbox" class="accent-teal-600 dark:accent-teal-400 w-4 h-4"> CSE
-                            </label>
-                            <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="checkbox" class="accent-teal-600 dark:accent-teal-400 w-4 h-4"> EEE
-                            </label>
-                            <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="checkbox" class="accent-teal-600 dark:accent-teal-400 w-4 h-4"> BBA
-                            </label>
-                            <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="checkbox" class="accent-teal-600 dark:accent-teal-400 w-4 h-4"> ME
-                            </label>
+                        {{-- Skills --}}
+                        <div>
+                            <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">দক্ষতা</p>
+                            <div class="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                                @foreach ($allSkills as $skill)
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="checkbox" name="skills[]" value="{{ $skill }}" {{ in_array($skill,
+                                        request('skills', [])) ? 'checked' : '' }}
+                                        class="accent-teal-600 dark:accent-teal-400 w-4 h-4">
+                                    {{ $skill }}
+                                </label>
+                                @endforeach
+                            </div>
                         </div>
-                    </div>
 
-                    {{-- Rating --}}
-                    <div>
-                        <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">সর্বনিম্ন রেটিং</p>
-                        <div class="space-y-2 text-sm text-gray-700 dark:text-gray-300">
-                            <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="radio" name="rating" class="accent-teal-600 dark:accent-teal-400 w-4 h-4">
-                                যেকোনো
-                            </label>
-                            <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="radio" name="rating" class="accent-teal-600 dark:accent-teal-400 w-4 h-4">
-                                <span class="text-yellow-400 text-xs">★★★★★</span> ৫.০
-                            </label>
-                            <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="radio" name="rating" class="accent-teal-600 dark:accent-teal-400 w-4 h-4">
-                                <span class="text-yellow-400 text-xs">★★★★☆</span> ৪.০+
-                            </label>
-                            <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="radio" name="rating" class="accent-teal-600 dark:accent-teal-400 w-4 h-4">
-                                <span class="text-yellow-400 text-xs">★★★☆☆</span> ৩.০+
-                            </label>
+                        {{-- Department --}}
+                        <div>
+                            <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">ডিপার্টমেন্ট</p>
+                            <div class="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                                @foreach ($allDepartments as $dept)
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="checkbox" name="departments[]" value="{{ $dept }}" {{ in_array($dept,
+                                        request('departments', [])) ? 'checked' : '' }}
+                                        class="accent-teal-600 dark:accent-teal-400 w-4 h-4">
+                                    {{ $dept }}
+                                </label>
+                                @endforeach
+                            </div>
                         </div>
-                    </div>
 
-                    <button class="w-full bg-teal-600 dark:bg-teal-500 text-white
-                               py-2.5 rounded-xl font-semibold
-                               hover:bg-teal-700 dark:hover:bg-teal-400
-                               transition text-sm">
-                        ফিল্টার প্রয়োগ করুন
-                    </button>
-                </div>
+                        {{-- Rating (placeholder for later) --}}
+                        <div>
+                            <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">
+                                সর্বনিম্ন রেটিং
+                                <span class="text-gray-300 dark:text-gray-600 font-normal">(শীঘ্রই আসছে)</span>
+                            </p>
+                            <div
+                                class="space-y-2 text-sm text-gray-400 dark:text-gray-600 cursor-not-allowed select-none">
+                                <label class="flex items-center gap-2">
+                                    <input type="radio" disabled class="w-4 h-4"> যেকোনো
+                                </label>
+                                <label class="flex items-center gap-2">
+                                    <input type="radio" disabled class="w-4 h-4">
+                                    <span class="text-yellow-300 text-xs">★★★★★</span> ৫.০
+                                </label>
+                                <label class="flex items-center gap-2">
+                                    <input type="radio" disabled class="w-4 h-4">
+                                    <span class="text-yellow-300 text-xs">★★★★☆</span> ৪.০+
+                                </label>
+                                <label class="flex items-center gap-2">
+                                    <input type="radio" disabled class="w-4 h-4">
+                                    <span class="text-yellow-300 text-xs">★★★☆☆</span> ৩.০+
+                                </label>
+                            </div>
+                        </div>
+
+                        {{-- Apply Button --}}
+                        <button type="submit" class="w-full bg-teal-600 dark:bg-teal-500 text-white
+                           py-2.5 rounded-xl font-semibold
+                           hover:bg-teal-700 dark:hover:bg-teal-400
+                           transition text-sm">
+                            ফিল্টার প্রয়োগ করুন
+                        </button>
+
+                    </div>
+                </form>
             </aside>
 
             {{-- Main Content --}}
             <div class="flex-1 min-w-0">
 
+                {{-- Results count & mobile filter --}}
                 {{-- Results count & mobile filter --}}
                 <div class="flex items-center justify-between mb-5">
                     <p class="text-sm text-gray-500 dark:text-gray-400">
@@ -219,21 +227,34 @@
                         নামে / টপিকে
                         <span class="font-semibold text-gray-800 dark:text-gray-200">{{ $totalMentors }} জন</span>
                         মেন্টর পাওয়া গিয়েছে
+                        @elseif (request('skills') || request('departments') || request('price_min') ||
+                        request('price_max'))
+                        ফিল্টার অনুযায়ী
+                        <span class="font-semibold text-gray-800 dark:text-gray-200">{{ $totalMentors }} জন</span>
+                        মেন্টর পাওয়া গেছে
                         @else
                         <span class="font-semibold text-gray-800 dark:text-gray-200">{{ $totalMentors }} জন</span>
                         মেন্টর পাওয়া গেছে
                         @endif
                     </p>
-                    <button class="lg:hidden flex items-center gap-2 text-sm
-                               border border-teal-300 dark:border-teal-700
-                               text-teal-600 dark:text-teal-400
-                               px-3 py-1.5 rounded-lg
-                               hover:bg-teal-50 dark:hover:bg-teal-900/20
-                               transition-colors duration-200">
+
+                    {{-- Mobile filter button --}}
+                    <button
+                        onclick="document.getElementById('mobile-filter-panel').classList.remove('translate-x-full')"
+                        class="lg:hidden flex items-center gap-2 text-sm
+                   border border-teal-300 dark:border-teal-700
+                   text-teal-600 dark:text-teal-400
+                   px-3 py-1.5 rounded-lg
+                   hover:bg-teal-50 dark:hover:bg-teal-900/20
+                   transition-colors duration-200">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M3 4h18M7 8h10M11 12h4" />
                         </svg>
                         ফিল্টার
+                        {{-- Active filter dot --}}
+                        @if(request('skills') || request('departments') || request('price_min') || request('price_max'))
+                        <span class="w-2 h-2 rounded-full bg-teal-500 inline-block"></span>
+                        @endif
                     </button>
                 </div>
 
@@ -431,6 +452,151 @@
                 @endif
 
             </div>
+        </div>
+    </div>
+
+    {{-- Mobile Filter Panel (slide-in from right) --}}
+    <div id="mobile-filter-panel"
+        class="lg:hidden fixed inset-0 z-50 flex justify-end translate-x-full transition-transform duration-300">
+
+        {{-- Backdrop --}}
+        <div onclick="document.getElementById('mobile-filter-panel').classList.add('translate-x-full')"
+            class="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
+
+        {{-- Panel --}}
+        <div class="relative w-80 max-w-full h-full overflow-y-auto
+                    bg-white dark:bg-[#1a2e3b]
+                    shadow-xl dark:shadow-[0_0_40px_rgba(0,0,0,0.6)]">
+
+            <form method="GET" action="{{ route('mentors') }}">
+
+                {{-- Keep search and sort --}}
+                @if(request('search'))
+                <input type="hidden" name="search" value="{{ request('search') }}">
+                @endif
+                @if(request('sort'))
+                <input type="hidden" name="sort" value="{{ request('sort') }}">
+                @endif
+
+                {{-- Panel Header --}}
+                <div class="flex items-center justify-between px-5 py-4
+                            border-b border-teal-100 dark:border-teal-900/40 sticky top-0
+                            bg-white dark:bg-[#1a2e3b] z-10">
+                    <h3 class="font-bold text-gray-800 dark:text-gray-200">ফিল্টার</h3>
+                    <div class="flex items-center gap-3">
+                        <a href="{{ route('mentors', array_filter(['search' => request('search'), 'sort' => request('sort')])) }}"
+                            class="text-xs text-teal-600 dark:text-teal-400 hover:underline">
+                            রিসেট
+                        </a>
+                        <button type="button"
+                            onclick="document.getElementById('mobile-filter-panel').classList.add('translate-x-full')"
+                            class="w-8 h-8 flex items-center justify-center rounded-lg
+                                       text-gray-400 dark:text-gray-500
+                                       hover:bg-gray-100 dark:hover:bg-teal-900/30
+                                       transition-colors duration-200">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="p-5 space-y-6">
+
+                    {{-- Price Range --}}
+                    <div>
+                        <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">মূল্য পরিসীমা (ঘণ্টা)</p>
+                        <div class="flex items-center gap-2">
+                            <input type="number" name="price_min" value="{{ request('price_min') }}"
+                                placeholder="৳ সর্বনিম্ন" class="w-full border border-gray-200 dark:border-gray-700
+                                          text-gray-600 dark:text-gray-300
+                                          bg-white dark:bg-[#243d4d]
+                                          placeholder:text-gray-400 dark:placeholder:text-gray-500
+                                          rounded-lg px-3 py-1.5 text-sm
+                                          focus:outline-none focus:ring-1 focus:ring-teal-400
+                                          transition-colors duration-200">
+                            <span class="text-gray-400 dark:text-gray-500 text-xs shrink-0">—</span>
+                            <input type="number" name="price_max" value="{{ request('price_max') }}"
+                                placeholder="৳ সর্বোচ্চ" class="w-full border border-gray-200 dark:border-gray-700
+                                          text-gray-600 dark:text-gray-300
+                                          bg-white dark:bg-[#243d4d]
+                                          placeholder:text-gray-400 dark:placeholder:text-gray-500
+                                          rounded-lg px-3 py-1.5 text-sm
+                                          focus:outline-none focus:ring-1 focus:ring-teal-400
+                                          transition-colors duration-200">
+                        </div>
+                    </div>
+
+                    {{-- Skills --}}
+                    <div>
+                        <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">দক্ষতা</p>
+                        <div class="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                            @foreach ($allSkills as $skill)
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" name="skills[]" value="{{ $skill }}" {{ in_array($skill,
+                                    request('skills', [])) ? 'checked' : '' }}
+                                    class="accent-teal-600 dark:accent-teal-400 w-4 h-4">
+                                {{ $skill }}
+                            </label>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    {{-- Department --}}
+                    <div>
+                        <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">ডিপার্টমেন্ট</p>
+                        <div class="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                            @foreach ($allDepartments as $dept)
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" name="departments[]" value="{{ $dept }}" {{ in_array($dept,
+                                    request('departments', [])) ? 'checked' : '' }}
+                                    class="accent-teal-600 dark:accent-teal-400 w-4 h-4">
+                                {{ $dept }}
+                            </label>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    {{-- Rating placeholder --}}
+                    <div>
+                        <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">
+                            সর্বনিম্ন রেটিং
+                            <span class="text-gray-300 dark:text-gray-600 font-normal">(শীঘ্রই আসছে)</span>
+                        </p>
+                        <div class="space-y-2 text-sm text-gray-400 dark:text-gray-600 cursor-not-allowed select-none">
+                            <label class="flex items-center gap-2">
+                                <input type="radio" disabled class="w-4 h-4"> যেকোনো
+                            </label>
+                            <label class="flex items-center gap-2">
+                                <input type="radio" disabled class="w-4 h-4">
+                                <span class="text-yellow-300 text-xs">★★★★★</span> ৫.০
+                            </label>
+                            <label class="flex items-center gap-2">
+                                <input type="radio" disabled class="w-4 h-4">
+                                <span class="text-yellow-300 text-xs">★★★★☆</span> ৪.০+
+                            </label>
+                            <label class="flex items-center gap-2">
+                                <input type="radio" disabled class="w-4 h-4">
+                                <span class="text-yellow-300 text-xs">★★★☆☆</span> ৩.০+
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+                {{-- Sticky Apply Button at bottom --}}
+                <div class="sticky bottom-0 px-5 py-4
+                            border-t border-teal-100 dark:border-teal-900/40
+                            bg-white dark:bg-[#1a2e3b]">
+                    <button type="submit" class="w-full bg-teal-600 dark:bg-teal-500 text-white
+                                   py-2.5 rounded-xl font-semibold
+                                   hover:bg-teal-700 dark:hover:bg-teal-400
+                                   transition text-sm">
+                        ফিল্টার প্রয়োগ করুন
+                    </button>
+                </div>
+
+            </form>
         </div>
     </div>
 
