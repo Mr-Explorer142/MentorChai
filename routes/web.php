@@ -20,7 +20,7 @@ Route::get('/contact', fn() => view('contact'))->name('contact');
 Route::get('/faq', fn() => view('faq'))->name('faq');
 
 Route::get('/mentors', function () {
-    $mentors = User::where('role', UserRole::Mentor)->get();
+    $mentors = User::where('role', UserRole::Mentor)->with('profile')->paginate(9);
     return view('mentors', compact('mentors'));
 })->name('mentors');
 
