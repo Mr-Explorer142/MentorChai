@@ -21,28 +21,34 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
-        // Validation rules
+        // Validation
         $request->validate([
-            'name' => 'required',
-            'email' => 'required | email | unique:users',
-            'password' => 'required | confirmed | min:8',
-            'role' => 'required | in:student,mentor',
+            'name'     => 'required',
+            'email'    => 'required|email|unique:users',
+            'password' => 'required|confirmed|min:8',
+            'role'     => 'required|in:student,mentor',
         ]);
 
-        // creating a new user
+        // Create user
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
+            'name'     => $request->name,
+            'email'    => $request->email,
             'password' => bcrypt($request->password),
-            'role' => $request->role,
+            'role'     => $request->role,
         ]);
 
-        // Create a user profile during User Creation
+        // Create empty profile
         $user->profile()->create([
             'bio' => null,
         ]);
 
-        // redirect
-        return redirect()->route('login');
+        // Send verification email
+        $user->sendEmailVerificationNotification();
+
+        // Log the user in
+        Auth::login($user);
+
+        // Redirect to verification notice page
+        return redirect()->route('verification.notice');
     }
 }
