@@ -51,13 +51,15 @@
 
                 {{-- Social Signup --}}
                 <div class="flex flex-col gap-2.5 mb-1">
-                    <button
+
+                    {{-- Google --}}
+                    <a href="{{ route('social.redirect', ['provider' => 'google', 'role' => 'student']) }}"
                         class="w-full flex items-center justify-center gap-2.5
                                   px-4 py-2.5 rounded-xl
                                   border-[1.5px] border-[#28666e]/18 dark:border-[#4db6c1]/20
                                   bg-[#eef7f8]/40 dark:bg-[#0f1f2e]/40
                                   text-[#033f63] dark:text-[#7ec8e3]
-                                  text-sm font-semibold font-[Nunito,sans-serif]
+                                  text-sm font-semibold font-[Nunito,sans-serif] no-underline
                                   cursor-pointer transition-all duration-200
                                   hover:bg-white dark:hover:bg-[#243d4d]
                                   hover:border-[#28666e]/35 dark:hover:border-[#4db6c1]/40
@@ -77,25 +79,35 @@
                                 fill="#EA4335" />
                         </svg>
                         Google দিয়ে শুরু করুন
-                    </button>
-                    <button
+                    </a>
+
+                    {{-- GitHub --}}
+                    <a href="{{ route('social.redirect', ['provider' => 'github', 'role' => 'student']) }}"
                         class="w-full flex items-center justify-center gap-2.5
                                   px-4 py-2.5 rounded-xl
                                   border-[1.5px] border-[#28666e]/18 dark:border-[#4db6c1]/20
                                   bg-[#eef7f8]/40 dark:bg-[#0f1f2e]/40
                                   text-[#033f63] dark:text-[#7ec8e3]
-                                  text-sm font-semibold font-[Nunito,sans-serif]
+                                  text-sm font-semibold font-[Nunito,sans-serif] no-underline
                                   cursor-pointer transition-all duration-200
                                   hover:bg-white dark:hover:bg-[#243d4d]
                                   hover:border-[#28666e]/35 dark:hover:border-[#4db6c1]/40
                                   hover:shadow-[0_3px_12px_rgba(40,102,110,0.1)] dark:hover:shadow-[0_3px_12px_rgba(0,0,0,0.3)]">
-                        <svg class="w-5 h-5 shrink-0" fill="#1877F2" viewBox="0 0 24 24">
+                        <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="currentColor">
                             <path
-                                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                                d="M12 0C5.37 0 0 5.373 0 12c0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.73.083-.73 1.205.085 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.76-1.604-2.665-.305-5.466-1.332-5.466-5.93 0-1.31.468-2.38 1.235-3.22-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.3 1.23a11.52 11.52 0 013.003-.404c1.02.005 2.046.138 3.003.404 2.29-1.552 3.297-1.23 3.297-1.23.653 1.652.242 2.873.118 3.176.77.84 1.233 1.91 1.233 3.22 0 4.61-2.804 5.622-5.476 5.92.43.372.814 1.103.814 2.222 0 1.606-.015 2.898-.015 3.293 0 .322.216.695.825.577C20.565 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
                         </svg>
-                        Facebook দিয়ে শুরু করুন
-                    </button>
+                        GitHub দিয়ে শুরু করুন
+                    </a>
+
                 </div>
+
+                {{-- Social auth error message --}}
+                @error('social')
+                    <div class="mt-1 mb-1 px-4 py-2.5 rounded-xl bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-700/40 text-sm text-red-600 dark:text-red-400 font-[Nunito,sans-serif]">
+                        {{ $message }}
+                    </div>
+                @enderror
 
                 {{-- Divider --}}
                 <div class="flex items-center gap-3 my-5
