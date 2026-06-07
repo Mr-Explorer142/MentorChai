@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SocialAuthController;
 use App\Http\Controllers\MentorsController;
 use App\Http\Controllers\SessionTopicController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -36,6 +37,16 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/register/student', [RegisterController::class, 'showStudentForm'])->name('student_register');
 Route::get('/register/teacher', [RegisterController::class, 'showTeacherForm'])->name('teacher_register');
 Route::post('/register', [RegisterController::class, 'register'])->name('register');
+
+// Social Authentication (Google, GitHub)
+Route::get('/auth/{provider}/redirect/{role}', [SocialAuthController::class, 'redirect'])
+    ->where('provider', 'google|github')
+    ->where('role', 'student|mentor|login')
+    ->name('social.redirect');
+
+Route::get('/auth/{provider}/callback', [SocialAuthController::class, 'callback'])
+    ->where('provider', 'google|github')
+    ->name('social.callback');
 
 /*
 |--------------------------------------------------------------------------
