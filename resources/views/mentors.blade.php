@@ -318,7 +318,7 @@
                                 <span>📘</span> {{ $mentor->profile?->highgest_education_level ?? 'N/A' }}
                             </p>
                             <p class="flex items-center gap-2">
-                                <span>🧑‍🎓</span> {{ $mentor->students_count ?? 0 }} জন শিক্ষার্থী
+                                <span>✏️</span> {{ $mentor->students_count ?? 0 }} জন শিক্ষার্থী
                             </p>
                         </div>
 
