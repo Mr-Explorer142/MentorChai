@@ -357,7 +357,7 @@
                                           transition-colors duration-200">
                                     প্রোফাইল
                                 </a>
-                                <a href="{{ route('checkout') }}" class="flex-1 text-center
+                                <a href="{{ route('session.request.create', $mentor->id) }}" class="flex-1 text-center
                                           bg-teal-600 dark:bg-teal-500 text-white
                                           py-2 rounded-lg text-xs font-semibold
                                           hover:bg-teal-700 dark:hover:bg-teal-400

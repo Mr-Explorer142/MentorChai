@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\MentorsController;
+use App\Http\Controllers\SessionTopicController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -89,36 +90,36 @@ Route::middleware('auth')->group(function () {
         Route::post('/profile/avatar', [ProfileController::class, 'updateAvatar'])->name('update_avatar');
         Route::delete('/profile/avatar', [ProfileController::class, 'removeAvatar'])->name('remove_avatar');
 
-        Route::get('/checkout', function () {
-            return view('checkout.checkout', [
-                'student'    => (object)['id' => 'STU-101', 'name' => 'Wasif Khan Lodi Adib'],
-                'mentor'     => (object)['id' => 'MEN-55',  'name' => 'Walid Ahmed Samy Sorkar'],
-                'topic'      => 'Laravel Basics',
-                'hourlyRate' => 50,
-                'hours'      => 2,
-                'paidAmount' => 100,
-            ]);
-        })->name('checkout');
-
-        Route::get('/success', function () {
-            return view('checkout.success', [
-                'paymentMethod' => session('payment_method', 'bKash'),
-                'amount'        => session('amount', 0),
-            ]);
-        })->name('success');
 
         Route::get('/live-session', fn() => view('session.live-session'))->name('live-session');
 
         // Student-only routes
         Route::middleware('student')->group(function () {
             Route::get('/dashboard/student', [DashboardController::class, 'studentDashboard'])->name('student_dashboard');
+            Route::get('/checkout', function () {
+                return view('checkout.checkout', [
+                    'student'    => (object)['id' => 'STU-101', 'name' => 'Wasif Khan Lodi Adib'],
+                    'mentor'     => (object)['id' => 'MEN-55',  'name' => 'Walid Ahmed Samy Sorkar'],
+                    'topic'      => 'Laravel Basics',
+                    'hourlyRate' => 50,
+                    'hours'      => 2,
+                    'paidAmount' => 100,
+                ]);
+            })->name('checkout.checkout');
+
+            Route::get('/success', function () {
+                return view('checkout.success', [
+                    'paymentMethod' => session('payment_method', 'bKash'),
+                    'amount'        => session('amount', 0),
+                ]);
+            })->name('success');
+            Route::get('/session/request/{mentor}', [SessionTopicController::class, 'create'])->name('session.request.create');
+            Route::post('/session/request', [SessionTopicController::class, 'store'])->name('session.request.store');
         });
 
         // Mentor-only routes
         Route::middleware('mentor')->group(function () {
             Route::get('/dashboard/mentor', [DashboardController::class, 'mentorDashboard'])->name('mentor_dashboard');
         });
-
     });
-
 });

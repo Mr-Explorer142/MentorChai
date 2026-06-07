@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-
 use App\Enums\UserRole;
 use App\Enums\UserStatus;
 use App\Models\Profile;
@@ -70,5 +68,34 @@ class User extends Authenticatable implements MustVerifyEmail
     public function lastSeenAgo()
     {
         return $this->last_seen_at->diffForHumans();
+    }
+
+    // Sessions where this user is the student
+    public function sessionTopicsAsStudent()
+    {
+        return $this->hasMany(SessionTopic::class, 'student_id');
+    }
+
+    // Sessions where this user is the mentor
+    public function sessionTopicsAsMentor()
+    {
+        return $this->hasMany(SessionTopic::class, 'mentor_id');
+    }
+
+    // Mentoring Sessions, Payments
+
+    public function mentoringSessions()
+    {
+        return $this->hasMany(MentoringSession::class, 'mentor_id');
+    }
+
+    public function studentSessions()
+    {
+        return $this->hasMany(MentoringSession::class, 'student_id');
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class, 'student_id');
     }
 }
