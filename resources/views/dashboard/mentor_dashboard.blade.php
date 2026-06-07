@@ -39,11 +39,17 @@
                             </div>
                         </div>
                         <div class="avatar online">
-                            <div class="w-20 h-20 rounded-full shadow-2xl">
-                                <img src="https://ui-avatars.com/api/?name={{ urlencode($mentor->name) }}&background=1A998F&color=ffffff&size=200&font-size=0.4&bold=true"
-                                     alt="Mentor Avatar"
-                                     class="object-cover rounded-full border-4 border-[#C4CFCE]" />
-                            </div>
+                            <a href="{{ route('mentor_profile', $mentor->id) }}" class="w-20 h-20 rounded-full shadow-2xl block transition-transform hover:scale-105">
+                                @if($mentor->profile && $mentor->profile->avatar)
+                                    <img src="{{ asset('storage/' . $mentor->profile->avatar) }}"
+                                         alt="Mentor Avatar"
+                                         class="w-full h-full object-cover rounded-full border-4 border-[#C4CFCE]" />
+                                @else
+                                    <img src="https://ui-avatars.com/api/?name={{ urlencode($mentor->name) }}&background=1A998F&color=ffffff&size=200&font-size=0.4&bold=true"
+                                         alt="Mentor Avatar"
+                                         class="w-full h-full object-cover rounded-full border-4 border-[#C4CFCE]" />
+                                @endif
+                            </a>
                         </div>
                     </div>
                 </div>

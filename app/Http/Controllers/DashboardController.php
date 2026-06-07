@@ -16,7 +16,7 @@ class DashboardController extends Controller
 
     public function mentorDashboard()
     {
-        $mentor = Auth::user();
+        $mentor = Auth::user()->load('profile');
         return view('dashboard.mentor_dashboard', compact('mentor'));
     }
 }
