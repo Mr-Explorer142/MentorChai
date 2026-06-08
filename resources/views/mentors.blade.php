@@ -275,8 +275,12 @@
                                 <div class="w-14 h-14 rounded-full
                                             bg-teal-100 dark:bg-teal-900/40
                                             flex items-center justify-center
-                                            text-xl font-bold text-teal-600 dark:text-teal-400">
-                                    {{ strtoupper(substr($mentor->name, 0, 1)) }}
+                                            text-xl font-bold text-teal-600 dark:text-teal-400 overflow-hidden">
+                                    @if($mentor->profile && $mentor->profile->avatar)
+                                        <img src="{{ asset('storage/' . $mentor->profile->avatar) }}" alt="Avatar" class="w-full h-full object-cover">
+                                    @else
+                                        {{ strtoupper(substr($mentor->name, 0, 1)) }}
+                                    @endif
                                 </div>
 
                                 {{-- Online / Offline dot --}}
@@ -314,7 +318,7 @@
                                 <span>📘</span> {{ $mentor->profile?->highgest_education_level ?? 'N/A' }}
                             </p>
                             <p class="flex items-center gap-2">
-                                <span>🧑‍🎓</span> {{ $mentor->students_count ?? 0 }} জন শিক্ষার্থী
+                                <span>✏️</span> {{ $mentor->students_count ?? 0 }} জন শিক্ষার্থী
                             </p>
                         </div>
 
