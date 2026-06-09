@@ -107,13 +107,21 @@
                                 সরাসরি বার্তা পাঠান
                             </h3>
 
-                            <form class="flex flex-col gap-4">
+                            @if(session('success'))
+                                <div class="alert alert-success text-sm py-3" style="background: rgba(26,153,143,0.12); border-color: var(--mc-primary); color: var(--mc-primary);">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-5 w-5" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                    <span>{{ session('success') }}</span>
+                                </div>
+                            @endif
+
+                            <form action="{{ route('contact.store') }}" method="POST" class="flex flex-col gap-4">
+                                @csrf
                                 <div class="form-control gap-1.5">
                                     <label class="label py-0">
                                         <span class="label-text text-xs font-bold uppercase tracking-wide"
                                             style="color: var(--mc-text-muted);">সম্পূর্ণ নাম</span>
                                     </label>
-                                    <input type="text" placeholder="আপনার নাম লিখুন"
+                                    <input type="text" name="name" placeholder="আপনার নাম লিখুন" required
                                         class="input input-bordered w-full text-sm"
                                         style="background: var(--mc-bg); border-color: var(--mc-border-teal-sub); color: var(--mc-text);" />
                                 </div>
@@ -123,7 +131,7 @@
                                         <span class="label-text text-xs font-bold uppercase tracking-wide"
                                             style="color: var(--mc-text-muted);">ইমেইল</span>
                                     </label>
-                                    <input type="email" placeholder="আপনার ইমেইল অ্যাড্রেস লিখুন"
+                                    <input type="email" name="email" placeholder="আপনার ইমেইল অ্যাড্রেস লিখুন" required
                                         class="input input-bordered w-full text-sm"
                                         style="background: var(--mc-bg); border-color: var(--mc-border-teal-sub); color: var(--mc-text);" />
                                 </div>
@@ -133,7 +141,7 @@
                                         <span class="label-text text-xs font-bold uppercase tracking-wide"
                                             style="color: var(--mc-text-muted);">বিষয়</span>
                                     </label>
-                                    <input type="text" placeholder="বিষয় লিখুন"
+                                    <input type="text" name="subject" placeholder="বিষয় লিখুন"
                                         class="input input-bordered w-full text-sm"
                                         style="background: var(--mc-bg); border-color: var(--mc-border-teal-sub); color: var(--mc-text);" />
                                 </div>
@@ -143,7 +151,7 @@
                                         <span class="label-text text-xs font-bold uppercase tracking-wide"
                                             style="color: var(--mc-text-muted);">বার্তা</span>
                                     </label>
-                                    <textarea placeholder=" আপনার প্রশ্ন কিংবা বার্তাটি লিখুন....." rows="5"
+                                    <textarea name="message" placeholder=" আপনার প্রশ্ন কিংবা বার্তাটি লিখুন....." rows="5" required
                                         class="textarea textarea-bordered w-full text-sm resize-y"
                                         style="background: var(--mc-bg); border-color: var(--mc-border-teal-sub); color: var(--mc-text); min-height: 130px;"></textarea>
                                 </div>
