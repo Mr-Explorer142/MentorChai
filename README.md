@@ -190,6 +190,7 @@ php artisan queue:work
 - **Database**: MySQL
 - **Real-time**: Laravel Echo and Pusher 
 - **Cloud Platform**: AWS
+- **Video Calling API kit**: ZegoCloud 
 - **Package Manager**: Composer, NPM
 
 ## 📂 Project Structure
