@@ -183,11 +183,12 @@ php artisan test
 php artisan queue:work
 ```
 
-## 🛠️ Tech Stack
+## 🛠️ Tech Stack & Tools
 
 - **Frontend**: HTML, Tailwind CSS(DaisyUI), JavaScript
 - **Backend**: PHP-Laravel
 - **Database**: MySQL
+- **Version Control System**: Git & GitHub 
 - **Notification System**: Laravel Echo and Pusher 
 - **Email Verification Platform**: MailTrap
 - **Video Calling API kit**: ZegoCloud 
