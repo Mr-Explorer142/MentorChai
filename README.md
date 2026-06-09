@@ -185,12 +185,13 @@ php artisan queue:work
 
 ## 🛠️ Tech Stack
 
+- **Frontend**: HTML, Tailwind CSS(DaisyUI), JavaScript
 - **Backend**: PHP-Laravel
-- **Frontend**: HTML, Tailwind CSS(DaisyUI), JavaScript 
 - **Database**: MySQL
-- **Real-time**: Laravel Echo and Pusher 
-- **Cloud Platform**: AWS
+- **Notification System**: Laravel Echo and Pusher 
+- **Email Verification Platform**: MailTrap
 - **Video Calling API kit**: ZegoCloud 
+- **Payment Gateway**: SSLCommerz(Sandbox), PathaoPay(Real time transaction)
 - **Package Manager**: Composer, NPM
 
 ## 📂 Project Structure
