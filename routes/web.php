@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
@@ -20,7 +21,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', fn() => view('home'))->name('home');
 Route::get('/about', fn() => view('about'))->name('about');
 Route::get('/contact', fn() => view('contact'))->name('contact');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 Route::get('/faq', fn() => view('faq'))->name('faq');
+Route::get('/mentor/terms', fn() => view('mentor_terms'))->name('mentor_terms');
 Route::get('/mentors', [MentorsController::class, 'index'])->name('mentors');
 Route::get('/mentors/suggestions', [MentorsController::class, 'suggestions'])->name('mentors.suggestions');
 

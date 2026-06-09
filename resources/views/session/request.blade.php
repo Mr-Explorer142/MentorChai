@@ -1,6 +1,6 @@
 <x-layout>
     <div
-        class="min-h-screen flex items-center justify-center p-5 md:p-10 bg-gradient-to-br from-teal-50 via-white to-white">
+        class="min-h-screen flex items-center justify-center p-5 md:p-10 transition-colors duration-300" style="background-color: var(--mc-bg);">
 
         {{-- Subtle grid texture --}}
         <div class="fixed inset-0 pointer-events-none opacity-[0.03]"
@@ -19,14 +19,14 @@
                             d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
                     </svg>
                 </div>
-                <h2 class="text-3xl font-bold text-gray-900" style="font-family:'Lora',serif;">
+                <h2 class="text-3xl font-bold" style="color: var(--mc-text); font-family:'Lora',serif;">
                     সেশন অনুরোধ
                 </h2>
-                <p class="text-sm mt-1 text-gray-400">মেন্টরের কাছে সেশনের জন্য অনুরোধ পাঠান</p>
+                <p class="text-sm mt-1" style="color: var(--mc-text-muted);">মেন্টরের কাছে সেশনের জন্য অনুরোধ পাঠান</p>
             </div>
 
             {{-- Main Card --}}
-            <div class="bg-white rounded-2xl border border-gray-100 shadow-xl shadow-teal-100/40 overflow-hidden">
+            <div class="rounded-2xl border overflow-hidden" style="background: var(--mc-surface); border-color: var(--mc-border-teal-sub); box-shadow: var(--mc-shadow-md);">
 
                 {{-- Card Top Accent --}}
                 <div class="h-1.5 w-full" style="background: linear-gradient(90deg, #1A9998, #155665);"></div>
@@ -37,9 +37,9 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
                         {{-- Student Info --}}
-                        <div class="rounded-xl p-4 bg-teal-50/60 border border-teal-100">
+                        <div class="rounded-xl p-4 border" style="background: rgba(26,153,143,0.05); border-color: var(--mc-border-teal-sub);">
                             <h3
-                                class="font-bold text-xs uppercase tracking-widest text-teal-600 mb-3 flex items-center gap-2">
+                                class="font-bold text-xs uppercase tracking-widest mb-3 flex items-center gap-2" style="color: var(--mc-primary);">
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -49,21 +49,21 @@
                             </h3>
                             <div class="flex items-center gap-3">
                                 <div
-                                    class="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center
-                                            text-sm font-bold text-teal-600 shrink-0">
+                                    class="w-10 h-10 rounded-full flex items-center justify-center
+                                            text-sm font-bold shrink-0" style="background: rgba(26,153,143,0.15); color: var(--mc-primary);">
                                     {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
                                 </div>
                                 <div>
-                                    <p class="text-sm font-bold text-gray-800">{{ auth()->user()->name }}</p>
-                                    <p class="text-xs text-gray-400">{{ auth()->user()->email }}</p>
+                                    <p class="text-sm font-bold" style="color: var(--mc-text);">{{ auth()->user()->name }}</p>
+                                    <p class="text-xs" style="color: var(--mc-text-muted);">{{ auth()->user()->email }}</p>
                                 </div>
                             </div>
                         </div>
 
                         {{-- Mentor Info --}}
-                        <div class="rounded-xl p-4 bg-gray-50 border border-gray-100">
+                        <div class="rounded-xl p-4 border" style="background: var(--mc-bg); border-color: var(--mc-border-teal-sub);">
                             <h3
-                                class="font-bold text-xs uppercase tracking-widest text-gray-400 mb-3 flex items-center gap-2">
+                                class="font-bold text-xs uppercase tracking-widest mb-3 flex items-center gap-2" style="color: var(--mc-text-muted);">
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -73,13 +73,13 @@
                             </h3>
                             <div class="flex items-center gap-3">
                                 <div
-                                    class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center
-                                            text-sm font-bold text-gray-600 shrink-0">
+                                    class="w-10 h-10 rounded-full flex items-center justify-center
+                                            text-sm font-bold shrink-0" style="background: rgba(128,128,128,0.15); color: var(--mc-text);">
                                     {{ strtoupper(substr($mentor->name, 0, 1)) }}
                                 </div>
                                 <div>
-                                    <p class="text-sm font-bold text-gray-800">{{ $mentor->name }}</p>
-                                    <p class="text-xs text-gray-400">
+                                    <p class="text-sm font-bold" style="color: var(--mc-text);">{{ $mentor->name }}</p>
+                                    <p class="text-xs" style="color: var(--mc-text-muted);">
                                         {{ $mentor->profile?->institution_name ?? 'N/A' }}
                                     </p>
                                 </div>
@@ -90,9 +90,9 @@
 
                     {{-- Divider --}}
                     <div class="flex items-center gap-3">
-                        <div class="flex-1 h-px bg-gray-100"></div>
-                        <span class="text-xs font-semibold uppercase tracking-widest text-gray-300">সেশনের বিবরণ</span>
-                        <div class="flex-1 h-px bg-gray-100"></div>
+                        <div class="flex-1 h-px" style="background-color: var(--mc-border-teal-sub);"></div>
+                        <span class="text-xs font-semibold uppercase tracking-widest" style="color: var(--mc-text-faint);">সেশনের বিবরণ</span>
+                        <div class="flex-1 h-px" style="background-color: var(--mc-border-teal-sub);"></div>
                     </div>
 
                     {{-- Session Request Form --}}
@@ -104,16 +104,17 @@
 
                         {{-- Topic Dropdown --}}
                         <div>
-                            <label class="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-2">
+                            <label class="block text-xs font-bold uppercase tracking-widest mb-2" style="color: var(--mc-text-muted);">
                                 সেশনের বিষয় (টপিক)
                             </label>
                             <div class="relative">
                                 <select name="topic" required
-                                    class="w-full appearance-none bg-white border border-gray-200
-                                               rounded-xl px-4 py-3 pr-10 text-sm text-gray-700
+                                    class="w-full appearance-none border
+                                               rounded-xl px-4 py-3 pr-10 text-sm
                                                focus:outline-none focus:ring-2 focus:ring-teal-400
                                                focus:border-teal-400 transition-colors duration-200
-                                               cursor-pointer">
+                                               cursor-pointer"
+                                    style="background: var(--mc-bg); border-color: var(--mc-border-teal-sub); color: var(--mc-text);">
                                     <option value="" disabled selected>— টপিক বেছে নিন —</option>
                                     @if (!empty($mentor->profile?->skills))
                                         @foreach (explode(',', $mentor->profile->skills) as $skill)
@@ -144,13 +145,13 @@
                         </div>
 
                         {{-- Hourly Rate Info --}}
-                        <div class="flex items-center gap-3 px-4 py-3 rounded-xl bg-teal-50 border border-teal-100">
+                        <div class="flex items-center gap-3 px-4 py-3 rounded-xl border" style="background: rgba(26,153,143,0.05); border-color: var(--mc-border-teal-sub);">
                             <svg class="w-4 h-4 text-teal-500 shrink-0" fill="none" stroke="currentColor"
                                 stroke-width="2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75" />
                             </svg>
-                            <p class="text-sm text-teal-700">
+                            <p class="text-sm" style="color: var(--mc-primary);">
                                 এই মেন্টরের ঘণ্টা প্রতি রেট:
                                 <span class="font-bold">
                                     ৳{{ $mentor->profile?->hourly_rate ?? '—' }}
@@ -160,23 +161,23 @@
 
                         {{-- Note / Message --}}
                         <div>
-                            <label class="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-2">
+                            <label class="block text-xs font-bold uppercase tracking-widest mb-2" style="color: var(--mc-text-muted);">
                                 বার্তা / নোট
-                                <span class="text-gray-300 font-normal normal-case tracking-normal">(ঐচ্ছিক)</span>
+                                <span class="font-normal normal-case tracking-normal" style="color: var(--mc-text-faint);">(ঐচ্ছিক)</span>
                             </label>
                             <textarea name="note" rows="4" placeholder="মেন্টরকে আপনার সমস্যা বা প্রয়োজন সম্পর্কে জানান..."
-                                class="w-full bg-white border border-gray-200 rounded-xl
-                                             px-4 py-3 text-sm text-gray-700
-                                             placeholder:text-gray-300
+                                class="w-full border rounded-xl
+                                             px-4 py-3 text-sm
                                              focus:outline-none focus:ring-2 focus:ring-teal-400
                                              focus:border-teal-400 transition-colors duration-200
-                                             resize-none">{{ old('note') }}</textarea>
+                                             resize-none"
+                                style="background: var(--mc-bg); border-color: var(--mc-border-teal-sub); color: var(--mc-text);">{{ old('note') }}</textarea>
                         </div>
 
                         {{-- Status Info Badge --}}
                         <div
-                            class="flex items-start gap-2.5 px-4 py-3 rounded-xl
-                                    bg-amber-50 border border-amber-100">
+                            class="flex items-start gap-2.5 px-4 py-3 rounded-xl border"
+                            style="background: rgba(245, 158, 11, 0.05); border-color: rgba(245, 158, 11, 0.2);">
                             <svg class="w-4 h-4 text-amber-400 shrink-0 mt-0.5" fill="none" stroke="currentColor"
                                 stroke-width="2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -192,15 +193,14 @@
                         </div>
 
                         {{-- Divider --}}
-                        <div class="h-px bg-gray-100"></div>
+                        <div class="h-px w-full" style="background-color: var(--mc-border-teal-sub);"></div>
 
                         {{-- Action Buttons --}}
                         <div class="flex flex-col sm:flex-row gap-3">
                             <a href="{{ route('mentor_profile', $mentor->id) }}"
                                 class="flex-1 text-center py-3 rounded-xl text-sm font-semibold
-                                      border border-gray-200 text-gray-500
-                                      hover:bg-gray-50 hover:border-gray-300
-                                      transition-colors duration-200">
+                                      border hover:-translate-y-0.5 transition-all duration-200"
+                                style="border-color: var(--mc-border-teal-sub); color: var(--mc-text-muted); background: var(--mc-surface);">
                                 ← ফিরে যান
                             </a>
                             <button type="submit"
@@ -225,7 +225,7 @@
             </div>
 
             {{-- Footer note --}}
-            <p class="text-center text-xs text-gray-300 mt-6 flex items-center justify-center gap-1.5">
+            <p class="text-center text-xs mt-6 flex items-center justify-center gap-1.5" style="color: var(--mc-text-faint);">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
