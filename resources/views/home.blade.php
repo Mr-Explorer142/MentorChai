@@ -45,7 +45,7 @@
                                 জরুরি মূহুর্তে হঠাৎ একজন শিক্ষকের সাহায্য প্রয়োজন?
                             </span>
                             <br />
-                            <span style="color: var(--mc-text);">MentorChai আছে আপনার সাথে ।</span>
+                            <span style="color: var(--mc-text);">MentorChai আছে আপনার সাথে </span>
                         </h1>
 
                         {{-- Subtext --}}
@@ -438,7 +438,7 @@
                             @endforeach
                         </div>
 
-                        <a href="{{ route('faq') }}"
+                        <a href="{{ route('terms') }}"
                             class="inline-flex items-center gap-3 rounded-2xl px-8 py-4 text-base font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
                             style="background: linear-gradient(135deg, var(--mc-primary), var(--mc-sage)); box-shadow: 0 8px 28px rgba(40,102,110,0.3);">
                             বিস্তারিত জানতে এখানে ক্লিক করুন
