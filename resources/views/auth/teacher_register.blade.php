@@ -229,10 +229,8 @@
                         <input type="checkbox" required
                             class="accent-[#28666e] dark:accent-[#4db6c1] w-[15px] h-[15px] mt-0.5 cursor-pointer" />
                         <span class="text-xs leading-relaxed text-[#033f63]/70 dark:text-[#7ec8e3]/60">
-                            আমি <a href="#"
-                                class="text-[#28666e] dark:text-[#4db6c1] font-bold hover:underline">শর্তাবলী</a> এবং
-                            <a href="#" class="text-[#28666e] dark:text-[#4db6c1] font-bold hover:underline">গোপনীয়তা
-                                নীতি</a>-তে সম্মত আছি
+                            আমি <a href="{{ route('terms') }}"
+                                class="text-[#28666e] dark:text-[#4db6c1] font-bold hover:underline">শর্তাবলী এবং গোপনীয়তা নীতি</a>-তে সম্মত আছি
                         </span>
                     </label>
 
