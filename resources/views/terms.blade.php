@@ -91,14 +91,14 @@
                 </div>
 
                 {{-- Clause 3 --}}
-                <div class="terms-card p-6 rounded-2xl border transition-all duration-300 hover:shadow-lg hover:-translate-y-1 md:col-span-2"
-                    style="background: var(--mc-surface); border-color: var(--mc-border-teal-sub); box-shadow: var(--mc-shadow-sm); opacity: 0; transform: translateY(14px);">
+                <div class="terms-card warning-card p-6 rounded-2xl border transition-all duration-300 hover:shadow-lg hover:-translate-y-1 md:col-span-2"
+                    style="opacity: 0; transform: translateY(14px);">
                     <div class="flex items-center gap-3.5 mb-4">
                         <div class="w-10 h-10 rounded-xl flex items-center justify-center font-extrabold text-sm text-white shrink-0"
-                            style="background: linear-gradient(135deg, #199998, #ef4444);">
+                            style="background: linear-gradient(135deg, #ef4444, #b91c1c);">
                             ৩
                         </div>
-                        <h3 class="font-bold text-base" style="color: var(--mc-text-sub);">প্ল্যাটফর্মের বাইরে যোগাযোগ — কঠোরভাবে নিষিদ্ধ</h3>
+                        <h3 class="font-bold text-base text-red-600 dark:text-red-400">প্ল্যাটফর্মের বাইরে যোগাযোগ: কঠোরভাবে নিষিদ্ধ</h3>
                     </div>
                     <p class="text-sm leading-relaxed mb-3" style="color: var(--mc-text-muted);">
                         মেন্টর ও শিক্ষার্থী উভয়কেই এই নিয়ম মেনে চলতে হবে। প্ল্যাটফর্মের বাইরে :
@@ -264,6 +264,19 @@
 
         </section>
     </div>
+
+    <style>
+        .warning-card {
+            background: rgba(239, 68, 68, 0.08) !important;
+            border-color: rgba(239, 68, 68, 0.38) !important;
+            box-shadow: 0 8px 30px rgba(239, 68, 68, 0.12) !important;
+        }
+        .dark .warning-card {
+            background: rgba(239, 68, 68, 0.15) !important;
+            border-color: rgba(239, 68, 68, 0.45) !important;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45) !important;
+        }
+    </style>
 
     <script>
         // Staggered load animation for terms cards
