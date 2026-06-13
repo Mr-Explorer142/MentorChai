@@ -133,7 +133,7 @@
 
                                     {{-- Red dot — only show if unread --}}
                                     @if($unreadCount > 0)
-                                    <span class="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full
+                                    <span id="notificationDot" class="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full
                          bg-[#ef4444] border border-white dark:border-[#0f1f2e]"></span>
                                     @endif
 
@@ -146,11 +146,11 @@
 
                                 {{-- Notification Panel --}}
                                 <div id="notificationPanel" class="hidden fixed md:absolute left-4 right-4 md:left-auto md:right-0
-                top-[4rem] md:top-auto md:mt-2 w-auto md:w-[22rem]
+                top-16 md:top-auto md:mt-2 w-auto md:w-88
                 rounded-3xl bg-white dark:bg-[#122333]
                 border border-[#28666e]/15 dark:border-[#4db6c1]/20
                 shadow-[0_20px_45px_rgba(40,102,110,0.12)] dark:shadow-[0_20px_45px_rgba(0,0,0,0.35)]
-                z-[999] overflow-hidden">
+                z-999 overflow-hidden">
 
                                     {{-- Panel Header --}}
                                     <div class="px-4 py-3 bg-[#eaf7f8] dark:bg-[#102d3b]
@@ -188,9 +188,9 @@
                                             <div class="flex items-start justify-between gap-2">
                                                 <div class="flex-1">
 
-                                                    {{-- Icon based on notification type --}}
                                                     @php $type = $notification->data['type'] ?? ''; @endphp
 
+                                                    {{-- Color dot by type --}}
                                                     <div class="flex items-center gap-2 mb-1">
                                                         @if($type === 'session_requested')
                                                         <span class="w-2 h-2 rounded-full bg-amber-400 shrink-0"></span>
@@ -208,7 +208,7 @@
                                                         </p>
                                                     </div>
 
-                                                    {{-- Checkout link for approved sessions --}}
+                                                    {{-- Student: Pay button for approved sessions --}}
                                                     @if($type === 'session_approved' &&
                                                     isset($notification->data['checkout_url']))
                                                     <a href="{{ $notification->data['checkout_url'] }}"
@@ -218,12 +218,35 @@
                                                     </a>
                                                     @endif
 
+                                                    {{-- Mentor: Approve button for session requests --}}
+                                                    @if($type === 'session_requested' &&
+                                                    isset($notification->data['session_id']))
+                                                    <form method="POST"
+                                                        action="{{ route('session.approve', $notification->data['session_id']) }}"
+                                                        class="mt-1">
+                                                        @csrf
+                                                        <button type="submit"
+                                                            onclick="markAsRead('{{ $notification->id }}')" class="inline-flex items-center gap-1 text-xs font-semibold
+                                                   text-white bg-teal-600 dark:bg-teal-500
+                                                   px-3 py-1 rounded-full
+                                                   hover:bg-teal-700 dark:hover:bg-teal-400
+                                                   transition-colors duration-200">
+                                                            <svg class="w-3 h-3" fill="none" stroke="currentColor"
+                                                                stroke-width="2.5" viewBox="0 0 24 24">
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    d="M5 13l4 4L19 7" />
+                                                            </svg>
+                                                            অনুমোদন করুন
+                                                        </button>
+                                                    </form>
+                                                    @endif
+
                                                     <p class="text-xs text-[#28666e]/60 dark:text-[#7ec8e3]/70 mt-1">
                                                         {{ $notification->created_at->diffForHumans() }}
                                                     </p>
                                                 </div>
 
-                                                {{-- Mark as read button for unread --}}
+                                                {{-- Mark single as read button --}}
                                                 @if(is_null($notification->read_at))
                                                 <button onclick="markAsRead('{{ $notification->id }}')" class="shrink-0 w-5 h-5 rounded-full
                                            bg-teal-100 dark:bg-teal-900/40
