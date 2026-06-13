@@ -38,18 +38,24 @@
                             style="background: var(--mc-bg); border-color: var(--mc-border);">
                             <h3 class="font-bold text-sm mb-3 flex items-center gap-2"
                                 style="color: var(--mc-primary);">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none"
-                                    viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.8" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
                                 </svg>
                                 শিক্ষার্থীর তথ্য
                             </h3>
                             <p class="text-sm" style="color: var(--mc-text-muted);">
-                                <span class="font-semibold" style="color: var(--mc-text);">আইডি:</span> #১০২৪
+                                <span class="font-semibold" style="color: var(--mc-text);">আইডি:</span>
+                                #{{ $student->id }}
                             </p>
                             <p class="text-sm mt-1" style="color: var(--mc-text-muted);">
-                                <span class="font-semibold" style="color: var(--mc-text);">নাম:</span> রাহেলা বেগম
+                                <span class="font-semibold" style="color: var(--mc-text);">নাম:</span>
+                                {{ $student->name }}
+                            </p>
+                            <p class="text-sm mt-1" style="color: var(--mc-text-muted);">
+                                <span class="font-semibold" style="color: var(--mc-text);">ইমেইল:</span>
+                                {{ $student->email }}
                             </p>
                         </div>
 
@@ -58,18 +64,24 @@
                             style="background: var(--mc-bg); border-color: var(--mc-border);">
                             <h3 class="font-bold text-sm mb-3 flex items-center gap-2"
                                 style="color: var(--mc-primary);">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none"
-                                    viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.8" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
                                 </svg>
                                 মেন্টরের তথ্য
                             </h3>
                             <p class="text-sm" style="color: var(--mc-text-muted);">
-                                <span class="font-semibold" style="color: var(--mc-text);">আইডি:</span> #৩০৫
+                                <span class="font-semibold" style="color: var(--mc-text);">আইডি:</span>
+                                #{{ $mentor->id }}
                             </p>
                             <p class="text-sm mt-1" style="color: var(--mc-text-muted);">
-                                <span class="font-semibold" style="color: var(--mc-text);">নাম:</span> ড. করিম আহমেদ
+                                <span class="font-semibold" style="color: var(--mc-text);">নাম:</span>
+                                {{ $mentor->name }}
+                            </p>
+                            <p class="text-sm mt-1" style="color: var(--mc-text-muted);">
+                                <span class="font-semibold" style="color: var(--mc-text);">প্রতিষ্ঠান:</span>
+                                {{ $mentor->profile?->institution_name ?? 'N/A' }}
                             </p>
                         </div>
                     </div>
@@ -109,76 +121,95 @@
                         <div class="rounded-xl p-3 border text-center"
                             style="background: var(--mc-bg); border-color: var(--mc-border);">
                             <p class="text-xs font-semibold mb-1" style="color: var(--mc-text-faint);">বিষয়</p>
-                            <p class="text-sm font-bold" style="color: var(--mc-text);">Laravel</p>
+                            <p class="text-sm font-bold" style="color: var(--mc-text);">{{ $topic }}</p>
                         </div>
                         <div class="rounded-xl p-3 border text-center"
                             style="background: var(--mc-bg); border-color: var(--mc-border);">
                             <p class="text-xs font-semibold mb-1" style="color: var(--mc-text-faint);">ঘণ্টাপ্রতি</p>
-                            <p class="text-sm font-bold" style="color: var(--mc-primary);">৳৮০০.০০</p>
+                            <p class="text-sm font-bold" style="color: var(--mc-primary);">
+                                ৳{{ number_format($hourlyRate, 2) }}
+                            </p>
                         </div>
                         <div class="rounded-xl p-3 border text-center"
                             style="background: var(--mc-bg); border-color: var(--mc-border);">
                             <p class="text-xs font-semibold mb-1" style="color: var(--mc-text-faint);">মোট সময়</p>
-                            <p class="text-sm font-bold" style="color: var(--mc-text);">২.০০ ঘণ্টা</p>
+                            <p class="text-sm font-bold" style="color: var(--mc-text);">১.০০ ঘণ্টা</p>
                         </div>
                         <div class="rounded-xl p-3 border text-center"
                             style="background: rgba(26,153,143,0.08); border-color: var(--mc-border-teal);">
                             <p class="text-xs font-semibold mb-1" style="color: var(--mc-primary); opacity: 0.7;">
                                 পরিশোধযোগ্য</p>
-                            <p class="text-sm font-bold" style="color: var(--mc-primary);">৳১,৬০০.০০</p>
+                            <p class="text-sm font-bold" style="color: var(--mc-primary);">
+                                ৳{{ number_format($hourlyRate, 2) }}
+                            </p>
                         </div>
                     </div>
 
                     {{-- Payment Methods --}}
-                    <div>
-                        <h3 class="font-bold text-sm mb-4 flex items-center gap-2"
-                            style="color: var(--mc-text-muted);">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.8" stroke="currentColor" style="color: var(--mc-primary);">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
-                            </svg>
-                            পেমেন্ট মেথড সিলেক্ট করুন
-                        </h3>
+                    <form method="POST" action="#" id="payment-form">
+                        @csrf
+                        <input type="hidden" name="session_topic_id" value="{{ $sessionTopic->id }}">
+                        <input type="hidden" name="payment_method" id="selected-payment-method" value="bkash">
 
-                        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                        <div>
+                            <h3 class="font-bold text-sm mb-4 flex items-center gap-2"
+                                style="color: var(--mc-text-muted);">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.8" stroke="currentColor" style="color: var(--mc-primary);">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
+                                </svg>
+                                পেমেন্ট মেথড সিলেক্ট করুন
+                            </h3>
 
-                            @php
+                            <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+
+                                @php
                                 $methods = [
-                                    ['value' => 'bkash',      'label' => 'বিকাশ',              'img' => 'bkash.svg',      'fallback' => 'bKash',      'active_border' => '#ec4899', 'active_bg' => 'rgba(236,72,153,0.08)',  'fallback_color' => '#ec4899'],
-                                    ['value' => 'nagad',      'label' => 'নগদ',                'img' => 'nagad.svg',      'fallback' => 'Nagad',      'active_border' => '#f97316', 'active_bg' => 'rgba(249,115,22,0.08)',  'fallback_color' => '#f97316'],
-                                    ['value' => 'rocket',     'label' => 'রকেট',               'img' => 'rocket.png',     'fallback' => 'Rocket',     'active_border' => '#a855f7', 'active_bg' => 'rgba(168,85,247,0.08)',  'fallback_color' => '#a855f7'],
-                                    ['value' => 'card',       'label' => 'ডেবিট/ক্রেডিট কার্ড', 'img' => 'cards.svg',      'fallback' => null,         'active_border' => '#1A9998', 'active_bg' => 'rgba(26,153,143,0.08)', 'fallback_color' => '#1A9998'],
-                                    ['value' => 'pathao_pay', 'label' => 'পাঠাও পে',            'img' => 'pathao_pay.svg', 'fallback' => 'Pathao Pay', 'active_border' => '#ef4444', 'active_bg' => 'rgba(239,68,68,0.08)',   'fallback_color' => '#ef4444'],
+                                ['value' => 'bkash', 'label' => 'বিকাশ', 'img' => 'bkash.svg', 'fallback' => 'bKash',
+                                'active_border' => '#ec4899', 'active_bg' => 'rgba(236,72,153,0.08)', 'fallback_color'
+                                => '#ec4899'],
+                                ['value' => 'nagad', 'label' => 'নগদ', 'img' => 'nagad.svg', 'fallback' => 'Nagad',
+                                'active_border' => '#f97316', 'active_bg' => 'rgba(249,115,22,0.08)', 'fallback_color'
+                                => '#f97316'],
+                                ['value' => 'rocket', 'label' => 'রকেট', 'img' => 'rocket.png', 'fallback' => 'Rocket',
+                                'active_border' => '#a855f7', 'active_bg' => 'rgba(168,85,247,0.08)', 'fallback_color'
+                                => '#a855f7'],
+                                ['value' => 'card', 'label' => 'ডেবিট/ক্রেডিট কার্ড', 'img' => 'cards.svg', 'fallback'
+                                => null, 'active_border' => '#1A9998', 'active_bg' => 'rgba(26,153,143,0.08)',
+                                'fallback_color' => '#1A9998'],
+                                ['value' => 'bank', 'label' => 'ব্যাংক ট্রান্সফার', 'img' => 'bank.svg', 'fallback' =>
+                                'Bank', 'active_border' => '#0284c7', 'active_bg' => 'rgba(2,132,199,0.08)',
+                                'fallback_color' => '#0284c7'],
                                 ];
-                            @endphp
+                                @endphp
 
-                            @foreach($methods as $i => $m)
+                                @foreach($methods as $i => $m)
                                 <label class="cursor-pointer payment-label"
-                                       data-active-border="{{ $m['active_border'] }}"
-                                       data-active-bg="{{ $m['active_bg'] }}">
-                                    <input type="radio" name="payment_method" value="{{ $m['value'] }}"
-                                           class="payment-radio hidden" {{ $i === 0 ? 'checked' : '' }}>
+                                    data-active-border="{{ $m['active_border'] }}"
+                                    data-active-bg="{{ $m['active_bg'] }}">
+                                    <input type="radio" name="_payment_display" value="{{ $m['value'] }}"
+                                        class="payment-radio hidden" {{ $i===0 ? 'checked' : '' }}>
                                     <div class="payment-card rounded-xl p-4 border-2 text-center transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
-                                         style="background: var(--mc-bg); border-color: var(--mc-border);">
+                                        style="background: var(--mc-bg); border-color: var(--mc-border);">
                                         <div class="h-7 flex items-center justify-center mb-2">
                                             @if($m['fallback'])
-                                                <img src="{{ asset('images/Checkout Page/' . $m['img']) }}"
-                                                     class="{{ $m['value'] === 'pathao_pay' ? 'h-6' : 'h-7' }} mx-auto"
-                                                     alt="{{ $m['label'] }}"
-                                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                                                <span class="{{ $m['value'] === 'pathao_pay' ? 'text-base' : 'text-lg' }} font-black hidden"
-                                                      style="color: {{ $m['fallback_color'] }};">{{ $m['fallback'] }}</span>
+                                            <img src="{{ asset('images/Checkout Page/' . $m['img']) }}"
+                                                class="{{ $m['value'] === 'pathao_pay' ? 'h-6' : 'h-7' }} mx-auto"
+                                                alt="{{ $m['label'] }}"
+                                                onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                                            <span
+                                                class="{{ $m['value'] === 'pathao_pay' ? 'text-base' : 'text-lg' }} font-black hidden"
+                                                style="color: {{ $m['fallback_color'] }};">{{ $m['fallback'] }}</span>
                                             @else
-                                                <img src="{{ asset('images/Checkout Page/' . $m['img']) }}"
-                                                     class="h-7 mx-auto"
-                                                     alt="{{ $m['label'] }}"
-                                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 hidden"
-                                                     fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="#1A9998">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
-                                                </svg>
+                                            <img src="{{ asset('images/Checkout Page/' . $m['img']) }}"
+                                                class="h-7 mx-auto" alt="{{ $m['label'] }}"
+                                                onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 hidden" fill="none"
+                                                viewBox="0 0 24 24" stroke-width="1.8" stroke="#1A9998">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
+                                            </svg>
                                             @endif
                                         </div>
                                         <p class="text-xs font-semibold" style="color: var(--mc-text-muted);">
@@ -186,46 +217,46 @@
                                         </p>
                                     </div>
                                 </label>
-                            @endforeach
+                                @endforeach
 
-                        </div>
-                    </div>
-
-                    {{-- Bottom Divider --}}
-                    <div class="h-px w-full" style="background-color: var(--mc-border);"></div>
-
-                    {{-- Total & Pay Button --}}
-                    <div class="flex flex-col sm:flex-row justify-between items-center gap-5">
-                        <div>
-                            <p class="text-xs font-semibold mb-1 uppercase tracking-wider"
-                                style="color: var(--mc-text-faint);">
-                                সর্বমোট পরিশোধযোগ্য
-                            </p>
-                            <p class="text-3xl font-bold"
-                                style="color: var(--mc-primary); font-family:'Lora',serif;">
-                                ৳১,৬০০.০০
-                            </p>
+                            </div>
                         </div>
 
-                        <a href="{{ route('success') }}"
-                            class="btn btn-wide font-bold text-base rounded-xl text-white border-0
-                                   hover:opacity-90 hover:-translate-y-0.5 transition-all duration-200"
-                            style="background: linear-gradient(135deg, #1A9998, #155665);
-                                   box-shadow: 0 8px 24px rgba(26,153,143,0.35);">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
-                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            পরিশোধ করুন
-                        </a>
-                    </div>
+                        {{-- Bottom Divider --}}
+                        <div class="h-px w-full mt-6" style="background-color: var(--mc-border);"></div>
+
+                        {{-- Total & Pay Button --}}
+                        <div class="flex flex-col sm:flex-row justify-between items-center gap-5 mt-6">
+                            <div>
+                                <p class="text-xs font-semibold mb-1 uppercase tracking-wider"
+                                    style="color: var(--mc-text-faint);">
+                                    সর্বমোট পরিশোধযোগ্য
+                                </p>
+                                <p class="text-3xl font-bold"
+                                    style="color: var(--mc-primary); font-family:'Lora',serif;">
+                                    ৳{{ number_format($hourlyRate, 2) }}
+                                </p>
+                            </div>
+
+                            <button type="submit" class="btn btn-wide font-bold text-base rounded-xl text-white border-0
+                                           hover:opacity-90 hover:-translate-y-0.5 transition-all duration-200" style="background: linear-gradient(135deg, #1A9998, #155665);
+                                           box-shadow: 0 8px 24px rgba(26,153,143,0.35);">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                পরিশোধ করুন
+                            </button>
+                        </div>
+
+                    </form>
 
                     {{-- Security Note --}}
                     <p class="text-center text-xs flex items-center justify-center gap-1.5"
                         style="color: var(--mc-text-faint);">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none"
-                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24"
+                            stroke-width="2" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
                         </svg>
@@ -238,6 +269,14 @@
     </div>
 
     <script>
+        // Sync selected payment method radio to hidden input
+        document.querySelectorAll('.payment-radio').forEach(r => {
+            r.addEventListener('change', function () {
+                document.getElementById('selected-payment-method').value = this.value;
+            });
+        });
+
+        // Payment card active state
         function updatePaymentCards() {
             document.querySelectorAll('.payment-label').forEach(label => {
                 const radio = label.querySelector('.payment-radio');

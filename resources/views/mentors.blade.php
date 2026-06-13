@@ -277,9 +277,10 @@
                                             flex items-center justify-center
                                             text-xl font-bold text-teal-600 dark:text-teal-400 overflow-hidden">
                                     @if($mentor->profile && $mentor->profile->avatar)
-                                        <img src="{{ asset('storage/' . $mentor->profile->avatar) }}" alt="Avatar" class="w-full h-full object-cover">
+                                    <img src="{{ asset('storage/' . $mentor->profile->avatar) }}" alt="Avatar"
+                                        class="w-full h-full object-cover">
                                     @else
-                                        {{ strtoupper(substr($mentor->name, 0, 1)) }}
+                                    {{ strtoupper(substr($mentor->name, 0, 1)) }}
                                     @endif
                                 </div>
 

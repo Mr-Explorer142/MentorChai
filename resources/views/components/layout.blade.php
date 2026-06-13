@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>MentorChai</title>
     <link rel="icon" type="image/png" href="{{ asset('images/icon.png') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -122,15 +123,20 @@
 
                             @auth
                             {{-- Vertical divider --}}
-                            <div class="hidden sm:block w-px h-7 bg-#28666e/0.18 dark:bg-#4db6c1/0.25 rounded-sm"></div>
+                            <div class="hidden sm:block w-px h-7 bg-[#28666e]/20 dark:bg-[#4db6c1]/25 rounded-sm"></div>
 
                             {{-- Notification button --}}
                             <div class="relative">
                                 <button id="notificationToggle" onclick="toggleNotifications()"
                                     class="relative p-1.5 rounded-lg hover:bg-teal-50 dark:hover:bg-teal-900/30 transition-colors"
                                     title="নোটিফিকেশন">
-                                    <span id="notificationDot"
-                                        class="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-[#ef4444] border border-white dark:border-[#0f1f2e]"></span>
+
+                                    {{-- Red dot — only show if unread --}}
+                                    @if($unreadCount > 0)
+                                    <span class="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full
+                         bg-[#ef4444] border border-white dark:border-[#0f1f2e]"></span>
+                                    @endif
+
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.8" stroke="#28666e" class="w-5 h-5 dark:stroke-[#4db6c1]">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -138,47 +144,114 @@
                                     </svg>
                                 </button>
 
-                                <div id="notificationPanel"
-                                    class="hidden fixed md:absolute left-4 right-4 md:left-auto md:right-0 top-[4rem] md:top-auto md:mt-2 w-auto md:w-[22rem] rounded-3xl bg-white dark:bg-[#122333] border border-[#28666e]/15 dark:border-[#4db6c1]/20 shadow-[0_20px_45px_rgba(40,102,110,0.12)] dark:shadow-[0_20px_45px_rgba(0,0,0,0.35)] z-[999] overflow-hidden">
-                                    <div
-                                        class="px-4 py-3 bg-[#eaf7f8] dark:bg-[#102d3b] border-b border-[#28666e]/10 dark:border-[#4db6c1]/10">
+                                {{-- Notification Panel --}}
+                                <div id="notificationPanel" class="hidden fixed md:absolute left-4 right-4 md:left-auto md:right-0
+                top-[4rem] md:top-auto md:mt-2 w-auto md:w-[22rem]
+                rounded-3xl bg-white dark:bg-[#122333]
+                border border-[#28666e]/15 dark:border-[#4db6c1]/20
+                shadow-[0_20px_45px_rgba(40,102,110,0.12)] dark:shadow-[0_20px_45px_rgba(0,0,0,0.35)]
+                z-[999] overflow-hidden">
+
+                                    {{-- Panel Header --}}
+                                    <div class="px-4 py-3 bg-[#eaf7f8] dark:bg-[#102d3b]
+                    border-b border-[#28666e]/10 dark:border-[#4db6c1]/10">
                                         <div class="flex items-center justify-between gap-3">
                                             <p class="font-semibold text-[#033f63] dark:text-[#7ec8e3]">নোটিফিকেশন</p>
                                             <div class="flex items-center gap-2">
-                                                <button onclick="markAllAsRead()"
-                                                    class="text-[0.7rem] font-semibold text-[#033f63] dark:text-[#d2f1ff] bg-[#28666e]/10 dark:bg-[#4db6c1]/15 px-2 py-1 rounded-full hover:bg-[#28666e]/15 dark:hover:bg-[#4db6c1]/25 transition-colors">
+                                                @if($unreadCount > 0)
+                                                <button onclick="markAllAsRead()" class="text-[0.7rem] font-semibold text-[#033f63] dark:text-[#d2f1ff]
+                                       bg-[#28666e]/10 dark:bg-[#4db6c1]/15
+                                       px-2 py-1 rounded-full
+                                       hover:bg-[#28666e]/15 dark:hover:bg-[#4db6c1]/25
+                                       transition-colors">
                                                     সবগুলো পড়া চিহ্নিত করুন
                                                 </button>
                                                 <span id="notificationCount"
-                                                    class="badge badge-sm bg-[#28666e] text-white border-0">৩</span>
+                                                    class="badge badge-sm bg-[#28666e] text-white border-0">
+                                                    {{ $unreadCount }}
+                                                </span>
+                                                @endif
                                             </div>
                                         </div>
                                         <p class="text-xs text-[#28666e]/70 dark:text-[#7ec8e3]/70 mt-1">সর্বশেষ আপডেট
                                         </p>
                                     </div>
-                                    <div class="p-3 space-y-2">
-                                        <div
-                                            class="rounded-3xl bg-[#f6fbfb] dark:bg-[#0f2430] p-3 border border-[#28666e]/10 dark:border-[#4db6c1]/10">
-                                            <p class="text-sm text-[#033f63] dark:text-[#d2f1ff]">নতুন সেশন “রিয়্যাক্ট
-                                                মাস্টারক্লাস” এখন লাইভ।</p>
-                                            <p class="text-xs text-[#28666e]/60 dark:text-[#7ec8e3]/70 mt-1">৫ মিনিট আগে
-                                            </p>
+
+                                    {{-- Notification List --}}
+                                    <div class="p-3 space-y-2 max-h-80 overflow-y-auto" id="notificationList">
+                                        @forelse($notifications as $notification)
+                                        <div id="notification-{{ $notification->id }}" class="rounded-2xl p-3 border transition-colors duration-200
+                            {{ is_null($notification->read_at)
+                                ? 'bg-teal-50 dark:bg-teal-900/20 border-[#28666e]/20 dark:border-[#4db6c1]/20'
+                                : 'bg-[#f6fbfb] dark:bg-[#0f2430] border-[#28666e]/10 dark:border-[#4db6c1]/10' }}">
+
+                                            <div class="flex items-start justify-between gap-2">
+                                                <div class="flex-1">
+
+                                                    {{-- Icon based on notification type --}}
+                                                    @php $type = $notification->data['type'] ?? ''; @endphp
+
+                                                    <div class="flex items-center gap-2 mb-1">
+                                                        @if($type === 'session_requested')
+                                                        <span class="w-2 h-2 rounded-full bg-amber-400 shrink-0"></span>
+                                                        @elseif($type === 'session_approved')
+                                                        <span class="w-2 h-2 rounded-full bg-green-400 shrink-0"></span>
+                                                        @elseif($type === 'payment_received')
+                                                        <span class="w-2 h-2 rounded-full bg-teal-400 shrink-0"></span>
+                                                        @else
+                                                        <span class="w-2 h-2 rounded-full bg-gray-400 shrink-0"></span>
+                                                        @endif
+
+                                                        <p
+                                                            class="text-sm text-[#033f63] dark:text-[#d2f1ff] leading-snug">
+                                                            {{ $notification->data['message'] ?? 'নতুন নোটিফিকেশন' }}
+                                                        </p>
+                                                    </div>
+
+                                                    {{-- Checkout link for approved sessions --}}
+                                                    @if($type === 'session_approved' &&
+                                                    isset($notification->data['checkout_url']))
+                                                    <a href="{{ $notification->data['checkout_url'] }}"
+                                                        onclick="markAsRead('{{ $notification->id }}')" class="inline-flex items-center gap-1 mt-1 text-xs font-semibold
+                                          text-teal-600 dark:text-teal-400 hover:underline">
+                                                        পেমেন্ট করুন →
+                                                    </a>
+                                                    @endif
+
+                                                    <p class="text-xs text-[#28666e]/60 dark:text-[#7ec8e3]/70 mt-1">
+                                                        {{ $notification->created_at->diffForHumans() }}
+                                                    </p>
+                                                </div>
+
+                                                {{-- Mark as read button for unread --}}
+                                                @if(is_null($notification->read_at))
+                                                <button onclick="markAsRead('{{ $notification->id }}')" class="shrink-0 w-5 h-5 rounded-full
+                                           bg-teal-100 dark:bg-teal-900/40
+                                           hover:bg-teal-200 dark:hover:bg-teal-800
+                                           flex items-center justify-center
+                                           transition-colors duration-150" title="পড়া চিহ্নিত করুন">
+                                                    <svg class="w-3 h-3 text-teal-600 dark:text-teal-400" fill="none"
+                                                        stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                </button>
+                                                @endif
+                                            </div>
                                         </div>
-                                        <div
-                                            class="rounded-3xl bg-[#f6fbfb] dark:bg-[#0f2430] p-3 border border-[#28666e]/10 dark:border-[#4db6c1]/10">
-                                            <p class="text-sm text-[#033f63] dark:text-[#d2f1ff]">১২ জন নতুন শিক্ষার্থী
-                                                আজ সাইন আপ করেছেন।</p>
-                                            <p class="text-xs text-[#28666e]/60 dark:text-[#7ec8e3]/70 mt-1">২০ মিনিট
-                                                আগে</p>
+                                        @empty
+                                        <div class="text-center py-8">
+                                            <svg class="w-10 h-10 mx-auto mb-2 text-gray-300 dark:text-gray-600"
+                                                fill="none" stroke="currentColor" stroke-width="1.5"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                                            </svg>
+                                            <p class="text-sm text-gray-400 dark:text-gray-500">কোনো নোটিফিকেশন নেই</p>
                                         </div>
-                                        <div
-                                            class="rounded-3xl bg-[#f6fbfb] dark:bg-[#0f2430] p-3 border border-[#28666e]/10 dark:border-[#4db6c1]/10">
-                                            <p class="text-sm text-[#033f63] dark:text-[#d2f1ff]">নতুন নিরাপত্তা আপডেট
-                                                সফলভাবে ইনস্টল হয়েছে।</p>
-                                            <p class="text-xs text-[#28666e]/60 dark:text-[#7ec8e3]/70 mt-1">১ ঘন্টা আগে
-                                            </p>
-                                        </div>
+                                        @endforelse
                                     </div>
+
                                 </div>
                             </div>
                             @endauth
@@ -516,65 +589,132 @@
         }
     </style>
 
-    {{-- ═══════════════ DARK MODE TOGGLE SCRIPT ═══════════════ --}}
     <script>
-        // Profile dropdown functionality
-        function toggleDropdown() {
-            const menu = document.getElementById('dropdown-menu');
-            menu.classList.toggle('hidden');
-        }
+        // ─── Profile Dropdown ───────────────────────────────────────────
+    function toggleDropdown() {
+        const menu = document.getElementById('dropdown-menu');
+        if (menu) menu.classList.toggle('hidden');
+    }
 
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function(event) {
-            const dropdown = document.getElementById('profile-dropdown');
-            const menu = document.getElementById('dropdown-menu');
-            const panel = document.getElementById('notificationPanel');
-            const notifyToggle = document.getElementById('notificationToggle');
+    // ─── Notification Panel ─────────────────────────────────────────
+    function toggleNotifications() {
+        const panel = document.getElementById('notificationPanel');
+        if (!panel) return;
+        panel.classList.toggle('hidden');
+    }
 
-            if (dropdown && menu && !dropdown.contains(event.target)) {
-                menu.classList.add('hidden');
+    function markAsRead(id) {
+        fetch(`/notifications/${id}/mark-read`, {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                'Content-Type': 'application/json',
             }
-
-            if (panel && notifyToggle && !notifyToggle.contains(event.target) && !panel.contains(event.target)) {
-                panel.classList.add('hidden');
+        }).then(() => {
+            const el = document.getElementById('notification-' + id);
+            if (el) {
+                el.classList.remove(
+                    'bg-teal-50', 'border-[#28666e]/20'
+                );
+                el.classList.add(
+                    'bg-[#f6fbfb]', 'border-[#28666e]/10'
+                );
+                const btn = el.querySelector('button');
+                if (btn) btn.remove();
             }
-        });
+            updateUnreadCount(-1);
+        }).catch(err => console.error('Mark read failed:', err));
+    }
 
-        function toggleNotifications() {
-            const panel = document.getElementById('notificationPanel');
-            if (!panel) return;
-            panel.classList.toggle('hidden');
-        }
+    function markAllAsRead() {
+        fetch('/notifications/mark-all-read', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                'Content-Type': 'application/json',
+            }
+        }).then(() => {
+            document.querySelectorAll('#notificationList > div').forEach(el => {
+                el.classList.remove(
+                    'bg-teal-50', 'dark:bg-teal-900/20',
+                    'border-[#28666e]/20', 'dark:border-[#4db6c1]/20'
+                );
+                el.classList.add(
+                    'bg-[#f6fbfb]', 'dark:bg-[#0f2430]',
+                    'border-[#28666e]/10', 'dark:border-[#4db6c1]/10'
+                );
+                const btn = el.querySelector('button[onclick^="markAsRead"]');
+                if (btn) btn.remove();
+            });
 
-        function markAllAsRead() {
-            const dot = document.getElementById('notificationDot');
+            // Hide unread badge and dot
             const count = document.getElementById('notificationCount');
-            if (dot) dot.classList.add('hidden');
-            if (count) count.textContent = '০';
-        }
+            const dot   = document.getElementById('notificationDot');
+            if (count) count.remove();
+            if (dot) dot.remove();
 
-        const toggle = document.getElementById('theme-toggle');
-        const sun    = document.getElementById('icon-sun');
-        const moon   = document.getElementById('icon-moon');
-        const html   = document.documentElement;
+            // Hide the mark all button itself
+            const markAllBtn = document.querySelector('button[onclick="markAllAsRead()"]');
+            if (markAllBtn) markAllBtn.remove();
+        }).catch(err => console.error('Mark all read failed:', err));
+    }
 
-        // Sync icons with current state on page load
-        if (localStorage.theme === 'dark') {
-            sun.classList.remove('hidden');
-            moon.classList.add('hidden');
+    function updateUnreadCount(delta) {
+        const badge = document.getElementById('notificationCount');
+        const dot   = document.getElementById('notificationDot');
+        if (badge) {
+            const current = parseInt(badge.textContent) + delta;
+            if (current <= 0) {
+                badge.remove();
+                if (dot) dot.remove();
+            } else {
+                badge.textContent = current;
+            }
         } else {
-            sun.classList.add('hidden');
-            moon.classList.remove('hidden');
+            if (dot) dot.remove();
+        }
+    }
+
+    // ─── Close dropdowns when clicking outside ──────────────────────
+    document.addEventListener('click', function (event) {
+        // Profile dropdown
+        const dropdown = document.getElementById('profile-dropdown');
+        const menu     = document.getElementById('dropdown-menu');
+        if (dropdown && menu && !dropdown.contains(event.target)) {
+            menu.classList.add('hidden');
         }
 
-        toggle.addEventListener('click', () => {
-            const isDark = html.classList.toggle('dark');
-            localStorage.theme = isDark ? 'dark' : 'light';
+        // Notification panel
+        const panel        = document.getElementById('notificationPanel');
+        const notifyToggle = document.getElementById('notificationToggle');
+        if (panel && notifyToggle
+            && !notifyToggle.contains(event.target)
+            && !panel.contains(event.target)) {
+            panel.classList.add('hidden');
+        }
+    });
 
-            // Swap icons
-            sun.classList.toggle('hidden', !isDark);
-            moon.classList.toggle('hidden', isDark);
-        });
+    // ─── Dark Mode Toggle ───────────────────────────────────────────
+    const toggle = document.getElementById('theme-toggle');
+    const sun    = document.getElementById('icon-sun');
+    const moon   = document.getElementById('icon-moon');
+    const html   = document.documentElement;
+
+    // Sync icons on page load
+    if (localStorage.theme === 'dark') {
+        sun.classList.remove('hidden');
+        moon.classList.add('hidden');
+    } else {
+        sun.classList.add('hidden');
+        moon.classList.remove('hidden');
+    }
+
+    toggle.addEventListener('click', () => {
+        const isDark = html.classList.toggle('dark');
+        localStorage.theme = isDark ? 'dark' : 'light';
+        sun.classList.toggle('hidden', !isDark);
+        moon.classList.toggle('hidden', isDark);
+    });
     </script>
 
     @stack('scripts')

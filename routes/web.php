@@ -38,7 +38,6 @@ Route::get('/register/student', [RegisterController::class, 'showStudentForm'])-
 Route::get('/register/teacher', [RegisterController::class, 'showTeacherForm'])->name('teacher_register');
 Route::post('/register', [RegisterController::class, 'register'])->name('register');
 
-// Social Authentication (Google, GitHub)
 Route::get('/auth/{provider}/redirect/{role}', [SocialAuthController::class, 'redirect'])
     ->where('provider', 'google|github')
     ->where('role', 'student|mentor|login')
@@ -101,22 +100,38 @@ Route::middleware('auth')->group(function () {
         Route::post('/profile/avatar', [ProfileController::class, 'updateAvatar'])->name('update_avatar');
         Route::delete('/profile/avatar', [ProfileController::class, 'removeAvatar'])->name('remove_avatar');
 
-
         Route::get('/live-session', fn() => view('session.live-session'))->name('live-session');
+
+        // ✏️ CHANGED: approve route moved here (both mentor and student need access)
+        Route::post('/session/{session}/approve', [SessionTopicController::class, 'approve'])->name('session.approve');
+
+        // Notification routes
+        Route::post('/notifications/mark-all-read', function (Request $request) {
+            $request->user()->unreadNotifications->markAsRead();
+            return response()->json(['success' => true]);
+        })->name('notifications.markAllRead');
+
+        Route::post('/notifications/{id}/mark-read', function (Request $request, $id) {
+            $request->user()->notifications()->where('id', $id)->update(['read_at' => now()]);
+            return response()->json(['success' => true]);
+        })->name('notifications.markRead');
 
         // Student-only routes
         Route::middleware('student')->group(function () {
             Route::get('/dashboard/student', [DashboardController::class, 'studentDashboard'])->name('student_dashboard');
-            Route::get('/checkout', function () {
-                return view('checkout.checkout', [
-                    'student'    => (object)['id' => 'STU-101', 'name' => 'Wasif Khan Lodi Adib'],
-                    'mentor'     => (object)['id' => 'MEN-55',  'name' => 'Walid Ahmed Samy Sorkar'],
-                    'topic'      => 'Laravel Basics',
-                    'hourlyRate' => 50,
-                    'hours'      => 2,
-                    'paidAmount' => 100,
-                ]);
-            })->name('checkout.checkout');
+
+            // Route::get('/checkout', function () {
+            //     return view('checkout.checkout', [
+            //         'student'    => (object)['id' => 'STU-101', 'name' => 'Wasif Khan Lodi Adib'],
+            //         'mentor'     => (object)['id' => 'MEN-55',  'name' => 'Walid Ahmed Samy Sorkar'],
+            //         'topic'      => 'Laravel Basics',
+            //         'hourlyRate' => 50,
+            //         'hours'      => 2,
+            //         'paidAmount' => 100,
+            //     ]);
+            // })->name('checkout.checkout');
+
+            Route::get('/checkout/{sessionTopic}', [SessionTopicController::class, 'checkout'])->name('checkout');
 
             Route::get('/success', function () {
                 return view('checkout.success', [
@@ -124,8 +139,13 @@ Route::middleware('auth')->group(function () {
                     'amount'        => session('amount', 0),
                 ]);
             })->name('success');
+
+            // ✏️ EXISTING — already here, kept as is
             Route::get('/session/request/{mentor}', [SessionTopicController::class, 'create'])->name('session.request.create');
             Route::post('/session/request', [SessionTopicController::class, 'store'])->name('session.request.store');
+
+            // ✏️ NEW — payment success handler for student
+            Route::post('/session/{session}/payment', [SessionTopicController::class, 'paymentSuccess'])->name('session.payment.success');
         });
 
         // Mentor-only routes
