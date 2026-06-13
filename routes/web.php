@@ -21,6 +21,7 @@ Route::get('/', fn() => view('home'))->name('home');
 Route::get('/about', fn() => view('about'))->name('about');
 Route::get('/contact', fn() => view('contact'))->name('contact');
 Route::get('/faq', fn() => view('faq'))->name('faq');
+Route::get('/terms', fn() => view('terms'))->name('terms');
 Route::get('/mentors', [MentorsController::class, 'index'])->name('mentors');
 Route::get('/mentors/suggestions', [MentorsController::class, 'suggestions'])->name('mentors.suggestions');
 
