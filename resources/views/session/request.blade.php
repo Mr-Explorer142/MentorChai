@@ -1,5 +1,6 @@
 <x-layout>
-    <div class="min-h-screen flex items-center justify-center p-5 md:p-10 transition-colors duration-300" style="background-color: var(--mc-bg);">
+    <div
+        class="min-h-screen flex items-center justify-center p-5 md:p-10 bg-gradient-to-br from-teal-50 via-white to-white">
 
         {{-- Subtle grid texture --}}
         <div class="fixed inset-0 pointer-events-none opacity-[0.03] dark:opacity-[0.015]"

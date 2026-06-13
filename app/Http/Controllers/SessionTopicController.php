@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\PaymentReceivedNotification;
+use App\Notifications\SessionRequestedNotification;
+use App\Notifications\SessionApprovedNotification;
 use App\Enums\SessionStatus;
 use App\Models\SessionTopic;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SessionTopicController extends Controller
 {
@@ -22,14 +26,63 @@ class SessionTopicController extends Controller
             'note'      => 'nullable|string|max:1000',
         ]);
 
-        SessionTopic::create([
+        $session = SessionTopic::create([
             'student_id' => $request->user()->id,
             'mentor_id'  => $request->mentor_id,
             'topic'      => $request->topic,
+            'note'       => $request->note,
             'status'     => SessionStatus::Pending,
         ]);
 
+        // Notify the mentor
+        $session->mentor->notify(new SessionRequestedNotification($session));
+
         return redirect()->route('student_dashboard')
             ->with('success', 'সেশনের অনুরোধ সফলভাবে পাঠানো হয়েছে!');
+    }
+
+    // Session approval
+    public function approve(SessionTopic $session)
+    {
+        $session->update([
+            'status'      => SessionStatus::Approved,
+            'approved_at' => now(),
+        ]);
+
+        // Notify the student
+        $session->student->notify(new SessionApprovedNotification($session));
+
+        return back()->with('success', 'সেশন অনুমোদিত হয়েছে।');
+    }
+
+    // checkout
+    public function checkout(SessionTopic $sessionTopic)
+    {
+        // Make sure only the student who owns this session can access it
+        abort_unless((int) Auth::id() === (int) $sessionTopic->student_id, 403);
+
+        // Make sure session is approved before allowing payment
+        abort_if($sessionTopic->status !== SessionStatus::Approved, 403);
+
+        return view('checkout.checkout', [
+            'sessionTopic' => $sessionTopic,
+            'mentor'       => $sessionTopic->mentor->load('profile'),
+            'student'      => $sessionTopic->student,
+            'topic'        => $sessionTopic->topic,
+            'hourlyRate'   => $sessionTopic->mentor->profile->hourly_rate,
+        ]);
+    }
+
+    // Payment notification
+    public function paymentSuccess(SessionTopic $session)
+    {
+        $session->update([
+            'status' => SessionStatus::Completed,
+        ]);
+
+        // Notify the mentor
+        $session->mentor->notify(new PaymentReceivedNotification($session));
+
+        return redirect()->route('success');
     }
 }
