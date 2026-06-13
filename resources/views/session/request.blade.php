@@ -1,10 +1,10 @@
 <x-layout>
-    <div
-        class="min-h-screen flex items-center justify-center p-5 md:p-10 bg-gradient-to-br from-teal-50 via-white to-white">
+    <div class="min-h-screen flex items-center justify-center p-5 md:p-10"
+        style="background: linear-gradient(135deg, var(--mc-bg) 0%, var(--mc-surface) 60%, var(--mc-bg) 100%);">
 
         {{-- Subtle grid texture --}}
         <div class="fixed inset-0 pointer-events-none opacity-[0.03] dark:opacity-[0.015]"
-            style="background-image: linear-gradient(#0d9488 1px, transparent 1px), linear-gradient(90deg, #0d9488 1px, transparent 1px); background-size: 40px 40px;">
+            style="background-image: linear-gradient(var(--mc-primary) 1px, transparent 1px), linear-gradient(90deg, var(--mc-primary) 1px, transparent 1px); background-size: 40px 40px;">
         </div>
 
         <div class="w-full max-w-2xl relative z-10">
@@ -26,7 +26,8 @@
             </div>
 
             {{-- Main Card --}}
-            <div class="rounded-2xl border shadow-xl shadow-teal-100/40 dark:shadow-none overflow-hidden transition-colors duration-300" style="background: var(--mc-surface); border-color: var(--mc-border-teal-sub);">
+            <div class="rounded-2xl border shadow-xl overflow-hidden transition-colors duration-300"
+                style="background: var(--mc-surface); border-color: var(--mc-border-teal-sub); box-shadow: var(--mc-shadow-lg);">
 
                 {{-- Card Top Accent --}}
                 <div class="h-1.5 w-full" style="background: linear-gradient(90deg, #1A9998, #155665);"></div>
@@ -37,9 +38,10 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
                         {{-- Student Info --}}
-                        <div class="rounded-xl p-4 border transition-colors duration-300" style="background: rgba(20, 184, 166, 0.05); border-color: var(--mc-border-teal-sub);">
-                            <h3
-                                class="font-bold text-xs uppercase tracking-widest text-teal-600 dark:text-teal-400 mb-3 flex items-center gap-2">
+                        <div class="rounded-xl p-4 border transition-colors duration-300"
+                            style="background: var(--mc-surface-hover); border-color: var(--mc-border-teal-sub);">
+                            <h3 class="font-bold text-xs uppercase tracking-widest mb-3 flex items-center gap-2"
+                                style="color: var(--mc-primary);">
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -48,22 +50,24 @@
                                 অনুরোধকারী শিক্ষার্থী
                             </h3>
                             <div class="flex items-center gap-3">
-                                <div
-                                    class="w-10 h-10 rounded-full flex items-center justify-center
-                                            text-sm font-bold text-teal-700 dark:text-teal-300 shrink-0" style="background: rgba(20, 184, 166, 0.15);">
+                                <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold shrink-0"
+                                    style="background: var(--mc-border-teal); color: var(--mc-primary);">
                                     {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
                                 </div>
                                 <div>
-                                    <p class="text-sm font-bold" style="color: var(--mc-text);">{{ auth()->user()->name }}</p>
-                                    <p class="text-xs" style="color: var(--mc-text-muted);">{{ auth()->user()->email }}</p>
+                                    <p class="text-sm font-bold" style="color: var(--mc-text);">{{ auth()->user()->name
+                                        }}</p>
+                                    <p class="text-xs" style="color: var(--mc-text-muted);">{{ auth()->user()->email }}
+                                    </p>
                                 </div>
                             </div>
                         </div>
 
                         {{-- Mentor Info --}}
-                        <div class="rounded-xl p-4 border transition-colors duration-300" style="background: rgba(100, 116, 139, 0.05); border-color: var(--mc-border-teal-sub);">
-                            <h3
-                                class="font-bold text-xs uppercase tracking-widest mb-3 flex items-center gap-2" style="color: var(--mc-text-muted);">
+                        <div class="rounded-xl p-4 border transition-colors duration-300"
+                            style="background: var(--mc-surface-hover); border-color: var(--mc-border-teal-sub);">
+                            <h3 class="font-bold text-xs uppercase tracking-widest mb-3 flex items-center gap-2"
+                                style="color: var(--mc-text-muted);">
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -72,9 +76,8 @@
                                 নির্বাচিত মেন্টর
                             </h3>
                             <div class="flex items-center gap-3">
-                                <div
-                                    class="w-10 h-10 rounded-full flex items-center justify-center
-                                            text-sm font-bold shrink-0" style="background: rgba(100, 116, 139, 0.15); color: var(--mc-text-sub);">
+                                <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold shrink-0"
+                                    style="background: var(--mc-border); color: var(--mc-text-sub);">
                                     {{ strtoupper(substr($mentor->name, 0, 1)) }}
                                 </div>
                                 <div>
@@ -91,7 +94,8 @@
                     {{-- Divider --}}
                     <div class="flex items-center gap-3">
                         <div class="flex-1 h-px" style="background-color: var(--mc-border-teal-sub);"></div>
-                        <span class="text-xs font-semibold uppercase tracking-widest" style="color: var(--mc-text-muted); opacity: 0.7;">সেশনের বিবরণ</span>
+                        <span class="text-xs font-semibold uppercase tracking-widest"
+                            style="color: var(--mc-text-muted); opacity: 0.7;">সেশনের বিবরণ</span>
                         <div class="flex-1 h-px" style="background-color: var(--mc-border-teal-sub);"></div>
                     </div>
 
@@ -104,80 +108,144 @@
 
                         {{-- Topic Dropdown --}}
                         <div>
-                            <label class="block text-xs font-bold uppercase tracking-widest mb-2" style="color: var(--mc-text-sub);">
+                            <label class="block text-xs font-bold uppercase tracking-widest mb-2"
+                                style="color: var(--mc-text-sub);">
                                 সেশনের বিষয় (টপিক)
                             </label>
                             <div class="relative">
-                                <select name="topic" required
-                                    class="w-full appearance-none rounded-xl px-4 py-3 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-teal-400 transition-colors duration-200 cursor-pointer border"
-                                    style="background: var(--mc-surface); border-color: var(--mc-border-teal-sub); color: var(--mc-text);">
-                                    <option value="" disabled selected>— টপিক বেছে নিন —</option>
+                                <select name="topic" id="topicSelect" required
+                                    class="w-full appearance-none rounded-xl px-4 py-3 pr-10 text-sm focus:outline-none focus:ring-2 transition-colors duration-200 cursor-pointer border"
+                                    style="background: var(--mc-surface); border-color: var(--mc-border-teal-sub); color: var(--mc-text); ring-color: var(--mc-primary);"
+                                    onfocus="this.style.borderColor='var(--mc-primary)'"
+                                    onblur="this.style.borderColor='var(--mc-border-teal-sub)'">
+                                    <option value="" disabled selected style="color: var(--mc-text-muted);">— টপিক বেছে
+                                        নিন —</option>
                                     @if (!empty($mentor->profile?->skills))
-                                        @foreach (explode(',', $mentor->profile->skills) as $skill)
-                                            <option value="{{ trim($skill) }}">{{ trim($skill) }}</option>
-                                        @endforeach
+                                    @foreach (explode(',', $mentor->profile->skills) as $skill)
+                                    <option value="{{ trim($skill) }}"
+                                        style="background: var(--mc-surface); color: var(--mc-text);">
+                                        {{ trim($skill) }}
+                                    </option>
+                                    @endforeach
                                     @else
-                                        <option disabled>কোনো দক্ষতা যোগ করা হয়নি</option>
+                                    <option disabled style="color: var(--mc-text-muted);">কোনো দক্ষতা যোগ করা হয়নি
+                                    </option>
                                     @endif
                                 </select>
                                 {{-- Dropdown arrow --}}
                                 <div class="pointer-events-none absolute inset-y-0 right-4 flex items-center">
-                                    <svg class="w-4 h-4 text-teal-500" fill="none" stroke="currentColor"
-                                        stroke-width="2" viewBox="0 0 24 24">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
+                                        viewBox="0 0 24 24" style="color: var(--mc-primary);">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                                     </svg>
                                 </div>
                             </div>
                             @error('topic')
-                                <p class="text-xs text-red-500 mt-1.5 flex items-center gap-1">
-                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
-                                    </svg>
-                                    {{ $message }}
-                                </p>
+                            <p class="text-xs text-red-500 mt-1.5 flex items-center gap-1">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                                </svg>
+                                {{ $message }}
+                            </p>
                             @enderror
                         </div>
 
-                        {{-- Hourly Rate Info --}}
-                        <div class="flex items-center gap-3 px-4 py-3 rounded-xl border transition-colors duration-300" style="background: rgba(20, 184, 166, 0.05); border-color: var(--mc-border-teal-sub);">
-                            <svg class="w-4 h-4 text-teal-500 shrink-0" fill="none" stroke="currentColor"
-                                stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75" />
-                            </svg>
-                            <p class="text-sm text-teal-700 dark:text-teal-400">
-                                এই মেন্টরের ঘণ্টা প্রতি রেট:
-                                <span class="font-bold">
-                                    ৳{{ $mentor->profile?->hourly_rate ?? '—' }}
-                                </span>
-                            </p>
+                        {{-- Duration Dropdown --}}
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-widest mb-2"
+                                style="color: var(--mc-text-sub);">
+                                সেশনের সময়কাল
+                            </label>
+                            <div class="relative">
+                                <select name="duration_hours" id="durationSelect" required class="w-full appearance-none rounded-xl px-4 py-3 pr-10 text-sm
+                                           focus:outline-none focus:ring-2 transition-colors duration-200
+                                           cursor-pointer border" style="background: var(--mc-surface); border-color: var(--mc-border-teal-sub);
+                                           color: var(--mc-text);" onfocus="this.style.borderColor='var(--mc-primary)'"
+                                    onblur="this.style.borderColor='var(--mc-border-teal-sub)'"
+                                    onchange="calculateTotal()">
+                                    <option value="1">১ ঘণ্টা</option>
+                                    <option value="2">২ ঘণ্টা</option>
+                                    <option value="3">৩ ঘণ্টা</option>
+                                    <option value="4">৪ ঘণ্টা</option>
+                                </select>
+                                <div class="pointer-events-none absolute inset-y-0 right-4 flex items-center">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
+                                        viewBox="0 0 24 24" style="color: var(--mc-primary);">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- Hourly Rate + Total Calculation --}}
+                        <div class="rounded-xl border transition-colors duration-300 overflow-hidden"
+                            style="border-color: var(--mc-border-teal);">
+
+                            {{-- Rate row --}}
+                            <div class="flex items-center justify-between px-4 py-3"
+                                style="background: var(--mc-surface-hover);">
+                                <div class="flex items-center gap-2">
+                                    <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2"
+                                        viewBox="0 0 24 24" style="color: var(--mc-primary);">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75" />
+                                    </svg>
+                                    <p class="text-sm" style="color: var(--mc-text-sub);">ঘণ্টা প্রতি রেট</p>
+                                </div>
+                                <p class="text-sm font-bold" style="color: var(--mc-primary);">
+                                    ৳{{ $mentor->profile?->hourly_rate ?? '0' }}
+                                </p>
+                            </div>
+
+                            {{-- Divider --}}
+                            <div class="h-px" style="background-color: var(--mc-border-teal-sub);"></div>
+
+                            {{-- Total row --}}
+                            <div class="flex items-center justify-between px-4 py-3"
+                                style="background: rgba(26,153,143,0.06);">
+                                <div class="flex items-center gap-2">
+                                    <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2"
+                                        viewBox="0 0 24 24" style="color: var(--mc-primary);">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M9 14.25l6-6m4.5-3.493V21.75l-3.75-1.5-3.75 1.5-3.75-1.5-3.75 1.5V4.757c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0c1.1.128 1.907 1.077 1.907 2.185z" />
+                                    </svg>
+                                    <p class="text-sm font-bold" style="color: var(--mc-text);">সর্বমোট পরিশোধযোগ্য</p>
+                                </div>
+                                <p class="text-lg font-bold" id="totalAmount" style="color: var(--mc-primary);">
+                                    ৳{{ $mentor->profile?->hourly_rate ?? '0' }}
+                                </p>
+                            </div>
+
                         </div>
 
                         {{-- Note / Message --}}
                         <div>
-                            <label class="block text-xs font-bold uppercase tracking-widest mb-2" style="color: var(--mc-text-sub);">
+                            <label class="block text-xs font-bold uppercase tracking-widest mb-2"
+                                style="color: var(--mc-text-sub);">
                                 বার্তা / নোট
-                                <span class="font-normal normal-case tracking-normal opacity-60">(ঐচ্ছিক)</span>
+                                <span class="font-normal normal-case tracking-normal"
+                                    style="opacity: 0.6;">(ঐচ্ছিক)</span>
                             </label>
-                            <textarea name="note" rows="4" placeholder="মেন্টরকে আপনার সমস্যা বা প্রয়োজন সম্পর্কে জানান..."
-                                class="w-full rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-400 transition-colors duration-200 resize-none border placeholder-gray-400 dark:placeholder-gray-500"
-                                style="background: var(--mc-surface); border-color: var(--mc-border-teal-sub); color: var(--mc-text);">{{ old('note') }}</textarea>
+                            <textarea name="note" rows="4"
+                                placeholder="মেন্টরকে আপনার সমস্যা বা প্রয়োজন সম্পর্কে জানান..."
+                                class="w-full rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 transition-colors duration-200 resize-none border border-[#ccecee] dark:border-[#1f4f54] placeholder:text-gray-400 dark:placeholder:text-gray-500"
+                                style="background: var(--mc-surface); color: var(--mc-text);">{{ old('note') }}</textarea>
                         </div>
 
                         {{-- Status Info Badge --}}
-                        <div
-                            class="flex items-start gap-2.5 px-4 py-3 rounded-xl border transition-colors duration-300"
-                            style="background: rgba(245, 158, 11, 0.05); border-color: rgba(245, 158, 11, 0.2);">
+                        <div class="flex items-start gap-2.5 px-4 py-3 rounded-xl border transition-colors duration-300"
+                            style="background: rgba(245, 158, 11, 0.06); border-color: rgba(245, 158, 11, 0.25);">
                             <svg class="w-4 h-4 text-amber-500 shrink-0 mt-0.5" fill="none" stroke="currentColor"
                                 stroke-width="2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
                             </svg>
                             <div>
-                                <p class="text-xs font-bold text-amber-600 dark:text-amber-500 mb-0.5">অনুরোধ পেন্ডিং থাকবে</p>
-                                <p class="text-xs text-amber-600/80 dark:text-amber-500/80 leading-relaxed">
+                                <p class="text-xs font-bold mb-0.5 text-amber-600 dark:text-amber-400">অনুরোধ পেন্ডিং
+                                    থাকবে</p>
+                                <p class="text-xs leading-relaxed text-amber-700 dark:text-amber-500/90">
                                     আপনার অনুরোধ পাঠানোর পর মেন্টর অনুমোদন করলে সেশন নিশ্চিত হবে।
                                     পেমেন্ট শুধুমাত্র অনুমোদনের পরেই সম্পন্ন করতে হবে।
                                 </p>
@@ -190,17 +258,16 @@
                         {{-- Action Buttons --}}
                         <div class="flex flex-col sm:flex-row gap-3">
                             <a href="{{ route('mentor_profile', $mentor->id) }}"
-                                class="flex-1 text-center py-3 rounded-xl text-sm font-semibold border hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-200"
-                                style="border-color: var(--mc-border-teal-sub); color: var(--mc-text-sub);">
+                                class="flex-1 text-center py-3 rounded-xl text-sm font-semibold border transition-colors duration-200"
+                                style="border-color: var(--mc-border-teal-sub); color: var(--mc-text-sub); background: transparent;"
+                                onmouseover="this.style.background='var(--mc-surface-hover)'"
+                                onmouseout="this.style.background='transparent'">
                                 ← ফিরে যান
                             </a>
-                            <button type="submit"
-                                class="flex-1 py-3 rounded-xl text-sm font-bold text-white
-                                           flex items-center justify-center gap-2
-                                           hover:opacity-90 hover:-translate-y-0.5
-                                           transition-all duration-200"
-                                style="background: linear-gradient(135deg, #1A9998, #155665);
-                                           box-shadow: 0 6px 20px rgba(26,153,143,0.3);">
+                            <button type="submit" id="submitBtn" disabled class="flex-1 py-3 rounded-xl text-sm font-bold text-white
+               flex items-center justify-center gap-2
+               transition-all duration-200 cursor-not-allowed opacity-50" style="background: linear-gradient(135deg, #1A9998, #155665);
+               box-shadow: 0 6px 20px rgba(26,153,143,0.3);">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -216,7 +283,8 @@
             </div>
 
             {{-- Footer note --}}
-            <p class="text-center text-xs mt-6 flex items-center justify-center gap-1.5" style="color: var(--mc-text-muted); opacity: 0.8;">
+            <p class="text-center text-xs mt-6 flex items-center justify-center gap-1.5"
+                style="color: var(--mc-text-muted); opacity: 0.8;">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
@@ -226,4 +294,48 @@
 
         </div>
     </div>
+
+    @push('scripts')
+    <script>
+        const hourlyRate = {{ (float) ($mentor->profile?->hourly_rate ?? 0) }};
+
+    const topicSelect    = document.getElementById('topicSelect');
+    const durationSelect = document.getElementById('durationSelect');
+    const submitBtn      = document.getElementById('submitBtn');
+
+    function calculateTotal() {
+        const hours = parseInt(durationSelect.value) || 1;
+        const total = hourlyRate * hours;
+        document.getElementById('totalAmount').textContent =
+            '৳' + total.toLocaleString('en-IN', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+    }
+
+    function validateForm() {
+        const topicSelected   = topicSelect.value !== '';
+        const durationSelected = durationSelect.value !== '';
+
+        if (topicSelected && durationSelected) {
+            submitBtn.disabled = false;
+            submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            submitBtn.classList.add('hover:opacity-90', 'hover:-translate-y-0.5', 'cursor-pointer');
+        } else {
+            submitBtn.disabled = true;
+            submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            submitBtn.classList.remove('hover:opacity-90', 'hover:-translate-y-0.5');
+        }
+
+        calculateTotal();
+    }
+
+    topicSelect.addEventListener('change', validateForm);
+    durationSelect.addEventListener('change', validateForm);
+
+    // Run on load
+    validateForm();
+    </script>
+    @endpush
+
 </x-layout>

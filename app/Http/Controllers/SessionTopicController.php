@@ -20,18 +20,21 @@ class SessionTopicController extends Controller
 
     public function store(Request $request)
     {
+
         $request->validate([
-            'mentor_id' => 'required|exists:users,id',
-            'topic'     => 'required|string|max:255',
-            'note'      => 'nullable|string|max:1000',
+            'mentor_id'      => 'required|exists:users,id',
+            'topic'          => 'required|string|max:255',
+            'note'           => 'nullable|string|max:1000',
+            'duration_hours' => 'required|integer|min:1|max:4',
         ]);
 
         $session = SessionTopic::create([
-            'student_id' => $request->user()->id,
-            'mentor_id'  => $request->mentor_id,
-            'topic'      => $request->topic,
-            'note'       => $request->note,
-            'status'     => SessionStatus::Pending,
+            'student_id'     => $request->user()->id,
+            'mentor_id'      => $request->mentor_id,
+            'topic'          => $request->topic,
+            'note'           => $request->note,
+            'duration_hours' => $request->duration_hours,
+            'status'         => SessionStatus::Pending,
         ]);
 
         // Notify the mentor

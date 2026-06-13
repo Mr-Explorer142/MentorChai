@@ -12,6 +12,7 @@ class SessionTopic extends Model
         'mentor_id',
         'topic',
         'note',
+        'duration_hours',
         'status',
         'approved_at',
     ];
