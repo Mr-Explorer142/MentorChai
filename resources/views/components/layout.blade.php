@@ -540,6 +540,18 @@
                           {{ Route::is('faq') ? 'text-![#28666e] dark:text-![#4db6c1] font-bold! after:w-full!' : '' }}">
                     প্রায়শই জিজ্ঞাসিত প্রশ্নাবলী
                 </a>
+                <span class="text-[#28666e]/25 dark:text-[#4db6c1]/25 text-xs leading-6">•</span>
+                <a href="{{ route('terms') }}"
+                    class="text-sm font-medium text-[#033f63]/70 dark:text-[#7ec8e3]/70 no-underline
+                          relative pb-0.5
+                          transition-all duration-300 ease-in-out
+                          hover:text-[#28666e] dark:hover:text-[#4db6c1] hover:font-bold
+                          after:absolute after:bottom-0 after:left-0 after:h-[1.5px] after:w-0
+                          after:bg-[#28666e] dark:after:bg-[#4db6c1] after:rounded-full
+                          after:transition-[width] after:duration-300 hover:after:w-full
+                          {{ Route::is('terms') ? 'text-![#28666e] dark:text-![#4db6c1] font-bold! after:w-full!' : '' }}">
+                    শর্তাবলী ও নীতিমালা
+                </a>
             </nav>
 
             {{-- Social icons --}}
