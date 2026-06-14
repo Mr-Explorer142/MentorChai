@@ -55,7 +55,7 @@
 
                         {{-- CTA Buttons --}}
                         <div class="flex flex-col gap-4 pt-2 sm:flex-row">
-                            <a href="#"
+                            <a href="{{ route('mentors') }}"
                                 class="inline-flex items-center justify-center gap-2 rounded-xl px-7 py-3.5 text-base font-bold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5"
                                 style="background: linear-gradient(135deg, #1A9998, #155665); box-shadow: 0 8px 24px rgba(26,153,152,0.35);">
                                 এখনই শিক্ষক খুঁজুন
@@ -423,9 +423,9 @@
                         {{-- Perks --}}
                         <div class="grid grid-cols-2 gap-3">
                             @foreach(['ফ্লেক্সিবল স্কেডিউল', 'ঘরে বসে আয়', 'দ্রুত পেমেন্ট', 'যেকোনো বিষয়'] as $perk)
-                            <div class="flex items-center gap-2.5 rounded-xl px-4 py-3"
-                                style="background: var(--mc-surface); border: 1px solid var(--mc-border-teal-sub); box-shadow: var(--mc-shadow-sm);">
-                                <div class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full"
+                            <div class="group flex items-center gap-2.5 rounded-xl px-4 py-3"
+                                style="background: var(--mc-surface); border: 1.5px solid var(--mc-primary); box-shadow: 0 4px 12px rgba(26,153,152,0.15);">
+                                <div class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full transition-transform duration-300 group-hover:scale-110"
                                     style="background: rgba(26,153,152,0.12);">
                                     <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke-width="3">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"
@@ -439,7 +439,7 @@
                         </div>
 
                         <a href="{{ route('terms') }}"
-                            class="inline-flex items-center gap-3 rounded-2xl px-8 py-4 text-base font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
+                            class="inline-flex items-center gap-3 rounded-2xl px-8 py-4 text-base font-bold text-white border border-black transition-all duration-500 ease-in-out hover:-translate-y-2 hover:shadow-2xl"
                             style="background: linear-gradient(135deg, var(--mc-primary), var(--mc-sage)); box-shadow: 0 8px 28px rgba(40,102,110,0.3);">
                             বিস্তারিত জানতে এখানে ক্লিক করুন
                             <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
