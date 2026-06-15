@@ -6,24 +6,25 @@
         AVATAR FLASH MESSAGES
         ══════════════════════ --}}
         @if(session('avatar_success'))
-            <div id="avatarFlash"
-                 class="flex items-center gap-3 px-5 py-4 rounded-2xl shadow-lg font-semibold text-white"
-                 style="background:#1A998F;">
-                <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                {{ session('avatar_success') }}
-            </div>
+        <div id="avatarFlash" class="flex items-center gap-3 px-5 py-4 rounded-2xl shadow-lg font-semibold text-white"
+            style="background:#1A998F;">
+            <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            {{ session('avatar_success') }}
+        </div>
         @endif
         @if($errors->has('avatar'))
-            <div id="avatarErrorFlash"
-                 class="flex items-center gap-3 px-5 py-4 rounded-2xl shadow-lg font-semibold text-white"
-                 style="background:#ef4444;">
-                <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
-                </svg>
-                {{ $errors->first('avatar') }}
-            </div>
+        <div id="avatarErrorFlash"
+            class="flex items-center gap-3 px-5 py-4 rounded-2xl shadow-lg font-semibold text-white"
+            style="background:#ef4444;">
+            <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+            </svg>
+            {{ $errors->first('avatar') }}
+        </div>
         @endif
 
         {{-- ══════════════════════
@@ -36,43 +37,39 @@
                     {{-- Avatar Container --}}
                     <div class="relative shrink-0" style="width:112px; height:112px;">
                         {{-- Avatar Circle --}}
-                        <div class="group"
-                             style="width:112px;height:112px;border-radius:9999px;overflow:hidden;
+                        <div class="group" style="width:112px;height:112px;border-radius:9999px;overflow:hidden;
                                     border:4px solid var(--mc-surface);
                                     box-shadow:var(--mc-shadow-md),0 0 0 3px var(--mc-border-teal);
                                     transition:box-shadow .2s;">
                             @if($student->profile && $student->profile->avatar)
-                                <img id="profileAvatarImg"
-                                     src="{{ asset('storage/' . $student->profile->avatar) }}"
-                                     alt="Profile Photo"
-                                     style="width:100%;height:100%;object-fit:cover;display:block;" />
+                            <img id="profileAvatarImg" src="{{ asset('storage/' . $student->profile->avatar) }}"
+                                alt="Profile Photo" style="width:100%;height:100%;object-fit:cover;display:block;" />
                             @else
-                                <img id="profileAvatarImg"
-                                     src="https://ui-avatars.com/api/?name={{ urlencode($student->name) }}&background=28666e&color=ffffff&size=224&font-size=0.38&bold=true"
-                                     alt="Profile Photo"
-                                     style="width:100%;height:100%;object-fit:cover;display:block;" />
+                            <img id="profileAvatarImg"
+                                src="https://ui-avatars.com/api/?name={{ urlencode($student->name) }}&background=28666e&color=ffffff&size=224&font-size=0.38&bold=true"
+                                alt="Profile Photo" style="width:100%;height:100%;object-fit:cover;display:block;" />
                             @endif
                         </div>
 
                         {{-- Small red dustbin button at the bottom-right corner --}}
                         @if(auth()->id() === $student->id && $student->profile && $student->profile->avatar)
                         <form action="{{ route('remove_avatar') }}" method="POST"
-                              style="position:absolute; bottom:-4px; right:-4px; margin:0; z-index:10;"
-                              onsubmit="return confirm('নিশ্চিতভাবে প্রোফাইল ছবি সরাবেন?');">
+                            style="position:absolute; bottom:-4px; right:-4px; margin:0; z-index:10;"
+                            onsubmit="return confirm('নিশ্চিতভাবে প্রোফাইল ছবি সরাবেন?');">
                             @csrf
                             @method('DELETE')
-                            <button type="submit"
-                                    title="ছবি সরিয়ে দিন"
-                                    style="width:32px; height:32px; border-radius:9999px;
+                            <button type="submit" title="ছবি সরিয়ে দিন" style="width:32px; height:32px; border-radius:9999px;
                                            background:#ef4444; border:2px solid #fff; cursor:pointer;
                                            display:flex; align-items:center; justify-content:center;
                                            box-shadow:0 2px 8px rgba(239,68,68,0.4);
                                            transition:all 0.2s;"
-                                    onmouseover="this.style.background='#dc2626'; this.style.transform='scale(1.15)';"
-                                    onmouseout="this.style.background='#ef4444'; this.style.transform='scale(1)';"
-                                    onclick="event.stopPropagation();">
-                                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="#fff">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/>
+                                onmouseover="this.style.background='#dc2626'; this.style.transform='scale(1.15)';"
+                                onmouseout="this.style.background='#ef4444'; this.style.transform='scale(1)';"
+                                onclick="event.stopPropagation();">
+                                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
+                                    stroke="#fff">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                                 </svg>
                             </button>
                         </form>
@@ -110,8 +107,7 @@
                     {{-- Upload Photo --}}
                     @if (auth()->id() === $student->id)
                     <div class="text-center lg:text-right shrink-0">
-                        <button type="button"
-                            onclick="document.getElementById('profileAvatarModal').showModal()"
+                        <button type="button" onclick="document.getElementById('profileAvatarModal').showModal()"
                             class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border-2 text-sm font-bold transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
                             style="border-color: var(--mc-primary); color: var(--mc-primary); background: transparent;"
                             onmouseover="this.style.background='var(--mc-primary)';this.style.color='white'"
@@ -506,22 +502,25 @@
     @if(auth()->id() === $student->id)
     <dialog id="profileAvatarModal" class="modal modal-bottom sm:modal-middle">
         <div class="modal-box max-w-md p-0 overflow-hidden rounded-3xl shadow-2xl"
-             style="background:var(--mc-surface);border:1px solid var(--mc-border-teal-sub);">
+            style="background:var(--mc-surface);border:1px solid var(--mc-border-teal-sub);">
 
             {{-- Header --}}
             <div class="px-6 pt-6 pb-4 flex items-center justify-between"
-                 style="background:linear-gradient(to right,#102E3C,#1A998F);">
+                style="background:linear-gradient(to right,#102E3C,#1A998F);">
                 <div class="flex items-center gap-3">
                     <div class="p-2 rounded-xl" style="background:rgba(255,255,255,0.1);">
-                        <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z" />
+                        <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" />
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z" />
                         </svg>
                     </div>
                     <h3 class="text-lg font-bold text-white">প্রোফাইল ছবি পরিবর্তন</h3>
                 </div>
                 <button type="button" onclick="closeProfileAvatarModal()"
-                        class="btn btn-sm btn-ghost btn-circle text-white hover:bg-white/20">
+                    class="btn btn-sm btn-ghost btn-circle text-white hover:bg-white/20">
                     <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                     </svg>
@@ -533,46 +532,39 @@
                 {{-- Preview --}}
                 <div class="flex flex-col items-center gap-2">
                     <div class="w-28 h-28 rounded-full overflow-hidden ring-4 shadow-xl"
-                         style="ring-color:rgba(26,153,143,0.4);">
+                        style="ring-color:rgba(26,153,143,0.4);">
                         @if($student->profile && $student->profile->avatar)
-                            <img id="profileModalPreview"
-                                 src="{{ asset('storage/' . $student->profile->avatar) }}"
-                                 alt="Preview"
-                                 class="w-full h-full object-cover transition-all duration-300" />
+                        <img id="profileModalPreview" src="{{ asset('storage/' . $student->profile->avatar) }}"
+                            alt="Preview" class="w-full h-full object-cover transition-all duration-300" />
                         @else
-                            <img id="profileModalPreview"
-                                 src="https://ui-avatars.com/api/?name={{ urlencode($student->name) }}&background=28666e&color=ffffff&size=224&font-size=0.38&bold=true"
-                                 alt="Preview"
-                                 class="w-full h-full object-cover transition-all duration-300" />
+                        <img id="profileModalPreview"
+                            src="https://ui-avatars.com/api/?name={{ urlencode($student->name) }}&background=28666e&color=ffffff&size=224&font-size=0.38&bold=true"
+                            alt="Preview" class="w-full h-full object-cover transition-all duration-300" />
                         @endif
                     </div>
-                    <div id="profilePreviewBadge"
-                         class="hidden px-2 py-0.5 rounded-full text-xs font-bold text-white"
-                         style="background:#1A998F;">পূর্বরূপ</div>
+                    <div id="profilePreviewBadge" class="hidden px-2 py-0.5 rounded-full text-xs font-bold text-white"
+                        style="background:#1A998F;">পূর্বরূপ</div>
                     <p class="text-xs" style="color:var(--mc-text-muted);">বর্তমান প্রোফাইল ছবি</p>
                 </div>
 
                 {{-- Drop Zone --}}
-                <form id="profileAvatarUploadForm"
-                      action="{{ route('update_avatar') }}"
-                      method="POST"
-                      enctype="multipart/form-data">
+                <form id="profileAvatarUploadForm" action="{{ route('update_avatar') }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
 
-                    <div id="profileDropZone"
-                         class="relative flex flex-col items-center justify-center gap-3 p-8
+                    <div id="profileDropZone" class="relative flex flex-col items-center justify-center gap-3 p-8
                                 border-2 border-dashed rounded-2xl cursor-pointer
                                 transition-all duration-200 group"
-                         style="border-color:rgba(26,153,143,0.4);background:rgba(26,153,143,0.04);"
-                         onclick="document.getElementById('profileAvatarFileInput').click()"
-                         ondragover="profileHandleDragOver(event)"
-                         ondragleave="profileHandleDragLeave(event)"
-                         ondrop="profileHandleDrop(event)">
+                        style="border-color:rgba(26,153,143,0.4);background:rgba(26,153,143,0.04);"
+                        onclick="document.getElementById('profileAvatarFileInput').click()"
+                        ondragover="profileHandleDragOver(event)" ondragleave="profileHandleDragLeave(event)"
+                        ondrop="profileHandleDrop(event)">
 
-                        <div class="p-4 rounded-full transition-colors"
-                             style="background:rgba(26,153,143,0.1);">
-                            <svg class="w-8 h-8" style="color:#1A998F;" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                        <div class="p-4 rounded-full transition-colors" style="background:rgba(26,153,143,0.1);">
+                            <svg class="w-8 h-8" style="color:#1A998F;" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
                             </svg>
                         </div>
                         <div class="text-center">
@@ -581,27 +573,26 @@
                                 ড্র্যাগ করুন অথবা ক্লিক করুন &bull; JPG, PNG, GIF, WebP &bull; সর্বোচ্চ ২ MB
                             </p>
                         </div>
-                        <input id="profileAvatarFileInput"
-                               name="avatar"
-                               type="file"
-                               accept="image/jpeg,image/png,image/gif,image/webp"
-                               class="hidden"
-                               onchange="profileHandleFileSelect(event)" />
+                        <input id="profileAvatarFileInput" name="avatar" type="file"
+                            accept="image/jpeg,image/png,image/gif,image/webp" class="hidden"
+                            onchange="profileHandleFileSelect(event)" />
                     </div>
 
                     {{-- File info strip --}}
-                    <div id="profileFileInfoStrip"
-                         class="hidden mt-3 flex items-center gap-3 px-4 py-3 rounded-xl"
-                         style="background:rgba(26,153,143,0.1);border:1px solid rgba(26,153,143,0.2);">
-                        <svg class="w-5 h-5 shrink-0" style="color:#1A998F;" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                    <div id="profileFileInfoStrip" class="hidden mt-3 flex items-center gap-3 px-4 py-3 rounded-xl"
+                        style="background:rgba(26,153,143,0.1);border:1px solid rgba(26,153,143,0.2);">
+                        <svg class="w-5 h-5 shrink-0" style="color:#1A998F;" fill="none" viewBox="0 0 24 24"
+                            stroke-width="2" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
                         </svg>
                         <div class="flex-1 min-w-0">
-                            <p id="profileFileInfoName" class="text-sm font-medium truncate" style="color:var(--mc-text);"></p>
+                            <p id="profileFileInfoName" class="text-sm font-medium truncate"
+                                style="color:var(--mc-text);"></p>
                             <p id="profileFileInfoSize" class="text-xs" style="color:var(--mc-text-muted);"></p>
                         </div>
                         <button type="button" onclick="profileClearFileSelection()"
-                                class="btn btn-xs btn-ghost btn-circle" style="color:var(--mc-text-muted);">
+                            class="btn btn-xs btn-ghost btn-circle" style="color:var(--mc-text-muted);">
                             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                             </svg>
@@ -611,17 +602,19 @@
                     {{-- Buttons --}}
                     <div class="flex gap-3 mt-5">
                         <button type="button" onclick="closeProfileAvatarModal()"
-                                class="btn flex-1 rounded-xl"
-                                style="border-color:var(--mc-border-teal-sub);color:var(--mc-text);">
-                            বাতিল
-                        </button>
-                        <button type="submit"
-                                id="profileUploadSubmitBtn"
-                                disabled
-                                class="btn flex-1 rounded-xl text-white border-0 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200"
-                                style="background:#1A998F;">
+                            class="btn btn-warning flex-1 rounded-xl">
                             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                            বাতিল করুন
+                        </button>
+                        <button type="submit" id="profileUploadSubmitBtn" disabled
+                            class="btn flex-1 rounded-xl text-white border-0 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200"
+                            style="background:#1A998F;">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
                             </svg>
                             সংরক্ষণ করুন
                         </button>

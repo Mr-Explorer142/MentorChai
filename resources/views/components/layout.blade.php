@@ -87,40 +87,6 @@
                             {{-- Vertical divider (desktop) --}}
                             <div class="hidden md:block w-px h-7 bg-#28666e/0.18 dark:bg-#4db6c1/0.25 rounded-sm">
                             </div>
-
-                            {{-- Search (desktop) --}}
-                            <div class="relative hidden md:block">
-                                <svg class="absolute left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-teal-500 dark:text-teal-400"
-                                    fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-                                    <circle cx="11" cy="11" r="8" />
-                                    <path d="m21 21-4.35-4.35" />
-                                </svg>
-                                <input type="search" placeholder="সার্চ করুন..." class="w-[200px] pl-9 pr-3 py-[0.4rem] text-sm rounded-xl
-                                              bg-[#eef7f8]/70 dark:bg-[#0f1f2e]/70
-                                              text-[#033f63] dark:text-[#7ec8e3]
-                                              border-[1.5px] border-[#28666e]/25 dark:border-[#4db6c1]/25
-                                              placeholder:text-[#033f63]/40 dark:placeholder:text-[#7ec8e3]/40
-                                              outline-none transition-all duration-200
-                                              focus:border-[#28666e] dark:focus:border-[#4db6c1]
-                                              focus:ring-[3px] focus:ring-[#28666e]/10 dark:focus:ring-[#4db6c1]/10
-                                              focus:bg-white dark:focus:bg-[#1a2e3b]" />
-                            </div>
-
-                            {{-- Search icon (mobile) --}}
-                            <label for="mobile-search"
-                                class="md:hidden cursor-pointer p-1.5 rounded-lg hover:bg-teal-50 dark:hover:bg-teal-900/30 transition-colors">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                                    stroke="#28666e" class="w-6 h-6 dark:hidden">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                                    stroke="#4db6c1" class="w-6 h-6 hidden dark:block">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                                </svg>
-                            </label>
-
                             @auth
                             {{-- Vertical divider --}}
                             <div class="hidden sm:block w-px h-7 bg-[#28666e]/20 dark:bg-[#4db6c1]/25 rounded-sm"></div>
@@ -454,36 +420,6 @@
                 </div>
             </div>
         </nav>
-
-        {{-- ═══════════════ Mobile Search Modal ═══════════════ --}}
-        <input type="checkbox" id="mobile-search" class="modal-toggle" />
-        <div class="modal">
-            <div
-                class="modal-box w-full max-w-none rounded-none bg-white dark:bg-[#1a2e3b] min-h-screen transition-colors duration-300">
-                <div class="flex items-center justify-between mb-6">
-                    <h3 class="font-[Lora,serif] font-bold text-lg text-[#033f63] dark:text-[#7ec8e3]">সার্চ করুন
-                    </h3>
-                    <label for="mobile-search"
-                        class="cursor-pointer p-1.5 rounded-lg hover:bg-teal-50 dark:hover:bg-teal-900/30 transition-colors font-bold text-teal-700 dark:text-teal-400 leading-none">✕</label>
-                </div>
-                <div class="relative">
-                    <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-teal-500 dark:text-teal-400"
-                        fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <circle cx="11" cy="11" r="8" />
-                        <path d="m21 21-4.35-4.35" />
-                    </svg>
-                    <input type="search" placeholder="মেন্টর, বিষয় বা দক্ষতা খুঁজুন..." class="w-full text-base pl-10 pr-4 py-3 rounded-2xl outline-none
-                                  bg-[#eef7f8] dark:bg-[#0f1f2e]
-                                  text-[#033f63] dark:text-[#7ec8e3]
-                                  border-[1.5px] border-[#28666e]/25 dark:border-[#4db6c1]/25
-                                  placeholder:text-[#033f63]/40 dark:placeholder:text-[#7ec8e3]/40
-                                  transition-all duration-200
-                                  focus:border-[#28666e] dark:focus:border-[#4db6c1]
-                                  focus:ring-[3px] focus:ring-[#28666e]/10 dark:focus:ring-[#4db6c1]/10
-                                  focus:bg-white dark:focus:bg-[#1a2e3b]" />
-                </div>
-            </div>
-        </div>
     </header>
 
     {{-- ═══════════════ MAIN CONTENT ═══════════════ --}}

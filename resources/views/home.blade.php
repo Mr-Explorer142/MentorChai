@@ -218,7 +218,7 @@
 
                     {{-- Scroll buttons --}}
                     <button id="scrollLeft"
-                        class="absolute -left-5 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full shadow-xl transition-all duration-300 hover:scale-110"
+                        class="cursor-pointer absolute -left-5 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full shadow-xl transition-all duration-300 hover:scale-110"
                         style="background: var(--mc-surface); border: 1.5px solid var(--mc-border-teal); box-shadow: var(--mc-shadow-lg);">
                         <svg class="h-5 w-5" fill="none" stroke="var(--mc-primary)" viewBox="0 0 24 24"
                             stroke-width="2.5">
@@ -226,7 +226,7 @@
                         </svg>
                     </button>
                     <button id="scrollRight"
-                        class="absolute -right-5 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full shadow-xl transition-all duration-300 hover:scale-110"
+                        class="cursor-pointer absolute -right-5 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full shadow-xl transition-all duration-300 hover:scale-110"
                         style="background: var(--mc-surface); border: 1.5px solid var(--mc-border-teal); box-shadow: var(--mc-shadow-lg);">
                         <svg class="h-5 w-5" fill="none" stroke="var(--mc-primary)" viewBox="0 0 24 24"
                             stroke-width="2.5">
@@ -273,7 +273,7 @@
 
                 <div class="grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-6">
                     @foreach($departments as $dept)
-                    <div class="group cursor-pointer overflow-hidden rounded-2xl p-6 text-center transition-all duration-500 hover:-translate-y-2 hover:shadow-xl"
+                    <div class="group overflow-hidden rounded-2xl p-6 text-center transition-all duration-500 hover:-translate-y-2 hover:shadow-xl"
                         style="background: var(--mc-surface); border: 1px solid var(--mc-border-teal-sub); box-shadow: var(--mc-shadow-sm);">
                         <div class="flex flex-col items-center gap-4">
                             <div class="flex h-20 w-20 items-center justify-center rounded-2xl transition-all duration-500 group-hover:scale-110"
@@ -343,7 +343,7 @@
 
                 <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                     @foreach($features as $f)
-                    <div class="group relative cursor-pointer overflow-hidden rounded-2xl p-6
+                    <div class="group relative overflow-hidden rounded-2xl p-6
                                 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl"
                         style="background: var(--mc-surface); border: 1px solid var(--mc-border-teal-sub); box-shadow: var(--mc-shadow-sm);">
 
