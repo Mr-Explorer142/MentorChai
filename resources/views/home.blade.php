@@ -204,7 +204,7 @@
                             @endphp
 
                             {{-- ── CARD WRAPPER ── --}}
-                            <div class="group relative w-64 shrink-0 overflow-hidden rounded-2xl transition-all duration-500
+                            <div class="group relative w-72 shrink-0 overflow-hidden rounded-2xl transition-all duration-500
                                         hover:-translate-y-3 bg-[var(--mc-surface)] dark:bg-[#1f3547]"
                                 style="border: 1.5px solid {{ $color }}45;
                                        box-shadow: 0 8px 30px {{ $color }}18, 0 2px 8px rgba(0,0,0,0.08);">
@@ -218,7 +218,7 @@
                                 {{-- ══════════════════════════════════════════
                                      HEADER — Rich gradient + decorations
                                  ══════════════════════════════════════════ --}}
-                                <div class="relative h-48 w-full overflow-hidden flex flex-col justify-between p-5"
+                                <div class="relative h-64 w-full overflow-hidden flex flex-col justify-between p-5"
                                     style="background: linear-gradient(135deg, {{ $pal['from'] }} 0%, {{ $pal['to'] }} 100%);">
 
                                     {{-- Dot-grid texture overlay --}}
@@ -279,8 +279,8 @@
                                  ══════════════════════════════════════════ --}}
                                 <div class="p-4">
                                     <a href="{{ route('mentors', ['skills[]' => $topic]) }}"
-                                        class="group/btn relative block w-full overflow-hidden rounded-xl py-2.5
-                                               text-center text-sm font-bold text-white
+                                        class="group/btn relative block w-full overflow-hidden rounded-xl py-2.5 px-4
+                                               text-center text-[13px] font-bold text-white
                                                transition-all duration-300 hover:scale-[1.02]"
                                         style="background: linear-gradient(135deg, {{ $pal['from'] }}, {{ $pal['to'] }});
                                                box-shadow: 0 4px 16px {{ $color }}45;">
@@ -291,7 +291,7 @@
                                             style="background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);">
                                         </span>
 
-                                        <span class="relative">অ্যাভেইলেবল টিচারলিস্ট দেখুন &rarr;</span>
+                                        <span class="relative">অ্যাভেইলেবল টিচারলিস্ট দেখুন</span>
                                     </a>
                                 </div>
                             </div>
