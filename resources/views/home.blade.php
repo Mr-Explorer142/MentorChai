@@ -128,18 +128,12 @@
             </div>
         </section>
 
-        {{-- Divider wave --}}
-        <div style="line-height:0; background-color: var(--mc-bg);">
-            <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"
-                style="width:100%; display:block;">
-                <path id="hero-wave" d="M0 60 C360 0 1080 0 1440 60 L1440 0 L0 0 Z" />
-            </svg>
-        </div>
+
 
         {{-- ═══════════════════════════════════════════
         POPULAR TOPICS CAROUSEL
         ═══════════════════════════════════════════ --}}
-        <section class="py-24 transition-colors duration-300" style="background-color: var(--mc-bg);">
+        <section class="py-24 transition-colors duration-300" style="background-color: var(--mc-surface);">
             <div class="mx-auto max-w-7xl px-6">
 
                 {{-- Heading --}}
@@ -240,8 +234,7 @@
         {{-- ═══════════════════════════════════════════
         POPULAR DEPARTMENTS
         ═══════════════════════════════════════════ --}}
-        <section class="py-24 transition-colors duration-300"
-            style="background: linear-gradient(180deg, var(--mc-surface) 0%, var(--mc-bg) 100%);">
+        <section class="py-24 transition-colors duration-300" style="background-color: var(--mc-bg);">
 
             <div class="relative mx-auto max-w-7xl px-6">
 
@@ -295,7 +288,7 @@
         {{-- ═══════════════════════════════════════════
         FEATURES SECTION
         ═══════════════════════════════════════════ --}}
-        <section class="py-24 transition-colors duration-300" style="background-color: var(--mc-bg);">
+        <section class="py-24 transition-colors duration-300" style="background-color: var(--mc-surface);">
             <div class="mx-auto max-w-6xl px-6">
 
                 {{-- Heading --}}
@@ -371,8 +364,7 @@
         {{-- ═══════════════════════════════════════════
         JOIN AS MENTOR SECTION
         ═══════════════════════════════════════════ --}}
-        <section class="relative overflow-hidden py-24 transition-colors duration-300"
-            style="background: linear-gradient(135deg, var(--mc-surface) 0%, var(--mc-surface-hover) 50%, var(--mc-bg) 100%);">
+        <section class="relative overflow-hidden py-24 transition-colors duration-300" style="background-color: var(--mc-bg);">
 
             {{-- Decorative shapes --}}
             <div class="pointer-events-none absolute inset-0 overflow-hidden">
@@ -483,21 +475,7 @@
 
     </div>
 
-    {{-- Wave color sync script --}}
-    <script>
-        function syncWave() {
-            const isDark = document.documentElement.classList.contains('dark');
-            const wavePath = document.getElementById('hero-wave');
-            if (wavePath) {
-                wavePath.setAttribute('fill', isDark ? '#1a2e3b' : '#e6f7f7');
-            }
-        }
-        syncWave();
 
-        // Watch for dark mode toggle
-        const observer = new MutationObserver(syncWave);
-        observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
-    </script>
 
     {{-- Carousel script --}}
     <script>
