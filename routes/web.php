@@ -17,7 +17,18 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 
-Route::get('/', fn() => view('home'))->name('home');
+Route::get('/', function () {
+    $popularTopics = \App\Models\Profile::whereNotNull('skills')
+        ->pluck('skills')
+        ->flatMap(fn($s) => array_map('trim', explode(',', $s)))
+        ->filter()
+        ->countBy()
+        ->sortDesc()
+        ->take(8)
+        ->keys();
+
+    return view('home', compact('popularTopics'));
+})->name('home');
 Route::get('/about', fn() => view('about'))->name('about');
 Route::get('/contact', fn() => view('contact'))->name('contact');
 Route::get('/faq', fn() => view('faq'))->name('faq');
