@@ -18,14 +18,56 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $popularTopics = \App\Models\Profile::whereNotNull('skills')
+    $excludedKeywords = ['React', 'Next.js', 'Tailwind'];
+
+    $skills = \App\Models\Profile::whereNotNull('skills')
         ->pluck('skills')
         ->flatMap(fn($s) => array_map('trim', explode(',', $s)))
-        ->filter()
+        ->filter(function($skill) use ($excludedKeywords) {
+            if (empty($skill)) {
+                return false;
+            }
+            foreach ($excludedKeywords as $keyword) {
+                if (stripos($skill, $keyword) !== false) {
+                    return false;
+                }
+            }
+            return true;
+        })
         ->countBy()
         ->sortDesc()
         ->take(8)
         ->keys();
+
+    $popularTopics = $skills->map(function ($skillName) {
+        $mentors = \App\Models\User::where('role', \App\Enums\UserRole::Mentor)
+            ->whereHas('profile', function ($q) use ($skillName) {
+                $q->where('skills', 'like', '%' . $skillName . '%');
+            })
+            ->with('profile')
+            ->limit(5)
+            ->get();
+
+        $subSkills = $mentors->flatMap(function ($m) use ($skillName) {
+            return array_map('trim', explode(',', $m->profile->skills ?? ''));
+        })
+        ->filter(fn($s) => !empty($s) && strcasecmp($s, $skillName) !== 0)
+        ->countBy()
+        ->sortDesc()
+        ->take(3)
+        ->keys()
+        ->toArray();
+
+        return (object)[
+            'name'          => $skillName,
+            'mentors_count' => $mentors->count(),
+            'skills'        => $subSkills,
+            'mentors'       => $mentors->map(fn($m) => [
+                'name'   => $m->name,
+                'avatar' => $m->profile->avatar ?? null,
+            ])->toArray(),
+        ];
+    });
 
     return view('home', compact('popularTopics'));
 })->name('home');
