@@ -155,137 +155,116 @@
                         <div id="cardsContainer" class="flex gap-6 pb-4 transition-transform duration-500 ease-out"
                             style="width: max-content;">
 
-                            @forelse($popularTopics as $topic)
+                            @forelse($popularTopics as $index => $topic)
                             @php
                                 $palettes = [
                                     [
-                                        'from' => '#06b6d4', 
-                                        'to' => '#0f766e', 
+                                        'from' => '#1A9998',
+                                        'to' => '#105857',
                                         'icon' => '<svg class="h-4.5 w-4.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.263 8.535l8.737-3.745 8.737 3.745-8.737 3.745-8.737-3.745zm0 0v4.615c0 2.215 3.91 4.01 8.737 4.01s8.737-1.795 8.737-4.01V8.535m-17.474 0L13 12.28"/></svg>'
                                     ], // Graduation Cap
                                     [
-                                        'from' => '#4f46e5', 
-                                        'to' => '#7c3aed', 
+                                        'from' => '#1E63B8',
+                                        'to' => '#0F3C75',
                                         'icon' => '<svg class="h-4.5 w-4.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925-3.546 5.974 5.974 0 00-2.133-1A3.75 3.75 0 004 9.5a3.75 3.75 0 00.322 1.503A5.992 5.992 0 003 14.5a5.976 5.976 0 001 2.135A3.75 3.75 0 007.5 20h.017a3.75 3.75 0 003.483-2.5z"/></svg>'
                                     ], // Lightbulb
                                     [
-                                        'from' => '#f43f5e', 
-                                        'to' => '#ea580c', 
-                                        'icon' => '<svg class="h-4.5 w-4.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/></svg>'
-                                    ], // Open Book
-                                    [
-                                        'from' => '#10b981', 
-                                        'to' => '#0d9488', 
+                                        'from' => '#6D31ED',
+                                        'to' => '#40179C',
                                         'icon' => '<svg class="h-4.5 w-4.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"/></svg>'
                                     ], // Compass / Guide Badge
-                                    [
-                                        'from' => '#3b82f6', 
-                                        'to' => '#06b6d4', 
-                                        'icon' => '<svg class="h-4.5 w-4.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18m9-9H3m15 0a3 3 0 11-6 0 3 3 0 016 0z"/></svg>'
-                                    ], // Target
-                                    [
-                                        'from' => '#8b5cf6', 
-                                        'to' => '#d946ef', 
-                                        'icon' => '<svg class="h-4.5 w-4.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0v3.75m0-3.75H12m0 0v3.75m-3-3.75h3"/></svg>'
-                                    ], // Presentation Board
-                                    [
-                                        'from' => '#f59e0b', 
-                                        'to' => '#e11d48', 
-                                        'icon' => '<svg class="h-4.5 w-4.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 .621-.504 1.125-1.125 1.125H4.875c-.621 0-1.125-.504-1.125-1.125v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.45.258-.717.258H3.75c-.266 0-.523-.093-.717-.258m16.5 0a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25m0 0a2.18 2.18 0 01-.75-1.661V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m0 0V4.875L12 3.75l3.75 1.125v1.125m-7.5 0h7.5"/></svg>'
-                                    ], // Briefcase
-                                    [
-                                        'from' => '#14b8a6', 
-                                        'to' => '#2563eb', 
-                                        'icon' => '<svg class="h-4.5 w-4.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 100-18 9 9 0 000 18zm0 0V3m9 9H3m15.54-5.54A9 9 0 005.46 17.54m13.08 0A9 9 0 005.46 6.46"/></svg>'
-                                    ], // Globe
                                 ];
-                                $pal   = $palettes[$loop->index % count($palettes)];
+                                $pal   = $palettes[$index % count($palettes)];
                                 $color = $pal['from'];
                             @endphp
 
-                            {{-- ── CARD WRAPPER ── --}}
-                            <div class="group relative w-72 shrink-0 overflow-hidden rounded-2xl transition-all duration-500
-                                        hover:-translate-y-3 bg-[var(--mc-surface)] dark:bg-[#1f3547]"
-                                style="border: 1.5px solid {{ $color }}45;
-                                       box-shadow: 0 8px 30px {{ $color }}18, 0 2px 8px rgba(0,0,0,0.08);">
+                            <div class="group relative w-64 shrink-0 overflow-hidden rounded-2xl transition-all duration-500 hover:-translate-y-3 bg-[var(--mc-surface)] dark:bg-[#253e50]"
+                                 style="border: 1px solid {{ $color }}45;
+                                        box-shadow: 0 8px 30px {{ $color }}20, 0 2px 8px rgba(0,0,0,0.12);">
 
-                                {{-- ── CARD-LEVEL SHIMMER (sweeps on hover) ── --}}
+                                {{-- Shimmer sweep --}}
                                 <div class="pointer-events-none absolute inset-0 z-30 -translate-x-full skew-x-12
                                             transition-transform duration-700 group-hover:translate-x-full"
-                                    style="background: linear-gradient(90deg, transparent, rgba(255,255,255,0.07), transparent);">
+                                     style="background: linear-gradient(90deg, transparent, rgba(255,255,255,0.07), transparent);">
                                 </div>
 
-                                {{-- ══════════════════════════════════════════
-                                     HEADER — Rich gradient + decorations
-                                 ══════════════════════════════════════════ --}}
-                                <div class="relative h-64 w-full overflow-hidden flex flex-col justify-between p-5"
-                                    style="background: linear-gradient(135deg, {{ $pal['from'] }} 0%, {{ $pal['to'] }} 100%);">
+                                {{-- ── HEADER ── --}}
+                                <div class="relative flex h-44 w-full flex-col justify-between overflow-hidden p-4"
+                                     style="background: linear-gradient(145deg, {{ $pal['from'] }} 0%, {{ $pal['to'] }} 100%);">
 
-                                    {{-- Dot-grid texture overlay --}}
+                                    {{-- Dot-grid texture --}}
                                     <div class="pointer-events-none absolute inset-0"
-                                        style="background-image: radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px);
-                                               background-size: 18px 18px;">
-                                    </div>
+                                         style="background-image: radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px);
+                                                background-size: 18px 18px;"></div>
 
-                                    {{-- Concentric decorative circles — top-right corner --}}
-                                    <div class="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full"
-                                        style="border: 1px solid rgba(255,255,255,0.07); background: rgba(255,255,255,0.03);">
-                                    </div>
-                                    <div class="pointer-events-none absolute -right-4 -top-4 h-24 w-24 rounded-full"
-                                        style="border: 1px solid rgba(255,255,255,0.10); background: rgba(255,255,255,0.04);">
-                                    </div>
+                                    {{-- Decorative circles --}}
+                                    <div class="pointer-events-none absolute -right-9 -top-9 h-32 w-32 rounded-full"
+                                         style="border: 1px solid rgba(255,255,255,0.07); background: rgba(255,255,255,0.03);"></div>
+                                    <div class="pointer-events-none absolute -right-3 -top-3 h-20 w-20 rounded-full"
+                                         style="border: 1px solid rgba(255,255,255,0.10); background: rgba(255,255,255,0.04);"></div>
 
-                                    {{-- Bottom-left soft glow blob --}}
-                                    <div class="pointer-events-none absolute -bottom-10 -left-10 h-32 w-32 rounded-full opacity-50
-                                                transition-transform duration-700 group-hover:scale-125"
-                                        style="background: radial-gradient(circle, rgba(255,255,255,0.14), transparent 70%);">
-                                    </div>
-
-                                    {{-- ── TOP ROW: Icon + Live dot ── --}}
+                                    {{-- Top row: icon + live dot --}}
                                     <div class="relative z-10 flex items-center justify-between">
                                         {{-- Translucent rounded icon container --}}
                                         <div class="flex h-8 w-8 items-center justify-center rounded-xl text-white"
-                                            style="background: rgba(255, 255, 255, 0.12);
-                                                   border: 1px solid rgba(255, 255, 255, 0.22);
-                                                   backdrop-filter: blur(6px);">
+                                             style="background: rgba(255, 255, 255, 0.12);
+                                                    border: 1px solid rgba(255, 255, 255, 0.22);
+                                                    backdrop-filter: blur(6px);">
                                             {!! $pal['icon'] !!}
                                         </div>
-
-                                        {{-- Glowing live dot --}}
                                         <span class="flex h-2.5 w-2.5 rounded-full"
-                                            style="background: rgba(255,255,255,0.75);
-                                                   box-shadow: 0 0 0 3px rgba(255,255,255,0.18), 0 0 8px 2px rgba(255,255,255,0.3);">
+                                              style="background: #4ade80; box-shadow: 0 0 0 3px rgba(74,222,128,0.2), 0 0 8px 2px rgba(74,222,128,0.25);">
                                         </span>
                                     </div>
 
-                                    {{-- ── TOPIC NAME — centre stage ── --}}
-                                    <div class="relative z-10 flex flex-1 items-center justify-center py-4">
-                                        <h3 class="text-center text-xl font-extrabold leading-snug tracking-tight"
-                                            style="color: #ffffff;
-                                                   font-family: 'Nunito', sans-serif;
-                                                   text-shadow: 0 2px 16px rgba(0,0,0,0.35);">
-                                            {{ $topic }}
+                                    {{-- Topic name --}}
+                                    <div class="relative z-10 flex flex-1 items-center justify-center py-2">
+                                        <h3 class="text-center text-[1.05rem] font-extrabold leading-snug tracking-tight"
+                                            style="color: #ffffff; font-family: 'Nunito', sans-serif; text-shadow: 0 2px 16px rgba(0,0,0,0.35);">
+                                            {{ $topic->name }}
                                         </h3>
                                     </div>
 
-                                    {{-- Hover brightness lift --}}
-                                    <div class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                                        style="background: linear-gradient(135deg, rgba(255,255,255,0.07), transparent 60%);">
+                                    {{-- Stats pill --}}
+                                    <div class="relative z-10 flex justify-center">
+                                        <div class="inline-flex items-center gap-3 rounded-full px-4 py-1.5"
+                                             style="background: rgba(0,0,0,0.28); border: 1px solid rgba(255,255,255,0.12);">
+                                            <span style="font-size:10px; color:rgba(255,255,255,0.80); font-weight:700;">
+                                                {{ $topic->mentors_count ?? '40+' }} মেন্টর
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
 
-                                {{-- ══════════════════════════════════════════
-                                     FOOTER — CTA button
-                                 ══════════════════════════════════════════ --}}
-                                <div class="p-4">
-                                    <a href="{{ route('mentors', ['skills[]' => $topic]) }}"
-                                        class="group/btn relative block w-full overflow-hidden rounded-xl py-2.5 px-4
-                                               text-center text-[13px] font-bold text-white
-                                               transition-all duration-300 hover:scale-[1.02]"
-                                        style="background: linear-gradient(135deg, {{ $pal['from'] }}, {{ $pal['to'] }});
-                                               box-shadow: 0 4px 16px {{ $color }}45;">
+                                {{-- ── MENTOR AVATARS ── --}}
+                                @if(!empty($topic->mentors))
+                                <div class="flex items-center gap-2 px-4 py-3">
+                                    <div class="flex">
+                                        @foreach(array_slice($topic->mentors, 0, 3) as $i => $mentor)
+                                        <div class="h-7 w-7 rounded-full overflow-hidden border-2 border-[var(--mc-surface)] dark:border-[#253e50]"
+                                             style="margin-left: {{ $i > 0 ? '-8px' : '0' }};">
+                                            @if(!empty($mentor['avatar']))
+                                                <img src="{{ asset('storage/' . $mentor['avatar']) }}" alt="{{ $mentor['name'] }}" class="h-full w-full object-cover">
+                                            @else
+                                                <img src="https://ui-avatars.com/api/?name={{ urlencode($mentor['name']) }}&background={{ str_replace('#', '', $pal['from']) }}&color=ffffff&size=28&font-size=0.38&bold=true" alt="{{ $mentor['name'] }}" class="h-full w-full object-cover">
+                                            @endif
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                    <span class="text-[11px]" style="color: var(--mc-text-muted);">
+                                        <strong style="color: var(--mc-primary);">{{ $topic->mentors[0]['name'] }}</strong>
+                                        এবং আরও {{ max(0, count($topic->mentors) - 1) }} জন পড়াচ্ছেন
+                                    </span>
+                                </div>
+                                @endif
 
-                                        {{-- Button shimmer sweep --}}
+                                {{-- ── CTA ── --}}
+                                <div class="px-4 pb-4 @if(empty($topic->mentors)) pt-3 @endif">
+                                    <a href="{{ route('mentors', ['skills[]' => $topic->name]) }}"
+                                       class="group/btn relative block w-full overflow-hidden rounded-xl py-2.5
+                                              text-center text-sm font-bold text-white transition-all duration-300 hover:scale-[1.02]"
+                                       style="background: linear-gradient(135deg, {{ $pal['from'] }}, {{ $pal['to'] }});
+                                              box-shadow: 0 4px 16px {{ $color }}45;">
                                         <span class="pointer-events-none absolute inset-0 -translate-x-full skew-x-12
                                                      transition-transform duration-500 group-hover/btn:translate-x-full"
                                             style="background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);">
@@ -574,7 +553,7 @@
         let scrollPos = 0;
         const container = document.getElementById('cardsContainer');
         const wrapper   = document.getElementById('scrollContainer');
-        const cardWidth = 312;
+        const cardWidth = 280;
 
         document.getElementById('scrollRight').addEventListener('click', () => {
             const max = container.scrollWidth - wrapper.offsetWidth;
