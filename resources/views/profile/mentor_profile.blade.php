@@ -109,7 +109,7 @@
                     @if (auth()->id() === $mentor->id)
                     <div class="text-center lg:text-right shrink-0">
                         <button type="button" onclick="document.getElementById('profileAvatarModal').showModal()"
-                            class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border-2 text-sm font-bold transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
+                            class="cursor-pointer inline-flex items-center gap-2 px-4 py-2 rounded-xl border-2 text-sm font-bold transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
                             style="border-color: var(--mc-primary); color: var(--mc-primary); background: transparent;"
                             onmouseover="this.style.background='var(--mc-primary)';this.style.color='white'"
                             onmouseout="this.style.background='transparent';this.style.color='var(--mc-primary)'">

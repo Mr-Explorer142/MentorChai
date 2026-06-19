@@ -133,20 +133,24 @@
                         <div class="rounded-xl p-3 border text-center"
                             style="background: var(--mc-bg); border-color: var(--mc-border);">
                             <p class="text-xs font-semibold mb-1" style="color: var(--mc-text-faint);">মোট সময়</p>
-                            <p class="text-sm font-bold" style="color: var(--mc-text);">১.০০ ঘণ্টা</p>
+                            <p class="text-sm font-bold" style="color: var(--mc-text);">
+                                {{ $durationHours }}.০০ ঘণ্টা
+                            </p>
                         </div>
                         <div class="rounded-xl p-3 border text-center"
                             style="background: rgba(26,153,143,0.08); border-color: var(--mc-border-teal);">
                             <p class="text-xs font-semibold mb-1" style="color: var(--mc-primary); opacity: 0.7;">
-                                পরিশোধযোগ্য</p>
+                                পরিশোধযোগ্য
+                            </p>
                             <p class="text-sm font-bold" style="color: var(--mc-primary);">
-                                ৳{{ number_format($hourlyRate, 2) }}
+                                ৳{{ number_format($totalAmount, 2) }}
                             </p>
                         </div>
                     </div>
 
                     {{-- Payment Methods --}}
-                    <form method="POST" action="#" id="payment-form">
+                    {{-- ✅ Fixed: action now points to payment.initiate route --}}
+                    <form method="POST" action="{{ route('payment.initiate') }}" id="payment-form">
                         @csrf
                         <input type="hidden" name="session_topic_id" value="{{ $sessionTopic->id }}">
                         <input type="hidden" name="payment_method" id="selected-payment-method" value="bkash">
@@ -163,7 +167,6 @@
                             </h3>
 
                             <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-
                                 @php
                                 $methods = [
                                 ['value' => 'bkash', 'label' => 'বিকাশ', 'img' => 'bkash.svg', 'fallback' => 'bKash',
@@ -172,9 +175,9 @@
                                 ['value' => 'nagad', 'label' => 'নগদ', 'img' => 'nagad.svg', 'fallback' => 'Nagad',
                                 'active_border' => '#f97316', 'active_bg' => 'rgba(249,115,22,0.08)', 'fallback_color'
                                 => '#f97316'],
-                                ['value' => 'rocket', 'label' => 'রকেট', 'img' => 'rocket.png', 'fallback' => 'Rocket',
-                                'active_border' => '#a855f7', 'active_bg' => 'rgba(168,85,247,0.08)', 'fallback_color'
-                                => '#a855f7'],
+                                ['value' => 'rocket', 'label' => 'রকেট', 'img' => 'rocket.png', 'fallback' =>
+                                'Rocket','active_border' => '#a855f7', 'active_bg' => 'rgba(168,85,247,0.08)',
+                                'fallback_color' => '#a855f7'],
                                 ['value' => 'card', 'label' => 'ডেবিট/ক্রেডিট কার্ড', 'img' => 'cards.svg', 'fallback'
                                 => null, 'active_border' => '#1A9998', 'active_bg' => 'rgba(26,153,143,0.08)',
                                 'fallback_color' => '#1A9998'],
@@ -195,11 +198,9 @@
                                         <div class="h-7 flex items-center justify-center mb-2">
                                             @if($m['fallback'])
                                             <img src="{{ asset('images/Checkout Page/' . $m['img']) }}"
-                                                class="{{ $m['value'] === 'pathao_pay' ? 'h-6' : 'h-7' }} mx-auto"
-                                                alt="{{ $m['label'] }}"
+                                                class="h-7 mx-auto" alt="{{ $m['label'] }}"
                                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                                            <span
-                                                class="{{ $m['value'] === 'pathao_pay' ? 'text-base' : 'text-lg' }} font-black hidden"
+                                            <span class="text-lg font-black hidden"
                                                 style="color: {{ $m['fallback_color'] }};">{{ $m['fallback'] }}</span>
                                             @else
                                             <img src="{{ asset('images/Checkout Page/' . $m['img']) }}"
@@ -218,7 +219,6 @@
                                     </div>
                                 </label>
                                 @endforeach
-
                             </div>
                         </div>
 
@@ -234,13 +234,12 @@
                                 </p>
                                 <p class="text-3xl font-bold"
                                     style="color: var(--mc-primary); font-family:'Lora',serif;">
-                                    ৳{{ number_format($hourlyRate, 2) }}
+                                    ৳{{ number_format($totalAmount, 2) }}
                                 </p>
                             </div>
-
                             <button type="submit" class="btn btn-wide font-bold text-base rounded-xl text-white border-0
-                                           hover:opacity-90 hover:-translate-y-0.5 transition-all duration-200" style="background: linear-gradient(135deg, #1A9998, #155665);
-                                           box-shadow: 0 8px 24px rgba(26,153,143,0.35);">
+                   hover:opacity-90 hover:-translate-y-0.5 transition-all duration-200" style="background: linear-gradient(135deg, #1A9998, #155665);
+                   box-shadow: 0 8px 24px rgba(26,153,143,0.35);">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
                                     stroke-width="2" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -269,29 +268,28 @@
     </div>
 
     <script>
-        // Sync selected payment method radio to hidden input
-        document.querySelectorAll('.payment-radio').forEach(r => {
-            r.addEventListener('change', function () {
-                document.getElementById('selected-payment-method').value = this.value;
-            });
-        });
-
-        // Payment card active state
         function updatePaymentCards() {
-            document.querySelectorAll('.payment-label').forEach(label => {
-                const radio = label.querySelector('.payment-radio');
-                const card  = label.querySelector('.payment-card');
-                if (radio.checked) {
-                    card.style.borderColor = label.dataset.activeBorder;
-                    card.style.background  = label.dataset.activeBg;
-                } else {
-                    card.style.borderColor = 'var(--mc-border)';
-                    card.style.background  = 'var(--mc-bg)';
-                }
-            });
-        }
-        document.querySelectorAll('.payment-radio').forEach(r => r.addEventListener('change', updatePaymentCards));
-        updatePaymentCards();
+        document.querySelectorAll('.payment-label').forEach(label => {
+            const radio = label.querySelector('.payment-radio');
+            const card  = label.querySelector('.payment-card');
+            if (radio.checked) {
+                card.style.borderColor = label.dataset.activeBorder;
+                card.style.background  = label.dataset.activeBg;
+                // ✅ sync hidden input whenever a card is active
+                document.getElementById('selected-payment-method').value = radio.value;
+            } else {
+                card.style.borderColor = 'var(--mc-border)';
+                card.style.background  = 'var(--mc-bg)';
+            }
+        });
+    }
+
+    document.querySelectorAll('.payment-radio').forEach(r => {
+        r.addEventListener('change', updatePaymentCards);
+    });
+
+    // Run on page load to set default selected method
+    updatePaymentCards();
     </script>
 
 </x-layout>

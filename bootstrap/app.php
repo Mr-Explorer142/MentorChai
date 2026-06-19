@@ -11,6 +11,19 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        $middleware->trustProxies(at: '*');
+        $middleware->trustHosts(subdomains: true);
+
+        // excluding routes from CSRF
+        $middleware->validateCsrfTokens(except: [
+            'payment/success',
+            'payment/fail',
+            'payment/cancel',
+            'payment/ipn',
+        ]);
+
+        $middleware->append(\App\Http\Middleware\HandleNgrok::class);
+
         $middleware->appendToGroup('web', [
             \App\Http\Middleware\UpdateLastSeen::class,
         ]);
