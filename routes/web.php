@@ -6,7 +6,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SocialAuthController;
 use App\Http\Controllers\MentorsController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\SessionTopicController;
+use App\Http\Controllers\SslCommerzPaymentController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -174,25 +176,29 @@ Route::middleware('auth')->group(function () {
         Route::middleware('student')->group(function () {
             Route::get('/dashboard/student', [DashboardController::class, 'studentDashboard'])->name('student_dashboard');
 
-            // Route::get('/checkout', function () {
-            //     return view('checkout.checkout', [
-            //         'student'    => (object)['id' => 'STU-101', 'name' => 'Wasif Khan Lodi Adib'],
-            //         'mentor'     => (object)['id' => 'MEN-55',  'name' => 'Walid Ahmed Samy Sorkar'],
-            //         'topic'      => 'Laravel Basics',
-            //         'hourlyRate' => 50,
-            //         'hours'      => 2,
-            //         'paidAmount' => 100,
-            //     ]);
-            // })->name('checkout.checkout');
-
             Route::get('/checkout/{sessionTopic}', [SessionTopicController::class, 'checkout'])->name('checkout');
 
+            Route::post('/payment/initiate', [PaymentController::class, 'initiate'])->name('payment.initiate');
+
             Route::get('/success', function () {
+                $tranId  = request('tran_id');
+                $payment = \App\Models\Payment::with(['session.mentor', 'session.topic'])
+                    ->where('transaction_id', $tranId)
+                    ->first();
+
+                if (!$payment) {
+                    return redirect()->route('student_dashboard')
+                        ->with('error', 'পেমেন্ট তথ্য পাওয়া যায়নি।');
+                }
+
                 return view('checkout.success', [
-                    'paymentMethod' => session('payment_method', 'bKash'),
-                    'amount'        => session('amount', 0),
+                    'paymentMethod'  => $payment->method->value,
+                    'amount'         => $payment->amount,
+                    'transactionId'  => $payment->transaction_id,
+                    'mentorName'     => $payment->session->mentor->name,
+                    'topic'          => $payment->session->topic->topic,
                 ]);
-            })->name('success');
+            })->middleware(['auth', 'verified'])->name('success');
 
             // ✏️ EXISTING — already here, kept as is
             Route::get('/session/request/{mentor}', [SessionTopicController::class, 'create'])->name('session.request.create');
@@ -208,3 +214,9 @@ Route::middleware('auth')->group(function () {
         });
     });
 });
+
+// Outside ALL middleware
+Route::post('/payment/success', [PaymentController::class, 'success'])->name('payment.success');
+Route::post('/payment/fail',    [PaymentController::class, 'fail'])->name('payment.fail');
+Route::post('/payment/cancel',  [PaymentController::class, 'cancel'])->name('payment.cancel');
+Route::post('/payment/ipn',     [PaymentController::class, 'ipn'])->name('payment.ipn');

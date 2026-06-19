@@ -33,7 +33,7 @@ class SessionTopicController extends Controller
             'mentor_id'      => $request->mentor_id,
             'topic'          => $request->topic,
             'note'           => $request->note,
-            'duration_hours' => $request->duration_hours,
+            'duration_hours' => $request->duration_hours ?? 1,
             'status'         => SessionStatus::Pending,
         ]);
 
@@ -67,12 +67,18 @@ class SessionTopicController extends Controller
         // Make sure session is approved before allowing payment
         abort_if($sessionTopic->status !== SessionStatus::Approved, 403);
 
+        $hourlyRate    = (float) $sessionTopic->mentor->profile->hourly_rate;
+        $durationHours = (int) $sessionTopic->duration_hours ?? 1;
+        $totalAmount   = $hourlyRate * $durationHours;
+
         return view('checkout.checkout', [
-            'sessionTopic' => $sessionTopic,
-            'mentor'       => $sessionTopic->mentor->load('profile'),
-            'student'      => $sessionTopic->student,
-            'topic'        => $sessionTopic->topic,
-            'hourlyRate'   => $sessionTopic->mentor->profile->hourly_rate,
+            'sessionTopic'  => $sessionTopic,
+            'mentor'        => $sessionTopic->mentor->load('profile'),
+            'student'       => $sessionTopic->student,
+            'topic'         => $sessionTopic->topic,
+            'hourlyRate'    => $hourlyRate,
+            'durationHours' => $durationHours,
+            'totalAmount'   => $totalAmount,
         ]);
     }
 
