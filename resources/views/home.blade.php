@@ -128,18 +128,10 @@
             </div>
         </section>
 
-        {{-- Divider wave --}}
-        <div style="line-height:0; background-color: var(--mc-bg);">
-            <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"
-                style="width:100%; display:block;">
-                <path id="hero-wave" d="M0 60 C360 0 1080 0 1440 60 L1440 0 L0 0 Z" />
-            </svg>
-        </div>
-
         {{-- ═══════════════════════════════════════════
         POPULAR TOPICS CAROUSEL
         ═══════════════════════════════════════════ --}}
-        <section class="py-24 transition-colors duration-300" style="background-color: var(--mc-bg);">
+        <section class="py-24 transition-colors duration-300" style="background-color: var(--mc-surface);">
             <div class="mx-auto max-w-7xl px-6">
 
                 {{-- Heading --}}
@@ -163,55 +155,128 @@
                         <div id="cardsContainer" class="flex gap-6 pb-4 transition-transform duration-500 ease-out"
                             style="width: max-content;">
 
+                            @forelse($popularTopics as $index => $topic)
                             @php
-                            $topics = [
-                            ['img'=>'cse.png', 'title'=>'Functions & Array in C', 'dept'=>'CSE, SWE',
-                            'color'=>'#1A9998'],
-                            ['img'=>'eee.png', 'title'=>'KVL & KCL', 'dept'=>'EEE, CSE', 'color'=>'#187F87'],
-                            ['img'=>'swe.png', 'title'=>"Dijkstra's Algorithm", 'dept'=>'CSE, SWE', 'color'=>'#155665'],
-                            ['img'=>'textile.png', 'title'=>'Fabric Mechanics (Stress-Strain)', 'dept'=>'TE',
-                            'color'=>'#1A9998'],
-                            ['img'=>'pharmacy.png', 'title'=>'Drug Receptor Interaction Mechanisms', 'dept'=>'Pharmacy',
-                            'color'=>'#187F87'],
-                            ['img'=>'nfe.png', 'title'=>'Nutrient Bioavailability & Absorption', 'dept'=>'NFE',
-                            'color'=>'#155665'],
-                            ['img'=>'environmentalsc.png','title'=>'Environmental Fate & Transport of
-                            Pollutants','dept'=>'Environmental Science','color'=>'#1A9998'],
-                            ];
+                                $palettes = [
+                                    [
+                                        'from' => '#1A9998',
+                                        'to' => '#105857',
+                                        'icon' => '<svg class="h-4.5 w-4.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.263 8.535l8.737-3.745 8.737 3.745-8.737 3.745-8.737-3.745zm0 0v4.615c0 2.215 3.91 4.01 8.737 4.01s8.737-1.795 8.737-4.01V8.535m-17.474 0L13 12.28"/></svg>'
+                                    ], // Graduation Cap
+                                    [
+                                        'from' => '#1E63B8',
+                                        'to' => '#0F3C75',
+                                        'icon' => '<svg class="h-4.5 w-4.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925-3.546 5.974 5.974 0 00-2.133-1A3.75 3.75 0 004 9.5a3.75 3.75 0 00.322 1.503A5.992 5.992 0 003 14.5a5.976 5.976 0 001 2.135A3.75 3.75 0 007.5 20h.017a3.75 3.75 0 003.483-2.5z"/></svg>'
+                                    ], // Lightbulb
+                                    [
+                                        'from' => '#6D31ED',
+                                        'to' => '#40179C',
+                                        'icon' => '<svg class="h-4.5 w-4.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"/></svg>'
+                                    ], // Compass / Guide Badge
+                                ];
+                                $pal   = $palettes[$index % count($palettes)];
+                                $color = $pal['from'];
                             @endphp
 
-                            @foreach($topics as $topic)
-                            <div class="group relative w-72 shrink-0 cursor-pointer overflow-hidden rounded-2xl
-                                        transition-all duration-500 hover:-translate-y-2"
-                                style="background: var(--mc-surface); border: 1px solid var(--mc-border-teal-sub); box-shadow: var(--mc-shadow-md);">
+                            <div class="group relative w-64 shrink-0 overflow-hidden rounded-2xl transition-all duration-500 hover:-translate-y-3 bg-[var(--mc-surface)] dark:bg-[#253e50]"
+                                 style="border: 1px solid {{ $color }}45;
+                                        box-shadow: 0 8px 30px {{ $color }}20, 0 2px 8px rgba(0,0,0,0.12);">
 
-                                {{-- Image --}}
-                                <div class="relative overflow-hidden">
-                                    <img src="{{ asset('images/Home Page/' . $topic['img']) }}"
-                                        alt="{{ $topic['title'] }}"
-                                        class="h-44 w-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                                    <div class="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                                        style="background: linear-gradient(to top, {{ $topic['color'] }}55, transparent 60%);">
+                                {{-- Shimmer sweep --}}
+                                <div class="pointer-events-none absolute inset-0 z-30 -translate-x-full skew-x-12
+                                            transition-transform duration-700 group-hover:translate-x-full"
+                                     style="background: linear-gradient(90deg, transparent, rgba(255,255,255,0.07), transparent);">
+                                </div>
+
+                                {{-- ── HEADER ── --}}
+                                <div class="relative flex h-44 w-full flex-col justify-between overflow-hidden p-4"
+                                     style="background: linear-gradient(145deg, {{ $pal['from'] }} 0%, {{ $pal['to'] }} 100%);">
+
+                                    {{-- Dot-grid texture --}}
+                                    <div class="pointer-events-none absolute inset-0"
+                                         style="background-image: radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px);
+                                                background-size: 18px 18px;"></div>
+
+                                    {{-- Decorative circles --}}
+                                    <div class="pointer-events-none absolute -right-9 -top-9 h-32 w-32 rounded-full"
+                                         style="border: 1px solid rgba(255,255,255,0.07); background: rgba(255,255,255,0.03);"></div>
+                                    <div class="pointer-events-none absolute -right-3 -top-3 h-20 w-20 rounded-full"
+                                         style="border: 1px solid rgba(255,255,255,0.10); background: rgba(255,255,255,0.04);"></div>
+
+                                    {{-- Top row: icon + live dot --}}
+                                    <div class="relative z-10 flex items-center justify-between">
+                                        {{-- Translucent rounded icon container --}}
+                                        <div class="flex h-8 w-8 items-center justify-center rounded-xl text-white"
+                                             style="background: rgba(255, 255, 255, 0.12);
+                                                    border: 1px solid rgba(255, 255, 255, 0.22);
+                                                    backdrop-filter: blur(6px);">
+                                            {!! $pal['icon'] !!}
+                                        </div>
+                                        <span class="flex h-2.5 w-2.5 rounded-full"
+                                              style="background: #4ade80; box-shadow: 0 0 0 3px rgba(74,222,128,0.2), 0 0 8px 2px rgba(74,222,128,0.25);">
+                                        </span>
+                                    </div>
+
+                                    {{-- Topic name --}}
+                                    <div class="relative z-10 flex flex-1 items-center justify-center py-2">
+                                        <h3 class="text-center text-[1.05rem] font-extrabold leading-snug tracking-tight"
+                                            style="color: #ffffff; font-family: 'Nunito', sans-serif; text-shadow: 0 2px 16px rgba(0,0,0,0.35);">
+                                            {{ $topic->name }}
+                                        </h3>
+                                    </div>
+
+                                    {{-- Stats pill --}}
+                                    <div class="relative z-10 flex justify-center">
+                                        <div class="inline-flex items-center gap-3 rounded-full px-4 py-1.5"
+                                             style="background: rgba(0,0,0,0.28); border: 1px solid rgba(255,255,255,0.12);">
+                                            <span style="font-size:10px; color:rgba(255,255,255,0.80); font-weight:700;">
+                                                {{ $topic->mentors_count ?? '40+' }} মেন্টর
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
 
-                                {{-- Content --}}
-                                <div class="space-y-3 p-5">
-                                    <h3 class="text-center text-base font-bold leading-snug"
-                                        style="color: var(--mc-text);">
-                                        {{ $topic['title'] }}
-                                    </h3>
-                                    <p class="text-center text-xs font-semibold" style="color: {{ $topic['color'] }};">
-                                        ডিপার্টমেন্ট: {{ $topic['dept'] }}
-                                    </p>
-                                    <button
-                                        class="w-full rounded-xl py-2.5 text-sm font-bold text-white transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
-                                        style="background: linear-gradient(135deg, {{ $topic['color'] }}, #102E3C); box-shadow: 0 4px 12px {{ $topic['color'] }}30;">
-                                        অ্যাভেইলেবল টিচারলিস্ট দেখুন
-                                    </button>
+                                {{-- ── MENTOR AVATARS ── --}}
+                                @if(!empty($topic->mentors))
+                                <div class="flex items-center gap-2 px-4 py-3">
+                                    <div class="flex">
+                                        @foreach(array_slice($topic->mentors, 0, 3) as $i => $mentor)
+                                        <div class="h-7 w-7 rounded-full overflow-hidden border-2 border-[var(--mc-surface)] dark:border-[#253e50]"
+                                             style="margin-left: {{ $i > 0 ? '-8px' : '0' }};">
+                                            @if(!empty($mentor['avatar']))
+                                                <img src="{{ asset('storage/' . $mentor['avatar']) }}" alt="{{ $mentor['name'] }}" class="h-full w-full object-cover">
+                                            @else
+                                                <img src="https://ui-avatars.com/api/?name={{ urlencode($mentor['name']) }}&background={{ str_replace('#', '', $pal['from']) }}&color=ffffff&size=28&font-size=0.38&bold=true" alt="{{ $mentor['name'] }}" class="h-full w-full object-cover">
+                                            @endif
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                    <span class="text-[11px]" style="color: var(--mc-text-muted);">
+                                        <strong style="color: var(--mc-primary);">{{ $topic->mentors[0]['name'] }}</strong>
+                                        এবং আরও {{ max(0, count($topic->mentors) - 1) }} জন পড়াচ্ছেন
+                                    </span>
+                                </div>
+                                @endif
+
+                                {{-- ── CTA ── --}}
+                                <div class="px-4 pb-4 @if(empty($topic->mentors)) pt-3 @endif">
+                                    <a href="{{ route('mentors', ['skills[]' => $topic->name]) }}"
+                                       class="group/btn relative block w-full overflow-hidden rounded-xl py-2.5
+                                              text-center text-sm font-bold text-white transition-all duration-300 hover:scale-[1.02]"
+                                       style="background: linear-gradient(135deg, {{ $pal['from'] }}, {{ $pal['to'] }});
+                                              box-shadow: 0 4px 16px {{ $color }}45;">
+                                        <span class="pointer-events-none absolute inset-0 -translate-x-full skew-x-12
+                                                     transition-transform duration-500 group-hover/btn:translate-x-full"
+                                            style="background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);">
+                                        </span>
+
+                                        <span class="relative">অ্যাভেইলেবল টিচারলিস্ট দেখুন</span>
+                                    </a>
                                 </div>
                             </div>
-                            @endforeach
+                            @empty
+                            <p class="py-12 text-center text-sm" style="color: var(--mc-text-muted);">কোনো টপিক পাওয়া যায়নি।</p>
+                            @endforelse
 
                         </div>
                     </div>
@@ -240,8 +305,7 @@
         {{-- ═══════════════════════════════════════════
         POPULAR DEPARTMENTS
         ═══════════════════════════════════════════ --}}
-        <section class="py-24 transition-colors duration-300"
-            style="background: linear-gradient(180deg, var(--mc-surface) 0%, var(--mc-bg) 100%);">
+        <section class="py-24 transition-colors duration-300" style="background-color: var(--mc-bg);">
 
             <div class="relative mx-auto max-w-7xl px-6">
 
@@ -295,7 +359,7 @@
         {{-- ═══════════════════════════════════════════
         FEATURES SECTION
         ═══════════════════════════════════════════ --}}
-        <section class="py-24 transition-colors duration-300" style="background-color: var(--mc-bg);">
+        <section class="py-24 transition-colors duration-300" style="background-color: var(--mc-surface);">
             <div class="mx-auto max-w-6xl px-6">
 
                 {{-- Heading --}}
@@ -371,8 +435,7 @@
         {{-- ═══════════════════════════════════════════
         JOIN AS MENTOR SECTION
         ═══════════════════════════════════════════ --}}
-        <section class="relative overflow-hidden py-24 transition-colors duration-300"
-            style="background: linear-gradient(135deg, var(--mc-surface) 0%, var(--mc-surface-hover) 50%, var(--mc-bg) 100%);">
+        <section class="relative overflow-hidden py-24 transition-colors duration-300" style="background-color: var(--mc-bg);">
 
             {{-- Decorative shapes --}}
             <div class="pointer-events-none absolute inset-0 overflow-hidden">
@@ -483,28 +546,14 @@
 
     </div>
 
-    {{-- Wave color sync script --}}
-    <script>
-        function syncWave() {
-            const isDark = document.documentElement.classList.contains('dark');
-            const wavePath = document.getElementById('hero-wave');
-            if (wavePath) {
-                wavePath.setAttribute('fill', isDark ? '#1a2e3b' : '#e6f7f7');
-            }
-        }
-        syncWave();
 
-        // Watch for dark mode toggle
-        const observer = new MutationObserver(syncWave);
-        observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
-    </script>
 
     {{-- Carousel script --}}
     <script>
         let scrollPos = 0;
         const container = document.getElementById('cardsContainer');
         const wrapper   = document.getElementById('scrollContainer');
-        const cardWidth = 312;
+        const cardWidth = 280;
 
         document.getElementById('scrollRight').addEventListener('click', () => {
             const max = container.scrollWidth - wrapper.offsetWidth;
