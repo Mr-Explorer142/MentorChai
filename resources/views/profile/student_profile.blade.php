@@ -100,7 +100,7 @@
                             </div>
                         </div>
                         <p class="text-sm leading-relaxed" style="color: var(--mc-text-muted);">
-                            {{ $student->profile->bio ?? 'এখনো শর্ট বায়ো যোগ করা হয়নি' }}
+                            {{ $student->profile->short_bio ?? 'এখনো শর্ট বায়ো যোগ করা হয়নি' }}
                         </p>
                     </div>
 

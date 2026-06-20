@@ -295,9 +295,16 @@
                             </div>
 
                             <div class="min-w-0">
-                                <h3 class="font-bold text-gray-900 dark:text-gray-100 text-sm leading-tight">
-                                    {{ $mentor->name }}
-                                </h3>
+                                <div class="flex items-center gap-1">
+                                    <h3 class="font-bold text-gray-900 dark:text-gray-100 text-sm leading-tight truncate">
+                                        {{ $mentor->name }}
+                                    </h3>
+                                    @if($mentor->profile && $mentor->profile->is_verified)
+                                    <svg class="w-4 h-4 text-blue-500 shrink-0" fill="currentColor" viewBox="0 0 20 20" title="Verified Mentor">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                                    </svg>
+                                    @endif
+                                </div>
                                 <p class="text-xs text-gray-400 dark:text-gray-500 mt-0.5">
                                     মেন্টর
                                 </p>

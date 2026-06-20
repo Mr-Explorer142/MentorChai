@@ -44,7 +44,8 @@ Route::get('/', function () {
     $popularTopics = $skills->map(function ($skillName) {
         $mentors = \App\Models\User::where('role', \App\Enums\UserRole::Mentor)
             ->whereHas('profile', function ($q) use ($skillName) {
-                $q->where('skills', 'like', '%' . $skillName . '%');
+                $q->where('skills', 'like', '%' . $skillName . '%')
+                  ->where('is_verified', true);
             })
             ->with('profile')
             ->limit(5)
@@ -155,6 +156,10 @@ Route::middleware('auth')->group(function () {
         Route::put('/profile', [ProfileController::class, 'updateprofile'])->name('update_profile');
         Route::post('/profile/avatar', [ProfileController::class, 'updateAvatar'])->name('update_avatar');
         Route::delete('/profile/avatar', [ProfileController::class, 'removeAvatar'])->name('remove_avatar');
+        
+        Route::post('/profile/achievements', [ProfileController::class, 'storeAchievement'])->name('achievements.store');
+        Route::put('/profile/achievements/{achievement}', [ProfileController::class, 'updateAchievement'])->name('achievements.update');
+        Route::delete('/profile/achievements/{achievement}', [ProfileController::class, 'deleteAchievement'])->name('achievements.delete');
 
         Route::get('/live-session', fn() => view('session.live-session'))->name('live-session');
 

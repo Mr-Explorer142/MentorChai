@@ -32,6 +32,7 @@ class MentorsController extends Controller
         $query = User::where('role', UserRole::Mentor)
             ->with('profile')
             ->join('profiles', 'users.id', '=', 'profiles.user_id')
+            ->where('profiles.is_verified', true)
             ->select('users.*');
 
         // Search
@@ -89,6 +90,9 @@ class MentorsController extends Controller
 
         // Check if query matches any mentor name
         $nameMatches = User::where('role', UserRole::Mentor)
+            ->whereHas('profile', function ($q) {
+                $q->where('is_verified', true);
+            })
             ->where('name', 'like', '%' . $query . '%')
             ->with('profile')
             ->limit(5)
@@ -106,7 +110,8 @@ class MentorsController extends Controller
             // Check skills instead
             $skillMatches = User::where('role', UserRole::Mentor)
                 ->whereHas('profile', function ($q) use ($query) {
-                    $q->where('skills', 'like', '%' . $query . '%');
+                    $q->where('skills', 'like', '%' . $query . '%')
+                      ->where('is_verified', true);
                 })
                 ->with('profile')
                 ->limit(5)

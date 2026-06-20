@@ -79,11 +79,30 @@
 
                     {{-- Name & Info --}}
                     <div class="flex-1 text-center lg:text-left space-y-3">
-                        <div class="space-y-2">
+                        <div class="space-y-3">
                             <h1 class="text-3xl sm:text-4xl font-bold"
                                 style="font-family:'Lora',serif; background: linear-gradient(135deg, var(--mc-primary), var(--mc-navy)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">
                                 {{ $mentor->name }}
                             </h1>
+                            
+                            <div class="flex items-center justify-center lg:justify-start gap-2 flex-wrap">
+                                @if($mentor->profile && $mentor->profile->is_verified)
+                                    <span class="inline-flex items-center gap-1.5 px-3 py-1 text-sm font-bold text-green-700 bg-green-100 rounded-full border border-green-200 shadow-sm">
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                                        </svg>
+                                        Verified
+                                    </span>
+                                @else
+                                    <span class="inline-flex items-center gap-1.5 px-3 py-1 text-sm font-bold text-red-700 bg-red-50 rounded-full border border-red-200 shadow-sm">
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd" />
+                                        </svg>
+                                        Not Verified
+                                    </span>
+                                @endif
+                            </div>
+
                             <div class="flex items-center justify-center lg:justify-start gap-2 flex-wrap">
                                 <span
                                     class="inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-full border"
@@ -101,7 +120,7 @@
                             </div>
                         </div>
                         <p class="text-sm leading-relaxed" style="color: var(--mc-text-muted);">
-                            {{ $mentor->profile->bio ?? 'এখনো শর্ট বায়ো যোগ করা হয়নি' }}
+                            {{ $mentor->profile->short_bio ?? 'এখনো শর্ট বায়ো যোগ করা হয়নি' }}
                         </p>
                     </div>
 
@@ -308,213 +327,67 @@
                 </div>
                 <div class="rounded-2xl p-6 border"
                     style="background: var(--mc-bg); border-color: var(--mc-border-teal-sub);">
-                    <p class="text-sm leading-7" style="color: var(--mc-text-muted);">
-                        আমি একজন অভিজ্ঞ সফটওয়্যার ইঞ্জিনিয়ার ও মেন্টর, যিনি গত ১০ বছরেরও বেশি সময় ধরে ওয়েব ও মোবাইল
-                        অ্যাপ্লিকেশন ডেভেলপমেন্টে কাজ করছেন।
-                    </p>
-                    <p class="text-sm leading-7 mt-4" style="color: var(--mc-text-muted);">
-                        শিক্ষাদানে আমার বিশেষ আগ্রহ রয়েছে — আমি বিশ্বাস করি সঠিক গাইডেন্স পেলে যেকোনো শিক্ষার্থী দ্রুত
-                        দক্ষতা অর্জন করতে পারে।
-                    </p>
-                    <p class="text-sm leading-7 mt-4" style="color: var(--mc-text-muted);">
-                        আমি ৫০০+ শিক্ষার্থীকে সরাসরি মেন্টরিং দিয়েছি এবং তাদের মধ্যে অনেকেই এখন দেশে-বিদেশে নামকরা
-                        প্রতিষ্ঠানে কর্মরত।
+                    <p class="text-sm leading-7" style="color: var(--mc-text-muted); white-space: pre-line;">
+                        {{ $mentor->profile->bio ?? 'কোনো শর্ট বায়ো যোগ করা হয়নি' }}
                     </p>
                 </div>
             </div>
 
             {{-- Achievements --}}
             <div class="p-6 sm:p-8 border-b" style="border-color: var(--mc-border-subtle);">
-                <div class="flex items-center gap-3 mb-6">
-                    <div class="w-1 h-7 rounded-full"
-                        style="background: linear-gradient(to bottom, #eab308, rgba(234,179,8,0.3));"></div>
-                    <h2 class="text-xl font-bold" style="color: var(--mc-text); font-family:'Lora',serif;">অর্জনসমূহ
-                    </h2>
-                </div>
-                @php
-                $achievements = [
-                ['title'=>'জাতীয় আইসিটি পুরস্কার ২০২২', 'desc'=>'সেরা প্রযুক্তি মেন্টর ক্যাটাগরিতে বাংলাদেশ সরকার
-                কর্তৃক জাতীয় আইসিটি পুরস্কার অর্জন।', 'url'=>'https://ict.gov.bd/award/2022', 'badge'=>'🏆',
-                'color'=>'#eab308', 'bg'=>'rgba(234,179,8,0.07)', 'border'=>'rgba(234,179,8,0.2)'],
-                ['title'=>'Google Developer Expert (GDE) — Web Technologies', 'desc'=>'Google কর্তৃক Web Technologies
-                বিভাগে Google Developer Expert স্বীকৃতি প্রাপ্তি, ২০২১।',
-                'url'=>'https://developers.google.com/community/experts', 'badge'=>'🎖️', 'color'=>'#3b82f6',
-                'bg'=>'rgba(59,130,246,0.06)', 'border'=>'rgba(59,130,246,0.18)'],
-                ['title'=>'BASIS National ICT Award — Best Freelancer', 'desc'=>'BASIS আয়োজিত জাতীয় আইসিটি পুরস্কারে
-                "সেরা ফ্রিল্যান্সার" ক্যাটাগরিতে প্রথম স্থান।', 'url'=>'https://basis.org.bd/award', 'badge'=>'🥇',
-                'color'=>'#28666e', 'bg'=>'rgba(40,102,110,0.06)', 'border'=>'rgba(40,102,110,0.18)'],
-                ['title'=>'Upwork Top Rated Plus Badge — ৫ বছর ধারাবাহিক', 'desc'=>'Upwork প্ল্যাটফর্মে ক্রমাগত ৫ বছর
-                ধরে "Top Rated Plus" ব্যাজ ধারণ এবং ৯৯% Job Success।',
-                'url'=>'https://www.upwork.com/freelancers/~example', 'badge'=>'⭐', 'color'=>'#22c55e',
-                'bg'=>'rgba(34,197,94,0.06)', 'border'=>'rgba(34,197,94,0.18)'],
-                ['title'=>'TEDx Dhaka — Featured Speaker ২০২৩', 'desc'=>'TEDx Dhaka ২০২৩ আয়োজনে "ভবিষ্যতের প্রযুক্তি
-                শিক্ষা" বিষয়ক আলোচনায় বিশেষ বক্তা।', 'url'=>'https://ted.com/tedx/events/example', 'badge'=>'🎤',
-                'color'=>'#ef4444', 'bg'=>'rgba(239,68,68,0.06)', 'border'=>'rgba(239,68,68,0.18)'],
-                ];
-                @endphp
-                <div class="space-y-3">
-                    @foreach($achievements as $ach)
-                    <a href="{{ $ach['url'] }}" target="_blank" rel="noopener noreferrer"
-                        class="group flex items-start gap-4 p-4 rounded-2xl border transition-all duration-200 hover:shadow-md hover:-translate-y-0.5 block"
-                        style="background: {{ $ach['bg'] }}; border-color: {{ $ach['border'] }};">
-                        <div class="text-2xl shrink-0 mt-0.5">{{ $ach['badge'] }}</div>
-                        <div class="flex-1 min-w-0">
-                            <div class="flex items-center gap-2 flex-wrap">
-                                <p class="text-sm font-bold" style="color: {{ $ach['color'] }};">{{ $ach['title'] }}</p>
-                                <svg class="w-3.5 h-3.5 opacity-50 group-hover:opacity-100 transition-opacity shrink-0"
-                                    fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="{{ $ach['color'] }}">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-                                </svg>
-                            </div>
-                            <p class="text-xs mt-1 leading-relaxed" style="color: var(--mc-text-muted);">{{ $ach['desc']
-                                }}</p>
-                        </div>
-                    </a>
-                    @endforeach
-                </div>
-            </div>
-
-            {{-- Inventions --}}
-            <div class="p-6 sm:p-8 border-b" style="border-color: var(--mc-border-subtle);">
-                <div class="flex items-center gap-3 mb-6">
-                    <div class="w-1 h-7 rounded-full"
-                        style="background: linear-gradient(to bottom, #8b5cf6, rgba(139,92,246,0.3));"></div>
-                    <h2 class="text-xl font-bold" style="color: var(--mc-text); font-family:'Lora',serif;">উদ্ভাবন ও
-                        প্রজেক্টসমূহ</h2>
-                </div>
-                @php
-                $inventions = [
-                ['title'=>'ShikhoBD — বাংলা ই-লার্নিং প্ল্যাটফর্ম', 'desc'=>'বাংলাদেশের প্রথম সম্পূর্ণ বাংলা ভাষায়
-                ইন্টারেক্টিভ কোডিং লার্নিং প্ল্যাটফর্ম, যেখানে ৩০,০০০+ শিক্ষার্থী নিবন্ধিত।',
-                'url'=>'https://shikhobd.example.com', 'tag'=>'EdTech', 'color'=>'#8b5cf6',
-                'bg'=>'rgba(139,92,246,0.06)', 'border'=>'rgba(139,92,246,0.18)',
-                'icon'=>'M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0
-                4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018
-                18a8.967 8.967 0 00-6 2.292m0-14.25v14.25'],
-                ['title'=>'AutoGrade AI — স্বয়ংক্রিয় কোড মূল্যায়ন টুল', 'desc'=>'শিক্ষার্থীদের কোড স্বয়ংক্রিয়ভাবে
-                মূল্যায়ন ও ফিডব্যাক প্রদানের জন্য AI-চালিত ওপেন-সোর্স টুল।',
-                'url'=>'https://github.com/example/autograde-ai', 'tag'=>'Open Source', 'color'=>'#28666e',
-                'bg'=>'rgba(40,102,110,0.06)', 'border'=>'rgba(40,102,110,0.18)',
-                'icon'=>'M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5'],
-                ['title'=>'BanglaCode IDE — বাংলা ডকুমেন্টেশন সহ IDE', 'desc'=>'সম্পূর্ণ বাংলা ডকুমেন্টেশনসহ
-                ব্রাউজার-ভিত্তিক কোড এডিটর যা নতুনদের জন্য বিশেষভাবে ডিজাইন।', 'url'=>'https://banglacode.example.com',
-                'tag'=>'DevTool', 'color'=>'#3b82f6', 'bg'=>'rgba(59,130,246,0.06)', 'border'=>'rgba(59,130,246,0.18)',
-                'icon'=>'M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0
-                00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z'],
-                ['title'=>'MentorMatch — মেন্টর-শিক্ষার্থী সংযোগ অ্যাপ', 'desc'=>'বাংলাদেশে মেন্টর ও শিক্ষার্থীদের মধ্যে
-                দক্ষতা-ভিত্তিক সংযোগ স্থাপনের জন্য মোবাইল অ্যাপ।', 'url'=>'https://mentormatch.example.com',
-                'tag'=>'SaaS', 'color'=>'#22c55e', 'bg'=>'rgba(34,197,94,0.06)', 'border'=>'rgba(34,197,94,0.18)',
-                'icon'=>'M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0
-                .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016
-                18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3
-                3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3
-                0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5
-                0z'],
-                ];
-                @endphp
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    @foreach($inventions as $inv)
-                    <a href="{{ $inv['url'] }}" target="_blank" rel="noopener noreferrer"
-                        class="group flex flex-col gap-3 p-5 rounded-2xl border transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
-                        style="background: {{ $inv['bg'] }}; border-color: {{ $inv['border'] }};">
-                        <div class="flex items-start justify-between gap-2">
-                            <div class="p-2.5 rounded-xl shrink-0" style="background: {{ $inv['border'] }};">
-                                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.8"
-                                    stroke="{{ $inv['color'] }}">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="{{ $inv['icon'] }}" />
-                                </svg>
-                            </div>
-                            <span class="text-xs font-bold px-2.5 py-1 rounded-full shrink-0"
-                                style="background: {{ $inv['border'] }}; color: {{ $inv['color'] }};">{{ $inv['tag']
-                                }}</span>
-                        </div>
-                        <div>
-                            <p class="text-sm font-bold mb-1.5 flex items-center gap-1.5"
-                                style="color: var(--mc-text);">
-                                {{ $inv['title'] }}
-                                <svg class="w-3.5 h-3.5 opacity-40 group-hover:opacity-100 transition-opacity shrink-0"
-                                    fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="var(--mc-text-sub)">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-                                </svg>
-                            </p>
-                            <p class="text-xs leading-relaxed" style="color: var(--mc-text-muted);">{{ $inv['desc'] }}
-                            </p>
-                        </div>
-                    </a>
-                    @endforeach
-                </div>
-            </div>
-
-            {{-- Social Links --}}
-            <div class="p-6 sm:p-8">
-                <div class="flex items-center gap-3 mb-6">
-                    <div class="w-1 h-7 rounded-full"
-                        style="background: linear-gradient(to bottom, var(--mc-primary), var(--mc-sage));"></div>
-                    <h2 class="text-xl font-bold" style="color: var(--mc-text); font-family:'Lora',serif;">অন্যান্য লিংক
-                    </h2>
-                </div>
-                @php
-                $socialLinks = [
-                ['label'=>'পোর্টফোলিও ওয়েবসাইট', 'url'=>'https://yourportfolio.example.com',
-                'sub'=>'yourportfolio.example.com', 'bg'=>'rgba(40,102,110,0.07)', 'border'=>'rgba(40,102,110,0.2)',
-                'color'=>'#28666e',
-                'icon_svg'=>'
-                <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
-                '],
-                ['label'=>'LinkedIn',
-                'url'=>'https://linkedin.com/in/your-profile','sub'=>'linkedin.com/in/your-profile',
-                'bg'=>'rgba(10,102,194,0.06)', 'border'=>'rgba(10,102,194,0.18)', 'color'=>'#0a66c2',
-                'icon_svg'=>'
-                <rect x="2" y="2" width="20" height="20" rx="4" stroke-width="1.8" />
-                <path d="M7 10v7M7 7v.01M12 17v-4a2 2 0 014 0v4M12 10v7" stroke-width="1.8" stroke-linecap="round"
-                    stroke-linejoin="round" />'],
-                ['label'=>'Facebook', 'url'=>'https://facebook.com/your-profile', 'sub'=>'facebook.com/your-profile',
-                'bg'=>'rgba(24,119,242,0.06)', 'border'=>'rgba(24,119,242,0.18)', 'color'=>'#1877f2',
-                'icon_svg'=>'
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
-                    d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />'],
-                ['label'=>'Instagram', 'url'=>'https://instagram.com/your-profile', 'sub'=>'instagram.com/your-profile',
-                'bg'=>'rgba(225,48,108,0.06)', 'border'=>'rgba(225,48,108,0.18)','color'=>'#e1306c',
-                'icon_svg'=>'
-                <rect x="2" y="2" width="20" height="20" rx="5" stroke-width="1.8" />
-                <circle cx="12" cy="12" r="4" stroke-width="1.8" />
-                <circle cx="17.5" cy="6.5" r="0.5" fill="#e1306c" stroke-width="0" />'],
-                ['label'=>'Gmail / ই-মেইল', 'url'=>'mailto:yourname@gmail.com', 'sub'=>'yourname@gmail.com',
-                'bg'=>'rgba(234,67,53,0.06)', 'border'=>'rgba(234,67,53,0.18)', 'color'=>'#ea4335',
-                'icon_svg'=>'
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
-                    d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-                '],
-                ];
-                @endphp
-                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3">
-                    @foreach($socialLinks as $link)
-                    <a href="{{ $link['url'] }}" target="_blank" rel="noopener noreferrer"
-                        class="group flex items-center gap-3 p-4 rounded-2xl border transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
-                        style="background: {{ $link['bg'] }}; border-color: {{ $link['border'] }};">
-                        <div class="p-2.5 rounded-xl shrink-0 group-hover:scale-110 transition-transform duration-200"
-                            style="background: {{ $link['border'] }};">
-                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="{{ $link['color'] }}">
-                                {!! $link['icon_svg'] !!}
-                            </svg>
-                        </div>
-                        <div class="min-w-0">
-                            <p class="text-sm font-bold" style="color: {{ $link['color'] }};">{{ $link['label'] }}</p>
-                            <p class="text-xs truncate mt-0.5" style="color: var(--mc-text-muted);">{{ $link['sub'] }}
-                            </p>
-                        </div>
-                        <svg class="w-4 h-4 ml-auto shrink-0 opacity-30 group-hover:opacity-80 transition-opacity"
-                            fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="{{ $link['color'] }}">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center gap-3">
+                        <div class="w-1 h-7 rounded-full"
+                            style="background: linear-gradient(to bottom, #eab308, rgba(234,179,8,0.3));"></div>
+                        <h2 class="text-xl font-bold" style="color: var(--mc-text); font-family:'Lora',serif;">অর্জনসমূহ
+                        </h2>
+                    </div>
+                    @if(auth()->id() === $mentor->id)
+                    <button type="button" onclick="document.getElementById('addAchievementModal').showModal()"
+                        class="inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-xl border transition-all duration-200 hover:shadow-sm hover:-translate-y-0.5"
+                        style="border-color: #eab308; color: #d97706;"
+                        onmouseover="this.style.background='#eab308';this.style.color='white'"
+                        onmouseout="this.style.background='transparent';this.style.color='#d97706'">
+                        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                         </svg>
-                    </a>
-                    @endforeach
+                        নতুন অর্জন যোগ করুন
+                    </button>
+                    @endif
+                </div>
+
+                <div class="space-y-3">
+                    @forelse($mentor->achievements as $ach)
+                    <div class="group flex items-start gap-4 p-4 rounded-2xl border transition-all duration-200 hover:shadow-md block relative"
+                        style="background: rgba(234,179,8,0.07); border-color: rgba(234,179,8,0.2);">
+                        <div class="text-2xl shrink-0 mt-0.5">🏆</div>
+                        <div class="flex-1 min-w-0 pr-16">
+                            <p class="text-sm font-bold" style="color: #eab308;">{{ $ach->title }}</p>
+                            <p class="text-xs mt-1 leading-relaxed" style="color: var(--mc-text-muted);">{{ Str::limit($ach->description, 100) }}</p>
+                            @if(auth()->id() === $mentor->id)
+                            <div class="mt-2 flex gap-2">
+                                <button type="button" onclick="editAchievement({{ $ach->id }}, '{{ addslashes($ach->title) }}', '{{ addslashes($ach->description) }}')" class="text-xs text-blue-500 hover:underline">Edit</button>
+                                <form action="{{ route('achievements.delete', $ach->id) }}" method="POST" onsubmit="return confirm('Delete this achievement?');" class="inline">
+                                    @csrf @method('DELETE')
+                                    <button type="submit" class="text-xs text-red-500 hover:underline">Delete</button>
+                                </form>
+                            </div>
+                            @endif
+                        </div>
+                        @if($ach->image)
+                        <div class="absolute right-4 top-4 shrink-0 w-12 h-12 rounded-lg overflow-hidden cursor-pointer border border-yellow-200"
+                             onclick="showAchievementImage('{{ asset('storage/' . $ach->image) }}')">
+                            <img src="{{ asset('storage/' . $ach->image) }}" alt="Achievement Image" class="w-full h-full object-cover">
+                        </div>
+                        @endif
+                    </div>
+                    @empty
+                    <p class="text-sm" style="color: var(--mc-text-muted);">কোনো অর্জন যোগ করা হয়নি</p>
+                    @endforelse
                 </div>
             </div>
+
+
 
         </div>
 
@@ -878,5 +751,97 @@
         @endif
     </script>
     @endif
+
+    {{-- ══════════════════════════════════════════
+    ACHIEVEMENT MODALS (own profile only)
+    ══════════════════════════════════════════ --}}
+    @if(auth()->id() === $mentor->id)
+    {{-- Add Achievement Modal --}}
+    <dialog id="addAchievementModal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box p-6 rounded-3xl" style="background:var(--mc-surface);border:1px solid var(--mc-border-teal-sub);">
+            <h3 class="font-bold text-lg mb-4 text-[#033f63] dark:text-[#7ec8e3]">নতুন অর্জন যোগ করুন</h3>
+            <form action="{{ route('achievements.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-bold mb-1 text-[#033f63] dark:text-[#7ec8e3]">শিরোনাম</label>
+                        <input type="text" name="title" required class="w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-transparent text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold mb-1 text-[#033f63] dark:text-[#7ec8e3]">বিবরণ (ছোট করে)</label>
+                        <textarea name="description" rows="3" required class="w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-transparent text-sm"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold mb-1 text-[#033f63] dark:text-[#7ec8e3]">ছবি (সার্টিফিকেট/ক্রেস্ট)</label>
+                        <input type="file" name="image" accept="image/*" class="w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-transparent text-sm">
+                    </div>
+                </div>
+                <div class="modal-action">
+                    <button type="button" onclick="document.getElementById('addAchievementModal').close()" class="btn btn-ghost rounded-xl">বাতিল</button>
+                    <button type="submit" class="btn rounded-xl text-white" style="background:#eab308;border:none;">যোগ করুন</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+
+    {{-- Edit Achievement Modal --}}
+    <dialog id="editAchievementModal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box p-6 rounded-3xl" style="background:var(--mc-surface);border:1px solid var(--mc-border-teal-sub);">
+            <h3 class="font-bold text-lg mb-4 text-[#033f63] dark:text-[#7ec8e3]">অর্জন সম্পাদনা করুন</h3>
+            <form id="editAchievementForm" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-bold mb-1 text-[#033f63] dark:text-[#7ec8e3]">শিরোনাম</label>
+                        <input type="text" name="title" id="editAchTitle" required class="w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-transparent text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold mb-1 text-[#033f63] dark:text-[#7ec8e3]">বিবরণ (ছোট করে)</label>
+                        <textarea name="description" id="editAchDesc" rows="3" required class="w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-transparent text-sm"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold mb-1 text-[#033f63] dark:text-[#7ec8e3]">নতুন ছবি (ঐচ্ছিক)</label>
+                        <input type="file" name="image" accept="image/*" class="w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-transparent text-sm">
+                    </div>
+                </div>
+                <div class="modal-action">
+                    <button type="button" onclick="document.getElementById('editAchievementModal').close()" class="btn btn-ghost rounded-xl">বাতিল</button>
+                    <button type="submit" class="btn rounded-xl text-white" style="background:#eab308;border:none;">আপডেট করুন</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+
+    <script>
+        function editAchievement(id, title, desc) {
+            const form = document.getElementById('editAchievementForm');
+            form.action = `/profile/achievements/${id}`;
+            document.getElementById('editAchTitle').value = title;
+            document.getElementById('editAchDesc').value = desc;
+            document.getElementById('editAchievementModal').showModal();
+        }
+    </script>
+    @endif
+
+    {{-- View Image Modal --}}
+    <dialog id="viewAchievementImageModal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box p-0 rounded-2xl bg-transparent shadow-none max-w-3xl">
+            <div class="relative">
+                <button type="button" onclick="document.getElementById('viewAchievementImageModal').close()" class="absolute -top-3 -right-3 btn btn-sm btn-circle btn-error text-white z-10 shadow-lg">✕</button>
+                <img id="viewAchImage" src="" alt="Achievement" class="w-full rounded-2xl shadow-2xl bg-white">
+            </div>
+        </div>
+        <form method="dialog" class="modal-backdrop">
+            <button>close</button>
+        </form>
+    </dialog>
+
+    <script>
+        function showAchievementImage(url) {
+            document.getElementById('viewAchImage').src = url;
+            document.getElementById('viewAchievementImageModal').showModal();
+        }
+    </script>
 
 </x-layout>
