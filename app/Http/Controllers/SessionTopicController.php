@@ -15,6 +15,11 @@ class SessionTopicController extends Controller
 {
     public function create(User $mentor)
     {
+        // Block booking sessions with unverified mentors
+        if (!$mentor->profile || !$mentor->profile->is_verified) {
+            abort(404, 'এই মেন্টরের প্রোফাইল এখনও ভেরিফাইড নয়।');
+        }
+
         return view('session.request', compact('mentor'));
     }
 
@@ -27,6 +32,11 @@ class SessionTopicController extends Controller
             'note'           => 'nullable|string|max:1000',
             'duration_hours' => 'required|integer|min:1|max:4',
         ]);
+
+        $mentor = User::findOrFail($request->mentor_id);
+        if (!$mentor->profile || !$mentor->profile->is_verified) {
+            abort(404, 'এই মেন্টরের প্রোফাইল এখনও ভেরিফাইড নয়।');
+        }
 
         $session = SessionTopic::create([
             'student_id'     => $request->user()->id,

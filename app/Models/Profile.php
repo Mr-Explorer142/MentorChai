@@ -20,6 +20,11 @@ class Profile extends Model
         'institution_name',
         'hourly_rate',
         'department',
+        'short_bio',
+        'nid_front',
+        'nid_back',
+        'student_id_front',
+        'student_id_back',
     ];
 
     public function user()

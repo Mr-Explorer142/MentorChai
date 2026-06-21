@@ -33,7 +33,18 @@
                         shadow-sm dark:shadow-[0_8px_40px_rgba(0,0,0,0.4)]
                         transition-colors duration-300">
                 <div class="p-6 sm:p-8 lg:p-10">
-                    <form action="{{ route('update_profile') }}" method="POST" class="space-y-10">
+                    @if ($errors->any())
+                        <div class="mb-6 p-4 rounded-xl" style="background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2);">
+                            <div class="text-sm text-red-500 font-bold mb-2">অনুগ্রহ করে নিচের ভুলগুলো সংশোধন করুন:</div>
+                            <ul class="text-sm text-red-500 list-disc list-inside">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    <form action="{{ route('update_profile') }}" method="POST" enctype="multipart/form-data" class="space-y-10">
                         @csrf
                         @method('PUT')
 
@@ -151,7 +162,35 @@
                                 </div>
                             </div>
 
-                            {{-- Bio --}}
+                            {{-- Short Bio --}}
+                            <div>
+                                <label class="flex items-center justify-between mb-1.5">
+                                    <span class="flex items-center gap-1.5 text-xs font-bold
+                                                 text-[#033f63] dark:text-[#7ec8e3]">
+                                        <svg class="w-3.5 h-3.5 text-[#28666e] dark:text-[#4db6c1]" fill="none"
+                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12" />
+                                        </svg>
+                                        ছোট বায়ো (হেডলাইন)
+                                    </span>
+                                    <span class="text-xs text-[#033f63]/45 dark:text-[#7ec8e3]/40">
+                                        প্রোফাইল নামের নিচে দেখানোর জন্য (১-২ লাইন)
+                                    </span>
+                                </label>
+                                <textarea name="short_bio" rows="2" class="w-full px-4 py-2.5 rounded-xl text-sm outline-none resize-none
+                                           border-[1.5px] border-[#28666e]/20 dark:border-[#4db6c1]/20
+                                           bg-[#eef7f8]/50 dark:bg-[#0f1f2e]/50
+                                           text-[#033f63] dark:text-[#7ec8e3]
+                                           placeholder:text-[#033f63]/35 dark:placeholder:text-[#7ec8e3]/30
+                                           focus:border-[#28666e] dark:focus:border-[#4db6c1]
+                                           focus:ring-[3px] focus:ring-[#28666e]/10 dark:focus:ring-[#4db6c1]/10
+                                           focus:bg-white dark:focus:bg-[#243d4d]
+                                           transition-all duration-200"
+                                    placeholder="আপনার শর্ট বায়ো/পেশা লিখুন">{{ old('short_bio', Auth::user()->profile?->short_bio) }}</textarea>
+                            </div>
+
+                            {{-- Detailed Bio --}}
                             <div>
                                 <label class="flex items-center justify-between mb-1.5">
                                     <span class="flex items-center gap-1.5 text-xs font-bold
@@ -161,10 +200,10 @@
                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                 d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
                                         </svg>
-                                        বায়ো
+                                        বিস্তারিত বায়ো
                                     </span>
                                     <span class="text-xs text-[#033f63]/45 dark:text-[#7ec8e3]/40">
-                                        নিজের সম্পর্কে সংক্ষেপে লিখুন
+                                        আপনার অভিজ্ঞতা ও দক্ষতা সম্পর্কে বিস্তারিত লিখুন
                                     </span>
                                 </label>
                                 <textarea name="bio" rows="4" class="w-full px-4 py-2.5 rounded-xl text-sm outline-none resize-none
@@ -176,7 +215,7 @@
                                            focus:ring-[3px] focus:ring-[#28666e]/10 dark:focus:ring-[#4db6c1]/10
                                            focus:bg-white dark:focus:bg-[#243d4d]
                                            transition-all duration-200"
-                                    placeholder="নিজের সম্পর্কে অল্প শব্দে কিছু লিখুন">{{ old('bio', Auth::user()->profile?->bio) }}</textarea>
+                                    placeholder="নিজের সম্পর্কে বিস্তারিত লিখুন">{{ old('bio', Auth::user()->profile?->bio) }}</textarea>
                             </div>
                         </div>
 
@@ -305,6 +344,143 @@
                                     </svg>
                                     প্রতিটি দক্ষতার মাঝে কমা (,) ব্যবহার করুন
                                 </p>
+                            </div>
+                        </div>
+
+                        {{-- ── Documents ── --}}
+                        <div class="space-y-6">
+                            <div class="flex items-center gap-3 pb-4
+                                        border-b border-teal-50 dark:border-[#4db6c1]/10">
+                                <div class="w-1 h-7 rounded-full
+                                            bg-linear-to-b from-[#28666e] to-[#7c9885]
+                                            dark:from-[#4db6c1] dark:to-[#9ab8a5]"></div>
+                                <h2 class="text-lg font-bold flex items-center gap-2
+                                           text-[#033f63] dark:text-[#7ec8e3]" style="font-family:'Lora',serif;">
+                                    <svg class="w-5 h-5 text-[#28666e] dark:text-[#4db6c1]" fill="none"
+                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                                    </svg>
+                                    নথিপত্র (Documents)
+                                </h2>
+                            </div>
+
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+                                {{-- NID Front --}}
+                                <div>
+                                    <label class="flex items-center gap-1.5 text-xs font-bold mb-1.5
+                                                  text-[#033f63] dark:text-[#7ec8e3]">
+                                        <svg class="w-3.5 h-3.5 text-[#28666e] dark:text-[#4db6c1]" fill="none"
+                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                                        </svg>
+                                        ন্যাশনাল আইডি (NID) - সামনের অংশ
+                                    </label>
+                                    <input type="file" name="nid_front" accept="image/*" class="w-full px-4 py-2.5 rounded-xl text-sm outline-none
+                                               border-[1.5px] border-[#28666e]/20 dark:border-[#4db6c1]/20
+                                               bg-[#eef7f8]/50 dark:bg-[#0f1f2e]/50
+                                               text-[#033f63] dark:text-[#7ec8e3]
+                                               focus:border-[#28666e] dark:focus:border-[#4db6c1]
+                                               focus:ring-[3px] focus:ring-[#28666e]/10 dark:focus:ring-[#4db6c1]/10
+                                               transition-all duration-200" />
+                                    @if(Auth::user()->profile && Auth::user()->profile->nid_front)
+                                        <div class="mt-2 flex items-center justify-between">
+                                            <p class="text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded-md">আপলোড করা আছে।</p>
+                                            <label class="flex items-center gap-1.5 cursor-pointer group">
+                                                <input type="checkbox" name="remove_nid_front" value="1" class="w-3.5 h-3.5 text-red-500 border-red-200 rounded focus:ring-red-500">
+                                                <span class="text-xs text-red-500 group-hover:text-red-600 transition-colors">ছবি মুছে ফেলুন</span>
+                                            </label>
+                                        </div>
+                                    @endif
+                                </div>
+
+                                {{-- NID Back --}}
+                                <div>
+                                    <label class="flex items-center gap-1.5 text-xs font-bold mb-1.5
+                                                  text-[#033f63] dark:text-[#7ec8e3]">
+                                        <svg class="w-3.5 h-3.5 text-[#28666e] dark:text-[#4db6c1]" fill="none"
+                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                                        </svg>
+                                        ন্যাশনাল আইডি (NID) - পিছনের অংশ
+                                    </label>
+                                    <input type="file" name="nid_back" accept="image/*" class="w-full px-4 py-2.5 rounded-xl text-sm outline-none
+                                               border-[1.5px] border-[#28666e]/20 dark:border-[#4db6c1]/20
+                                               bg-[#eef7f8]/50 dark:bg-[#0f1f2e]/50
+                                               text-[#033f63] dark:text-[#7ec8e3]
+                                               focus:border-[#28666e] dark:focus:border-[#4db6c1]
+                                               focus:ring-[3px] focus:ring-[#28666e]/10 dark:focus:ring-[#4db6c1]/10
+                                               transition-all duration-200" />
+                                    @if(Auth::user()->profile && Auth::user()->profile->nid_back)
+                                        <div class="mt-2 flex items-center justify-between">
+                                            <p class="text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded-md">আপলোড করা আছে।</p>
+                                            <label class="flex items-center gap-1.5 cursor-pointer group">
+                                                <input type="checkbox" name="remove_nid_back" value="1" class="w-3.5 h-3.5 text-red-500 border-red-200 rounded focus:ring-red-500">
+                                                <span class="text-xs text-red-500 group-hover:text-red-600 transition-colors">ছবি মুছে ফেলুন</span>
+                                            </label>
+                                        </div>
+                                    @endif
+                                </div>
+
+                                {{-- Student ID Front --}}
+                                <div>
+                                    <label class="flex items-center gap-1.5 text-xs font-bold mb-1.5
+                                                  text-[#033f63] dark:text-[#7ec8e3]">
+                                        <svg class="w-3.5 h-3.5 text-[#28666e] dark:text-[#4db6c1]" fill="none"
+                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z" />
+                                        </svg>
+                                        স্টুডেন্ট আইডি - সামনের অংশ
+                                    </label>
+                                    <input type="file" name="student_id_front" accept="image/*" class="w-full px-4 py-2.5 rounded-xl text-sm outline-none
+                                               border-[1.5px] border-[#28666e]/20 dark:border-[#4db6c1]/20
+                                               bg-[#eef7f8]/50 dark:bg-[#0f1f2e]/50
+                                               text-[#033f63] dark:text-[#7ec8e3]
+                                               focus:border-[#28666e] dark:focus:border-[#4db6c1]
+                                               focus:ring-[3px] focus:ring-[#28666e]/10 dark:focus:ring-[#4db6c1]/10
+                                               transition-all duration-200" />
+                                    @if(Auth::user()->profile && Auth::user()->profile->student_id_front)
+                                        <div class="mt-2 flex items-center justify-between">
+                                            <p class="text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded-md">আপলোড করা আছে।</p>
+                                            <label class="flex items-center gap-1.5 cursor-pointer group">
+                                                <input type="checkbox" name="remove_student_id_front" value="1" class="w-3.5 h-3.5 text-red-500 border-red-200 rounded focus:ring-red-500">
+                                                <span class="text-xs text-red-500 group-hover:text-red-600 transition-colors">ছবি মুছে ফেলুন</span>
+                                            </label>
+                                        </div>
+                                    @endif
+                                </div>
+
+                                {{-- Student ID Back --}}
+                                <div>
+                                    <label class="flex items-center gap-1.5 text-xs font-bold mb-1.5
+                                                  text-[#033f63] dark:text-[#7ec8e3]">
+                                        <svg class="w-3.5 h-3.5 text-[#28666e] dark:text-[#4db6c1]" fill="none"
+                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z" />
+                                        </svg>
+                                        স্টুডেন্ট আইডি - পিছনের অংশ
+                                    </label>
+                                    <input type="file" name="student_id_back" accept="image/*" class="w-full px-4 py-2.5 rounded-xl text-sm outline-none
+                                               border-[1.5px] border-[#28666e]/20 dark:border-[#4db6c1]/20
+                                               bg-[#eef7f8]/50 dark:bg-[#0f1f2e]/50
+                                               text-[#033f63] dark:text-[#7ec8e3]
+                                               focus:border-[#28666e] dark:focus:border-[#4db6c1]
+                                               focus:ring-[3px] focus:ring-[#28666e]/10 dark:focus:ring-[#4db6c1]/10
+                                               transition-all duration-200" />
+                                    @if(Auth::user()->profile && Auth::user()->profile->student_id_back)
+                                        <div class="mt-2 flex items-center justify-between">
+                                            <p class="text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded-md">আপলোড করা আছে।</p>
+                                            <label class="flex items-center gap-1.5 cursor-pointer group">
+                                                <input type="checkbox" name="remove_student_id_back" value="1" class="w-3.5 h-3.5 text-red-500 border-red-200 rounded focus:ring-red-500">
+                                                <span class="text-xs text-red-500 group-hover:text-red-600 transition-colors">ছবি মুছে ফেলুন</span>
+                                            </label>
+                                        </div>
+                                    @endif
+                                </div>
                             </div>
                         </div>
 

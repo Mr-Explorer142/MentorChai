@@ -35,5 +35,7 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+        $exceptions->render(function (\Illuminate\Http\Exceptions\PostTooLargeException $e, \Illuminate\Http\Request $request) {
+            return back()->withErrors(['error' => 'আপনি যে ছবিগুলো আপলোড করছেন তার মোট সাইজ সার্ভারের সীমার চেয়ে বেশি। দয়া করে ছোট সাইজের ছবি আপলোড করুন অথবা সার্ভারের লিমিট বাড়ান।']);
+        });
     })->create();
