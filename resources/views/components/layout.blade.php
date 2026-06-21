@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="bn" data-bs-theme="light">
+<html lang="bn" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
@@ -20,6 +20,9 @@
     <script>
         if (localStorage.theme === 'dark') {
             document.documentElement.classList.add('dark');
+            document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+            document.documentElement.setAttribute('data-theme', 'light');
         }
     </script>
 </head>
@@ -682,6 +685,7 @@
 
     toggle.addEventListener('click', () => {
         const isDark = html.classList.toggle('dark');
+        html.setAttribute('data-theme', isDark ? 'dark' : 'light');
         localStorage.theme = isDark ? 'dark' : 'light';
         sun.classList.toggle('hidden', !isDark);
         moon.classList.toggle('hidden', isDark);

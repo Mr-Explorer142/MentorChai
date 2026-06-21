@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @plugin "daisyui" {
-  themes: light --default;
+  themes: light --default, dark;
 }
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
@@ -141,4 +141,32 @@ html.dark {
 @keyframes fadeUp {
     from { opacity: 0; transform: translateY(10px); }
     to   { opacity: 1; transform: translateY(0);    }
+}
+
+/* ═══════════════════════════════════════════════════
+   DAISYUI DARK MODE SYNC OVERRIDES
+   Ensures DaisyUI components strictly follow system dark mode colors
+   ═══════════════════════════════════════════════════ */
+html.dark {
+    /* DaisyUI v5 explicit color overrides */
+    --color-base-100: var(--mc-surface) !important;
+    --color-base-200: var(--mc-bg) !important;
+    --color-base-300: var(--mc-surface-hover) !important; /* Restored for normal hovers */
+    --color-base-content: var(--mc-text) !important;
+    
+    /* Fallbacks for older DaisyUI versions just in case */
+    --b1: var(--mc-surface) !important;
+    --b2: var(--mc-bg) !important;
+    --b3: var(--mc-surface-hover) !important;
+    --bc: var(--mc-text) !important;
+}
+
+/* Specific visibility enhancements for cards */
+html:not(.dark) .card {
+    border: 1px solid #000000 !important; /* Solid black border in light mode */
+}
+
+html.dark .card {
+    border: 1px solid #e5e7eb !important; /* Very bright, near-white border in dark mode */
+    box-shadow: none !important; /* Removed the previous shadow */
 }
