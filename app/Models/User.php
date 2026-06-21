@@ -63,6 +63,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(Profile::class);
     }
 
+    public function achievements()
+    {
+        return $this->hasMany(Achievement::class);
+    }
+
     public function isOnline()
     {
         return $this->last_seen_at && $this->last_seen_at >= now()->subMinutes(1);
