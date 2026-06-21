@@ -66,8 +66,6 @@
                                 </h2>
                             </div>
 
-                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
-
                                 {{-- Name --}}
                                 <div>
                                     <label class="flex items-center gap-1.5 text-xs font-bold mb-1.5
@@ -90,8 +88,6 @@
                                                transition-all duration-200" placeholder="সম্পূর্ণ নাম দিন"
                                         value="{{ old('name', Auth::user()->name) }}" />
                                 </div>
-
-                            </div>
 
                             {{-- Short Bio --}}
                             <div>
