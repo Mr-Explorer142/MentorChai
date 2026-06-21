@@ -20,7 +20,7 @@
                             </div>
                             <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight">স্বাগতম, {{ $mentor->name }}
                             </h1>
-                            <p class="text-base leading-8 text-primary-content/75 max-w-xl">{{ $mentor->profile->bio }}
+                            <p class="text-base leading-8 text-primary-content/75 max-w-xl">{{ $mentor->profile->short_bio ?? $mentor->profile->bio }}
                             </p>
                             <div class="flex flex-wrap gap-2">
                                 <div class="badge badge-accent gap-2 py-3 px-4 font-semibold">

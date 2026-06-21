@@ -119,7 +119,7 @@
                                 </span>
                             </div>
                         </div>
-                        <p class="text-sm leading-relaxed" style="color: var(--mc-text-muted);">
+                        <p class="text-base md:text-lg font-medium italic leading-relaxed mt-1" style="color: var(--mc-text);">
                             {{ $mentor->profile->short_bio ?? 'এখনো শর্ট বায়ো যোগ করা হয়নি' }}
                         </p>
                     </div>
@@ -178,32 +178,26 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
                     @php
                     $infoItems = [
-                    ['icon_color'=>'#3b82f6', 'bg'=>'rgba(59,130,246,0.1)', 'label'=>'ই-মেইল', 'value'=>$mentor->email,
-                    'bold'=>false,
-                    'icon'=>'M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25
-                    2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25
-                    2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75'],
-                    ['icon_color'=>'#22c55e', 'bg'=>'rgba(34,197,94,0.1)', 'label'=>'ফোন',
-                    'value'=>$mentor->profile->phone ?? '—', 'bold'=>false,
-                    'icon'=>'M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0
-                    002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97
-                    1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0
-                    01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125
-                    1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z'],
-                    ['icon_color'=>'#eab308', 'bg'=>'rgba(234,179,8,0.1)', 'label'=>'ঠিকানা',
-                    'value'=>$mentor->profile->address ?? '—', 'bold'=>false,
-                    'icon'=>'M15 10.5a3 3 0 11-6 0 3 3 0 016 0zM19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5
-                    10.5a7.5 7.5 0 1115 0z'],
-                    ['icon_color'=>'#8b5cf6', 'bg'=>'rgba(139,92,246,0.1)', 'label'=>'জন্ম তারিখ',
-                    'value'=>$mentor->profile->date_of_birth ?? '—', 'bold'=>false,
-                    'icon'=>'M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121
-                    7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5'],
-                    ['icon_color'=>'#28666e', 'bg'=>'rgba(40,102,110,0.1)', 'label'=>'ঘণ্টা প্রতি চার্জ',
-                    'value'=>$mentor->profile->hourly_rate ? '৳'.number_format($mentor->profile->hourly_rate) : '—',
-                    'bold'=>true,
-                    'icon'=>'M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536
-                    12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006
-                    0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z'],
+                        ['icon_color'=>'#28666e', 'bg'=>'rgba(40,102,110,0.1)', 'label'=>'ঘণ্টা প্রতি চার্জ',
+                        'value'=>$mentor->profile->hourly_rate ? '৳'.number_format($mentor->profile->hourly_rate) : '—',
+                        'bold'=>true,
+                        'icon'=>'M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z'],
+                        
+                        ['icon_color'=>'#3b82f6', 'bg'=>'rgba(59,130,246,0.1)', 'label'=>'শিক্ষাগত যোগ্যতা',
+                        'value'=>$mentor->profile->highgest_education_level ?? '—', 'bold'=>false,
+                        'icon'=>'M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814'],
+                        
+                        ['icon_color'=>'#8b5cf6', 'bg'=>'rgba(139,92,246,0.1)', 'label'=>'শিক্ষাপ্রতিষ্ঠানের নাম',
+                        'value'=>$mentor->profile->institution_name ?? '—', 'bold'=>false,
+                        'icon'=>'M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18'],
+
+                        ['icon_color'=>'#eab308', 'bg'=>'rgba(234,179,8,0.1)', 'label'=>'অধ্যয়নের বিষয় (ডিপার্টমেন্ট)',
+                        'value'=>$mentor->profile->department ?? '—', 'bold'=>false,
+                        'icon'=>'M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25'],
+
+                        ['icon_color'=>'#10b981', 'bg'=>'rgba(16,185,129,0.1)', 'label'=>'মেন্টর হিসেবে যুক্ত হয়েছেন',
+                        'value'=>$mentor->created_at->format('F Y'), 'bold'=>false,
+                        'icon'=>'M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z'],
                     ];
                     @endphp
                     @foreach($infoItems as $item)
@@ -228,44 +222,7 @@
                 </div>
             </div>
 
-            {{-- Education --}}
-            <div class="p-6 sm:p-8 border-b" style="border-color: var(--mc-border-subtle);">
-                <div class="flex items-center gap-3 mb-7">
-                    <div class="w-1 h-7 rounded-full"
-                        style="background: linear-gradient(to bottom, var(--mc-primary), var(--mc-sage));"></div>
-                    <h2 class="text-xl font-bold" style="color: var(--mc-text); font-family:'Lora',serif;">শিক্ষাগত তথ্য
-                    </h2>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    @foreach([
-                    ['bg'=>'rgba(40,102,110,0.1)', 'stroke'=>'var(--mc-primary)', 'label'=>'শিক্ষাগত যোগ্যতা',
-                    'value'=>$mentor->profile->highgest_education_level ?? '—',
-                    'icon'=>'M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0
-                    018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112
-                    3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814'],
-                    ['bg'=>'rgba(124,152,133,0.12)', 'stroke'=>'var(--mc-sage)', 'label'=>'শিক্ষাপ্রতিষ্ঠানের নাম',
-                    'value'=>$mentor->profile->institution_name ?? '—',
-                    'icon'=>'M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012
-                    9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18'],
-                    ] as $edu)
-                    <div class="group flex items-start gap-3 p-4 rounded-xl transition-all duration-200"
-                        onmouseover="this.style.background='var(--mc-surface-hover)'"
-                        onmouseout="this.style.background='transparent'">
-                        <div class="p-2.5 rounded-xl shrink-0 group-hover:scale-110 transition-transform duration-200"
-                            style="background: {{ $edu['bg'] }};">
-                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.8"
-                                stroke="{{ $edu['stroke'] }}">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="{{ $edu['icon'] }}" />
-                            </svg>
-                        </div>
-                        <div>
-                            <p class="text-xs font-bold mb-0.5" style="color: var(--mc-text);">{{ $edu['label'] }}</p>
-                            <p class="text-sm" style="color: var(--mc-text-muted);">{{ $edu['value'] }}</p>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
-            </div>
+
 
             {{-- Skills --}}
             <div class="p-6 sm:p-8 border-b" style="border-color: var(--mc-border-subtle);">
@@ -319,16 +276,16 @@
 
             {{-- About Me --}}
             <div class="p-6 sm:p-8 border-b" style="border-color: var(--mc-border-subtle);">
-                <div class="flex items-center gap-3 mb-6">
+                <div class="flex items-center gap-3 mb-4">
                     <div class="w-1 h-7 rounded-full"
                         style="background: linear-gradient(to bottom, var(--mc-primary), var(--mc-sage));"></div>
                     <h2 class="text-xl font-bold" style="color: var(--mc-text); font-family:'Lora',serif;">আমার সম্পর্কে
                     </h2>
                 </div>
-                <div class="rounded-2xl p-6 border"
+                <div class="rounded-2xl px-6 pt-2 pb-5 border shadow-sm"
                     style="background: var(--mc-bg); border-color: var(--mc-border-teal-sub);">
-                    <p class="text-sm leading-7" style="color: var(--mc-text-muted); white-space: pre-line;">
-                        {{ $mentor->profile->bio ?? 'কোনো শর্ট বায়ো যোগ করা হয়নি' }}
+                    <p class="text-base leading-relaxed tracking-wide" style="color: var(--mc-text); white-space: pre-line;">
+                        {{ $mentor->profile->bio ?? 'কোনো বিস্তারিত বায়ো যোগ করা হয়নি' }}
                     </p>
                 </div>
             </div>
@@ -356,20 +313,30 @@
                     @endif
                 </div>
 
-                <div class="space-y-3">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     @forelse($mentor->achievements as $ach)
-                    <div class="group flex items-start gap-4 p-4 rounded-2xl border transition-all duration-200 hover:shadow-md block relative"
+                    <div class="group flex items-start gap-4 p-4 rounded-2xl border transition-all duration-200 hover:shadow-md relative"
                         style="background: rgba(234,179,8,0.07); border-color: rgba(234,179,8,0.2);">
                         <div class="text-2xl shrink-0 mt-0.5">🏆</div>
-                        <div class="flex-1 min-w-0 pr-16">
+                        <div class="flex-1 min-w-0 pr-16 flex flex-col h-full">
                             <p class="text-sm font-bold" style="color: #eab308;">{{ $ach->title }}</p>
-                            <p class="text-xs mt-1 leading-relaxed" style="color: var(--mc-text-muted);">{{ Str::limit($ach->description, 100) }}</p>
+                            <p class="text-xs mt-1 leading-relaxed flex-1" style="color: var(--mc-text-muted);">{{ Str::limit($ach->description, 100) }}</p>
+                            
                             @if(auth()->id() === $mentor->id)
-                            <div class="mt-2 flex gap-2">
-                                <button type="button" onclick="editAchievement({{ $ach->id }}, '{{ addslashes($ach->title) }}', '{{ addslashes($ach->description) }}')" class="text-xs text-blue-500 hover:underline">Edit</button>
-                                <form action="{{ route('achievements.delete', $ach->id) }}" method="POST" onsubmit="return confirm('Delete this achievement?');" class="inline">
+                            <div class="mt-3 flex gap-2 relative z-10">
+                                <button type="button" onclick="editAchievement({{ $ach->id }}, '{{ addslashes($ach->title) }}', '{{ addslashes($ach->description) }}')" 
+                                    class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-blue-50 text-blue-600 hover:bg-blue-100 hover:text-blue-700 transition-colors shadow-sm border border-blue-100" title="এডিট করুন">
+                                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                    </svg>
+                                </button>
+                                <form action="{{ route('achievements.delete', $ach->id) }}" method="POST" onsubmit="return confirm('আপনি কি নিশ্চিত যে এই অর্জনটি মুছে ফেলতে চান?');" class="inline">
                                     @csrf @method('DELETE')
-                                    <button type="submit" class="text-xs text-red-500 hover:underline">Delete</button>
+                                    <button type="submit" class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-red-50 text-red-600 hover:bg-red-100 hover:text-red-700 transition-colors shadow-sm border border-red-100" title="ডিলিট করুন">
+                                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
+                                    </button>
                                 </form>
                             </div>
                             @endif
@@ -826,10 +793,12 @@
 
     {{-- View Image Modal --}}
     <dialog id="viewAchievementImageModal" class="modal modal-bottom sm:modal-middle">
-        <div class="modal-box p-0 rounded-2xl bg-transparent shadow-none max-w-3xl">
-            <div class="relative">
-                <button type="button" onclick="document.getElementById('viewAchievementImageModal').close()" class="absolute -top-3 -right-3 btn btn-sm btn-circle btn-error text-white z-10 shadow-lg">✕</button>
-                <img id="viewAchImage" src="" alt="Achievement" class="w-full rounded-2xl shadow-2xl bg-white">
+        <div class="modal-box p-0 rounded-2xl bg-transparent shadow-none max-w-3xl overflow-hidden">
+            <div class="relative inline-block w-full">
+                <button type="button" onclick="document.getElementById('viewAchievementImageModal').close()" 
+                        class="absolute top-4 right-4 btn btn-sm btn-circle z-50 shadow-xl" 
+                        style="background-color: #ef4444 !important; color: white !important; border: 2px solid white !important;">✕</button>
+                <img id="viewAchImage" src="" alt="Achievement" class="w-full rounded-2xl shadow-2xl bg-white block relative z-40">
             </div>
         </div>
         <form method="dialog" class="modal-backdrop">
