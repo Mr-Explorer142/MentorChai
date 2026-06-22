@@ -81,7 +81,7 @@
                                 <h3 class="font-bold text-base md:text-lg" style="color: var(--mc-text-sub);">সেশন ফী ও কমিশন</h3>
                             </div>
                             <p class="text-sm leading-relaxed mb-4" style="color: var(--mc-text-muted);">
-                                মেন্টর তার সেশনের ফী নিজে নির্ধারণ করতে পারবেন, তবে প্ল্যাটফর্ম নির্ধারিত সর্বোচ্চ সীমার বেশি ফী নির্ধারণ করতে পারবেন না।
+                                মেন্টর তার সেশনের ফী নিজে নির্ধারণ করতে পারবেন, তবে প্ল্যাটফর্ম কর্তৃক নির্ধারিত সর্বোচ্চ সীমার বেশি ফী নির্ধারণ করতে পারবেন না।
                             </p>
                             <div class="flex flex-col gap-3 p-4 rounded-xl mb-4" style="background: rgba(40,102,110,0.04);">
                                 <div class="flex justify-between items-center text-sm">
