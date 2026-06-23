@@ -259,6 +259,9 @@ class PaymentController extends Controller
                     new PaymentReceivedNotification($mentoringSession->topic)
                 );
 
+                // ✅ Re-authenticate the user to bypass browser SameSite cookie blocking
+                Auth::loginUsingId($payment->student_id);
+
                 // ✅ Pass tran_id in URL instead of flash session
                 return redirect()->route('success', ['tran_id' => $payment->transaction_id]);
             }
@@ -269,6 +272,7 @@ class PaymentController extends Controller
         } elseif ($payment->status === PaymentStatus::Paid) {
 
             // ✅ Already paid — same approach
+            Auth::loginUsingId($payment->student_id);
             return redirect()->route('success', ['tran_id' => $payment->transaction_id]);
         }
 
