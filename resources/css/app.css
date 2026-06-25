@@ -11,6 +11,32 @@
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+    --animate-fade-up: fade-up 0.35s ease both;
+
+    @keyframes fade-up {
+        from { opacity: 0; transform: translateY(10px); }
+        to   { opacity: 1; transform: translateY(0);    }
+    }
+}
+
+@utility mesh-bg-student {
+    background-color: oklch(var(--b1));
+    background-image: 
+        radial-gradient(at 0% 0%, oklch(var(--p) / 0.4) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, oklch(var(--s) / 0.4) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, oklch(var(--a) / 0.4) 0px, transparent 50%),
+        radial-gradient(at 0% 100%, oklch(var(--wa) / 0.3) 0px, transparent 50%);
+    background-attachment: fixed;
+}
+
+@utility mesh-bg-mentor {
+    background-color: oklch(var(--b1));
+    background-image: 
+        radial-gradient(at 0% 0%, oklch(var(--p) / 0.4) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, oklch(var(--s) / 0.4) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, oklch(var(--a) / 0.4) 0px, transparent 50%),
+        radial-gradient(at 0% 100%, oklch(var(--in) / 0.3) 0px, transparent 50%);
+    background-attachment: fixed;
 }
 
 /* ═══════════════════════════════════════════════════
@@ -135,13 +161,7 @@ html.dark {
     --mc-stat-purple-bg: rgba(126, 34,  206, 0.15);  --mc-stat-purple-text: #d8b4fe;
 }
 
-/* ═══════════════════════════════════════════════════
-   PAGE FADE-IN ANIMATION
-   ═══════════════════════════════════════════════════ */
-@keyframes fadeUp {
-    from { opacity: 0; transform: translateY(10px); }
-    to   { opacity: 1; transform: translateY(0);    }
-}
+
 
 /* ═══════════════════════════════════════════════════
    DAISYUI DARK MODE SYNC OVERRIDES

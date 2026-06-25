@@ -1,47 +1,23 @@
 @use('App\Enums\SessionStatus')
 
 <x-layout>
-    <style>
-        .bento-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-        @media (min-width: 1024px) {
-            .bento-grid {
-                display: grid;
-                grid-template-columns: repeat(12, 1fr);
-            }
-        }
-        .mesh-bg {
-            background-color: oklch(var(--b1));
-            background-image: 
-                radial-gradient(at 0% 0%, oklch(var(--p) / 0.4) 0px, transparent 50%),
-                radial-gradient(at 100% 0%, oklch(var(--s) / 0.4) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, oklch(var(--a) / 0.4) 0px, transparent 50%),
-                radial-gradient(at 0% 100%, oklch(var(--wa) / 0.3) 0px, transparent 50%);
-            background-attachment: fixed;
-        }
-    </style>
-
-    <div class="min-h-screen mesh-bg py-10 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <div class="min-h-screen mesh-bg-student py-10 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
         
-        <div class="mx-auto max-w-[1400px] relative z-10">
-            <div class="bento-grid">
+            <div class="flex flex-col gap-6 lg:grid lg:grid-cols-12">
                 
-                {{-- ═══ 1. Main Hero (Col 1-8) ═══ --}}
-                <div class="col-span-12 lg:col-span-8 p-8 sm:p-12 flex flex-col justify-center min-h-[320px] rounded-[2rem] bg-primary text-primary-content relative overflow-hidden border-2 border-black dark:border-white">
+                {{-- ═══ 1. Main Hero (Col 1-7) ═══ --}}
+                <div class="col-span-12 lg:col-span-7 p-8 sm:p-12 flex flex-col justify-center min-h-[320px] rounded-[2rem] bg-primary text-primary-content relative overflow-hidden border-2 border-black dark:border-white">
                     <div class="flex flex-col sm:flex-row items-center sm:items-start gap-8 z-10">
-                        <div class="avatar shrink-0 relative">
-                            <div class="absolute -inset-2 bg-white/20 rounded-full blur-lg animate-pulse"></div>
-                            <div class="w-32 h-32 sm:w-40 sm:h-40 rounded-full border-4 border-white/50 bg-base-100 shadow-2xl relative">
+                        <a href="{{ route('student_profile', $student->id) }}" class="avatar shrink-0 relative group hover:scale-105 transition-transform duration-300">
+                            <div class="absolute -inset-2 bg-white/20 rounded-full blur-lg animate-pulse group-hover:bg-white/30 transition-colors"></div>
+                            <div class="w-32 h-32 sm:w-40 sm:h-40 rounded-full border-4 border-white/50 bg-base-100 shadow-2xl relative overflow-hidden">
                                 @if($student->profile && $student->profile->avatar)
-                                <img src="{{ asset('storage/' . $student->profile->avatar) }}" alt="Avatar" class="object-cover" />
+                                <img src="{{ asset('storage/' . $student->profile->avatar) }}" alt="Avatar" class="w-full h-full object-cover" />
                                 @else
-                                <img src="https://ui-avatars.com/api/?name={{ urlencode($student->name) }}&background=random&color=fff&size=200&bold=true" alt="Avatar" />
+                                <img src="https://ui-avatars.com/api/?name={{ urlencode($student->name) }}&background=random&color=fff&size=200&bold=true" alt="Avatar" class="w-full h-full object-cover" />
                                 @endif
                             </div>
-                        </div>
+                        </a>
                         
                         <div class="text-center sm:text-left space-y-4">
                             <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/20 border border-white/30 text-xs font-bold uppercase tracking-widest text-white shadow-sm backdrop-blur-md">
@@ -71,8 +47,8 @@
                     </div>
                 </div>
 
-                {{-- ═══ 2. Colorful Quick Stats Grid (Col 9-12) ═══ --}}
-                <div class="col-span-12 lg:col-span-4 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {{-- ═══ 2. Colorful Quick Stats Grid (Col 8-12) ═══ --}}
+                <div class="col-span-12 lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-6">
                     {{-- Total Requests --}}
                     <div class="bg-primary/90 backdrop-blur-xl text-primary-content rounded-3xl p-6 flex flex-col justify-between group hover:-translate-y-1 transition-all border-2 border-black dark:border-white">
                         <div class="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center text-white mb-4">
@@ -258,16 +234,8 @@
                 </div>
 
                 {{-- ═══ 5. The Chart (Col 1-12) ═══ --}}
-                <div class="col-span-12 bg-base-100/40 backdrop-blur-xl border-2 border-black dark:border-white rounded-[2rem] hover:-translate-y-1 transition-all p-6 sm:p-10">
-                    <div class="mb-6 flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-xl bg-accent text-accent-content flex items-center justify-center shadow-md">
-                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" /></svg>
-                        </div>
-                        <h2 class="text-2xl font-black text-base-content drop-shadow-sm">মাসিক ব্যয়ের গ্রাফ</h2>
-                    </div>
-                    <div class="w-full bg-base-100/50 rounded-2xl p-4 shadow-inner">
-                        @include('dashboard.student-spending-chart')
-                    </div>
+                <div class="col-span-12">
+                    @include('dashboard.student-spending-chart')
                 </div>
 
             </div>
