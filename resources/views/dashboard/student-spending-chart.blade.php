@@ -102,8 +102,8 @@ $monthlyChartData = $monthlyChartData ?? array_fill(0, count($monthLabels), 0);
                        document.documentElement.getAttribute('data-theme') === 'dark' ||
                        document.documentElement.getAttribute('data-theme') === 'night';
         
-        // Use a single, vibrant color (Teal) that looks stunning on both Light and Dark backgrounds
-        const primaryColor = '#14b8a6'; 
+        // Black in light mode, white in dark mode
+        const primaryColor = isDark ? '#ffffff' : '#000000'; 
         const baseColors = Array(12).fill(primaryColor);
         
         const hexToRgba = (hex, alpha) => {
