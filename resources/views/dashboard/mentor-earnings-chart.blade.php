@@ -97,52 +97,33 @@ $monthlyChartData = $monthlyChartData ?? array_fill(0, count($monthLabels), 0);
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     (function () {
-    function getCSSVar(name) {
-        return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
-    }
-
-    function resolveColor(cssVar) {
-        const el = document.createElement('div');
-        el.style.color = `oklch(${getCSSVar(cssVar)})`;
-        document.body.appendChild(el);
-        const color = getComputedStyle(el).color;
-        document.body.removeChild(el);
-        return color;
-    }
-
     function buildColors() {
-        try {
-            const p  = resolveColor('--p');
-            const s  = resolveColor('--s');
-            const a  = resolveColor('--a');
-            const su = resolveColor('--su');
-            const wa = resolveColor('--wa');
-            const bars = [p, s, a, su, wa, p, s, a, su, wa, p, s];
-            const addAlpha = (rgb, alpha) => rgb.replace('rgb(', 'rgba(').replace(')', `, ${alpha})`);
-            return {
-                barBg:     bars.map(c => addAlpha(c, 0.75)),
-                barBorder: bars,
-                barHover:  bars.map(c => addAlpha(c, 0.95)),
-                lineColor: p,
-                lineFill:  addAlpha(p, 0.15),
-                points:    bars,
-                tick:      resolveColor('--bc'),
-                grid:      addAlpha(resolveColor('--bc'), 0.08),
-                tooltip:   resolveColor('--b2'),
-            };
-        } catch (e) {
-            return {
-                barBg:     Array(12).fill('rgba(26,153,143,0.75)'),
-                barBorder: Array(12).fill('#1A998F'),
-                barHover:  Array(12).fill('rgba(26,153,143,0.95)'),
-                lineColor: '#1A998F',
-                lineFill:  'rgba(26,153,143,0.15)',
-                points:    Array(12).fill('#155665'),
-                tick:      '#374151',
-                grid:      'rgba(0,0,0,0.07)',
-                tooltip:   '#ffffff',
-            };
-        }
+        const isDark = document.documentElement.classList.contains('dark') || 
+                       document.documentElement.getAttribute('data-theme') === 'dark' ||
+                       document.documentElement.getAttribute('data-theme') === 'night';
+        
+        // Black in light mode, white in dark mode
+        const primaryColor = isDark ? '#ffffff' : '#000000'; 
+        const baseColors = Array(12).fill(primaryColor);
+        
+        const hexToRgba = (hex, alpha) => {
+            let r = parseInt(hex.slice(1, 3), 16),
+                g = parseInt(hex.slice(3, 5), 16),
+                b = parseInt(hex.slice(5, 7), 16);
+            return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+        };
+
+        return {
+            barBg:     baseColors.map(c => hexToRgba(c, 0.75)),
+            barBorder: baseColors,
+            barHover:  baseColors.map(c => hexToRgba(c, 0.95)),
+            lineColor: primaryColor,
+            lineFill:  hexToRgba(primaryColor, 0.15),
+            points:    baseColors,
+            tick:      isDark ? '#d1d5db' : '#374151',
+            grid:      isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)',
+            tooltip:   isDark ? '#1f2937' : '#ffffff',
+        };
     }
 
     // ✅ Dynamic labels from controller — shows actual last 12 months
@@ -230,8 +211,9 @@ $monthlyChartData = $monthlyChartData ?? array_fill(0, count($monthLabels), 0);
         setToggleState(type);
     };
 
-    document.getElementById('theme-toggle')?.addEventListener('click', () => {
-        setTimeout(() => window.updateEarningsChartType(earningsChart.config.type), 80);
+    const observer = new MutationObserver(() => {
+        window.updateEarningsChartType(earningsChart.config.type);
     });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class', 'data-theme'] });
 })();
 </script>

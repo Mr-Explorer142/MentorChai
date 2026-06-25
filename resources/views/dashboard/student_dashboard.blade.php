@@ -1,441 +1,276 @@
 @use('App\Enums\SessionStatus')
 
 <x-layout>
-    <div class="min-h-screen bg-base-200 py-6 px-4 sm:px-6 lg:px-8">
-        <div class="mx-auto space-y-6">
+    <style>
+        .bento-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        @media (min-width: 1024px) {
+            .bento-grid {
+                display: grid;
+                grid-template-columns: repeat(12, 1fr);
+            }
+        }
+        .mesh-bg {
+            background-color: oklch(var(--b1));
+            background-image: 
+                radial-gradient(at 0% 0%, oklch(var(--p) / 0.4) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, oklch(var(--s) / 0.4) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, oklch(var(--a) / 0.4) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, oklch(var(--wa) / 0.3) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+    </style>
 
-            {{-- ═══ Welcome Hero Banner ═══ --}}
-            <div class="card bg-primary text-primary-content shadow-2xl rounded-3xl overflow-hidden">
-                <div class="card-body px-8 sm:px-12 py-10 sm:py-12">
-                    <div class="flex flex-col lg:flex-row justify-between items-start gap-8">
-                        <div class="max-w-2xl space-y-5">
-                            <div
-                                class="badge badge-outline border-primary-content/30 text-primary-content/80 gap-2 py-3 px-4 text-xs uppercase tracking-widest font-semibold">
-                                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                                    stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
-                                </svg>
+    <div class="min-h-screen mesh-bg py-10 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        
+        <div class="mx-auto max-w-[1400px] relative z-10">
+            <div class="bento-grid">
+                
+                {{-- ═══ 1. Main Hero (Col 1-8) ═══ --}}
+                <div class="col-span-12 lg:col-span-8 p-8 sm:p-12 flex flex-col justify-center min-h-[320px] rounded-[2rem] bg-primary text-primary-content relative overflow-hidden border-2 border-black dark:border-white">
+                    <div class="flex flex-col sm:flex-row items-center sm:items-start gap-8 z-10">
+                        <div class="avatar shrink-0 relative">
+                            <div class="absolute -inset-2 bg-white/20 rounded-full blur-lg animate-pulse"></div>
+                            <div class="w-32 h-32 sm:w-40 sm:h-40 rounded-full border-4 border-white/50 bg-base-100 shadow-2xl relative">
+                                @if($student->profile && $student->profile->avatar)
+                                <img src="{{ asset('storage/' . $student->profile->avatar) }}" alt="Avatar" class="object-cover" />
+                                @else
+                                <img src="https://ui-avatars.com/api/?name={{ urlencode($student->name) }}&background=random&color=fff&size=200&bold=true" alt="Avatar" />
+                                @endif
+                            </div>
+                        </div>
+                        
+                        <div class="text-center sm:text-left space-y-4">
+                            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/20 border border-white/30 text-xs font-bold uppercase tracking-widest text-white shadow-sm backdrop-blur-md">
                                 স্টুডেন্ট ড্যাশবোর্ড
                             </div>
-                            <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight">স্বাগতম, {{ $student->name }}
+                            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tighter text-white drop-shadow-md">
+                                স্বাগতম, <br class="hidden sm:block"/>{{ $student->name }}
                             </h1>
-                            <p class="text-base leading-8 text-primary-content/75 max-w-xl">
-                                {{ $student->profile?->bio ?? 'আপনার শেখার যাত্রা চালিয়ে যান — নতুন মেন্টর খুঁজুন বা
-                                চলমান সেশনগুলো দেখুন।' }}
+                            <p class="text-lg text-white/90 font-medium max-w-lg leading-relaxed drop-shadow-sm">
+                                {{ $student->profile?->bio ?? 'আপনার শেখার যাত্রা চালিয়ে যান — নতুন মেন্টর খুঁজুন বা চলমান সেশনগুলো দেখুন।' }}
                             </p>
-                            <div class="flex flex-wrap gap-2">
-                                <div class="badge badge-accent gap-2 py-3 px-4 font-semibold">
-                                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                                        stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
-                                    </svg>
-                                    আইডি: #{{ $student->id }}
+                            
+                            <div class="flex flex-wrap justify-center sm:justify-start gap-3 pt-4">
+                                <div class="px-4 py-2 rounded-xl bg-white/20 border border-white/30 text-white text-sm font-bold shadow-sm backdrop-blur-md">
+                                    <span class="opacity-70 mr-1">আইডি:</span> #{{ $student->id }}
                                 </div>
-                                <div class="badge badge-secondary gap-2 py-3 px-4 font-semibold">
-                                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                                        stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
-                                    </svg>
-                                    যোগদান: {{ $student->created_at->format('d M Y') }}
+                                <div class="px-4 py-2 rounded-xl bg-white/20 border border-white/30 text-white text-sm font-bold shadow-sm backdrop-blur-md">
+                                    <span class="opacity-70 mr-1">যোগদান:</span> {{ $student->created_at->format('d M Y') }}
                                 </div>
                                 @if($student->profile?->department)
-                                <div class="badge badge-neutral gap-2 py-3 px-4 font-semibold">
-                                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                                        stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
-                                    </svg>
+                                <div class="px-4 py-2 rounded-xl bg-white/90 text-primary text-sm font-black shadow-sm backdrop-blur-md">
                                     {{ $student->profile->department }}
                                 </div>
                                 @endif
                             </div>
                         </div>
-
-                        {{-- Avatar --}}
-                        <div class="shrink-0 flex items-center justify-center">
-                            <a href="{{ route('student_profile', $student->id) }}" class="group">
-                                <div class="avatar">
-                                    <div
-                                        class="w-28 rounded-full ring ring-accent ring-offset-primary ring-offset-4 transition-transform duration-300 group-hover:-translate-y-1 shadow-xl">
-                                        @if($student->profile && $student->profile->avatar)
-                                        <img src="{{ asset('storage/' . $student->profile->avatar) }}" alt="Avatar" />
-                                        @else
-                                        <img src="https://ui-avatars.com/api/?name={{ urlencode($student->name) }}&background=38A3A5&color=ffffff&size=200&font-size=0.4&bold=true"
-                                            alt="Avatar" />
-                                        @endif
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {{-- ═══ Quick Stats ═══ --}}
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                <div
-                    class="stat bg-primary text-primary-content rounded-2xl shadow-lg hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
-                    <div class="stat-figure">
-                        <div class="w-12 h-12 rounded-2xl bg-primary-content/15 flex items-center justify-center">
-                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M3.75 5.25h16.5M3.75 9.75h16.5M3.75 14.25h16.5M3.75 18.75h16.5" />
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="stat-title text-primary-content/70">মোট অনুরোধ</div>
-                    <div class="stat-value">{{ $totalRequests }}</div>
-                    <div class="stat-desc text-primary-content/55">সকল সেশন অনুরোধ</div>
-                </div>
-
-                <div
-                    class="stat bg-warning text-warning-content rounded-2xl shadow-lg hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
-                    <div class="stat-figure">
-                        <div class="w-12 h-12 rounded-2xl bg-warning-content/15 flex items-center justify-center">
-                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="stat-title text-warning-content/70">অপেক্ষমান</div>
-                    <div class="stat-value">{{ $pendingRequests }}</div>
-                    <div class="stat-desc text-warning-content/55">অনুমোদনের অপেক্ষায়</div>
-                </div>
-
-                <div
-                    class="stat bg-success text-success-content rounded-2xl shadow-lg hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
-                    <div class="stat-figure">
-                        <div class="w-12 h-12 rounded-2xl bg-success-content/15 flex items-center justify-center">
-                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="stat-title text-success-content/70">অনুমোদিত</div>
-                    <div class="stat-value">{{ $approvedRequests }}</div>
-                    <div class="stat-desc text-success-content/55">পেমেন্টের জন্য প্রস্তুত</div>
-                </div>
-
-                <div
-                    class="stat bg-secondary text-secondary-content rounded-2xl shadow-lg hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
-                    <div class="stat-figure">
-                        <div class="w-12 h-12 rounded-2xl bg-secondary-content/15 flex items-center justify-center">
-                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="stat-title text-secondary-content/70">মোট ব্যয়</div>
-                    <div class="stat-value text-2xl">৳{{ number_format($totalSpent, 0) }}</div>
-                    <div class="stat-desc text-secondary-content/55">সর্বমোট পরিশোধিত</div>
-                </div>
-            </div>
-
-            {{-- ═══ Session Breakdown + Payment Summary ═══ --}}
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-
-                <div
-                    class="card bg-base-100 shadow-lg border border-base-300 hover:shadow-xl transition-shadow duration-300">
-                    <div class="card-body gap-5">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                                    <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                                        stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M3.75 5.25h16.5M3.75 9.75h16.5M3.75 14.25h16.5M3.75 18.75h16.5" />
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h2 class="card-title text-base-content">সেশন অনুরোধ</h2>
-                                    <p class="text-xs text-base-content/50">সকল অনুরোধের সারসংক্ষেপ</p>
-                                </div>
-                            </div>
-                            <div class="badge badge-primary badge-lg font-bold">{{ $totalRequests }}</div>
-                        </div>
-                        @php
-                        $studentBreakdown = [
-                        ['label' => 'অপেক্ষমান', 'value' => $pendingRequests, 'bg' => 'bg-warning', 'text' =>
-                        'text-warning-content', 'icon' => 'M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z'],
-                        ['label' => 'অনুমোদিত', 'value' => $approvedRequests, 'bg' => 'bg-success', 'text' =>
-                        'text-success-content', 'icon' => 'M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118
-                        0z'],
-                        ['label' => 'প্রত্যাখ্যাত', 'value' => $sessionTopics->where('status',
-                        SessionStatus::Rejected)->count(), 'bg' => 'bg-error', 'text' => 'text-error-content', 'icon' =>
-                        'M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z'],
-                        ];
-                        @endphp
-                        <div class="grid grid-cols-3 gap-3">
-                            @foreach($studentBreakdown as $item)
-                            <div
-                                class="{{ $item['bg'] }} {{ $item['text'] }} rounded-2xl p-4 text-center hover:scale-105 transition-transform shadow">
-                                <svg class="w-7 h-7 mx-auto mb-2 opacity-90" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="2" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="{{ $item['icon'] }}" />
-                                </svg>
-                                <p class="text-2xl font-extrabold">{{ $item['value'] }}</p>
-                                <p class="text-xs opacity-80 mt-1 font-semibold">{{ $item['label'] }}</p>
-                            </div>
-                            @endforeach
-                        </div>
                     </div>
                 </div>
 
-                <div
-                    class="card bg-base-100 shadow-lg border border-base-300 hover:shadow-xl transition-shadow duration-300">
-                    <div class="card-body gap-5">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-xl bg-secondary/10 flex items-center justify-center">
-                                    <svg class="w-5 h-5 text-secondary" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                                        stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h2 class="card-title text-base-content">মোট ব্যয়</h2>
-                                    <p class="text-xs text-base-content/50">সর্বমোট পরিশোধিত অর্থ</p>
-                                </div>
-                            </div>
-                            <div class="badge badge-secondary badge-lg font-bold">৳{{ number_format($totalSpent, 0) }}
-                            </div>
-                        </div>
-                        @php
-                        $studentSpentRows = [
-                        ['label' => 'বিগত সপ্তাহ', 'amount' => $weeklySpent, 'bar' => 'bg-primary'],
-                        ['label' => 'বিগত মাস', 'amount' => $monthlySpent, 'bar' => 'bg-secondary'],
-                        ['label' => 'বিগত বছর', 'amount' => $yearlySpent, 'bar' => 'bg-accent'],
-                        ];
-                        @endphp
-                        <div class="space-y-3">
-                            @foreach($studentSpentRows as $row)
-                            <div
-                                class="flex items-center justify-between bg-base-200 rounded-xl px-4 py-3 hover:bg-base-300 transition-colors">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-1.5 h-8 rounded-full {{ $row['bar'] }}"></div>
-                                    <span class="font-medium text-base-content text-sm">{{ $row['label'] }}</span>
-                                </div>
-                                <span class="font-extrabold text-lg text-base-content">৳{{ number_format($row['amount'],
-                                    0) }}</span>
-                            </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {{-- ═══ Recent Session Requests Table ═══ --}}
-            <div
-                class="card bg-base-100 shadow-lg border border-base-300 hover:shadow-xl transition-shadow duration-300">
-                <div class="card-body gap-0 p-0">
-                    <div
-                        class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 px-6 sm:px-8 py-5 border-b border-base-300">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                                <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                                    stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25z" />
-                                </svg>
-                            </div>
-                            <div>
-                                <h2 class="text-lg font-bold text-base-content">সাম্প্রতিক অনুরোধসমূহ</h2>
-                                <p class="text-xs text-base-content/50">সর্বশেষ সেশন অনুরোধের তালিকা</p>
-                            </div>
-                        </div>
-                        <a href="{{ route('mentors') }}" class="btn btn-primary btn-sm gap-2">
-                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                            </svg>
-                            নতুন অনুরোধ
-                        </a>
-                    </div>
-
-                    @if($sessionTopics->isEmpty())
-                    <div class="text-center py-14 px-6">
-                        <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-8 h-8 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25z" />
-                            </svg>
-                        </div>
-                        <p class="text-base-content font-semibold">কোনো অনুরোধ নেই</p>
-                        <p class="text-sm text-base-content/50 mt-1">মেন্টর খুঁজে সেশন শুরু করুন</p>
-                        <a href="{{ route('mentors') }}" class="btn btn-primary btn-sm mt-4">মেন্টর খুঁজুন</a>
-                    </div>
-                    @else
-                    <div class="overflow-x-auto">
-                        <table class="table table-zebra w-full">
-                            <thead>
-                                <tr class="bg-base-200 text-base-content/60 text-xs uppercase tracking-wider">
-                                    <th class="font-bold">মেন্টর</th>
-                                    <th class="font-bold">টপিক</th>
-                                    <th class="font-bold">সময়কাল</th>
-                                    <th class="font-bold">তারিখ</th>
-                                    <th class="font-bold">স্ট্যাটাস</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @php
-                                $statusConfig = [
-                                'pending' => ['label' => 'অপেক্ষমান', 'cls' => 'badge-warning'],
-                                'approved' => ['label' => 'অনুমোদিত', 'cls' => 'badge-success'],
-                                'rejected' => ['label' => 'প্রত্যাখ্যাত', 'cls' => 'badge-error'],
-                                'completed' => ['label' => 'সম্পন্ন', 'cls' => 'badge-info'],
-                                ];
-                                @endphp
-                                @foreach($sessionTopics->take(5) as $topic)
-                                <tr class="hover">
-                                    <td>
-                                        <div class="flex items-center gap-3">
-                                            {{-- ✅ Real avatar with fallback --}}
-                                            <div class="w-9 h-9 rounded-full overflow-hidden shrink-0">
-                                                @if($topic->mentor?->profile?->avatar)
-                                                <img src="{{ asset('storage/' . $topic->mentor->profile->avatar) }}"
-                                                    alt="{{ $topic->mentor->name }}"
-                                                    class="w-full h-full object-cover" />
-                                                @else
-                                                <div
-                                                    class="w-full h-full bg-primary text-primary-content flex items-center justify-center">
-                                                    <span class="text-xs font-bold">{{
-                                                        strtoupper(substr($topic->mentor?->name ?? 'NA', 0, 1))
-                                                        }}</span>
-                                                </div>
-                                                @endif
-                                            </div>
-                                            <span class="font-semibold text-base-content text-sm">{{
-                                                $topic->mentor?->name ?? 'N/A' }}</span>
-                                        </div>
-                                    </td>
-                                    <td class="text-base-content/70 text-sm">{{ $topic->topic }}</td>
-                                    <td>
-                                        <div class="badge badge-outline badge-primary font-semibold">{{
-                                            $topic->duration_hours ?? 1 }} ঘণ্টা</div>
-                                    </td>
-                                    <td class="text-base-content/50 text-sm">{{ $topic->created_at->format('d M Y') }}
-                                    </td>
-                                    <td>
-                                        @php $s = $statusConfig[$topic->status->value] ?? $statusConfig['pending'];
-                                        @endphp
-                                        <div class="badge {{ $s['cls'] }} font-semibold text-xs">{{ $s['label'] }}</div>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                    @endif
-                </div>
-            </div>
-
-            {{-- ═══ Recent Payments Table ═══ --}}
-            <div
-                class="card bg-base-100 shadow-lg border border-base-300 hover:shadow-xl transition-shadow duration-300">
-                <div class="card-body gap-0 p-0">
-                    <div class="flex items-center gap-4 px-6 sm:px-8 py-5 border-b border-base-300">
-                        <div class="w-10 h-10 rounded-xl bg-secondary/10 flex items-center justify-center">
-                            <svg class="w-5 h-5 text-secondary" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
-                            </svg>
+                {{-- ═══ 2. Colorful Quick Stats Grid (Col 9-12) ═══ --}}
+                <div class="col-span-12 lg:col-span-4 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    {{-- Total Requests --}}
+                    <div class="bg-primary/90 backdrop-blur-xl text-primary-content rounded-3xl p-6 flex flex-col justify-between group hover:-translate-y-1 transition-all border-2 border-black dark:border-white">
+                        <div class="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center text-white mb-4">
+                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 5.25h16.5M3.75 9.75h16.5M3.75 14.25h16.5M3.75 18.75h16.5" /></svg>
                         </div>
                         <div>
-                            <h2 class="text-lg font-bold text-base-content">সাম্প্রতিক পেমেন্টসমূহ</h2>
-                            <p class="text-xs text-base-content/50">সর্বশেষ লেনদেনের তালিকা</p>
+                            <h3 class="text-4xl font-black">{{ $totalRequests }}</h3>
+                            <p class="text-sm font-bold opacity-80 mt-1 uppercase tracking-wider">মোট অনুরোধ</p>
+                        </div>
+                    </div>
+                    
+                    {{-- Pending --}}
+                    <div class="bg-warning/90 backdrop-blur-xl text-warning-content rounded-3xl p-6 flex flex-col justify-between group hover:-translate-y-1 transition-all border-2 border-black dark:border-white">
+                        <div class="w-12 h-12 rounded-xl bg-black/10 flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-4xl font-black">{{ $pendingRequests }}</h3>
+                            <p class="text-sm font-bold opacity-80 mt-1 uppercase tracking-wider">অপেক্ষমান</p>
                         </div>
                     </div>
 
-                    @if($recentPayments->isEmpty())
-                    <div class="text-center py-14 px-6">
-                        <div
-                            class="w-16 h-16 rounded-full bg-secondary/10 flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-8 h-8 text-secondary" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
-                            </svg>
+                    {{-- Approved --}}
+                    <div class="bg-success/90 backdrop-blur-xl text-success-content rounded-3xl p-6 flex flex-col justify-between group hover:-translate-y-1 transition-all border-2 border-black dark:border-white">
+                        <div class="w-12 h-12 rounded-xl bg-black/10 flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                         </div>
-                        <p class="text-base-content font-semibold">কোনো পেমেন্ট নেই</p>
-                        <p class="text-sm text-base-content/50 mt-1">এখনো কোনো পেমেন্ট সম্পন্ন হয়নি</p>
+                        <div>
+                            <h3 class="text-4xl font-black">{{ $approvedRequests }}</h3>
+                            <p class="text-sm font-bold opacity-80 mt-1 uppercase tracking-wider">অনুমোদিত</p>
+                        </div>
                     </div>
-                    @else
-                    <div class="overflow-x-auto">
-                        <table class="table table-zebra w-full">
-                            <thead>
-                                <tr class="bg-base-200 text-base-content/60 text-xs uppercase tracking-wider">
-                                    <th class="font-bold">মেন্টর</th>
-                                    <th class="font-bold">পরিমাণ</th>
-                                    <th class="font-bold">মাধ্যম</th>
-                                    <th class="font-bold">তারিখ</th>
-                                    <th class="font-bold">স্ট্যাটাস</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @php
-                                $pConfig = [
-                                'pending' => ['label' => 'অপেক্ষমান', 'cls' => 'badge-warning'],
-                                'paid' => ['label' => 'পরিশোধিত', 'cls' => 'badge-success'],
-                                'failed' => ['label' => 'ব্যর্থ', 'cls' => 'badge-error'],
-                                'refunded' => ['label' => 'ফেরত', 'cls' => 'badge-info'],
-                                ];
-                                @endphp
-                                @foreach($recentPayments as $payment)
-                                <tr class="hover">
-                                    <td>
-                                        <div class="flex items-center gap-3">
-                                            {{-- ✅ Real avatar with fallback --}}
-                                            <div class="w-9 h-9 rounded-full overflow-hidden shrink-0">
-                                                @if($payment->session?->mentor?->profile?->avatar)
-                                                <img src="{{ asset('storage/' . $payment->session->mentor->profile->avatar) }}"
-                                                    alt="{{ $payment->session->mentor->name }}"
-                                                    class="w-full h-full object-cover" />
-                                                @else
-                                                <div
-                                                    class="w-full h-full bg-secondary text-secondary-content flex items-center justify-center">
-                                                    <span class="text-xs font-bold">{{
-                                                        strtoupper(substr($payment->session?->mentor?->name ?? '?', 0,
-                                                        1)) }}</span>
+
+                    {{-- Total Spent --}}
+                    <div class="bg-secondary/90 backdrop-blur-xl text-secondary-content rounded-3xl p-6 flex flex-col justify-between group hover:-translate-y-1 transition-all border-2 border-black dark:border-white">
+                        <div class="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-3xl font-black">৳{{ number_format($totalSpent, 0) }}</h3>
+                            <p class="text-sm font-bold opacity-80 mt-1 uppercase tracking-wider">মোট ব্যয়</p>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- ═══ 3. Recent Requests Table (Col 1-7) ═══ --}}
+                <div class="col-span-12 lg:col-span-7 bg-base-100/40 backdrop-blur-xl border-2 border-black dark:border-white rounded-[2rem] hover:-translate-y-1 transition-all flex flex-col overflow-hidden">
+                    <div class="px-8 py-6 border-b border-base-content/10 flex justify-between items-center bg-base-100/40">
+                        <div>
+                            <h2 class="text-2xl font-black text-base-content drop-shadow-sm">সাম্প্রতিক সেশন অনুরোধ</h2>
+                            <p class="text-sm font-bold text-base-content/60 mt-1">আপনার সর্বশেষ মেন্টরিং সেশনের তালিকা</p>
+                        </div>
+                        <a href="{{ route('mentors') }}" class="btn btn-primary btn-sm rounded-full px-6 shadow-lg">নতুন অনুরোধ</a>
+                    </div>
+                    
+                    <div class="flex-1 p-2">
+                        @if($sessionTopics->isEmpty())
+                        <div class="h-full flex flex-col items-center justify-center py-12">
+                            <div class="w-16 h-16 rounded-full bg-base-content/10 flex items-center justify-center mb-4 text-base-content/50">
+                                <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                            </div>
+                            <p class="font-bold text-base-content/70">কোনো অনুরোধ পাওয়া যায়নি</p>
+                        </div>
+                        @else
+                        <div class="overflow-x-auto">
+                            <table class="table w-full border-none text-base-content">
+                                <tbody>
+                                    @php
+                                    $statusConfig = [
+                                        'pending' => ['label' => 'অপেক্ষমান', 'cls' => 'badge-warning'],
+                                        'approved' => ['label' => 'অনুমোদিত', 'cls' => 'badge-success'],
+                                        'rejected' => ['label' => 'প্রত্যাখ্যাত', 'cls' => 'badge-error'],
+                                        'completed' => ['label' => 'সম্পন্ন', 'cls' => 'badge-info'],
+                                    ];
+                                    @endphp
+                                    @foreach($sessionTopics->take(5) as $topic)
+                                    <tr class="hover:bg-base-content/10 transition-colors border-b border-base-content/5 last:border-0">
+                                        <td class="py-4 pl-6">
+                                            <div class="flex items-center gap-4">
+                                                <div class="avatar">
+                                                    <div class="w-12 h-12 rounded-full border-2 border-white shadow-md">
+                                                        @if($topic->mentor?->profile?->avatar)
+                                                        <img src="{{ asset('storage/' . $topic->mentor->profile->avatar) }}" alt="{{ $topic->mentor->name }}" />
+                                                        @else
+                                                        <img src="https://ui-avatars.com/api/?name={{ urlencode($topic->mentor?->name ?? 'M') }}&background=random" alt="Avatar" />
+                                                        @endif
+                                                    </div>
                                                 </div>
+                                                <div>
+                                                    <div class="font-black text-base">{{ $topic->mentor?->name ?? 'N/A' }}</div>
+                                                    <div class="text-xs font-bold text-base-content/60 mt-0.5 truncate max-w-[150px]">{{ $topic->topic }}</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="py-4">
+                                            <div class="px-3 py-1 bg-base-100/50 rounded-lg inline-block text-xs font-black shadow-sm">
+                                                {{ $topic->duration_hours ?? 1 }} ঘণ্টা
+                                            </div>
+                                        </td>
+                                        <td class="py-4 text-right pr-6">
+                                            @php $s = $statusConfig[$topic->status->value] ?? $statusConfig['pending']; @endphp
+                                            <div class="badge {{ $s['cls'] }} font-black text-xs py-2.5 px-4 shadow-sm border-0">{{ $s['label'] }}</div>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        @endif
+                    </div>
+                </div>
+
+                {{-- ═══ 4. Spend Breakdown & Recent Payments (Col 8-12) ═══ --}}
+                <div class="col-span-12 lg:col-span-5 grid grid-rows-[auto_1fr] gap-6">
+                    
+                    {{-- Spend Breakdown --}}
+                    <div class="bg-base-100/40 backdrop-blur-xl border-2 border-black dark:border-white rounded-[2rem] hover:-translate-y-1 transition-all p-8">
+                        <h2 class="text-xl font-black text-base-content mb-6 drop-shadow-sm">ব্যয়ের সারসংক্ষেপ</h2>
+                        @php
+                        $studentSpentRows = [
+                            ['label' => 'বিগত সপ্তাহ', 'amount' => $weeklySpent, 'color' => 'bg-primary'],
+                            ['label' => 'বিগত মাস', 'amount' => $monthlySpent, 'color' => 'bg-secondary'],
+                            ['label' => 'বিগত বছর', 'amount' => $yearlySpent, 'color' => 'bg-accent'],
+                        ];
+                        @endphp
+                        <div class="space-y-5">
+                            @foreach($studentSpentRows as $row)
+                            <div>
+                                <div class="flex justify-between items-end mb-2">
+                                    <span class="font-bold text-sm text-base-content/80">{{ $row['label'] }}</span>
+                                    <span class="font-black text-lg text-base-content">৳{{ number_format($row['amount'], 0) }}</span>
+                                </div>
+                                <div class="w-full h-3 bg-base-content/10 rounded-full overflow-hidden shadow-inner">
+                                    <div class="h-full {{ $row['color'] }} rounded-full" style="width: {{ $totalSpent > 0 ? min(100, ($row['amount'] / $totalSpent) * 100) : 0 }}%"></div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    {{-- Recent Payments --}}
+                    <div class="bg-base-100/40 backdrop-blur-xl border-2 border-black dark:border-white rounded-[2rem] hover:-translate-y-1 transition-all flex flex-col overflow-hidden">
+                        <div class="px-8 py-5 border-b border-base-content/10 bg-base-100/40">
+                            <h2 class="text-lg font-black text-base-content drop-shadow-sm">সাম্প্রতিক লেনদেন</h2>
+                        </div>
+                        <div class="flex-1 p-4 overflow-y-auto max-h-[300px]">
+                            @if($recentPayments->isEmpty())
+                            <div class="text-center py-8">
+                                <p class="font-bold text-base-content/60 text-sm">কোনো লেনদেন নেই</p>
+                            </div>
+                            @else
+                            <div class="space-y-2">
+                                @foreach($recentPayments as $payment)
+                                <div class="flex items-center justify-between p-3 rounded-2xl hover:bg-base-content/10 transition-colors">
+                                    <div class="flex items-center gap-3">
+                                        <div class="avatar">
+                                            <div class="w-12 h-12 rounded-full border-2 border-white shadow-md">
+                                                @if($payment->session?->mentor?->profile?->avatar)
+                                                <img src="{{ asset('storage/' . $payment->session->mentor->profile->avatar) }}" alt="{{ $payment->session->mentor->name }}" />
+                                                @else
+                                                <img src="https://ui-avatars.com/api/?name={{ urlencode($payment->session?->mentor?->name ?? 'M') }}&background=random" alt="Avatar" />
                                                 @endif
                                             </div>
-                                            <span class="font-semibold text-base-content text-sm">{{
-                                                $payment->session?->mentor?->name ?? 'N/A' }}</span>
                                         </div>
-                                    </td>
-                                    <td><span class="font-extrabold text-lg text-accent">৳{{
-                                            number_format($payment->amount, 0) }}</span></td>
-                                    <td>
-                                        <div class="badge badge-outline badge-secondary font-semibold">{{
-                                            ucfirst($payment->method->value) }}</div>
-                                    </td>
-                                    <td class="text-base-content/50 text-sm">{{ $payment->paid_at ?
-                                        $payment->paid_at->format('d M Y') : $payment->created_at->format('d M Y') }}
-                                    </td>
-                                    <td>
-                                        @php $p = $pConfig[$payment->status->value] ?? $pConfig['pending']; @endphp
-                                        <div class="badge {{ $p['cls'] }} font-semibold text-xs">{{ $p['label'] }}</div>
-                                    </td>
-                                </tr>
+                                        <div>
+                                            <div class="flex items-center gap-2">
+                                                <div class="font-black text-sm text-base-content">{{ $payment->session?->mentor?->name ?? 'N/A' }}</div>
+                                                <div class="badge badge-accent badge-sm font-bold text-[10px] shadow-sm uppercase tracking-wider">{{ $payment->method->value }}</div>
+                                            </div>
+                                            <div class="text-xs font-bold text-base-content/60">{{ $payment->paid_at ? $payment->paid_at->format('d M, Y') : $payment->created_at->format('d M, Y') }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="font-black text-lg text-secondary drop-shadow-sm">৳{{ number_format($payment->amount, 0) }}</div>
+                                        <div class="text-[10px] font-black uppercase tracking-widest text-success mt-0.5">{{ $payment->status->value === 'completed' ? 'PAID' : strtoupper($payment->status->value) }}</div>
+                                    </div>
+                                </div>
                                 @endforeach
-                            </tbody>
-                        </table>
+                            </div>
+                            @endif
+                        </div>
                     </div>
-                    @endif
                 </div>
+
+                {{-- ═══ 5. The Chart (Col 1-12) ═══ --}}
+                <div class="col-span-12 bg-base-100/40 backdrop-blur-xl border-2 border-black dark:border-white rounded-[2rem] hover:-translate-y-1 transition-all p-6 sm:p-10">
+                    <div class="mb-6 flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-accent text-accent-content flex items-center justify-center shadow-md">
+                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" /></svg>
+                        </div>
+                        <h2 class="text-2xl font-black text-base-content drop-shadow-sm">মাসিক ব্যয়ের গ্রাফ</h2>
+                    </div>
+                    <div class="w-full bg-base-100/50 rounded-2xl p-4 shadow-inner">
+                        @include('dashboard.student-spending-chart')
+                    </div>
+                </div>
+
             </div>
-
-            {{-- ═══ Chart ═══ --}}
-            @include('dashboard.student-spending-chart')
-
         </div>
     </div>
 </x-layout>
