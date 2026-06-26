@@ -426,7 +426,7 @@
     </header>
 
     {{-- ═══════════════ MAIN CONTENT ═══════════════ --}}
-    <main class="flex-1 animate-[fadeUp_0.35s_ease_both]">{{ $slot }}</main>
+    <main class="flex-1 animate-fade-up">{{ $slot }}</main>
 
     {{-- ═══════════════ FOOTER ═══════════════ --}}
     <footer class="bg-white dark:bg-[#1a2e3b] border-t border-[#28666e]/10 dark:border-[#4db6c1]/10
@@ -548,20 +548,7 @@
         </div>
     </footer>
 
-    {{-- Page fade-in animation --}}
-    <style>
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
 
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
 
     <script>
         // ─── Profile Dropdown ───────────────────────────────────────────
