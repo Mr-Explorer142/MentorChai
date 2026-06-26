@@ -20,19 +20,27 @@
                     focus-within:ring-2 focus-within:ring-teal-400 dark:focus-within:ring-teal-500
                     bg-white dark:bg-[#1a2e3b]">
 
-                        <svg class="absolute left-3 w-4 h-4 text-teal-400 dark:text-teal-500 pointer-events-none"
-                            fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <circle cx="11" cy="11" r="8" />
-                            <path d="m21 21-4.35-4.35" />
-                        </svg>
+                        <div class="relative flex items-center w-32 sm:w-44 md:w-56">
+                            <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-teal-400 dark:text-teal-500 pointer-events-none"
+                                fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <circle cx="11" cy="11" r="8" />
+                                <path d="m21 21-4.35-4.35" />
+                            </svg>
 
-                        <input type="text" id="search-input" value="{{ request('search') }}" name="search"
-                            placeholder="নাম বা দক্ষতা খুঁজুন..." autocomplete="off" class="pl-10 pr-2 py-2 text-sm
-                          w-32 sm:w-44 md:w-56
-                          text-gray-600 dark:text-gray-300
-                          bg-transparent
-                          placeholder:text-gray-400 dark:placeholder:text-gray-500
-                          focus:outline-none">
+                            <input type="text" id="search-input" value="{{ request('search') }}" name="search"
+                                placeholder="নাম বা দক্ষতা খুঁজুন..." autocomplete="off" class="pl-10 pr-10 py-2 text-sm
+                              w-full
+                              text-gray-600 dark:text-gray-300
+                              bg-transparent
+                              placeholder:text-gray-400 dark:placeholder:text-gray-500
+                              focus:outline-none">
+
+                            <button type="button" id="clear-search" class="absolute right-3 top-1/2 -translate-y-1/2 z-20 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 focus:outline-none p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800/40 transition-colors duration-150 {{ request('search') ? '' : 'hidden' }}">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        </div>
 
                         <button type="submit" class="bg-teal-600 dark:bg-teal-500
                            hover:bg-teal-700 dark:hover:bg-teal-400
@@ -614,11 +622,25 @@
 
     @push('scripts')
     <script>
-        const input = document.getElementById('search-input');
+    const input = document.getElementById('search-input');
     const dropdown = document.getElementById('search-suggestions');
+    const clearBtn = document.getElementById('clear-search');
     let debounceTimer;
 
     input.addEventListener('input', function () {
+        if (this.value.length > 0) {
+            clearBtn.classList.remove('hidden');
+        } else {
+            clearBtn.classList.add('hidden');
+            
+            const url = new URL(window.location.href);
+            if (url.searchParams.has('search')) {
+                url.searchParams.delete('search');
+                url.searchParams.delete('page');
+                window.location.href = url.pathname + url.search;
+            }
+        }
+
         clearTimeout(debounceTimer);
         const query = this.value.trim();
 
@@ -667,7 +689,6 @@
                             ? (isDark ? '#134e4a' : '#99f6e4')
                             : (isDark ? '#4c1d95' : '#e9d5ff');
                         const badgeLabel = isMentor ? 'মেন্টর' : 'দক্ষতা';
-                        const divider    = isDark ? '#1e3a47' : '#f0fdfa';
 
                         return `
                             <button type="button"
@@ -699,6 +720,37 @@
                     dropdown.classList.add('hidden');
                 });
         }, 300);
+    });
+
+    clearBtn.addEventListener('click', function () {
+        input.value = '';
+        clearBtn.classList.add('hidden');
+        dropdown.classList.add('hidden');
+        dropdown.innerHTML = '';
+        
+        const url = new URL(window.location.href);
+        if (url.searchParams.has('search')) {
+            url.searchParams.delete('search');
+            url.searchParams.delete('page');
+            window.location.href = url.pathname + url.search;
+        } else {
+            input.focus();
+        }
+    });
+
+    const searchForm = input.closest('form');
+    searchForm.addEventListener('submit', function (e) {
+        if (input.value.trim() === '') {
+            e.preventDefault();
+            const url = new URL(window.location.href);
+            if (url.searchParams.has('search')) {
+                url.searchParams.delete('search');
+                url.searchParams.delete('page');
+                window.location.href = url.pathname + url.search;
+            } else {
+                window.location.href = url.pathname + url.search;
+            }
+        }
     });
 
     function selectSuggestion(label) {
