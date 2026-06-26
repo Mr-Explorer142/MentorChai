@@ -113,8 +113,9 @@
                                            focus:border-[#28666e] dark:focus:border-[#4db6c1]
                                            focus:ring-[3px] focus:ring-[#28666e]/10 dark:focus:ring-[#4db6c1]/10
                                            focus:bg-white dark:focus:bg-[#243d4d]
+                                           disabled:opacity-60 disabled:cursor-not-allowed disabled:bg-gray-100 dark:disabled:bg-gray-800
                                            transition-all duration-200"
-                                    placeholder="আপনার শর্ট বায়ো/পেশা লিখুন">{{ old('short_bio', Auth::user()->profile?->short_bio) }}</textarea>
+                                    placeholder="আপনার শর্ট বায়ো/পেশা লিখুন" {{ Auth::user()->role === \App\Enums\UserRole::Student ? 'disabled' : '' }}>{{ old('short_bio', Auth::user()->profile?->short_bio) }}</textarea>
                             </div>
 
                             {{-- Detailed Bio --}}
@@ -141,8 +142,9 @@
                                            focus:border-[#28666e] dark:focus:border-[#4db6c1]
                                            focus:ring-[3px] focus:ring-[#28666e]/10 dark:focus:ring-[#4db6c1]/10
                                            focus:bg-white dark:focus:bg-[#243d4d]
+                                           disabled:opacity-60 disabled:cursor-not-allowed disabled:bg-gray-100 dark:disabled:bg-gray-800
                                            transition-all duration-200"
-                                    placeholder="নিজের সম্পর্কে বিস্তারিত লিখুন">{{ old('bio', Auth::user()->profile?->bio) }}</textarea>
+                                    placeholder="নিজের সম্পর্কে বিস্তারিত লিখুন" {{ Auth::user()->role === \App\Enums\UserRole::Student ? 'disabled' : '' }}>{{ old('bio', Auth::user()->profile?->bio) }}</textarea>
                             </div>
                         </div>
 
@@ -254,8 +256,9 @@
                                                focus:border-green-500 dark:focus:border-green-400
                                                focus:ring-[3px] focus:ring-green-500/10 dark:focus:ring-green-400/10
                                                focus:bg-white dark:focus:bg-[#243d4d]
+                                               disabled:opacity-60 disabled:cursor-not-allowed disabled:bg-gray-100 dark:disabled:bg-gray-800
                                                transition-all duration-200" placeholder="ঘণ্টা প্রতি চার্জ এন্ট্রি দিন"
-                                        value="{{ old('hourly_rate', Auth::user()->profile?->hourly_rate) }}" />
+                                        value="{{ old('hourly_rate', Auth::user()->profile?->hourly_rate) }}" {{ Auth::user()->role === \App\Enums\UserRole::Student ? 'disabled' : '' }} />
                                 </div>
                             </div>
 
@@ -283,8 +286,9 @@
                                            focus:border-[#7c9885] dark:focus:border-[#9ab8a5]
                                            focus:ring-[3px] focus:ring-[#7c9885]/12 dark:focus:ring-[#9ab8a5]/10
                                            focus:bg-white dark:focus:bg-[#243d4d]
+                                           disabled:opacity-60 disabled:cursor-not-allowed disabled:bg-gray-100 dark:disabled:bg-gray-800
                                            transition-all duration-200"
-                                    placeholder="যেমন: Compiler Design, Algorithm, Data Structures">{{ old('skills', Auth::user()->profile?->skills) }}</textarea>
+                                    placeholder="যেমন: Compiler Design, Algorithm, Data Structures" {{ Auth::user()->role === \App\Enums\UserRole::Student ? 'disabled' : '' }}>{{ old('skills', Auth::user()->profile?->skills) }}</textarea>
                                 <p class="mt-1.5 text-xs flex items-center gap-1
                                           text-[#033f63]/40 dark:text-[#7ec8e3]/35">
                                     <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke-width="2"
@@ -333,7 +337,8 @@
                                                text-[#033f63] dark:text-[#7ec8e3]
                                                focus:border-[#28666e] dark:focus:border-[#4db6c1]
                                                focus:ring-[3px] focus:ring-[#28666e]/10 dark:focus:ring-[#4db6c1]/10
-                                               transition-all duration-200" />
+                                               disabled:opacity-60 disabled:cursor-not-allowed disabled:bg-gray-100 dark:disabled:bg-gray-800
+                                               transition-all duration-200" {{ Auth::user()->role === \App\Enums\UserRole::Student ? 'disabled' : '' }} />
                                     @if(Auth::user()->profile && Auth::user()->profile->nid_front)
                                         <div class="mt-2 flex items-center justify-between">
                                             <p class="text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded-md">আপলোড করা আছে।</p>
@@ -362,7 +367,8 @@
                                                text-[#033f63] dark:text-[#7ec8e3]
                                                focus:border-[#28666e] dark:focus:border-[#4db6c1]
                                                focus:ring-[3px] focus:ring-[#28666e]/10 dark:focus:ring-[#4db6c1]/10
-                                               transition-all duration-200" />
+                                               disabled:opacity-60 disabled:cursor-not-allowed disabled:bg-gray-100 dark:disabled:bg-gray-800
+                                               transition-all duration-200" {{ Auth::user()->role === \App\Enums\UserRole::Student ? 'disabled' : '' }} />
                                     @if(Auth::user()->profile && Auth::user()->profile->nid_back)
                                         <div class="mt-2 flex items-center justify-between">
                                             <p class="text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded-md">আপলোড করা আছে।</p>
@@ -391,7 +397,8 @@
                                                text-[#033f63] dark:text-[#7ec8e3]
                                                focus:border-[#28666e] dark:focus:border-[#4db6c1]
                                                focus:ring-[3px] focus:ring-[#28666e]/10 dark:focus:ring-[#4db6c1]/10
-                                               transition-all duration-200" />
+                                               disabled:opacity-60 disabled:cursor-not-allowed disabled:bg-gray-100 dark:disabled:bg-gray-800
+                                               transition-all duration-200" {{ Auth::user()->role === \App\Enums\UserRole::Student ? 'disabled' : '' }} />
                                     @if(Auth::user()->profile && Auth::user()->profile->student_id_front)
                                         <div class="mt-2 flex items-center justify-between">
                                             <p class="text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded-md">আপলোড করা আছে।</p>
@@ -420,7 +427,8 @@
                                                text-[#033f63] dark:text-[#7ec8e3]
                                                focus:border-[#28666e] dark:focus:border-[#4db6c1]
                                                focus:ring-[3px] focus:ring-[#28666e]/10 dark:focus:ring-[#4db6c1]/10
-                                               transition-all duration-200" />
+                                               disabled:opacity-60 disabled:cursor-not-allowed disabled:bg-gray-100 dark:disabled:bg-gray-800
+                                               transition-all duration-200" {{ Auth::user()->role === \App\Enums\UserRole::Student ? 'disabled' : '' }} />
                                     @if(Auth::user()->profile && Auth::user()->profile->student_id_back)
                                         <div class="mt-2 flex items-center justify-between">
                                             <p class="text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded-md">আপলোড করা আছে।</p>

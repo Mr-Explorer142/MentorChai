@@ -22,3 +22,8 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# Ignore all dummy seeders
+/database/seeders/*.php
+# Except the main seeder that creates the superadmin
+!/database/seeders/DatabaseSeeder.php

@@ -9,4 +9,5 @@ enum SessionStatus : string
     case Ongoing   = 'ongoing';
     case Rejected = 'rejected';
     case Completed = 'completed';
+    case EndedByAdmin = 'ended_by_admin';
 }

@@ -25,7 +25,22 @@ class Profile extends Model
         'nid_back',
         'student_id_front',
         'student_id_back',
+        'is_verified',
+        'documents_submitted_at',
     ];
+
+    protected $casts = [
+        'documents_submitted_at' => 'datetime',
+        'is_verified' => 'boolean',
+    ];
+
+    public function hasPendingDocuments(): bool
+    {
+        return ! $this->is_verified
+            && $this->documents_submitted_at !== null
+            && ($this->nid_front || $this->nid_back || $this->student_id_front || $this->student_id_back);
+    }
+
 
     public function user()
     {

@@ -33,4 +33,10 @@ class SessionTopic extends Model
     {
         return $this->belongsTo(User::class, 'mentor_id');
     }
+
+    // The actual scheduled/paid mentoring session
+    public function mentoringSession()
+    {
+        return $this->hasOne(MentoringSession::class, 'topic_id');
+    }
 }

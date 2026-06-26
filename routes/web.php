@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
@@ -131,10 +132,34 @@ Route::post('/email/resend', function (Request $request) {
 */
 
 Route::prefix('admin')->name('admin_')->group(function () {
-    Route::get('/login', fn() => view('admin_login'))->name('login');
-    Route::get('/dashboard', fn() => view('dashboard.admin-dashboard', ['adminInitialSection' => 'dashboard']))->name('dashboard');
-    Route::get('/dashboard/sessions', fn() => view('dashboard.admin-dashboard', ['adminInitialSection' => 'sessions']))->name('sessions');
-    Route::get('/dashboard/users', fn() => view('dashboard.admin-dashboard', ['adminInitialSection' => 'users']))->name('users');
+    // Public admin routes (no auth needed)
+    Route::get('/login',  [AdminController::class, 'showLogin'])->name('login');
+    Route::post('/login', [AdminController::class, 'login'])->name('login_post');
+    Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
+
+    // Protected admin routes
+    Route::middleware(['auth', 'admin'])->group(function () {
+        // Dashboard pages
+        Route::get('/dashboard',          [AdminController::class, 'dashboard'])->name('dashboard');
+        Route::get('/dashboard/users',    [AdminController::class, 'users'])->name('users');
+        Route::get('/dashboard/mentors',  [AdminController::class, 'mentors'])->name('mentors');
+        Route::get('/dashboard/sessions', [AdminController::class, 'sessions'])->name('sessions');
+        Route::get('/dashboard/payments', [AdminController::class, 'payments'])->name('payments');
+
+        // Action routes
+        Route::post('/mentor/{id}/approve', [AdminController::class, 'approveMentor'])->name('mentor.approve');
+        Route::post('/mentor/{id}/reject',  [AdminController::class, 'rejectMentor'])->name('mentor.reject');
+        Route::post('/user/{id}/approve',   [AdminController::class, 'approveUser'])->name('user.approve');
+        Route::post('/user/{id}/ban',       [AdminController::class, 'banUser'])->name('user.ban');
+        Route::post('/user/{id}/unban',     [AdminController::class, 'unbanUser'])->name('user.unban');
+        Route::post('/session/{id}/end',    [AdminController::class, 'endSession'])->name('session.end');
+        Route::post('/topics/edit',         [AdminController::class, 'editTopic'])->name('topics.edit');
+        Route::post('/topics/delete',       [AdminController::class, 'deleteTopic'])->name('topics.delete');
+
+        // Admin management (super admin only)
+        Route::post('/admins',           [AdminController::class, 'addAdmin'])->name('admin.add');
+        Route::delete('/admins/{id}',    [AdminController::class, 'removeAdmin'])->name('admin.remove');
+    });
 });
 
 /*
