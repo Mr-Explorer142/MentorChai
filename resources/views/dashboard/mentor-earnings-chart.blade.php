@@ -1,5 +1,4 @@
-{{-- Monthly Earnings Chart — DaisyUI Semantic Color Edition --}}
-<div class="card bg-base-100 shadow-lg border border-base-300 hover:shadow-xl transition-shadow duration-300">
+<div class="card bg-base-100 shadow-lg border-2 border-black dark:border-white rounded-[2rem] hover:-translate-y-1 transition-all duration-300">
     <div class="card-body gap-0 p-0">
 
         <div
@@ -123,6 +122,8 @@ $monthlyChartData = $monthlyChartData ?? array_fill(0, count($monthLabels), 0);
             tick:      isDark ? '#d1d5db' : '#374151',
             grid:      isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)',
             tooltip:   isDark ? '#1f2937' : '#ffffff',
+            tooltipTitle: isDark ? '#ffffff' : '#111827',
+            tooltipBody:  isDark ? '#e5e7eb' : '#374151',
         };
     }
 
@@ -154,8 +155,8 @@ $monthlyChartData = $monthlyChartData ?? array_fill(0, count($monthLabels), 0);
                 legend: { display: false },
                 tooltip: {
                     backgroundColor: c.tooltip,
-                    titleColor:      '#ffffff',
-                    bodyColor:       '#ffffff',
+                    titleColor:      c.tooltipTitle,
+                    bodyColor:       c.tooltipBody,
                     borderColor:     c.grid,
                     borderWidth:     1,
                     padding:         12,
@@ -207,6 +208,10 @@ $monthlyChartData = $monthlyChartData ?? array_fill(0, count($monthLabels), 0);
         earningsChart.options.scales.y.ticks.color = c.tick;
         earningsChart.options.scales.x.ticks.color = c.tick;
         earningsChart.options.scales.y.grid.color  = c.grid;
+        earningsChart.options.plugins.tooltip.backgroundColor = c.tooltip;
+        earningsChart.options.plugins.tooltip.titleColor      = c.tooltipTitle;
+        earningsChart.options.plugins.tooltip.bodyColor       = c.tooltipBody;
+        earningsChart.options.plugins.tooltip.borderColor     = c.grid;
         earningsChart.update();
         setToggleState(type);
     };
