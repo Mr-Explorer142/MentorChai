@@ -11,6 +11,7 @@ use App\Http\Controllers\SessionTopicController;
 use App\Http\Controllers\SslCommerzPaymentController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,7 +26,7 @@ Route::get('/', function () {
     $skills = \App\Models\Profile::whereNotNull('skills')
         ->pluck('skills')
         ->flatMap(fn($s) => array_map('trim', explode(',', $s)))
-        ->filter(function($skill) use ($excludedKeywords) {
+        ->filter(function ($skill) use ($excludedKeywords) {
             if (empty($skill)) {
                 return false;
             }
@@ -45,7 +46,7 @@ Route::get('/', function () {
         $mentors = \App\Models\User::where('role', \App\Enums\UserRole::Mentor)
             ->whereHas('profile', function ($q) use ($skillName) {
                 $q->where('skills', 'like', '%' . $skillName . '%')
-                  ->where('is_verified', true);
+                    ->where('is_verified', true);
             })
             ->with('profile')
             ->limit(5)
@@ -54,12 +55,12 @@ Route::get('/', function () {
         $subSkills = $mentors->flatMap(function ($m) use ($skillName) {
             return array_map('trim', explode(',', $m->profile->skills ?? ''));
         })
-        ->filter(fn($s) => !empty($s) && strcasecmp($s, $skillName) !== 0)
-        ->countBy()
-        ->sortDesc()
-        ->take(3)
-        ->keys()
-        ->toArray();
+            ->filter(fn($s) => !empty($s) && strcasecmp($s, $skillName) !== 0)
+            ->countBy()
+            ->sortDesc()
+            ->take(3)
+            ->keys()
+            ->toArray();
 
         return (object)[
             'name'          => $skillName,
@@ -149,6 +150,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/student/{id}', [ProfileController::class, 'showStudentProfile'])->name('student_profile');
     Route::get('/profile/mentor/{id}', [ProfileController::class, 'showMentorProfile'])->name('mentor_profile');
 
+    // zegocloud - return server secret for client-side token generation
+    Route::get('/zego/token', function () {
+        return response()->json(['serverSecret' => env('ZEGOCLOUD_SERVER_SECRET')]);
+    })->name('zego.token');
+
     // Routes that require verified email
     Route::middleware('verified')->group(function () {
 
@@ -156,12 +162,64 @@ Route::middleware('auth')->group(function () {
         Route::put('/profile', [ProfileController::class, 'updateprofile'])->name('update_profile');
         Route::post('/profile/avatar', [ProfileController::class, 'updateAvatar'])->name('update_avatar');
         Route::delete('/profile/avatar', [ProfileController::class, 'removeAvatar'])->name('remove_avatar');
-        
+
         Route::post('/profile/achievements', [ProfileController::class, 'storeAchievement'])->name('achievements.store');
         Route::put('/profile/achievements/{achievement}', [ProfileController::class, 'updateAchievement'])->name('achievements.update');
         Route::delete('/profile/achievements/{achievement}', [ProfileController::class, 'deleteAchievement'])->name('achievements.delete');
 
-        Route::get('/live-session', fn() => view('session.live-session'))->name('live-session');
+        Route::get('/live-session', function () {
+            $roomId = request('room');
+
+            if (!$roomId) {
+                return redirect()->route('student_dashboard')
+                    ->with('error', 'সেশন কোড পাওয়া যায়নি।');
+            }
+
+            $session = \App\Models\MentoringSession::where('session_code', $roomId)
+                ->with(['mentor', 'student', 'topic'])
+                ->firstOrFail();
+
+            // Only mentor or student of this session can enter
+            $user = request()->user();
+            if ($user->id !== $session->mentor_id && $user->id !== $session->student_id) {
+                abort(403);
+            }
+
+            return view('session.live-session', [
+                'session'  => $session,
+                'roomId'   => $roomId,
+                'userId'   => (string) $user->id,
+                'userName' => $user->name,
+                'appId'    => (int) env('ZEGOCLOUD_APP_ID'),
+                'appSign'  => env('ZEGOCLOUD_APP_SIGN'),
+                'userRole' => $user->id === $session->mentor_id ? 'mentor' : 'student',
+            ]);
+        })->name('live-session');
+
+        Route::post('/session/complete', function (Request $request) {
+            $roomId  = str_replace(['mc-', '-'], ['', ''], $request->room);
+
+            $session = \App\Models\MentoringSession::where('session_code', 'like', '%' . substr($roomId, 2) . '%')
+                ->first();
+
+            if (!$session) {
+                // Try direct match
+                $session = \App\Models\MentoringSession::where('session_code', $request->room)->first();
+            }
+
+            if ($session && $session->status === \App\Enums\SessionStatus::Ongoing) {
+                $user = $request->user();
+                // Only complete if mentor leaves (mentor ends the session)
+                if ($user && $user->id === $session->mentor_id) {
+                    $session->update([
+                        'status'   => \App\Enums\SessionStatus::Completed,
+                        'ended_at' => now(),
+                    ]);
+                }
+            }
+
+            return response()->json(['success' => true]);
+        })->name('session.complete');
 
         // ✏️ CHANGED: approve route moved here (both mentor and student need access)
         Route::post('/session/{session}/approve', [SessionTopicController::class, 'approve'])->name('session.approve');
@@ -202,6 +260,7 @@ Route::middleware('auth')->group(function () {
                     'transactionId'  => $payment->transaction_id,
                     'mentorName'     => $payment->session->mentor->name,
                     'topic'          => $payment->session->topic->topic,
+                    'sessionCode'    => $payment->session->session_code,
                 ]);
             })->middleware(['auth', 'verified'])->name('success');
 

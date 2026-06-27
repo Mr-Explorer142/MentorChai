@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\PaymentStatus;
 use App\Enums\SessionStatus;
+use App\Models\MentoringSession;
 use App\Models\Payment;
 use App\Models\SessionTopic;
 use Illuminate\Support\Facades\Auth;
@@ -43,6 +44,10 @@ class DashboardController extends Controller
             ->latest()
             ->get();
 
+        // MentoringSession counts (actual session state)
+        $mentoringSessions = MentoringSession::where('student_id', $student->id)
+            ->get();
+
         $totalRequests    = $sessionTopics->count();
         $pendingRequests  = $sessionTopics->where('status', SessionStatus::Pending)->count();
         $approvedRequests = $sessionTopics->where('status', SessionStatus::Approved)->count();
@@ -54,14 +59,11 @@ class DashboardController extends Controller
 
         $totalSpent   = $payments->where('status', PaymentStatus::Paid)->sum('amount');
         $weeklySpent  = $payments->where('status', PaymentStatus::Paid)
-            ->where('paid_at', '>=', now()->subWeek())
-            ->sum('amount');
+            ->where('paid_at', '>=', now()->subWeek())->sum('amount');
         $monthlySpent = $payments->where('status', PaymentStatus::Paid)
-            ->where('paid_at', '>=', now()->subMonth())
-            ->sum('amount');
+            ->where('paid_at', '>=', now()->subMonth())->sum('amount');
         $yearlySpent  = $payments->where('status', PaymentStatus::Paid)
-            ->where('paid_at', '>=', now()->subYear())
-            ->sum('amount');
+            ->where('paid_at', '>=', now()->subYear())->sum('amount');
 
         $monthlyChartData = [];
         for ($i = 11; $i >= 0; $i--) {
@@ -78,6 +80,7 @@ class DashboardController extends Controller
         return view('dashboard.student_dashboard', compact(
             'student',
             'sessionTopics',
+            'mentoringSessions',
             'totalRequests',
             'pendingRequests',
             'approvedRequests',
@@ -101,8 +104,13 @@ class DashboardController extends Controller
             ->latest()
             ->get();
 
-        $totalSessions     = $sessionTopics->count();
-        $completedSessions = $sessionTopics->where('status', SessionStatus::Completed)->count();
+        // MentoringSession counts (actual session state)
+        $mentoringSessions = MentoringSession::where('mentor_id', $mentor->id)
+            ->get();
+
+        $totalSessions     = $mentoringSessions->count();
+        $completedSessions = $mentoringSessions->where('status', SessionStatus::Completed)->count();
+        $ongoingSessions   = $mentoringSessions->where('status', SessionStatus::Ongoing)->count();
         $pendingRequests   = $sessionTopics->where('status', SessionStatus::Pending)->count();
         $cancelledRequests = $sessionTopics->where('status', SessionStatus::Rejected)->count();
 
@@ -113,14 +121,11 @@ class DashboardController extends Controller
 
         $totalEarnings   = $payments->where('status', PaymentStatus::Paid)->sum('mentor_earning');
         $weeklyEarnings  = $payments->where('status', PaymentStatus::Paid)
-            ->where('paid_at', '>=', now()->subWeek())
-            ->sum('mentor_earning');
+            ->where('paid_at', '>=', now()->subWeek())->sum('mentor_earning');
         $monthlyEarnings = $payments->where('status', PaymentStatus::Paid)
-            ->where('paid_at', '>=', now()->subMonth())
-            ->sum('mentor_earning');
+            ->where('paid_at', '>=', now()->subMonth())->sum('mentor_earning');
         $yearlyEarnings  = $payments->where('status', PaymentStatus::Paid)
-            ->where('paid_at', '>=', now()->subYear())
-            ->sum('mentor_earning');
+            ->where('paid_at', '>=', now()->subYear())->sum('mentor_earning');
 
         $monthlyChartData = [];
         for ($i = 11; $i >= 0; $i--) {
@@ -137,8 +142,10 @@ class DashboardController extends Controller
         return view('dashboard.mentor_dashboard', compact(
             'mentor',
             'sessionTopics',
+            'mentoringSessions',
             'totalSessions',
             'completedSessions',
+            'ongoingSessions',
             'pendingRequests',
             'cancelledRequests',
             'payments',

@@ -256,7 +256,7 @@ class PaymentController extends Controller
 
                 // Notify mentor
                 $mentoringSession->mentor->notify(
-                    new PaymentReceivedNotification($mentoringSession->topic)
+                    new PaymentReceivedNotification($mentoringSession)
                 );
 
                 // ✅ Re-authenticate the user to bypass browser SameSite cookie blocking

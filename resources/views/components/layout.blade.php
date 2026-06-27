@@ -86,7 +86,7 @@
                                       dark:hover:bg-[#4db6c1] dark:hover:text-[#0f1f2e] dark:hover:border-[#4db6c1]">
                                 মেন্টর দেখুন
                             </a>
-  
+
                             {{-- Vertical divider (desktop) --}}
                             <div class="hidden md:block w-px h-7 bg-#28666e/0.18 dark:bg-#4db6c1/0.25 rounded-sm">
                             </div>
@@ -100,10 +100,9 @@
                                     class="relative p-1.5 rounded-lg hover:bg-teal-50 dark:hover:bg-teal-900/30 transition-colors"
                                     title="নোটিফিকেশন">
 
-                                    {{-- Red dot — only show if unread --}}
                                     @if($unreadCount > 0)
                                     <span id="notificationDot" class="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full
-                         bg-[#ef4444] border border-white dark:border-[#0f1f2e]"></span>
+             bg-[#ef4444] border border-white dark:border-[#0f1f2e]"></span>
                                     @endif
 
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -115,24 +114,24 @@
 
                                 {{-- Notification Panel --}}
                                 <div id="notificationPanel" class="hidden fixed md:absolute left-4 right-4 md:left-auto md:right-0
-                top-16 md:top-auto md:mt-2 w-auto md:w-88
-                rounded-3xl bg-white dark:bg-[#122333]
-                border border-[#28666e]/15 dark:border-[#4db6c1]/20
-                shadow-[0_20px_45px_rgba(40,102,110,0.12)] dark:shadow-[0_20px_45px_rgba(0,0,0,0.35)]
-                z-999 overflow-hidden">
+        top-16 md:top-auto md:mt-2 w-auto md:w-88
+        rounded-3xl bg-white dark:bg-[#122333]
+        border border-[#28666e]/15 dark:border-[#4db6c1]/20
+        shadow-[0_20px_45px_rgba(40,102,110,0.12)] dark:shadow-[0_20px_45px_rgba(0,0,0,0.35)]
+        z-999 overflow-hidden">
 
                                     {{-- Panel Header --}}
                                     <div class="px-4 py-3 bg-[#eaf7f8] dark:bg-[#102d3b]
-                    border-b border-[#28666e]/10 dark:border-[#4db6c1]/10">
+            border-b border-[#28666e]/10 dark:border-[#4db6c1]/10">
                                         <div class="flex items-center justify-between gap-3">
                                             <p class="font-semibold text-[#033f63] dark:text-[#7ec8e3]">নোটিফিকেশন</p>
                                             <div class="flex items-center gap-2">
                                                 @if($unreadCount > 0)
                                                 <button onclick="markAllAsRead()" class="text-[0.7rem] font-semibold text-[#033f63] dark:text-[#d2f1ff]
-                                       bg-[#28666e]/10 dark:bg-[#4db6c1]/15
-                                       px-2 py-1 rounded-full
-                                       hover:bg-[#28666e]/15 dark:hover:bg-[#4db6c1]/25
-                                       transition-colors">
+                           bg-[#28666e]/10 dark:bg-[#4db6c1]/15
+                           px-2 py-1 rounded-full
+                           hover:bg-[#28666e]/15 dark:hover:bg-[#4db6c1]/25
+                           transition-colors">
                                                     সবগুলো পড়া চিহ্নিত করুন
                                                 </button>
                                                 <span id="notificationCount"
@@ -150,9 +149,9 @@
                                     <div class="p-3 space-y-2 max-h-80 overflow-y-auto" id="notificationList">
                                         @forelse($notifications as $notification)
                                         <div id="notification-{{ $notification->id }}" class="rounded-2xl p-3 border transition-colors duration-200
-                            {{ is_null($notification->read_at)
-                                ? 'bg-teal-50 dark:bg-teal-900/20 border-[#28666e]/20 dark:border-[#4db6c1]/20'
-                                : 'bg-[#f6fbfb] dark:bg-[#0f2430] border-[#28666e]/10 dark:border-[#4db6c1]/10' }}">
+                {{ is_null($notification->read_at)
+                    ? 'bg-teal-50 dark:bg-teal-900/20 border-[#28666e]/20 dark:border-[#4db6c1]/20'
+                    : 'bg-[#f6fbfb] dark:bg-[#0f2430] border-[#28666e]/10 dark:border-[#4db6c1]/10' }}">
 
                                             <div class="flex items-start justify-between gap-2">
                                                 <div class="flex-1">
@@ -182,7 +181,7 @@
                                                     isset($notification->data['checkout_url']))
                                                     <a href="{{ $notification->data['checkout_url'] }}"
                                                         onclick="markAsRead('{{ $notification->id }}')" class="inline-flex items-center gap-1 mt-1 text-xs font-semibold
-                                          text-teal-600 dark:text-teal-400 hover:underline">
+                                   text-teal-600 dark:text-teal-400 hover:underline">
                                                         পেমেন্ট করুন →
                                                     </a>
                                                     @endif
@@ -196,10 +195,10 @@
                                                         @csrf
                                                         <button type="submit"
                                                             onclick="markAsRead('{{ $notification->id }}')" class="inline-flex items-center gap-1 text-xs font-semibold
-                                                   text-white bg-teal-600 dark:bg-teal-500
-                                                   px-3 py-1 rounded-full
-                                                   hover:bg-teal-700 dark:hover:bg-teal-400
-                                                   transition-colors duration-200">
+                                       text-white bg-teal-600 dark:bg-teal-500
+                                       px-3 py-1 rounded-full
+                                       hover:bg-teal-700 dark:hover:bg-teal-400
+                                       transition-colors duration-200">
                                                             <svg class="w-3 h-3" fill="none" stroke="currentColor"
                                                                 stroke-width="2.5" viewBox="0 0 24 24">
                                                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -210,6 +209,24 @@
                                                     </form>
                                                     @endif
 
+                                                    {{-- Mentor + Student: Join session button for payment_received --}}
+                                                    @if($type === 'payment_received' &&
+                                                    isset($notification->data['room_url']))
+                                                    <a href="{{ $notification->data['room_url'] }}"
+                                                        onclick="markAsRead('{{ $notification->id }}')" class="inline-flex items-center gap-1 mt-1 text-xs font-semibold
+                                   text-white bg-teal-600 dark:bg-teal-500
+                                   px-3 py-1 rounded-full
+                                   hover:bg-teal-700 dark:hover:bg-teal-400
+                                   transition-colors duration-200">
+                                                        <svg class="w-3 h-3" fill="none" stroke="currentColor"
+                                                            stroke-width="2.5" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
+                                                        </svg>
+                                                        সেশনে যুক্ত হন
+                                                    </a>
+                                                    @endif
+
                                                     <p class="text-xs text-[#28666e]/60 dark:text-[#7ec8e3]/70 mt-1">
                                                         {{ $notification->created_at->diffForHumans() }}
                                                     </p>
@@ -218,10 +235,10 @@
                                                 {{-- Mark single as read button --}}
                                                 @if(is_null($notification->read_at))
                                                 <button onclick="markAsRead('{{ $notification->id }}')" class="shrink-0 w-5 h-5 rounded-full
-                                           bg-teal-100 dark:bg-teal-900/40
-                                           hover:bg-teal-200 dark:hover:bg-teal-800
-                                           flex items-center justify-center
-                                           transition-colors duration-150" title="পড়া চিহ্নিত করুন">
+                               bg-teal-100 dark:bg-teal-900/40
+                               hover:bg-teal-200 dark:hover:bg-teal-800
+                               flex items-center justify-center
+                               transition-colors duration-150" title="পড়া চিহ্নিত করুন">
                                                     <svg class="w-3 h-3 text-teal-600 dark:text-teal-400" fill="none"
                                                         stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round"
