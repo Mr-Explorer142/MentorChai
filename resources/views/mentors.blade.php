@@ -143,7 +143,7 @@
                                   rounded-lg px-3 py-1.5 text-sm
                                   focus:outline-none focus:ring-1 focus:ring-teal-400
                                   transition-colors duration-200">
-                                <span class="text-gray-400 dark:text-gray-500 text-xs shrink-0">—</span>
+                                <span class="text-gray-400 dark:text-gray-500 text-xs shrink-0">-</span>
                                 <input type="number" name="price_max" value="{{ request('price_max') }}"
                                     placeholder="৳ সর্বোচ্চ" class="w-full border border-gray-200 dark:border-gray-700
                                   text-gray-600 dark:text-gray-300
@@ -364,7 +364,7 @@
                                         px-4 py-2 rounded-xl mb-3">
                                 <span class="text-xs text-gray-500 dark:text-gray-400">ঘণ্টা প্রতি</span>
                                 <span class="text-base font-bold text-teal-600 dark:text-teal-400">
-                                    ৳{{ $mentor->profile?->hourly_rate ?? '—' }}
+                                    ৳{{ $mentor->profile?->hourly_rate ?? '-' }}
                                 </span>
                             </div>
 
@@ -535,7 +535,7 @@
                                           rounded-lg px-3 py-1.5 text-sm
                                           focus:outline-none focus:ring-1 focus:ring-teal-400
                                           transition-colors duration-200">
-                            <span class="text-gray-400 dark:text-gray-500 text-xs shrink-0">—</span>
+                            <span class="text-gray-400 dark:text-gray-500 text-xs shrink-0">-</span>
                             <input type="number" name="price_max" value="{{ request('price_max') }}"
                                 placeholder="৳ সর্বোচ্চ" class="w-full border border-gray-200 dark:border-gray-700
                                           text-gray-600 dark:text-gray-300

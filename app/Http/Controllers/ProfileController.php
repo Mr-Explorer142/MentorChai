@@ -45,6 +45,11 @@ class ProfileController extends Controller
 
     function updateProfile(Request $request)
     {
+        if (!\Illuminate\Support\Facades\Schema::hasColumn('profiles', 'learning_style')) {
+            \Illuminate\Support\Facades\Schema::table('profiles', function ($table) {
+                $table->text('learning_style')->nullable();
+            });
+        }
         $user = Auth::user();
         $this->authorize('update', $user);
 
@@ -57,6 +62,7 @@ class ProfileController extends Controller
             'department' => 'nullable|string|max:200',
             'skills' => 'nullable|string|max:200',
             'hourly_rate' => 'nullable|string|max:200',
+            'learning_style' => 'nullable|string|max:2000',
             'nid_front' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
             'nid_back' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
             'student_id_front' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',

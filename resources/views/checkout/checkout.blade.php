@@ -104,7 +104,7 @@
                                 style="background-color: var(--mc-primary);"></span>
                         </span>
                         <p class="text-sm font-medium" style="color: var(--mc-primary);">
-                            লাইভ সেশন — পেমেন্ট সম্পন্ন হলে মেন্টর সাথে সাথে সংযুক্ত হবেন
+                            লাইভ সেশন - পেমেন্ট সম্পন্ন হলে মেন্টর সাথে সাথে সংযুক্ত হবেন
                         </p>
                     </div>
 

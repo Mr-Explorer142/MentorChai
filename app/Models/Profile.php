@@ -21,6 +21,7 @@ class Profile extends Model
         'hourly_rate',
         'department',
         'short_bio',
+        'learning_style',
         'nid_front',
         'nid_back',
         'student_id_front',
