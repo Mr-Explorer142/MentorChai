@@ -56,7 +56,7 @@
                 <div class="p-8 space-y-6">
 
                     {{-- Form --}}
-                    <form method="POST" action="{{ route('admin_login') }}" class="space-y-5">
+                    <form method="POST" action="{{ route('admin_login_post') }}" class="space-y-5">
                         @csrf
 
                         {{-- Email --}}
@@ -66,7 +66,9 @@
                                 অ্যাডমিন ই-মেইল
                             </label>
                             <div class="relative">
-                                <input type="email" name="email" placeholder="admin@email.com" required class="w-full pl-10 pr-4 py-2.5 rounded-xl
+                                <input type="email" name="email" placeholder="admin@email.com" required
+                                       value="{{ old('email') }}"
+                                       class="w-full pl-10 pr-4 py-2.5 rounded-xl
                                               text-sm font-[Nunito,sans-serif] outline-none
                                               border-[1.5px] border-[#C4CFCE] dark:border-[#4db6c1]/20
                                               bg-[#fafcfc] dark:bg-[#0f1f2e]/60
@@ -94,7 +96,8 @@
                                 পাসওয়ার্ড
                             </label>
                             <div class="relative">
-                                <input type="password" name="password" placeholder="••••••••" required class="w-full pl-10 pr-4 py-2.5 rounded-xl
+                                <input type="password" name="password" placeholder="••••••••" required
+                                       class="w-full pl-10 pr-4 py-2.5 rounded-xl
                                               text-sm font-[Nunito,sans-serif] outline-none
                                               border-[1.5px] border-[#C4CFCE] dark:border-[#4db6c1]/20
                                               bg-[#fafcfc] dark:bg-[#0f1f2e]/60
@@ -121,20 +124,20 @@
                         <div class="flex items-center justify-between text-sm">
                             <label class="flex items-center gap-2 cursor-pointer
                                           text-[#155665] dark:text-[#7ec8e3]">
-                                <input type="checkbox" class="w-4 h-4 rounded cursor-pointer
+                                <input type="checkbox" name="remember" class="w-4 h-4 rounded cursor-pointer
                                               accent-[#1A998F] dark:accent-[#4db6c1]" />
                                 তথ্য সেভ রাখুন
                             </label>
                         </div>
 
                         {{-- Submit Button --}}
-                        <a href="{{ route('admin_dashboard') }}" class="w-full flex items-center justify-center gap-2
+                        <button type="submit" class="w-full flex items-center justify-center gap-2
                                   py-3 rounded-xl
-                                  bg-linear-to-br from-[#155665] to-[#1A998F]
+                                  bg-gradient-to-br from-[#155665] to-[#1A998F]
                                   dark:from-[#28666e] dark:to-[#4db6c1]
                                   text-white dark:text-[#0f1f2e]
                                   text-sm font-bold font-[Nunito,sans-serif]
-                                  shadow-lg no-underline
+                                  shadow-lg border-none cursor-pointer
                                   transition-all duration-200
                                   hover:opacity-90
                                   hover:shadow-[0_8px_24px_rgba(26,153,143,0.3)] dark:hover:shadow-[0_8px_24px_rgba(77,182,193,0.25)]
@@ -145,9 +148,10 @@
                                     d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                             </svg>
                             অ্যাডমিন হিসেবে লগইন করুন
-                        </a>
+                        </button>
 
                     </form>
+
 
                     {{-- Divider --}}
                     <div class="flex items-center gap-3">

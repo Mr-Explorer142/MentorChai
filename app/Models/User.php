@@ -26,11 +26,16 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'password',
         'role',
+        'is_super_admin',
+        'status',
+        'banned_at',
+        'banned_reason',
         'last_seen_at',
         'provider',
         'provider_id',
         'email_verified_at',
     ];
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -66,6 +71,16 @@ class User extends Authenticatable implements MustVerifyEmail
     public function achievements()
     {
         return $this->hasMany(Achievement::class);
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === UserRole::Admin || $this->role === UserRole::SuperAdmin;
+    }
+
+    public function isSuperAdmin(): bool
+    {
+        return ($this->role === UserRole::Admin && (bool) $this->is_super_admin) || $this->role === UserRole::SuperAdmin;
     }
 
     public function isOnline()

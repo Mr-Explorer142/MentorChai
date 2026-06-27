@@ -32,6 +32,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'mentor'       => \App\Http\Middleware\MentorMiddleware::class,
             'student'      => \App\Http\Middleware\StudentMiddleware::class,
             'last_seen_at' => \App\Http\Middleware\UpdateLastSeen::class,
+            'admin'        => \App\Http\Middleware\AdminMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

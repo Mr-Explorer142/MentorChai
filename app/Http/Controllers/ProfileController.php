@@ -92,6 +92,22 @@ class ProfileController extends Controller
         // Save all valid data to the database
         $user->profile()->updateOrCreate(['user_id' => $user->id], $profileData);
 
+        // If mentor uploaded new documents, mark as pending verification
+        $docFields = ['nid_front', 'nid_back', 'student_id_front', 'student_id_back'];
+        $uploadedNewDoc = false;
+        foreach ($docFields as $field) {
+            if ($request->hasFile($field) && isset($validData[$field])) {
+                $uploadedNewDoc = true;
+                break;
+            }
+        }
+        if ($uploadedNewDoc && $user->role === \App\Enums\UserRole::Mentor) {
+            $user->profile()->updateOrCreate(['user_id' => $user->id], [
+                'is_verified'            => false,
+                'documents_submitted_at' => now(),
+            ]);
+        }
+
         // If there were any errors in other fields, redirect back with those errors
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
