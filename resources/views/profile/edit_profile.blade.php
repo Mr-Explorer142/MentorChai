@@ -89,34 +89,6 @@
                                         value="{{ old('name', Auth::user()->name) }}" />
                                 </div>
 
-                            {{-- Short Bio --}}
-                            <div>
-                                <label class="flex items-center justify-between mb-1.5">
-                                    <span class="flex items-center gap-1.5 text-xs font-bold
-                                                 text-[#033f63] dark:text-[#7ec8e3]">
-                                        <svg class="w-3.5 h-3.5 text-[#28666e] dark:text-[#4db6c1]" fill="none"
-                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12" />
-                                        </svg>
-                                        ছোট বায়ো (হেডলাইন)
-                                    </span>
-                                    <span class="text-xs text-[#033f63]/45 dark:text-[#7ec8e3]/40">
-                                        প্রোফাইল নামের নিচে দেখানোর জন্য (১-২ লাইন)
-                                    </span>
-                                </label>
-                                <textarea name="short_bio" rows="2" class="w-full px-4 py-2.5 rounded-xl text-sm outline-none resize-none
-                                           border-[1.5px] border-[#28666e]/20 dark:border-[#4db6c1]/20
-                                           bg-[#eef7f8]/50 dark:bg-[#0f1f2e]/50
-                                           text-[#033f63] dark:text-[#7ec8e3]
-                                           placeholder:text-[#033f63]/35 dark:placeholder:text-[#7ec8e3]/30
-                                           focus:border-[#28666e] dark:focus:border-[#4db6c1]
-                                           focus:ring-[3px] focus:ring-[#28666e]/10 dark:focus:ring-[#4db6c1]/10
-                                           focus:bg-white dark:focus:bg-[#243d4d]
-                                           disabled:opacity-60 disabled:cursor-not-allowed disabled:bg-gray-100 dark:disabled:bg-gray-800
-                                           transition-all duration-200"
-                                    placeholder="আপনার শর্ট বায়ো/পেশা লিখুন" {{ Auth::user()->role === \App\Enums\UserRole::Student ? 'disabled' : '' }}>{{ old('short_bio', Auth::user()->profile?->short_bio) }}</textarea>
-                            </div>
 
                             @if(Auth::user()->role === \App\Enums\UserRole::Mentor)
                             {{-- Short Bio --}}
@@ -213,6 +185,7 @@
 
                         {{-- ── Education & Professional ── --}}
                         <div class="space-y-6">
+                            @if(Auth::user()->role === \App\Enums\UserRole::Mentor)
                             <div class="flex items-center gap-3 pb-4
                                         border-b border-teal-50 dark:border-[#4db6c1]/10">
                                 <div class="w-1 h-7 rounded-full
@@ -228,6 +201,7 @@
                                     শিক্ষা ও পেশাগত তথ্য
                                 </h2>
                             </div>
+                            @endif
 
                             <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
 
