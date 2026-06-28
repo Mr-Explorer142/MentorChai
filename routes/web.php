@@ -295,6 +295,38 @@ Route::middleware('auth')->group(function () {
 
             // ✏️ NEW — payment success handler for student
             Route::post('/session/{session}/payment', [SessionTopicController::class, 'paymentSuccess'])->name('session.payment.success');
+
+            Route::post('/session/{session}/review', function (Request $request, \App\Models\MentoringSession $session) {
+                // Only the student of this session can review
+                if (Auth::id() !== $session->student_id) {
+                    return response()->json(['error' => 'Unauthorized'], 403);
+                }
+
+                // Only one review per session
+                if ($session->review) {
+                    return response()->json(['error' => 'already_reviewed'], 422);
+                }
+
+                // Only completed sessions can be reviewed
+                if ($session->status !== \App\Enums\SessionStatus::Completed) {
+                    return response()->json(['error' => 'not_completed'], 422);
+                }
+
+                $request->validate([
+                    'rating'  => 'required|integer|min:1|max:5',
+                    'comment' => 'nullable|string|max:1000',
+                ]);
+
+                \App\Models\Review::create([
+                    'session_id' => $session->id,
+                    'student_id' => Auth::id(),
+                    'mentor_id'  => $session->mentor_id,
+                    'rating'     => $request->rating,
+                    'comment'    => $request->comment,
+                ]);
+
+                return response()->json(['success' => true]);
+            })->name('session.review');
         });
 
         // Mentor-only routes

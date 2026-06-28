@@ -27,7 +27,7 @@ class ProfileController extends Controller
 
     function showMentorProfile(int $id)
     {
-        $mentor = User::with('profile')->findOrFail($id);
+        $mentor = User::with(['profile', 'achievements', 'reviews.student.profile', 'reviews.session.topic'])->findOrFail($id);
 
         // Block access to unverified mentors unless the user is viewing their own profile
         if ((!$mentor->profile || !$mentor->profile->is_verified) && Auth::id() !== $mentor->id) {
@@ -85,7 +85,7 @@ class ProfileController extends Controller
                     Storage::disk('public')->delete($user->profile->$field);
                 }
                 $profileData[$field] = null;
-            } 
+            }
             // Only process the file if it actually passed validation
             elseif ($request->hasFile($field) && isset($validData[$field])) {
                 if ($user->profile && $user->profile->$field) {

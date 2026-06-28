@@ -1,6 +1,6 @@
 import { ZegoUIKitPrebuilt } from "@zegocloud/zego-uikit-prebuilt";
 
-const { appID, roomID, userID, userName } = window.ZEGO_CONFIG;
+const { appID, roomID, userID, userName, userRole } = window.ZEGO_CONFIG;
 
 async function startCall() {
     const response = await fetch("/zego/token");
@@ -28,6 +28,7 @@ async function startCall() {
         showScreenSharingButton: true,
         showPreJoinView: true,
         onLeaveRoom: async () => {
+            // Mark session complete
             await fetch("/session/complete", {
                 method: "POST",
                 headers: {
@@ -39,9 +40,15 @@ async function startCall() {
                 body: JSON.stringify({ room: window.ZEGO_CONFIG.roomID }),
             });
 
-            const role = window.ZEGO_CONFIG.userRole || "student";
-            window.location.href =
-                role === "mentor" ? "/dashboard/mentor" : "/dashboard/student";
+            if (userRole === "student") {
+                // Show review modal for student
+                document
+                    .getElementById("reviewModal")
+                    .classList.remove("hidden");
+            } else {
+                // Mentor goes straight to dashboard
+                window.location.href = "/dashboard/mentor";
+            }
         },
     });
 }
