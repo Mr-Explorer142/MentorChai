@@ -4,13 +4,11 @@
 
         {{-- ── Page Header ── --}}
         <div class="mb-6">
-            <p class="text-xs font-bold uppercase tracking-widest mb-1 text-[#1A9998] dark:text-[#4db6c1]">সক্রিয় সেশন
-            </p>
+            <p class="text-xs font-bold uppercase tracking-widest mb-1 text-[#1A9998] dark:text-[#4db6c1]">সক্রিয় সেশন</p>
             <h1 class="text-2xl font-extrabold text-[#0d3d3d] dark:text-[#d2f1ff]">লাইভ মেন্টরিং সেশন</h1>
             <div class="flex items-center gap-2 mt-2">
                 <span class="text-sm font-semibold text-[#155665]/60 dark:text-[#7ec8e3]/60">Topic :</span>
-                <span
-                    class="text-sm font-bold px-3 py-0.5 rounded-full bg-[#1a9998]/10 dark:bg-[#4db6c1]/10 text-[#155665] dark:text-[#7ec8e3] border border-[#1a9998]/20 dark:border-[#4db6c1]/20">
+                <span class="text-sm font-bold px-3 py-0.5 rounded-full bg-[#1a9998]/10 dark:bg-[#4db6c1]/10 text-[#155665] dark:text-[#7ec8e3] border border-[#1a9998]/20 dark:border-[#4db6c1]/20">
                     {{ $session->topic->topic }}
                 </span>
             </div>
@@ -22,12 +20,10 @@
             <div class="lg:col-span-8 space-y-5">
 
                 {{-- Live Video Card --}}
-                <div
-                    class="bg-white dark:bg-[#1a2e3b] rounded-2xl overflow-hidden shadow-sm transition-colors duration-300 border border-[#1a9998]/15 dark:border-[#4db6c1]/15 shadow-[0_4px_20px_rgba(26,153,152,0.08)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
+                <div class="bg-white dark:bg-[#1a2e3b] rounded-2xl overflow-hidden shadow-sm transition-colors duration-300 border border-[#1a9998]/15 dark:border-[#4db6c1]/15 shadow-[0_4px_20px_rgba(26,153,152,0.08)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
 
                     {{-- ZegoCloud mounts here --}}
-                    <div id="zego-container"
-                        style="width:100%;height:520px;border-radius:1rem 1rem 0 0;overflow:hidden;"></div>
+                    <div id="zego-container" style="width:100%;height:520px;border-radius:1rem 1rem 0 0;overflow:hidden;"></div>
 
                     {{-- Session meta --}}
                     <div class="px-5 py-4 flex flex-wrap justify-between items-center gap-3">
@@ -37,40 +33,35 @@
                                 শুরু হয়েছে {{ $session->started_at?->format('h:i A') ?? 'এখনই' }}
                             </p>
                         </div>
-                        <span
-                            class="px-3 py-1 rounded-full text-xs font-bold bg-[#1a9998]/10 dark:bg-[#4db6c1]/10 text-[#1A9998] dark:text-[#4db6c1] border border-[#1a9998]/25 dark:border-[#4db6c1]/25">
+                        <span class="px-3 py-1 rounded-full text-xs font-bold bg-[#1a9998]/10 dark:bg-[#4db6c1]/10 text-[#1A9998] dark:text-[#4db6c1] border border-[#1a9998]/25 dark:border-[#4db6c1]/25">
                             {{ $roomId }}
                         </span>
                     </div>
                 </div>
 
                 {{-- Mentor Info --}}
-                <div
-                    class="bg-white dark:bg-[#1a2e3b] rounded-2xl px-5 py-5 shadow-sm transition-colors duration-300 border border-[#1a9998]/15 dark:border-[#4db6c1]/15">
+                <div class="bg-white dark:bg-[#1a2e3b] rounded-2xl px-5 py-5 shadow-sm transition-colors duration-300 border border-[#1a9998]/15 dark:border-[#4db6c1]/15">
                     <div class="flex flex-col sm:flex-row gap-4 items-center sm:items-start">
                         <div class="avatar placeholder shrink-0">
                             @if($session->mentor->profile?->avatar)
-                            <img src="{{ asset('storage/' . $session->mentor->profile->avatar) }}"
-                                class="w-16 rounded-full object-cover" alt="{{ $session->mentor->name }}">
+                                <img src="{{ asset('storage/' . $session->mentor->profile->avatar) }}"
+                                    class="w-16 rounded-full object-cover" alt="{{ $session->mentor->name }}">
                             @else
-                            <div
-                                class="w-16 rounded-full font-bold text-2xl grid place-items-center text-white bg-gradient-to-br from-[#1A9998] to-[#155665] dark:from-[#4db6c1] dark:to-[#155665]">
-                                {{ strtoupper(substr($session->mentor->name, 0, 1)) }}
-                            </div>
+                                <div class="w-16 rounded-full font-bold text-2xl grid place-items-center text-white bg-gradient-to-br from-[#1A9998] to-[#155665] dark:from-[#4db6c1] dark:to-[#155665]">
+                                    {{ strtoupper(substr($session->mentor->name, 0, 1)) }}
+                                </div>
                             @endif
                         </div>
                         <div class="flex-1 text-center sm:text-left">
-                            <p class="font-bold text-lg text-[#0d3d3d] dark:text-[#d2f1ff]">{{ $session->mentor->name }}
-                            </p>
+                            <p class="font-bold text-lg text-[#0d3d3d] dark:text-[#d2f1ff]">{{ $session->mentor->name }}</p>
                             <p class="text-sm text-[#155665]/60 dark:text-[#7ec8e3]/60">মেন্টর</p>
                             @if($session->mentor->profile?->bio)
-                            <p class="text-sm mt-2 text-[#4a7070] dark:text-[#7ec8e3]/80">
-                                {{ Str::limit($session->mentor->profile->bio, 100) }}
-                            </p>
+                                <p class="text-sm mt-2 text-[#4a7070] dark:text-[#7ec8e3]/80">
+                                    {{ Str::limit($session->mentor->profile->bio, 100) }}
+                                </p>
                             @endif
                         </div>
-                        <span
-                            class="px-3 py-1 rounded-full text-xs font-bold bg-[#1a9998]/10 dark:bg-[#4db6c1]/10 text-[#1A9998] dark:text-[#4db6c1] border border-[#1a9998]/25 dark:border-[#4db6c1]/25">
+                        <span class="px-3 py-1 rounded-full text-xs font-bold bg-[#1a9998]/10 dark:bg-[#4db6c1]/10 text-[#1A9998] dark:text-[#4db6c1] border border-[#1a9998]/25 dark:border-[#4db6c1]/25">
                             Host
                         </span>
                     </div>
@@ -82,86 +73,58 @@
             <div class="lg:col-span-4 space-y-5">
 
                 {{-- Session Details --}}
-                <div
-                    class="bg-white dark:bg-[#1a2e3b] rounded-2xl px-5 py-5 shadow-sm transition-colors duration-300 border border-[#1a9998]/15 dark:border-[#4db6c1]/15">
+                <div class="bg-white dark:bg-[#1a2e3b] rounded-2xl px-5 py-5 shadow-sm transition-colors duration-300 border border-[#1a9998]/15 dark:border-[#4db6c1]/15">
                     <h2 class="font-bold text-sm mb-4 text-[#0d3d3d] dark:text-[#d2f1ff]">সেশন বিবরণ</h2>
-
                     <div class="space-y-3 pt-4 border-t border-[#1a9998]/10 dark:border-[#4db6c1]/15">
-
                         <div class="flex items-start gap-2">
-                            <span
-                                class="text-xs font-bold w-20 shrink-0 pt-0.5 text-[#155665]/50 dark:text-[#7ec8e3]/50">Topic</span>
-                            <span class="text-sm font-medium text-[#2d6e6e] dark:text-[#d2f1ff]">{{
-                                $session->topic->topic }}</span>
+                            <span class="text-xs font-bold w-20 shrink-0 pt-0.5 text-[#155665]/50 dark:text-[#7ec8e3]/50">Topic</span>
+                            <span class="text-sm font-medium text-[#2d6e6e] dark:text-[#d2f1ff]">{{ $session->topic->topic }}</span>
                         </div>
-
                         <div class="flex items-center gap-2">
-                            <span
-                                class="text-xs font-bold w-20 shrink-0 text-[#155665]/50 dark:text-[#7ec8e3]/50">মেন্টর</span>
-                            <span class="text-sm font-medium text-[#2d6e6e] dark:text-[#d2f1ff]">{{
-                                $session->mentor->name }}</span>
+                            <span class="text-xs font-bold w-20 shrink-0 text-[#155665]/50 dark:text-[#7ec8e3]/50">মেন্টর</span>
+                            <span class="text-sm font-medium text-[#2d6e6e] dark:text-[#d2f1ff]">{{ $session->mentor->name }}</span>
                         </div>
-
                         <div class="flex items-center gap-2">
-                            <span
-                                class="text-xs font-bold w-20 shrink-0 text-[#155665]/50 dark:text-[#7ec8e3]/50">শিক্ষার্থী</span>
-                            <span class="text-sm font-medium text-[#2d6e6e] dark:text-[#d2f1ff]">{{
-                                $session->student->name }}</span>
+                            <span class="text-xs font-bold w-20 shrink-0 text-[#155665]/50 dark:text-[#7ec8e3]/50">শিক্ষার্থী</span>
+                            <span class="text-sm font-medium text-[#2d6e6e] dark:text-[#d2f1ff]">{{ $session->student->name }}</span>
                         </div>
-
                         <div class="flex items-center gap-2">
-                            <span
-                                class="text-xs font-bold w-20 shrink-0 text-[#155665]/50 dark:text-[#7ec8e3]/50">শুরু</span>
+                            <span class="text-xs font-bold w-20 shrink-0 text-[#155665]/50 dark:text-[#7ec8e3]/50">শুরু</span>
                             <span class="text-sm font-medium text-[#2d6e6e] dark:text-[#d2f1ff]">
                                 {{ $session->started_at?->format('d M Y, h:i A') ?? 'এখনই' }}
                             </span>
                         </div>
-
                         <div class="flex items-center gap-2">
-                            <span
-                                class="text-xs font-bold w-20 shrink-0 text-[#155665]/50 dark:text-[#7ec8e3]/50">Room</span>
+                            <span class="text-xs font-bold w-20 shrink-0 text-[#155665]/50 dark:text-[#7ec8e3]/50">Room</span>
                             <span class="text-sm font-mono text-[#1A9998] dark:text-[#4db6c1]">{{ $roomId }}</span>
                         </div>
-
                         <div class="flex items-center gap-2">
-                            <span
-                                class="text-xs font-bold w-20 shrink-0 text-[#155665]/50 dark:text-[#7ec8e3]/50">পরিমাণ</span>
-                            <span class="text-sm font-bold text-[#2d6e6e] dark:text-[#d2f1ff]">৳{{
-                                number_format($session->amount, 2) }}</span>
+                            <span class="text-xs font-bold w-20 shrink-0 text-[#155665]/50 dark:text-[#7ec8e3]/50">পরিমাণ</span>
+                            <span class="text-sm font-bold text-[#2d6e6e] dark:text-[#d2f1ff]">৳{{ number_format($session->amount, 2) }}</span>
                         </div>
-
                     </div>
                 </div>
 
                 {{-- Participants --}}
-                <div
-                    class="bg-white dark:bg-[#1a2e3b] rounded-2xl px-5 py-5 shadow-sm transition-colors duration-300 border border-[#1a9998]/15 dark:border-[#4db6c1]/15">
+                <div class="bg-white dark:bg-[#1a2e3b] rounded-2xl px-5 py-5 shadow-sm transition-colors duration-300 border border-[#1a9998]/15 dark:border-[#4db6c1]/15">
                     <h2 class="font-bold text-sm mb-4 text-[#0d3d3d] dark:text-[#d2f1ff]">অংশগ্রহণকারী</h2>
-
                     <div class="space-y-3">
-                        {{-- Mentor --}}
                         <div class="flex items-center gap-3">
-                            <div
-                                class="w-9 h-9 rounded-full grid place-items-center text-sm font-bold text-white bg-gradient-to-br from-[#1A9998] to-[#155665] shrink-0">
+                            <div class="w-9 h-9 rounded-full grid place-items-center text-sm font-bold text-white bg-gradient-to-br from-[#1A9998] to-[#155665] shrink-0">
                                 {{ strtoupper(substr($session->mentor->name, 0, 1)) }}
                             </div>
                             <div class="flex-1 min-w-0">
-                                <p class="text-sm font-bold truncate text-[#0d3d3d] dark:text-[#d2f1ff]">{{
-                                    $session->mentor->name }}</p>
+                                <p class="text-sm font-bold truncate text-[#0d3d3d] dark:text-[#d2f1ff]">{{ $session->mentor->name }}</p>
                                 <p class="text-xs text-[#155665]/50 dark:text-[#7ec8e3]/50">মেন্টর · Host</p>
                             </div>
                             <span class="w-2 h-2 rounded-full bg-green-400 shrink-0"></span>
                         </div>
-
-                        {{-- Student --}}
                         <div class="flex items-center gap-3">
-                            <div
-                                class="w-9 h-9 rounded-full grid place-items-center text-sm font-bold text-white bg-gradient-to-br from-[#155665] to-[#0d3d3d] shrink-0">
+                            <div class="w-9 h-9 rounded-full grid place-items-center text-sm font-bold text-white bg-gradient-to-br from-[#155665] to-[#0d3d3d] shrink-0">
                                 {{ strtoupper(substr($session->student->name, 0, 1)) }}
                             </div>
                             <div class="flex-1 min-w-0">
-                                <p class="text-sm font-bold truncate text-[#0d3d3d] dark:text-[#d2f1ff]">{{
-                                    $session->student->name }}</p>
+                                <p class="text-sm font-bold truncate text-[#0d3d3d] dark:text-[#d2f1ff]">{{ $session->student->name }}</p>
                                 <p class="text-xs text-[#155665]/50 dark:text-[#7ec8e3]/50">শিক্ষার্থী</p>
                             </div>
                             <span class="w-2 h-2 rounded-full bg-green-400 shrink-0"></span>
@@ -171,83 +134,192 @@
 
             </div>
         </div>
-
-        {{-- ══════════ REVIEW SECTION (student only) ══════════ --}}
-        @if(auth()->id() === $session->student_id)
-        <div class="mt-8">
-            <div
-                class="bg-white dark:bg-[#1a2e3b] rounded-2xl shadow-sm max-w-2xl mx-auto overflow-hidden transition-colors duration-300 border border-[#1a9998]/15 dark:border-[#4db6c1]/15">
-
-                <div class="h-1 bg-gradient-to-r from-[#1A9998] to-[#155665] dark:from-[#4db6c1] dark:to-[#7ec8e3]">
-                </div>
-
-                <div class="p-7 space-y-6">
-                    <div>
-                        <h2 class="text-lg font-bold text-[#0d3d3d] dark:text-[#d2f1ff]">রিভিউ সাবমিট করুন</h2>
-                        <p class="text-sm mt-1 text-[#155665]/60 dark:text-[#7ec8e3]/60">সেশন সম্পর্কে আপনার মতামত
-                            শেয়ার করুন</p>
-                    </div>
-
-                    <form method="POST" action="#" class="space-y-5">
-                        @csrf
-
-                        <div>
-                            <label class="block text-sm font-bold mb-2 text-[#155665] dark:text-[#7ec8e3]">আপনার
-                                রেটিং</label>
-                            <div class="rating rating-lg">
-                                <input type="radio" name="rating" value="1" class="mask mask-star-2 bg-warning" />
-                                <input type="radio" name="rating" value="2" class="mask mask-star-2 bg-warning" />
-                                <input type="radio" name="rating" value="3" class="mask mask-star-2 bg-warning" />
-                                <input type="radio" name="rating" value="4" class="mask mask-star-2 bg-warning" />
-                                <input type="radio" name="rating" value="5" class="mask mask-star-2 bg-warning" />
-                            </div>
-                        </div>
-
-                        <div>
-                            <label class="block text-sm font-bold mb-2 text-[#155665] dark:text-[#7ec8e3]">বিস্তারিত
-                                লিখুন</label>
-                            <textarea
-                                class="textarea w-full resize-none text-sm focus:outline-none rounded-2xl bg-[#f7fdfd] dark:bg-[#122333] text-[#2d6e6e] dark:text-[#d2f1ff] border border-[#1a9998]/25 dark:border-[#4db6c1]/25"
-                                rows="4" name="comment"
-                                placeholder="সেশন সম্পর্কে আপনার মতামত শেয়ার করুন..."></textarea>
-                        </div>
-
-                        <div class="flex justify-end">
-                            <button type="submit"
-                                class="flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-bold text-white dark:text-[#0f1f2e] transition-all hover:-translate-y-0.5 bg-gradient-to-br from-[#1A9998] to-[#155665] dark:from-[#4db6c1] dark:to-[#28666e] shadow-[0_4px_14px_rgba(26,153,152,0.3)]">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0l-4.725 2.885a.562.562 0 01-.84-.61l1.285-5.385a.562.562 0 00-.182-.557l-4.204-3.602a.562.562 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
-                                </svg>
-                                রিভিউ দিন
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        @endif
-
     </div>
 
-    {{-- TEMP DEBUG - remove after fixing --}}
-    <div style="display:none" id="zego-debug">
-        appID: {{ $appId }} |
-        appSign length: {{ strlen($appSign) }} |
-        roomID: mc-{{ $roomId }} |
-        userID: {{ $userId }}
+    {{-- ══════════ REVIEW MODAL (student only, shown after leaving call) ══════════ --}}
+    @if(auth()->id() === $session->student_id)
+    <div id="reviewModal" class="hidden fixed inset-0 z-[9999] flex items-center justify-center p-4"
+        style="background: rgba(0,0,0,0.7); backdrop-filter: blur(6px);">
+
+        <div class="w-full max-w-lg bg-white dark:bg-[#1a2e3b] rounded-3xl shadow-2xl overflow-hidden
+                    border border-[#1a9998]/20 dark:border-[#4db6c1]/20
+                    animate-fade-up">
+
+            {{-- Top accent --}}
+            <div class="h-1.5 bg-gradient-to-r from-[#1A9998] to-[#155665] dark:from-[#4db6c1] dark:to-[#7ec8e3]"></div>
+
+            <div class="p-6 sm:p-8">
+
+                {{-- Header --}}
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0
+                                bg-gradient-to-br from-[#1A9998] to-[#155665] dark:from-[#4db6c1] dark:to-[#28666e]">
+                        <svg class="w-6 h-6 text-white dark:text-[#0f1f2e]" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.173c.969 0 1.371 1.24.588 1.81l-3.376 2.454a1 1 0 00-.364 1.118l1.286 3.967c.3.921-.755 1.688-1.54 1.118l-3.376-2.454a1 1 0 00-1.176 0l-3.376 2.454c-.784.57-1.838-.197-1.539-1.118l1.285-3.967a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.173a1 1 0 00.95-.69l1.287-3.967z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold text-[#0d3d3d] dark:text-[#d2f1ff]">সেশন কেমন ছিল?</h2>
+                        <p class="text-sm text-[#155665]/60 dark:text-[#7ec8e3]/60 mt-0.5">
+                            {{ $session->mentor->name }}-কে রিভিউ দিন
+                        </p>
+                    </div>
+                </div>
+
+                {{-- Mentor strip --}}
+                <div class="flex items-center gap-3 p-3 rounded-2xl mb-6
+                            bg-[#f0fafa] dark:bg-[#0f2430]
+                            border border-[#1a9998]/10 dark:border-[#4db6c1]/10">
+                    <div class="w-10 h-10 rounded-full overflow-hidden shrink-0">
+                        @if($session->mentor->profile?->avatar)
+                            <img src="{{ asset('storage/' . $session->mentor->profile->avatar) }}"
+                                class="w-full h-full object-cover" alt="{{ $session->mentor->name }}">
+                        @else
+                            <div class="w-full h-full grid place-items-center font-bold text-white text-sm
+                                        bg-gradient-to-br from-[#1A9998] to-[#155665]">
+                                {{ strtoupper(substr($session->mentor->name, 0, 1)) }}
+                            </div>
+                        @endif
+                    </div>
+                    <div>
+                        <p class="text-sm font-bold text-[#0d3d3d] dark:text-[#d2f1ff]">{{ $session->mentor->name }}</p>
+                        <p class="text-xs text-[#155665]/50 dark:text-[#7ec8e3]/50">{{ $session->topic->topic }}</p>
+                    </div>
+                </div>
+
+                {{-- Review Form --}}
+                <form method="POST" action="{{ route('session.review', $session) }}" id="reviewForm" class="space-y-5">
+                    @csrf
+
+                    {{-- Star Rating --}}
+                    <div>
+                        <label class="block text-sm font-bold mb-3 text-[#155665] dark:text-[#7ec8e3]">
+                            রেটিং দিন <span class="text-red-400">*</span>
+                        </label>
+                        <div class="flex items-center gap-2" id="starRating">
+                            @for($i = 1; $i <= 5; $i++)
+                            <label class="cursor-pointer">
+                                <input type="radio" name="rating" value="{{ $i }}" class="sr-only" required />
+                                <svg class="w-12 h-12 sm:w-14 sm:h-14 transition-all duration-150
+                                            text-gray-200 dark:text-gray-700 hover:scale-110 star-icon"
+                                    fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.173c.969 0 1.371 1.24.588 1.81l-3.376 2.454a1 1 0 00-.364 1.118l1.286 3.967c.3.921-.755 1.688-1.54 1.118l-3.376-2.454a1 1 0 00-1.176 0l-3.376 2.454c-.784.57-1.838-.197-1.539-1.118l1.285-3.967a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.173a1 1 0 00.95-.69l1.287-3.967z" />
+                                </svg>
+                            </label>
+                            @endfor
+                        </div>
+                        <p id="ratingLabel" class="text-sm font-bold mt-2 h-5 text-[#1A9998] dark:text-[#4db6c1]"></p>
+                    </div>
+
+                    {{-- Comment --}}
+                    <div>
+                        <label class="block text-sm font-bold mb-2 text-[#155665] dark:text-[#7ec8e3]">
+                            মন্তব্য
+                            <span class="font-normal text-[#155665]/50 dark:text-[#7ec8e3]/50">(ঐচ্ছিক)</span>
+                        </label>
+                        <textarea
+                            name="comment"
+                            rows="3"
+                            maxlength="1000"
+                            placeholder="আপনার অভিজ্ঞতা সম্পর্কে লিখুন..."
+                            class="w-full px-4 py-3 text-sm rounded-2xl resize-none focus:outline-none focus:ring-2 focus:ring-[#1a9998]/40
+                                   bg-[#f7fdfd] dark:bg-[#122333]
+                                   text-[#2d6e6e] dark:text-[#d2f1ff]
+                                   border border-[#1a9998]/25 dark:border-[#4db6c1]/25
+                                   placeholder:text-[#155665]/40 dark:placeholder:text-[#7ec8e3]/30
+                                   transition-colors duration-200"></textarea>
+                    </div>
+
+                    {{-- Buttons --}}
+                    <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                        <button type="button" id="skipReviewBtn"
+                            class="flex-1 py-3 rounded-2xl text-sm font-semibold transition-all duration-200
+                                   border border-[#1a9998]/30 dark:border-[#4db6c1]/30
+                                   text-[#155665]/70 dark:text-[#7ec8e3]/70
+                                   hover:bg-[#1a9998]/5 dark:hover:bg-[#4db6c1]/5">
+                            এড়িয়ে যান
+                        </button>
+                        <button type="submit"
+                            class="flex-1 flex items-center justify-center gap-2 py-3 rounded-2xl text-sm font-bold
+                                   text-white dark:text-[#0f1f2e] transition-all duration-200 hover:-translate-y-0.5
+                                   bg-gradient-to-br from-[#1A9998] to-[#155665] dark:from-[#4db6c1] dark:to-[#28666e]
+                                   shadow-[0_4px_14px_rgba(26,153,152,0.35)]">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.173c.969 0 1.371 1.24.588 1.81l-3.376 2.454a1 1 0 00-.364 1.118l1.286 3.967c.3.921-.755 1.688-1.54 1.118l-3.376-2.454a1 1 0 00-1.176 0l-3.376 2.454c-.784.57-1.838-.197-1.539-1.118l1.285-3.967a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.173a1 1 0 00.95-.69l1.287-3.967z" />
+                            </svg>
+                            রিভিউ সাবমিট করুন
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
     </div>
 
     <script>
+        // Star rating interaction
+        const stars     = document.querySelectorAll('#starRating label');
+        const inputs    = document.querySelectorAll('#starRating input');
+        const ratingLbl = document.getElementById('ratingLabel');
+        const labels    = ['', 'খুব খারাপ 😞', 'খারাপ 😕', 'ঠিক আছে 😐', 'ভালো 😊', 'অসাধারণ! 🤩'];
+
+        function paintStars(count) {
+            stars.forEach((star, i) => {
+                const svg = star.querySelector('svg');
+                svg.classList.toggle('text-yellow-400', i < count);
+                svg.classList.toggle('scale-110', i < count);
+                svg.classList.toggle('text-gray-200', i >= count);
+                svg.classList.toggle('dark:text-gray-700', i >= count);
+            });
+            ratingLbl.textContent = labels[count] || '';
+        }
+
+        stars.forEach((star, index) => {
+            star.addEventListener('mouseenter', () => paintStars(index + 1));
+            star.addEventListener('mouseleave', () => {
+                const checked = [...inputs].findIndex(i => i.checked);
+                paintStars(checked >= 0 ? checked + 1 : 0);
+            });
+            star.addEventListener('click', () => {
+                inputs[index].checked = true;
+                paintStars(index + 1);
+            });
+        });
+
+        // Skip → redirect to student dashboard
+        document.getElementById('skipReviewBtn').addEventListener('click', () => {
+            window.location.href = '/dashboard/student';
+        });
+
+        // After form submit → redirect to student dashboard
+        document.getElementById('reviewForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+
+            fetch(this.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                }
+            }).then(() => {
+                window.location.href = '/dashboard/student';
+            }).catch(() => {
+                window.location.href = '/dashboard/student';
+            });
+        });
+    </script>
+    @endif
+
+    <script>
         window.ZEGO_CONFIG = {
-        appID:    {{ $appId }},
-        appSign:  "{{ $appSign }}",
-        roomID:   "mc-{{ $roomId }}",
-        userID:   "{{ $userId }}",
-        userName: "{{ $userName }}",
-        userRole: "{{ $userRole }}",
-    };
+            appID:    {{ $appId }},
+            appSign:  "{{ $appSign }}",
+            roomID:   "mc-{{ $roomId }}",
+            userID:   "{{ $userId }}",
+            userName: "{{ $userName }}",
+            userRole: "{{ $userRole }}",
+        };
     </script>
     @vite(['resources/js/video-call.js'])
 </x-layout>

@@ -84,22 +84,28 @@
                                 style="font-family:'Lora',serif; background: linear-gradient(135deg, var(--mc-primary), var(--mc-navy)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">
                                 {{ $mentor->name }}
                             </h1>
-                            
+
                             <div class="flex items-center justify-center lg:justify-start gap-2 flex-wrap">
                                 @if($mentor->profile && $mentor->profile->is_verified)
-                                    <span class="inline-flex items-center gap-1.5 px-3 py-1 text-sm font-bold text-green-700 bg-green-100 rounded-full border border-green-200 shadow-sm">
-                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
-                                        </svg>
-                                        Verified
-                                    </span>
+                                <span
+                                    class="inline-flex items-center gap-1.5 px-3 py-1 text-sm font-bold text-green-700 bg-green-100 rounded-full border border-green-200 shadow-sm">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    Verified
+                                </span>
                                 @else
-                                    <span class="inline-flex items-center gap-1.5 px-3 py-1 text-sm font-bold text-red-700 bg-red-50 rounded-full border border-red-200 shadow-sm">
-                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd" />
-                                        </svg>
-                                        Not Verified
-                                    </span>
+                                <span
+                                    class="inline-flex items-center gap-1.5 px-3 py-1 text-sm font-bold text-red-700 bg-red-50 rounded-full border border-red-200 shadow-sm">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    Not Verified
+                                </span>
                                 @endif
                             </div>
 
@@ -119,7 +125,8 @@
                                 </span>
                             </div>
                         </div>
-                        <p class="text-base md:text-lg font-medium italic leading-relaxed mt-1" style="color: var(--mc-text);">
+                        <p class="text-base md:text-lg font-medium italic leading-relaxed mt-1"
+                            style="color: var(--mc-text);">
                             {{ $mentor->profile->short_bio ?? 'এখনো শর্ট বায়ো যোগ করা হয়নি' }}
                         </p>
                     </div>
@@ -178,26 +185,37 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
                     @php
                     $infoItems = [
-                        ['icon_color'=>'#28666e', 'bg'=>'rgba(40,102,110,0.1)', 'label'=>'ঘণ্টা প্রতি চার্জ',
-                        'value'=>$mentor->profile->hourly_rate ? '৳'.number_format($mentor->profile->hourly_rate) : '-',
-                        'bold'=>true,
-                        'icon'=>'M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z'],
-                        
-                        ['icon_color'=>'#3b82f6', 'bg'=>'rgba(59,130,246,0.1)', 'label'=>'শিক্ষাগত যোগ্যতা',
-                        'value'=>$mentor->profile->highgest_education_level ?? '-', 'bold'=>false,
-                        'icon'=>'M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814'],
-                        
-                        ['icon_color'=>'#8b5cf6', 'bg'=>'rgba(139,92,246,0.1)', 'label'=>'শিক্ষাপ্রতিষ্ঠানের নাম',
-                        'value'=>$mentor->profile->institution_name ?? '-', 'bold'=>false,
-                        'icon'=>'M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18'],
+                    ['icon_color'=>'#28666e', 'bg'=>'rgba(40,102,110,0.1)', 'label'=>'ঘণ্টা প্রতি চার্জ',
+                    'value'=>$mentor->profile->hourly_rate ? '৳'.number_format($mentor->profile->hourly_rate) : '-',
+                    'bold'=>true,
+                    'icon'=>'M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536
+                    12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006
+                    0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z'],
 
-                        ['icon_color'=>'#eab308', 'bg'=>'rgba(234,179,8,0.1)', 'label'=>'অধ্যয়নের বিষয় (ডিপার্টমেন্ট)',
-                        'value'=>$mentor->profile->department ?? '-', 'bold'=>false,
-                        'icon'=>'M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25'],
+                    ['icon_color'=>'#3b82f6', 'bg'=>'rgba(59,130,246,0.1)', 'label'=>'শিক্ষাগত যোগ্যতা',
+                    'value'=>$mentor->profile->highgest_education_level ?? '-', 'bold'=>false,
+                    'icon'=>'M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0
+                    018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112
+                    3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814'],
 
-                        ['icon_color'=>'#10b981', 'bg'=>'rgba(16,185,129,0.1)', 'label'=>'মেন্টর হিসেবে যুক্ত হয়েছেন',
-                        'value'=>$mentor->created_at->format('F Y'), 'bold'=>false,
-                        'icon'=>'M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z'],
+                    ['icon_color'=>'#8b5cf6', 'bg'=>'rgba(139,92,246,0.1)', 'label'=>'শিক্ষাপ্রতিষ্ঠানের নাম',
+                    'value'=>$mentor->profile->institution_name ?? '-', 'bold'=>false,
+                    'icon'=>'M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012
+                    9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18'],
+
+                    ['icon_color'=>'#eab308', 'bg'=>'rgba(234,179,8,0.1)', 'label'=>'অধ্যয়নের বিষয় (ডিপার্টমেন্ট)',
+                    'value'=>$mentor->profile->department ?? '-', 'bold'=>false,
+                    'icon'=>'M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305
+                    0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018
+                    18a8.967 8.967 0 00-6 2.292m0-14.25v14.25'],
+
+                    ['icon_color'=>'#10b981', 'bg'=>'rgba(16,185,129,0.1)', 'label'=>'মেন্টর হিসেবে যুক্ত হয়েছেন',
+                    'value'=>$mentor->created_at->format('F Y'), 'bold'=>false,
+                    'icon'=>'M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0
+                    00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285
+                    5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0
+                    01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0
+                    01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z'],
                     ];
                     @endphp
                     @foreach($infoItems as $item)
@@ -284,7 +302,8 @@
                 </div>
                 <div class="rounded-2xl px-6 pt-2 pb-5 border shadow-sm"
                     style="background: var(--mc-bg); border-color: var(--mc-border-teal-sub);">
-                    <p class="text-base leading-relaxed tracking-wide" style="color: var(--mc-text); white-space: pre-line;">
+                    <p class="text-base leading-relaxed tracking-wide"
+                        style="color: var(--mc-text); white-space: pre-line;">
                         {{ $mentor->profile->bio ?? 'কোনো বিস্তারিত বায়ো যোগ করা হয়নি' }}
                     </p>
                 </div>
@@ -320,21 +339,32 @@
                         <div class="text-2xl shrink-0 mt-0.5">🏆</div>
                         <div class="flex-1 min-w-0 pr-16 flex flex-col h-full">
                             <p class="text-sm font-bold" style="color: #eab308;">{{ $ach->title }}</p>
-                            <p class="text-xs mt-1 leading-relaxed flex-1" style="color: var(--mc-text-muted);">{{ Str::limit($ach->description, 100) }}</p>
-                            
+                            <p class="text-xs mt-1 leading-relaxed flex-1" style="color: var(--mc-text-muted);">{{
+                                Str::limit($ach->description, 100) }}</p>
+
                             @if(auth()->id() === $mentor->id)
                             <div class="mt-3 flex gap-2 relative z-10">
-                                <button type="button" onclick="editAchievement({{ $ach->id }}, '{{ addslashes($ach->title) }}', '{{ addslashes($ach->description) }}')" 
-                                    class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-blue-50 text-blue-600 hover:bg-blue-100 hover:text-blue-700 transition-colors shadow-sm border border-blue-100" title="এডিট করুন">
-                                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                <button type="button"
+                                    onclick="editAchievement({{ $ach->id }}, '{{ addslashes($ach->title) }}', '{{ addslashes($ach->description) }}')"
+                                    class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-blue-50 text-blue-600 hover:bg-blue-100 hover:text-blue-700 transition-colors shadow-sm border border-blue-100"
+                                    title="এডিট করুন">
+                                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                                     </svg>
                                 </button>
-                                <form action="{{ route('achievements.delete', $ach->id) }}" method="POST" onsubmit="return confirm('আপনি কি নিশ্চিত যে এই অর্জনটি মুছে ফেলতে চান?');" class="inline">
+                                <form action="{{ route('achievements.delete', $ach->id) }}" method="POST"
+                                    onsubmit="return confirm('আপনি কি নিশ্চিত যে এই অর্জনটি মুছে ফেলতে চান?');"
+                                    class="inline">
                                     @csrf @method('DELETE')
-                                    <button type="submit" class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-red-50 text-red-600 hover:bg-red-100 hover:text-red-700 transition-colors shadow-sm border border-red-100" title="ডিলিট করুন">
-                                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                    <button type="submit"
+                                        class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-red-50 text-red-600 hover:bg-red-100 hover:text-red-700 transition-colors shadow-sm border border-red-100"
+                                        title="ডিলিট করুন">
+                                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                            stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                         </svg>
                                     </button>
                                 </form>
@@ -343,8 +373,9 @@
                         </div>
                         @if($ach->image)
                         <div class="absolute right-4 top-4 shrink-0 w-12 h-12 rounded-lg overflow-hidden cursor-pointer border border-yellow-200"
-                             onclick="showAchievementImage('{{ asset('storage/' . $ach->image) }}')">
-                            <img src="{{ asset('storage/' . $ach->image) }}" alt="Achievement Image" class="w-full h-full object-cover">
+                            onclick="showAchievementImage('{{ asset('storage/' . $ach->image) }}')">
+                            <img src="{{ asset('storage/' . $ach->image) }}" alt="Achievement Image"
+                                class="w-full h-full object-cover">
                         </div>
                         @endif
                     </div>
@@ -361,6 +392,14 @@
         {{-- ══════════════════════
         REVIEWS CARD
         ══════════════════════ --}}
+        {{-- ══════════════════════
+        REVIEWS CARD
+        ══════════════════════ --}}
+        @php
+        $reviews = $mentor->reviews()->with('student.profile')->latest()->get();
+        $avgRating = $reviews->count() > 0 ? round($reviews->avg('rating'), 1) : null;
+        @endphp
+
         <div class="rounded-2xl border"
             style="background: var(--mc-surface); border-color: var(--mc-border-teal-sub); box-shadow: var(--mc-shadow-sm);">
             <div class="p-6 sm:p-8">
@@ -376,68 +415,82 @@
                                     <path
                                         d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.173c.969 0 1.371 1.24.588 1.81l-3.376 2.454a1 1 0 00-.364 1.118l1.286 3.967c.3.921-.755 1.688-1.54 1.118l-3.376-2.454a1 1 0 00-1.176 0l-3.376 2.454c-.784.57-1.838-.197-1.539-1.118l1.285-3.967a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.173a1 1 0 00.95-.69l1.287-3.967z" />
                                 </svg>
-                                ছাত্রদের রিভিউ
+                                শিক্ষার্থীদের রিভিউ
                             </h2>
                             <p class="text-xs mt-0.5" style="color: var(--mc-text-muted);">শিক্ষার্থীদের মতামত ও
                                 অভিজ্ঞতা</p>
                         </div>
                     </div>
+
+                    @if($avgRating)
                     <div class="rounded-2xl px-6 py-4 border text-center"
                         style="background: rgba(234,179,8,0.07); border-color: rgba(234,179,8,0.2);">
-                        <p class="text-3xl font-bold" style="color: #d97706; font-family:'Lora',serif;">৪.৮</p>
-                        <div class="flex justify-center my-1">
-                            <span class="text-yellow-400 text-sm tracking-wide">★★★★★</span>
+                        <p class="text-3xl font-bold" style="color: #d97706; font-family:'Lora',serif;">{{ $avgRating }}
+                        </p>
+                        <div class="flex justify-center my-1 gap-0.5">
+                            @for($i = 1; $i <= 5; $i++) <svg
+                                class="w-4 h-4 {{ $i <= round($avgRating) ? 'text-yellow-400' : 'text-gray-300' }}"
+                                fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.173c.969 0 1.371 1.24.588 1.81l-3.376 2.454a1 1 0 00-.364 1.118l1.286 3.967c.3.921-.755 1.688-1.54 1.118l-3.376-2.454a1 1 0 00-1.176 0l-3.376 2.454c-.784.57-1.838-.197-1.539-1.118l1.285-3.967a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.173a1 1 0 00.95-.69l1.287-3.967z" />
+                                </svg>
+                                @endfor
                         </div>
-                        <p class="text-xs" style="color: var(--mc-text-muted);">৫টি রিভিউ থেকে</p>
+                        <p class="text-xs" style="color: var(--mc-text-muted);">{{ $reviews->count() }}টি রিভিউ থেকে</p>
                     </div>
+                    @endif
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    @php
-                    $reviews = [
-                    ['initial'=>'A', 'name'=>'Ahsan Rahman', 'color'=>'#28666e', 'stars'=>5, 'time'=>'২ দিন আগে',
-                    'text'=>'বিষয়গুলো খুব পরিষ্কারভাবে বুঝিয়েছেন। জটিল টপিকও সহজ করে বোঝানোর ধরনটা দারুণ লেগেছে।'],
-                    ['initial'=>'S', 'name'=>'Sara Islam', 'color'=>'#3d8a8f', 'stars'=>4, 'time'=>'৫ দিন আগে',
-                    'text'=>'প্রতিটি সেশন ছিল গোছানো ও কাজে লাগার মতো। বাস্তব প্রজেক্টে কাজ করার আত্মবিশ্বাস পেয়েছি।'],
-                    ['initial'=>'M', 'name'=>'Mahmud Hasan', 'color'=>'#7c9885', 'stars'=>4, 'time'=>'১ সপ্তাহ আগে',
-                    'text'=>'খুব বন্ধুসুলভ এবং প্রফেশনালভাবে গাইড করেছেন। প্রশ্ন করলে সবসময় ধৈর্য ধরে উত্তর
-                    দিয়েছেন।'],
-                    ['initial'=>'N', 'name'=>'Nusrat Jahan', 'color'=>'#8b5cf6', 'stars'=>3, 'time'=>'২ সপ্তাহ আগে',
-                    'text'=>'শেখানোর গতি আর ব্যাখ্যা দুটোই ভালো। নতুনদের পাশাপাশি মাঝামাঝি লেভেলের শিক্ষার্থীদের জন্যও
-                    উপকারী।'],
-                    ];
-                    @endphp
+                @if($reviews->isEmpty())
+                <div class="text-center py-12">
+                    <svg class="w-14 h-14 mx-auto mb-3 opacity-20" fill="#eab308" viewBox="0 0 20 20">
+                        <path
+                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.173c.969 0 1.371 1.24.588 1.81l-3.376 2.454a1 1 0 00-.364 1.118l1.286 3.967c.3.921-.755 1.688-1.54 1.118l-3.376-2.454a1 1 0 00-1.176 0l-3.376 2.454c-.784.57-1.838-.197-1.539-1.118l1.285-3.967a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.173a1 1 0 00.95-.69l1.287-3.967z" />
+                    </svg>
+                    <p class="font-bold" style="color: var(--mc-text-muted);">এখনো কোনো রিভিউ নেই</p>
+                    <p class="text-sm mt-1" style="color: var(--mc-text-faint);">সেশন সম্পন্ন হলে শিক্ষার্থীরা রিভিউ
+                        দিতে পারবেন
+                    </p>
+                </div>
 
+                @else
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     @foreach($reviews as $review)
                     <div class="rounded-2xl border p-5 transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
                         style="border-color: var(--mc-border-teal-sub); background: var(--mc-bg);">
                         <div class="flex items-start justify-between mb-3">
                             <div class="flex items-center gap-3">
-                                <div class="w-11 h-11 rounded-full flex items-center justify-center text-lg font-bold text-white shrink-0"
-                                    style="background: {{ $review['color'] }};">{{ $review['initial'] }}</div>
+                                <div class="w-11 h-11 rounded-full overflow-hidden shrink-0 border-2"
+                                    style="border-color: var(--mc-border-teal);">
+                                    @if($review->student->profile?->avatar)
+                                    <img src="{{ asset('storage/' . $review->student->profile->avatar) }}"
+                                        alt="{{ $review->student->name }}" class="w-full h-full object-cover">
+                                    @else
+                                    <img src="https://ui-avatars.com/api/?name={{ urlencode($review->student->name) }}&background=28666e&color=fff&size=80&bold=true"
+                                        alt="{{ $review->student->name }}" class="w-full h-full object-cover">
+                                    @endif
+                                </div>
                                 <div>
-                                    <p class="font-bold text-sm" style="color: var(--mc-text);">{{ $review['name'] }}
-                                    </p>
-                                    <div class="flex items-center gap-2 mt-0.5">
-                                        <span class="text-yellow-400 text-xs tracking-wide">
-                                            {{ str_repeat('★', $review['stars']) }}{{ str_repeat('☆', 5 -
-                                            $review['stars']) }}
+                                    <p class="font-bold text-sm" style="color: var(--mc-text);">{{
+                                        $review->student->name }}</p>
+                                    <div class="flex items-center gap-1.5 mt-0.5">
+                                        <div class="flex gap-0.5">
+                                            @for($i = 1; $i <= 5; $i++) <svg
+                                                class="w-3.5 h-3.5 {{ $i <= $review->rating ? 'text-yellow-400' : 'text-gray-300 dark:text-gray-600' }}"
+                                                fill="currentColor" viewBox="0 0 20 20">
+                                                <path
+                                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.173c.969 0 1.371 1.24.588 1.81l-3.376 2.454a1 1 0 00-.364 1.118l1.286 3.967c.3.921-.755 1.688-1.54 1.118l-3.376-2.454a1 1 0 00-1.176 0l-3.376 2.454c-.784.57-1.838-.197-1.539-1.118l1.285-3.967a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.173a1 1 0 00.95-.69l1.287-3.967z" />
+                                                </svg>
+                                                @endfor
+                                        </div>
+                                        <span class="text-xs" style="color: var(--mc-text-faint);">
+                                            {{ $review->created_at->diffForHumans() }}
                                         </span>
-                                        <span class="text-xs" style="color: var(--mc-text-faint);">{{ $review['time']
-                                            }}</span>
                                     </div>
                                 </div>
                             </div>
-                            <svg class="w-7 h-7 shrink-0" fill="rgba(234,179,8,0.15)" viewBox="0 0 24 24">
-                                <path
-                                    d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                            </svg>
-                        </div>
-                        <p class="text-sm italic leading-relaxed" style="color: var(--mc-text-muted);">"{{
-                            $review['text'] }}"</p>
-                        <div class="mt-3">
                             <span
-                                class="inline-flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-full border"
+                                class="inline-flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-full border shrink-0"
                                 style="border-color: var(--mc-border-teal); color: var(--mc-primary);">
                                 <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke-width="2"
                                     stroke="currentColor">
@@ -446,62 +499,31 @@
                                 </svg>
                                 যাচাইকৃত
                             </span>
+                        </div>
+
+                        @if($review->comment)
+                        <p class="text-sm italic leading-relaxed" style="color: var(--mc-text-muted);">"{{
+                            $review->comment }}"
+                        </p>
+                        @else
+                        <p class="text-sm italic" style="color: var(--mc-text-faint);">কোনো মন্তব্য নেই</p>
+                        @endif
+
+                        <div class="mt-3 pt-3 border-t flex items-center gap-2"
+                            style="border-color: var(--mc-border-subtle);">
+                            <svg class="w-3.5 h-3.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" style="color: var(--mc-text-faint);">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                            </svg>
+                            <span class="text-xs" style="color: var(--mc-text-faint);">{{ $review->session->topic->topic
+                                ??
+                                'N/A' }}</span>
                         </div>
                     </div>
                     @endforeach
-
-                    {{-- 5th review spans full width --}}
-                    <div class="md:col-span-2 rounded-2xl border p-5 transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
-                        style="border-color: var(--mc-border-teal-sub); background: var(--mc-bg);">
-                        <div class="flex items-start justify-between mb-3">
-                            <div class="flex items-center gap-3">
-                                <div class="w-11 h-11 rounded-full flex items-center justify-center text-lg font-bold text-white shrink-0"
-                                    style="background: #22c55e;">R</div>
-                                <div>
-                                    <p class="font-bold text-sm" style="color: var(--mc-text);">Rakib Chowdhury</p>
-                                    <div class="flex items-center gap-2 mt-0.5">
-                                        <span class="text-yellow-400 text-xs tracking-wide">★★★★☆</span>
-                                        <span class="text-xs" style="color: var(--mc-text-faint);">৩ সপ্তাহ আগে</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <svg class="w-7 h-7 shrink-0" fill="rgba(234,179,8,0.15)" viewBox="0 0 24 24">
-                                <path
-                                    d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                            </svg>
-                        </div>
-                        <p class="text-sm italic leading-relaxed" style="color: var(--mc-text-muted);">"বিষয় সম্পর্কে
-                            গভীর ধারণা আছে এবং বোঝানোর স্টাইলও চমৎকার। যারা সিরিয়াসলি শিখতে চায়, তাদের জন্য খুব ভালো।"
-                        </p>
-                        <div class="mt-3">
-                            <span
-                                class="inline-flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-full border"
-                                style="border-color: var(--mc-border-teal); color: var(--mc-primary);">
-                                <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                                    stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                যাচাইকৃত
-                            </span>
-                        </div>
-                    </div>
                 </div>
-
-                <div class="text-center mt-8">
-                    <button
-                        class="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl border-2 font-bold text-sm transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
-                        style="border-color: var(--mc-primary); color: var(--mc-primary);"
-                        onmouseover="this.style.background='var(--mc-primary)';this.style.color='white'"
-                        onmouseout="this.style.background='transparent';this.style.color='var(--mc-primary)'">
-                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                        সকল রিভিউ দেখুন
-                    </button>
-                </div>
+                @endif
 
             </div>
         </div>
@@ -725,27 +747,35 @@
     @if(auth()->id() === $mentor->id)
     {{-- Add Achievement Modal --}}
     <dialog id="addAchievementModal" class="modal modal-bottom sm:modal-middle">
-        <div class="modal-box p-6 rounded-3xl" style="background:var(--mc-surface);border:1px solid var(--mc-border-teal-sub);">
+        <div class="modal-box p-6 rounded-3xl"
+            style="background:var(--mc-surface);border:1px solid var(--mc-border-teal-sub);">
             <h3 class="font-bold text-lg mb-4 text-[#033f63] dark:text-[#7ec8e3]">নতুন অর্জন যোগ করুন</h3>
             <form action="{{ route('achievements.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="space-y-4">
                     <div>
                         <label class="block text-sm font-bold mb-1 text-[#033f63] dark:text-[#7ec8e3]">শিরোনাম</label>
-                        <input type="text" name="title" required class="w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-transparent text-sm">
+                        <input type="text" name="title" required
+                            class="w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-transparent text-sm">
                     </div>
                     <div>
-                        <label class="block text-sm font-bold mb-1 text-[#033f63] dark:text-[#7ec8e3]">বিবরণ (ছোট করে)</label>
-                        <textarea name="description" rows="3" required class="w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-transparent text-sm"></textarea>
+                        <label class="block text-sm font-bold mb-1 text-[#033f63] dark:text-[#7ec8e3]">বিবরণ (ছোট
+                            করে)</label>
+                        <textarea name="description" rows="3" required
+                            class="w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-transparent text-sm"></textarea>
                     </div>
                     <div>
-                        <label class="block text-sm font-bold mb-1 text-[#033f63] dark:text-[#7ec8e3]">ছবি (সার্টিফিকেট/ক্রেস্ট)</label>
-                        <input type="file" name="image" accept="image/*" class="w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-transparent text-sm">
+                        <label class="block text-sm font-bold mb-1 text-[#033f63] dark:text-[#7ec8e3]">ছবি
+                            (সার্টিফিকেট/ক্রেস্ট)</label>
+                        <input type="file" name="image" accept="image/*"
+                            class="w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-transparent text-sm">
                     </div>
                 </div>
                 <div class="modal-action">
-                    <button type="button" onclick="document.getElementById('addAchievementModal').close()" class="btn btn-ghost rounded-xl">বাতিল</button>
-                    <button type="submit" class="btn rounded-xl text-white" style="background:#eab308;border:none;">যোগ করুন</button>
+                    <button type="button" onclick="document.getElementById('addAchievementModal').close()"
+                        class="btn btn-ghost rounded-xl">বাতিল</button>
+                    <button type="submit" class="btn rounded-xl text-white" style="background:#eab308;border:none;">যোগ
+                        করুন</button>
                 </div>
             </form>
         </div>
@@ -753,7 +783,8 @@
 
     {{-- Edit Achievement Modal --}}
     <dialog id="editAchievementModal" class="modal modal-bottom sm:modal-middle">
-        <div class="modal-box p-6 rounded-3xl" style="background:var(--mc-surface);border:1px solid var(--mc-border-teal-sub);">
+        <div class="modal-box p-6 rounded-3xl"
+            style="background:var(--mc-surface);border:1px solid var(--mc-border-teal-sub);">
             <h3 class="font-bold text-lg mb-4 text-[#033f63] dark:text-[#7ec8e3]">অর্জন সম্পাদনা করুন</h3>
             <form id="editAchievementForm" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -761,20 +792,27 @@
                 <div class="space-y-4">
                     <div>
                         <label class="block text-sm font-bold mb-1 text-[#033f63] dark:text-[#7ec8e3]">শিরোনাম</label>
-                        <input type="text" name="title" id="editAchTitle" required class="w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-transparent text-sm">
+                        <input type="text" name="title" id="editAchTitle" required
+                            class="w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-transparent text-sm">
                     </div>
                     <div>
-                        <label class="block text-sm font-bold mb-1 text-[#033f63] dark:text-[#7ec8e3]">বিবরণ (ছোট করে)</label>
-                        <textarea name="description" id="editAchDesc" rows="3" required class="w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-transparent text-sm"></textarea>
+                        <label class="block text-sm font-bold mb-1 text-[#033f63] dark:text-[#7ec8e3]">বিবরণ (ছোট
+                            করে)</label>
+                        <textarea name="description" id="editAchDesc" rows="3" required
+                            class="w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-transparent text-sm"></textarea>
                     </div>
                     <div>
-                        <label class="block text-sm font-bold mb-1 text-[#033f63] dark:text-[#7ec8e3]">নতুন ছবি (ঐচ্ছিক)</label>
-                        <input type="file" name="image" accept="image/*" class="w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-transparent text-sm">
+                        <label class="block text-sm font-bold mb-1 text-[#033f63] dark:text-[#7ec8e3]">নতুন ছবি
+                            (ঐচ্ছিক)</label>
+                        <input type="file" name="image" accept="image/*"
+                            class="w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-transparent text-sm">
                     </div>
                 </div>
                 <div class="modal-action">
-                    <button type="button" onclick="document.getElementById('editAchievementModal').close()" class="btn btn-ghost rounded-xl">বাতিল</button>
-                    <button type="submit" class="btn rounded-xl text-white" style="background:#eab308;border:none;">আপডেট করুন</button>
+                    <button type="button" onclick="document.getElementById('editAchievementModal').close()"
+                        class="btn btn-ghost rounded-xl">বাতিল</button>
+                    <button type="submit" class="btn rounded-xl text-white"
+                        style="background:#eab308;border:none;">আপডেট করুন</button>
                 </div>
             </form>
         </div>
@@ -795,10 +833,11 @@
     <dialog id="viewAchievementImageModal" class="modal modal-bottom sm:modal-middle">
         <div class="modal-box p-0 rounded-2xl bg-transparent shadow-none max-w-3xl overflow-hidden">
             <div class="relative inline-block w-full">
-                <button type="button" onclick="document.getElementById('viewAchievementImageModal').close()" 
-                        class="absolute top-4 right-4 btn btn-sm btn-circle z-50 shadow-xl" 
-                        style="background-color: #ef4444 !important; color: white !important; border: 2px solid white !important;">✕</button>
-                <img id="viewAchImage" src="" alt="Achievement" class="w-full rounded-2xl shadow-2xl bg-white block relative z-40">
+                <button type="button" onclick="document.getElementById('viewAchievementImageModal').close()"
+                    class="absolute top-4 right-4 btn btn-sm btn-circle z-50 shadow-xl"
+                    style="background-color: #ef4444 !important; color: white !important; border: 2px solid white !important;">✕</button>
+                <img id="viewAchImage" src="" alt="Achievement"
+                    class="w-full rounded-2xl shadow-2xl bg-white block relative z-40">
             </div>
         </div>
         <form method="dialog" class="modal-backdrop">

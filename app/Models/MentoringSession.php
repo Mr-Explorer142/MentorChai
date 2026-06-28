@@ -52,6 +52,11 @@ class MentoringSession extends Model
         return $this->hasOne(Payment::class, 'session_id');
     }
 
+    public function review()
+    {
+        return $this->hasOne(Review::class, 'session_id');
+    }
+
     // Auto-generate session code like SS-4201
     public static function generateCode(): string
     {
