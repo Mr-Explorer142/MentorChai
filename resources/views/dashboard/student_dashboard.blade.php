@@ -135,7 +135,7 @@
                         অনুরোধ</a>
                 </div>
 
-                <div class="flex-1 p-2">
+                <div class="flex-1 p-2 overflow-y-auto max-h-[380px]">
                     @if($sessionTopics->isEmpty())
                     <div class="h-full flex flex-col items-center justify-center py-12">
                         <div
@@ -159,7 +159,7 @@
                                 'completed' => ['label' => 'সম্পন্ন', 'cls' => 'badge-info'],
                                 ];
                                 @endphp
-                                @foreach($sessionTopics->take(5) as $topic)
+                                @foreach($sessionTopics as $topic)
                                 @php
                                 $mentoringSession = $mentoringSessions->first(fn($s) => $s->topic_id === $topic->id);
                                 $s = $statusConfig[$topic->status->value] ?? $statusConfig['pending'];
