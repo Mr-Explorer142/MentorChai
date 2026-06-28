@@ -89,6 +89,8 @@
                                         value="{{ old('name', Auth::user()->name) }}" />
                                 </div>
 
+
+                            @if(Auth::user()->role === \App\Enums\UserRole::Mentor)
                             {{-- Short Bio --}}
                             <div>
                                 <label class="flex items-center justify-between mb-1.5">
@@ -113,11 +115,13 @@
                                            focus:border-[#28666e] dark:focus:border-[#4db6c1]
                                            focus:ring-[3px] focus:ring-[#28666e]/10 dark:focus:ring-[#4db6c1]/10
                                            focus:bg-white dark:focus:bg-[#243d4d]
-                                           disabled:opacity-60 disabled:cursor-not-allowed disabled:bg-gray-100 dark:disabled:bg-gray-800
                                            transition-all duration-200"
-                                    placeholder="আপনার শর্ট বায়ো/পেশা লিখুন" {{ Auth::user()->role === \App\Enums\UserRole::Student ? 'disabled' : '' }}>{{ old('short_bio', Auth::user()->profile?->short_bio) }}</textarea>
+                                    placeholder="আপনার শর্ট বায়ো/পেশা লিখুন">{{ old('short_bio', Auth::user()->profile?->short_bio) }}</textarea>
                             </div>
+                            @endif
 
+                            {{-- Detailed Bio --}}
+                            @if(Auth::user()->role === \App\Enums\UserRole::Mentor)
                             {{-- Detailed Bio --}}
                             <div>
                                 <label class="flex items-center justify-between mb-1.5">
@@ -142,14 +146,46 @@
                                            focus:border-[#28666e] dark:focus:border-[#4db6c1]
                                            focus:ring-[3px] focus:ring-[#28666e]/10 dark:focus:ring-[#4db6c1]/10
                                            focus:bg-white dark:focus:bg-[#243d4d]
-                                           disabled:opacity-60 disabled:cursor-not-allowed disabled:bg-gray-100 dark:disabled:bg-gray-800
                                            transition-all duration-200"
-                                    placeholder="নিজের সম্পর্কে বিস্তারিত লিখুন" {{ Auth::user()->role === \App\Enums\UserRole::Student ? 'disabled' : '' }}>{{ old('bio', Auth::user()->profile?->bio) }}</textarea>
+                                    placeholder="নিজের সম্পর্কে বিস্তারিত লিখুন">{{ old('bio', Auth::user()->profile?->bio) }}</textarea>
                             </div>
+                            @endif
+
+                            {{-- Learning Style --}}
+                            @if(Auth::user()->role === \App\Enums\UserRole::Student)
+                            {{-- Learning Style --}}
+                            <div>
+                                <label class="flex items-center justify-between mb-1.5">
+                                    <span class="flex items-center gap-1.5 text-xs font-bold
+                                                 text-[#033f63] dark:text-[#7ec8e3]">
+                                        <svg class="w-3.5 h-3.5 text-[#28666e] dark:text-[#4db6c1]" fill="none"
+                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                                        </svg>
+                                        আপনি কীভাবে শিখতে স্বাচ্ছন্দ্যবোধ করেন?
+                                    </span>
+                                    <span class="text-xs text-[#033f63]/45 dark:text-[#7ec8e3]/40">
+                                        এই তথ্য মেন্টরকে আপনার জন্য সেশন প্ল্যান করতে সাহায্য করবে।
+                                    </span>
+                                </label>
+                                <textarea name="learning_style" rows="4" class="w-full px-4 py-2.5 rounded-xl text-sm outline-none resize-none
+                                           border-[1.5px] border-[#28666e]/20 dark:border-[#4db6c1]/20
+                                           bg-[#eef7f8]/50 dark:bg-[#0f1f2e]/50
+                                           text-[#033f63] dark:text-[#7ec8e3]
+                                           placeholder:text-[#033f63]/35 dark:placeholder:text-[#7ec8e3]/30
+                                           focus:border-[#28666e] dark:focus:border-[#4db6c1]
+                                           focus:ring-[3px] focus:ring-[#28666e]/10 dark:focus:ring-[#4db6c1]/10
+                                           focus:bg-white dark:focus:bg-[#243d4d]
+                                           transition-all duration-200"
+                                    placeholder="আপনি কীভাবে সহজে বোঝেন এবং মেন্টরের পড়ানোর ধরণ কেমন হলে সুবিধা হবে তা লিখুন। যেমন: 'আমার বেসিক একটু দুর্বল, তাই শুরু থেকে ধরে ধরে বোঝালে ভালো হয়। একটু সময় নিয়ে বুঝি, তাড়াহুড়া না করলে খুশি হবো।' কিংবা 'আমি একটু ইঙ্গিত পেলেই বুঝে ফেলতে পারি, সহজ বিষয়গুলো দ্রুতগতিতে বুঝিয়ে দিলেও আমার কোনো সমস্যা হয় না।'">{{ old('learning_style', Auth::user()->profile?->learning_style) }}</textarea>
+                            </div>
+                            @endif
                         </div>
 
                         {{-- ── Education & Professional ── --}}
                         <div class="space-y-6">
+                            @if(Auth::user()->role === \App\Enums\UserRole::Mentor)
                             <div class="flex items-center gap-3 pb-4
                                         border-b border-teal-50 dark:border-[#4db6c1]/10">
                                 <div class="w-1 h-7 rounded-full
@@ -165,6 +201,7 @@
                                     শিক্ষা ও পেশাগত তথ্য
                                 </h2>
                             </div>
+                            @endif
 
                             <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
 
@@ -238,6 +275,8 @@
                                 </div>
 
                                 {{-- Hourly Rate --}}
+                                @if(Auth::user()->role === \App\Enums\UserRole::Mentor)
+                                {{-- Hourly Rate --}}
                                 <div class="lg:col-span-2">
                                     <label class="flex items-center gap-1.5 text-xs font-bold mb-1.5
                                                   text-[#033f63] dark:text-[#7ec8e3]">
@@ -256,12 +295,14 @@
                                                focus:border-green-500 dark:focus:border-green-400
                                                focus:ring-[3px] focus:ring-green-500/10 dark:focus:ring-green-400/10
                                                focus:bg-white dark:focus:bg-[#243d4d]
-                                               disabled:opacity-60 disabled:cursor-not-allowed disabled:bg-gray-100 dark:disabled:bg-gray-800
                                                transition-all duration-200" placeholder="ঘণ্টা প্রতি চার্জ এন্ট্রি দিন"
-                                        value="{{ old('hourly_rate', Auth::user()->profile?->hourly_rate) }}" {{ Auth::user()->role === \App\Enums\UserRole::Student ? 'disabled' : '' }} />
+                                        value="{{ old('hourly_rate', Auth::user()->profile?->hourly_rate) }}" />
                                 </div>
+                                @endif
                             </div>
 
+                            {{-- Skills --}}
+                            @if(Auth::user()->role === \App\Enums\UserRole::Mentor)
                             {{-- Skills --}}
                             <div>
                                 <label class="flex items-center justify-between mb-1.5">
@@ -286,9 +327,8 @@
                                            focus:border-[#7c9885] dark:focus:border-[#9ab8a5]
                                            focus:ring-[3px] focus:ring-[#7c9885]/12 dark:focus:ring-[#9ab8a5]/10
                                            focus:bg-white dark:focus:bg-[#243d4d]
-                                           disabled:opacity-60 disabled:cursor-not-allowed disabled:bg-gray-100 dark:disabled:bg-gray-800
                                            transition-all duration-200"
-                                    placeholder="যেমন: Compiler Design, Algorithm, Data Structures" {{ Auth::user()->role === \App\Enums\UserRole::Student ? 'disabled' : '' }}>{{ old('skills', Auth::user()->profile?->skills) }}</textarea>
+                                    placeholder="যেমন: Compiler Design, Algorithm, Data Structures">{{ old('skills', Auth::user()->profile?->skills) }}</textarea>
                                 <p class="mt-1.5 text-xs flex items-center gap-1
                                           text-[#033f63]/40 dark:text-[#7ec8e3]/35">
                                     <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke-width="2"
@@ -299,8 +339,10 @@
                                     প্রতিটি দক্ষতার মাঝে কমা (,) ব্যবহার করুন
                                 </p>
                             </div>
+                            @endif
                         </div>
 
+                        @if(Auth::user()->role === \App\Enums\UserRole::Mentor)
                         {{-- ── Documents ── --}}
                         <div class="space-y-6">
                             <div class="flex items-center gap-3 pb-4
@@ -337,7 +379,6 @@
                                                text-[#033f63] dark:text-[#7ec8e3]
                                                focus:border-[#28666e] dark:focus:border-[#4db6c1]
                                                focus:ring-[3px] focus:ring-[#28666e]/10 dark:focus:ring-[#4db6c1]/10
-                                               disabled:opacity-60 disabled:cursor-not-allowed disabled:bg-gray-100 dark:disabled:bg-gray-800
                                                transition-all duration-200" {{ Auth::user()->role === \App\Enums\UserRole::Student ? 'disabled' : '' }} />
                                     @if(Auth::user()->profile && Auth::user()->profile->nid_front)
                                         <div class="mt-2 flex items-center justify-between">
@@ -367,7 +408,6 @@
                                                text-[#033f63] dark:text-[#7ec8e3]
                                                focus:border-[#28666e] dark:focus:border-[#4db6c1]
                                                focus:ring-[3px] focus:ring-[#28666e]/10 dark:focus:ring-[#4db6c1]/10
-                                               disabled:opacity-60 disabled:cursor-not-allowed disabled:bg-gray-100 dark:disabled:bg-gray-800
                                                transition-all duration-200" {{ Auth::user()->role === \App\Enums\UserRole::Student ? 'disabled' : '' }} />
                                     @if(Auth::user()->profile && Auth::user()->profile->nid_back)
                                         <div class="mt-2 flex items-center justify-between">
@@ -397,8 +437,7 @@
                                                text-[#033f63] dark:text-[#7ec8e3]
                                                focus:border-[#28666e] dark:focus:border-[#4db6c1]
                                                focus:ring-[3px] focus:ring-[#28666e]/10 dark:focus:ring-[#4db6c1]/10
-                                               disabled:opacity-60 disabled:cursor-not-allowed disabled:bg-gray-100 dark:disabled:bg-gray-800
-                                               transition-all duration-200" {{ Auth::user()->role === \App\Enums\UserRole::Student ? 'disabled' : '' }} />
+                                               transition-all duration-200" />
                                     @if(Auth::user()->profile && Auth::user()->profile->student_id_front)
                                         <div class="mt-2 flex items-center justify-between">
                                             <p class="text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded-md">আপলোড করা আছে।</p>
@@ -427,8 +466,7 @@
                                                text-[#033f63] dark:text-[#7ec8e3]
                                                focus:border-[#28666e] dark:focus:border-[#4db6c1]
                                                focus:ring-[3px] focus:ring-[#28666e]/10 dark:focus:ring-[#4db6c1]/10
-                                               disabled:opacity-60 disabled:cursor-not-allowed disabled:bg-gray-100 dark:disabled:bg-gray-800
-                                               transition-all duration-200" {{ Auth::user()->role === \App\Enums\UserRole::Student ? 'disabled' : '' }} />
+                                               transition-all duration-200" />
                                     @if(Auth::user()->profile && Auth::user()->profile->student_id_back)
                                         <div class="mt-2 flex items-center justify-between">
                                             <p class="text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded-md">আপলোড করা আছে।</p>
@@ -441,6 +479,7 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
 
                         {{-- Action Buttons --}}
                         <div class="flex flex-col sm:flex-row gap-3 pt-6

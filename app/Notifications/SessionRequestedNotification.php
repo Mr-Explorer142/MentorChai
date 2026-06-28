@@ -36,10 +36,11 @@ class SessionRequestedNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->subject('নতুন সেশন অনুরোধ — ' . $this->session->topic)
+            ->subject('নতুন সেশন অনুরোধ - ' . $this->session->topic)
             ->greeting('হ্যালো ' . $notifiable->name . '!')
             ->line($this->session->student->name . ' আপনার কাছে "' . $this->session->topic . '" বিষয়ে একটি সেশনের অনুরোধ পাঠিয়েছেন।')
             ->line('নোট: ' . ($this->session->note ?? 'কোনো নোট নেই'))
+            ->line('কীভাবে শিখতে স্বাচ্ছন্দ্যবোধ করেন: ' . ($this->session->student->profile->learning_style ?? 'দেওয়া হয়নি'))
             ->action('অনুরোধ দেখুন', url('/dashboard/mentor'))
             ->line('অনুগ্রহ করে দ্রুত সাড়া দিন।');
     }
@@ -59,6 +60,7 @@ class SessionRequestedNotification extends Notification
             'student_name' => $this->session->student->name,
             'topic'       => $this->session->topic,
             'note'        => $this->session->note,
+            'learning_style' => $this->session->student->profile->learning_style ?? '',
         ];
     }
 }

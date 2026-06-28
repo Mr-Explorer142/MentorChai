@@ -179,20 +179,20 @@
                     @php
                     $infoItems = [
                         ['icon_color'=>'#28666e', 'bg'=>'rgba(40,102,110,0.1)', 'label'=>'ঘণ্টা প্রতি চার্জ',
-                        'value'=>$mentor->profile->hourly_rate ? '৳'.number_format($mentor->profile->hourly_rate) : '—',
+                        'value'=>$mentor->profile->hourly_rate ? '৳'.number_format($mentor->profile->hourly_rate) : '-',
                         'bold'=>true,
                         'icon'=>'M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z'],
                         
                         ['icon_color'=>'#3b82f6', 'bg'=>'rgba(59,130,246,0.1)', 'label'=>'শিক্ষাগত যোগ্যতা',
-                        'value'=>$mentor->profile->highgest_education_level ?? '—', 'bold'=>false,
+                        'value'=>$mentor->profile->highgest_education_level ?? '-', 'bold'=>false,
                         'icon'=>'M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814'],
                         
                         ['icon_color'=>'#8b5cf6', 'bg'=>'rgba(139,92,246,0.1)', 'label'=>'শিক্ষাপ্রতিষ্ঠানের নাম',
-                        'value'=>$mentor->profile->institution_name ?? '—', 'bold'=>false,
+                        'value'=>$mentor->profile->institution_name ?? '-', 'bold'=>false,
                         'icon'=>'M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18'],
 
                         ['icon_color'=>'#eab308', 'bg'=>'rgba(234,179,8,0.1)', 'label'=>'অধ্যয়নের বিষয় (ডিপার্টমেন্ট)',
-                        'value'=>$mentor->profile->department ?? '—', 'bold'=>false,
+                        'value'=>$mentor->profile->department ?? '-', 'bold'=>false,
                         'icon'=>'M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25'],
 
                         ['icon_color'=>'#10b981', 'bg'=>'rgba(16,185,129,0.1)', 'label'=>'মেন্টর হিসেবে যুক্ত হয়েছেন',

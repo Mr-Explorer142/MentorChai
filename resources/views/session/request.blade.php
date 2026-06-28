@@ -118,7 +118,7 @@
                                     style="background: var(--mc-surface); border-color: var(--mc-border-teal-sub); color: var(--mc-text); ring-color: var(--mc-primary);"
                                     onfocus="this.style.borderColor='var(--mc-primary)'"
                                     onblur="this.style.borderColor='var(--mc-border-teal-sub)'">
-                                    <option value="" disabled selected style="color: var(--mc-text-muted);">— টপিক বেছে
+                                    <option value="" disabled selected style="color: var(--mc-text-muted);">- টপিক বেছে
                                         নিন —</option>
                                     @if (!empty($mentor->profile?->skills))
                                     @foreach (explode(',', $mentor->profile->skills) as $skill)

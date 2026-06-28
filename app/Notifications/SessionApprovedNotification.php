@@ -21,7 +21,7 @@ class SessionApprovedNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->subject('সেশন অনুমোদিত হয়েছে — পেমেন্ট করুন')
+            ->subject('সেশন অনুমোদিত হয়েছে - পেমেন্ট করুন')
             ->greeting('হ্যালো ' . $notifiable->name . '!')
             ->line('আপনার "' . $this->session->topic . '" বিষয়ক সেশনের অনুরোধ ' . $this->session->mentor->name . ' অনুমোদন করেছেন।')
             ->action('পেমেন্ট করুন', route('checkout', $this->session->id))

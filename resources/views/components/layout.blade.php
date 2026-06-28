@@ -176,6 +176,29 @@
                                                         </p>
                                                     </div>
 
+                                                    {{-- Student's Note and Learning Style for Session Requests --}}
+                                                    @if($type === 'session_requested')
+                                                        @if(!empty($notification->data['note']))
+                                                        <div class="mt-2 mb-1.5 p-2 rounded-lg bg-teal-500/5 border border-teal-500/10 text-[11px] leading-relaxed text-[#033f63]/80 dark:text-[#7ec8e3]/80">
+                                                            <strong class="text-[#033f63] dark:text-[#7ec8e3]">নোট:</strong> {{ \Illuminate\Support\Str::limit($notification->data['note'], 80) }}
+                                                        </div>
+                                                        @endif
+                                                        
+                                                        {{-- Some old notifications might not have learning_style in data, we can fall back to loading from model if needed, but safe to just check data array --}}
+                                                        @php 
+                                                            $ls = $notification->data['learning_style'] ?? null; 
+                                                            if(!$ls && isset($notification->data['student_id'])) {
+                                                                $studentProfile = \App\Models\Profile::where('user_id', $notification->data['student_id'])->first();
+                                                                $ls = $studentProfile ? $studentProfile->learning_style : null;
+                                                            }
+                                                        @endphp
+                                                        @if(!empty($ls))
+                                                        <div class="mt-1.5 mb-2 p-2 rounded-lg bg-teal-500/5 border border-teal-500/10 text-[11px] leading-relaxed text-[#033f63]/80 dark:text-[#7ec8e3]/80">
+                                                            <strong class="text-[#033f63] dark:text-[#7ec8e3]">শেখার ধরন:</strong> {{ \Illuminate\Support\Str::limit($ls, 100) }}
+                                                        </div>
+                                                        @endif
+                                                    @endif
+
                                                     {{-- Student: Pay button for approved sessions --}}
                                                     @if($type === 'session_approved' &&
                                                     isset($notification->data['checkout_url']))
@@ -269,14 +292,14 @@
                             <button id="theme-toggle"
                                 class="p-1.5 rounded-lg hover:bg-teal-50 dark:hover:bg-teal-900/30 transition-colors"
                                 title="ডার্ক মোড">
-                                {{-- Sun icon — shown in dark mode --}}
+                                {{-- Sun icon - shown in dark mode --}}
                                 <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg"
                                     class="hidden w-5 h-5 text-yellow-400" fill="none" viewBox="0 0 24 24"
                                     stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M12 3v1m0 16v1m8.66-9h-1M4.34 12h-1m15.07-6.07-.7.7M6.34 17.66l-.7.7m12.02 0-.7-.7M6.34 6.34l-.7-.7M12 7a5 5 0 1 0 0 10A5 5 0 0 0 12 7Z" />
                                 </svg>
-                                {{-- Moon icon — shown in light mode --}}
+                                {{-- Moon icon - shown in light mode --}}
                                 <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#28666e]"
                                     fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -560,7 +583,7 @@
             </div>
 
             {{-- Copyright --}}
-            <p class="text-xs text-[#033f63]/50 dark:text-[#7ec8e3]/40">Copyright © MentorChai — All rights reserved
+            <p class="text-xs text-[#033f63]/50 dark:text-[#7ec8e3]/40">Copyright © MentorChai - All rights reserved
             </p>
         </div>
     </footer>

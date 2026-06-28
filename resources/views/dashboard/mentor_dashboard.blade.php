@@ -177,6 +177,18 @@
                                                 <div
                                                     class="text-xs font-bold text-base-content/60 mt-0.5 wrap-break-word max-w-[200px]">
                                                     {{ $topic->topic }}</div>
+                                                
+                                                @if(!empty($topic->note))
+                                                <div class="text-[11px] mt-2 text-base-content/70 max-w-[280px] leading-relaxed bg-base-content/5 p-2 rounded-lg">
+                                                    <strong class="text-base-content/90">নোট:</strong> {{ \Illuminate\Support\Str::limit($topic->note, 120) }}
+                                                </div>
+                                                @endif
+                                                
+                                                @if(!empty($topic->student?->profile?->learning_style))
+                                                <div class="text-[11px] mt-1.5 text-base-content/70 max-w-[280px] leading-relaxed bg-base-content/5 p-2 rounded-lg">
+                                                    <strong class="text-base-content/90">শেখার ধরন:</strong> {{ \Illuminate\Support\Str::limit($topic->student->profile->learning_style, 150) }}
+                                                </div>
+                                                @endif
                                             </div>
                                         </div>
                                     </td>

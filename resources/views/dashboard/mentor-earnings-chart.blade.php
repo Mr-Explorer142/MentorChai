@@ -75,7 +75,7 @@
                 </svg>
                 <div>
                     <h3 class="font-bold">আয়ের প্রবণতা</h3>
-                    <div class="text-xs">আপনার মাসিক গড় আয় ৳{{ number_format($chartAvg, 0) }} — সর্বোচ্চ মাসে আয়
+                    <div class="text-xs">আপনার মাসিক গড় আয় ৳{{ number_format($chartAvg, 0) }} - সর্বোচ্চ মাসে আয়
                         হয়েছে ৳{{ number_format($chartMax, 0) }}।</div>
                 </div>
             </div>
@@ -127,7 +127,7 @@ $monthlyChartData = $monthlyChartData ?? array_fill(0, count($monthLabels), 0);
         };
     }
 
-    // ✅ Dynamic labels from controller — shows actual last 12 months
+    // ✅ Dynamic labels from controller - shows actual last 12 months
     const labels = @json($monthLabels);
     const data   = @json($monthlyChartData);
 

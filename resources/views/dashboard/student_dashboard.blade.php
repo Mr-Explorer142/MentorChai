@@ -36,7 +36,7 @@
                             স্বাগতম, <br class="hidden sm:block" />{{ $student->name }}
                         </h1>
                         <p class="text-lg text-white/90 font-medium max-w-lg leading-relaxed drop-shadow-sm">
-                            {{ $student->profile?->bio ?? 'আপনার শেখার যাত্রা চালিয়ে যান — নতুন মেন্টর খুঁজুন বা চলমান
+                            {{ $student->profile?->bio ?? 'আপনার শেখার যাত্রা চালিয়ে যান - নতুন মেন্টর খুঁজুন বা চলমান
                             সেশনগুলো দেখুন।' }}
                         </p>
 

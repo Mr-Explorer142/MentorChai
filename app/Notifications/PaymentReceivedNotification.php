@@ -23,7 +23,7 @@ class PaymentReceivedNotification extends Notification
         $roomUrl = url('/live-session?room=' . $this->session->session_code);
 
         return (new MailMessage)
-            ->subject('পেমেন্ট প্রাপ্ত হয়েছে — সেশন নিশ্চিত')
+            ->subject('পেমেন্ট প্রাপ্ত হয়েছে - সেশন নিশ্চিত')
             ->greeting('হ্যালো ' . $notifiable->name . '!')
             ->line($this->session->student->name . ' "' . $this->session->topic->topic . '" বিষয়ক সেশনের পেমেন্ট সম্পন্ন করেছেন।')
             ->action('সেশনে যুক্ত হন', $roomUrl)

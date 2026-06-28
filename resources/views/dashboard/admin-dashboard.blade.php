@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>MentorChai — Admin</title>
+<title>MentorChai - Admin</title>
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
 @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -23,8 +23,8 @@
     <div class="nav-section">ওভারভিউ</div>
     <a class="nav-item @if(($adminInitialSection ?? 'dashboard') === 'dashboard') active @endif" href="{{ route('admin_dashboard') }}" onclick="nav('dashboard',this)"><x-heroicon name="squares-2x2" class="h-icon" style="width:20px;height:20px" />ড্যাশবোর্ড</a>
     <div class="nav-section">ম্যানেজমেন্ট</div>
-    <a class="nav-item @if(($adminInitialSection ?? '') === 'users') active @endif" href="{{ route('admin_users') }}" onclick="nav('users',this)"><x-heroicon name="users" class="h-icon" style="width:20px;height:20px" />শিক্ষার্থী<span class="n-badge amber">{{ $pendingUsersCount ?? 0 }}</span></a>
-    <a class="nav-item @if(($adminInitialSection ?? '') === 'mentors') active @endif" href="{{ route('admin_mentors') }}" onclick="nav('mentors',this)"><x-heroicon name="user-group" class="h-icon" style="width:20px;height:20px" />মেন্টর<span class="n-badge">{{ $pendingMentorsCount ?? 0 }}</span></a>
+    <a class="nav-item @if(($adminInitialSection ?? '') === 'users') active @endif" href="{{ route('admin_users') }}" onclick="nav('users',this)"><x-heroicon name="users" class="h-icon" style="width:20px;height:20px" />শিক্ষার্থী</a>
+    <a class="nav-item @if(($adminInitialSection ?? '') === 'mentors') active @endif" href="{{ route('admin_mentors') }}" onclick="nav('mentors',this)"><x-heroicon name="user-group" class="h-icon" style="width:20px;height:20px" />মেন্টর</a>
     <a class="nav-item @if(($adminInitialSection ?? '') === 'topics') active @endif" onclick="nav('topics',this)"><x-heroicon name="book-open" class="h-icon" style="width:20px;height:20px" />টপিকগুলো</a>
     <a class="nav-item @if(($adminInitialSection ?? '') === 'sessions') active @endif" href="{{ route('admin_sessions') }}" onclick="nav('sessions',this)"><x-heroicon name="video-camera" class="h-icon" style="width:20px;height:20px" />সেশনগুলো</a>
     <a class="nav-item @if(($adminInitialSection ?? '') === 'payments') active @endif" href="{{ route('admin_payments') }}" onclick="nav('payments',this)"><x-heroicon name="credit-card" class="h-icon" style="width:20px;height:20px" />পেমেন্টস</a>
@@ -513,7 +513,7 @@
       </div>
     </div>
 
-    {{-- Pending Mentors — Document Verification --}}
+    {{-- Pending Mentors - Document Verification --}}
     <div class="tab-panel" id="tp-pending-mentors">
       <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
         <span style="font-size:13px;color:var(--text3)">{{ $pendingMentorsCount ?? 0 }} জন মেন্টরের ডকুমেন্ট রিভিউয়ের অপেক্ষায়</span>
@@ -648,7 +648,7 @@
                     {{ $mentor['name'] }}
                   </div>
                 </td>
-                <td>{{ $mentor['institution'] ?? '—' }}</td>
+                <td>{{ $mentor['institution'] ?? '-' }}</td>
                 <td>{{ $mentor['dept'] }}</td>
                 <td>{{ $mentor['sessions_today'] }}</td>
                 <td><span class="badge b-ongoing">অনলাইন</span></td>
@@ -866,7 +866,7 @@
         </div>
       </div>
 
-      {{-- Admin Management — only for super admin --}}
+      {{-- Admin Management - only for super admin --}}
       @if(auth()->user()?->isSuperAdmin())
       <div class="card">
         <div class="card-head"><h3>অ্যাডমিন যোগ করুন</h3></div>
@@ -904,7 +904,7 @@
                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('অ্যাডমিন পারমিশন বাতিল করতে নিশ্চিত?')"><x-heroicon name="trash" class="h-icon h-icon--sm" />সরান</button>
                   </form>
                   @else
-                  <span style="font-size:11px;color:var(--text3)">—</span>
+                  <span style="font-size:11px;color:var(--text3)">-</span>
                   @endif
                 </td>
               </tr>
