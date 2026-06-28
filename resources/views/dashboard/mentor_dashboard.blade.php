@@ -127,7 +127,7 @@
                     <button class="btn btn-primary btn-sm rounded-full px-6 shadow-lg">নতুন সেশন</button>
                 </div>
 
-                <div class="flex-1 p-2">
+                <div class="flex-1 p-2 overflow-y-auto max-h-[380px]">
                     @if($sessionTopics->isEmpty())
                     <div class="h-full flex flex-col items-center justify-center py-12">
                         <div
@@ -142,16 +142,16 @@
                     @else
                     <div class="overflow-x-auto">
                         <table class="table w-full border-none text-base-content">
-                            <tbody>
-                                @php
-                                $statusConfig = [
-                                'pending' => ['label' => 'অপেক্ষমান', 'cls' => 'badge-warning'],
-                                'approved' => ['label' => 'অনুমোদিত', 'cls' => 'badge-success'],
-                                'rejected' => ['label' => 'প্রত্যাখ্যাত', 'cls' => 'badge-error'],
-                                'completed' => ['label' => 'সম্পন্ন', 'cls' => 'badge-info'],
-                                ];
-                                @endphp
-                                @foreach($sessionTopics->take(5) as $topic)
+                             <tbody>
+                                 @php
+                                 $statusConfig = [
+                                 'pending' => ['label' => 'অপেক্ষমান', 'cls' => 'badge-warning'],
+                                 'approved' => ['label' => 'অনুমোদিত', 'cls' => 'badge-success'],
+                                 'rejected' => ['label' => 'প্রত্যাখ্যাত', 'cls' => 'badge-error'],
+                                 'completed' => ['label' => 'সম্পন্ন', 'cls' => 'badge-info'],
+                                 ];
+                                 @endphp
+                                 @foreach($sessionTopics as $topic)
                                 @php
                                 $mentoringSession = $mentoringSessions->first(fn($s) => $s->topic_id === $topic->id);
                                 $s = $statusConfig[$topic->status->value] ?? $statusConfig['pending'];
