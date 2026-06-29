@@ -117,7 +117,7 @@ class ProfileFactory extends Factory
     {
         return $this->state(fn() => [
             'skills'         => fake()->randomElement(self::$mentorSkills),
-            'hourly_rate'    => fake()->randomElement(['300', '400', '500', '600', '750', '1000', '1200', '1500']),
+            'hourly_rate'    => fake()->randomElement(['100', '150', '200', '250', '300', '350', '400', '450', '500']),
             'rating'         => fake()->randomFloat(1, 3.0, 5.0),
             'total_sessions' => fake()->numberBetween(5, 80),
         ]);

@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
 
         // ── 8 Students ────────────────────────────────────────────────
         User::factory()
-            ->count(8)
+            ->count(18)
             ->student()
             ->create()
             ->each(function (User $user) {
@@ -47,7 +47,7 @@ class DatabaseSeeder extends Seeder
 
         // ── 7 Mentors ─────────────────────────────────────────────────
         User::factory()
-            ->count(7)
+            ->count(12)
             ->mentor()
             ->create()
             ->each(function (User $user) {
@@ -56,6 +56,6 @@ class DatabaseSeeder extends Seeder
                 );
             });
 
-        $this->command->info('✅ 1 Super Admin + 15 users seeded: 8 students + 7 mentors (password: password)');
+        $this->command->info('✅ 1 Super Admin + 30 users seeded: 18 students + 12 mentors (password: password)');
     }
 }
