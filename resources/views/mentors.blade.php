@@ -185,28 +185,27 @@
                             </div>
                         </div>
 
-                        {{-- Rating (placeholder for later) --}}
+                        {{-- Rating --}}
                         <div>
                             <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">
                                 সর্বনিম্ন রেটিং
-                                <span class="text-gray-300 dark:text-gray-600 font-normal">(শীঘ্রই আসছে)</span>
                             </p>
                             <div
-                                class="space-y-2 text-sm text-gray-400 dark:text-gray-600 cursor-not-allowed select-none">
-                                <label class="flex items-center gap-2">
-                                    <input type="radio" disabled class="w-4 h-4"> যেকোনো
+                                class="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="radio" name="rating" value="0" {{ request('rating', '0') == '0' ? 'checked' : '' }} class="accent-teal-600 dark:accent-teal-400 w-4 h-4"> যেকোনো
                                 </label>
-                                <label class="flex items-center gap-2">
-                                    <input type="radio" disabled class="w-4 h-4">
-                                    <span class="text-yellow-300 text-xs">★★★★★</span> ৫.০
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="radio" name="rating" value="5" {{ request('rating') == '5' ? 'checked' : '' }} class="accent-teal-600 dark:accent-teal-400 w-4 h-4">
+                                    <span class="text-yellow-400 text-xs tracking-widest">★★★★★</span> ৫.০
                                 </label>
-                                <label class="flex items-center gap-2">
-                                    <input type="radio" disabled class="w-4 h-4">
-                                    <span class="text-yellow-300 text-xs">★★★★☆</span> ৪.০+
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="radio" name="rating" value="4" {{ request('rating') == '4' ? 'checked' : '' }} class="accent-teal-600 dark:accent-teal-400 w-4 h-4">
+                                    <span class="text-yellow-400 text-xs tracking-widest">★★★★☆</span> ৪.০+
                                 </label>
-                                <label class="flex items-center gap-2">
-                                    <input type="radio" disabled class="w-4 h-4">
-                                    <span class="text-yellow-300 text-xs">★★★☆☆</span> ৩.০+
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="radio" name="rating" value="3" {{ request('rating') == '3' ? 'checked' : '' }} class="accent-teal-600 dark:accent-teal-400 w-4 h-4">
+                                    <span class="text-yellow-400 text-xs tracking-widest">★★★☆☆</span> ৩.০+
                                 </label>
                             </div>
                         </div>
@@ -317,9 +316,22 @@
                                     মেন্টর
                                 </p>
                                 <div class="flex items-center gap-1 mt-1">
-                                    <span class="text-yellow-400 text-xs">★★★★★</span>
+                                    @php
+                                        $avg = round($mentor->reviews_avg_rating ?? 0, 1);
+                                    @endphp
+                                    <span class="text-yellow-400 text-xs tracking-widest">
+                                        @for($i = 1; $i <= 5; $i++)
+                                            @if($i <= $avg)
+                                                ★
+                                            @elseif($i - 0.5 <= $avg)
+                                                ★
+                                            @else
+                                                ☆
+                                            @endif
+                                        @endfor
+                                    </span>
                                     <span class="text-xs text-gray-500 dark:text-gray-400">
-                                        ({{ $mentor->reviews_count ?? 0 }})
+                                        {{ $avg > 0 ? $avg : 'New' }} ({{ $mentor->reviews_count ?? 0 }})
                                     </span>
                                 </div>
                             </div>
@@ -577,27 +589,26 @@
                         </div>
                     </div>
 
-                    {{-- Rating placeholder --}}
+                    {{-- Rating --}}
                     <div>
                         <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">
                             সর্বনিম্ন রেটিং
-                            <span class="text-gray-300 dark:text-gray-600 font-normal">(শীঘ্রই আসছে)</span>
                         </p>
-                        <div class="space-y-2 text-sm text-gray-400 dark:text-gray-600 cursor-not-allowed select-none">
-                            <label class="flex items-center gap-2">
-                                <input type="radio" disabled class="w-4 h-4"> যেকোনো
+                        <div class="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="rating" value="0" {{ request('rating', '0') == '0' ? 'checked' : '' }} class="accent-teal-600 dark:accent-teal-400 w-4 h-4"> যেকোনো
                             </label>
-                            <label class="flex items-center gap-2">
-                                <input type="radio" disabled class="w-4 h-4">
-                                <span class="text-yellow-300 text-xs">★★★★★</span> ৫.০
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="rating" value="5" {{ request('rating') == '5' ? 'checked' : '' }} class="accent-teal-600 dark:accent-teal-400 w-4 h-4">
+                                <span class="text-yellow-400 text-xs tracking-widest">★★★★★</span> ৫.০
                             </label>
-                            <label class="flex items-center gap-2">
-                                <input type="radio" disabled class="w-4 h-4">
-                                <span class="text-yellow-300 text-xs">★★★★☆</span> ৪.০+
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="rating" value="4" {{ request('rating') == '4' ? 'checked' : '' }} class="accent-teal-600 dark:accent-teal-400 w-4 h-4">
+                                <span class="text-yellow-400 text-xs tracking-widest">★★★★☆</span> ৪.০+
                             </label>
-                            <label class="flex items-center gap-2">
-                                <input type="radio" disabled class="w-4 h-4">
-                                <span class="text-yellow-300 text-xs">★★★☆☆</span> ৩.০+
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="rating" value="3" {{ request('rating') == '3' ? 'checked' : '' }} class="accent-teal-600 dark:accent-teal-400 w-4 h-4">
+                                <span class="text-yellow-400 text-xs tracking-widest">★★★☆☆</span> ৩.০+
                             </label>
                         </div>
                     </div>

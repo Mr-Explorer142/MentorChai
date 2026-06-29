@@ -184,7 +184,7 @@
                             </svg>
                         </div>
                         <div class="min-w-0">
-                            <p class="text-xs font-bold mb-0.5" style="color: var(--mc-text);">{{ $item['label'] }}</p>
+                            <p class="text-sm font-bold mb-0.5" style="color: var(--mc-text);">{{ $item['label'] }}</p>
                             <p class="text-sm break-all" style="color: var(--mc-text-muted);">{{ $item['val'] }}</p>
                         </div>
                     </div>
@@ -193,16 +193,33 @@
             </div>
 
 
-            {{-- Learning Style --}}
+            {{-- Learning Style & Preferences --}}
             <div class="p-6 sm:p-8" style="border-top: 1px solid var(--mc-border-subtle);">
                 <div class="flex items-center gap-3 mb-6">
                     <div class="w-1 h-7 rounded-full"
                         style="background: linear-gradient(to bottom, var(--mc-primary), var(--mc-sage));"></div>
-                    <h2 class="text-xl font-bold" style="color: var(--mc-text); font-family:'Lora',serif;">আপনি কীভাবে শিখতে স্বাচ্ছন্দ্যবোধ করেন?
+                    <h2 class="text-xl font-bold" style="color: var(--mc-text); font-family:'Lora',serif;">শেখার ধরণ ও প্রত্যাশা
                     </h2>
                 </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+                    <div class="rounded-2xl p-5 border" style="background: var(--mc-bg); border-color: var(--mc-border-teal-sub);">
+                        <p class="text-sm font-bold mb-1.5 opacity-70" style="color: var(--mc-text);">পড়ানোর ক্ষেত্রে কোন মাধ্যমটি আপনার জন্য সহজ ও সুবিধাজনক?</p>
+                        <p class="text-[15px] font-medium" style="color: var(--mc-text);">
+                            {{ !empty($student->profile->preferred_teaching_medium) ? $student->profile->preferred_teaching_medium : ' - ' }}
+                        </p>
+                    </div>
+                    <div class="rounded-2xl p-5 border" style="background: var(--mc-bg); border-color: var(--mc-border-teal-sub);">
+                        <p class="text-sm font-bold mb-1.5 opacity-70" style="color: var(--mc-text);">পড়ানোর সময় কোন ভাষায় আপনি স্বাচ্ছন্দ্য বোধ করেন?</p>
+                        <p class="text-[15px] font-medium" style="color: var(--mc-text);">
+                            {{ !empty($student->profile->preferred_language) ? $student->profile->preferred_language : ' - ' }}
+                        </p>
+                    </div>
+                </div>
+
                 <div class="rounded-2xl p-6 border"
                     style="background: var(--mc-bg); border-color: var(--mc-border-teal-sub);">
+                    <p class="text-sm font-bold mb-3 opacity-70" style="color: var(--mc-text);">আপনি কীভাবে শিখতে স্বাচ্ছন্দ্যবোধ করেন?</p>
                     <p class="text-base leading-relaxed whitespace-pre-line" style="color: var(--mc-text);">
                         {{ !empty($student->profile->learning_style) ? $student->profile->learning_style : "আপনি কীভাবে সহজে বোঝেন এবং মেন্টরের পড়ানোর ধরণ কেমন হলে সুবিধা হবে তা লিখুন। যেমন: 'আমার বেসিক একটু দুর্বল, তাই শুরু থেকে ধরে ধরে বোঝালে ভালো হয়। একটু সময় নিয়ে বুঝি, তাড়াহুড়া না করলে খুশি হবো।' কিংবা 'আমি একটু ইঙ্গিত পেলেই বুঝে ফেলতে পারি, সহজ বিষয়গুলো দ্রুতগতিতে বুঝিয়ে দিলেও আমার কোনো সমস্যা হয় না।'" }}
                     </p>

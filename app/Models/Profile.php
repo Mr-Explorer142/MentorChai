@@ -29,6 +29,8 @@ class Profile extends Model
         'student_id_back',
         'is_verified',
         'documents_submitted_at',
+        'preferred_teaching_medium',
+        'preferred_language',
     ];
 
     protected $casts = [

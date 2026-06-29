@@ -1,4 +1,5 @@
 @import "tailwindcss";
+
 @plugin "daisyui" {
   themes: light --default, dark;
 }
@@ -9,34 +10,41 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
-    --animate-fade-up: fade-up 0.35s ease both;
+  --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji';
+  --animate-fade-up: fade-up 0.35s ease both;
 
-    @keyframes fade-up {
-        from { opacity: 0; transform: translateY(10px); }
-        to   { opacity: 1; transform: translateY(0);    }
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
     }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }
 
 @utility mesh-bg-student {
-    background-color: oklch(var(--b1));
-    background-image: 
-        radial-gradient(at 0% 0%, oklch(var(--p) / 0.4) 0px, transparent 50%),
-        radial-gradient(at 100% 0%, oklch(var(--s) / 0.4) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, oklch(var(--a) / 0.4) 0px, transparent 50%),
-        radial-gradient(at 0% 100%, oklch(var(--wa) / 0.3) 0px, transparent 50%);
-    background-attachment: fixed;
+  background-color: oklch(var(--b1));
+  background-image:
+    radial-gradient(at 0% 0%, oklch(var(--p) / 0.4) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, oklch(var(--s) / 0.4) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, oklch(var(--a) / 0.4) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, oklch(var(--wa) / 0.3) 0px, transparent 50%);
+  background-attachment: fixed;
 }
 
 @utility mesh-bg-mentor {
-    background-color: oklch(var(--b1));
-    background-image: 
-        radial-gradient(at 0% 0%, oklch(var(--p) / 0.4) 0px, transparent 50%),
-        radial-gradient(at 100% 0%, oklch(var(--s) / 0.4) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, oklch(var(--a) / 0.4) 0px, transparent 50%),
-        radial-gradient(at 0% 100%, oklch(var(--in) / 0.3) 0px, transparent 50%);
-    background-attachment: fixed;
+  background-color: oklch(var(--b1));
+  background-image:
+    radial-gradient(at 0% 0%, oklch(var(--p) / 0.4) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, oklch(var(--s) / 0.4) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, oklch(var(--a) / 0.4) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, oklch(var(--in) / 0.3) 0px, transparent 50%);
+  background-attachment: fixed;
 }
 
 /* ═══════════════════════════════════════════════════
@@ -48,117 +56,171 @@
    MENTORCHAI COLOR TOKENS
    ═══════════════════════════════════════════════════ */
 :root {
-    /* Backgrounds */
-    --mc-bg:              #eef7f8;
-    --mc-surface:         #ffffff;
-    --mc-surface-hover:   #f8fffe;
+  /* Backgrounds */
+  --mc-bg: #eef7f8;
+  --mc-surface: #ffffff;
+  --mc-surface-hover: #f8fffe;
 
-    /* Brand */
-    --mc-primary:         #28666e;
-    --mc-navy:            #033f63;
-    --mc-sage:            #7c9885;
+  /* Brand */
+  --mc-primary: #28666e;
+  --mc-navy: #033f63;
+  --mc-sage: #7c9885;
 
-    /* Text */
-    --mc-text:            #111827;   /* gray-900 */
-    --mc-text-sub:        #374151;   /* gray-700 */
-    --mc-text-muted:      #6b7280;   /* gray-500 */
-    --mc-text-faint:      #9ca3af;   /* gray-400 */
+  /* Text */
+  --mc-text: #111827;
+  /* gray-900 */
+  --mc-text-sub: #374151;
+  /* gray-700 */
+  --mc-text-muted: #6b7280;
+  /* gray-500 */
+  --mc-text-faint: #9ca3af;
+  /* gray-400 */
 
-    /* Borders */
-    --mc-border:          #e5e7eb;   /* gray-200 */
-    --mc-border-subtle:   #f3f4f6;   /* gray-100 */
-    --mc-border-teal:     #99d4d8;   /* teal-200 */
-    --mc-border-teal-sub: #ccecee;   /* teal-100 */
+  /* Borders */
+  --mc-border: #e5e7eb;
+  /* gray-200 */
+  --mc-border-subtle: #f3f4f6;
+  /* gray-100 */
+  --mc-border-teal: #99d4d8;
+  /* teal-200 */
+  --mc-border-teal-sub: #ccecee;
+  /* teal-100 */
 
-    /* Shadows */
-    --mc-shadow-sm:       0 1px 3px  rgba(40, 102, 110, 0.08);
-    --mc-shadow-md:       0 4px 12px rgba(40, 102, 110, 0.12);
-    --mc-shadow-lg:       0 8px 30px rgba(40, 102, 110, 0.14);
+  /* Shadows */
+  --mc-shadow-sm: 0 1px 3px rgba(40, 102, 110, 0.08);
+  --mc-shadow-md: 0 4px 12px rgba(40, 102, 110, 0.12);
+  --mc-shadow-lg: 0 8px 30px rgba(40, 102, 110, 0.14);
 
-    /* Status */
-    --mc-online:          #4ade80;   /* green-400 */
-    --mc-offline:         #d1d5db;   /* gray-300 */
+  /* Status */
+  --mc-online: #4ade80;
+  /* green-400 */
+  --mc-offline: #d1d5db;
+  /* gray-300 */
 
-    /* Chart / SVG */
-    --mc-chart-stroke:    #28666e;
-    --mc-chart-fill:      #eef7f8;
+  /* Chart / SVG */
+  --mc-chart-stroke: #28666e;
+  --mc-chart-fill: #eef7f8;
 }
 
 html.dark {
-    /* Backgrounds */
-    --mc-bg:              #0f1f2e;
-    --mc-surface:         #1a2e3b;
-    --mc-surface-hover:   #243d4d;
+  /* Backgrounds */
+  --mc-bg: #0f1f2e;
+  --mc-surface: #1a2e3b;
+  --mc-surface-hover: #243d4d;
 
-    /* Brand */
-    --mc-primary:         #4db6c1;
-    --mc-navy:            #7ec8e3;
-    --mc-sage:            #9ab8a5;
+  /* Brand */
+  --mc-primary: #4db6c1;
+  --mc-navy: #7ec8e3;
+  --mc-sage: #9ab8a5;
 
-    /* Text */
-    --mc-text:            #f3f4f6;   /* gray-100 */
-    --mc-text-sub:        #d1d5db;   /* gray-300 */
-    --mc-text-muted:      #9ca3af;   /* gray-400 */
-    --mc-text-faint:      #6b7280;   /* gray-500 */
+  /* Text */
+  --mc-text: #f3f4f6;
+  /* gray-100 */
+  --mc-text-sub: #d1d5db;
+  /* gray-300 */
+  --mc-text-muted: #9ca3af;
+  /* gray-400 */
+  --mc-text-faint: #6b7280;
+  /* gray-500 */
 
-    /* Borders */
-    --mc-border:          #374151;   /* gray-700 */
-    --mc-border-subtle:   #1f2937;   /* gray-800 */
-    --mc-border-teal:     #1f4f54;   /* teal-900 */
-    --mc-border-teal-sub: #172f33;   /* teal-900/40 */
+  /* Borders */
+  --mc-border: #374151;
+  /* gray-700 */
+  --mc-border-subtle: #1f2937;
+  /* gray-800 */
+  --mc-border-teal: #1f4f54;
+  /* teal-900 */
+  --mc-border-teal-sub: #172f33;
+  /* teal-900/40 */
 
-    /* Shadows */
-    --mc-shadow-sm:       0 1px 3px  rgba(0, 0, 0, 0.4);
-    --mc-shadow-md:       0 4px 12px rgba(0, 0, 0, 0.5);
-    --mc-shadow-lg:       0 8px 30px rgba(0, 0, 0, 0.4);
+  /* Shadows */
+  --mc-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --mc-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+  --mc-shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.4);
 
-    /* Status */
-    --mc-online:          #4ade80;   /* stays same */
-    --mc-offline:         #4b5563;   /* gray-600 */
+  /* Status */
+  --mc-online: #4ade80;
+  /* stays same */
+  --mc-offline: #4b5563;
+  /* gray-600 */
 
-    /* Chart / SVG */
-    --mc-chart-stroke:    #4db6c1;
-    --mc-chart-fill:      #1a2e3b;
+  /* Chart / SVG */
+  --mc-chart-stroke: #4db6c1;
+  --mc-chart-fill: #1a2e3b;
 }
 
 /* ═══════════════════════════════════════════════════
    BADGE / TAG COLORS  (skill chips on mentor cards)
    ═══════════════════════════════════════════════════ */
 :root {
-    --mc-badge-teal-bg:     #f0fdfe;  --mc-badge-teal-text:   #0f766e;  --mc-badge-teal-border:   #99d4d8;
-    --mc-badge-purple-bg:   #faf5ff;  --mc-badge-purple-text: #7e22ce;  --mc-badge-purple-border: #d8b4fe;
-    --mc-badge-orange-bg:   #fff7ed;  --mc-badge-orange-text: #c2410c;  --mc-badge-orange-border: #fed7aa;
-    --mc-badge-blue-bg:     #eff6ff;  --mc-badge-blue-text:   #1d4ed8;  --mc-badge-blue-border:   #bfdbfe;
-    --mc-badge-green-bg:    #f0fdf4;  --mc-badge-green-text:  #15803d;  --mc-badge-green-border:  #bbf7d0;
-    --mc-badge-pink-bg:     #fdf2f8;  --mc-badge-pink-text:   #be185d;  --mc-badge-pink-border:   #fbcfe8;
+  --mc-badge-teal-bg: #f0fdfe;
+  --mc-badge-teal-text: #0f766e;
+  --mc-badge-teal-border: #99d4d8;
+  --mc-badge-purple-bg: #faf5ff;
+  --mc-badge-purple-text: #7e22ce;
+  --mc-badge-purple-border: #d8b4fe;
+  --mc-badge-orange-bg: #fff7ed;
+  --mc-badge-orange-text: #c2410c;
+  --mc-badge-orange-border: #fed7aa;
+  --mc-badge-blue-bg: #eff6ff;
+  --mc-badge-blue-text: #1d4ed8;
+  --mc-badge-blue-border: #bfdbfe;
+  --mc-badge-green-bg: #f0fdf4;
+  --mc-badge-green-text: #15803d;
+  --mc-badge-green-border: #bbf7d0;
+  --mc-badge-pink-bg: #fdf2f8;
+  --mc-badge-pink-text: #be185d;
+  --mc-badge-pink-border: #fbcfe8;
 }
 
 html.dark {
-    --mc-badge-teal-bg:     rgba(13,  148, 136, 0.15);  --mc-badge-teal-text:   #5eead4;  --mc-badge-teal-border:   rgba(13,  148, 136, 0.3);
-    --mc-badge-purple-bg:   rgba(126, 34,  206, 0.15);  --mc-badge-purple-text: #d8b4fe;  --mc-badge-purple-border: rgba(126, 34,  206, 0.3);
-    --mc-badge-orange-bg:   rgba(194, 65,  12,  0.15);  --mc-badge-orange-text: #fdba74;  --mc-badge-orange-border: rgba(194, 65,  12,  0.3);
-    --mc-badge-blue-bg:     rgba(29,  78,  216, 0.15);  --mc-badge-blue-text:   #93c5fd;  --mc-badge-blue-border:   rgba(29,  78,  216, 0.3);
-    --mc-badge-green-bg:    rgba(21,  128, 61,  0.15);  --mc-badge-green-text:  #86efac;  --mc-badge-green-border:  rgba(21,  128, 61,  0.3);
-    --mc-badge-pink-bg:     rgba(190, 24,  93,  0.15);  --mc-badge-pink-text:   #f9a8d4;  --mc-badge-pink-border:   rgba(190, 24,  93,  0.3);
+  --mc-badge-teal-bg: rgba(13, 148, 136, 0.15);
+  --mc-badge-teal-text: #5eead4;
+  --mc-badge-teal-border: rgba(13, 148, 136, 0.3);
+  --mc-badge-purple-bg: rgba(126, 34, 206, 0.15);
+  --mc-badge-purple-text: #d8b4fe;
+  --mc-badge-purple-border: rgba(126, 34, 206, 0.3);
+  --mc-badge-orange-bg: rgba(194, 65, 12, 0.15);
+  --mc-badge-orange-text: #fdba74;
+  --mc-badge-orange-border: rgba(194, 65, 12, 0.3);
+  --mc-badge-blue-bg: rgba(29, 78, 216, 0.15);
+  --mc-badge-blue-text: #93c5fd;
+  --mc-badge-blue-border: rgba(29, 78, 216, 0.3);
+  --mc-badge-green-bg: rgba(21, 128, 61, 0.15);
+  --mc-badge-green-text: #86efac;
+  --mc-badge-green-border: rgba(21, 128, 61, 0.3);
+  --mc-badge-pink-bg: rgba(190, 24, 93, 0.15);
+  --mc-badge-pink-text: #f9a8d4;
+  --mc-badge-pink-border: rgba(190, 24, 93, 0.3);
 }
 
 /* ═══════════════════════════════════════════════════
    STAT CARD COLORS  (admin dashboard)
    ═══════════════════════════════════════════════════ */
 :root {
-    --mc-stat-teal-bg:   #f0fdfe;  --mc-stat-teal-text:   #0f766e;
-    --mc-stat-blue-bg:   #eff6ff;  --mc-stat-blue-text:   #1d4ed8;
-    --mc-stat-green-bg:  #f0fdf4;  --mc-stat-green-text:  #15803d;
-    --mc-stat-red-bg:    #fef2f2;  --mc-stat-red-text:    #b91c1c;
-    --mc-stat-purple-bg: #faf5ff;  --mc-stat-purple-text: #7e22ce;
+  --mc-stat-teal-bg: #f0fdfe;
+  --mc-stat-teal-text: #0f766e;
+  --mc-stat-blue-bg: #eff6ff;
+  --mc-stat-blue-text: #1d4ed8;
+  --mc-stat-green-bg: #f0fdf4;
+  --mc-stat-green-text: #15803d;
+  --mc-stat-red-bg: #fef2f2;
+  --mc-stat-red-text: #b91c1c;
+  --mc-stat-purple-bg: #faf5ff;
+  --mc-stat-purple-text: #7e22ce;
 }
 
 html.dark {
-    --mc-stat-teal-bg:   rgba(13,  148, 136, 0.15);  --mc-stat-teal-text:   #5eead4;
-    --mc-stat-blue-bg:   rgba(29,  78,  216, 0.15);  --mc-stat-blue-text:   #93c5fd;
-    --mc-stat-green-bg:  rgba(21,  128, 61,  0.15);  --mc-stat-green-text:  #86efac;
-    --mc-stat-red-bg:    rgba(185, 28,  28,  0.15);  --mc-stat-red-text:    #fca5a5;
-    --mc-stat-purple-bg: rgba(126, 34,  206, 0.15);  --mc-stat-purple-text: #d8b4fe;
+  --mc-stat-teal-bg: rgba(13, 148, 136, 0.15);
+  --mc-stat-teal-text: #5eead4;
+  --mc-stat-blue-bg: rgba(29, 78, 216, 0.15);
+  --mc-stat-blue-text: #93c5fd;
+  --mc-stat-green-bg: rgba(21, 128, 61, 0.15);
+  --mc-stat-green-text: #86efac;
+  --mc-stat-red-bg: rgba(185, 28, 28, 0.15);
+  --mc-stat-red-text: #fca5a5;
+  --mc-stat-purple-bg: rgba(126, 34, 206, 0.15);
+  --mc-stat-purple-text: #d8b4fe;
 }
 
 
@@ -168,52 +230,56 @@ html.dark {
    Ensures DaisyUI components strictly follow system dark mode colors
    ═══════════════════════════════════════════════════ */
 html.dark {
-    /* DaisyUI v5 explicit color overrides */
-    --color-base-100: var(--mc-surface) !important;
-    --color-base-200: var(--mc-bg) !important;
-    --color-base-300: var(--mc-surface-hover) !important; /* Restored for normal hovers */
-    --color-base-content: var(--mc-text) !important;
-    
-    /* Fallbacks for older DaisyUI versions just in case */
-    --b1: var(--mc-surface) !important;
-    --b2: var(--mc-bg) !important;
-    --b3: var(--mc-surface-hover) !important;
-    --bc: var(--mc-text) !important;
+  /* DaisyUI v5 explicit color overrides */
+  --color-base-100: var(--mc-surface) !important;
+  --color-base-200: var(--mc-bg) !important;
+  --color-base-300: var(--mc-surface-hover) !important;
+  /* Restored for normal hovers */
+  --color-base-content: var(--mc-text) !important;
+
+  /* Fallbacks for older DaisyUI versions just in case */
+  --b1: var(--mc-surface) !important;
+  --b2: var(--mc-bg) !important;
+  --b3: var(--mc-surface-hover) !important;
+  --bc: var(--mc-text) !important;
 }
 
 /* Specific visibility enhancements for cards */
 html:not(.dark) .card {
-    border: 1px solid #000000 !important; /* Solid black border in light mode */
+  border: 1px solid #000000 !important;
+  /* Solid black border in light mode */
 }
 
 html.dark .card {
-    border: 1px solid #e5e7eb !important; /* Very bright, near-white border in dark mode */
-    box-shadow: none !important; /* Removed the previous shadow */
+  border: 1px solid #e5e7eb !important;
+  /* Very bright, near-white border in dark mode */
+  box-shadow: none !important;
+  /* Removed the previous shadow */
 }
 
 /* ═══════════════════════════════════════════════════
    ADMIN DASHBOARD TAILWIND STYLES
    ═══════════════════════════════════════════════════ */
 .admin-dashboard-view {
-  --bg:        var(--mc-bg, #eef7f8);
-  --surface:   var(--mc-surface, #ffffff);
-  --surface2:  var(--mc-surface-hover, #f8fffe);
-  --border:    var(--mc-border, #e5e7eb);
-  --border2:   var(--mc-border-teal, #99d4d8);
-  --text:      var(--mc-text, #111827);
-  --text2:     var(--mc-text-sub, #374151);
-  --text3:     var(--mc-text-muted, #6b7280);
-  --accent:     var(--mc-primary, #28666e);
-  --accent-bg:  var(--mc-badge-teal-bg, #f0fdfe);
+  --bg: var(--mc-bg, #eef7f8);
+  --surface: var(--mc-surface, #ffffff);
+  --surface2: var(--mc-surface-hover, #f8fffe);
+  --border: var(--mc-border, #e5e7eb);
+  --border2: var(--mc-border-teal, #99d4d8);
+  --text: var(--mc-text, #111827);
+  --text2: var(--mc-text-sub, #374151);
+  --text3: var(--mc-text-muted, #6b7280);
+  --accent: var(--mc-primary, #28666e);
+  --accent-bg: var(--mc-badge-teal-bg, #f0fdfe);
   --accent-txt: var(--mc-badge-teal-text, #0f766e);
-  --green-bg:   var(--mc-stat-green-bg, #f0fdf4);
-  --green:      var(--mc-stat-green-text, #15803d);
-  --red-bg:     var(--mc-stat-red-bg, #fef2f2);
-  --red:        var(--mc-stat-red-text, #b91c1c);
-  --amber-bg:   var(--mc-badge-orange-bg, #fffbeb);
-  --amber:      var(--mc-badge-orange-text, #d97706);
+  --green-bg: var(--mc-stat-green-bg, #f0fdf4);
+  --green: var(--mc-stat-green-text, #15803d);
+  --red-bg: var(--mc-stat-red-bg, #fef2f2);
+  --red: var(--mc-stat-red-text, #b91c1c);
+  --amber-bg: var(--mc-badge-orange-bg, #fffbeb);
+  --amber: var(--mc-badge-orange-text, #d97706);
   --sidebar-w: 224px;
-  --topbar-h:  54px;
+  --topbar-h: 54px;
 
   margin: 0;
   padding: 0;
@@ -228,6 +294,7 @@ html.dark .card {
     border-collapse: collapse;
     font-size: 12px;
   }
+
   thead th {
     padding: 10px 14px;
     text-align: left;
@@ -240,19 +307,24 @@ html.dark .card {
     white-space: nowrap;
     background-color: var(--surface2);
   }
+
   tbody tr {
     border-bottom: 1px solid var(--border);
   }
+
   tbody tr:last-child {
     border-bottom: 0;
   }
+
   tbody tr:hover {
     background-color: var(--surface2);
   }
+
   td {
     padding: 10px 14px;
     vertical-align: middle;
   }
+
   textarea.fc {
     resize: vertical;
     min-height: 80px;
@@ -282,9 +354,11 @@ html.dark .card {
     cursor: pointer;
     transition: opacity 0.15s ease;
   }
+
   .logo-wrap:hover {
     opacity: 0.9;
   }
+
   .logo-icon {
     width: 32px;
     height: 32px;
@@ -296,10 +370,12 @@ html.dark .card {
     color: white;
     flex-shrink: 0;
   }
+
   .logo-name {
     font-size: 15px;
     font-weight: 600;
   }
+
   .logo-role {
     font-size: 10.5px;
     color: var(--text3);
@@ -330,10 +406,12 @@ html.dark .card {
     position: relative;
     transition: all 0.15s ease;
   }
+
   .nav-item:hover {
     background-color: var(--bg);
     color: var(--text);
   }
+
   .nav-item.active {
     background-color: var(--accent-bg);
     color: var(--accent-txt);
@@ -348,6 +426,7 @@ html.dark .card {
     background-color: var(--red-bg);
     color: var(--red);
   }
+
   .n-badge.amber {
     background-color: var(--amber-bg);
     color: var(--amber);
@@ -381,6 +460,7 @@ html.dark .card {
     flex-shrink: 0;
     overflow: hidden;
   }
+
   .admin-av img {
     width: 100%;
     height: 100%;
@@ -417,6 +497,7 @@ html.dark .card {
     padding: 6px 12px;
     width: 208px;
   }
+
   .searchbar input {
     background: transparent;
     border: none;
@@ -425,6 +506,7 @@ html.dark .card {
     font-size: 12px;
     width: 100%;
   }
+
   .searchbar input::placeholder {
     color: var(--text3);
   }
@@ -443,6 +525,7 @@ html.dark .card {
     font-size: 17px;
     transition: all 0.15s ease;
   }
+
   .tb-btn:hover {
     background-color: var(--border);
   }
@@ -462,6 +545,7 @@ html.dark .card {
     overflow: hidden;
     flex-shrink: 0;
   }
+
   .tb-av img {
     width: 100%;
     height: 100%;
@@ -483,6 +567,7 @@ html.dark .card {
     flex-direction: column;
     gap: 18px;
   }
+
   .page.active {
     display: flex;
   }
@@ -493,17 +578,20 @@ html.dark .card {
     gap: 10px;
     flex-wrap: wrap;
   }
+
   .pg-hd h2 {
     font-size: 18px;
     font-weight: 600;
     letter-spacing: -0.02em;
     margin: 0;
   }
+
   .pg-hd-sub {
     font-size: 12.5px;
     color: var(--text3);
     margin-bottom: 2px;
   }
+
   .pg-hd-actions {
     margin-left: auto;
     display: flex;
@@ -514,28 +602,39 @@ html.dark .card {
     display: grid;
     gap: 12px;
   }
+
   .sgrid.g4 {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
+
   .sgrid.g3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+
   .sgrid.g5 {
     grid-template-columns: repeat(5, minmax(0, 1fr));
   }
+
   .sgrid.g2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
   @media (max-width: 1100px) {
     .sgrid.g4 {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+
     .sgrid.g5 {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
+
   @media (max-width: 680px) {
-    .sgrid.g4, .sgrid.g3, .sgrid.g5, .sgrid.g2 {
+
+    .sgrid.g4,
+    .sgrid.g3,
+    .sgrid.g5,
+    .sgrid.g2 {
       grid-template-columns: 1fr;
     }
   }
@@ -546,6 +645,7 @@ html.dark .card {
     border-radius: 8px;
     padding: 16px;
   }
+
   .stat-head {
     display: flex;
     align-items: center;
@@ -553,6 +653,7 @@ html.dark .card {
     gap: 10px;
     margin-bottom: 8px;
   }
+
   .stat-icon {
     display: inline-flex;
     align-items: center;
@@ -563,6 +664,7 @@ html.dark .card {
     background-color: var(--accent-bg);
     color: var(--accent-txt);
   }
+
   .s-label {
     font-size: 10.5px;
     font-weight: 600;
@@ -571,12 +673,14 @@ html.dark .card {
     color: var(--text3);
     margin-bottom: 8px;
   }
+
   .s-val {
     font-size: 24px;
     font-weight: 600;
     letter-spacing: -0.02em;
     font-family: monospace;
   }
+
   .s-sub {
     font-size: 11.5px;
     color: var(--text3);
@@ -599,6 +703,7 @@ html.dark .card {
     border-radius: 8px;
     overflow: hidden;
   }
+
   .card-head {
     padding: 18px;
     border-bottom: 1px solid var(--mc-border);
@@ -608,12 +713,14 @@ html.dark .card {
     flex-wrap: wrap;
     min-height: 48px;
   }
+
   .card-head h3 {
     font-size: 13.5px;
     font-weight: 600;
     flex: 1;
     margin: 0;
   }
+
   .card-foot {
     padding: 16px;
     border-top: 1px solid var(--mc-border);
@@ -626,11 +733,13 @@ html.dark .card {
   .tbl {
     overflow-x: auto;
   }
+
   .td-mono {
     font-family: monospace;
     font-size: 12px;
     color: var(--text3);
   }
+
   .td-link {
     font-family: monospace;
     font-size: 12px;
@@ -639,13 +748,16 @@ html.dark .card {
     font-weight: 500;
     transition: text-decoration 0.2s ease;
   }
+
   .td-link:hover {
     text-decoration: underline;
   }
+
   .td-pos {
     color: #16a34a;
     font-family: monospace;
   }
+
   .td-neg {
     color: #dc2626;
     font-family: monospace;
@@ -664,55 +776,68 @@ html.dark .card {
     white-space: nowrap;
     transition: all 0.2s ease;
   }
+
   .btn.btn-sm {
     padding: 4px 10px;
     font-size: 11px;
     border-radius: 6px;
   }
+
   .btn.btn-primary {
     background-color: var(--accent);
     color: white;
   }
+
   .btn.btn-primary:hover {
     opacity: 0.9;
   }
+
   .btn.btn-ghost {
     background-color: transparent;
     color: var(--text2);
     border: 1px solid var(--border);
   }
+
   .btn.btn-ghost:hover {
     background-color: var(--bg);
   }
+
   .btn.btn-danger {
     background-color: #fef2f2;
     color: #dc2626;
     border: 1px solid #fca5a5;
   }
+
   .btn.btn-danger:hover {
     background-color: #fee2e2;
   }
+
   .btn.btn-success {
     background-color: #f0fdf4;
     color: #16a34a;
     border: 1px solid #bbf7d0;
   }
+
   .btn.btn-success:hover {
     background-color: #dcfce7;
   }
+
   .btn.btn-warning {
     background-color: #fffbeb;
     color: #d97706;
     border: 1px solid #fde68a;
   }
+
   .btn.btn-warning:hover {
     background-color: #fef3c7;
   }
+
   .btn.btn-neutral {
     background-color: var(--bg);
     color: var(--text2);
     border: 1px solid var(--border);
   }
+
   .btn.btn-neutral:hover {
     background-color: var(--border);
   }
@@ -732,36 +857,44 @@ html.dark .card {
     font-weight: 600;
     white-space: nowrap;
   }
+
   .badge.b-active {
     background-color: #f0fdf4;
     color: #16a34a;
   }
+
   .badge.b-offline {
     background-color: var(--bg);
     color: var(--text3);
     border: 1px solid var(--border);
   }
+
   .badge.b-banned {
     background-color: #fef2f2;
     color: #dc2626;
   }
+
   .badge.b-pending {
     background-color: #fffbeb;
     color: #d97706;
   }
+
   .badge.b-ongoing {
     background-color: #f0fdf4;
     color: #16a34a;
     border: 1px solid #bbf7d0;
   }
+
   .badge.b-completed {
     background-color: var(--bg);
     color: var(--text3);
   }
+
   .badge.b-cancelled {
     background-color: #fef2f2;
     color: #dc2626;
   }
+
   .badge.b-verified {
     background-color: #f0fdfa;
     color: #0d9488;
@@ -773,6 +906,7 @@ html.dark .card {
     flex-wrap: wrap;
     align-items: center;
   }
+
   .fi {
     background-color: var(--bg);
     border: 1px solid var(--border);
@@ -783,6 +917,7 @@ html.dark .card {
     outline: none;
     transition: all 0.2s ease;
   }
+
   .fi:focus {
     border-color: var(--accent);
   }
@@ -793,6 +928,7 @@ html.dark .card {
     border-bottom: 1px solid var(--border);
     overflow-x: auto;
   }
+
   .tab {
     padding: 10px 16px;
     font-size: 12px;
@@ -804,17 +940,21 @@ html.dark .card {
     white-space: nowrap;
     transition: all 0.2s ease;
   }
+
   .tab:hover {
     color: var(--text);
   }
+
   .tab.active {
     border-bottom-color: var(--accent);
     color: var(--accent);
   }
+
   .tab.active .t-count {
     background-color: var(--accent-bg);
     color: var(--accent-txt);
   }
+
   .t-count {
     display: inline-flex;
     padding: 2px 6px;
@@ -831,6 +971,7 @@ html.dark .card {
     gap: 14px;
     padding-top: 2px;
   }
+
   .tab-panel.active {
     display: flex;
   }
@@ -841,6 +982,7 @@ html.dark .card {
     border-radius: 8px;
     overflow: hidden;
   }
+
   .mini-head {
     padding: 12px 16px;
     border-bottom: 1px solid var(--mc-border);
@@ -848,12 +990,14 @@ html.dark .card {
     align-items: center;
     gap: 8px;
   }
+
   .mini-head h4 {
     font-size: 13.5px;
     font-weight: 600;
     flex: 1;
     margin: 0;
   }
+
   .mini-count {
     font-size: 11px;
     font-family: monospace;
@@ -863,6 +1007,7 @@ html.dark .card {
     border-radius: 9999px;
     border: 1px solid var(--border);
   }
+
   .mini-row {
     display: flex;
     align-items: center;
@@ -870,9 +1015,11 @@ html.dark .card {
     padding: 8px 16px;
     border-bottom: 1px solid var(--border);
   }
+
   .mini-row:last-child {
     border-bottom: 0;
   }
+
   .mini-foot {
     padding: 8px 16px;
     border-top: 1px solid var(--border);
@@ -890,28 +1037,34 @@ html.dark .card {
     flex-shrink: 0;
     overflow: hidden;
   }
+
   .av img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 8px;
   }
+
   .av.av-blue {
     background-color: #eff6ff;
     color: #1d4ed8;
   }
+
   .av.av-green {
     background-color: #f0fdf4;
     color: #16a34a;
   }
+
   .av.av-red {
     background-color: #fef2f2;
     color: #dc2626;
   }
+
   .av.av-amber {
     background-color: #fffbeb;
     color: #d97706;
   }
+
   .av.av-gray {
     background-color: var(--bg);
     color: var(--text3);
@@ -921,6 +1074,7 @@ html.dark .card {
     font-size: 12px;
     font-weight: 500;
   }
+
   .mini-sub {
     font-size: 11.5px;
     color: var(--text3);
@@ -936,6 +1090,7 @@ html.dark .card {
     gap: 14px;
     align-items: start;
   }
+
   .appr-av {
     width: 44px;
     height: 44px;
@@ -948,16 +1103,19 @@ html.dark .card {
     flex-shrink: 0;
     overflow: hidden;
   }
+
   .appr-av img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 8px;
   }
+
   .appr-info {
     flex: 1;
     min-w: 0;
   }
+
   .appr-info h4 {
     font-size: 12px;
     font-weight: 600;
@@ -971,6 +1129,7 @@ html.dark .card {
     flex-wrap: wrap;
     margin: 4px 0;
   }
+
   .meta-it {
     font-size: 12px;
     color: var(--text2);
@@ -978,12 +1137,14 @@ html.dark .card {
     align-items: center;
     gap: 4px;
   }
+
   .chips {
     display: flex;
     gap: 4px;
     flex-wrap: wrap;
     margin-top: 6px;
   }
+
   .chip {
     font-size: 11px;
     padding: 2px 8px;
@@ -1016,6 +1177,7 @@ html.dark .card {
     line-height: normal;
     cursor: pointer;
   }
+
   .photo-box img {
     width: 100%;
     height: 100%;
@@ -1031,6 +1193,7 @@ html.dark .card {
     gap: 12px;
     align-items: start;
   }
+
   .ban-av {
     width: 36px;
     height: 36px;
@@ -1045,26 +1208,31 @@ html.dark .card {
     flex-shrink: 0;
     overflow: hidden;
   }
+
   .ban-av img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 8px;
   }
+
   .ban-uid {
     font-size: 11px;
     font-family: monospace;
     color: var(--text3);
   }
+
   .ban-name {
     font-size: 13.5px;
     font-weight: 600;
     margin: 2px 0;
   }
+
   .ban-date {
     font-size: 12px;
     color: var(--text3);
   }
+
   .ban-reason {
     font-size: 12.5px;
     color: var(--text2);
@@ -1093,12 +1261,14 @@ html.dark .card {
     vertical-align: middle;
     overflow: hidden;
   }
+
   .t-av img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 4px;
   }
+
   .td-with-av {
     display: flex;
     align-items: center;
@@ -1110,6 +1280,7 @@ html.dark .card {
     gap: 4px;
     align-items: center;
   }
+
   .pg {
     width: 30px;
     height: 30px;
@@ -1125,6 +1296,7 @@ html.dark .card {
     background-color: var(--surface);
     transition: all 0.2s ease;
   }
+
   .pg:hover {
     background-color: var(--accent);
     border-color: var(--accent);
@@ -1141,9 +1313,11 @@ html.dark .card {
     justify-content: center;
     backdrop-filter: blur(4px);
   }
+
   .modal-ov.open {
     display: flex;
   }
+
   .mc-modal {
     background-color: var(--mc-surface);
     border: 1px solid var(--mc-border);
@@ -1153,6 +1327,7 @@ html.dark .card {
     max-height: 90vh;
     overflow-y: auto;
   }
+
   .modal-hd {
     padding: 14px;
     border-bottom: 1px solid var(--border);
@@ -1160,15 +1335,18 @@ html.dark .card {
     align-items: center;
     gap: 8px;
   }
+
   .modal-hd h3 {
     flex: 1;
     font-size: 15px;
     font-weight: 600;
     margin: 0;
   }
+
   .modal-bd {
     padding: 18px;
   }
+
   .modal-ft {
     padding: 12px;
     border-top: 1px solid var(--border);
@@ -1180,6 +1358,7 @@ html.dark .card {
   .fg {
     margin-bottom: 12px;
   }
+
   .fg label {
     display: block;
     font-size: 10.5px;
@@ -1189,6 +1368,7 @@ html.dark .card {
     letter-spacing: 0.05em;
     margin-bottom: 6px;
   }
+
   .fc {
     width: 100%;
     background-color: var(--bg);
@@ -1200,6 +1380,7 @@ html.dark .card {
     outline: none;
     transition: all 0.2s ease;
   }
+
   .fc:focus {
     border-color: var(--accent);
   }
@@ -1210,6 +1391,7 @@ html.dark .card {
     border-radius: 18px;
     padding: 18px;
   }
+
   .ss-label {
     font-size: 10.5px;
     font-weight: 600;
@@ -1221,6 +1403,7 @@ html.dark .card {
     align-items: center;
     gap: 6px;
   }
+
   .ss-val {
     font-size: 30px;
     font-weight: 700;
@@ -1237,6 +1420,7 @@ html.dark .card {
     font-weight: 500;
     margin-bottom: 4px;
   }
+
   .flash-error {
     background-color: var(--red-bg);
     color: var(--red);
@@ -1272,6 +1456,7 @@ html.dark .card {
     flex-wrap: wrap;
     margin-top: 8px;
   }
+
   .doc-img-box {
     width: 72px;
     height: 88px;
@@ -1281,11 +1466,13 @@ html.dark .card {
     cursor: pointer;
     position: relative;
   }
+
   .doc-img-box img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
+
   .doc-img-box .doc-label {
     position: absolute;
     bottom: 0;
@@ -1318,14 +1505,17 @@ html.dark .card {
     display: inline-block;
     vertical-align: middle;
   }
+
   .h-icon--sm {
     width: 12px;
     height: 12px;
   }
+
   .h-icon--md {
     width: 15px;
     height: 15px;
   }
+
   .h-icon--lg {
     width: 16px;
     height: 16px;
@@ -1337,73 +1527,89 @@ html.dark .admin-dashboard-view {
   .td-pos {
     color: #4ade80;
   }
+
   .td-neg {
     color: #f87171;
   }
+
   .btn.btn-danger {
     background-color: rgba(153, 27, 27, 0.2);
     color: #fca5a5;
     border: 1px solid rgba(153, 27, 27, 0.4);
   }
+
   .btn.btn-danger:hover {
     background-color: rgba(153, 27, 27, 0.3);
   }
+
   .btn.btn-success {
     background-color: rgba(22, 101, 52, 0.2);
     color: #86efac;
     border: 1px solid rgba(22, 101, 52, 0.4);
   }
+
   .btn.btn-success:hover {
     background-color: rgba(22, 101, 52, 0.3);
   }
+
   .btn.btn-warning {
     background-color: rgba(180, 83, 9, 0.2);
     color: #fcd34d;
     border: 1px solid rgba(180, 83, 9, 0.4);
   }
+
   .btn.btn-warning:hover {
     background-color: rgba(180, 83, 9, 0.3);
   }
+
   .badge.b-active {
     background-color: rgba(22, 101, 52, 0.2);
     color: #86efac;
   }
+
   .badge.b-banned {
     background-color: rgba(153, 27, 27, 0.2);
     color: #fca5a5;
   }
+
   .badge.b-pending {
     background-color: rgba(180, 83, 9, 0.2);
     color: #fcd34d;
   }
+
   .badge.b-ongoing {
     background-color: rgba(22, 101, 52, 0.2);
     color: #86efac;
     border: 1px solid rgba(22, 101, 52, 0.4);
   }
+
   .badge.b-cancelled {
     background-color: rgba(153, 27, 27, 0.2);
     color: #fca5a5;
   }
+
   .badge.b-verified {
     background-color: rgba(13, 148, 136, 0.2);
     color: #2dd4bf;
   }
+
   .av.av-blue {
     background-color: rgba(29, 78, 216, 0.2);
     color: #93c5fd;
   }
+
   .av.av-green {
     background-color: rgba(22, 101, 52, 0.2);
     color: #86efac;
   }
+
   .av.av-red {
     background-color: rgba(153, 27, 27, 0.2);
     color: #fca5a5;
   }
+
   .av.av-amber {
     background-color: rgba(180, 83, 9, 0.2);
     color: #fcd34d;
   }
 }
-

@@ -40,6 +40,8 @@ class SessionRequestedNotification extends Notification
             ->greeting('হ্যালো ' . $notifiable->name . '!')
             ->line($this->session->student->name . ' আপনার কাছে "' . $this->session->topic . '" বিষয়ে একটি সেশনের অনুরোধ পাঠিয়েছেন।')
             ->line('নোট: ' . ($this->session->note ?? 'কোনো নোট নেই'))
+            ->line('মাধ্যম: ' . ($this->session->student->profile->preferred_teaching_medium ?? ' - '))
+            ->line('ভাষা: ' . ($this->session->student->profile->preferred_language ?? ' - '))
             ->line('কীভাবে শিখতে স্বাচ্ছন্দ্যবোধ করেন: ' . ($this->session->student->profile->learning_style ?? 'দেওয়া হয়নি'))
             ->action('অনুরোধ দেখুন', url('/dashboard/mentor'))
             ->line('অনুগ্রহ করে দ্রুত সাড়া দিন।');
@@ -61,6 +63,8 @@ class SessionRequestedNotification extends Notification
             'topic'       => $this->session->topic,
             'note'        => $this->session->note,
             'learning_style' => $this->session->student->profile->learning_style ?? '',
+            'preferred_teaching_medium' => $this->session->student->profile->preferred_teaching_medium ?? '',
+            'preferred_language' => $this->session->student->profile->preferred_language ?? '',
         ];
     }
 }

@@ -30,10 +30,12 @@ class MentorsController extends Controller
             ->keys();
 
         $query = User::where('role', UserRole::Mentor)
+            ->select('users.*')
             ->with('profile')
             ->join('profiles', 'users.id', '=', 'profiles.user_id')
             ->where('profiles.is_verified', true)
-            ->select('users.*');
+            ->withCount('reviews')
+            ->withAvg('reviews', 'rating');
 
         // Search
         if ($request->filled('search')) {
@@ -61,6 +63,11 @@ class MentorsController extends Controller
         // Filter by department
         if ($request->filled('departments')) {
             $query->whereIn('profiles.department', $request->departments);
+        }
+
+        // Filter by rating
+        if ($request->filled('rating') && $request->rating > 0) {
+            $query->whereRaw('(SELECT COALESCE(AVG(rating), 0) FROM reviews WHERE reviews.mentor_id = users.id) >= ?', [$request->rating]);
         }
 
         // Sorting
