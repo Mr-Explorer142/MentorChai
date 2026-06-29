@@ -341,6 +341,31 @@
                                     প্রতিটি দক্ষতার মাঝে কমা (,) ব্যবহার করুন
                                 </p>
                             </div>
+
+                            {{-- Preferred Language --}}
+                            <div class="mt-4">
+                                <label class="flex items-center gap-1.5 text-xs font-bold mb-2
+                                              text-[#033f63] dark:text-[#7ec8e3]">
+                                    আপনি কোন ভাষায় পড়াতে স্বাচ্ছন্দ্য বোধ করেন?
+                                </label>
+                                <div class="flex gap-4 pl-1">
+                                    @php
+                                        $selectedLanguage = old('preferred_language', Auth::user()->profile?->preferred_language);
+                                    @endphp
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="radio" name="preferred_language" value="বাংলা" class="w-4 h-4 text-[#28666e] focus:ring-[#28666e]" {{ $selectedLanguage === 'বাংলা' ? 'checked' : '' }}>
+                                        <span class="text-sm text-[#033f63] dark:text-[#7ec8e3]">বাংলা</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="radio" name="preferred_language" value="ইংরেজি" class="w-4 h-4 text-[#28666e] focus:ring-[#28666e]" {{ $selectedLanguage === 'ইংরেজি' ? 'checked' : '' }}>
+                                        <span class="text-sm text-[#033f63] dark:text-[#7ec8e3]">ইংরেজি</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="radio" name="preferred_language" value="বাংলা-ইংরেজি মিশ্রিত" class="w-4 h-4 text-[#28666e] focus:ring-[#28666e]" {{ $selectedLanguage === 'বাংলা-ইংরেজি মিশ্রিত' ? 'checked' : '' }}>
+                                        <span class="text-sm text-[#033f63] dark:text-[#7ec8e3]">বাংলা-ইংরেজি মিশ্রিত</span>
+                                    </label>
+                                </div>
+                            </div>
                             @endif
                         </div>
 

@@ -185,6 +185,24 @@
                             </div>
                         </div>
 
+                        {{-- Language --}}
+                        <div>
+                            <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">ভাষা</p>
+                            <div class="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                                @php
+                                    $languages = ['বাংলা', 'ইংরেজি', 'বাংলা-ইংরেজি মিশ্রিত'];
+                                @endphp
+                                @foreach ($languages as $lang)
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="checkbox" name="languages[]" value="{{ $lang }}" {{ in_array($lang,
+                                        request('languages', [])) ? 'checked' : '' }}
+                                        class="accent-teal-600 dark:accent-teal-400 w-4 h-4">
+                                    {{ $lang }}
+                                </label>
+                                @endforeach
+                            </div>
+                        </div>
+
                         {{-- Rating --}}
                         <div>
                             <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">
@@ -234,7 +252,7 @@
                         নামে / টপিকে
                         <span class="font-semibold text-gray-800 dark:text-gray-200">{{ $totalMentors }} জন</span>
                         মেন্টর পাওয়া গিয়েছে
-                        @elseif (request('skills') || request('departments') || request('price_min') ||
+                        @elseif (request('skills') || request('departments') || request('languages') || request('price_min') ||
                         request('price_max'))
                         ফিল্টার অনুযায়ী
                         <span class="font-semibold text-gray-800 dark:text-gray-200">{{ $totalMentors }} জন</span>
@@ -259,7 +277,7 @@
                         </svg>
                         ফিল্টার
                         {{-- Active filter dot --}}
-                        @if(request('skills') || request('departments') || request('price_min') || request('price_max'))
+                        @if(request('skills') || request('departments') || request('languages') || request('price_min') || request('price_max'))
                         <span class="w-2 h-2 rounded-full bg-teal-500 inline-block"></span>
                         @endif
                     </button>
@@ -584,6 +602,24 @@
                                     request('departments', [])) ? 'checked' : '' }}
                                     class="accent-teal-600 dark:accent-teal-400 w-4 h-4">
                                 {{ $dept }}
+                            </label>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    {{-- Language --}}
+                    <div>
+                        <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">ভাষা</p>
+                        <div class="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                            @php
+                                $languages = ['বাংলা', 'ইংরেজি', 'বাংলা-ইংরেজি মিশ্রিত'];
+                            @endphp
+                            @foreach ($languages as $lang)
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" name="languages[]" value="{{ $lang }}" {{ in_array($lang,
+                                    request('languages', [])) ? 'checked' : '' }}
+                                    class="accent-teal-600 dark:accent-teal-400 w-4 h-4">
+                                {{ $lang }}
                             </label>
                             @endforeach
                         </div>
