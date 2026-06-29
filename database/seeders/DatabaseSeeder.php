@@ -3,17 +3,22 @@
 namespace Database\Seeders;
 
 use App\Enums\UserRole;
+use App\Models\Profile;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
     /**
      * Seed the application's database.
+     *
+     * 15 users total:
+     *  - 8 students
+     *  - 7 mentors
+     *
+     * Each user gets a role-appropriate profile.
+     * All passwords are: password
      */
     public function run(): void
     {
@@ -28,5 +33,29 @@ class DatabaseSeeder extends Seeder
                 'email_verified_at' => now(),
             ]
         );
+
+        // ── 8 Students ────────────────────────────────────────────────
+        User::factory()
+            ->count(8)
+            ->student()
+            ->create()
+            ->each(function (User $user) {
+                $user->profile()->create(
+                    Profile::factory()->student()->make()->toArray()
+                );
+            });
+
+        // ── 7 Mentors ─────────────────────────────────────────────────
+        User::factory()
+            ->count(7)
+            ->mentor()
+            ->create()
+            ->each(function (User $user) {
+                $user->profile()->create(
+                    Profile::factory()->mentor()->make()->toArray()
+                );
+            });
+
+        $this->command->info('✅ 1 Super Admin + 15 users seeded: 8 students + 7 mentors (password: password)');
     }
 }
