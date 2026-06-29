@@ -184,8 +184,19 @@
                                                 </div>
                                                 @endif
                                                 
+                                                @php
+                                                    $pm = $topic->student?->profile?->preferred_teaching_medium;
+                                                    $pl = $topic->student?->profile?->preferred_language;
+                                                @endphp
+                                                @if(!empty($pm) || !empty($pl))
+                                                <div class="text-[11px] mt-1.5 text-base-content/70 max-w-[280px] leading-relaxed bg-base-content/5 p-2 rounded-lg border border-black/10 dark:border-white/10 space-y-1">
+                                                    @if(!empty($pm))<div><strong class="text-base-content/90">মাধ্যম:</strong> {{ $pm }}</div>@endif
+                                                    @if(!empty($pl))<div><strong class="text-base-content/90">ভাষা:</strong> {{ $pl }}</div>@endif
+                                                </div>
+                                                @endif
+                                                
                                                 @if(!empty($topic->student?->profile?->learning_style))
-                                                <div class="text-[11px] mt-1.5 text-base-content/70 max-w-[280px] leading-relaxed bg-base-content/5 p-2 rounded-lg">
+                                                <div class="text-[11px] mt-1.5 text-base-content/70 max-w-[280px] leading-relaxed bg-base-content/5 p-2 rounded-lg border border-black/20 dark:border-white/20">
                                                     <strong class="text-base-content/90">শেখার ধরন:</strong> {{ \Illuminate\Support\Str::limit($topic->student->profile->learning_style, 150) }}
                                                 </div>
                                                 @endif

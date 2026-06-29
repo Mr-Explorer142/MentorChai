@@ -184,14 +184,25 @@
                                                         </div>
                                                         @endif
                                                         
-                                                        {{-- Some old notifications might not have learning_style in data, we can fall back to loading from model if needed, but safe to just check data array --}}
                                                         @php 
                                                             $ls = $notification->data['learning_style'] ?? null; 
-                                                            if(!$ls && isset($notification->data['student_id'])) {
+                                                            $pm = $notification->data['preferred_teaching_medium'] ?? null;
+                                                            $pl = $notification->data['preferred_language'] ?? null;
+                                                            if((!$ls || !$pm || !$pl) && isset($notification->data['student_id'])) {
                                                                 $studentProfile = \App\Models\Profile::where('user_id', $notification->data['student_id'])->first();
-                                                                $ls = $studentProfile ? $studentProfile->learning_style : null;
+                                                                if ($studentProfile) {
+                                                                    $ls = $ls ?: $studentProfile->learning_style;
+                                                                    $pm = $pm ?: $studentProfile->preferred_teaching_medium;
+                                                                    $pl = $pl ?: $studentProfile->preferred_language;
+                                                                }
                                                             }
                                                         @endphp
+                                                        @if(!empty($pm) || !empty($pl))
+                                                        <div class="mt-1.5 mb-1.5 p-2 rounded-lg bg-teal-500/5 border border-teal-500/10 text-[11px] leading-relaxed text-[#033f63]/80 dark:text-[#7ec8e3]/80 space-y-1">
+                                                            @if(!empty($pm))<div><strong class="text-[#033f63] dark:text-[#7ec8e3]">মাধ্যম:</strong> {{ $pm }}</div>@endif
+                                                            @if(!empty($pl))<div><strong class="text-[#033f63] dark:text-[#7ec8e3]">ভাষা:</strong> {{ $pl }}</div>@endif
+                                                        </div>
+                                                        @endif
                                                         @if(!empty($ls))
                                                         <div class="mt-1.5 mb-2 p-2 rounded-lg bg-teal-500/5 border border-teal-500/10 text-[11px] leading-relaxed text-[#033f63]/80 dark:text-[#7ec8e3]/80">
                                                             <strong class="text-[#033f63] dark:text-[#7ec8e3]">শেখার ধরন:</strong> {{ \Illuminate\Support\Str::limit($ls, 100) }}

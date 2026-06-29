@@ -50,6 +50,12 @@ class ProfileController extends Controller
                 $table->text('learning_style')->nullable();
             });
         }
+        if (!\Illuminate\Support\Facades\Schema::hasColumn('profiles', 'preferred_teaching_medium')) {
+            \Illuminate\Support\Facades\Schema::table('profiles', function ($table) {
+                $table->string('preferred_teaching_medium')->nullable();
+                $table->string('preferred_language')->nullable();
+            });
+        }
         $user = Auth::user();
         $this->authorize('update', $user);
 
@@ -63,6 +69,8 @@ class ProfileController extends Controller
             'skills' => 'nullable|string|max:200',
             'hourly_rate' => 'nullable|string|max:200',
             'learning_style' => 'nullable|string|max:2000',
+            'preferred_teaching_medium' => 'nullable|string|max:100',
+            'preferred_language' => 'nullable|string|max:100',
             'nid_front' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
             'nid_back' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
             'student_id_front' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
@@ -119,7 +127,7 @@ class ProfileController extends Controller
             return back()->withErrors($validator)->withInput();
         }
 
-        return back()->with('success', 'প্রোফাইল সফলভাবে আপডেট করা হয়েছে 😁');
+        return back()->with('success', 'প্রোফাইল সফলভাবে আপডেট করা হয়েছে।');
     }
 
     function storeAchievement(Request $request)

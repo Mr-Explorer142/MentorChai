@@ -57,11 +57,6 @@
                                             dark:from-[#4db6c1] dark:to-[#9ab8a5]"></div>
                                 <h2 class="text-lg font-bold flex items-center gap-2
                                            text-[#033f63] dark:text-[#7ec8e3]" style="font-family:'Lora',serif;">
-                                    <svg class="w-5 h-5 text-[#28666e] dark:text-[#4db6c1]" fill="none"
-                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                                    </svg>
                                     ব্যক্তিগত তথ্য
                                 </h2>
                             </div>
@@ -70,11 +65,6 @@
                                 <div>
                                     <label class="flex items-center gap-1.5 text-xs font-bold mb-1.5
                                                   text-[#033f63] dark:text-[#7ec8e3]">
-                                        <svg class="w-3.5 h-3.5 text-[#28666e] dark:text-[#4db6c1]" fill="none"
-                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                                        </svg>
                                         নাম
                                     </label>
                                     <input type="text" name="name" class="w-full px-4 py-2.5 rounded-xl text-sm outline-none
@@ -96,11 +86,6 @@
                                 <label class="flex items-center justify-between mb-1.5">
                                     <span class="flex items-center gap-1.5 text-xs font-bold
                                                  text-[#033f63] dark:text-[#7ec8e3]">
-                                        <svg class="w-3.5 h-3.5 text-[#28666e] dark:text-[#4db6c1]" fill="none"
-                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12" />
-                                        </svg>
                                         ছোট বায়ো (হেডলাইন)
                                     </span>
                                     <span class="text-xs text-[#033f63]/45 dark:text-[#7ec8e3]/40">
@@ -127,11 +112,6 @@
                                 <label class="flex items-center justify-between mb-1.5">
                                     <span class="flex items-center gap-1.5 text-xs font-bold
                                                  text-[#033f63] dark:text-[#7ec8e3]">
-                                        <svg class="w-3.5 h-3.5 text-[#28666e] dark:text-[#4db6c1]" fill="none"
-                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
-                                        </svg>
                                         বিস্তারিত বায়ো
                                     </span>
                                     <span class="text-xs text-[#033f63]/45 dark:text-[#7ec8e3]/40">
@@ -154,15 +134,67 @@
                             {{-- Learning Style --}}
                             @if(Auth::user()->role === \App\Enums\UserRole::Student)
                             {{-- Learning Style --}}
+                            {{-- Structured Learning Preferences --}}
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4 mb-6">
+                                {{-- Preferred Teaching Medium --}}
+                                <div>
+                                    <label class="flex items-center gap-1.5 text-xs font-bold mb-2
+                                                  text-[#033f63] dark:text-[#7ec8e3]">
+                                        পড়ানোর ক্ষেত্রে কোন মাধ্যমটি আপনার জন্য সহজ ও সুবিধাজনক?
+                                    </label>
+                                    <div class="space-y-2 pl-5">
+                                        @php
+                                            $selectedMedium = old('preferred_teaching_medium', Auth::user()->profile?->preferred_teaching_medium);
+                                        @endphp
+                                        <label class="flex items-center gap-2 cursor-pointer">
+                                            <input type="radio" name="preferred_teaching_medium" value="ডিজিটাল কন্টেন্ট (স্লাইড/প্রেজেন্টেশন)" class="w-4 h-4 text-[#28666e] focus:ring-[#28666e]" {{ $selectedMedium === 'ডিজিটাল কন্টেন্ট (স্লাইড/প্রেজেন্টেশন)' ? 'checked' : '' }}>
+                                            <span class="text-sm text-[#033f63] dark:text-[#7ec8e3]">ডিজিটাল কন্টেন্ট (স্লাইড/প্রেজেন্টেশন)</span>
+                                        </label>
+                                        <label class="flex items-center gap-2 cursor-pointer">
+                                            <input type="radio" name="preferred_teaching_medium" value="হাতে লেখা/বোর্ডে বুঝানো" class="w-4 h-4 text-[#28666e] focus:ring-[#28666e]" {{ $selectedMedium === 'হাতে লেখা/বোর্ডে বুঝানো' ? 'checked' : '' }}>
+                                            <span class="text-sm text-[#033f63] dark:text-[#7ec8e3]">হাতে লেখা/বোর্ডে বুঝানো</span>
+                                        </label>
+                                        <label class="flex items-center gap-2 cursor-pointer">
+                                            <input type="radio" name="preferred_teaching_medium" value="দুটোর মিশ্রণ (ডিজিটাল + হাতে লেখা)" class="w-4 h-4 text-[#28666e] focus:ring-[#28666e]" {{ $selectedMedium === 'দুটোর মিশ্রণ (ডিজিটাল + হাতে লেখা)' ? 'checked' : '' }}>
+                                            <span class="text-sm text-[#033f63] dark:text-[#7ec8e3]">দুটোর মিশ্রণ (ডিজিটাল + হাতে লেখা)</span>
+                                        </label>
+                                        <label class="flex items-center gap-2 cursor-pointer">
+                                            <input type="radio" name="preferred_teaching_medium" value="(ঐচ্ছিক) নির্দিষ্ট কোনো পছন্দ নেই" class="w-4 h-4 text-[#28666e] focus:ring-[#28666e]" {{ $selectedMedium === '(ঐচ্ছিক) নির্দিষ্ট কোনো পছন্দ নেই' ? 'checked' : '' }}>
+                                            <span class="text-sm text-[#033f63] dark:text-[#7ec8e3]">(ঐচ্ছিক) নির্দিষ্ট কোনো পছন্দ নেই</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                {{-- Preferred Language --}}
+                                <div>
+                                    <label class="flex items-center gap-1.5 text-xs font-bold mb-2
+                                                  text-[#033f63] dark:text-[#7ec8e3]">
+                                        পড়ানোর সময় কোন ভাষায় আপনি স্বাচ্ছন্দ্য বোধ করেন?
+                                    </label>
+                                    <div class="space-y-2 pl-5">
+                                        @php
+                                            $selectedLanguage = old('preferred_language', Auth::user()->profile?->preferred_language);
+                                        @endphp
+                                        <label class="flex items-center gap-2 cursor-pointer">
+                                            <input type="radio" name="preferred_language" value="বাংলা" class="w-4 h-4 text-[#28666e] focus:ring-[#28666e]" {{ $selectedLanguage === 'বাংলা' ? 'checked' : '' }}>
+                                            <span class="text-sm text-[#033f63] dark:text-[#7ec8e3]">বাংলা</span>
+                                        </label>
+                                        <label class="flex items-center gap-2 cursor-pointer">
+                                            <input type="radio" name="preferred_language" value="ইংরেজি" class="w-4 h-4 text-[#28666e] focus:ring-[#28666e]" {{ $selectedLanguage === 'ইংরেজি' ? 'checked' : '' }}>
+                                            <span class="text-sm text-[#033f63] dark:text-[#7ec8e3]">ইংরেজি</span>
+                                        </label>
+                                        <label class="flex items-center gap-2 cursor-pointer">
+                                            <input type="radio" name="preferred_language" value="বাংলা-ইংরেজি মিশ্রিত" class="w-4 h-4 text-[#28666e] focus:ring-[#28666e]" {{ $selectedLanguage === 'বাংলা-ইংরেজি মিশ্রিত' ? 'checked' : '' }}>
+                                            <span class="text-sm text-[#033f63] dark:text-[#7ec8e3]">বাংলা-ইংরেজি মিশ্রিত</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div>
                                 <label class="flex items-center justify-between mb-1.5">
                                     <span class="flex items-center gap-1.5 text-xs font-bold
                                                  text-[#033f63] dark:text-[#7ec8e3]">
-                                        <svg class="w-3.5 h-3.5 text-[#28666e] dark:text-[#4db6c1]" fill="none"
-                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
-                                        </svg>
                                         আপনি কীভাবে শিখতে স্বাচ্ছন্দ্যবোধ করেন?
                                     </span>
                                     <span class="text-xs text-[#033f63]/45 dark:text-[#7ec8e3]/40">
@@ -193,11 +225,6 @@
                                             dark:from-[#4db6c1] dark:to-[#9ab8a5]"></div>
                                 <h2 class="text-lg font-bold flex items-center gap-2
                                            text-[#033f63] dark:text-[#7ec8e3]" style="font-family:'Lora',serif;">
-                                    <svg class="w-5 h-5 text-[#3d8a8f] dark:text-[#4db6c1]" fill="none"
-                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814" />
-                                    </svg>
                                     শিক্ষা ও পেশাগত তথ্য
                                 </h2>
                             </div>
@@ -209,11 +236,6 @@
                                 <div>
                                     <label class="flex items-center gap-1.5 text-xs font-bold mb-1.5
                                                   text-[#033f63] dark:text-[#7ec8e3]">
-                                        <svg class="w-3.5 h-3.5 text-[#3d8a8f] dark:text-[#4db6c1]" fill="none"
-                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814" />
-                                        </svg>
                                         শিক্ষাগত যোগ্যতা
                                     </label>
                                     <input type="text" name="highgest_education_level" class="w-full px-4 py-2.5 rounded-xl text-sm outline-none
@@ -232,11 +254,6 @@
                                 <div>
                                     <label class="flex items-center gap-1.5 text-xs font-bold mb-1.5
                                                   text-[#033f63] dark:text-[#7ec8e3]">
-                                        <svg class="w-3.5 h-3.5 text-[#3d8a8f] dark:text-[#4db6c1]" fill="none"
-                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
-                                        </svg>
                                         শিক্ষাপ্রতিষ্ঠানের নাম
                                     </label>
                                     <input type="text" name="institution_name" class="w-full px-4 py-2.5 rounded-xl text-sm outline-none
@@ -255,11 +272,6 @@
                                 <div class="lg:col-span-2">
                                     <label class="flex items-center gap-1.5 text-xs font-bold mb-1.5
                                                   text-[#033f63] dark:text-[#7ec8e3]">
-                                        <svg class="w-3.5 h-3.5 text-[#3d8a8f] dark:text-[#4db6c1]" fill="none"
-                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
-                                        </svg>
                                         অধ্যয়নের বিষয় (ডিপার্টমেন্ট)
                                     </label>
                                     <input type="text" name="department" class="w-full px-4 py-2.5 rounded-xl text-sm outline-none
@@ -280,11 +292,6 @@
                                 <div class="lg:col-span-2">
                                     <label class="flex items-center gap-1.5 text-xs font-bold mb-1.5
                                                   text-[#033f63] dark:text-[#7ec8e3]">
-                                        <svg class="w-3.5 h-3.5 text-green-500 dark:text-green-400" fill="none"
-                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
                                         ঘণ্টা প্রতি চার্জ (৳)
                                     </label>
                                     <input type="number" name="hourly_rate" class="w-full px-4 py-2.5 rounded-xl text-sm outline-none
@@ -308,11 +315,6 @@
                                 <label class="flex items-center justify-between mb-1.5">
                                     <span class="flex items-center gap-1.5 text-xs font-bold
                                                  text-[#033f63] dark:text-[#7ec8e3]">
-                                        <svg class="w-3.5 h-3.5 text-[#7c9885] dark:text-[#9ab8a5]" fill="none"
-                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
-                                        </svg>
                                         দক্ষতাসমূহ
                                     </span>
                                     <span class="text-xs text-[#033f63]/45 dark:text-[#7ec8e3]/40">
@@ -352,11 +354,6 @@
                                             dark:from-[#4db6c1] dark:to-[#9ab8a5]"></div>
                                 <h2 class="text-lg font-bold flex items-center gap-2
                                            text-[#033f63] dark:text-[#7ec8e3]" style="font-family:'Lora',serif;">
-                                    <svg class="w-5 h-5 text-[#28666e] dark:text-[#4db6c1]" fill="none"
-                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-                                    </svg>
                                     নথিপত্র (Documents)
                                 </h2>
                             </div>
@@ -366,11 +363,6 @@
                                 <div>
                                     <label class="flex items-center gap-1.5 text-xs font-bold mb-1.5
                                                   text-[#033f63] dark:text-[#7ec8e3]">
-                                        <svg class="w-3.5 h-3.5 text-[#28666e] dark:text-[#4db6c1]" fill="none"
-                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-                                        </svg>
                                         ন্যাশনাল আইডি (NID) - সামনের অংশ
                                     </label>
                                     <input type="file" name="nid_front" accept="image/*" class="w-full px-4 py-2.5 rounded-xl text-sm outline-none
@@ -395,11 +387,6 @@
                                 <div>
                                     <label class="flex items-center gap-1.5 text-xs font-bold mb-1.5
                                                   text-[#033f63] dark:text-[#7ec8e3]">
-                                        <svg class="w-3.5 h-3.5 text-[#28666e] dark:text-[#4db6c1]" fill="none"
-                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-                                        </svg>
                                         ন্যাশনাল আইডি (NID) - পিছনের অংশ
                                     </label>
                                     <input type="file" name="nid_back" accept="image/*" class="w-full px-4 py-2.5 rounded-xl text-sm outline-none
