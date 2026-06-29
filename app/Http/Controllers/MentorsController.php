@@ -54,15 +54,20 @@ class MentorsController extends Controller
         }
 
         // Filter by skills (multiple checkboxes)
-        if ($request->filled('skills')) {
+        if ($request->filled('skills') && is_array($request->skills)) {
             foreach ($request->skills as $skill) {
                 $query->where('profiles.skills', 'like', '%' . $skill . '%');
             }
         }
 
         // Filter by department
-        if ($request->filled('departments')) {
+        if ($request->filled('departments') && is_array($request->departments)) {
             $query->whereIn('profiles.department', $request->departments);
+        }
+
+        // Filter by language
+        if ($request->filled('languages') && is_array($request->languages)) {
+            $query->whereIn('profiles.preferred_language', $request->languages);
         }
 
         // Filter by rating
