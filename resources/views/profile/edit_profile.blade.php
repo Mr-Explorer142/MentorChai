@@ -63,7 +63,7 @@
 
                                 {{-- Name --}}
                                 <div>
-                                    <label class="flex items-center gap-1.5 text-xs font-bold mb-1.5
+                                    <label class="flex items-center gap-1.5 text-sm font-bold mb-1.5
                                                   text-[#033f63] dark:text-[#7ec8e3]">
                                         নাম
                                     </label>
@@ -84,7 +84,7 @@
                             {{-- Short Bio --}}
                             <div>
                                 <label class="flex items-center justify-between mb-1.5">
-                                    <span class="flex items-center gap-1.5 text-xs font-bold
+                                    <span class="flex items-center gap-1.5 text-sm font-bold
                                                  text-[#033f63] dark:text-[#7ec8e3]">
                                         ছোট বায়ো (হেডলাইন)
                                     </span>
@@ -110,7 +110,7 @@
                             {{-- Detailed Bio --}}
                             <div>
                                 <label class="flex items-center justify-between mb-1.5">
-                                    <span class="flex items-center gap-1.5 text-xs font-bold
+                                    <span class="flex items-center gap-1.5 text-sm font-bold
                                                  text-[#033f63] dark:text-[#7ec8e3]">
                                         বিস্তারিত বায়ো
                                     </span>
@@ -138,7 +138,7 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4 mb-6">
                                 {{-- Preferred Teaching Medium --}}
                                 <div>
-                                    <label class="flex items-center gap-1.5 text-xs font-bold mb-2
+                                    <label class="flex items-center gap-1.5 text-sm font-bold mb-2
                                                   text-[#033f63] dark:text-[#7ec8e3]">
                                         পড়ানোর ক্ষেত্রে কোন মাধ্যমটি আপনার জন্য সহজ ও সুবিধাজনক?
                                     </label>
@@ -167,7 +167,7 @@
 
                                 {{-- Preferred Language --}}
                                 <div>
-                                    <label class="flex items-center gap-1.5 text-xs font-bold mb-2
+                                    <label class="flex items-center gap-1.5 text-sm font-bold mb-2
                                                   text-[#033f63] dark:text-[#7ec8e3]">
                                         পড়ানোর সময় কোন ভাষায় আপনি স্বাচ্ছন্দ্য বোধ করেন?
                                     </label>
@@ -193,7 +193,7 @@
 
                             <div>
                                 <label class="flex items-center justify-between mb-1.5">
-                                    <span class="flex items-center gap-1.5 text-xs font-bold
+                                    <span class="flex items-center gap-1.5 text-sm font-bold
                                                  text-[#033f63] dark:text-[#7ec8e3]">
                                         আপনি কীভাবে শিখতে স্বাচ্ছন্দ্যবোধ করেন?
                                     </span>
@@ -234,7 +234,7 @@
 
                                 {{-- Education Level --}}
                                 <div>
-                                    <label class="flex items-center gap-1.5 text-xs font-bold mb-1.5
+                                    <label class="flex items-center gap-1.5 text-sm font-bold mb-1.5
                                                   text-[#033f63] dark:text-[#7ec8e3]">
                                         শিক্ষাগত যোগ্যতা
                                     </label>
@@ -252,7 +252,7 @@
 
                                 {{-- Institution --}}
                                 <div>
-                                    <label class="flex items-center gap-1.5 text-xs font-bold mb-1.5
+                                    <label class="flex items-center gap-1.5 text-sm font-bold mb-1.5
                                                   text-[#033f63] dark:text-[#7ec8e3]">
                                         শিক্ষাপ্রতিষ্ঠানের নাম
                                     </label>
@@ -270,7 +270,7 @@
 
                                 {{-- Department --}}
                                 <div class="lg:col-span-2">
-                                    <label class="flex items-center gap-1.5 text-xs font-bold mb-1.5
+                                    <label class="flex items-center gap-1.5 text-sm font-bold mb-1.5
                                                   text-[#033f63] dark:text-[#7ec8e3]">
                                         অধ্যয়নের বিষয় (ডিপার্টমেন্ট)
                                     </label>
@@ -290,7 +290,7 @@
                                 @if(Auth::user()->role === \App\Enums\UserRole::Mentor)
                                 {{-- Hourly Rate --}}
                                 <div class="lg:col-span-2">
-                                    <label class="flex items-center gap-1.5 text-xs font-bold mb-1.5
+                                    <label class="flex items-center gap-1.5 text-sm font-bold mb-1.5
                                                   text-[#033f63] dark:text-[#7ec8e3]">
                                         ঘণ্টা প্রতি চার্জ (৳)
                                     </label>
@@ -313,7 +313,7 @@
                             {{-- Skills --}}
                             <div>
                                 <label class="flex items-center justify-between mb-1.5">
-                                    <span class="flex items-center gap-1.5 text-xs font-bold
+                                    <span class="flex items-center gap-1.5 text-sm font-bold
                                                  text-[#033f63] dark:text-[#7ec8e3]">
                                         দক্ষতাসমূহ
                                     </span>
@@ -344,7 +344,7 @@
 
                             {{-- Preferred Language --}}
                             <div class="mt-4">
-                                <label class="flex items-center gap-1.5 text-xs font-bold mb-2
+                                <label class="flex items-center gap-1.5 text-sm font-bold mb-2
                                               text-[#033f63] dark:text-[#7ec8e3]">
                                     আপনি কোন ভাষায় পড়াতে স্বাচ্ছন্দ্য বোধ করেন?
                                 </label>
@@ -386,7 +386,7 @@
                             <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
                                 {{-- NID Front --}}
                                 <div>
-                                    <label class="flex items-center gap-1.5 text-xs font-bold mb-1.5
+                                    <label class="flex items-center gap-1.5 text-sm font-bold mb-1.5
                                                   text-[#033f63] dark:text-[#7ec8e3]">
                                         ন্যাশনাল আইডি (NID) - সামনের অংশ
                                     </label>
@@ -410,7 +410,7 @@
 
                                 {{-- NID Back --}}
                                 <div>
-                                    <label class="flex items-center gap-1.5 text-xs font-bold mb-1.5
+                                    <label class="flex items-center gap-1.5 text-sm font-bold mb-1.5
                                                   text-[#033f63] dark:text-[#7ec8e3]">
                                         ন্যাশনাল আইডি (NID) - পিছনের অংশ
                                     </label>
@@ -434,7 +434,7 @@
 
                                 {{-- Student ID Front --}}
                                 <div>
-                                    <label class="flex items-center gap-1.5 text-xs font-bold mb-1.5
+                                    <label class="flex items-center gap-1.5 text-sm font-bold mb-1.5
                                                   text-[#033f63] dark:text-[#7ec8e3]">
                                         <svg class="w-3.5 h-3.5 text-[#28666e] dark:text-[#4db6c1]" fill="none"
                                             viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
@@ -463,7 +463,7 @@
 
                                 {{-- Student ID Back --}}
                                 <div>
-                                    <label class="flex items-center gap-1.5 text-xs font-bold mb-1.5
+                                    <label class="flex items-center gap-1.5 text-sm font-bold mb-1.5
                                                   text-[#033f63] dark:text-[#7ec8e3]">
                                         <svg class="w-3.5 h-3.5 text-[#28666e] dark:text-[#4db6c1]" fill="none"
                                             viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">

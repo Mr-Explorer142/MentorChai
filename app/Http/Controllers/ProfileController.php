@@ -45,17 +45,7 @@ class ProfileController extends Controller
 
     function updateProfile(Request $request)
     {
-        if (!\Illuminate\Support\Facades\Schema::hasColumn('profiles', 'learning_style')) {
-            \Illuminate\Support\Facades\Schema::table('profiles', function ($table) {
-                $table->text('learning_style')->nullable();
-            });
-        }
-        if (!\Illuminate\Support\Facades\Schema::hasColumn('profiles', 'preferred_teaching_medium')) {
-            \Illuminate\Support\Facades\Schema::table('profiles', function ($table) {
-                $table->string('preferred_teaching_medium')->nullable();
-                $table->string('preferred_language')->nullable();
-            });
-        }
+
         $user = Auth::user();
         $this->authorize('update', $user);
 
