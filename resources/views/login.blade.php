@@ -5,7 +5,7 @@
     ═══════════════════════════════════════════ --}}
 
     {{-- Page wrapper --}}
-    <div class="relative min-h-screen overflow-hidden flex items-center justify-center px-4 py-16
+    <div class="relative min-h-screen overflow-hidden flex items-center justify-center px-4 py-8 sm:py-16
                 bg-linear-to-br from-[#eef7f8] via-[#f8fdfe] to-[#f0f9f4]
                 dark:from-[#0f1f2e] dark:via-[#1a2e3b] dark:to-[#0f2a20]
                 transition-colors duration-300">
@@ -20,14 +20,14 @@
                     bg-[radial-gradient(circle,rgba(124,152,133,0.07),transparent_70%)]
                     dark:bg-[radial-gradient(circle,rgba(154,184,165,0.06),transparent_70%)]"></div>
 
-        <div class="w-full max-w-[420px] relative z-10">
+        <div class="w-full max-w-[340px] sm:max-w-[420px] relative z-10 mx-auto">
 
             {{-- Brand Header --}}
-            <div class="text-center mb-7">
-                <div class="w-[60px] h-[60px] rounded-[18px] mx-auto mb-4
+            <div class="text-center mb-5 sm:mb-8">
+                <div class="hidden sm:flex w-[60px] h-[60px] rounded-[18px] mx-auto mb-4
                             bg-linear-to-br from-[#28666e] to-[#033f63]
                             dark:from-[#4db6c1] dark:to-[#28666e]
-                            flex items-center justify-center
+                            items-center justify-center
                             shadow-[0_6px_20px_rgba(40,102,110,0.25)] dark:shadow-[0_6px_20px_rgba(77,182,193,0.2)]">
                     <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke-width="2"
                         stroke="currentColor">
@@ -35,37 +35,36 @@
                             d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
                     </svg>
                 </div>
-                <h1 class="font-[Lora,serif] text-[1.6rem] font-bold block
+                <h1 class="font-[Lora,serif] text-xl sm:text-[1.85rem] font-bold block
                            bg-linear-to-br from-[#28666e] via-[#033f63] to-[#7c9885]
                            dark:from-[#4db6c1] dark:via-[#7ec8e3] dark:to-[#9ab8a5]
                            bg-clip-text text-transparent">MentorChai</h1>
-                <p class="text-sm mt-1 text-[#033f63]/50 dark:text-[#7ec8e3]/50">আপনার অ্যাকাউন্টে লগইন করুন</p>
+                <p class="text-xs sm:text-sm mt-0.5 text-[#033f63]/50 dark:text-[#7ec8e3]/50">আপনার অ্যাকাউন্টে লগইন করুন</p>
             </div>
 
-            {{-- Card --}}
+            {{-- Card Container --}}
             <div class="bg-white dark:bg-[#1a2e3b]
                         rounded-3xl border border-[#28666e]/10 dark:border-[#4db6c1]/15
                         shadow-[0_8px_40px_rgba(40,102,110,0.1)] dark:shadow-[0_8px_40px_rgba(0,0,0,0.4)]
-                        p-9
+                        p-5 sm:p-9
                         animate-[authFadeUp_0.4s_ease_both]
                         transition-colors duration-300">
 
-                {{-- Social Login --}}
-                <div class="flex flex-col gap-2.5 mb-1">
+                {{-- Social Login (Side by side on mobile) --}}
+                <div class="grid grid-cols-2 gap-2.5 mb-1">
 
                     {{-- Google --}}
                     <a href="{{ route('social.redirect', ['provider' => 'google', 'role' => 'login']) }}"
-                        class="w-full flex items-center justify-center gap-2.5
-                                  px-4 py-2.5 rounded-xl
-                                  border-[1.5px] border-[#28666e]/18 dark:border-[#4db6c1]/20
-                                  bg-[#eef7f8]/40 dark:bg-[#0f1f2e]/40
+                        class="flex items-center justify-center gap-1.5
+                                  px-3 py-2 rounded-xl
+                                  border border-[#28666e]/18 dark:border-[#4db6c1]/20
+                                  bg-white dark:bg-[#0f1f2e]/40
                                   text-[#033f63] dark:text-[#7ec8e3]
-                                  text-sm font-semibold font-[Nunito,sans-serif] no-underline
+                                  text-xs sm:text-sm font-semibold font-[Nunito,sans-serif] no-underline
                                   cursor-pointer transition-all duration-200
                                   hover:bg-white dark:hover:bg-[#243d4d]
-                                  hover:border-[#28666e]/35 dark:hover:border-[#4db6c1]/40
-                                  hover:shadow-[0_3px_12px_rgba(40,102,110,0.1)] dark:hover:shadow-[0_3px_12px_rgba(0,0,0,0.3)]">
-                        <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                                  hover:border-[#28666e]/35 dark:hover:border-[#4db6c1]/40">
+                        <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="currentColor">
                             <path
                                 d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
                                 fill="#4285F4" />
@@ -79,39 +78,38 @@
                                 d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
                                 fill="#EA4335" />
                         </svg>
-                        Google দিয়ে লগইন করুন
+                        Google
                     </a>
 
                     {{-- GitHub --}}
                     <a href="{{ route('social.redirect', ['provider' => 'github', 'role' => 'login']) }}"
-                        class="w-full flex items-center justify-center gap-2.5
-                                  px-4 py-2.5 rounded-xl
-                                  border-[1.5px] border-[#28666e]/18 dark:border-[#4db6c1]/20
-                                  bg-[#eef7f8]/40 dark:bg-[#0f1f2e]/40
+                        class="flex items-center justify-center gap-1.5
+                                  px-3 py-2 rounded-xl
+                                  border border-[#28666e]/18 dark:border-[#4db6c1]/20
+                                  bg-white dark:bg-[#0f1f2e]/40
                                   text-[#033f63] dark:text-[#7ec8e3]
-                                  text-sm font-semibold font-[Nunito,sans-serif] no-underline
+                                  text-xs sm:text-sm font-semibold font-[Nunito,sans-serif] no-underline
                                   cursor-pointer transition-all duration-200
                                   hover:bg-white dark:hover:bg-[#243d4d]
-                                  hover:border-[#28666e]/35 dark:hover:border-[#4db6c1]/40
-                                  hover:shadow-[0_3px_12px_rgba(40,102,110,0.1)] dark:hover:shadow-[0_3px_12px_rgba(0,0,0,0.3)]">
-                        <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                                  hover:border-[#28666e]/35 dark:hover:border-[#4db6c1]/40">
+                        <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="currentColor">
                             <path
                                 d="M12 0C5.37 0 0 5.373 0 12c0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.73.083-.73 1.205.085 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.76-1.604-2.665-.305-5.466-1.332-5.466-5.93 0-1.31.468-2.38 1.235-3.22-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.3 1.23a11.52 11.52 0 013.003-.404c1.02.005 2.046.138 3.003.404 2.29-1.552 3.297-1.23 3.297-1.23.653 1.652.242 2.873.118 3.176.77.84 1.233 1.91 1.233 3.22 0 4.61-2.804 5.622-5.476 5.92.43.372.814 1.103.814 2.222 0 1.606-.015 2.898-.015 3.293 0 .322.216.695.825.577C20.565 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
                         </svg>
-                        GitHub দিয়ে লগইন করুন
+                        GitHub
                     </a>
 
                 </div>
 
                 {{-- Social auth error --}}
                 @error('social')
-                    <div class="mt-1 mb-1 px-4 py-2.5 rounded-xl bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-700/40 text-sm text-red-600 dark:text-red-400 font-[Nunito,sans-serif]">
+                    <div class="mt-1 mb-1 px-4 py-2 rounded-xl bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-700/40 text-xs text-red-600 dark:text-red-400 font-[Nunito,sans-serif]">
                         {{ $message }}
                     </div>
                 @enderror
 
                 {{-- Divider --}}
-                <div class="flex items-center gap-3 my-5
+                <div class="flex items-center gap-3 my-3.5 sm:my-5
                             text-[#033f63]/40 dark:text-[#7ec8e3]/40 text-xs
                             before:flex-1 before:h-px before:bg-[#28666e]/12 dark:before:bg-[#4db6c1]/15
                             after:flex-1 after:h-px after:bg-[#28666e]/12 dark:after:bg-[#4db6c1]/15">
@@ -119,13 +117,13 @@
                 </div>
 
                 {{-- Login Form --}}
-                <form action="{{ route('login') }}" method="POST" class="flex flex-col gap-4">
+                <form action="{{ route('login') }}" method="POST" class="flex flex-col gap-3.5">
                     @csrf
 
                     {{-- Email --}}
                     <div>
                         <label
-                            class="flex items-center gap-1.5 text-[0.82rem] font-bold text-[#033f63] dark:text-[#7ec8e3] mb-1.5">
+                            class="hidden sm:flex items-center gap-1.5 text-[0.82rem] font-bold text-[#033f63] dark:text-[#7ec8e3] mb-1.5">
                             <svg class="w-3.5 h-3.5 text-[#28666e] dark:text-[#4db6c1]" fill="none" viewBox="0 0 24 24"
                                 stroke-width="2" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -133,10 +131,10 @@
                             </svg>
                             ই-মেইল
                         </label>
-                        <input type="email" name="email" placeholder="আপনার ই-মেইল দিন" required class="w-full px-4 py-2.5 rounded-xl text-[0.9rem]
+                        <input type="email" name="email" placeholder="আপনার ই-মেইল" required class="w-full px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-[0.9rem]
                                       font-[Nunito,sans-serif] outline-none
                                       border-[1.5px] border-[#28666e]/18 dark:border-[#4db6c1]/20
-                                      bg-[#eef7f8]/50 dark:bg-[#0f1f2e]/50
+                                      bg-white dark:bg-[#0f1f2e]/50
                                       text-[#033f63] dark:text-[#7ec8e3]
                                       placeholder:text-[#033f63]/35 dark:placeholder:text-[#7ec8e3]/30
                                       transition-all duration-200
@@ -148,7 +146,7 @@
                     {{-- Password --}}
                     <div>
                         <label
-                            class="flex items-center gap-1.5 text-[0.82rem] font-bold text-[#033f63] dark:text-[#7ec8e3] mb-1.5">
+                            class="hidden sm:flex items-center gap-1.5 text-[0.82rem] font-bold text-[#033f63] dark:text-[#7ec8e3] mb-1.5">
                             <svg class="w-3.5 h-3.5 text-[#28666e] dark:text-[#4db6c1]" fill="none" viewBox="0 0 24 24"
                                 stroke-width="2" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -156,10 +154,10 @@
                             </svg>
                             পাসওয়ার্ড
                         </label>
-                        <input type="password" name="password" placeholder="পাসওয়ার্ড দিন" required class="w-full px-4 py-2.5 rounded-xl text-[0.9rem]
+                        <input type="password" name="password" placeholder="পাসওয়ার্ড" required class="w-full px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-[0.9rem]
                                       font-[Nunito,sans-serif] outline-none
                                       border-[1.5px] border-[#28666e]/18 dark:border-[#4db6c1]/20
-                                      bg-[#eef7f8]/50 dark:bg-[#0f1f2e]/50
+                                      bg-white dark:bg-[#0f1f2e]/50
                                       text-[#033f63] dark:text-[#7ec8e3]
                                       placeholder:text-[#033f63]/35 dark:placeholder:text-[#7ec8e3]/30
                                       transition-all duration-200
@@ -170,22 +168,22 @@
 
                     {{-- Remember & Forgot --}}
                     <div class="flex items-center justify-between">
-                        <label class="flex items-center gap-2 cursor-pointer">
+                        <label class="flex items-center gap-1.5 cursor-pointer">
                             <input type="checkbox" name="remember"
-                                class="accent-[#28666e] dark:accent-[#4db6c1] w-[15px] h-[15px] cursor-pointer" />
-                            <span class="text-xs font-semibold text-[#033f63] dark:text-[#7ec8e3]">তথ্য সেভ রাখুন</span>
+                                class="accent-[#28666e] dark:accent-[#4db6c1] w-[14px] h-[14px] cursor-pointer" />
+                            <span class="text-[10px] sm:text-xs font-semibold text-[#033f63] dark:text-[#7ec8e3]">তথ্য সেভ রাখুন</span>
                         </label>
-                        <a href="#" class="text-xs font-semibold text-[#28666e] dark:text-[#4db6c1] hover:underline">
+                        <a href="#" class="text-[10px] sm:text-xs font-semibold text-[#28666e] dark:text-[#4db6c1] hover:underline">
                             পাসওয়ার্ড ভুলেছেন?
                         </a>
                     </div>
 
                     {{-- Submit --}}
                     <button type="submit" class="w-full flex items-center justify-center gap-2
-                                   px-4 py-[0.72rem] rounded-xl
+                                   px-4 py-2.5 sm:py-[0.72rem] rounded-xl
                                    bg-[#28666e] dark:bg-[#4db6c1]
                                    text-white dark:text-[#0f1f2e]
-                                   text-[0.9rem] font-bold font-[Nunito,sans-serif]
+                                   text-xs sm:text-[0.9rem] font-bold font-[Nunito,sans-serif]
                                    border-none cursor-pointer no-underline
                                    transition-all duration-200
                                    hover:bg-[#1a4a52] dark:hover:bg-[#38a8b5]
@@ -198,44 +196,18 @@
                         লগইন করুন
                     </button>
 
-                    {{-- Admin Login --}}
-                    <a href="{{ route('admin_login') }}" class="w-full flex items-center justify-center gap-2
-                              px-4 py-[0.55rem] rounded-xl
-                              bg-transparent text-[#28666e] dark:text-[#4db6c1]
-                              text-[0.8rem] font-bold font-[Nunito,sans-serif] no-underline
-                              border-[1.5px] border-dashed border-[#28666e] dark:border-[#4db6c1]/60
-                              cursor-pointer transition-all duration-200
-                              hover:bg-[#28666e]/6 dark:hover:bg-[#4db6c1]/10
-                              hover:shadow-[0_4px_12px_rgba(40,102,110,0.12)]
-                              hover:-translate-y-px active:translate-y-0">
-                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
-                        </svg>
-                        অ্যাডমিন লগইন
-                    </a>
                 </form>
 
-                {{-- Register link --}}
-                <div class="mt-5 rounded-2xl text-center px-5 py-4
-                            bg-[#eef7f8]/60 dark:bg-[#0f1f2e]/50
-                            border border-[#28666e]/10 dark:border-[#4db6c1]/10">
-                    <p class="text-xs mb-3 text-[#033f63]/55 dark:text-[#7ec8e3]/50">MentorChai-তে নতুন?</p>
-                    <a href="{{ route('student_register') }}" class="w-full flex items-center justify-center gap-2
-                              px-4 py-[0.68rem] rounded-xl
-                              bg-transparent text-[#28666e] dark:text-[#4db6c1]
-                              text-sm font-bold font-[Nunito,sans-serif] no-underline
-                              border-[1.5px] border-[#28666e] dark:border-[#4db6c1]/60
-                              cursor-pointer transition-all duration-200
-                              hover:bg-[#28666e]/6 dark:hover:bg-[#4db6c1]/10
-                              hover:shadow-[0_4px_12px_rgba(40,102,110,0.12)]
-                              hover:-translate-y-px active:translate-y-0">
-                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
-                        </svg>
-                        নতুন অ্যাকাউন্ট খুলুন
-                    </a>
+                {{-- Clean Inline Link Footer --}}
+                <div class="mt-6 text-center text-xs space-y-2.5 text-[#033f63]/60 dark:text-[#7ec8e3]/60">
+                    <p>
+                        MentorChai-তে নতুন? 
+                        <a href="{{ route('student_register') }}" class="text-[#28666e] dark:text-[#4db6c1] font-bold hover:underline">নতুন অ্যাকাউন্ট খুলুন</a>
+                    </p>
+                    <p>
+                        আপনি কি অ্যাডমিন? 
+                        <a href="{{ route('admin_login') }}" class="text-[#28666e] dark:text-[#4db6c1] font-bold hover:underline">এখানে লগইন করুন</a>
+                    </p>
                 </div>
 
             </div>
@@ -246,7 +218,7 @@
                         px-4 py-3.5 rounded-xl
                         bg-red-50 dark:bg-red-900/20
                         border border-red-200/60 dark:border-red-700/40
-                        text-sm text-red-700 dark:text-red-400">
+                        text-xs sm:text-sm text-red-700 dark:text-red-400">
                 <svg class="w-4 h-4 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round"

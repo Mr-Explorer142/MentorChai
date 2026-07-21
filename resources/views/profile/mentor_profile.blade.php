@@ -32,23 +32,23 @@
         ══════════════════════ --}}
         <div class="rounded-2xl border transition-shadow duration-300 hover:shadow-xl"
             style="background: var(--mc-surface); border-color: var(--mc-border-teal-sub); box-shadow: var(--mc-shadow-sm);">
-            <div class="p-6 sm:p-8">
-                <div class="flex flex-col lg:flex-row gap-8 items-center lg:items-start">
+            <div class="p-4 sm:p-8">
+                <div class="flex flex-col lg:flex-row gap-6 sm:gap-8 items-center lg:items-start">
 
                     {{-- Avatar Container --}}
-                    <div class="relative shrink-0" style="width:112px; height:112px;">
+                    <div class="relative shrink-0 w-[90px] h-[90px] sm:w-[112px] sm:h-[112px]">
                         {{-- Avatar Circle --}}
-                        <div class="group" style="width:112px;height:112px;border-radius:9999px;overflow:hidden;
-                                    border:4px solid var(--mc-surface);
-                                    box-shadow:var(--mc-shadow-md),0 0 0 3px var(--mc-border-teal);
+                        <div class="group w-full h-full rounded-full overflow-hidden
+                                    border-[3px] sm:border-4 border-[var(--mc-surface)]
+                                    shadow-[var(--mc-shadow-md)] ring-2 sm:ring-3 ring-[var(--mc-border-teal)]
                                     transition:box-shadow .2s;">
                             @if($mentor->profile && $mentor->profile->avatar)
                             <img id="profileAvatarImg" src="{{ asset('storage/' . $mentor->profile->avatar) }}"
-                                alt="Profile Photo" style="width:100%;height:100%;object-fit:cover;display:block;" />
+                                alt="Profile Photo" class="w-full h-full object-cover block" />
                             @else
                             <img id="profileAvatarImg"
                                 src="https://ui-avatars.com/api/?name={{ urlencode($mentor->name) }}&background=28666e&color=ffffff&size=224&font-size=0.38&bold=true"
-                                alt="Profile Photo" style="width:100%;height:100%;object-fit:cover;display:block;" />
+                                alt="Profile Photo" class="w-full h-full object-cover block" />
                             @endif
                         </div>
 
@@ -59,7 +59,7 @@
                             onsubmit="return confirm('নিশ্চিতভাবে প্রোফাইল ছবি সরাবেন?');">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" title="ছবি সরিয়ে দিন" style="width:32px; height:32px; border-radius:9999px;
+                            <button type="submit" title="ছবি সরিয়ে দিন" style="width:28px; height:28px; border-radius:9999px;
                                            background:#ef4444; border:2px solid #fff; cursor:pointer;
                                            display:flex; align-items:center; justify-content:center;
                                            box-shadow:0 2px 8px rgba(239,68,68,0.4);
@@ -67,7 +67,7 @@
                                 onmouseover="this.style.background='#dc2626'; this.style.transform='scale(1.15)';"
                                 onmouseout="this.style.background='#ef4444'; this.style.transform='scale(1)';"
                                 onclick="event.stopPropagation();">
-                                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
+                                <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
                                     stroke="#fff">
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
@@ -78,18 +78,18 @@
                     </div>
 
                     {{-- Name & Info --}}
-                    <div class="flex-1 text-center lg:text-left space-y-3">
-                        <div class="space-y-3">
-                            <h1 class="text-3xl sm:text-4xl font-bold"
+                    <div class="flex-1 text-center lg:text-left space-y-2">
+                        <div class="space-y-2">
+                            <h1 class="text-2xl sm:text-4xl font-bold"
                                 style="font-family:'Lora',serif; background: linear-gradient(135deg, var(--mc-primary), var(--mc-navy)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">
                                 {{ $mentor->name }}
                             </h1>
 
-                            <div class="flex items-center justify-center lg:justify-start gap-2 flex-wrap">
+                            <div class="flex items-center justify-center lg:justify-start gap-1.5 flex-wrap">
                                 @if($mentor->profile && $mentor->profile->is_verified)
                                 <span
-                                    class="inline-flex items-center gap-1.5 px-3 py-1 text-sm font-bold text-green-700 bg-green-100 rounded-full border border-green-200 shadow-sm">
-                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    class="inline-flex items-center gap-1 px-2 py-0.5 text-xs sm:text-sm font-bold text-green-700 bg-green-100 rounded-full border border-green-200 shadow-sm">
+                                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd"
                                             d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
                                             clip-rule="evenodd" />
@@ -98,8 +98,8 @@
                                 </span>
                                 @else
                                 <span
-                                    class="inline-flex items-center gap-1.5 px-3 py-1 text-sm font-bold text-red-700 bg-red-50 rounded-full border border-red-200 shadow-sm">
-                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    class="inline-flex items-center gap-1 px-2 py-0.5 text-xs sm:text-sm font-bold text-red-700 bg-red-50 rounded-full border border-red-200 shadow-sm">
+                                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd"
                                             d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z"
                                             clip-rule="evenodd" />
@@ -109,23 +109,23 @@
                                 @endif
                             </div>
 
-                            <div class="flex items-center justify-center lg:justify-start gap-2 flex-wrap">
+                            <div class="flex items-center justify-center lg:justify-start gap-1.5 flex-wrap">
                                 <span
-                                    class="inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-full border"
+                                    class="inline-flex items-center gap-1 text-[10px] sm:text-xs font-bold px-2 py-0.5 rounded-full border"
                                     style="background: rgba(40,102,110,0.1); border-color: var(--mc-border-teal); color: var(--mc-primary);">
-                                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                    <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke-width="2"
                                         stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
                                     {{ ucfirst($mentor->role->value) }}
                                 </span>
-                                <span class="text-sm font-medium" style="color: var(--mc-text-muted);">
+                                <span class="text-xs sm:text-sm font-medium" style="color: var(--mc-text-muted);">
                                     ইউজার আইডি: #{{ $mentor->id }}
                                 </span>
                             </div>
                         </div>
-                        <p class="text-base md:text-lg font-medium italic leading-relaxed mt-1"
+                        <p class="text-sm sm:text-base md:text-lg font-medium italic leading-relaxed mt-1"
                             style="color: var(--mc-text);">
                             {{ $mentor->profile->short_bio ?? 'এখনো শর্ট বায়ো যোগ করা হয়নি' }}
                         </p>
@@ -135,17 +135,17 @@
                     @if (auth()->id() === $mentor->id)
                     <div class="text-center lg:text-right shrink-0">
                         <button type="button" onclick="document.getElementById('profileAvatarModal').showModal()"
-                            class="cursor-pointer inline-flex items-center gap-2 px-4 py-2 rounded-xl border-2 text-sm font-bold transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
+                            class="cursor-pointer inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border-[1.5px] sm:border-2 text-xs sm:text-sm font-bold transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
                             style="border-color: var(--mc-primary); color: var(--mc-primary); background: transparent;"
                             onmouseover="this.style.background='var(--mc-primary)';this.style.color='white'"
                             onmouseout="this.style.background='transparent';this.style.color='var(--mc-primary)'">
-                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
                             </svg>
                             ফটো আপলোড
                         </button>
-                        <p class="mt-2 text-xs" style="color: var(--mc-text-faint);">800×800 পিক্সেল · JPG বা PNG</p>
+                        <p class="mt-1.5 text-[10px] sm:text-xs" style="color: var(--mc-text-faint);">800×800 পিক্সেল · JPG বা PNG</p>
                     </div>
                     @endif
                 </div>
@@ -159,12 +159,12 @@
             style="background: var(--mc-surface); border-color: var(--mc-border-teal-sub); box-shadow: var(--mc-shadow-sm);">
 
             {{-- Personal Info --}}
-            <div class="p-6 sm:p-8 border-b" style="border-color: var(--mc-border-subtle);">
+            <div class="p-4 sm:p-8 border-b" style="border-color: var(--mc-border-subtle);">
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-7">
                     <div class="flex items-center gap-3">
                         <div class="w-1 h-7 rounded-full"
                             style="background: linear-gradient(to bottom, var(--mc-primary), var(--mc-sage));"></div>
-                        <h2 class="text-xl font-bold" style="color: var(--mc-text); font-family:'Lora',serif;">ব্যক্তিগত
+                        <h2 class="text-lg sm:text-xl font-bold" style="color: var(--mc-text); font-family:'Lora',serif;">ব্যক্তিগত
                             তথ্য</h2>
                     </div>
                     @if (auth()->id() === $mentor->id)
@@ -182,7 +182,7 @@
                     @endif
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4">
                     @php
                     $infoItems = [
                     ['icon_color'=>'#28666e', 'bg'=>'rgba(40,102,110,0.1)', 'label'=>'ঘণ্টা প্রতি চার্জ',
@@ -223,20 +223,20 @@
                     ];
                     @endphp
                     @foreach($infoItems as $item)
-                    <div class="group flex items-start gap-3 p-4 rounded-xl transition-all duration-200"
+                    <div class="group flex items-start gap-2.5 p-2.5 sm:p-4 rounded-xl transition-all duration-200"
                         style="--hover-bg: var(--mc-surface-hover);"
                         onmouseover="this.style.background='var(--mc-surface-hover)'"
                         onmouseout="this.style.background='transparent'">
-                        <div class="p-2.5 rounded-xl shrink-0 group-hover:scale-110 transition-transform duration-200"
+                        <div class="p-2 sm:p-2.5 rounded-xl shrink-0 group-hover:scale-110 transition-transform duration-200"
                             style="background: {{ $item['bg'] }};">
-                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.8"
+                            <svg class="w-4.5 h-4.5 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.8"
                                 stroke="{{ $item['icon_color'] }}">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="{{ $item['icon'] }}" />
                             </svg>
                         </div>
                         <div class="min-w-0">
-                            <p class="text-xs font-bold mb-0.5" style="color: var(--mc-text);">{{ $item['label'] }}</p>
-                            <p class="text-sm break-all {{ $item['bold'] ? 'font-bold' : '' }}"
+                            <p class="text-[10px] sm:text-xs font-bold mb-0.5" style="color: var(--mc-text);">{{ $item['label'] }}</p>
+                            <p class="text-xs sm:text-sm break-all {{ $item['bold'] ? 'font-bold' : '' }}"
                                 style="color: var(--mc-text-muted);">{{ $item['value'] }}</p>
                         </div>
                     </div>
@@ -244,25 +244,23 @@
                 </div>
             </div>
 
-
-
             {{-- Skills --}}
-            <div class="p-6 sm:p-8 border-b" style="border-color: var(--mc-border-subtle);">
+            <div class="p-4 sm:p-8 border-b" style="border-color: var(--mc-border-subtle);">
                 <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
                     <div class="flex items-center gap-3">
                         <div class="w-1 h-7 rounded-full"
                             style="background: linear-gradient(to bottom, var(--mc-primary), var(--mc-sage));"></div>
-                        <h2 class="text-xl font-bold" style="color: var(--mc-text); font-family:'Lora',serif;">
+                        <h2 class="text-lg sm:text-xl font-bold" style="color: var(--mc-text); font-family:'Lora',serif;">
                             দক্ষতাসমূহ</h2>
                     </div>
                 </div>
-                <div class="flex flex-wrap gap-2">
+                <div class="flex flex-wrap gap-1.5 sm:gap-2">
                     @if (!empty($mentor->profile->skills))
                     @foreach (explode(',', $mentor->profile->skills) as $skill)
                     <span
-                        class="inline-flex items-center gap-1.5 text-sm font-semibold px-3 py-1.5 rounded-full border transition-all duration-200 hover:scale-105 cursor-default"
+                        class="inline-flex items-center gap-1 text-xs sm:text-sm font-semibold px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full border transition-all duration-200 hover:scale-105 cursor-default"
                         style="border-color: var(--mc-border-teal); color: var(--mc-primary); background: rgba(40,102,110,0.08);">
-                        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
                         </svg>
@@ -283,16 +281,15 @@
             </div>
 
             {{-- About Me --}}
-            <div class="p-6 sm:p-8 border-b" style="border-color: var(--mc-border-subtle);">
+            <div class="p-4 sm:p-8 border-b" style="border-color: var(--mc-border-subtle);">
                 <div class="flex items-center gap-3 mb-4">
                     <div class="w-1 h-7 rounded-full"
                         style="background: linear-gradient(to bottom, var(--mc-primary), var(--mc-sage));"></div>
-                    <h2 class="text-xl font-bold" style="color: var(--mc-text); font-family:'Lora',serif;">আমার সম্পর্কে
-                    </h2>
+                    <h2 class="text-lg sm:text-xl font-bold" style="color: var(--mc-text); font-family:'Lora',serif;">আমার সম্পর্কে</h2>
                 </div>
-                <div class="rounded-2xl px-6 pt-2 pb-5 border shadow-sm"
+                <div class="rounded-2xl px-4 pt-2.5 pb-4 sm:px-6 sm:pt-2 sm:pb-5 border shadow-sm"
                     style="background: var(--mc-bg); border-color: var(--mc-border-teal-sub);">
-                    <p class="text-base leading-relaxed tracking-wide"
+                    <p class="text-sm sm:text-base leading-relaxed tracking-wide"
                         style="color: var(--mc-text); white-space: pre-line;">
                         {{ $mentor->profile->bio ?? 'কোনো বিস্তারিত বায়ো যোগ করা হয়নি' }}
                     </p>
@@ -300,45 +297,44 @@
             </div>
 
             {{-- Achievements --}}
-            <div class="p-6 sm:p-8 border-b" style="border-color: var(--mc-border-subtle);">
-                <div class="flex items-center justify-between mb-6">
+            <div class="p-4 sm:p-8 border-b" style="border-color: var(--mc-border-subtle);">
+                <div class="flex items-center justify-between mb-6 gap-2">
                     <div class="flex items-center gap-3">
                         <div class="w-1 h-7 rounded-full"
                             style="background: linear-gradient(to bottom, #eab308, rgba(234,179,8,0.3));"></div>
-                        <h2 class="text-xl font-bold" style="color: var(--mc-text); font-family:'Lora',serif;">অর্জনসমূহ
-                        </h2>
+                        <h2 class="text-lg sm:text-xl font-bold" style="color: var(--mc-text); font-family:'Lora',serif;">অর্জনসমূহ</h2>
                     </div>
                     @if(auth()->id() === $mentor->id)
                     <button type="button" onclick="document.getElementById('addAchievementModal').showModal()"
-                        class="inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-xl border transition-all duration-200 hover:shadow-sm hover:-translate-y-0.5"
+                        class="inline-flex items-center gap-1 text-[10px] sm:text-xs font-bold px-2 py-1 sm:px-3 sm:py-1.5 rounded-xl border transition-all duration-200 hover:shadow-sm hover:-translate-y-0.5"
                         style="border-color: #eab308; color: #d97706;"
                         onmouseover="this.style.background='#eab308';this.style.color='white'"
                         onmouseout="this.style.background='transparent';this.style.color='#d97706'">
-                        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                         </svg>
-                        নতুন অর্জন যোগ করুন
+                        নতুন অর্জন
                     </button>
                     @endif
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                     @forelse($mentor->achievements as $ach)
-                    <div class="group flex items-start gap-4 p-4 rounded-2xl border transition-all duration-200 hover:shadow-md relative"
+                    <div class="group flex items-start gap-3 p-3.5 rounded-2xl border transition-all duration-200 hover:shadow-md relative"
                         style="background: rgba(234,179,8,0.07); border-color: rgba(234,179,8,0.2);">
-                        <div class="text-2xl shrink-0 mt-0.5">🏆</div>
-                        <div class="flex-1 min-w-0 pr-16 flex flex-col h-full">
-                            <p class="text-sm font-bold" style="color: #eab308;">{{ $ach->title }}</p>
-                            <p class="text-xs mt-1 leading-relaxed flex-1" style="color: var(--mc-text-muted);">{{
+                        <div class="text-xl shrink-0 mt-0.5">🏆</div>
+                        <div class="flex-1 min-w-0 pr-12 flex flex-col h-full">
+                            <p class="text-xs sm:text-sm font-bold" style="color: #eab308;">{{ $ach->title }}</p>
+                            <p class="text-[11px] sm:text-xs mt-1 leading-relaxed flex-1" style="color: var(--mc-text-muted);">{{
                                 Str::limit($ach->description, 100) }}</p>
 
                             @if(auth()->id() === $mentor->id)
-                            <div class="mt-3 flex gap-2 relative z-10">
+                            <div class="mt-2.5 flex gap-1.5 relative z-10">
                                 <button type="button"
                                     onclick="editAchievement({{ $ach->id }}, '{{ addslashes($ach->title) }}', '{{ addslashes($ach->description) }}')"
-                                    class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-blue-50 text-blue-600 hover:bg-blue-100 hover:text-blue-700 transition-colors shadow-sm border border-blue-100"
+                                    class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-blue-50 text-blue-600 hover:bg-blue-100 hover:text-blue-700 transition-colors shadow-sm border border-blue-100"
                                     title="এডিট করুন">
-                                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                                         stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
@@ -349,9 +345,9 @@
                                     class="inline">
                                     @csrf @method('DELETE')
                                     <button type="submit"
-                                        class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-red-50 text-red-600 hover:bg-red-100 hover:text-red-700 transition-colors shadow-sm border border-red-100"
+                                        class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-red-50 text-red-600 hover:bg-red-100 hover:text-red-700 transition-colors shadow-sm border border-red-100"
                                         title="ডিলিট করুন">
-                                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                                             stroke-width="2">
                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                 d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -362,7 +358,7 @@
                             @endif
                         </div>
                         @if($ach->image)
-                        <div class="absolute right-4 top-4 shrink-0 w-12 h-12 rounded-lg overflow-hidden cursor-pointer border border-yellow-200"
+                        <div class="absolute right-3.5 top-3.5 shrink-0 w-10 h-10 rounded-lg overflow-hidden cursor-pointer border border-yellow-200"
                             onclick="showAchievementImage('{{ asset('storage/' . $ach->image) }}')">
                             <img src="{{ asset('storage/' . $ach->image) }}" alt="Achievement Image"
                                 class="w-full h-full object-cover">
@@ -370,7 +366,7 @@
                         @endif
                     </div>
                     @empty
-                    <p class="text-sm" style="color: var(--mc-text-muted);">কোনো অর্জন যোগ করা হয়নি</p>
+                    <p class="text-xs sm:text-sm" style="color: var(--mc-text-muted);">কোনো অর্জন যোগ করা হয়নি</p>
                     @endforelse
                 </div>
             </div>
@@ -382,9 +378,6 @@
         {{-- ══════════════════════
         REVIEWS CARD
         ══════════════════════ --}}
-        {{-- ══════════════════════
-        REVIEWS CARD
-        ══════════════════════ --}}
         @php
         $reviews = $mentor->reviews()->with('student.profile')->latest()->get();
         $avgRating = $reviews->count() > 0 ? round($reviews->avg('rating'), 1) : null;
@@ -392,41 +385,40 @@
 
         <div class="rounded-2xl border"
             style="background: var(--mc-surface); border-color: var(--mc-border-teal-sub); box-shadow: var(--mc-shadow-sm);">
-            <div class="p-6 sm:p-8">
+            <div class="p-4 sm:p-8">
 
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
                     <div class="flex items-center gap-3">
                         <div class="w-1 h-10 rounded-full"
                             style="background: linear-gradient(to bottom, #eab308, rgba(234,179,8,0.3));"></div>
                         <div>
-                            <h2 class="text-xl font-bold flex items-center gap-2"
+                            <h2 class="text-lg sm:text-xl font-bold flex items-center gap-2"
                                 style="color: var(--mc-text); font-family:'Lora',serif;">
-                                <svg class="w-6 h-6" fill="#eab308" viewBox="0 0 20 20">
+                                <svg class="w-5.5 h-5.5" fill="#eab308" viewBox="0 0 20 20">
                                     <path
                                         d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.173c.969 0 1.371 1.24.588 1.81l-3.376 2.454a1 1 0 00-.364 1.118l1.286 3.967c.3.921-.755 1.688-1.54 1.118l-3.376-2.454a1 1 0 00-1.176 0l-3.376 2.454c-.784.57-1.838-.197-1.539-1.118l1.285-3.967a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.173a1 1 0 00.95-.69l1.287-3.967z" />
                                 </svg>
                                 শিক্ষার্থীদের রিভিউ
                             </h2>
-                            <p class="text-xs mt-0.5" style="color: var(--mc-text-muted);">শিক্ষার্থীদের মতামত ও
-                                অভিজ্ঞতা</p>
+                            <p class="text-xs mt-0.5" style="color: var(--mc-text-muted);">শিক্ষার্থীদের মতামত ও অভিজ্ঞতা</p>
                         </div>
                     </div>
 
                     @if($avgRating)
-                    <div class="rounded-2xl px-6 py-4 border text-center"
+                    <div class="rounded-xl px-4 py-3 border text-center"
                         style="background: rgba(234,179,8,0.07); border-color: rgba(234,179,8,0.2);">
-                        <p class="text-3xl font-bold" style="color: #d97706; font-family:'Lora',serif;">{{ $avgRating }}
+                        <p class="text-2xl font-bold" style="color: #d97706; font-family:'Lora',serif;">{{ $avgRating }}
                         </p>
-                        <div class="flex justify-center my-1 gap-0.5">
+                        <div class="flex justify-center my-0.5 gap-0.5">
                             @for($i = 1; $i <= 5; $i++) <svg
-                                class="w-4 h-4 {{ $i <= round($avgRating) ? 'text-yellow-400' : 'text-gray-300' }}"
+                                class="w-3.5 h-3.5 {{ $i <= round($avgRating) ? 'text-yellow-400' : 'text-gray-300' }}"
                                 fill="currentColor" viewBox="0 0 20 20">
                                 <path
                                     d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.173c.969 0 1.371 1.24.588 1.81l-3.376 2.454a1 1 0 00-.364 1.118l1.286 3.967c.3.921-.755 1.688-1.54 1.118l-3.376-2.454a1 1 0 00-1.176 0l-3.376 2.454c-.784.57-1.838-.197-1.539-1.118l1.285-3.967a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.173a1 1 0 00.95-.69l1.287-3.967z" />
                                 </svg>
                                 @endfor
                         </div>
-                        <p class="text-xs" style="color: var(--mc-text-muted);">{{ $reviews->count() }}টি রিভিউ থেকে</p>
+                        <p class="text-[10px]" style="color: var(--mc-text-muted);">{{ $reviews->count() }}টি রিভিউ থেকে</p>
                     </div>
                     @endif
                 </div>
@@ -438,19 +430,17 @@
                             d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.173c.969 0 1.371 1.24.588 1.81l-3.376 2.454a1 1 0 00-.364 1.118l1.286 3.967c.3.921-.755 1.688-1.54 1.118l-3.376-2.454a1 1 0 00-1.176 0l-3.376 2.454c-.784.57-1.838-.197-1.539-1.118l1.285-3.967a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.173a1 1 0 00.95-.69l1.287-3.967z" />
                     </svg>
                     <p class="font-bold" style="color: var(--mc-text-muted);">এখনো কোনো রিভিউ নেই</p>
-                    <p class="text-sm mt-1" style="color: var(--mc-text-faint);">সেশন সম্পন্ন হলে শিক্ষার্থীরা রিভিউ
-                        দিতে পারবেন
-                    </p>
+                    <p class="text-sm mt-1" style="color: var(--mc-text-faint);">সেশন সম্পন্ন হলে শিক্ষার্থীরা রিভিউ দিতে পারবেন</p>
                 </div>
 
                 @else
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
                     @foreach($reviews as $review)
-                    <div class="rounded-2xl border p-5 transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
+                    <div class="rounded-2xl border p-4 sm:p-5 transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
                         style="border-color: var(--mc-border-teal-sub); background: var(--mc-bg);">
                         <div class="flex items-start justify-between mb-3">
                             <div class="flex items-center gap-3">
-                                <div class="w-11 h-11 rounded-full overflow-hidden shrink-0 border-2"
+                                <div class="w-9 h-9 rounded-full overflow-hidden shrink-0 border-2"
                                     style="border-color: var(--mc-border-teal);">
                                     @if($review->student->profile?->avatar)
                                     <img src="{{ asset('storage/' . $review->student->profile->avatar) }}"
@@ -461,26 +451,26 @@
                                     @endif
                                 </div>
                                 <div>
-                                    <p class="font-bold text-sm" style="color: var(--mc-text);">{{
+                                    <p class="font-bold text-xs sm:text-sm" style="color: var(--mc-text);">{{
                                         $review->student->name }}</p>
                                     <div class="flex items-center gap-1.5 mt-0.5">
                                         <div class="flex gap-0.5">
                                             @for($i = 1; $i <= 5; $i++) <svg
-                                                class="w-3.5 h-3.5 {{ $i <= $review->rating ? 'text-yellow-400' : 'text-gray-300 dark:text-gray-600' }}"
+                                                class="w-3 h-3 {{ $i <= $review->rating ? 'text-yellow-400' : 'text-gray-300 dark:text-gray-600' }}"
                                                 fill="currentColor" viewBox="0 0 20 20">
                                                 <path
                                                     d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.173c.969 0 1.371 1.24.588 1.81l-3.376 2.454a1 1 0 00-.364 1.118l1.286 3.967c.3.921-.755 1.688-1.54 1.118l-3.376-2.454a1 1 0 00-1.176 0l-3.376 2.454c-.784.57-1.838-.197-1.539-1.118l1.285-3.967a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.173a1 1 0 00.95-.69l1.287-3.967z" />
                                                 </svg>
                                                 @endfor
                                         </div>
-                                        <span class="text-xs" style="color: var(--mc-text-faint);">
+                                        <span class="text-[10px]" style="color: var(--mc-text-faint);">
                                             {{ $review->created_at->diffForHumans() }}
                                         </span>
                                     </div>
                                 </div>
                             </div>
                             <span
-                                class="inline-flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-full border shrink-0"
+                                class="inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full border shrink-0"
                                 style="border-color: var(--mc-border-teal); color: var(--mc-primary);">
                                 <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke-width="2"
                                     stroke="currentColor">
@@ -492,11 +482,11 @@
                         </div>
 
                         @if($review->comment)
-                        <p class="text-sm italic leading-relaxed" style="color: var(--mc-text-muted);">"{{
+                        <p class="text-xs sm:text-sm italic leading-relaxed" style="color: var(--mc-text-muted);">"{{
                             $review->comment }}"
                         </p>
                         @else
-                        <p class="text-sm italic" style="color: var(--mc-text-faint);">কোনো মন্তব্য নেই</p>
+                        <p class="text-xs sm:text-sm italic" style="color: var(--mc-text-faint);">কোনো মন্তব্য নেই</p>
                         @endif
 
                         <div class="mt-3 pt-3 border-t flex items-center gap-2"
@@ -506,7 +496,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
                             </svg>
-                            <span class="text-xs" style="color: var(--mc-text-faint);">{{ $review->session->topic->topic
+                            <span class="text-[10px]" style="color: var(--mc-text-faint);">{{ $review->session->topic->topic
                                 ??
                                 'N/A' }}</span>
                         </div>
