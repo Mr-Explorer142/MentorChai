@@ -32,22 +32,22 @@
         ══════════════════════ --}}
         <div class="rounded-2xl border transition-shadow duration-300 hover:shadow-xl"
             style="background: var(--mc-surface); border-color: var(--mc-border-teal-sub); box-shadow: var(--mc-shadow-sm);">
-            <div class="p-6 sm:p-8">
-                <div class="flex flex-col lg:flex-row gap-8 items-center lg:items-start">
+            <div class="p-4 sm:p-8">
+                <div class="flex flex-col lg:flex-row gap-6 sm:gap-8 items-center lg:items-start">
                     {{-- Avatar Container --}}
-                    <div class="relative shrink-0" style="width:112px; height:112px;">
+                    <div class="relative shrink-0 w-[90px] h-[90px] sm:w-[112px] sm:h-[112px]">
                         {{-- Avatar Circle --}}
-                        <div class="group" style="width:112px;height:112px;border-radius:9999px;overflow:hidden;
-                                    border:4px solid var(--mc-surface);
-                                    box-shadow:var(--mc-shadow-md),0 0 0 3px var(--mc-border-teal);
+                        <div class="group w-full h-full rounded-full overflow-hidden
+                                    border-[3px] sm:border-4 border-[var(--mc-surface)]
+                                    shadow-[var(--mc-shadow-md)] ring-2 sm:ring-3 ring-[var(--mc-border-teal)]
                                     transition:box-shadow .2s;">
                             @if($student->profile && $student->profile->avatar)
                             <img id="profileAvatarImg" src="{{ asset('storage/' . $student->profile->avatar) }}"
-                                alt="Profile Photo" style="width:100%;height:100%;object-fit:cover;display:block;" />
+                                alt="Profile Photo" class="w-full h-full object-cover block" />
                             @else
                             <img id="profileAvatarImg"
                                 src="https://ui-avatars.com/api/?name={{ urlencode($student->name) }}&background=28666e&color=ffffff&size=224&font-size=0.38&bold=true"
-                                alt="Profile Photo" style="width:100%;height:100%;object-fit:cover;display:block;" />
+                                alt="Profile Photo" class="w-full h-full object-cover block" />
                             @endif
                         </div>
 
@@ -58,7 +58,7 @@
                             onsubmit="return confirm('নিশ্চিতভাবে প্রোফাইল ছবি সরাবেন?');">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" title="ছবি সরিয়ে দিন" style="width:32px; height:32px; border-radius:9999px;
+                            <button type="submit" title="ছবি সরিয়ে দিন" style="width:28px; height:28px; border-radius:9999px;
                                            background:#ef4444; border:2px solid #fff; cursor:pointer;
                                            display:flex; align-items:center; justify-content:center;
                                            box-shadow:0 2px 8px rgba(239,68,68,0.4);
@@ -66,7 +66,7 @@
                                 onmouseover="this.style.background='#dc2626'; this.style.transform='scale(1.15)';"
                                 onmouseout="this.style.background='#ef4444'; this.style.transform='scale(1)';"
                                 onclick="event.stopPropagation();">
-                                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
+                                <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
                                     stroke="#fff">
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
@@ -77,24 +77,24 @@
                     </div>
 
                     {{-- Name & Info --}}
-                    <div class="flex-1 text-center lg:text-left space-y-3">
+                    <div class="flex-1 text-center lg:text-left space-y-2">
                         <div class="space-y-2">
-                            <h1 class="text-3xl sm:text-4xl font-bold"
+                            <h1 class="text-2xl sm:text-4xl font-bold"
                                 style="font-family:'Lora',serif; background: linear-gradient(135deg, var(--mc-primary), var(--mc-navy)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">
                                 {{ $student->name }}
                             </h1>
-                            <div class="flex items-center justify-center lg:justify-start gap-2 flex-wrap">
+                            <div class="flex items-center justify-center lg:justify-start gap-1.5 flex-wrap">
                                 <span
-                                    class="inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-full border"
+                                    class="inline-flex items-center gap-1 text-[10px] sm:text-xs font-bold px-2.5 py-0.5 rounded-full border"
                                     style="background: rgba(40,102,110,0.1); border-color: var(--mc-border-teal); color: var(--mc-primary);">
-                                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                    <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke-width="2"
                                         stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
                                     {{ ucfirst($student->role->value) }}
                                 </span>
-                                <span class="text-sm font-medium" style="color: var(--mc-text-muted);">
+                                <span class="text-xs sm:text-sm font-medium" style="color: var(--mc-text-muted);">
                                     ইউজার আইডি: #{{ $student->id }}
                                 </span>
                             </div>
@@ -106,17 +106,17 @@
                     @if (auth()->id() === $student->id)
                     <div class="text-center lg:text-right shrink-0">
                         <button type="button" onclick="document.getElementById('profileAvatarModal').showModal()"
-                            class="cursor-pointer inline-flex items-center gap-2 px-4 py-2 rounded-xl border-2 text-sm font-bold transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
+                            class="cursor-pointer inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border-[1.5px] sm:border-2 text-xs sm:text-sm font-bold transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
                             style="border-color: var(--mc-primary); color: var(--mc-primary); background: transparent;"
                             onmouseover="this.style.background='var(--mc-primary)';this.style.color='white'"
                             onmouseout="this.style.background='transparent';this.style.color='var(--mc-primary)'">
-                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
                             </svg>
                             ফটো আপলোড
                         </button>
-                        <p class="mt-2 text-xs" style="color: var(--mc-text-faint);">800×800 পিক্সেল · JPG বা PNG</p>
+                        <p class="mt-1.5 text-[10px] sm:text-xs" style="color: var(--mc-text-faint);">800×800 পিক্সেল · JPG বা PNG</p>
                     </div>
                     @endif
                 </div>
@@ -130,12 +130,12 @@
             style="background: var(--mc-surface); border-color: var(--mc-border-teal-sub); box-shadow: var(--mc-shadow-sm);">
 
             {{-- Personal Info --}}
-            <div class="p-6 sm:p-8" style="border-color: var(--mc-border-subtle);">
+            <div class="p-4 sm:p-8" style="border-color: var(--mc-border-subtle);">
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-7">
                     <div class="flex items-center gap-3">
                         <div class="w-1 h-7 rounded-full"
                             style="background: linear-gradient(to bottom, var(--mc-primary), var(--mc-sage));"></div>
-                        <h2 class="text-xl font-bold" style="color: var(--mc-text); font-family:'Lora',serif;">ব্যক্তিগত
+                        <h2 class="text-lg sm:text-xl font-bold" style="color: var(--mc-text); font-family:'Lora',serif;">ব্যক্তিগত
                             তথ্য</h2>
                     </div>
                     @if (auth()->id() === $student->id)
@@ -153,7 +153,7 @@
                     @endif
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4">
                     @foreach([
                     ['ic'=>'#3b82f6', 'bg'=>'rgba(59,130,246,0.1)', 'label'=>'ই-মেইল', 'val'=>$student->email,
                     'bold'=>false,
@@ -173,19 +173,19 @@
                     'val'=>$student->profile->department ?? '-', 'bold'=>false,
                     'path'=>'M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25'],
                     ] as $item)
-                    <div class="group flex items-start gap-3 p-4 rounded-xl transition-all duration-200"
+                    <div class="group flex items-start gap-2.5 p-2.5 sm:p-4 rounded-xl transition-all duration-200"
                         onmouseover="this.style.background='var(--mc-surface-hover)'"
                         onmouseout="this.style.background='transparent'">
-                        <div class="p-2.5 rounded-xl shrink-0 group-hover:scale-110 transition-transform duration-200"
+                        <div class="p-2 sm:p-2.5 rounded-xl shrink-0 group-hover:scale-110 transition-transform duration-200"
                             style="background: {{ $item['bg'] }};">
-                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.8"
+                            <svg class="w-4.5 h-4.5 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.8"
                                 stroke="{{ $item['ic'] }}">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="{{ $item['path'] }}" />
                             </svg>
                         </div>
                         <div class="min-w-0">
-                            <p class="text-sm font-bold mb-0.5" style="color: var(--mc-text);">{{ $item['label'] }}</p>
-                            <p class="text-sm break-all" style="color: var(--mc-text-muted);">{{ $item['val'] }}</p>
+                            <p class="text-[10px] sm:text-xs font-bold mb-0.5" style="color: var(--mc-text);">{{ $item['label'] }}</p>
+                            <p class="text-xs sm:text-sm break-all" style="color: var(--mc-text-muted);">{{ $item['val'] }}</p>
                         </div>
                     </div>
                     @endforeach
@@ -194,33 +194,32 @@
 
 
             {{-- Learning Style & Preferences --}}
-            <div class="p-6 sm:p-8" style="border-top: 1px solid var(--mc-border-subtle);">
+            <div class="p-4 sm:p-8" style="border-top: 1px solid var(--mc-border-subtle);">
                 <div class="flex items-center gap-3 mb-6">
                     <div class="w-1 h-7 rounded-full"
                         style="background: linear-gradient(to bottom, var(--mc-primary), var(--mc-sage));"></div>
-                    <h2 class="text-xl font-bold" style="color: var(--mc-text); font-family:'Lora',serif;">শেখার ধরণ ও প্রত্যাশা
-                    </h2>
+                    <h2 class="text-lg sm:text-xl font-bold" style="color: var(--mc-text); font-family:'Lora',serif;">শেখার ধরণ ও প্রত্যাশা</h2>
                 </div>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
-                    <div class="rounded-2xl p-5 border" style="background: var(--mc-bg); border-color: var(--mc-border-teal-sub);">
-                        <p class="text-sm font-bold mb-1.5 opacity-70" style="color: var(--mc-text);">পড়ানোর ক্ষেত্রে কোন মাধ্যমটি আপনার জন্য সহজ ও সুবিধাজনক?</p>
-                        <p class="text-[15px] font-medium" style="color: var(--mc-text);">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-5 mb-5">
+                    <div class="rounded-2xl p-4 sm:p-5 border" style="background: var(--mc-bg); border-color: var(--mc-border-teal-sub);">
+                        <p class="text-xs sm:text-sm font-bold mb-1.5 opacity-70" style="color: var(--mc-text);">পড়ানোর ক্ষেত্রে কোন মাধ্যমটি আপনার জন্য সহজ ও সুবিধাজনক?</p>
+                        <p class="text-sm sm:text-[15px] font-medium" style="color: var(--mc-text);">
                             {{ !empty($student->profile->preferred_teaching_medium) ? $student->profile->preferred_teaching_medium : ' - ' }}
                         </p>
                     </div>
-                    <div class="rounded-2xl p-5 border" style="background: var(--mc-bg); border-color: var(--mc-border-teal-sub);">
-                        <p class="text-sm font-bold mb-1.5 opacity-70" style="color: var(--mc-text);">পড়ানোর সময় কোন ভাষায় আপনি স্বাচ্ছন্দ্য বোধ করেন?</p>
-                        <p class="text-[15px] font-medium" style="color: var(--mc-text);">
+                    <div class="rounded-2xl p-4 sm:p-5 border" style="background: var(--mc-bg); border-color: var(--mc-border-teal-sub);">
+                        <p class="text-xs sm:text-sm font-bold mb-1.5 opacity-70" style="color: var(--mc-text);">পড়ানোর সময় কোন ভাষায় আপনি স্বাচ্ছন্দ্য বোধ করেন?</p>
+                        <p class="text-sm sm:text-[15px] font-medium" style="color: var(--mc-text);">
                             {{ !empty($student->profile->preferred_language) ? $student->profile->preferred_language : ' - ' }}
                         </p>
                     </div>
                 </div>
 
-                <div class="rounded-2xl p-6 border"
+                <div class="rounded-2xl p-4 sm:p-6 border mt-4"
                     style="background: var(--mc-bg); border-color: var(--mc-border-teal-sub);">
-                    <p class="text-sm font-bold mb-3 opacity-70" style="color: var(--mc-text);">আপনি কীভাবে শিখতে স্বাচ্ছন্দ্যবোধ করেন?</p>
-                    <p class="text-base leading-relaxed whitespace-pre-line" style="color: var(--mc-text);">
+                    <p class="text-xs sm:text-sm font-bold mb-3 opacity-70" style="color: var(--mc-text);">আপনি কীভাবে শিখতে স্বাচ্ছন্দ্যবোধ করেন?</p>
+                    <p class="text-xs sm:text-sm leading-relaxed whitespace-pre-line" style="color: var(--mc-text);">
                         {{ !empty($student->profile->learning_style) ? $student->profile->learning_style : "আপনি কীভাবে সহজে বোঝেন এবং মেন্টরের পড়ানোর ধরণ কেমন হলে সুবিধা হবে তা লিখুন। যেমন: 'আমার বেসিক একটু দুর্বল, তাই শুরু থেকে ধরে ধরে বোঝালে ভালো হয়। একটু সময় নিয়ে বুঝি, তাড়াহুড়া না করলে খুশি হবো।' কিংবা 'আমি একটু ইঙ্গিত পেলেই বুঝে ফেলতে পারি, সহজ বিষয়গুলো দ্রুতগতিতে বুঝিয়ে দিলেও আমার কোনো সমস্যা হয় না।'" }}
                     </p>
                 </div>

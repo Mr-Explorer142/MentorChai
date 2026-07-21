@@ -11,32 +11,32 @@
                 <h1 class="text-2xl font-extrabold text-gray-900 dark:text-gray-100">মেন্টর খুঁজুন</h1>
             </div>
 
-            <form method="GET" action="{{ route('mentors') }}" class="flex items-center gap-3">
+            <form method="GET" action="{{ route('mentors') }}" class="flex items-center gap-1.5 w-full sm:w-auto">
 
-                <div class="relative">
+                <div class="relative flex-1 sm:flex-initial">
                     <div class="flex items-center
                     rounded-xl overflow-hidden
                     border border-teal-200 dark:border-teal-800
                     focus-within:ring-2 focus-within:ring-teal-400 dark:focus-within:ring-teal-500
                     bg-white dark:bg-[#1a2e3b]">
 
-                        <div class="relative flex items-center w-32 sm:w-44 md:w-56">
-                            <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-teal-400 dark:text-teal-500 pointer-events-none"
+                        <div class="relative flex items-center w-full sm:w-44 md:w-56">
+                            <svg class="absolute left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-teal-400 dark:text-teal-500 pointer-events-none"
                                 fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <circle cx="11" cy="11" r="8" />
                                 <path d="m21 21-4.35-4.35" />
                             </svg>
 
                             <input type="text" id="search-input" value="{{ request('search') }}" name="search"
-                                placeholder="নাম বা দক্ষতা খুঁজুন..." autocomplete="off" class="pl-10 pr-10 py-2 text-sm
+                                placeholder="খুঁজুন..." autocomplete="off" class="pl-8 pr-8 py-2 text-xs sm:text-sm
                               w-full
                               text-gray-600 dark:text-gray-300
                               bg-transparent
                               placeholder:text-gray-400 dark:placeholder:text-gray-500
                               focus:outline-none">
 
-                            <button type="button" id="clear-search" class="absolute right-3 top-1/2 -translate-y-1/2 z-20 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 focus:outline-none p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800/40 transition-colors duration-150 {{ request('search') ? '' : 'hidden' }}">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <button type="button" id="clear-search" class="absolute right-2.5 top-1/2 -translate-y-1/2 z-20 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 focus:outline-none p-0.5 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800/40 transition-colors duration-150 {{ request('search') ? '' : 'hidden' }}">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                                 </svg>
                             </button>
@@ -44,10 +44,10 @@
 
                         <button type="submit" class="bg-teal-600 dark:bg-teal-500
                            hover:bg-teal-700 dark:hover:bg-teal-400
-                           text-white px-3 sm:px-4 py-2 text-sm font-semibold
+                           text-white px-2.5 sm:px-4 py-2 text-xs sm:text-sm font-semibold
                            transition-colors duration-200
-                           flex items-center gap-1.5 shrink-0">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                           flex items-center gap-1 shrink-0">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <circle cx="11" cy="11" r="8" />
                                 <path d="m21 21-4.35-4.35" />
                             </svg>
@@ -64,41 +64,43 @@
                     </div>
                 </div>
 
-                {{-- Sort --}}
-                <div class="relative">
+                <div class="relative shrink-0">
                     <select name="sort" onchange="this.form.submit()" class="border border-teal-200 dark:border-teal-800
-                   rounded-xl py-2 text-sm
+                   rounded-xl py-2 text-xs sm:text-sm
                    text-gray-600 dark:text-gray-300
                    bg-white dark:bg-[#1a2e3b]
                    focus:outline-none focus:ring-2 focus:ring-teal-400 dark:focus:ring-teal-500
                    transition-colors duration-200
-                   pl-8 pr-2 sm:pl-4 sm:pr-8
-                   w-9 sm:w-auto
+                   pl-2.5 pr-6
+                   w-[95px] sm:w-auto
                    appearance-none cursor-pointer">
-                        <option value="" {{ request('sort')=='' ? 'selected' : '' }}>মূল্য অনুযায়ী বাছাই</option>
-                        <option value="price_asc" {{ request('sort')=='price_asc' ? 'selected' : '' }}>মূল্য: কম থেকে
-                            বেশি</option>
-                        <option value="price_desc" {{ request('sort')=='price_desc' ? 'selected' : '' }}>মূল্য: বেশি
-                            থেকে কম</option>
+                        <option value="" {{ request('sort')=='' ? 'selected' : '' }}>বাছাই</option>
+                        <option value="price_asc" {{ request('sort')=='price_asc' ? 'selected' : '' }}>৳ কম-বেশি</option>
+                        <option value="price_desc" {{ request('sort')=='price_desc' ? 'selected' : '' }}>৳ বেশি-কম</option>
                     </select>
 
-                    {{-- Icon shown on small screens --}}
-                    <div class="pointer-events-none absolute inset-0 flex items-center justify-center sm:hidden">
-                        <svg class="w-4 h-4 text-teal-500 dark:text-teal-400" fill="none" stroke="currentColor"
-                            stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M3 4.5h14.25M3 9h9.75M3 13.5h9.75m4.5-4.5v12m0 0-3.75-3.75M17.25 21 21 17.25" />
-                        </svg>
-                    </div>
-
-                    {{-- Default dropdown arrow shown on larger screens --}}
-                    <div class="pointer-events-none absolute inset-y-0 right-3 hidden sm:flex items-center">
-                        <svg class="w-4 h-4 text-teal-500 dark:text-teal-400" fill="none" stroke="currentColor"
-                            stroke-width="2" viewBox="0 0 24 24">
+                    {{-- Dropdown arrow shown on all screens --}}
+                    <div class="pointer-events-none absolute inset-y-0 right-2 flex items-center">
+                        <svg class="w-3 h-3 text-teal-500 dark:text-teal-400" fill="none" stroke="currentColor"
+                            stroke-width="2.5" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                         </svg>
                     </div>
                 </div>
+
+                {{-- Mobile Filter Trigger --}}
+                <button type="button"
+                    onclick="document.getElementById('mobile-filter-panel').classList.remove('translate-x-full')"
+                    class="lg:hidden flex items-center justify-center shrink-0 w-9 h-9
+                    border border-teal-200 dark:border-teal-800
+                    text-teal-600 dark:text-teal-400
+                    bg-white dark:bg-[#1a2e3b] rounded-xl
+                    hover:bg-teal-50 dark:hover:bg-teal-900/20
+                    transition-colors duration-200">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 4h18M7 8h10M11 12h4" />
+                    </svg>
+                </button>
 
             </form>
         </div>
@@ -244,63 +246,43 @@
             <div class="flex-1 min-w-0">
 
                 {{-- Results count & mobile filter --}}
-                {{-- Results count & mobile filter --}}
                 <div class="flex items-center justify-between mb-5">
-                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                    <p class="text-[10px] sm:text-sm text-gray-500 dark:text-gray-400">
                         @if (request('search'))
                         "<span class="font-semibold text-teal-600 dark:text-teal-400">{{ request('search') }}</span>"
                         নামে / টপিকে
                         <span class="font-semibold text-gray-800 dark:text-gray-200">{{ $totalMentors }} জন</span>
-                        মেন্টর পাওয়া গিয়েছে
+                        মেন্টর পাওয়া গিয়েছে
                         @elseif (request('skills') || request('departments') || request('languages') || request('price_min') ||
                         request('price_max'))
-                        ফিল্টার অনুযায়ী
+                        ফিল্টার অনুযায়ী
                         <span class="font-semibold text-gray-800 dark:text-gray-200">{{ $totalMentors }} জন</span>
-                        মেন্টর পাওয়া গেছে
+                        মেন্টর পাওয়া গেছে
                         @else
                         <span class="font-semibold text-gray-800 dark:text-gray-200">{{ $totalMentors }} জন</span>
-                        মেন্টর পাওয়া গেছে
+                        মেন্টর পাওয়া গেছে
                         @endif
                     </p>
-
-                    {{-- Mobile filter button --}}
-                    <button
-                        onclick="document.getElementById('mobile-filter-panel').classList.remove('translate-x-full')"
-                        class="lg:hidden flex items-center gap-2 text-sm
-                   border border-teal-300 dark:border-teal-700
-                   text-teal-600 dark:text-teal-400
-                   px-3 py-1.5 rounded-lg
-                   hover:bg-teal-50 dark:hover:bg-teal-900/20
-                   transition-colors duration-200">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 4h18M7 8h10M11 12h4" />
-                        </svg>
-                        ফিল্টার
-                        {{-- Active filter dot --}}
-                        @if(request('skills') || request('departments') || request('languages') || request('price_min') || request('price_max'))
-                        <span class="w-2 h-2 rounded-full bg-teal-500 inline-block"></span>
-                        @endif
-                    </button>
                 </div>
 
                 {{-- Mentor Cards Grid --}}
-                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
+                <div class="grid grid-cols-2 gap-2 sm:grid-cols-2 xl:grid-cols-3 sm:gap-5">
 
                     @forelse ($mentors as $mentor)
                     <div class="bg-white dark:bg-[#1a2e3b]
-                                rounded-2xl border border-teal-100 dark:border-teal-900/40
+                                rounded-xl border border-teal-100 dark:border-teal-900/40
                                 shadow-sm dark:shadow-[0_1px_3px_rgba(0,0,0,0.4)]
                                 hover:shadow-md dark:hover:shadow-[0_4px_12px_rgba(0,0,0,0.5)]
-                                transition-all duration-200 p-5 flex flex-col">
+                                transition-all duration-200 p-3 sm:p-5 flex flex-col">
 
                         {{-- Avatar + Name --}}
-                        <div class="flex items-start gap-3 mb-4">
+                        <div class="flex items-start gap-2 mb-2 sm:mb-3">
                             <div class="relative shrink-0">
                                 {{-- Avatar Circle --}}
-                                <div class="w-14 h-14 rounded-full
+                                <div class="w-8 h-8 sm:w-14 sm:h-14 rounded-full
                                             bg-teal-100 dark:bg-teal-900/40
                                             flex items-center justify-center
-                                            text-xl font-bold text-teal-600 dark:text-teal-400 overflow-hidden">
+                                            text-[10px] sm:text-xl font-bold text-teal-600 dark:text-teal-400 overflow-hidden">
                                     @if($mentor->profile && $mentor->profile->avatar)
                                     <img src="{{ asset('storage/' . $mentor->profile->avatar) }}" alt="Avatar"
                                         class="w-full h-full object-cover">
@@ -311,77 +293,65 @@
 
                                 {{-- Online / Offline dot --}}
                                 @if ($mentor->isOnline())
-                                <span class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-400
-                                                 border-2 border-white dark:border-[#1a2e3b] rounded-full"></span>
+                                <span class="absolute bottom-0 right-0 w-2 h-2 sm:w-3.5 sm:h-3.5 bg-green-400
+                                                 border-[1.5px] border-white dark:border-[#1a2e3b] rounded-full"></span>
                                 @else
-                                <span class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-gray-300 dark:bg-gray-600
-                                                 border-2 border-white dark:border-[#1a2e3b] rounded-full"></span>
+                                <span class="absolute bottom-0 right-0 w-2 h-2 sm:w-3.5 sm:h-3.5 bg-gray-300 dark:bg-gray-600
+                                                 border-[1.5px] border-white dark:border-[#1a2e3b] rounded-full"></span>
                                 @endif
                             </div>
 
                             <div class="min-w-0">
-                                <div class="flex items-center gap-1">
-                                    <h3 class="font-bold text-gray-900 dark:text-gray-100 text-sm leading-tight truncate">
+                                <div class="flex items-center gap-0.5">
+                                    <h3 class="font-bold text-gray-900 dark:text-gray-100 text-[11px] sm:text-sm leading-tight truncate">
                                         {{ $mentor->name }}
                                     </h3>
                                     @if($mentor->profile && $mentor->profile->is_verified)
-                                    <svg class="w-4 h-4 text-blue-500 shrink-0" fill="currentColor" viewBox="0 0 20 20" title="Verified Mentor">
+                                    <svg class="w-3 h-3 text-blue-500 shrink-0" fill="currentColor" viewBox="0 0 20 20" title="Verified Mentor">
                                         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
                                     </svg>
                                     @endif
                                 </div>
-                                <p class="text-xs text-gray-400 dark:text-gray-500 mt-0.5">
+                                <p class="text-[9px] sm:text-[10px] text-gray-400 dark:text-gray-500">
                                     মেন্টর
                                 </p>
-                                <div class="flex items-center gap-1 mt-1">
+                                <div class="flex items-center gap-0.5 mt-0.5">
                                     @php
                                         $avg = round($mentor->reviews_avg_rating ?? 0, 1);
                                     @endphp
-                                    <span class="text-yellow-400 text-xs tracking-widest">
-                                        @for($i = 1; $i <= 5; $i++)
-                                            @if($i <= $avg)
-                                                ★
-                                            @elseif($i - 0.5 <= $avg)
-                                                ★
-                                            @else
-                                                ☆
-                                            @endif
-                                        @endfor
+                                    <span class="text-yellow-400 text-[9px] sm:text-[10px] tracking-tighter">
+                                        ★ {{ $avg > 0 ? $avg : 'New' }}
                                     </span>
-                                    <span class="text-xs text-gray-500 dark:text-gray-400">
-                                        {{ $avg > 0 ? $avg : 'New' }} ({{ $mentor->reviews_count ?? 0 }})
+                                    <span class="text-[8px] sm:text-xs text-gray-500 dark:text-gray-400">
+                                        ({{ $mentor->reviews_count ?? 0 }})
                                     </span>
                                 </div>
                             </div>
                         </div>
 
                         {{-- University / Degree / Students --}}
-                        <div class="space-y-1.5 text-xs text-gray-600 dark:text-gray-400 mb-4">
-                            <p class="flex items-center gap-2">
-                                <span>🎓</span> {{ $mentor->profile?->institution_name ?? 'N/A' }}
+                        <div class="space-y-0.5 text-[9px] sm:text-xs text-gray-600 dark:text-gray-400 mb-2 sm:mb-3">
+                            <p class="flex items-center gap-1.5 truncate">
+                                <span>🎓</span> <span class="truncate">{{ $mentor->profile?->institution_name ?? 'N/A' }}</span>
                             </p>
-                            <p class="flex items-center gap-2">
-                                <span>📘</span> {{ $mentor->profile?->highgest_education_level ?? 'N/A' }}
-                            </p>
-                            <p class="flex items-center gap-2">
+                            <p class="flex items-center gap-1.5">
                                 <span>✏️</span> {{ $mentor->students_count ?? 0 }} জন শিক্ষার্থী
                             </p>
                         </div>
 
                         {{-- Skills --}}
-                        {{-- Skills --}}
-                        <div class="flex flex-wrap gap-1.5 mb-4">
+                        <div class="flex flex-wrap gap-1 mb-3">
                             @if (!empty($mentor->profile->skills))
-                            @foreach (explode(',', $mentor->profile->skills) as $skill)
-                            <span class="text-xs bg-teal-50 dark:bg-teal-900/30
+                            @foreach (array_slice(explode(',', $mentor->profile->skills), 0, 2) as $skill)
+                            <span class="text-[9px] sm:text-xs bg-teal-50 dark:bg-teal-900/30
                          text-teal-700 dark:text-teal-300
                          border border-teal-100 dark:border-teal-800/50
-                         px-2 py-0.5 rounded-full">
+                         px-1.5 py-0.5 rounded-full">
                                 {{ trim($skill) }}
                             </span>
                             @endforeach
                             @else
-                            <span class="text-xs text-gray-400 dark:text-gray-500 italic">
+                            <span class="text-[10px] sm:text-xs text-gray-400 dark:text-gray-500 italic">
                                 কোনো দক্ষতা যোগ করা হয়নি
                             </span>
                             @endif
@@ -391,25 +361,25 @@
                         <div class="mt-auto">
                             <div class="flex justify-between items-center
                                         bg-teal-50 dark:bg-teal-900/20
-                                        px-4 py-2 rounded-xl mb-3">
-                                <span class="text-xs text-gray-500 dark:text-gray-400">ঘণ্টা প্রতি</span>
-                                <span class="text-base font-bold text-teal-600 dark:text-teal-400">
+                                        px-2.5 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl mb-2 sm:mb-3">
+                                <span class="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400">ঘণ্টা প্রতি</span>
+                                <span class="text-xs sm:text-base font-bold text-teal-600 dark:text-teal-400">
                                     ৳{{ $mentor->profile?->hourly_rate ?? '-' }}
                                 </span>
                             </div>
 
-                            <div class="flex gap-2">
-                                <a href="{{ route('mentor_profile', $mentor->id) }}" class="flex-1 text-center
+                            <div class="flex flex-col sm:flex-row gap-1.5 sm:gap-2">
+                                <a href="{{ route('mentor_profile', $mentor->id) }}" class="w-full sm:flex-1 text-center
                                           border border-teal-400 dark:border-teal-600
                                           text-teal-600 dark:text-teal-400
-                                          py-2 rounded-lg text-xs font-semibold
+                                          py-1.5 sm:py-2 rounded-lg text-[10px] sm:text-xs font-semibold
                                           hover:bg-teal-50 dark:hover:bg-teal-900/20
                                           transition-colors duration-200">
                                     প্রোফাইল
                                 </a>
-                                <a href="{{ route('session.request.create', $mentor->id) }}" class="flex-1 text-center
+                                <a href="{{ route('session.request.create', $mentor->id) }}" class="w-full sm:flex-1 text-center
                                           bg-teal-600 dark:bg-teal-500 text-white
-                                          py-2 rounded-lg text-xs font-semibold
+                                          py-1.5 sm:py-2 rounded-lg text-[10px] sm:text-xs font-semibold
                                           hover:bg-teal-700 dark:hover:bg-teal-400
                                           transition-colors duration-200">
                                     হায়ার করুন
