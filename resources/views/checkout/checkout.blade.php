@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="min-h-screen flex items-center justify-center p-5 md:p-10 transition-colors duration-300"
+    <div class="min-h-screen flex items-center justify-center p-3 sm:p-6 md:p-10 py-6 sm:py-10 transition-colors duration-300"
         style="background-color: var(--mc-bg);">
 
         {{-- Subtle grid texture overlay --}}
@@ -10,33 +10,33 @@
         <div class="w-full max-w-3xl relative z-10">
 
             {{-- Page Header --}}
-            <div class="text-center mb-8">
-                <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-4 shadow-xl"
+            <div class="text-center mb-6 sm:mb-8">
+                <div class="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl mb-3 sm:mb-4 shadow-xl"
                     style="background: linear-gradient(135deg, #1A9998, #155665); box-shadow: 0 8px 24px rgba(26,153,143,0.3);">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24"
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" viewBox="0 0 24 24"
                         stroke-width="1.8" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
                     </svg>
                 </div>
-                <h2 class="text-3xl font-bold" style="color: var(--mc-text); font-family:'Lora',serif;">
+                <h2 class="text-xl sm:text-3xl font-bold" style="color: var(--mc-text); font-family:'Lora',serif;">
                     পেমেন্টের বিবরণ
                 </h2>
-                <p class="text-sm mt-1" style="color: var(--mc-text-faint);">সেশন নিশ্চিত করতে পেমেন্ট সম্পন্ন করুন</p>
+                <p class="text-xs sm:text-sm mt-1" style="color: var(--mc-text-faint);">সেশন নিশ্চিত করতে পেমেন্ট সম্পন্ন করুন</p>
             </div>
 
             {{-- Main Card --}}
-            <div class="rounded-2xl border"
+            <div class="rounded-xl sm:rounded-2xl border"
                 style="background: var(--mc-surface); border-color: var(--mc-border); box-shadow: var(--mc-shadow-lg);">
-                <div class="p-6 sm:p-8 flex flex-col gap-6">
+                <div class="p-4 sm:p-8 flex flex-col gap-4 sm:gap-6">
 
                     {{-- Student & Mentor Info --}}
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
 
                         {{-- Student --}}
-                        <div class="rounded-xl p-4 border"
+                        <div class="rounded-xl p-3.5 sm:p-4 border"
                             style="background: var(--mc-bg); border-color: var(--mc-border);">
-                            <h3 class="font-bold text-sm mb-3 flex items-center gap-2"
+                            <h3 class="font-bold text-xs sm:text-sm mb-2 sm:mb-3 flex items-center gap-1.5 sm:gap-2"
                                 style="color: var(--mc-primary);">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.8" stroke="currentColor">
@@ -45,24 +45,24 @@
                                 </svg>
                                 শিক্ষার্থীর তথ্য
                             </h3>
-                            <p class="text-sm" style="color: var(--mc-text-muted);">
+                            <p class="text-xs sm:text-sm" style="color: var(--mc-text-muted);">
                                 <span class="font-semibold" style="color: var(--mc-text);">আইডি:</span>
                                 #{{ $student->id }}
                             </p>
-                            <p class="text-sm mt-1" style="color: var(--mc-text-muted);">
+                            <p class="text-xs sm:text-sm mt-0.5 sm:mt-1 truncate" style="color: var(--mc-text-muted);">
                                 <span class="font-semibold" style="color: var(--mc-text);">নাম:</span>
                                 {{ $student->name }}
                             </p>
-                            <p class="text-sm mt-1" style="color: var(--mc-text-muted);">
+                            <p class="text-xs sm:text-sm mt-0.5 sm:mt-1 truncate" style="color: var(--mc-text-muted);">
                                 <span class="font-semibold" style="color: var(--mc-text);">ইমেইল:</span>
                                 {{ $student->email }}
                             </p>
                         </div>
 
                         {{-- Mentor --}}
-                        <div class="rounded-xl p-4 border"
+                        <div class="rounded-xl p-3.5 sm:p-4 border"
                             style="background: var(--mc-bg); border-color: var(--mc-border);">
-                            <h3 class="font-bold text-sm mb-3 flex items-center gap-2"
+                            <h3 class="font-bold text-xs sm:text-sm mb-2 sm:mb-3 flex items-center gap-1.5 sm:gap-2"
                                 style="color: var(--mc-primary);">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.8" stroke="currentColor">
@@ -71,15 +71,15 @@
                                 </svg>
                                 মেন্টরের তথ্য
                             </h3>
-                            <p class="text-sm" style="color: var(--mc-text-muted);">
+                            <p class="text-xs sm:text-sm" style="color: var(--mc-text-muted);">
                                 <span class="font-semibold" style="color: var(--mc-text);">আইডি:</span>
                                 #{{ $mentor->id }}
                             </p>
-                            <p class="text-sm mt-1" style="color: var(--mc-text-muted);">
+                            <p class="text-xs sm:text-sm mt-0.5 sm:mt-1 truncate" style="color: var(--mc-text-muted);">
                                 <span class="font-semibold" style="color: var(--mc-text);">নাম:</span>
                                 {{ $mentor->name }}
                             </p>
-                            <p class="text-sm mt-1" style="color: var(--mc-text-muted);">
+                            <p class="text-xs sm:text-sm mt-0.5 sm:mt-1 truncate" style="color: var(--mc-text-muted);">
                                 <span class="font-semibold" style="color: var(--mc-text);">প্রতিষ্ঠান:</span>
                                 {{ $mentor->profile?->institution_name ?? 'N/A' }}
                             </p>
@@ -89,13 +89,13 @@
                     {{-- Divider --}}
                     <div class="flex items-center gap-3">
                         <div class="flex-1 h-px" style="background-color: var(--mc-border);"></div>
-                        <span class="text-xs font-semibold uppercase tracking-widest"
+                        <span class="text-[10px] sm:text-xs font-semibold uppercase tracking-widest"
                             style="color: var(--mc-text-faint);">সেশনের ধরন</span>
                         <div class="flex-1 h-px" style="background-color: var(--mc-border);"></div>
                     </div>
 
                     {{-- Live Session Badge --}}
-                    <div class="flex items-center gap-2.5 px-4 py-3 rounded-xl border"
+                    <div class="flex items-center gap-2.5 px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-xl border"
                         style="background: rgba(26,153,143,0.08); border-color: var(--mc-border-teal);">
                         <span class="relative flex h-2.5 w-2.5 shrink-0">
                             <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
@@ -103,7 +103,7 @@
                             <span class="relative inline-flex rounded-full h-2.5 w-2.5"
                                 style="background-color: var(--mc-primary);"></span>
                         </span>
-                        <p class="text-sm font-medium" style="color: var(--mc-primary);">
+                        <p class="text-xs sm:text-sm font-medium" style="color: var(--mc-primary);">
                             লাইভ সেশন - পেমেন্ট সম্পন্ন হলে মেন্টর সাথে সাথে সংযুক্ত হবেন
                         </p>
                     </div>
@@ -111,38 +111,38 @@
                     {{-- Section Divider --}}
                     <div class="flex items-center gap-3">
                         <div class="flex-1 h-px" style="background-color: var(--mc-border);"></div>
-                        <span class="text-xs font-semibold uppercase tracking-widest"
+                        <span class="text-[10px] sm:text-xs font-semibold uppercase tracking-widest"
                             style="color: var(--mc-text-faint);">সেশনের বিস্তারিত</span>
                         <div class="flex-1 h-px" style="background-color: var(--mc-border);"></div>
                     </div>
 
                     {{-- Session Details Grid --}}
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                        <div class="rounded-xl p-3 border text-center"
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
+                        <div class="rounded-xl p-2.5 sm:p-3 border text-center"
                             style="background: var(--mc-bg); border-color: var(--mc-border);">
-                            <p class="text-xs font-semibold mb-1" style="color: var(--mc-text-faint);">বিষয়</p>
-                            <p class="text-sm font-bold" style="color: var(--mc-text);">{{ $topic }}</p>
+                            <p class="text-[10px] sm:text-xs font-semibold mb-0.5 sm:mb-1" style="color: var(--mc-text-faint);">বিষয়</p>
+                            <p class="text-xs sm:text-sm font-bold truncate" style="color: var(--mc-text);">{{ $topic }}</p>
                         </div>
-                        <div class="rounded-xl p-3 border text-center"
+                        <div class="rounded-xl p-2.5 sm:p-3 border text-center"
                             style="background: var(--mc-bg); border-color: var(--mc-border);">
-                            <p class="text-xs font-semibold mb-1" style="color: var(--mc-text-faint);">ঘণ্টাপ্রতি</p>
-                            <p class="text-sm font-bold" style="color: var(--mc-primary);">
+                            <p class="text-[10px] sm:text-xs font-semibold mb-0.5 sm:mb-1" style="color: var(--mc-text-faint);">ঘণ্টাপ্রতি</p>
+                            <p class="text-xs sm:text-sm font-bold" style="color: var(--mc-primary);">
                                 ৳{{ number_format($hourlyRate, 2) }}
                             </p>
                         </div>
-                        <div class="rounded-xl p-3 border text-center"
+                        <div class="rounded-xl p-2.5 sm:p-3 border text-center"
                             style="background: var(--mc-bg); border-color: var(--mc-border);">
-                            <p class="text-xs font-semibold mb-1" style="color: var(--mc-text-faint);">মোট সময়</p>
-                            <p class="text-sm font-bold" style="color: var(--mc-text);">
+                            <p class="text-[10px] sm:text-xs font-semibold mb-0.5 sm:mb-1" style="color: var(--mc-text-faint);">মোট সময়</p>
+                            <p class="text-xs sm:text-sm font-bold" style="color: var(--mc-text);">
                                 {{ $durationHours }}.০০ ঘণ্টা
                             </p>
                         </div>
-                        <div class="rounded-xl p-3 border text-center"
+                        <div class="rounded-xl p-2.5 sm:p-3 border text-center"
                             style="background: rgba(26,153,143,0.08); border-color: var(--mc-border-teal);">
-                            <p class="text-xs font-semibold mb-1" style="color: var(--mc-primary); opacity: 0.7;">
+                            <p class="text-[10px] sm:text-xs font-semibold mb-0.5 sm:mb-1" style="color: var(--mc-primary); opacity: 0.7;">
                                 পরিশোধযোগ্য
                             </p>
-                            <p class="text-sm font-bold" style="color: var(--mc-primary);">
+                            <p class="text-xs sm:text-sm font-bold" style="color: var(--mc-primary);">
                                 ৳{{ number_format($totalAmount, 2) }}
                             </p>
                         </div>
@@ -156,7 +156,7 @@
                         <input type="hidden" name="payment_method" id="selected-payment-method" value="bkash">
 
                         <div>
-                            <h3 class="font-bold text-sm mb-4 flex items-center gap-2"
+                            <h3 class="font-bold text-xs sm:text-sm mb-3 sm:mb-4 flex items-center gap-1.5 sm:gap-2"
                                 style="color: var(--mc-text-muted);">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.8" stroke="currentColor" style="color: var(--mc-primary);">
@@ -166,7 +166,7 @@
                                 পেমেন্ট মেথড সিলেক্ট করুন
                             </h3>
 
-                            <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-3">
                                 @php
                                 $methods = [
                                 ['value' => 'bkash', 'label' => 'বিকাশ', 'img' => 'bkash.svg', 'fallback' => 'bKash',
@@ -195,27 +195,27 @@
                                 <a href="{{ $m['link'] }}" target="_blank" class="cursor-pointer payment-label block" style="text-decoration: none;"
                                     data-active-border="{{ $m['active_border'] }}"
                                     data-active-bg="{{ $m['active_bg'] }}">
-                                    <div class="payment-card rounded-xl p-4 border-2 text-center transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
+                                    <div class="payment-card rounded-xl p-2.5 sm:p-4 border-2 text-center transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
                                         style="background: var(--mc-bg); border-color: var(--mc-border);">
-                                        <div class="h-7 flex items-center justify-center mb-2">
+                                        <div class="h-6 sm:h-7 flex items-center justify-center mb-1.5 sm:mb-2">
                                             @if($m['fallback'])
                                             <img src="{{ asset('images/Checkout Page/' . $m['img']) }}"
-                                                class="h-7 mx-auto" alt="{{ $m['label'] }}"
+                                                class="h-6 sm:h-7 mx-auto" alt="{{ $m['label'] }}"
                                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                                            <span class="text-lg font-black hidden"
+                                            <span class="text-base sm:text-lg font-black hidden"
                                                 style="color: {{ $m['fallback_color'] }};">{{ $m['fallback'] }}</span>
                                             @else
                                             <img src="{{ asset('images/Checkout Page/' . $m['img']) }}"
-                                                class="h-7 mx-auto" alt="{{ $m['label'] }}"
+                                                class="h-6 sm:h-7 mx-auto" alt="{{ $m['label'] }}"
                                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 hidden" fill="none"
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 sm:w-7 sm:h-7 hidden" fill="none"
                                                 viewBox="0 0 24 24" stroke-width="1.8" stroke="#1A9998">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                     d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
                                             </svg>
                                             @endif
                                         </div>
-                                        <p class="text-xs font-semibold" style="color: var(--mc-text-muted);">
+                                        <p class="text-[11px] sm:text-xs font-semibold" style="color: var(--mc-text-muted);">
                                             {{ $m['label'] }}
                                         </p>
                                     </div>
@@ -226,27 +226,27 @@
                                     data-active-bg="{{ $m['active_bg'] }}">
                                     <input type="radio" name="_payment_display" value="{{ $m['value'] }}"
                                         class="payment-radio hidden" {{ $i===0 ? 'checked' : '' }}>
-                                    <div class="payment-card rounded-xl p-4 border-2 text-center transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
+                                    <div class="payment-card rounded-xl p-2.5 sm:p-4 border-2 text-center transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
                                         style="background: var(--mc-bg); border-color: var(--mc-border);">
-                                        <div class="h-7 flex items-center justify-center mb-2">
+                                        <div class="h-6 sm:h-7 flex items-center justify-center mb-1.5 sm:mb-2">
                                             @if($m['fallback'])
                                             <img src="{{ asset('images/Checkout Page/' . $m['img']) }}"
-                                                class="h-7 mx-auto" alt="{{ $m['label'] }}"
+                                                class="h-6 sm:h-7 mx-auto" alt="{{ $m['label'] }}"
                                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                                            <span class="text-lg font-black hidden"
+                                            <span class="text-base sm:text-lg font-black hidden"
                                                 style="color: {{ $m['fallback_color'] }};">{{ $m['fallback'] }}</span>
                                             @else
                                             <img src="{{ asset('images/Checkout Page/' . $m['img']) }}"
-                                                class="h-7 mx-auto" alt="{{ $m['label'] }}"
+                                                class="h-6 sm:h-7 mx-auto" alt="{{ $m['label'] }}"
                                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 hidden" fill="none"
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 sm:w-7 sm:h-7 hidden" fill="none"
                                                 viewBox="0 0 24 24" stroke-width="1.8" stroke="#1A9998">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                     d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
                                             </svg>
                                             @endif
                                         </div>
-                                        <p class="text-xs font-semibold" style="color: var(--mc-text-muted);">
+                                        <p class="text-[11px] sm:text-xs font-semibold" style="color: var(--mc-text-muted);">
                                             {{ $m['label'] }}
                                         </p>
                                     </div>
@@ -257,24 +257,25 @@
                         </div>
 
                         {{-- Bottom Divider --}}
-                        <div class="h-px w-full mt-6" style="background-color: var(--mc-border);"></div>
+                        <div class="h-px w-full mt-4 sm:mt-6" style="background-color: var(--mc-border);"></div>
 
                         {{-- Total & Pay Button --}}
-                        <div class="flex flex-col sm:flex-row justify-between items-center gap-5 mt-6">
+                        <div class="flex flex-col sm:flex-row justify-between items-center sm:items-end gap-3 sm:gap-5 mt-4 sm:mt-6 text-center sm:text-left">
                             <div>
-                                <p class="text-xs font-semibold mb-1 uppercase tracking-wider"
+                                <p class="text-[10px] sm:text-xs font-semibold mb-0.5 sm:mb-1 uppercase tracking-wider"
                                     style="color: var(--mc-text-faint);">
                                     সর্বমোট পরিশোধযোগ্য
                                 </p>
-                                <p class="text-3xl font-bold"
+                                <p class="text-2xl sm:text-3xl font-bold"
                                     style="color: var(--mc-primary); font-family:'Lora',serif;">
                                     ৳{{ number_format($totalAmount, 2) }}
                                 </p>
                             </div>
-                            <button type="submit" class="btn btn-wide font-bold text-base rounded-xl text-white border-0
+                            <button type="submit" class="w-full sm:w-auto px-8 py-3 rounded-xl text-sm sm:text-base font-bold text-white border-0
+                   flex items-center justify-center gap-2
                    hover:opacity-90 hover:-translate-y-0.5 transition-all duration-200" style="background: linear-gradient(135deg, #1A9998, #155665);
                    box-shadow: 0 8px 24px rgba(26,153,143,0.35);">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24"
                                     stroke-width="2" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />

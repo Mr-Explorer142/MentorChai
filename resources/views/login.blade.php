@@ -20,7 +20,7 @@
                     bg-[radial-gradient(circle,rgba(124,152,133,0.07),transparent_70%)]
                     dark:bg-[radial-gradient(circle,rgba(154,184,165,0.06),transparent_70%)]"></div>
 
-        <div class="w-full max-w-[340px] sm:max-w-[420px] relative z-10 mx-auto">
+        <div class="w-full max-w-[340px] sm:max-w-[440px] relative z-10 mx-auto">
 
             {{-- Brand Header --}}
             <div class="text-center mb-5 sm:mb-8">
@@ -50,13 +50,13 @@
                         animate-[authFadeUp_0.4s_ease_both]
                         transition-colors duration-300">
 
-                {{-- Social Login (Side by side on mobile) --}}
-                <div class="grid grid-cols-2 gap-2.5 mb-1">
+                {{-- Social Login --}}
+                <div class="grid grid-cols-2 sm:flex sm:flex-col gap-2.5 sm:gap-3 mb-1">
 
                     {{-- Google --}}
                     <a href="{{ route('social.redirect', ['provider' => 'google', 'role' => 'login']) }}"
-                        class="flex items-center justify-center gap-1.5
-                                  px-3 py-2 rounded-xl
+                        class="flex items-center justify-center gap-2
+                                  px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl
                                   border border-[#28666e]/18 dark:border-[#4db6c1]/20
                                   bg-white dark:bg-[#0f1f2e]/40
                                   text-[#033f63] dark:text-[#7ec8e3]
@@ -78,13 +78,14 @@
                                 d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
                                 fill="#EA4335" />
                         </svg>
-                        Google
+                        <span class="inline sm:hidden">Google</span>
+                        <span class="hidden sm:inline">Google দিয়ে লগইন করুন</span>
                     </a>
 
                     {{-- GitHub --}}
                     <a href="{{ route('social.redirect', ['provider' => 'github', 'role' => 'login']) }}"
-                        class="flex items-center justify-center gap-1.5
-                                  px-3 py-2 rounded-xl
+                        class="flex items-center justify-center gap-2
+                                  px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl
                                   border border-[#28666e]/18 dark:border-[#4db6c1]/20
                                   bg-white dark:bg-[#0f1f2e]/40
                                   text-[#033f63] dark:text-[#7ec8e3]
@@ -96,7 +97,8 @@
                             <path
                                 d="M12 0C5.37 0 0 5.373 0 12c0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.73.083-.73 1.205.085 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.76-1.604-2.665-.305-5.466-1.332-5.466-5.93 0-1.31.468-2.38 1.235-3.22-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.3 1.23a11.52 11.52 0 013.003-.404c1.02.005 2.046.138 3.003.404 2.29-1.552 3.297-1.23 3.297-1.23.653 1.652.242 2.873.118 3.176.77.84 1.233 1.91 1.233 3.22 0 4.61-2.804 5.622-5.476 5.92.43.372.814 1.103.814 2.222 0 1.606-.015 2.898-.015 3.293 0 .322.216.695.825.577C20.565 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
                         </svg>
-                        GitHub
+                        <span class="inline sm:hidden">GitHub</span>
+                        <span class="hidden sm:inline">GitHub দিয়ে লগইন করুন</span>
                     </a>
 
                 </div>
