@@ -377,6 +377,7 @@
                                           transition-colors duration-200">
                                     প্রোফাইল
                                 </a>
+                                @if ($mentor->isOnline())
                                 <a href="{{ route('session.request.create', $mentor->id) }}" class="w-full sm:flex-1 text-center
                                           bg-teal-600 dark:bg-teal-500 text-white
                                           py-1.5 sm:py-2 rounded-lg text-[10px] sm:text-xs font-semibold
@@ -384,6 +385,14 @@
                                           transition-colors duration-200">
                                     হায়ার করুন
                                 </a>
+                                @else
+                                <button type="button" disabled class="w-full sm:flex-1 text-center
+                                          bg-red-500/80 dark:bg-red-600/70 text-white
+                                          py-1.5 sm:py-2 rounded-lg text-[10px] sm:text-xs font-semibold
+                                          cursor-not-allowed opacity-75">
+                                    মেন্টর অফলাইন
+                                </button>
+                                @endif
                             </div>
                         </div>
                     </div>
