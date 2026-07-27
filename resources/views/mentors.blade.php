@@ -230,6 +230,26 @@
                             </div>
                         </div>
 
+                        {{-- Online Status --}}
+                        <div>
+                            <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">
+                                অনলাইন স্ট্যাটাস
+                            </p>
+                            <div class="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="radio" name="online_status" value="both" {{ request('online_status', 'both') == 'both' ? 'checked' : '' }} class="accent-teal-600 dark:accent-teal-400 w-4 h-4"> যেকোনো
+                                </label>
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="radio" name="online_status" value="online" {{ request('online_status') == 'online' ? 'checked' : '' }} class="accent-teal-600 dark:accent-teal-400 w-4 h-4"> অনলাইন
+                                </label>
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="radio" name="online_status" value="offline" {{ request('online_status') == 'offline' ? 'checked' : '' }} class="accent-teal-600 dark:accent-teal-400 w-4 h-4"> অফলাইন
+                                </label>
+                            </div>
+                        </div>
+
+
+
                         {{-- Apply Button --}}
                         <button type="submit" class="w-full bg-teal-600 dark:bg-teal-500 text-white
                            py-2.5 rounded-xl font-semibold
@@ -624,6 +644,24 @@
                             <label class="flex items-center gap-2 cursor-pointer">
                                 <input type="radio" name="rating" value="3" {{ request('rating') == '3' ? 'checked' : '' }} class="accent-teal-600 dark:accent-teal-400 w-4 h-4">
                                 <span class="text-yellow-400 text-xs tracking-widest">★★★☆☆</span> ৩.০+
+                            </label>
+                        </div>
+                    </div>
+
+                    {{-- Online Status --}}
+                    <div>
+                        <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">
+                            অনলাইন স্ট্যাটাস
+                        </p>
+                        <div class="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="online_status" value="both" {{ request('online_status', 'both') == 'both' ? 'checked' : '' }} class="accent-teal-600 dark:accent-teal-400 w-4 h-4"> যেকোনো
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="online_status" value="online" {{ request('online_status') == 'online' ? 'checked' : '' }} class="accent-teal-600 dark:accent-teal-400 w-4 h-4"> অনলাইন
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="online_status" value="offline" {{ request('online_status') == 'offline' ? 'checked' : '' }} class="accent-teal-600 dark:accent-teal-400 w-4 h-4"> অফলাইন
                             </label>
                         </div>
                     </div>
