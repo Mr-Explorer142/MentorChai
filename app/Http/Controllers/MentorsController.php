@@ -77,6 +77,18 @@ class MentorsController extends Controller
             $query->whereRaw('(SELECT COALESCE(AVG(rating), 0) FROM reviews WHERE reviews.mentor_id = users.id) >= ?', [$request->rating]);
         }
 
+        // Filter by online status
+        if ($request->filled('online_status')) {
+            if ($request->online_status === 'online') {
+                $query->where('users.last_seen_at', '>=', now()->subMinutes(5));
+            } elseif ($request->online_status === 'offline') {
+                $query->where(function ($q) {
+                    $q->whereNull('users.last_seen_at')
+                      ->orWhere('users.last_seen_at', '<', now()->subMinutes(5));
+                });
+            }
+        }
+
         // Sorting
         if ($request->sort === 'price_asc') {
             $query->orderByRaw('CAST(profiles.hourly_rate AS UNSIGNED) asc');
