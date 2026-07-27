@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\UserRole;
+use App\Enums\UserStatus;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -30,6 +31,7 @@ class MentorsController extends Controller
             ->keys();
 
         $query = User::where('role', UserRole::Mentor)
+            ->where('users.status', UserStatus::ACTIVE)
             ->select('users.*')
             ->with('profile')
             ->join('profiles', 'users.id', '=', 'profiles.user_id')
@@ -102,6 +104,7 @@ class MentorsController extends Controller
 
         // Check if query matches any mentor name
         $nameMatches = User::where('role', UserRole::Mentor)
+            ->where('status', UserStatus::ACTIVE)
             ->whereHas('profile', function ($q) {
                 $q->where('is_verified', true);
             })
@@ -121,6 +124,7 @@ class MentorsController extends Controller
         } else {
             // Check skills instead
             $skillMatches = User::where('role', UserRole::Mentor)
+                ->where('status', UserStatus::ACTIVE)
                 ->whereHas('profile', function ($q) use ($query) {
                     $q->where('skills', 'like', '%' . $query . '%')
                       ->where('is_verified', true);

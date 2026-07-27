@@ -730,6 +730,24 @@
     });
     </script>
 
+    {{-- ── Online Heartbeat: keeps last_seen_at fresh every 60s ── --}}
+    @auth
+    <script>
+        (function () {
+            const csrf = document.querySelector('meta[name="csrf-token"]')?.content;
+            function ping() {
+                fetch('/ping', {
+                    method: 'POST',
+                    headers: { 'X-CSRF-TOKEN': csrf, 'Content-Type': 'application/json' },
+                    keepalive: true,
+                }).catch(() => {});
+            }
+            ping(); // immediate ping on page load
+            setInterval(ping, 60000); // then every 60 seconds
+        })();
+    </script>
+    @endauth
+
     @stack('scripts')
 
 </body>

@@ -45,6 +45,7 @@ Route::get('/', function () {
 
     $popularTopics = $skills->map(function ($skillName) {
         $mentors = \App\Models\User::where('role', \App\Enums\UserRole::Mentor)
+            ->where('status', \App\Enums\UserStatus::ACTIVE)
             ->whereHas('profile', function ($q) use ($skillName) {
                 $q->where('skills', 'like', '%' . $skillName . '%')
                     ->where('is_verified', true);
@@ -80,6 +81,11 @@ Route::get('/about', fn() => view('about'))->name('about');
 Route::get('/contact', fn() => view('contact'))->name('contact');
 Route::get('/faq', fn() => view('faq'))->name('faq');
 Route::get('/terms', fn() => view('terms'))->name('terms');
+Route::post('/ping', function () {
+    // Heartbeat: UpdateLastSeen middleware handles the last_seen_at update
+    return response()->noContent();
+})->middleware('auth')->name('ping');
+
 Route::get('/mentors', [MentorsController::class, 'index'])->name('mentors');
 Route::get('/mentors/suggestions', [MentorsController::class, 'suggestions'])->name('mentors.suggestions');
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\UserRole;
+use App\Enums\UserStatus;
 use App\Models\User;
 use App\Models\Achievement;
 use Illuminate\Http\Request;
@@ -29,8 +30,8 @@ class ProfileController extends Controller
     {
         $mentor = User::with(['profile', 'achievements', 'reviews.student.profile', 'reviews.session.topic'])->findOrFail($id);
 
-        // Block access to unverified mentors unless the user is viewing their own profile
-        if ((!$mentor->profile || !$mentor->profile->is_verified) && Auth::id() !== $mentor->id) {
+        // Block access to unverified or inactive mentors unless the user is viewing their own profile
+        if ((!$mentor->profile || !$mentor->profile->is_verified || $mentor->status !== UserStatus::ACTIVE) && Auth::id() !== $mentor->id) {
             abort(404);
         }
 

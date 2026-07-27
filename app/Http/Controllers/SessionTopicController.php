@@ -6,6 +6,7 @@ use App\Notifications\PaymentReceivedNotification;
 use App\Notifications\SessionRequestedNotification;
 use App\Notifications\SessionApprovedNotification;
 use App\Enums\SessionStatus;
+use App\Enums\UserStatus;
 use App\Models\SessionTopic;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -15,9 +16,9 @@ class SessionTopicController extends Controller
 {
     public function create(User $mentor)
     {
-        // Block booking sessions with unverified mentors
-        if (!$mentor->profile || !$mentor->profile->is_verified) {
-            abort(404, 'এই মেন্টরের প্রোফাইল এখনও ভেরিফাইড নয়।');
+        // Block booking sessions with unverified or inactive mentors
+        if (!$mentor->profile || !$mentor->profile->is_verified || $mentor->status !== UserStatus::ACTIVE) {
+            abort(404, 'এই মেন্টরের প্রোফাইল ভেরিফাইড নয় অথবা মেন্টর বর্তমানে সক্রিয় নন।');
         }
 
         return view('session.request', compact('mentor'));
@@ -34,8 +35,8 @@ class SessionTopicController extends Controller
         ]);
 
         $mentor = User::findOrFail($request->mentor_id);
-        if (!$mentor->profile || !$mentor->profile->is_verified) {
-            abort(404, 'এই মেন্টরের প্রোফাইল এখনও ভেরিফাইড নয়।');
+        if (!$mentor->profile || !$mentor->profile->is_verified || $mentor->status !== UserStatus::ACTIVE) {
+            abort(404, 'এই মেন্টরের প্রোফাইল ভেরিফাইড নয় অথবা মেন্টর বর্তমানে সক্রিয় নন।');
         }
 
         $session = SessionTopic::create([

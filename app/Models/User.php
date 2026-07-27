@@ -85,7 +85,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function isOnline()
     {
-        return $this->last_seen_at && $this->last_seen_at >= now()->subMinutes(1);
+        return $this->last_seen_at && $this->last_seen_at >= now()->subMinutes(5);
     }
 
     public function lastSeenAgo()
