@@ -378,8 +378,6 @@
                     <div
                         class="px-4 py-3.5 sm:px-8 sm:py-5 border-b border-base-content/10 bg-base-100/40 flex justify-between items-center">
                         <h2 class="text-base sm:text-lg font-black text-base-content drop-shadow-sm">সাম্প্রতিক পেমেন্ট</h2>
-                        <button
-                            class="btn btn-ghost btn-xs text-base-content/50 hover:text-base-content">রিপোর্ট</button>
                     </div>
                     <div class="flex-1 p-3 sm:p-4 overflow-y-auto max-h-[300px]">
                         @if($recentPayments->isEmpty())

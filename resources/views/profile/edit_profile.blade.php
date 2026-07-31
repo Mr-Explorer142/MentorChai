@@ -284,6 +284,55 @@
                                         value="{{ old('department', Auth::user()->profile?->department) }}" />
                                 </div>
 
+                                {{-- Teaching Experience --}}
+                                @if(Auth::user()->role === \App\Enums\UserRole::Mentor)
+                                <div class="lg:col-span-2">
+                                    <label class="flex items-center gap-1.5 text-xs sm:text-sm font-bold mb-2
+                                                  text-[#033f63] dark:text-[#7ec8e3]">
+                                        শিক্ষকতার অভিজ্ঞতা
+                                    </label>
+                                    <div class="flex items-center gap-3 flex-wrap">
+                                        {{-- Years --}}
+                                        <div class="flex items-center gap-2">
+                                            <select name="teaching_experience_years" class="px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs sm:text-sm outline-none
+                                                       border-[1.5px] border-[#28666e]/20 dark:border-[#4db6c1]/20
+                                                       bg-[#eef7f8]/50 dark:bg-[#0f1f2e]/50
+                                                       text-[#033f63] dark:text-[#7ec8e3]
+                                                       focus:border-[#28666e] dark:focus:border-[#4db6c1]
+                                                       focus:ring-[3px] focus:ring-[#28666e]/10 dark:focus:ring-[#4db6c1]/10
+                                                       focus:bg-white dark:focus:bg-[#243d4d]
+                                                       transition-all duration-200 cursor-pointer">
+                                                <option value="">-- বছর --</option>
+                                                @for($y = 0; $y <= 50; $y++)
+                                                    <option value="{{ $y }}" {{ old('teaching_experience_years', Auth::user()->profile?->teaching_experience_years) == $y && old('teaching_experience_years', Auth::user()->profile?->teaching_experience_years) !== null ? 'selected' : '' }}>
+                                                        {{ $y }} বছর
+                                                    </option>
+                                                @endfor
+                                            </select>
+                                        </div>
+                                        {{-- Months --}}
+                                        <div class="flex items-center gap-2">
+                                            <select name="teaching_experience_months" class="px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs sm:text-sm outline-none
+                                                       border-[1.5px] border-[#28666e]/20 dark:border-[#4db6c1]/20
+                                                       bg-[#eef7f8]/50 dark:bg-[#0f1f2e]/50
+                                                       text-[#033f63] dark:text-[#7ec8e3]
+                                                       focus:border-[#28666e] dark:focus:border-[#4db6c1]
+                                                       focus:ring-[3px] focus:ring-[#28666e]/10 dark:focus:ring-[#4db6c1]/10
+                                                       focus:bg-white dark:focus:bg-[#243d4d]
+                                                       transition-all duration-200 cursor-pointer">
+                                                <option value="">-- মাস --</option>
+                                                @for($m = 0; $m <= 11; $m++)
+                                                    <option value="{{ $m }}" {{ old('teaching_experience_months', Auth::user()->profile?->teaching_experience_months) == $m && old('teaching_experience_months', Auth::user()->profile?->teaching_experience_months) !== null ? 'selected' : '' }}>
+                                                        {{ $m }} মাস
+                                                    </option>
+                                                @endfor
+                                            </select>
+                                        </div>
+                                        <p class="text-[10px] sm:text-xs text-[#033f63]/45 dark:text-[#7ec8e3]/40">যেমন: ২ বছর ৬ মাস</p>
+                                    </div>
+                                </div>
+                                @endif
+
                                 {{-- Hourly Rate --}}
                                 @if(Auth::user()->role === \App\Enums\UserRole::Mentor)
                                 {{-- Hourly Rate --}}
