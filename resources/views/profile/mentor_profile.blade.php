@@ -139,13 +139,15 @@
                             style="border-color: var(--mc-primary); color: var(--mc-primary); background: transparent;"
                             onmouseover="this.style.background='var(--mc-primary)';this.style.color='white'"
                             onmouseout="this.style.background='transparent';this.style.color='var(--mc-primary)'">
-                            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
                             </svg>
                             ফটো আপলোড
                         </button>
-                        <p class="mt-1.5 text-[10px] sm:text-xs" style="color: var(--mc-text-faint);">800×800 পিক্সেল · JPG বা PNG</p>
+                        <p class="mt-1.5 text-[10px] sm:text-xs" style="color: var(--mc-text-faint);">800×800 পিক্সেল ·
+                            JPG বা PNG</p>
                     </div>
                     @endif
                 </div>
@@ -168,8 +170,10 @@
                         <div class="flex items-center gap-4">
                             <div class="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-2xl shadow-md flex-shrink-0"
                                 style="background: linear-gradient(135deg, var(--mc-primary), #1A998F);">
-                                <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="white">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                                <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.8" stroke="white">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
                                 </svg>
                             </div>
                             <div>
@@ -177,7 +181,8 @@
                                     style="font-family:'Lora',serif; background: linear-gradient(135deg, var(--mc-primary), #1A998F, var(--mc-navy)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">
                                     ব্যক্তিগত তথ্য
                                 </h2>
-                                <p class="text-xs sm:text-sm mt-0.5 font-medium" style="color: var(--mc-text-muted);">মেন্টরের বিস্তারিত পরিচিতি ও যোগাযোগের তথ্য</p>
+                                <p class="text-xs sm:text-sm mt-0.5 font-medium" style="color: var(--mc-text-muted);">
+                                    মেন্টরের বিস্তারিত পরিচিতি ও যোগাযোগের তথ্য</p>
                             </div>
                         </div>
                         @if (auth()->id() === $mentor->id)
@@ -186,7 +191,8 @@
                             style="border-color: var(--mc-primary); color: var(--mc-primary);"
                             onmouseover="this.style.background='var(--mc-primary)';this.style.color='white'"
                             onmouseout="this.style.background='transparent';this.style.color='var(--mc-primary)'">
-                            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931z" />
                             </svg>
@@ -204,7 +210,8 @@
                         ['icon_color'=>'#3b82f6', 'bg'=>'rgba(59,130,246,0.12)', 'label'=>'শিক্ষাগত যোগ্যতা',
                         'value'=>$mentor->profile->highgest_education_level ?? '-', 'bold'=>false,
                         'icon'=>'M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0
-                        018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112
+                        018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0
+                        0112
                         3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814'],
 
                         ['icon_color'=>'#8b5cf6', 'bg'=>'rgba(139,92,246,0.12)', 'label'=>'শিক্ষাপ্রতিষ্ঠানের নাম',
@@ -212,10 +219,13 @@
                         'icon'=>'M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012
                         9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18'],
 
-                        ['icon_color'=>'#eab308', 'bg'=>'rgba(234,179,8,0.12)', 'label'=>'অধ্যয়নের বিষয় (ডিপার্টমেন্ট)',
+                        ['icon_color'=>'#eab308', 'bg'=>'rgba(234,179,8,0.12)', 'label'=>'অধ্যয়নের বিষয়
+                        (ডিপার্টমেন্ট)',
                         'value'=>$mentor->profile->department ?? '-', 'bold'=>false,
-                        'icon'=>'M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305
-                        0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018
+                        'icon'=>'M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016
+                        18c2.305
+                        0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0
+                        0018
                         18a8.967 8.967 0 00-6 2.292m0-14.25v14.25'],
 
                         ['icon_color'=>'#10b981', 'bg'=>'rgba(16,185,129,0.12)', 'label'=>'মেন্টর হিসেবে যুক্ত হয়েছেন',
@@ -228,7 +238,9 @@
 
                         ['icon_color'=>'#ec4899', 'bg'=>'rgba(236,72,153,0.12)', 'label'=>'পড়ানোর ভাষা',
                         'value'=>$mentor->profile->preferred_language ?? '-', 'bold'=>false,
-                        'icon'=>'M10.5 21l5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 016-.371m0 0c1.12 0 2.233.038 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138c.896.061 1.785.147 2.666.257m-4.589 8.495a18.023 18.023 0 01-3.827-5.802'],
+                        'icon'=>'M10.5 21l5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 016-.371m0 0c1.12 0
+                        2.233.038 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138c.896.061
+                        1.785.147 2.666.257m-4.589 8.495a18.023 18.023 0 01-3.827-5.802'],
                         ];
                         @endphp
                         @foreach($infoItems as $item)
@@ -238,13 +250,14 @@
                             onmouseout="this.style.background='var(--mc-surface)'; this.style.borderColor='var(--mc-border-teal-sub)'">
                             <div class="p-2.5 sm:p-3 rounded-xl shrink-0 group-hover:scale-110 transition-transform duration-200"
                                 style="background: {{ $item['bg'] }};">
-                                <svg class="w-5 h-5 sm:w-5.5 sm:h-5.5" fill="none" viewBox="0 0 24 24" stroke-width="1.8"
-                                    stroke="{{ $item['icon_color'] }}">
+                                <svg class="w-5 h-5 sm:w-5.5 sm:h-5.5" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.8" stroke="{{ $item['icon_color'] }}">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="{{ $item['icon'] }}" />
                                 </svg>
                             </div>
                             <div class="min-w-0">
-                                <p class="text-xs sm:text-sm font-bold mb-1" style="color: var(--mc-text);">{{ $item['label'] }}</p>
+                                <p class="text-xs sm:text-sm font-bold mb-1" style="color: var(--mc-text);">{{
+                                    $item['label'] }}</p>
                                 <p class="text-sm sm:text-base break-all {{ $item['bold'] ? 'font-extrabold' : 'font-medium' }}"
                                     style="color: var(--mc-text-muted);">{{ $item['value'] }}</p>
                             </div>
@@ -253,10 +266,10 @@
 
                         {{-- শিক্ষকতার অভিজ্ঞতা --}}
                         @php
-                        $expYears  = $mentor->profile->teaching_experience_years ?? null;
+                        $expYears = $mentor->profile->teaching_experience_years ?? null;
                         $expMonths = $mentor->profile->teaching_experience_months ?? null;
-                        $expParts  = [];
-                        if ($expYears)  $expParts[] = $expYears . ' বছর';
+                        $expParts = [];
+                        if ($expYears) $expParts[] = $expYears . ' বছর';
                         if ($expMonths) $expParts[] = $expMonths . ' মাস';
                         $expValue = count($expParts) ? implode(' ', $expParts) : '-';
                         @endphp
@@ -266,13 +279,17 @@
                             onmouseout="this.style.background='var(--mc-surface)'; this.style.borderColor='var(--mc-border-teal-sub)'">
                             <div class="p-2.5 sm:p-3 rounded-xl shrink-0 group-hover:scale-110 transition-transform duration-200"
                                 style="background: rgba(14,165,233,0.12);">
-                                <svg class="w-5 h-5 sm:w-5.5 sm:h-5.5" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="#0ea5e9">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                <svg class="w-5 h-5 sm:w-5.5 sm:h-5.5" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.8" stroke="#0ea5e9">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                             </div>
                             <div class="min-w-0">
-                                <p class="text-xs sm:text-sm font-bold mb-1" style="color: var(--mc-text);">শিক্ষকতার অভিজ্ঞতা</p>
-                                <p class="text-sm sm:text-base font-medium" style="color: var(--mc-text-muted);">{{ $expValue }}</p>
+                                <p class="text-xs sm:text-sm font-bold mb-1" style="color: var(--mc-text);">শিক্ষকতার
+                                    অভিজ্ঞতা</p>
+                                <p class="text-sm sm:text-base font-medium" style="color: var(--mc-text-muted);">{{
+                                    $expValue }}</p>
                             </div>
                         </div>
                     </div>
@@ -280,31 +297,37 @@
                     {{-- ঘণ্টা প্রতি চার্জ — Special Highlighted Card --}}
                     <div class="relative overflow-hidden rounded-2xl p-4 sm:p-5 mt-2"
                         style="background: linear-gradient(135deg, rgba(40,102,110,0.15) 0%, rgba(26,153,143,0.1) 50%, rgba(40,102,110,0.08) 100%); border: 2px solid rgba(40,102,110,0.3); box-shadow: 0 4px 20px rgba(40,102,110,0.15);">
-                        {{-- Decorative glow --}}
-                        <div class="absolute -top-6 -right-6 w-24 h-24 rounded-full opacity-20" style="background: radial-gradient(circle, #1A998F, transparent);"></div>
-                        <div class="absolute -bottom-4 -left-4 w-16 h-16 rounded-full opacity-15" style="background: radial-gradient(circle, var(--mc-primary), transparent);"></div>
+
 
                         <div class="relative flex flex-col sm:flex-row items-center sm:items-center gap-4">
                             <div class="flex items-center gap-4 flex-1">
-                                <div class="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-2xl shadow-lg flex-shrink-0"
+                                <div class="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-2xl shadow-lg shrink-0"
                                     style="background: linear-gradient(135deg, var(--mc-primary), #1A998F);">
-                                    <svg class="w-6 h-6 sm:w-7 sm:h-7" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="white">
+                                    <svg class="w-6 h-6 sm:w-7 sm:h-7" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.8" stroke="white">
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
                                 </div>
                                 <div>
-                                    <p class="text-xs sm:text-sm font-bold uppercase tracking-wider mb-0.5" style="color: var(--mc-primary);">ঘণ্টা প্রতি চার্জ</p>
-                                    <p class="text-3xl sm:text-4xl font-extrabold" style="font-family:'Lora',serif; color: var(--mc-primary);"
-                                    >{{ $mentor->profile->hourly_rate ? '৳ ' . number_format($mentor->profile->hourly_rate) : 'নির্ধারিত নয়' }}</p>
-                                    <p class="text-[10px] sm:text-xs font-medium mt-0.5" style="color: var(--mc-text-muted);">প্রতি ঘণ্টায় পাঠ্য মূল্য</p>
+                                    <p class="text-sm font-bold uppercase tracking-wider mb-0.5"
+                                        style="color: var(--mc-primary);">ঘণ্টা প্রতি চার্জ</p>
+                                    <p class="text-2xl my-3 font-extrabold"
+                                        style="font-family:'Lora',serif; color: var(--mc-primary);">{{
+                                        $mentor->profile->hourly_rate ? '৳ ' .
+                                        number_format($mentor->profile->hourly_rate) : 'নির্ধারিত নয়' }}</p>
+                                    <p class="text-xs font-medium mt-0.5"
+                                        style="color: var(--mc-text-muted);">প্রতি ঘণ্টায় পাঠ্য মূল্য</p>
                                 </div>
                             </div>
-                            <div class="flex-shrink-0">
-                                <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs sm:text-sm font-bold"
+                            <div class="shrink-0">
+                                <span
+                                    class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs sm:text-sm font-bold"
                                     style="background: rgba(40,102,110,0.15); color: var(--mc-primary); border: 1.5px solid rgba(40,102,110,0.3);">
-                                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                        stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
                                     প্রতি ঘণ্টা
                                 </span>
@@ -320,7 +343,8 @@
                     <div class="flex items-center gap-3">
                         <div class="w-1 h-7 rounded-full"
                             style="background: linear-gradient(to bottom, var(--mc-primary), var(--mc-sage));"></div>
-                        <h2 class="text-lg sm:text-xl font-bold" style="color: var(--mc-text); font-family:'Lora',serif;">
+                        <h2 class="text-lg sm:text-xl font-bold"
+                            style="color: var(--mc-text); font-family:'Lora',serif;">
                             দক্ষতাসমূহ</h2>
                     </div>
                 </div>
@@ -330,7 +354,8 @@
                     <span
                         class="inline-flex items-center gap-1 text-xs sm:text-sm font-semibold px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full border transition-all duration-200 hover:scale-105 cursor-default"
                         style="border-color: var(--mc-border-teal); color: var(--mc-primary); background: rgba(40,102,110,0.08);">
-                        <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
                         </svg>
@@ -355,7 +380,8 @@
                 <div class="flex items-center gap-3 mb-4">
                     <div class="w-1 h-7 rounded-full"
                         style="background: linear-gradient(to bottom, var(--mc-primary), var(--mc-sage));"></div>
-                    <h2 class="text-lg sm:text-xl font-bold" style="color: var(--mc-text); font-family:'Lora',serif;">আমার সম্পর্কে</h2>
+                    <h2 class="text-lg sm:text-xl font-bold" style="color: var(--mc-text); font-family:'Lora',serif;">
+                        আমার সম্পর্কে</h2>
                 </div>
                 <div class="rounded-2xl px-4 pt-2.5 pb-4 sm:px-6 sm:pt-2 sm:pb-5 border shadow-sm"
                     style="background: var(--mc-bg); border-color: var(--mc-border-teal-sub);">
@@ -372,7 +398,8 @@
                     <div class="flex items-center gap-3">
                         <div class="w-1 h-7 rounded-full"
                             style="background: linear-gradient(to bottom, #eab308, rgba(234,179,8,0.3));"></div>
-                        <h2 class="text-lg sm:text-xl font-bold" style="color: var(--mc-text); font-family:'Lora',serif;">অর্জনসমূহ</h2>
+                        <h2 class="text-lg sm:text-xl font-bold"
+                            style="color: var(--mc-text); font-family:'Lora',serif;">অর্জনসমূহ</h2>
                     </div>
                     @if(auth()->id() === $mentor->id)
                     <button type="button" onclick="document.getElementById('addAchievementModal').showModal()"
@@ -380,7 +407,8 @@
                         style="border-color: #eab308; color: #d97706;"
                         onmouseover="this.style.background='#eab308';this.style.color='white'"
                         onmouseout="this.style.background='transparent';this.style.color='#d97706'">
-                        <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                         </svg>
                         নতুন অর্জন
@@ -395,7 +423,8 @@
                         <div class="text-xl shrink-0 mt-0.5">🏆</div>
                         <div class="flex-1 min-w-0 pr-12 flex flex-col h-full">
                             <p class="text-xs sm:text-sm font-bold" style="color: #eab308;">{{ $ach->title }}</p>
-                            <p class="text-[11px] sm:text-xs mt-1 leading-relaxed flex-1" style="color: var(--mc-text-muted);">{{
+                            <p class="text-[11px] sm:text-xs mt-1 leading-relaxed flex-1"
+                                style="color: var(--mc-text-muted);">{{
                                 Str::limit($ach->description, 100) }}</p>
 
                             @if(auth()->id() === $mentor->id)
@@ -470,7 +499,8 @@
                                 </svg>
                                 শিক্ষার্থীদের রিভিউ
                             </h2>
-                            <p class="text-xs mt-0.5" style="color: var(--mc-text-muted);">শিক্ষার্থীদের মতামত ও অভিজ্ঞতা</p>
+                            <p class="text-xs mt-0.5" style="color: var(--mc-text-muted);">শিক্ষার্থীদের মতামত ও
+                                অভিজ্ঞতা</p>
                         </div>
                     </div>
 
@@ -488,7 +518,8 @@
                                 </svg>
                                 @endfor
                         </div>
-                        <p class="text-[10px]" style="color: var(--mc-text-muted);">{{ $reviews->count() }}টি রিভিউ থেকে</p>
+                        <p class="text-[10px]" style="color: var(--mc-text-muted);">{{ $reviews->count() }}টি রিভিউ থেকে
+                        </p>
                     </div>
                     @endif
                 </div>
@@ -500,7 +531,8 @@
                             d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.173c.969 0 1.371 1.24.588 1.81l-3.376 2.454a1 1 0 00-.364 1.118l1.286 3.967c.3.921-.755 1.688-1.54 1.118l-3.376-2.454a1 1 0 00-1.176 0l-3.376 2.454c-.784.57-1.838-.197-1.539-1.118l1.285-3.967a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.173a1 1 0 00.95-.69l1.287-3.967z" />
                     </svg>
                     <p class="font-bold" style="color: var(--mc-text-muted);">এখনো কোনো রিভিউ নেই</p>
-                    <p class="text-sm mt-1" style="color: var(--mc-text-faint);">সেশন সম্পন্ন হলে শিক্ষার্থীরা রিভিউ দিতে পারবেন</p>
+                    <p class="text-sm mt-1" style="color: var(--mc-text-faint);">সেশন সম্পন্ন হলে শিক্ষার্থীরা রিভিউ
+                        দিতে পারবেন</p>
                 </div>
 
                 @else
@@ -566,7 +598,8 @@
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
                             </svg>
-                            <span class="text-[10px]" style="color: var(--mc-text-faint);">{{ $review->session->topic->topic
+                            <span class="text-[10px]" style="color: var(--mc-text-faint);">{{
+                                $review->session->topic->topic
                                 ??
                                 'N/A' }}</span>
                         </div>

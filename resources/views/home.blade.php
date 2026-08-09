@@ -28,9 +28,11 @@
                 <div class="grid items-center gap-8 sm:gap-14 lg:grid-cols-2">
 
                     {{-- LEFT CONTENT --}}
-                    <div class="flex flex-col items-center sm:items-start text-center sm:text-left space-y-5 sm:space-y-8">
+                    <div
+                        class="flex flex-col items-center sm:items-start text-center sm:text-left space-y-5 sm:space-y-8">
                         {{-- Badge --}}
-                        <span class="inline-flex items-center gap-1.5 sm:gap-2 rounded-full px-3.5 py-1.5 text-xs sm:text-sm font-bold tracking-wide shadow-xs"
+                        <span
+                            class="inline-flex items-center gap-1.5 sm:gap-2 rounded-full px-3.5 py-1.5 text-xs sm:text-sm font-bold tracking-wide shadow-xs"
                             style="background: linear-gradient(135deg, rgba(26,153,152,0.12), rgba(21,86,101,0.06)); border: 1.5px solid rgba(26,153,152,0.3); color: var(--mc-primary);">
                             <span class="h-2 w-2 animate-pulse rounded-full shadow-[0_0_8px_rgba(26,153,152,0.8)]"
                                 style="background: var(--mc-primary);"></span>
@@ -41,7 +43,8 @@
                         <h1 class="text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl md:text-5xl lg:text-6xl"
                             style="color: var(--mc-text);">
                             জরুরি মূহুর্তে হঠাৎ <br class="inline sm:hidden" />
-                            <span class="bg-gradient-to-r from-[#1A9998] to-[#155665] dark:from-[#4db6c1] dark:to-[#7ec8e3] bg-clip-text text-transparent">
+                            <span
+                                class="bg-gradient-to-r from-[#1A9998] to-[#155665] dark:from-[#4db6c1] dark:to-[#7ec8e3] bg-clip-text text-transparent">
                                 শিক্ষকের সাহায্য
                             </span> প্রয়োজন?
                             <br class="hidden sm:inline" />
@@ -49,18 +52,21 @@
                         </h1>
 
                         {{-- Subtext --}}
-                        <p class="max-w-xl mx-auto sm:mx-0 text-sm sm:text-lg leading-relaxed font-medium" style="color: var(--mc-text-muted);">
-                            পরীক্ষার আগের রাতে হঠাৎ Calculus বুঝতে অসুবিধা হচ্ছে? কিংবা Binary Search Algorithm? শুধুমাত্র Kirchhoff's Laws বুঝতে মাত্র এক ঘণ্টার জন্য একজন শিক্ষকের সহায়তা দরকার?
+                        <p class="max-w-xl mx-auto sm:mx-0 text-sm sm:text-lg leading-relaxed font-medium"
+                            style="color: var(--mc-text-muted);">
+                            পরীক্ষার আগের রাতে হঠাৎ Calculus বুঝতে অসুবিধা হচ্ছে? কিংবা Binary Search Algorithm?
+                            শুধুমাত্র Kirchhoff's Laws বুঝতে মাত্র এক ঘণ্টার জন্য একজন শিক্ষকের সহায়তা দরকার?
                         </p>
 
                         {{-- CTA Buttons --}}
-                        <div class="grid grid-cols-2 gap-2 sm:flex sm:flex-row sm:gap-4 pt-1 sm:pt-2 w-full max-w-md sm:max-w-none justify-center sm:justify-start">
+                        <div
+                            class="grid grid-cols-2 gap-2 sm:flex sm:flex-row sm:gap-4 pt-1 sm:pt-2 w-full max-w-md sm:max-w-none justify-center sm:justify-start">
                             <a href="{{ route('mentors') }}"
                                 class="inline-flex items-center justify-center gap-1.5 sm:gap-2 rounded-xl px-3 py-2.5 text-xs sm:px-7 sm:py-3.5 sm:text-base font-bold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5"
                                 style="background: linear-gradient(135deg, #1A9998, #155665); box-shadow: 0 8px 24px rgba(26,153,152,0.35);">
                                 এখনই শিক্ষক খুঁজুন
-                                <svg class="h-3.5 w-3.5 sm:h-4 sm:w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                    stroke-width="2.5">
+                                <svg class="h-3.5 w-3.5 sm:h-4 sm:w-4" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24" stroke-width="2.5">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7-7 7" />
                                 </svg>
                             </a>
@@ -68,8 +74,8 @@
                                 class="inline-flex items-center justify-center gap-1.5 sm:gap-2 rounded-xl px-3 py-2.5 text-xs sm:px-7 sm:py-3.5 sm:text-base font-semibold transition-all duration-300 hover:-translate-y-0.5"
                                 style="border: 1.5px solid rgba(26,153,152,0.4); color: var(--mc-primary); background: var(--mc-surface);">
                                 কীভাবে কাজ করে?
-                                <svg class="h-3.5 w-3.5 sm:h-4 sm:w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                    stroke-width="2">
+                                <svg class="h-3.5 w-3.5 sm:h-4 sm:w-4" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
                                 </svg>
                             </a>
@@ -102,14 +108,17 @@
                                 style="background: var(--mc-surface); border: 1px solid var(--mc-border-teal);">
                                 <div class="flex h-7 w-7 sm:h-9 sm:w-9 items-center justify-center rounded-lg sm:rounded-xl"
                                     style="background: linear-gradient(135deg, #1A9998, #155665);">
-                                    <svg class="h-4 w-4 sm:h-5 sm:w-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="h-4 w-4 sm:h-5 sm:w-5 text-white" fill="currentColor"
+                                        viewBox="0 0 20 20">
                                         <path
                                             d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                     </svg>
                                 </div>
                                 <div>
-                                    <p class="text-xs sm:text-sm font-bold" style="color: var(--mc-primary);">4.9 Rated</p>
-                                    <p class="text-[10px] sm:text-xs" style="color: var(--mc-text-muted);">Verified Mentors</p>
+                                    <p class="text-xs sm:text-sm font-bold" style="color: var(--mc-primary);">4.9 Rated
+                                    </p>
+                                    <p class="text-[10px] sm:text-xs" style="color: var(--mc-text-muted);">Verified
+                                        Mentors</p>
                                 </div>
                             </div>
 
@@ -118,7 +127,8 @@
                                 style="background: var(--mc-surface); border: 1px solid var(--mc-border-teal);">
                                 <span class="h-2 w-2 animate-pulse rounded-full"
                                     style="background: var(--mc-online);"></span>
-                                <span class="text-[10px] sm:text-xs font-semibold" style="color: var(--mc-primary);">৩২ জন
+                                <span class="text-[10px] sm:text-xs font-semibold" style="color: var(--mc-primary);">৩২
+                                    জন
                                     অনলাইন</span>
                             </div>
                         </div>
@@ -138,7 +148,8 @@
                 <div class="mb-8 sm:mb-14 text-center">
                     <p class="mb-2 text-sm font-bold uppercase tracking-widest" style="color: var(--mc-primary);">
                         এক্সপ্লোর করুন</p>
-                    <h2 class="text-xl sm:text-3xl font-extrabold tracking-tight lg:text-4xl" style="color: var(--mc-text);">
+                    <h2 class="text-xl sm:text-3xl font-extrabold tracking-tight lg:text-4xl"
+                        style="color: var(--mc-text);">
                         জনপ্রিয়
                         <span
                             style="background: linear-gradient(135deg, #1A9998, #155665); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
@@ -152,68 +163,82 @@
                 {{-- Carousel --}}
                 <div class="relative">
                     <div id="scrollContainer" class="overflow-hidden">
-                        <div id="cardsContainer" class="flex gap-4 sm:gap-6 pb-4 transition-transform duration-500 ease-out"
+                        <div id="cardsContainer"
+                            class="flex gap-4 sm:gap-6 pb-4 transition-transform duration-500 ease-out"
                             style="width: max-content;">
 
                             @forelse($popularTopics as $index => $topic)
                             @php
-                                $palettes = [
-                                    [
-                                        'from' => '#1A9998',
-                                        'to' => '#105857',
-                                        'icon' => '<svg class="h-4.5 w-4.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.263 8.535l8.737-3.745 8.737 3.745-8.737 3.745-8.737-3.745zm0 0v4.615c0 2.215 3.91 4.01 8.737 4.01s8.737-1.795 8.737-4.01V8.535m-17.474 0L13 12.28"/></svg>'
-                                    ], // Graduation Cap
-                                    [
-                                        'from' => '#1E63B8',
-                                        'to' => '#0F3C75',
-                                        'icon' => '<svg class="h-4.5 w-4.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925-3.546 5.974 5.974 0 00-2.133-1A3.75 3.75 0 004 9.5a3.75 3.75 0 00.322 1.503A5.992 5.992 0 003 14.5a5.976 5.976 0 001 2.135A3.75 3.75 0 007.5 20h.017a3.75 3.75 0 003.483-2.5z"/></svg>'
-                                    ], // Lightbulb
-                                    [
-                                        'from' => '#6D31ED',
-                                        'to' => '#40179C',
-                                        'icon' => '<svg class="h-4.5 w-4.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"/></svg>'
-                                    ], // Compass / Guide Badge
-                                ];
-                                $pal   = $palettes[$index % count($palettes)];
-                                $color = $pal['from'];
+                            $palettes = [
+                            [
+                            'from' => '#1A9998',
+                            'to' => '#105857',
+                            'icon' => '<svg class="h-4.5 w-4.5" fill="none" stroke="currentColor" stroke-width="2.2"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M4.263 8.535l8.737-3.745 8.737 3.745-8.737 3.745-8.737-3.745zm0 0v4.615c0 2.215 3.91 4.01 8.737 4.01s8.737-1.795 8.737-4.01V8.535m-17.474 0L13 12.28" />
+                            </svg>'
+                            ], // Graduation Cap
+                            [
+                            'from' => '#1E63B8',
+                            'to' => '#0F3C75',
+                            'icon' => '<svg class="h-4.5 w-4.5" fill="none" stroke="currentColor" stroke-width="2.2"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925-3.546 5.974 5.974 0 00-2.133-1A3.75 3.75 0 004 9.5a3.75 3.75 0 00.322 1.503A5.992 5.992 0 003 14.5a5.976 5.976 0 001 2.135A3.75 3.75 0 007.5 20h.017a3.75 3.75 0 003.483-2.5z" />
+                            </svg>'
+                            ], // Lightbulb
+                            [
+                            'from' => '#6D31ED',
+                            'to' => '#40179C',
+                            'icon' => '<svg class="h-4.5 w-4.5" fill="none" stroke="currentColor" stroke-width="2.2"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+                            </svg>'
+                            ], // Compass / Guide Badge
+                            ];
+                            $pal = $palettes[$index % count($palettes)];
+                            $color = $pal['from'];
                             @endphp
 
                             <div class="group relative w-44 sm:w-64 shrink-0 overflow-hidden rounded-2xl transition-all duration-500 hover:-translate-y-3 bg-[var(--mc-surface)] dark:bg-[#253e50]"
-                                 style="border: 1px solid {{ $color }}45;
+                                style="border: 1px solid {{ $color }}45;
                                         box-shadow: 0 8px 30px {{ $color }}20, 0 2px 8px rgba(0,0,0,0.12);">
 
                                 {{-- Shimmer sweep --}}
                                 <div class="pointer-events-none absolute inset-0 z-30 -translate-x-full skew-x-12
                                             transition-transform duration-700 group-hover:translate-x-full"
-                                     style="background: linear-gradient(90deg, transparent, rgba(255,255,255,0.07), transparent);">
+                                    style="background: linear-gradient(90deg, transparent, rgba(255,255,255,0.07), transparent);">
                                 </div>
 
                                 {{-- ── HEADER ── --}}
                                 <div class="relative flex h-32 sm:h-44 w-full flex-col justify-between overflow-hidden p-2.5 sm:p-4"
-                                     style="background: linear-gradient(145deg, {{ $pal['from'] }} 0%, {{ $pal['to'] }} 100%);">
+                                    style="background: linear-gradient(145deg, {{ $pal['from'] }} 0%, {{ $pal['to'] }} 100%);">
 
                                     {{-- Dot-grid texture --}}
-                                    <div class="pointer-events-none absolute inset-0"
-                                         style="background-image: radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px);
+                                    <div class="pointer-events-none absolute inset-0" style="background-image: radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px);
                                                 background-size: 18px 18px;"></div>
 
                                     {{-- Decorative circles --}}
                                     <div class="pointer-events-none absolute -right-9 -top-9 h-32 w-32 rounded-full"
-                                         style="border: 1px solid rgba(255,255,255,0.07); background: rgba(255,255,255,0.03);"></div>
+                                        style="border: 1px solid rgba(255,255,255,0.07); background: rgba(255,255,255,0.03);">
+                                    </div>
                                     <div class="pointer-events-none absolute -right-3 -top-3 h-20 w-20 rounded-full"
-                                         style="border: 1px solid rgba(255,255,255,0.10); background: rgba(255,255,255,0.04);"></div>
+                                        style="border: 1px solid rgba(255,255,255,0.10); background: rgba(255,255,255,0.04);">
+                                    </div>
 
                                     {{-- Top row: icon + live dot --}}
                                     <div class="relative z-10 flex items-center justify-between">
                                         {{-- Translucent rounded icon container --}}
                                         <div class="flex h-8 w-8 items-center justify-center rounded-xl text-white"
-                                             style="background: rgba(255, 255, 255, 0.12);
+                                            style="background: rgba(255, 255, 255, 0.12);
                                                     border: 1px solid rgba(255, 255, 255, 0.22);
                                                     backdrop-filter: blur(6px);">
                                             {!! $pal['icon'] !!}
                                         </div>
                                         <span class="flex h-2.5 w-2.5 rounded-full"
-                                              style="background: #4ade80; box-shadow: 0 0 0 3px rgba(74,222,128,0.2), 0 0 8px 2px rgba(74,222,128,0.25);">
+                                            style="background: #4ade80; box-shadow: 0 0 0 3px rgba(74,222,128,0.2), 0 0 8px 2px rgba(74,222,128,0.25);">
                                         </span>
                                     </div>
 
@@ -228,8 +253,9 @@
                                     {{-- Stats pill --}}
                                     <div class="relative z-10 flex justify-center">
                                         <div class="inline-flex items-center gap-1.5 sm:gap-3 rounded-full px-2.5 py-1 sm:px-4 sm:py-1.5"
-                                             style="background: rgba(0,0,0,0.28); border: 1px solid rgba(255,255,255,0.12);">
-                                            <span style="font-size: 9px; sm:font-size:10px; color:rgba(255,255,255,0.80); font-weight:700;">
+                                            style="background: rgba(0,0,0,0.28); border: 1px solid rgba(255,255,255,0.12);">
+                                            <span
+                                                style="font-size: 9px; sm:font-size:10px; color:rgba(255,255,255,0.80); font-weight:700;">
                                                 {{ $topic->mentors_count ?? '40+' }} মেন্টর
                                             </span>
                                         </div>
@@ -242,17 +268,21 @@
                                     <div class="flex">
                                         @foreach(array_slice($topic->mentors, 0, 3) as $i => $mentor)
                                         <div class="h-7 w-7 rounded-full overflow-hidden border-2 border-[var(--mc-surface)] dark:border-[#253e50]"
-                                             style="margin-left: {{ $i > 0 ? '-8px' : '0' }};">
+                                            style="margin-left: {{ $i > 0 ? '-8px' : '0' }};">
                                             @if(!empty($mentor['avatar']))
-                                                <img src="{{ asset('storage/' . $mentor['avatar']) }}" alt="{{ $mentor['name'] }}" class="h-full w-full object-cover">
+                                            <img src="{{ asset('storage/' . $mentor['avatar']) }}"
+                                                alt="{{ $mentor['name'] }}" class="h-full w-full object-cover">
                                             @else
-                                                <img src="https://ui-avatars.com/api/?name={{ urlencode($mentor['name']) }}&background={{ str_replace('#', '', $pal['from']) }}&color=ffffff&size=28&font-size=0.38&bold=true" alt="{{ $mentor['name'] }}" class="h-full w-full object-cover">
+                                            <img src="https://ui-avatars.com/api/?name={{ urlencode($mentor['name']) }}&background={{ str_replace('#', '', $pal['from']) }}&color=ffffff&size=28&font-size=0.38&bold=true"
+                                                alt="{{ $mentor['name'] }}" class="h-full w-full object-cover">
                                             @endif
                                         </div>
                                         @endforeach
                                     </div>
-                                    <span class="text-[9px] sm:text-[11px] leading-tight" style="color: var(--mc-text-muted);">
-                                        <strong style="color: var(--mc-primary);">{{ $topic->mentors[0]['name'] }}</strong>
+                                    <span class="text-[9px] sm:text-[11px] leading-tight"
+                                        style="color: var(--mc-text-muted);">
+                                        <strong style="color: var(--mc-primary);">{{ $topic->mentors[0]['name']
+                                            }}</strong>
                                         এবং আরও {{ max(0, count($topic->mentors) - 1) }} জন পড়াচ্ছেন
                                     </span>
                                 </div>
@@ -261,11 +291,11 @@
                                 {{-- ── CTA ── --}}
                                 <div class="px-3 pb-3 sm:px-4 sm:pb-4 @if(empty($topic->mentors)) pt-3 @endif">
                                     <a href="{{ route('mentors', ['skills[]' => $topic->name]) }}"
-                                       class="group/btn relative block w-full overflow-hidden rounded-lg sm:rounded-xl py-1.5 sm:py-2.5
-                                              text-center text-[10px] sm:text-sm font-bold text-white transition-all duration-300 hover:scale-[1.02]"
-                                       style="background: linear-gradient(135deg, {{ $pal['from'] }}, {{ $pal['to'] }});
+                                        class="group/btn relative block w-full overflow-hidden rounded-lg sm:rounded-xl py-1.5 sm:py-2.5
+                                              text-center text-[10px] sm:text-sm font-bold text-white transition-all duration-300 hover:scale-[1.02]" style="background: linear-gradient(135deg, {{ $pal['from'] }}, {{ $pal['to'] }});
                                               box-shadow: 0 4px 16px {{ $color }}45;">
-                                        <span class="pointer-events-none absolute inset-0 -translate-x-full skew-x-12
+                                        <span
+                                            class="pointer-events-none absolute inset-0 -translate-x-full skew-x-12
                                                      transition-transform duration-500 group-hover/btn:translate-x-full"
                                             style="background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);">
                                         </span>
@@ -275,7 +305,8 @@
                                 </div>
                             </div>
                             @empty
-                            <p class="py-12 text-center text-sm" style="color: var(--mc-text-muted);">কোনো টপিক পাওয়া যায়নি।</p>
+                            <p class="py-12 text-center text-sm" style="color: var(--mc-text-muted);">কোনো টপিক পাওয়া
+                                যায়নি।</p>
                             @endforelse
 
                         </div>
@@ -302,71 +333,19 @@
             </div>
         </section>
 
-        {{-- ═══════════════════════════════════════════
-        POPULAR DEPARTMENTS
-        ═══════════════════════════════════════════ --}}
-        <section class="py-12 sm:py-24 transition-colors duration-300" style="background-color: var(--mc-bg);">
-
-            <div class="relative mx-auto max-w-7xl px-4 sm:px-6">
-
-                {{-- Heading --}}
-                <div class="mb-8 sm:mb-14 text-center">
-                    <p class="mb-2 text-sm font-bold uppercase tracking-widest" style="color: var(--mc-primary);">
-                        ডিপার্টমেন্ট</p>
-                    <h2 class="text-xl sm:text-3xl font-extrabold tracking-tight lg:text-4xl" style="color: var(--mc-text);">
-                        প্রায়শই অনুসন্ধানকৃত
-                        <span
-                            style="background: linear-gradient(135deg, #1A9998, #155665); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-                            ডিপার্টমেন্টসমূহ
-                        </span>
-                    </h2>
-                    <div class="mx-auto mt-4 h-1 w-14 rounded-full"
-                        style="background: linear-gradient(90deg, #1A9998, #155665);"></div>
-                </div>
-
-                @php
-                $departments = [
-                ['icon'=>'cseicon.png', 'name'=>'Computer Science & Engineering', 'color'=>'#1A9998'],
-                ['icon'=>'eeeicon.png', 'name'=>'Electrical & Electronics Engg.', 'color'=>'#187F87'],
-                ['icon'=>'pharmacyicon.png', 'name'=>'Pharmacy', 'color'=>'#155665'],
-                ['icon'=>'textileicon.png', 'name'=>'Textile Engineering', 'color'=>'#1A9998'],
-                ['icon'=>'sweicon.png', 'name'=>'Software Engineering', 'color'=>'#187F87'],
-                ['icon'=>'nfeicon.png', 'name'=>'Nutrition & Food Engineering', 'color'=>'#155665'],
-                ];
-                @endphp
-
-                <div class="flex overflow-x-auto snap-x snap-mandatory gap-3 pb-4 md:grid md:grid-cols-3 lg:grid-cols-6 md:overflow-x-visible md:pb-0 scroll-smooth" style="scrollbar-width: none; -ms-overflow-style: none;">
-                    @foreach($departments as $dept)
-                    <div class="group shrink-0 w-[150px] md:w-auto snap-center overflow-hidden rounded-xl sm:rounded-2xl p-4 sm:p-6 text-center transition-all duration-500 hover:-translate-y-2 hover:shadow-xl"
-                        style="background: var(--mc-surface); border: 1px solid var(--mc-border-teal-sub); box-shadow: var(--mc-shadow-sm);">
-                        <div class="flex flex-col items-center gap-2.5 sm:gap-4">
-                            <div class="flex h-14 w-14 sm:h-20 sm:w-20 items-center justify-center rounded-xl sm:rounded-2xl transition-all duration-500 group-hover:scale-110"
-                                style="background: {{ $dept['color'] }}18; border: 1.5px solid {{ $dept['color'] }}30;">
-                                <img src="{{ asset('images/Home Page/' . $dept['icon']) }}" alt="{{ $dept['name'] }}"
-                                    class="h-8 w-8 sm:h-12 sm:w-12 object-contain drop-shadow" />
-                            </div>
-                            <h3 class="text-xs font-semibold leading-tight transition-colors duration-300 md:text-sm"
-                                style="color: var(--mc-text-sub);">
-                                {{ $dept['name'] }}
-                            </h3>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
-            </div>
-        </section>
 
         {{-- ═══════════════════════════════════════════
         FEATURES SECTION
         ═══════════════════════════════════════════ --}}
-        <section class="py-12 sm:py-24 transition-colors duration-300" style="background-color: var(--mc-surface);">
+        <section class="py-12 sm:py-24 transition-colors duration-300" >
             <div class="mx-auto max-w-6xl px-4 sm:px-6">
 
                 {{-- Heading --}}
                 <div class="mb-8 sm:mb-14 text-center">
                     <p class="mb-2 text-sm font-bold uppercase tracking-widest" style="color: var(--mc-primary);">কেন
                         আমরা?</p>
-                    <h2 class="text-xl sm:text-3xl font-extrabold tracking-tight lg:text-4xl" style="color: var(--mc-text);">
+                    <h2 class="text-xl sm:text-3xl font-extrabold tracking-tight lg:text-4xl"
+                        style="color: var(--mc-text);">
                         আমাদের
                         <span
                             style="background: linear-gradient(135deg, #1A9998, #155665); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
@@ -385,7 +364,8 @@
                 সাবস্ক্রিপশন বা দীর্ঘমেয়াদী কোর্সের ঝামেলা নেই।'],
                 ['icon'=>'cheap.png', 'cf'=>'#187F87', 'ct'=>'#155665',
                 'title'=>'সাধ্যের ভেতরে সাশ্রয়ী সেশন',
-                'desc'=>'শিক্ষার্থীদের সাধ্যের ব্যাপারটি মাথায় রেখে মেন্টরশিপ সেশনগুলোর খরচ নির্ধারণ করা হয়েছে। কম সময়ের
+                'desc'=>'শিক্ষার্থীদের সাধ্যের ব্যাপারটি মাথায় রেখে মেন্টরশিপ সেশনগুলোর খরচ নির্ধারণ করা হয়েছে। কম
+                সময়ের
                 সেশন হওয়ায় খরচও একদম হাতের নাগালে।'],
                 ['icon'=>'topic.png', 'cf'=>'#155665', 'ct'=>'#102E3C',
                 'title'=>'পুরো কোর্স নয়, শিখুন নির্দিষ্ট টপিক',
@@ -405,7 +385,8 @@
                 ];
                 @endphp
 
-                <div class="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 md:grid md:grid-cols-2 lg:grid-cols-3 md:overflow-x-visible md:pb-0 scroll-smooth" style="scrollbar-width: none; -ms-overflow-style: none;">
+                <div class="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 md:grid md:grid-cols-2 lg:grid-cols-3 md:overflow-x-visible md:pb-0 scroll-smooth"
+                    style="scrollbar-width: none; -ms-overflow-style: none;">
                     @foreach($features as $f)
                     <div class="group relative shrink-0 w-[270px] md:w-auto snap-center overflow-hidden rounded-xl sm:rounded-2xl p-4 sm:p-6
                                 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl
@@ -423,9 +404,11 @@
                                     class="h-6 w-6 sm:h-8 sm:w-8 object-contain" />
                             </div>
 
-                            <h3 class="text-sm sm:text-base font-bold leading-snug" style="color: var(--mc-text);">{{ $f['title']
+                            <h3 class="text-sm sm:text-base font-bold leading-snug" style="color: var(--mc-text);">{{
+                                $f['title']
                                 }}</h3>
-                            <p class="text-xs sm:text-sm leading-relaxed" style="color: var(--mc-text-muted);">{{ $f['desc'] }}</p>
+                            <p class="text-xs sm:text-sm leading-relaxed" style="color: var(--mc-text-muted);">{{
+                                $f['desc'] }}</p>
                         </div>
                     </div>
                     @endforeach
@@ -436,7 +419,8 @@
         {{-- ═══════════════════════════════════════════
         JOIN AS MENTOR SECTION
         ═══════════════════════════════════════════ --}}
-        <section class="relative overflow-hidden py-12 sm:py-24 transition-colors duration-300" style="background-color: var(--mc-bg);">
+        <section class="relative overflow-hidden py-12 sm:py-24 transition-colors duration-300"
+            style="background-color: var(--mc-surface);">
 
             {{-- Decorative shapes --}}
             <div class="pointer-events-none absolute inset-0 overflow-hidden">
@@ -461,7 +445,8 @@
                 <div class="grid items-center gap-8 sm:gap-14 lg:grid-cols-2">
 
                     {{-- LEFT --}}
-                    <div class="flex flex-col items-center sm:items-start text-center sm:text-left space-y-5 sm:space-y-7">
+                    <div
+                        class="flex flex-col items-center sm:items-start text-center sm:text-left space-y-5 sm:space-y-7">
                         <h2 class="text-xl sm:text-3xl font-extrabold leading-tight tracking-tight lg:text-4xl"
                             style="color: var(--mc-text);">
                             যুক্ত হোন আমাদের
@@ -478,7 +463,8 @@
                                 টিউশনি করানো কষ্টসাধ্য?
                             </p>
                             <p class="text-sm sm:text-base leading-relaxed" style="color: var(--mc-text-muted);">
-                                MentorChai এর সাথে যুক্ত হোন মেন্টর হিসেবে। নিজের সুবিধামতো সময় অনুযায়ী দিন কিংবা রাত যেকোনো
+                                MentorChai এর সাথে যুক্ত হোন মেন্টর হিসেবে। নিজের সুবিধামতো সময় অনুযায়ী দিন কিংবা রাত
+                                যেকোনো
                                 সময়ে মেন্টরশিপ প্রদান করুন। দেশব্যাপী শিক্ষার্থীদের সাথে সংযুক্ত হয়ে ঘরে বসেই অর্থ
                                 উপার্জন করুন।
                             </p>
@@ -496,7 +482,8 @@
                                             stroke="var(--mc-primary)" />
                                     </svg>
                                 </div>
-                                <span class="text-xs sm:text-sm font-semibold" style="color: var(--mc-text-sub);">{{ $perk
+                                <span class="text-xs sm:text-sm font-semibold" style="color: var(--mc-text-sub);">{{
+                                    $perk
                                     }}</span>
                             </div>
                             @endforeach
@@ -529,14 +516,16 @@
                             <div class="absolute right-2 -top-3 sm:-right-4 sm:-top-4 flex items-center gap-1.5 sm:gap-2.5 rounded-xl sm:rounded-2xl px-3 py-2 sm:px-4 sm:py-3 shadow-xl"
                                 style="background: var(--mc-surface); border: 1px solid var(--mc-border-teal);">
                                 <div class="h-2.5 w-2.5 animate-pulse rounded-full" style="background: #f59e0b;"></div>
-                                <span class="text-xs sm:text-sm font-bold" style="color: var(--mc-primary);">ঘরে বসে আয়</span>
+                                <span class="text-xs sm:text-sm font-bold" style="color: var(--mc-primary);">ঘরে বসে
+                                    আয়</span>
                             </div>
 
                             {{-- Earnings card --}}
                             <div class="absolute -bottom-4 left-2 sm:-bottom-5 sm:-left-4 rounded-xl sm:rounded-2xl px-3.5 py-2.5 sm:px-5 sm:py-3.5 shadow-xl"
                                 style="background: var(--mc-surface); border: 1px solid var(--mc-border-teal);">
                                 <p class="text-xs" style="color: var(--mc-text-muted);">এই মাসে উপার্জন</p>
-                                <p class="text-base sm:text-xl font-extrabold" style="color: var(--mc-primary);">৳ ১২,৫০০</p>
+                                <p class="text-base sm:text-xl font-extrabold" style="color: var(--mc-primary);">৳
+                                    ১২,৫০০</p>
                             </div>
                         </div>
                     </div>

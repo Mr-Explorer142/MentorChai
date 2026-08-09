@@ -330,7 +330,7 @@
     <main class="flex-1 animate-fade-up">{{ $slot }}</main>
 
     {{-- ═══════════════ FOOTER ═══════════════ --}}
-    <footer class="bg-white dark:bg-[#1a2e3b] border-t border-[#28666e]/10 dark:border-[#4db6c1]/10
+    <footer class="border-t border-[#28666e]/10 dark:border-[#4db6c1]/10
                    shadow-[0_-2px_16px_rgba(40,102,110,0.05)] dark:shadow-[0_-2px_16px_rgba(0,0,0,0.2)]
                    mt-auto transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-6 py-10 flex flex-col items-center gap-6">
