@@ -266,6 +266,21 @@ Route::middleware('auth')->group(function () {
             return response()->json(['success' => true]);
         })->name('notifications.markRead');
 
+        Route::get('/notifications/poll', function (Request $request) {
+            $notifications = $request->user()
+                ->notifications()
+                ->latest()
+                ->take(10)
+                ->get();
+
+            $unreadCount = $request->user()->unreadNotifications()->count();
+
+            return response()->json([
+                'html'        => view('partials.notification-items', compact('notifications'))->render(),
+                'unreadCount' => $unreadCount,
+            ]);
+        })->middleware('auth')->name('notifications.poll');
+
         // Student-only routes
         Route::middleware('student')->group(function () {
             Route::get('/dashboard/student', [DashboardController::class, 'studentDashboard'])->name('student_dashboard');
