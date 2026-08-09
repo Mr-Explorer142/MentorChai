@@ -31,6 +31,8 @@ class Profile extends Model
         'documents_submitted_at',
         'preferred_teaching_medium',
         'preferred_language',
+        'teaching_experience_years',
+        'teaching_experience_months',
     ];
 
     protected $casts = [

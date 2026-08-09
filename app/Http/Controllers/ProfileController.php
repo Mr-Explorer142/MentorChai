@@ -62,6 +62,8 @@ class ProfileController extends Controller
             'learning_style' => 'nullable|string|max:2000',
             'preferred_teaching_medium' => 'nullable|string|max:100',
             'preferred_language' => 'nullable|string|max:100',
+            'teaching_experience_years' => 'nullable|integer|min:0|max:99',
+            'teaching_experience_months' => 'nullable|integer|min:0|max:11',
             'nid_front' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
             'nid_back' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
             'student_id_front' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
