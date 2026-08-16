@@ -7,7 +7,7 @@
 
             {{-- ═══ 1. Main Hero (Col 1-7) ═══ --}}
             <div
-                class="col-span-12 lg:col-span-7 p-5 sm:p-12 flex flex-col justify-center min-h-[220px] sm:min-h-[320px] rounded-[1.5rem] sm:rounded-[2rem] bg-primary text-primary-content relative overflow-hidden border-2 border-black dark:border-white">
+                class="col-span-12 lg:col-span-7 p-5 sm:p-12 flex flex-col justify-center min-h-[220px] sm:min-h-[320px] rounded-[1.5rem] sm:rounded-[2rem] dashboard-card-hero relative overflow-hidden border-2 border-black dark:border-white">
                 <div class="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-8 z-10">
                     <a href="{{ route('mentor_profile', $mentor->id) }}"
                         class="avatar shrink-0 relative group hover:scale-105 transition-transform duration-300">
@@ -57,7 +57,7 @@
             <div class="col-span-12 lg:col-span-5 grid grid-cols-2 sm:grid-cols-2 gap-3 sm:gap-6">
                 {{-- Total Sessions --}}
                 <div
-                    class="bg-primary/90 backdrop-blur-xl text-primary-content rounded-2xl sm:rounded-3xl p-3.5 sm:p-6 flex flex-col justify-between group hover:-translate-y-1 transition-all border-2 border-black dark:border-white">
+                    class="dashboard-card-sessions backdrop-blur-xl rounded-2xl sm:rounded-3xl p-3.5 sm:p-6 flex flex-col justify-between group hover:-translate-y-1 transition-all border-2 border-black dark:border-white">
                     <div class="w-8 h-8 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-white/20 flex items-center justify-center text-white mb-2 sm:mb-4">
                         <svg class="w-4 h-4 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -72,8 +72,8 @@
 
                 {{-- Pending --}}
                 <div
-                    class="bg-warning/90 backdrop-blur-xl text-warning-content rounded-2xl sm:rounded-3xl p-3.5 sm:p-6 flex flex-col justify-between group hover:-translate-y-1 transition-all border-2 border-black dark:border-white">
-                    <div class="w-8 h-8 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-black/10 flex items-center justify-center mb-2 sm:mb-4">
+                    class="dashboard-card-pending backdrop-blur-xl rounded-2xl sm:rounded-3xl p-3.5 sm:p-6 flex flex-col justify-between group hover:-translate-y-1 transition-all border-2 border-black dark:border-white">
+                    <div class="w-8 h-8 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-white/20 flex items-center justify-center mb-2 sm:mb-4">
                         <svg class="w-4 h-4 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -87,8 +87,8 @@
 
                 {{-- Completed --}}
                 <div
-                    class="bg-success/90 backdrop-blur-xl text-success-content rounded-2xl sm:rounded-3xl p-3.5 sm:p-6 flex flex-col justify-between group hover:-translate-y-1 transition-all border-2 border-black dark:border-white">
-                    <div class="w-8 h-8 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-black/10 flex items-center justify-center mb-2 sm:mb-4">
+                    class="dashboard-card-completed backdrop-blur-xl rounded-2xl sm:rounded-3xl p-3.5 sm:p-6 flex flex-col justify-between group hover:-translate-y-1 transition-all border-2 border-black dark:border-white">
+                    <div class="w-8 h-8 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-white/20 flex items-center justify-center mb-2 sm:mb-4">
                         <svg class="w-4 h-4 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -102,7 +102,7 @@
 
                 {{-- Total Earnings --}}
                 <div
-                    class="bg-secondary/90 backdrop-blur-xl text-secondary-content rounded-2xl sm:rounded-3xl p-3.5 sm:p-6 flex flex-col justify-between group hover:-translate-y-1 transition-all border-2 border-black dark:border-white">
+                    class="dashboard-card-earnings backdrop-blur-xl rounded-2xl sm:rounded-3xl p-3.5 sm:p-6 flex flex-col justify-between group hover:-translate-y-1 transition-all border-2 border-black dark:border-white">
                     <div class="w-8 h-8 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-white/20 flex items-center justify-center mb-2 sm:mb-4">
                         <svg class="w-4 h-4 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -124,7 +124,7 @@
                         <h2 class="text-lg sm:text-2xl font-black text-base-content drop-shadow-sm">সাম্প্রতিক সেশনসমূহ</h2>
                         <p class="text-xs sm:text-sm font-bold text-base-content/60 mt-0.5 sm:mt-1">আপনার সর্বশেষ মেন্টরিং সেশনের তালিকা</p>
                     </div>
-                    <button class="btn btn-primary btn-xs sm:btn-sm rounded-full px-3 sm:px-6 shadow-lg text-xs">নতুন সেশন</button>
+                    <button class="px-4 py-1.5 sm:px-6 sm:py-2 text-xs font-bold text-white bg-linear-to-r from-[#28666e] to-[#033f63] dark:from-[#4db6c1] dark:to-[#7ec8e3] dark:text-[#0f1f2e] rounded-full hover:scale-[1.03] transition-all shadow-md border-0">নতুন সেশন</button>
                 </div>
 
                 <div class="flex-1 p-2 overflow-y-auto max-h-[380px]">
@@ -349,9 +349,9 @@
                     <h2 class="text-base sm:text-xl font-black text-base-content mb-4 sm:mb-6 drop-shadow-sm">আয়ের সারসংক্ষেপ</h2>
                     @php
                     $mentorEarningsRows = [
-                    ['label' => 'বিগত সপ্তাহ', 'amount' => $weeklyEarnings, 'color' => 'bg-primary'],
-                    ['label' => 'বিগত মাস', 'amount' => $monthlyEarnings, 'color' => 'bg-secondary'],
-                    ['label' => 'বিগত বছর', 'amount' => $yearlyEarnings, 'color' => 'bg-accent'],
+                    ['label' => 'বিগত সপ্তাহ', 'amount' => $weeklyEarnings, 'color' => 'bg-[#28666e] dark:bg-[#4db6c1]'],
+                    ['label' => 'বিগত মাস', 'amount' => $monthlyEarnings, 'color' => 'bg-[#033f63] dark:bg-[#7ec8e3]'],
+                    ['label' => 'বিগত বছর', 'amount' => $yearlyEarnings, 'color' => 'bg-[#7c9885] dark:bg-[#9ab8a5]'],
                     ];
                     @endphp
                     <div class="space-y-4 sm:space-y-5">

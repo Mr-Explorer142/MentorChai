@@ -26,7 +26,7 @@
                     লাইন
                 </button>
                 <button id="earningsBarBtn" onclick="updateEarningsChartType('bar')"
-                    class="join-item btn btn-sm btn-primary gap-2 px-4" title="বার চার্ট">
+                    class="join-item btn btn-sm bg-[#28666e] dark:bg-[#4db6c1] text-white dark:text-[#0f1f2e] border-0 hover:bg-[#1f5056] dark:hover:bg-[#3ca4af] gap-2 px-4" title="বার চার্ট">
                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
@@ -47,13 +47,13 @@
             $chartAvg = count($monthlyChartData) ? array_sum($monthlyChartData) / count($monthlyChartData) : 0;
             $chartTotal = array_sum($monthlyChartData);
             $earningsStats = [
-            ['label' => 'সর্বোচ্চ আয়', 'value' => '৳' . number_format($chartMax, 0), 'bg' => 'bg-violet-600', 'text' =>
-            'text-white', 'title' => 'text-violet-100'],
-            ['label' => 'সর্বনিম্ন আয়', 'value' => '৳' . number_format($chartMin, 0), 'bg' => 'bg-pink-500', 'text' =>
-            'text-white', 'title' => 'text-pink-100'],
-            ['label' => 'গড় আয়', 'value' => '৳' . number_format($chartAvg, 0), 'bg' => 'bg-teal-500', 'text' =>
+            ['label' => 'সর্বোচ্চ আয়', 'value' => '৳' . number_format($chartMax, 0), 'bg' => 'bg-[#033f63]', 'text' =>
+            'text-white', 'title' => 'text-sky-100'],
+            ['label' => 'সর্বনিম্ন আয়', 'value' => '৳' . number_format($chartMin, 0), 'bg' => 'bg-[#b87a32]', 'text' =>
+            'text-white', 'title' => 'text-amber-100'],
+            ['label' => 'গড় আয়', 'value' => '৳' . number_format($chartAvg, 0), 'bg' => 'bg-[#28666e]', 'text' =>
             'text-white', 'title' => 'text-teal-100'],
-            ['label' => 'মোট আয়', 'value' => '৳' . number_format($chartTotal, 0), 'bg' => 'bg-emerald-500','text' =>
+            ['label' => 'মোট আয়', 'value' => '৳' . number_format($chartTotal, 0), 'bg' => 'bg-[#3b7558]','text' =>
             'text-white', 'title' => 'text-emerald-100'],
             ];
             @endphp
@@ -67,19 +67,7 @@
                 @endforeach
             </div>
 
-            @if($chartTotal > 0)
-            <div role="alert" class="alert alert-success shadow">
-                <svg class="w-6 h-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />
-                </svg>
-                <div>
-                    <h3 class="font-bold">আয়ের প্রবণতা</h3>
-                    <div class="text-xs">আপনার মাসিক গড় আয় ৳{{ number_format($chartAvg, 0) }} - সর্বোচ্চ মাসে আয়
-                        হয়েছে ৳{{ number_format($chartMax, 0) }}।</div>
-                </div>
-            </div>
-            @endif
+
         </div>
     </div>
 </div>
@@ -183,10 +171,12 @@ $monthlyChartData = $monthlyChartData ?? array_fill(0, count($monthLabels), 0);
     function setToggleState(type) {
         const lineBtn = document.getElementById('earningsLineBtn');
         const barBtn  = document.getElementById('earningsBarBtn');
-        lineBtn.className = 'join-item btn btn-sm btn-ghost gap-2 px-4';
-        barBtn.className  = 'join-item btn btn-sm btn-ghost gap-2 px-4';
-        if (type === 'line') lineBtn.className = 'join-item btn btn-sm btn-primary gap-2 px-4';
-        else                  barBtn.className  = 'join-item btn btn-sm btn-primary gap-2 px-4';
+        const activeCls = 'join-item btn btn-sm bg-[#28666e] dark:bg-[#4db6c1] text-white dark:text-[#0f1f2e] border-0 hover:bg-[#1f5056] dark:hover:bg-[#3ca4af] gap-2 px-4';
+        const inactiveCls = 'join-item btn btn-sm btn-ghost gap-2 px-4';
+        lineBtn.className = inactiveCls;
+        barBtn.className  = inactiveCls;
+        if (type === 'line') lineBtn.className = activeCls;
+        else                  barBtn.className  = activeCls;
     }
 
     window.updateEarningsChartType = function (type) {
