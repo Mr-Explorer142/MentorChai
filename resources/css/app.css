@@ -54,6 +54,7 @@
   background: linear-gradient(135deg, #033f63 0%, #28666e 100%) !important;
   color: #ffffff !important;
 }
+
 html.dark .dashboard-card-hero {
   background: linear-gradient(135deg, #122533 0%, #183a42 100%) !important;
   color: #d2f1ff !important;
@@ -63,13 +64,16 @@ html.dark .dashboard-card-hero {
   background-color: #28666e !important;
   color: #ffffff !important;
 }
+
 .dashboard-card-sessions svg {
   stroke: #ffffff !important;
 }
+
 html.dark .dashboard-card-sessions {
   background-color: #173238 !important;
   color: #4db6c1 !important;
 }
+
 html.dark .dashboard-card-sessions svg {
   stroke: #4db6c1 !important;
 }
@@ -78,13 +82,16 @@ html.dark .dashboard-card-sessions svg {
   background-color: #b87a32 !important;
   color: #ffffff !important;
 }
+
 .dashboard-card-pending svg {
   stroke: #ffffff !important;
 }
+
 html.dark .dashboard-card-pending {
   background-color: #2d1e10 !important;
   color: #f3b063 !important;
 }
+
 html.dark .dashboard-card-pending svg {
   stroke: #f3b063 !important;
 }
@@ -93,13 +100,16 @@ html.dark .dashboard-card-pending svg {
   background-color: #3b7558 !important;
   color: #ffffff !important;
 }
+
 .dashboard-card-completed svg {
   stroke: #ffffff !important;
 }
+
 html.dark .dashboard-card-completed {
   background-color: #162a1f !important;
   color: #9ab8a5 !important;
 }
+
 html.dark .dashboard-card-completed svg {
   stroke: #9ab8a5 !important;
 }
@@ -108,13 +118,16 @@ html.dark .dashboard-card-completed svg {
   background-color: #033f63 !important;
   color: #ffffff !important;
 }
+
 .dashboard-card-earnings svg {
   stroke: #ffffff !important;
 }
+
 html.dark .dashboard-card-earnings {
   background-color: #102330 !important;
   color: #7ec8e3 !important;
 }
+
 html.dark .dashboard-card-earnings svg {
   stroke: #7ec8e3 !important;
 }
