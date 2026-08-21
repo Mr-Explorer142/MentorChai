@@ -6,9 +6,9 @@
         {{-- Header --}}
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
             <div>
-                <p class="text-xs font-bold uppercase tracking-widest text-teal-600 dark:text-teal-400 mb-1">ব্রাউজ করুন
+                <p class="text-xs font-bold uppercase tracking-widest text-teal-600 dark:text-teal-400 mb-1">Browse
                 </p>
-                <h1 class="text-2xl font-extrabold text-gray-900 dark:text-gray-100">মেন্টর খুঁজুন</h1>
+                <h1 class="text-2xl font-extrabold text-gray-900 dark:text-gray-100">Find Mentors</h1>
             </div>
 
             <form method="GET" action="{{ route('mentors') }}" class="flex items-center gap-1.5 w-full sm:w-auto">
@@ -28,7 +28,7 @@
                             </svg>
 
                             <input type="text" id="search-input" value="{{ request('search') }}" name="search"
-                                placeholder="খুঁজুন..." autocomplete="off" class="pl-8 pr-8 py-2 text-xs sm:text-sm
+                                placeholder="Search..." autocomplete="off" class="pl-8 pr-8 py-2 text-xs sm:text-sm
                               w-full
                               text-gray-600 dark:text-gray-300
                               bg-transparent
@@ -51,7 +51,7 @@
                                 <circle cx="11" cy="11" r="8" />
                                 <path d="m21 21-4.35-4.35" />
                             </svg>
-                            <span class="hidden sm:inline">খুঁজুন</span>
+                            <span class="hidden sm:inline">Search</span>
                         </button>
                     </div>
 
@@ -74,9 +74,9 @@
                    pl-2.5 pr-6
                    w-[95px] sm:w-auto
                    appearance-none cursor-pointer">
-                        <option value="" {{ request('sort')=='' ? 'selected' : '' }}>বাছাই</option>
-                        <option value="price_asc" {{ request('sort')=='price_asc' ? 'selected' : '' }}>৳ কম-বেশি</option>
-                        <option value="price_desc" {{ request('sort')=='price_desc' ? 'selected' : '' }}>৳ বেশি-কম</option>
+                        <option value="" {{ request('sort')=='' ? 'selected' : '' }}>Sort by</option>
+                        <option value="price_asc" {{ request('sort')=='price_asc' ? 'selected' : '' }}>Price: Low to High</option>
+                        <option value="price_desc" {{ request('sort')=='price_desc' ? 'selected' : '' }}>Price: High to Low</option>
                     </select>
 
                     {{-- Dropdown arrow shown on all screens --}}
@@ -126,19 +126,19 @@
                     p-5 space-y-6 sticky top-6 transition-colors duration-300">
 
                         <div class="flex items-center justify-between">
-                            <h3 class="font-bold text-gray-800 dark:text-gray-200 text-sm">ফিল্টার</h3>
+                            <h3 class="font-bold text-gray-800 dark:text-gray-200 text-sm">Filters</h3>
                             <a href="{{ route('mentors', array_filter(['search' => request('search'), 'sort' => request('sort')])) }}"
                                 class="text-xs text-teal-600 dark:text-teal-400 hover:underline">
-                                রিসেট
+                                Reset
                             </a>
                         </div>
 
                         {{-- Price Range --}}
                         <div>
-                            <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">মূল্য পরিসীমা (ঘণ্টা)</p>
+                            <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">Price Range (Hourly)</p>
                             <div class="flex items-center gap-2">
                                 <input type="number" name="price_min" value="{{ request('price_min') }}"
-                                    placeholder="৳ সর্বনিম্ন" class="w-full border border-gray-200 dark:border-gray-700
+                                    placeholder="Min ৳" class="w-full border border-gray-200 dark:border-gray-700
                                   text-gray-600 dark:text-gray-300
                                   bg-white dark:bg-[#243d4d]
                                   placeholder:text-gray-400 dark:placeholder:text-gray-500
@@ -147,7 +147,7 @@
                                   transition-colors duration-200">
                                 <span class="text-gray-400 dark:text-gray-500 text-xs shrink-0">-</span>
                                 <input type="number" name="price_max" value="{{ request('price_max') }}"
-                                    placeholder="৳ সর্বোচ্চ" class="w-full border border-gray-200 dark:border-gray-700
+                                    placeholder="Max ৳" class="w-full border border-gray-200 dark:border-gray-700
                                   text-gray-600 dark:text-gray-300
                                   bg-white dark:bg-[#243d4d]
                                   placeholder:text-gray-400 dark:placeholder:text-gray-500
@@ -159,7 +159,7 @@
 
                         {{-- Skills --}}
                         <div>
-                            <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">দক্ষতা</p>
+                            <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">Skills</p>
                             <div class="space-y-2 text-sm text-gray-700 dark:text-gray-300">
                                 @foreach ($allSkills as $skill)
                                 <label class="flex items-center gap-2 cursor-pointer">
@@ -174,7 +174,7 @@
 
                         {{-- Department --}}
                         <div>
-                            <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">ডিপার্টমেন্ট</p>
+                            <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">Department</p>
                             <div class="space-y-2 text-sm text-gray-700 dark:text-gray-300">
                                 @foreach ($allDepartments as $dept)
                                 <label class="flex items-center gap-2 cursor-pointer">
@@ -189,10 +189,10 @@
 
                         {{-- Language --}}
                         <div>
-                            <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">ভাষা</p>
+                            <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">Language</p>
                             <div class="space-y-2 text-sm text-gray-700 dark:text-gray-300">
                                 @php
-                                    $languages = ['বাংলা', 'ইংরেজি', 'বাংলা-ইংরেজি মিশ্রিত'];
+                                    $languages = ['Bengali', 'English', 'Bengali-English Mixed'];
                                 @endphp
                                 @foreach ($languages as $lang)
                                 <label class="flex items-center gap-2 cursor-pointer">
@@ -208,12 +208,12 @@
                         {{-- Rating --}}
                         <div>
                             <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">
-                                সর্বনিম্ন রেটিং
+                                Minimum Rating
                             </p>
                             <div
                                 class="space-y-2 text-sm text-gray-700 dark:text-gray-300">
                                 <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="radio" name="rating" value="0" {{ request('rating', '0') == '0' ? 'checked' : '' }} class="accent-teal-600 dark:accent-teal-400 w-4 h-4"> যেকোনো
+                                    <input type="radio" name="rating" value="0" {{ request('rating', '0') == '0' ? 'checked' : '' }} class="accent-teal-600 dark:accent-teal-400 w-4 h-4"> Any
                                 </label>
                                 <label class="flex items-center gap-2 cursor-pointer">
                                     <input type="radio" name="rating" value="5" {{ request('rating') == '5' ? 'checked' : '' }} class="accent-teal-600 dark:accent-teal-400 w-4 h-4">
@@ -233,17 +233,17 @@
                         {{-- Online Status --}}
                         <div>
                             <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">
-                                অনলাইন স্ট্যাটাস
+                                Online Status
                             </p>
                             <div class="space-y-2 text-sm text-gray-700 dark:text-gray-300">
                                 <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="radio" name="online_status" value="both" {{ request('online_status', 'both') == 'both' ? 'checked' : '' }} class="accent-teal-600 dark:accent-teal-400 w-4 h-4"> যেকোনো
+                                    <input type="radio" name="online_status" value="both" {{ request('online_status', 'both') == 'both' ? 'checked' : '' }} class="accent-teal-600 dark:accent-teal-400 w-4 h-4"> Any
                                 </label>
                                 <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="radio" name="online_status" value="online" {{ request('online_status') == 'online' ? 'checked' : '' }} class="accent-teal-600 dark:accent-teal-400 w-4 h-4"> অনলাইন
+                                    <input type="radio" name="online_status" value="online" {{ request('online_status') == 'online' ? 'checked' : '' }} class="accent-teal-600 dark:accent-teal-400 w-4 h-4"> Online
                                 </label>
                                 <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="radio" name="online_status" value="offline" {{ request('online_status') == 'offline' ? 'checked' : '' }} class="accent-teal-600 dark:accent-teal-400 w-4 h-4"> অফলাইন
+                                    <input type="radio" name="online_status" value="offline" {{ request('online_status') == 'offline' ? 'checked' : '' }} class="accent-teal-600 dark:accent-teal-400 w-4 h-4"> Offline
                                 </label>
                             </div>
                         </div>
@@ -255,7 +255,7 @@
                            py-2.5 rounded-xl font-semibold
                            hover:bg-teal-700 dark:hover:bg-teal-400
                            transition text-sm">
-                            ফিল্টার প্রয়োগ করুন
+                            Apply Filters
                         </button>
 
                     </div>
@@ -269,18 +269,15 @@
                 <div class="flex items-center justify-between mb-5">
                     <p class="text-[10px] sm:text-sm text-gray-500 dark:text-gray-400">
                         @if (request('search'))
+                        <span class="font-semibold text-gray-800 dark:text-gray-200">{{ $totalMentors }}</span> mentors found related to
                         "<span class="font-semibold text-teal-600 dark:text-teal-400">{{ request('search') }}</span>"
-                        নামে / টপিকে
-                        <span class="font-semibold text-gray-800 dark:text-gray-200">{{ $totalMentors }} জন</span>
-                        মেন্টর পাওয়া গিয়েছে
                         @elseif (request('skills') || request('departments') || request('languages') || request('price_min') ||
                         request('price_max'))
-                        ফিল্টার অনুযায়ী
-                        <span class="font-semibold text-gray-800 dark:text-gray-200">{{ $totalMentors }} জন</span>
-                        মেন্টর পাওয়া গেছে
+                        <span class="font-semibold text-gray-800 dark:text-gray-200">{{ $totalMentors }}</span>
+                        mentors found based on filters
                         @else
-                        <span class="font-semibold text-gray-800 dark:text-gray-200">{{ $totalMentors }} জন</span>
-                        মেন্টর পাওয়া গেছে
+                        <span class="font-semibold text-gray-800 dark:text-gray-200">{{ $totalMentors }}</span>
+                        mentors found
                         @endif
                     </p>
                 </div>
@@ -333,7 +330,7 @@
                                     @endif
                                 </div>
                                 <p class="text-[9px] sm:text-[10px] text-gray-400 dark:text-gray-500">
-                                    মেন্টর
+                                    Mentor
                                 </p>
                                 <div class="flex items-center gap-0.5 mt-0.5">
                                     @php
@@ -355,7 +352,7 @@
                                 <span>🎓</span> <span class="truncate">{{ $mentor->profile?->institution_name ?? 'N/A' }}</span>
                             </p>
                             <p class="flex items-center gap-1.5">
-                                <span>✏️</span> {{ $mentor->students_count ?? 0 }} জন শিক্ষার্থী
+                                <span>✏️</span> {{ $mentor->students_count ?? 0 }} Students
                             </p>
                         </div>
 
@@ -372,7 +369,7 @@
                             @endforeach
                             @else
                             <span class="text-[10px] sm:text-xs text-gray-400 dark:text-gray-500 italic">
-                                কোনো দক্ষতা যোগ করা হয়নি
+                                Skills not added
                             </span>
                             @endif
                         </div>
@@ -382,7 +379,7 @@
                             <div class="flex justify-between items-center
                                         bg-teal-50 dark:bg-teal-900/20
                                         px-2.5 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl mb-2 sm:mb-3">
-                                <span class="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400">ঘণ্টা প্রতি</span>
+                                <span class="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400">Per Hour</span>
                                 <span class="text-xs sm:text-base font-bold text-teal-600 dark:text-teal-400">
                                     ৳{{ $mentor->profile?->hourly_rate ?? '-' }}
                                 </span>
@@ -395,7 +392,7 @@
                                           py-1.5 sm:py-2 rounded-lg text-[10px] sm:text-xs font-semibold
                                           hover:bg-teal-50 dark:hover:bg-teal-900/20
                                           transition-colors duration-200">
-                                    প্রোফাইল
+                                    View Profile
                                 </a>
                                 @if ($mentor->isOnline())
                                 <a href="{{ route('session.request.create', $mentor->id) }}" class="w-full sm:flex-1 text-center
@@ -403,14 +400,14 @@
                                           py-1.5 sm:py-2 rounded-lg text-[10px] sm:text-xs font-semibold
                                           hover:bg-teal-700 dark:hover:bg-teal-400
                                           transition-colors duration-200">
-                                    হায়ার করুন
+                                    Hire Now
                                 </a>
                                 @else
                                 <button type="button" disabled class="w-full sm:flex-1 text-center
                                           bg-red-500/80 dark:bg-red-600/70 text-white
                                           py-1.5 sm:py-2 rounded-lg text-[10px] sm:text-xs font-semibold
                                           cursor-not-allowed opacity-75">
-                                    মেন্টর অফলাইন
+                                    Offline
                                 </button>
                                 @endif
                             </div>
@@ -420,8 +417,8 @@
                     @empty
                     <div class="col-span-3 flex flex-col items-center justify-center py-16 text-center">
                         <span class="text-4xl mb-3">🔍</span>
-                        <p class="text-gray-500 dark:text-gray-400 font-medium">কোনো মেন্টর পাওয়া যায়নি</p>
-                        <p class="text-xs text-gray-400 dark:text-gray-500 mt-1">অনুগ্রহ করে পরে আবার চেষ্টা করুন</p>
+                        <p class="text-gray-500 dark:text-gray-400 font-medium">Sorry, no mentors found for your search.</p>
+                        <p class="text-xs text-gray-400 dark:text-gray-500 mt-1">Please try again with a different keyword or filter.</p>
                     </div>
                     @endforelse
 
@@ -531,11 +528,11 @@
                 <div class="flex items-center justify-between px-5 py-4
                             border-b border-teal-100 dark:border-teal-900/40 sticky top-0
                             bg-white dark:bg-[#1a2e3b] z-10">
-                    <h3 class="font-bold text-gray-800 dark:text-gray-200">ফিল্টার</h3>
+                    <h3 class="font-bold text-gray-800 dark:text-gray-200">Filters</h3>
                     <div class="flex items-center gap-3">
                         <a href="{{ route('mentors', array_filter(['search' => request('search'), 'sort' => request('sort')])) }}"
                             class="text-xs text-teal-600 dark:text-teal-400 hover:underline">
-                            রিসেট
+                            Reset
                         </a>
                         <button type="button"
                             onclick="document.getElementById('mobile-filter-panel').classList.add('translate-x-full')"
@@ -554,10 +551,10 @@
 
                     {{-- Price Range --}}
                     <div>
-                        <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">মূল্য পরিসীমা (ঘণ্টা)</p>
+                        <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">Price Range (Hourly)</p>
                         <div class="flex items-center gap-2">
                             <input type="number" name="price_min" value="{{ request('price_min') }}"
-                                placeholder="৳ সর্বনিম্ন" class="w-full border border-gray-200 dark:border-gray-700
+                                placeholder="Min ৳" class="w-full border border-gray-200 dark:border-gray-700
                                           text-gray-600 dark:text-gray-300
                                           bg-white dark:bg-[#243d4d]
                                           placeholder:text-gray-400 dark:placeholder:text-gray-500
@@ -566,7 +563,7 @@
                                           transition-colors duration-200">
                             <span class="text-gray-400 dark:text-gray-500 text-xs shrink-0">-</span>
                             <input type="number" name="price_max" value="{{ request('price_max') }}"
-                                placeholder="৳ সর্বোচ্চ" class="w-full border border-gray-200 dark:border-gray-700
+                                placeholder="Max ৳" class="w-full border border-gray-200 dark:border-gray-700
                                           text-gray-600 dark:text-gray-300
                                           bg-white dark:bg-[#243d4d]
                                           placeholder:text-gray-400 dark:placeholder:text-gray-500
@@ -578,7 +575,7 @@
 
                     {{-- Skills --}}
                     <div>
-                        <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">দক্ষতা</p>
+                        <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">Skills</p>
                         <div class="space-y-2 text-sm text-gray-700 dark:text-gray-300">
                             @foreach ($allSkills as $skill)
                             <label class="flex items-center gap-2 cursor-pointer">
@@ -593,7 +590,7 @@
 
                     {{-- Department --}}
                     <div>
-                        <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">ডিপার্টমেন্ট</p>
+                        <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">Department</p>
                         <div class="space-y-2 text-sm text-gray-700 dark:text-gray-300">
                             @foreach ($allDepartments as $dept)
                             <label class="flex items-center gap-2 cursor-pointer">
@@ -608,10 +605,10 @@
 
                     {{-- Language --}}
                     <div>
-                        <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">ভাষা</p>
+                        <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">Language</p>
                         <div class="space-y-2 text-sm text-gray-700 dark:text-gray-300">
                             @php
-                                $languages = ['বাংলা', 'ইংরেজি', 'বাংলা-ইংরেজি মিশ্রিত'];
+                                $languages = ['Bengali', 'English', 'Bengali-English Mixed'];
                             @endphp
                             @foreach ($languages as $lang)
                             <label class="flex items-center gap-2 cursor-pointer">
@@ -627,11 +624,11 @@
                     {{-- Rating --}}
                     <div>
                         <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">
-                            সর্বনিম্ন রেটিং
+                            Minimum Rating
                         </p>
                         <div class="space-y-2 text-sm text-gray-700 dark:text-gray-300">
                             <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="radio" name="rating" value="0" {{ request('rating', '0') == '0' ? 'checked' : '' }} class="accent-teal-600 dark:accent-teal-400 w-4 h-4"> যেকোনো
+                                <input type="radio" name="rating" value="0" {{ request('rating', '0') == '0' ? 'checked' : '' }} class="accent-teal-600 dark:accent-teal-400 w-4 h-4"> Any
                             </label>
                             <label class="flex items-center gap-2 cursor-pointer">
                                 <input type="radio" name="rating" value="5" {{ request('rating') == '5' ? 'checked' : '' }} class="accent-teal-600 dark:accent-teal-400 w-4 h-4">
@@ -651,17 +648,17 @@
                     {{-- Online Status --}}
                     <div>
                         <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">
-                            অনলাইন স্ট্যাটাস
+                            Status
                         </p>
                         <div class="space-y-2 text-sm text-gray-700 dark:text-gray-300">
                             <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="radio" name="online_status" value="both" {{ request('online_status', 'both') == 'both' ? 'checked' : '' }} class="accent-teal-600 dark:accent-teal-400 w-4 h-4"> যেকোনো
+                                <input type="radio" name="online_status" value="both" {{ request('online_status', 'both') == 'both' ? 'checked' : '' }} class="accent-teal-600 dark:accent-teal-400 w-4 h-4"> Any
                             </label>
                             <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="radio" name="online_status" value="online" {{ request('online_status') == 'online' ? 'checked' : '' }} class="accent-teal-600 dark:accent-teal-400 w-4 h-4"> অনলাইন
+                                <input type="radio" name="online_status" value="online" {{ request('online_status') == 'online' ? 'checked' : '' }} class="accent-teal-600 dark:accent-teal-400 w-4 h-4"> Online
                             </label>
                             <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="radio" name="online_status" value="offline" {{ request('online_status') == 'offline' ? 'checked' : '' }} class="accent-teal-600 dark:accent-teal-400 w-4 h-4"> অফলাইন
+                                <input type="radio" name="online_status" value="offline" {{ request('online_status') == 'offline' ? 'checked' : '' }} class="accent-teal-600 dark:accent-teal-400 w-4 h-4"> Offline
                             </label>
                         </div>
                     </div>
@@ -676,7 +673,7 @@
                                    py-2.5 rounded-xl font-semibold
                                    hover:bg-teal-700 dark:hover:bg-teal-400
                                    transition text-sm">
-                        ফিল্টার প্রয়োগ করুন
+                        Apply Filters
                     </button>
                 </div>
 
@@ -752,7 +749,7 @@
                         const badgeBorder = isMentor
                             ? (isDark ? '#134e4a' : '#99f6e4')
                             : (isDark ? '#4c1d95' : '#e9d5ff');
-                        const badgeLabel = isMentor ? 'মেন্টর' : 'দক্ষতা';
+                        const badgeLabel = isMentor ? 'Mentor' : 'Skill';
 
                         return `
                             <button type="button"

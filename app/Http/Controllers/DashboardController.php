@@ -11,26 +11,26 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-    private function getBengaliMonthLabels(): array
+    private function getMonthLabels(): array
     {
-        $bengaliMonths = [
-            '01' => 'জানুয়ারি',
-            '02' => 'ফেব্রুয়ারি',
-            '03' => 'মার্চ',
-            '04' => 'এপ্রিল',
-            '05' => 'মে',
-            '06' => 'জুন',
-            '07' => 'জুলাই',
-            '08' => 'আগস্ট',
-            '09' => 'সেপ্টেম্বর',
-            '10' => 'অক্টোবর',
-            '11' => 'নভেম্বর',
-            '12' => 'ডিসেম্বর',
+        $englishMonths = [
+            '01' => 'January',
+            '02' => 'February',
+            '03' => 'March',
+            '04' => 'April',
+            '05' => 'May',
+            '06' => 'June',
+            '07' => 'July',
+            '08' => 'August',
+            '09' => 'September',
+            '10' => 'October',
+            '11' => 'November',
+            '12' => 'December',
         ];
 
         $labels = [];
         for ($i = 11; $i >= 0; $i--) {
-            $labels[] = $bengaliMonths[now()->subMonths($i)->format('m')];
+            $labels[] = $englishMonths[now()->subMonths($i)->format('m')];
         }
         return $labels;
     }
@@ -74,7 +74,7 @@ class DashboardController extends Controller
                 ->sum('amount');
         }
 
-        $monthLabels    = $this->getBengaliMonthLabels();
+        $monthLabels    = $this->getMonthLabels();
         $recentPayments = $payments->take(5);
 
         return view('dashboard.student_dashboard', compact(
@@ -136,7 +136,7 @@ class DashboardController extends Controller
                 ->sum('mentor_earning');
         }
 
-        $monthLabels    = $this->getBengaliMonthLabels();
+        $monthLabels    = $this->getMonthLabels();
         $recentPayments = $payments->take(5);
 
         return view('dashboard.mentor_dashboard', compact(

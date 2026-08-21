@@ -4,7 +4,7 @@
         {{-- ═══════════════════════════════════════════
         HERO SECTION
         ═══════════════════════════════════════════ --}}
-        <section class="relative overflow-hidden py-14 sm:py-28 lg:py-36" style="background-color: var(--mc-bg);">
+        <section class="relative overflow-hidden pt-8 pb-14 sm:pt-12 sm:pb-28 lg:pt-16 lg:pb-36" style="background-color: var(--mc-bg);">
 
             {{-- Decorative blobs --}}
             <div class="pointer-events-none absolute inset-0 overflow-hidden">

@@ -84,7 +84,7 @@
                                       transition-all duration-200
                                       hover:bg-[#28666e] hover:text-white hover:shadow-[0_4px_12px_rgba(40,102,110,0.22)]
                                       dark:hover:bg-[#4db6c1] dark:hover:text-[#0f1f2e] dark:hover:border-[#4db6c1]">
-                                মেন্টর দেখুন
+                                {{ Route::is('home', 'about', 'faq', 'terms') ? 'শিক্ষক খুঁজুন' : 'Find Mentors' }}
                             </a>
 
                             {{-- Vertical divider (desktop) --}}
@@ -98,7 +98,7 @@
                             <div class="relative">
                                 <button id="notificationToggle" onclick="toggleNotifications()"
                                     class="relative p-1.5 rounded-lg hover:bg-teal-50 dark:hover:bg-teal-900/30 transition-colors"
-                                    title="নোটিফিকেশন">
+                                    title="Notifications">
 
                                     <span id="notificationDot" class="{{ $unreadCount > 0 ? '' : 'hidden' }} absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full
                                  bg-[#ef4444] border border-white dark:border-[#0f1f2e]"></span>
@@ -122,13 +122,13 @@
                                     <div class="px-4 py-3 bg-[#eaf7f8] dark:bg-[#102d3b]
             border-b border-[#28666e]/10 dark:border-[#4db6c1]/10">
                                         <div class="flex items-center justify-between gap-3">
-                                            <p class="font-semibold text-[#033f63] dark:text-[#7ec8e3]">নোটিফিকেশন</p>
+                                            <p class="font-semibold text-[#033f63] dark:text-[#7ec8e3]">Notifications</p>
                                             <div class="flex items-center gap-2">
                                                 <button id="markAllBtn" onclick="markAllAsRead()"
                                                     class="{{ $unreadCount > 0 ? '' : 'hidden' }} text-[0.7rem] font-semibold text-[#033f63] dark:text-[#d2f1ff]
                                                            bg-[#28666e]/10 dark:bg-[#4db6c1]/15 px-2 py-1 rounded-full
                                                            hover:bg-[#28666e]/15 dark:hover:bg-[#4db6c1]/25 transition-colors">
-                                                    সবগুলো পড়া চিহ্নিত করুন
+                                                    Mark all as read
                                                 </button>
                                                 <span id="notificationCount"
                                                     class="{{ $unreadCount > 0 ? '' : 'hidden' }} badge badge-sm bg-[#28666e] text-white border-0">
@@ -136,7 +136,7 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <p class="text-xs text-[#28666e]/70 dark:text-[#7ec8e3]/70 mt-1">সর্বশেষ আপডেট
+                                        <p class="text-xs text-[#28666e]/70 dark:text-[#7ec8e3]/70 mt-1">Latest Updates
                                         </p>
                                     </div>
 
@@ -152,7 +152,7 @@
                             {{-- Dark Mode Toggle --}}
                             <button id="theme-toggle"
                                 class="p-1.5 rounded-lg hover:bg-teal-50 dark:hover:bg-teal-900/30 transition-colors"
-                                title="ডার্ক মোড">
+                                title="Dark Mode">
                                 {{-- Sun icon - shown in dark mode --}}
                                 <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg"
                                     class="hidden w-5 h-5 text-yellow-400" fill="none" viewBox="0 0 24 24"
@@ -181,7 +181,7 @@
                                       hover:bg-[#28666e] hover:text-white hover:border-[#28666e] hover:shadow-[0_4px_12px_rgba(40,102,110,0.22)]
                                       dark:hover:bg-[#4db6c1] dark:hover:text-[#0f1f2e] dark:hover:border-[#4db6c1]
                                       {{ Route::is('login') ? 'bg-[#28666e] border-[#28666e]' : '' }}">
-                                লগইন করুন
+                                Login
                             </a>
                             @endguest
 
@@ -211,7 +211,7 @@
                                               transition-all duration-150
                                               hover:bg-[#28666e]/8 dark:hover:bg-[#4db6c1]/12 hover:text-[#28666e] dark:hover:text-[#4db6c1]
                                               {{ Route::is('mentor_profile') ? 'bg-![#28666e] text-gray-500!' : '' }}">
-                                        প্রোফাইল
+                                        Profile
                                     </a>
                                     <a href="{{ route('mentor_dashboard') }}"
                                         class="block w-full text-center text-sm font-semibold
@@ -220,7 +220,7 @@
                                               transition-all duration-150
                                               hover:bg-[#28666e]/8 dark:hover:bg-[#4db6c1]/12 hover:text-[#28666e] dark:hover:text-[#4db6c1]
                                               {{ Route::is('mentor_dashboard') ? 'bg-![#28666e] text-gray-500!' : '' }}">
-                                        ড্যাশবোর্ড
+                                        Dashboard
                                     </a>
                                     @elseif (isStudent())
                                     <a href="{{ route('student_profile', auth()->user()->id) }}"
@@ -230,7 +230,7 @@
                                               transition-all duration-150
                                               hover:bg-[#28666e]/8 dark:hover:bg-[#4db6c1]/12 hover:text-[#28666e] dark:hover:text-[#4db6c1]
                                               {{ Route::is('student_profile') ? 'bg-![#28666e] text-gray-500!' : '' }}">
-                                        প্রোফাইল
+                                        Profile
                                     </a>
                                     <a href="{{ route('student_dashboard') }}"
                                         class="block w-full text-center text-sm font-semibold
@@ -239,7 +239,7 @@
                                               transition-all duration-150
                                               hover:bg-[#28666e]/8 dark:hover:bg-[#4db6c1]/12 hover:text-[#28666e] dark:hover:text-[#4db6c1]
                                               {{ Route::is('student_dashboard') ? 'bg-![#28666e] text-gray-500!' : '' }}">
-                                        ড্যাশবোর্ড
+                                        Dashboard
                                     </a>
                                     @endif
 
@@ -255,7 +255,7 @@
                                                        px-4 py-[0.55rem] rounded-[10px]
                                                        transition-all duration-150 bg-transparent border-0 cursor-pointer
                                                        hover:bg-[#28666e]/8 dark:hover:bg-[#4db6c1]/12 hover:text-[#28666e] dark:hover:text-[#4db6c1]">
-                                            লগআউট
+                                            Logout
                                         </button>
                                     </form>
                                 </div>
@@ -296,14 +296,14 @@
                                       transition-all duration-150
                                       hover:bg-[#28666e]/8 dark:hover:bg-[#4db6c1]/12 hover:text-[#28666e] dark:hover:text-[#4db6c1]
                                       {{ Route::is('mentors') ? 'bg-![#28666e] text-white!' : '' }}">
-                                🎓 মেন্টর দেখুন
+                                🎓 {{ Route::is('home', 'about', 'faq', 'terms') ? 'শিক্ষক খুঁজুন' : 'Find Mentors' }}
                             </a>
                             <a href="{{ route('home') }}" class="block text-[0.9rem] font-semibold text-[#033f63] dark:text-[#7ec8e3] no-underline
                                       px-4 py-[0.65rem] rounded-xl
                                       transition-all duration-150
                                       hover:bg-[#28666e]/8 dark:hover:bg-[#4db6c1]/12 hover:text-[#28666e] dark:hover:text-[#4db6c1]
                                       {{ Route::is('home') ? 'bg-![#28666e] text-white!' : '' }}">
-                                🏠 হোম
+                                🏠 Home
                             </a>
                             @guest
                             <a href="{{ route('student_register') }}" class="block text-[0.9rem] font-semibold text-[#033f63] dark:text-[#7ec8e3] no-underline
@@ -311,7 +311,7 @@
                                       transition-all duration-150
                                       hover:bg-[#28666e]/8 dark:hover:bg-[#4db6c1]/12 hover:text-[#28666e] dark:hover:text-[#4db6c1]
                                       {{ Route::is('student_register') ? 'bg-![#28666e] text-white!' : '' }}">
-                                ✨ অ্যাকাউন্ট খুলুন
+                                ✨ Register
                             </a>
                             @endguest
                         </div>
@@ -354,7 +354,7 @@
                           after:bg-[#28666e] dark:after:bg-[#4db6c1] after:rounded-full
                           after:transition-[width] after:duration-300 hover:after:w-full
                           {{ Route::is('about') ? 'text-![#28666e] dark:text-![#4db6c1] font-bold! after:w-full!' : '' }}">
-                    আমাদের সম্পর্কে
+                    About Us
                 </a>
                 <span class="text-[#28666e]/25 dark:text-[#4db6c1]/25 text-xs leading-6">•</span>
                 <a href="{{ route('contact') }}"
@@ -366,7 +366,7 @@
                           after:bg-[#28666e] dark:after:bg-[#4db6c1] after:rounded-full
                           after:transition-[width] after:duration-300 hover:after:w-full
                           {{ Route::is('contact') ? 'text-![#28666e] dark:text-![#4db6c1] font-bold! after:w-full!' : '' }}">
-                    যোগাযোগ করুন
+                    Contact Us
                 </a>
                 <span class="text-[#28666e]/25 dark:text-[#4db6c1]/25 text-xs leading-6">•</span>
                 <a href="{{ route('faq') }}"
@@ -378,7 +378,7 @@
                           after:bg-[#28666e] dark:after:bg-[#4db6c1] after:rounded-full
                           after:transition-[width] after:duration-300 hover:after:w-full
                           {{ Route::is('faq') ? 'text-![#28666e] dark:text-![#4db6c1] font-bold! after:w-full!' : '' }}">
-                    প্রায়শই জিজ্ঞাসিত প্রশ্নাবলী
+                    FAQs
                 </a>
                 <span class="text-[#28666e]/25 dark:text-[#4db6c1]/25 text-xs leading-6">•</span>
                 <a href="{{ route('terms') }}"
@@ -390,7 +390,7 @@
                           after:bg-[#28666e] dark:after:bg-[#4db6c1] after:rounded-full
                           after:transition-[width] after:duration-300 hover:after:w-full
                           {{ Route::is('terms') ? 'text-![#28666e] dark:text-![#4db6c1] font-bold! after:w-full!' : '' }}">
-                    শর্তাবলী ও নীতিমালা
+                    Terms & Conditions
                 </a>
             </nav>
 
@@ -458,6 +458,7 @@
         if (menu) menu.classList.toggle('hidden');
     }
 
+    @auth
     // ─── Notification Panel ─────────────────────────────────────────
     function toggleNotifications() {
         const panel = document.getElementById('notificationPanel');
@@ -577,7 +578,6 @@ if (current <= 0) { badge.classList.add('hidden'); if (dot) dot.classList.add('h
         .catch(err => console.error('Notification poll failed:', err));
     }
 
-    @auth
     setInterval(refreshNotifications, 12000);
     @endauth
 

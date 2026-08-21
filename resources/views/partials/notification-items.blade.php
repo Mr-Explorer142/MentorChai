@@ -21,8 +21,24 @@
                 <span class="w-2 h-2 rounded-full bg-gray-400 shrink-0"></span>
                 @endif
 
+                @php
+                    $message = e($notification->data['message'] ?? 'New Notification');
+                    $studentName = e($notification->data['student_name'] ?? '');
+                    $mentorName = e($notification->data['mentor_name'] ?? '');
+                    $topic = e($notification->data['topic'] ?? '');
+
+                    if ($studentName && str_contains($message, $studentName)) {
+                        $message = str_replace($studentName, "<strong>{$studentName}</strong>", $message);
+                    }
+                    if ($mentorName && str_contains($message, $mentorName)) {
+                        $message = str_replace($mentorName, "<strong>{$mentorName}</strong>", $message);
+                    }
+                    if ($topic && str_contains($message, $topic)) {
+                        $message = str_replace($topic, "<strong>{$topic}</strong>", $message);
+                    }
+                @endphp
                 <p class="text-sm text-[#033f63] dark:text-[#d2f1ff] leading-snug">
-                    {{ $notification->data['message'] ?? 'নতুন নোটিফিকেশন' }}
+                    {!! $message !!}
                 </p>
             </div>
 
@@ -31,7 +47,7 @@
             @if(!empty($notification->data['note']))
             <div
                 class="mt-2 mb-1.5 p-2 rounded-lg bg-teal-500/5 border border-teal-500/10 text-[11px] leading-relaxed text-[#033f63]/80 dark:text-[#7ec8e3]/80">
-                <strong class="text-[#033f63] dark:text-[#7ec8e3]">নোট:</strong> {{
+                <strong class="text-[#033f63] dark:text-[#7ec8e3]">Note:</strong> {{
                 \Illuminate\Support\Str::limit($notification->data['note'], 80) }}
             </div>
             @endif
@@ -52,16 +68,16 @@
             @if(!empty($pm) || !empty($pl))
             <div
                 class="mt-1.5 mb-1.5 p-2 rounded-lg bg-teal-500/5 border border-teal-500/10 text-[11px] leading-relaxed text-[#033f63]/80 dark:text-[#7ec8e3]/80 space-y-1">
-                @if(!empty($pm))<div><strong class="text-[#033f63] dark:text-[#7ec8e3]">মাধ্যম:</strong> {{ $pm }}</div>
+                @if(!empty($pm))<div><strong class="text-[#033f63] dark:text-[#7ec8e3]">Medium:</strong> {{ $pm }}</div>
                 @endif
-                @if(!empty($pl))<div><strong class="text-[#033f63] dark:text-[#7ec8e3]">ভাষা:</strong> {{ $pl }}</div>
+                @if(!empty($pl))<div><strong class="text-[#033f63] dark:text-[#7ec8e3]">Language:</strong> {{ $pl }}</div>
                 @endif
             </div>
             @endif
             @if(!empty($ls))
             <div
                 class="mt-1.5 mb-2 p-2 rounded-lg bg-teal-500/5 border border-teal-500/10 text-[11px] leading-relaxed text-[#033f63]/80 dark:text-[#7ec8e3]/80">
-                <strong class="text-[#033f63] dark:text-[#7ec8e3]">শেখার ধরন:</strong> {{
+                <strong class="text-[#033f63] dark:text-[#7ec8e3]">Learning Style:</strong> {{
                 \Illuminate\Support\Str::limit($ls, 100) }}
             </div>
             @endif
@@ -72,7 +88,7 @@
             isset($notification->data['checkout_url']))
             <a href="{{ $notification->data['checkout_url'] }}" onclick="markAsRead('{{ $notification->id }}')" class="inline-flex items-center gap-1 mt-1 text-xs font-semibold
                                    text-teal-600 dark:text-teal-400 hover:underline">
-                পেমেন্ট করুন →
+                Pay Now &rarr;
             </a>
             @endif
 
@@ -89,7 +105,7 @@
                     <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
-                    অনুমোদন করুন
+                    Approve
                 </button>
             </form>
             @endif
@@ -106,7 +122,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
                 </svg>
-                সেশনে যুক্ত হন
+                Join Session
             </a>
             @endif
 
@@ -121,7 +137,7 @@
                                bg-teal-100 dark:bg-teal-900/40
                                hover:bg-teal-200 dark:hover:bg-teal-800
                                flex items-center justify-center
-                               transition-colors duration-150" title="পড়া চিহ্নিত করুন">
+                               transition-colors duration-150" title="Mark as read">
             <svg class="w-3 h-3 text-teal-600 dark:text-teal-400" fill="none" stroke="currentColor" stroke-width="2.5"
                 viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
@@ -137,6 +153,6 @@
         <path stroke-linecap="round" stroke-linejoin="round"
             d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
     </svg>
-    <p class="text-sm text-gray-400 dark:text-gray-500">কোনো নোটিফিকেশন নেই</p>
+    <p class="text-sm text-gray-400 dark:text-gray-500">No notifications found</p>
 </div>
 @endforelse

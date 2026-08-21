@@ -78,7 +78,7 @@ class SocialAuthController extends Controller
             $errorRoute = $isLoginOnly ? 'login' : ($intendedRole === 'mentor' ? 'teacher_register' : 'student_register');
             return redirect()
                 ->route($errorRoute)
-                ->withErrors(['social' => 'সামাজিক লগইন বাতিল হয়েছে। আবার চেষ্টা করুন।']);
+                ->withErrors(['social' => 'Social login cancelled. Please try again.']);
         }
 
         // Edge case: provider returned no email (GitHub with private email)
@@ -86,7 +86,7 @@ class SocialAuthController extends Controller
             $errorRoute = $isLoginOnly ? 'login' : ($intendedRole === 'mentor' ? 'teacher_register' : 'student_register');
             return redirect()
                 ->route($errorRoute)
-                ->withErrors(['social' => 'আপনার ' . ucfirst($provider) . ' অ্যাকাউন্ট থেকে ইমেইল পাওয়া যায়নি। প্রোফাইলে পাবলিক ইমেইল যোগ করুন।']);
+                ->withErrors(['social' => 'No email found from your ' . ucfirst($provider) . ' account. Please add a public email to your profile.']);
         }
 
         $email      = $socialUser->getEmail();
@@ -116,20 +116,20 @@ class SocialAuthController extends Controller
                 // Registered via a different social provider
                 $errorRoute = $isLoginOnly ? 'login' : ($intendedRole === 'mentor' ? 'teacher_register' : 'student_register');
                 return redirect()->route($errorRoute)->withErrors([
-                    'social' => 'এই ইমেইল দিয়ে ইতিমধ্যে ' . ucfirst($existingUser->provider) . ' অ্যাকাউন্ট খোলা আছে।',
+                    'social' => 'An account is already registered with this email via ' . ucfirst($existingUser->provider) . '.',
                 ]);
             }
 
             // Registered via email/password — offer to log in normally
             return redirect()->route('login')->withErrors([
-                'email' => 'এই ইমেইল ঠিকানাটি ইতিমধ্যে নিবন্ধিত। পাসওয়ার্ড দিয়ে লগইন করুন।',
+                'email' => 'This email address is already registered. Please log in with your password.',
             ]);
         }
 
         // 3) Login-only intent but no account found — send to register
         if ($isLoginOnly) {
             return redirect()->route('student_register')->withErrors([
-                'social' => ucfirst($provider) . ' অ্যাকাউন্টে কোনো নিবন্ধন পাওয়া যায়নি। নিচে রেজিস্ট্রেশন করুন।',
+                'social' => 'No registration found for ' . ucfirst($provider) . ' account. Please register below.',
             ]);
         }
 

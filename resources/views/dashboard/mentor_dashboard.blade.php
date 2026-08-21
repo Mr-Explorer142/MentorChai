@@ -29,11 +29,11 @@
                     <div class="text-center sm:text-left space-y-2 sm:space-y-4">
                         <div
                             class="inline-flex items-center gap-1.5 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-white/20 border border-white/30 text-[10px] sm:text-xs font-bold uppercase tracking-widest text-white shadow-sm backdrop-blur-md">
-                            মেন্টর ড্যাশবোর্ড
+                            Mentor Dashboard
                         </div>
                         <h1
                             class="text-2xl sm:text-5xl lg:text-6xl font-black tracking-tighter text-white drop-shadow-md">
-                            স্বাগতম, <br class="hidden sm:block" />{{ $mentor->name }}
+                            Welcome, <br class="hidden sm:block" />{{ $mentor->name }}
                         </h1>
                         <p class="text-xs sm:text-lg text-white/90 font-medium max-w-lg leading-relaxed drop-shadow-sm">
                             {{ $mentor->profile->short_bio ?? $mentor->profile->bio }}
@@ -42,11 +42,11 @@
                         <div class="flex flex-wrap justify-center sm:justify-start gap-2 sm:gap-3 pt-2 sm:pt-4">
                             <div
                                 class="px-2.5 py-1 sm:px-4 sm:py-2 rounded-xl bg-white/20 border border-white/30 text-white text-xs sm:text-sm font-bold shadow-sm backdrop-blur-md">
-                                <span class="opacity-70 mr-1">আইডি:</span> #{{ $mentor->id }}
+                                <span class="opacity-70 mr-1">ID:</span> #{{ $mentor->id }}
                             </div>
                             <div
                                 class="px-2.5 py-1 sm:px-4 sm:py-2 rounded-xl bg-white/20 border border-white/30 text-white text-xs sm:text-sm font-bold shadow-sm backdrop-blur-md">
-                                <span class="opacity-70 mr-1">যোগদান:</span> {{ $mentor->created_at->format('d M Y') }}
+                                <span class="opacity-70 mr-1">Joined:</span> {{ $mentor->created_at->format('d M Y') }}
                             </div>
                         </div>
                     </div>
@@ -66,7 +66,7 @@
                     </div>
                     <div>
                         <h3 class="text-xl sm:text-4xl font-black">{{ $totalSessions }}</h3>
-                        <p class="text-[10px] sm:text-sm font-bold opacity-80 mt-0.5 sm:mt-1 uppercase tracking-wider">মোট সেশন</p>
+                        <p class="text-[10px] sm:text-sm font-bold opacity-80 mt-0.5 sm:mt-1 uppercase tracking-wider">Total Sessions</p>
                     </div>
                 </div>
 
@@ -81,7 +81,7 @@
                     </div>
                     <div>
                         <h3 class="text-xl sm:text-4xl font-black">{{ $pendingRequests }}</h3>
-                        <p class="text-[10px] sm:text-sm font-bold opacity-80 mt-0.5 sm:mt-1 uppercase tracking-wider">প্রক্রিয়াধীন</p>
+                        <p class="text-[10px] sm:text-sm font-bold opacity-80 mt-0.5 sm:mt-1 uppercase tracking-wider">Pending</p>
                     </div>
                 </div>
 
@@ -96,7 +96,7 @@
                     </div>
                     <div>
                         <h3 class="text-xl sm:text-4xl font-black">{{ $completedSessions }}</h3>
-                        <p class="text-[10px] sm:text-sm font-bold opacity-80 mt-0.5 sm:mt-1 uppercase tracking-wider">সম্পন্ন</p>
+                        <p class="text-[10px] sm:text-sm font-bold opacity-80 mt-0.5 sm:mt-1 uppercase tracking-wider">Completed</p>
                     </div>
                 </div>
 
@@ -111,7 +111,7 @@
                     </div>
                     <div>
                         <h3 class="text-lg sm:text-3xl font-black">৳{{ number_format($totalEarnings, 0) }}</h3>
-                        <p class="text-[10px] sm:text-sm font-bold opacity-80 mt-0.5 sm:mt-1 uppercase tracking-wider">মোট আয়</p>
+                        <p class="text-[10px] sm:text-sm font-bold opacity-80 mt-0.5 sm:mt-1 uppercase tracking-wider">Total Earnings</p>
                     </div>
                 </div>
             </div>
@@ -121,10 +121,10 @@
                 class="col-span-12 lg:col-span-7 bg-base-100/40 backdrop-blur-xl border-2 border-black dark:border-white rounded-[1.5rem] sm:rounded-[2rem] hover:-translate-y-1 transition-all flex flex-col overflow-hidden">
                 <div class="px-4 py-3.5 sm:px-8 sm:py-6 border-b border-base-content/10 flex justify-between items-center bg-base-100/40">
                     <div>
-                        <h2 class="text-lg sm:text-2xl font-black text-base-content drop-shadow-sm">সাম্প্রতিক সেশনসমূহ</h2>
-                        <p class="text-xs sm:text-sm font-bold text-base-content/60 mt-0.5 sm:mt-1">আপনার সর্বশেষ মেন্টরিং সেশনের তালিকা</p>
+                        <h2 class="text-lg sm:text-2xl font-black text-base-content drop-shadow-sm">Recent Sessions</h2>
+                        <p class="text-xs sm:text-sm font-bold text-base-content/60 mt-0.5 sm:mt-1">Your latest mentoring sessions</p>
                     </div>
-                    <button class="px-4 py-1.5 sm:px-6 sm:py-2 text-xs font-bold text-white bg-linear-to-r from-[#28666e] to-[#033f63] dark:from-[#4db6c1] dark:to-[#7ec8e3] dark:text-[#0f1f2e] rounded-full hover:scale-[1.03] transition-all shadow-md border-0">নতুন সেশন</button>
+                    <button class="px-4 py-1.5 sm:px-6 sm:py-2 text-xs font-bold text-white bg-linear-to-r from-[#28666e] to-[#033f63] dark:from-[#4db6c1] dark:to-[#7ec8e3] dark:text-[#0f1f2e] rounded-full hover:scale-[1.03] transition-all shadow-md border-0">New Session</button>
                 </div>
 
                 <div class="flex-1 p-2 overflow-y-auto max-h-[380px]">
@@ -137,17 +137,17 @@
                                     d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                             </svg>
                         </div>
-                        <p class="font-bold text-xs sm:text-base text-base-content/70">কোনো সেশন পাওয়া যায়নি</p>
+                        <p class="font-bold text-xs sm:text-base text-base-content/70">No sessions found</p>
                     </div>
                     @else
                     {{-- Mobile View: Cards --}}
                     <div class="block sm:hidden space-y-3 p-2">
                         @php
                         $statusConfig = [
-                        'pending' => ['label' => 'অপেক্ষমান', 'cls' => 'badge-warning'],
-                        'approved' => ['label' => 'অনুমোদিত', 'cls' => 'badge-success'],
-                        'rejected' => ['label' => 'প্রত্যাখ্যাত', 'cls' => 'badge-error'],
-                        'completed' => ['label' => 'সম্পন্ন', 'cls' => 'badge-info'],
+                        'pending' => ['label' => 'Pending', 'cls' => 'badge-warning'],
+                        'approved' => ['label' => 'Approved', 'cls' => 'badge-success'],
+                        'rejected' => ['label' => 'Rejected', 'cls' => 'badge-error'],
+                        'completed' => ['label' => 'Completed', 'cls' => 'badge-info'],
                         ];
                         @endphp
                         @foreach($sessionTopics as $topic)
@@ -175,7 +175,7 @@
                                 </div>
                                 <div class="flex items-center gap-1.5 shrink-0">
                                     <div class="px-2 py-0.5 bg-base-100/80 rounded-lg text-[10px] font-black shadow-2xs">
-                                        {{ $topic->duration_hours ?? 1 }} ঘণ্টা
+                                        {{ $topic->duration_hours ?? 1 }} Hour(s)
                                     </div>
                                     @if($mentoringSession && $mentoringSession->status === \App\Enums\SessionStatus::Ongoing)
                                     <a href="{{ route('live-session', ['room' => $mentoringSession->session_code]) }}"
@@ -183,13 +183,13 @@
                                         <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
                                         </svg>
-                                        যুক্ত হন
+                                        Join
                                     </a>
                                     @endif
                                     <div class="badge {{ $s['cls'] }} font-black text-[10px] py-1 px-2 shadow-2xs border-0">
                                         @if($mentoringSession)
                                         @php
-                                        $sessionStatusLabels = ['ongoing' => 'চলমান', 'completed' => 'সম্পন্ন'];
+                                        $sessionStatusLabels = ['ongoing' => 'Ongoing', 'completed' => 'Completed'];
                                         @endphp
                                         {{ $sessionStatusLabels[$mentoringSession->status->value] ?? $s['label'] }}
                                         @else
@@ -202,7 +202,7 @@
                             {{-- Details: Note --}}
                             @if(!empty($topic->note))
                             <div class="text-[10px] text-base-content/70 w-full leading-relaxed bg-base-content/5 p-2 rounded-xl">
-                                <strong class="text-base-content/90">নোট:</strong> {{ \Illuminate\Support\Str::limit($topic->note, 120) }}
+                                <strong class="text-base-content/90">Note:</strong> {{ \Illuminate\Support\Str::limit($topic->note, 120) }}
                             </div>
                             @endif
 
@@ -213,15 +213,15 @@
                             @endphp
                             @if(!empty($pm) || !empty($pl))
                             <div class="text-[10px] text-base-content/70 w-full leading-relaxed bg-base-content/5 p-2 rounded-xl border border-black/5 dark:border-white/5 space-y-0.5">
-                                @if(!empty($pm))<div><strong class="text-base-content/90">মাধ্যম:</strong> {{ $pm }}</div>@endif
-                                @if(!empty($pl))<div><strong class="text-base-content/90">ভাষা:</strong> {{ $pl }}</div>@endif
+                                @if(!empty($pm))<div><strong class="text-base-content/90">Medium:</strong> {{ $pm }}</div>@endif
+                                @if(!empty($pl))<div><strong class="text-base-content/90">Language:</strong> {{ $pl }}</div>@endif
                             </div>
                             @endif
 
                             {{-- Details: Learning Style (Full Width) --}}
                             @if(!empty($topic->student?->profile?->learning_style))
                             <div class="text-[10px] text-base-content/70 w-full leading-relaxed bg-base-content/5 p-2 rounded-xl border border-black/10 dark:border-white/10 whitespace-normal break-words">
-                                <strong class="text-base-content/90">শেখার ধরন:</strong> {{ \Illuminate\Support\Str::limit($topic->student->profile->learning_style, 150) }}
+                                <strong class="text-base-content/90">Learning Style:</strong> {{ \Illuminate\Support\Str::limit($topic->student->profile->learning_style, 150) }}
                             </div>
                             @endif
                         </div>
@@ -234,10 +234,10 @@
                              <tbody>
                                  @php
                                  $statusConfig = [
-                                 'pending' => ['label' => 'অপেক্ষমান', 'cls' => 'badge-warning'],
-                                 'approved' => ['label' => 'অনুমোদিত', 'cls' => 'badge-success'],
-                                 'rejected' => ['label' => 'প্রত্যাখ্যাত', 'cls' => 'badge-error'],
-                                 'completed' => ['label' => 'সম্পন্ন', 'cls' => 'badge-info'],
+                                 'pending' => ['label' => 'Pending', 'cls' => 'badge-warning'],
+                                 'approved' => ['label' => 'Approved', 'cls' => 'badge-success'],
+                                 'rejected' => ['label' => 'Rejected', 'cls' => 'badge-error'],
+                                 'completed' => ['label' => 'Completed', 'cls' => 'badge-info'],
                                  ];
                                  @endphp
                                  @foreach($sessionTopics as $topic)
@@ -269,7 +269,7 @@
                                                 
                                                 @if(!empty($topic->note))
                                                 <div class="text-[11px] mt-1.5 text-base-content/70 max-w-[280px] leading-relaxed bg-base-content/5 p-2 rounded-lg">
-                                                    <strong class="text-base-content/90">নোট:</strong> {{ \Illuminate\Support\Str::limit($topic->note, 120) }}
+                                                    <strong class="text-base-content/90">Note:</strong> {{ \Illuminate\Support\Str::limit($topic->note, 120) }}
                                                 </div>
                                                 @endif
                                                 
@@ -279,14 +279,14 @@
                                                 @endphp
                                                 @if(!empty($pm) || !empty($pl))
                                                 <div class="text-[11px] mt-1.5 text-base-content/70 max-w-[280px] leading-relaxed bg-base-content/5 p-2 rounded-lg border border-black/10 dark:border-white/10 space-y-1">
-                                                    @if(!empty($pm))<div><strong class="text-base-content/90">মাধ্যম:</strong> {{ $pm }}</div>@endif
-                                                    @if(!empty($pl))<div><strong class="text-base-content/90">ভাষা:</strong> {{ $pl }}</div>@endif
+                                                    @if(!empty($pm))<div><strong class="text-base-content/90">Medium:</strong> {{ $pm }}</div>@endif
+                                                    @if(!empty($pl))<div><strong class="text-base-content/90">Language:</strong> {{ $pl }}</div>@endif
                                                 </div>
                                                 @endif
                                                 
                                                 @if(!empty($topic->student?->profile?->learning_style))
                                                 <div class="text-[11px] mt-1.5 text-base-content/70 max-w-[280px] leading-relaxed bg-base-content/5 p-2 rounded-lg border border-black/20 dark:border-white/20">
-                                                    <strong class="text-base-content/90">শেখার ধরন:</strong> {{ \Illuminate\Support\Str::limit($topic->student->profile->learning_style, 150) }}
+                                                    <strong class="text-base-content/90">Learning Style:</strong> {{ \Illuminate\Support\Str::limit($topic->student->profile->learning_style, 150) }}
                                                 </div>
                                                 @endif
                                             </div>
@@ -295,7 +295,7 @@
                                     <td class="py-4">
                                         <div
                                             class="px-3 py-1 bg-base-100/50 rounded-lg inline-block text-xs font-black shadow-sm">
-                                            {{ $topic->duration_hours ?? 1 }} ঘণ্টা
+                                            {{ $topic->duration_hours ?? 1 }} Hour(s)
                                         </div>
                                     </td>
                                     <td class="py-4 text-right pr-6">
@@ -310,7 +310,7 @@
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
                                                 </svg>
-                                                যুক্ত হন
+                                                Join
                                             </a>
                                             @endif
                                             <div
@@ -319,8 +319,8 @@
                                                 @if($mentoringSession)
                                                 @php
                                                 $sessionStatusLabels = [
-                                                'ongoing' => 'চলমান',
-                                                'completed' => 'সম্পন্ন',
+                                                'ongoing' => 'Ongoing',
+                                                'completed' => 'Completed',
                                                 ];
                                                 @endphp
                                                 {{ $sessionStatusLabels[$mentoringSession->status->value] ?? $s['label']
@@ -346,12 +346,12 @@
                 {{-- Earnings Breakdown --}}
                 <div
                     class="bg-base-100/40 backdrop-blur-xl border-2 border-black dark:border-white rounded-[1.5rem] sm:rounded-[2rem] hover:-translate-y-1 transition-all p-4 sm:p-8">
-                    <h2 class="text-base sm:text-xl font-black text-base-content mb-4 sm:mb-6 drop-shadow-sm">আয়ের সারসংক্ষেপ</h2>
+                    <h2 class="text-base sm:text-xl font-black text-base-content mb-4 sm:mb-6 drop-shadow-sm">Earnings Summary</h2>
                     @php
                     $mentorEarningsRows = [
-                    ['label' => 'বিগত সপ্তাহ', 'amount' => $weeklyEarnings, 'color' => 'bg-[#28666e] dark:bg-[#4db6c1]'],
-                    ['label' => 'বিগত মাস', 'amount' => $monthlyEarnings, 'color' => 'bg-[#033f63] dark:bg-[#7ec8e3]'],
-                    ['label' => 'বিগত বছর', 'amount' => $yearlyEarnings, 'color' => 'bg-[#7c9885] dark:bg-[#9ab8a5]'],
+                    ['label' => 'Last Week', 'amount' => $weeklyEarnings, 'color' => 'bg-[#28666e] dark:bg-[#4db6c1]'],
+                    ['label' => 'Last Month', 'amount' => $monthlyEarnings, 'color' => 'bg-[#033f63] dark:bg-[#7ec8e3]'],
+                    ['label' => 'Last Year', 'amount' => $yearlyEarnings, 'color' => 'bg-[#7c9885] dark:bg-[#9ab8a5]'],
                     ];
                     @endphp
                     <div class="space-y-4 sm:space-y-5">
@@ -377,12 +377,12 @@
                     class="bg-base-100/40 backdrop-blur-xl border-2 border-black dark:border-white rounded-[1.5rem] sm:rounded-[2rem] hover:-translate-y-1 transition-all flex flex-col overflow-hidden">
                     <div
                         class="px-4 py-3.5 sm:px-8 sm:py-5 border-b border-base-content/10 bg-base-100/40 flex justify-between items-center">
-                        <h2 class="text-base sm:text-lg font-black text-base-content drop-shadow-sm">সাম্প্রতিক পেমেন্ট</h2>
+                        <h2 class="text-base sm:text-lg font-black text-base-content drop-shadow-sm">Recent Payments</h2>
                     </div>
                     <div class="flex-1 p-3 sm:p-4 overflow-y-auto max-h-[300px]">
                         @if($recentPayments->isEmpty())
                         <div class="text-center py-6 sm:py-8">
-                            <p class="font-bold text-base-content/60 text-xs sm:text-sm">কোনো পেমেন্ট নেই</p>
+                            <p class="font-bold text-base-content/60 text-xs sm:text-sm">No payments</p>
                         </div>
                         @else
                         <div class="space-y-2">

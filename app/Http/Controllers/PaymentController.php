@@ -107,7 +107,7 @@ class PaymentController extends Controller
     //     $payment_options = $sslc->makePayment($post_data, 'hosted');
 
     //     if (!is_array($payment_options)) {
-    //         return redirect()->back()->with('error', 'পেমেন্ট শুরু করতে সমস্যা হয়েছে।');
+    //         return redirect()->back()->with('error', 'There was a problem initiating the payment.');
     //     }
     // }
 
@@ -213,7 +213,7 @@ class PaymentController extends Controller
 
         if (!is_array($payment_options)) {
             Log::error('SSLCommerz failed', ['response' => $payment_options]);
-            return redirect()->back()->with('error', 'পেমেন্ট শুরু করতে সমস্যা হয়েছে।');
+            return redirect()->back()->with('error', 'There was a problem initiating the payment.');
         }
     }
 
@@ -232,7 +232,7 @@ class PaymentController extends Controller
         if (!$payment) {
             Log::error('Payment not found for tran_id: ' . $tran_id);
             return redirect()->route('student_dashboard')
-                ->with('error', 'পেমেন্ট তথ্য পাওয়া যায়নি।');
+                ->with('error', 'Payment information not found.');
         }
 
         if ($payment->status === PaymentStatus::Pending) {
@@ -268,7 +268,7 @@ class PaymentController extends Controller
 
             Log::error('Payment validation failed for tran_id: ' . $tran_id);
             return redirect()->route('student_dashboard')
-                ->with('error', 'পেমেন্ট যাচাই ব্যর্থ হয়েছে।');
+                ->with('error', 'Payment verification failed.');
         } elseif ($payment->status === PaymentStatus::Paid) {
 
             // ✅ Already paid — same approach
@@ -277,7 +277,7 @@ class PaymentController extends Controller
         }
 
         return redirect()->route('student_dashboard')
-            ->with('error', 'পেমেন্ট যাচাই ব্যর্থ হয়েছে।');
+            ->with('error', 'Payment verification failed.');
     }
 
     // Step 3: SSLCommerz redirects here on failure
@@ -291,7 +291,7 @@ class PaymentController extends Controller
         }
 
         return redirect()->route('student_dashboard')
-            ->with('error', 'পেমেন্ট ব্যর্থ হয়েছে। আবার চেষ্টা করুন।');
+            ->with('error', 'Payment failed. Please try again.');
     }
 
     // Step 4: SSLCommerz redirects here on cancel
@@ -305,7 +305,7 @@ class PaymentController extends Controller
         }
 
         return redirect()->route('student_dashboard')
-            ->with('error', 'পেমেন্ট বাতিল করা হয়েছে।');
+            ->with('error', 'Payment was cancelled.');
     }
 
     // Step 5: IPN — SSLCommerz server-to-server notification

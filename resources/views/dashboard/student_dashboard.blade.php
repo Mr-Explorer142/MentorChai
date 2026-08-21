@@ -29,24 +29,24 @@
                     <div class="text-center sm:text-left space-y-2 sm:space-y-4">
                         <div
                             class="inline-flex items-center gap-1.5 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-white/20 border border-white/30 text-[10px] sm:text-xs font-bold uppercase tracking-widest text-white shadow-sm backdrop-blur-md">
-                            স্টুডেন্ট ড্যাশবোর্ড
+                            Student Dashboard
                         </div>
                         <h1
                             class="text-2xl sm:text-5xl lg:text-6xl font-black tracking-tighter text-white drop-shadow-md">
-                            স্বাগতম, <br class="hidden sm:block" />{{ $student->name }}
+                            Welcome, <br class="hidden sm:block" />{{ $student->name }}
                         </h1>
                         <p class="text-xs sm:text-lg text-white/90 font-medium max-w-lg leading-relaxed drop-shadow-sm">
-                            {{ $student->profile?->bio ?? 'আপনার শেখার যাত্রা চালিয়ে যান - নতুন মেন্টর খুঁজুন বা চলমান সেশনগুলো দেখুন।' }}
+                            {{ $student->profile?->bio ?? 'Continue your learning journey - find new mentors or view ongoing sessions.' }}
                         </p>
 
                         <div class="flex flex-wrap justify-center sm:justify-start gap-2 sm:gap-3 pt-2 sm:pt-4">
                             <div
                                 class="px-2.5 py-1 sm:px-4 sm:py-2 rounded-xl bg-white/20 border border-white/30 text-white text-xs sm:text-sm font-bold shadow-sm backdrop-blur-md">
-                                <span class="opacity-70 mr-1">আইডি:</span> #{{ $student->id }}
+                                <span class="opacity-70 mr-1">ID:</span> #{{ $student->id }}
                             </div>
                             <div
                                 class="px-2.5 py-1 sm:px-4 sm:py-2 rounded-xl bg-white/20 border border-white/30 text-white text-xs sm:text-sm font-bold shadow-sm backdrop-blur-md">
-                                <span class="opacity-70 mr-1">যোগদান:</span> {{ $student->created_at->format('d M Y') }}
+                                <span class="opacity-70 mr-1">Joined:</span> {{ $student->created_at->format('d M Y') }}
                             </div>
                             @if($student->profile?->department)
                             <div
@@ -72,7 +72,7 @@
                     </div>
                     <div>
                         <h3 class="text-xl sm:text-4xl font-black">{{ $totalRequests }}</h3>
-                        <p class="text-[10px] sm:text-sm font-bold opacity-80 mt-0.5 sm:mt-1 uppercase tracking-wider">মোট অনুরোধ</p>
+                        <p class="text-[10px] sm:text-sm font-bold opacity-80 mt-0.5 sm:mt-1 uppercase tracking-wider">Total Requests</p>
                     </div>
                 </div>
 
@@ -87,7 +87,7 @@
                     </div>
                     <div>
                         <h3 class="text-xl sm:text-4xl font-black">{{ $pendingRequests }}</h3>
-                        <p class="text-[10px] sm:text-sm font-bold opacity-80 mt-0.5 sm:mt-1 uppercase tracking-wider">অপেক্ষমান</p>
+                        <p class="text-[10px] sm:text-sm font-bold opacity-80 mt-0.5 sm:mt-1 uppercase tracking-wider">Pending</p>
                     </div>
                 </div>
 
@@ -102,7 +102,7 @@
                     </div>
                     <div>
                         <h3 class="text-xl sm:text-4xl font-black">{{ $approvedRequests }}</h3>
-                        <p class="text-[10px] sm:text-sm font-bold opacity-80 mt-0.5 sm:mt-1 uppercase tracking-wider">অনুমোদিত</p>
+                        <p class="text-[10px] sm:text-sm font-bold opacity-80 mt-0.5 sm:mt-1 uppercase tracking-wider">Approved</p>
                     </div>
                 </div>
 
@@ -117,7 +117,7 @@
                     </div>
                     <div>
                         <h3 class="text-lg sm:text-3xl font-black">৳{{ number_format($totalSpent, 0) }}</h3>
-                        <p class="text-[10px] sm:text-sm font-bold opacity-80 mt-0.5 sm:mt-1 uppercase tracking-wider">মোট ব্যয়</p>
+                        <p class="text-[10px] sm:text-sm font-bold opacity-80 mt-0.5 sm:mt-1 uppercase tracking-wider">Total Spent</p>
                     </div>
                 </div>
             </div>
@@ -127,10 +127,10 @@
                 class="col-span-12 lg:col-span-7 bg-base-100/40 backdrop-blur-xl border-2 border-black dark:border-white rounded-[1.5rem] sm:rounded-[2rem] hover:-translate-y-1 transition-all flex flex-col overflow-hidden">
                 <div class="px-4 py-3.5 sm:px-8 sm:py-6 border-b border-base-content/10 flex justify-between items-center bg-base-100/40">
                     <div>
-                        <h2 class="text-lg sm:text-2xl font-black text-base-content drop-shadow-sm">সাম্প্রতিক সেশন অনুরোধ</h2>
-                        <p class="text-xs sm:text-sm font-bold text-base-content/60 mt-0.5 sm:mt-1">আপনার সর্বশেষ মেন্টরিং সেশনের তালিকা</p>
+                        <h2 class="text-lg sm:text-2xl font-black text-base-content drop-shadow-sm">Recent Session Requests</h2>
+                        <p class="text-xs sm:text-sm font-bold text-base-content/60 mt-0.5 sm:mt-1">Your latest mentoring sessions</p>
                     </div>
-                    <a href="{{ route('mentors') }}" class="px-4 py-1.5 sm:px-6 sm:py-2 text-xs font-bold text-white bg-linear-to-r from-[#28666e] to-[#033f63] dark:from-[#4db6c1] dark:to-[#7ec8e3] dark:text-[#0f1f2e] rounded-full hover:scale-[1.03] transition-all shadow-md">নতুন অনুরোধ</a>
+                    <a href="{{ route('mentors') }}" class="px-4 py-1.5 sm:px-6 sm:py-2 text-xs font-bold text-white bg-linear-to-r from-[#28666e] to-[#033f63] dark:from-[#4db6c1] dark:to-[#7ec8e3] dark:text-[#0f1f2e] rounded-full hover:scale-[1.03] transition-all shadow-md">New Request</a>
                 </div>
 
                 <div class="flex-1 p-2 overflow-y-auto max-h-[380px]">
@@ -143,7 +143,7 @@
                                     d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                             </svg>
                         </div>
-                        <p class="font-bold text-xs sm:text-base text-base-content/70">কোনো অনুরোধ পাওয়া যায়নি</p>
+                        <p class="font-bold text-xs sm:text-base text-base-content/70">No requests found</p>
                     </div>
                     @else
                     <div class="overflow-x-auto">
@@ -151,10 +151,10 @@
                             <tbody>
                                 @php
                                 $statusConfig = [
-                                'pending' => ['label' => 'অপেক্ষমান', 'cls' => 'badge-warning'],
-                                'approved' => ['label' => 'অনুমোদিত', 'cls' => 'badge-success'],
-                                'rejected' => ['label' => 'প্রত্যাখ্যাত', 'cls' => 'badge-error'],
-                                'completed' => ['label' => 'সম্পন্ন', 'cls' => 'badge-info'],
+                                'pending' => ['label' => 'Pending', 'cls' => 'badge-warning'],
+                                'approved' => ['label' => 'Approved', 'cls' => 'badge-success'],
+                                'rejected' => ['label' => 'Rejected', 'cls' => 'badge-error'],
+                                'completed' => ['label' => 'Completed', 'cls' => 'badge-info'],
                                 ];
                                 @endphp
                                 @foreach($sessionTopics as $topic)
@@ -189,7 +189,7 @@
                                     <td class="py-3">
                                         <div
                                             class="px-2 py-0.5 sm:px-3 sm:py-1 bg-base-100/50 rounded-lg inline-block text-[10px] sm:text-xs font-black shadow-sm">
-                                            {{ $topic->duration_hours ?? 1 }} ঘণ্টা
+                                            {{ $topic->duration_hours ?? 1 }} Hour(s)
                                         </div>
                                     </td>
                                     <td class="py-3 text-right pr-3 sm:pr-6">
@@ -204,7 +204,7 @@
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
                                                 </svg>
-                                                যুক্ত হন
+                                                Join
                                             </a>
                                             @endif
                                             <div
@@ -212,8 +212,8 @@
                                                 @if($mentoringSession)
                                                 @php
                                                 $sessionStatusLabels = [
-                                                'ongoing' => 'চলমান',
-                                                'completed' => 'সম্পন্ন',
+                                                'ongoing' => 'Ongoing',
+                                                'completed' => 'Completed',
                                                 ];
                                                 @endphp
                                                 {{ $sessionStatusLabels[$mentoringSession->status->value] ?? $s['label']
@@ -239,12 +239,12 @@
                 {{-- Spend Breakdown --}}
                 <div
                     class="bg-base-100/40 backdrop-blur-xl border-2 border-black dark:border-white rounded-[1.5rem] sm:rounded-[2rem] hover:-translate-y-1 transition-all p-4 sm:p-8">
-                    <h2 class="text-base sm:text-xl font-black text-base-content mb-4 sm:mb-6 drop-shadow-sm">ব্যয়ের সারসংক্ষেপ</h2>
+                    <h2 class="text-base sm:text-xl font-black text-base-content mb-4 sm:mb-6 drop-shadow-sm">Spending Summary</h2>
                     @php
                     $studentSpentRows = [
-                    ['label' => 'বিগত সপ্তাহ', 'amount' => $weeklySpent, 'color' => 'bg-[#28666e] dark:bg-[#4db6c1]'],
-                    ['label' => 'বিগত মাস', 'amount' => $monthlySpent, 'color' => 'bg-[#033f63] dark:bg-[#7ec8e3]'],
-                    ['label' => 'বিগত বছর', 'amount' => $yearlySpent, 'color' => 'bg-[#7c9885] dark:bg-[#9ab8a5]'],
+                    ['label' => 'Last Week', 'amount' => $weeklySpent, 'color' => 'bg-[#28666e] dark:bg-[#4db6c1]'],
+                    ['label' => 'Last Month', 'amount' => $monthlySpent, 'color' => 'bg-[#033f63] dark:bg-[#7ec8e3]'],
+                    ['label' => 'Last Year', 'amount' => $yearlySpent, 'color' => 'bg-[#7c9885] dark:bg-[#9ab8a5]'],
                     ];
                     @endphp
                     <div class="space-y-4 sm:space-y-5">
@@ -269,12 +269,12 @@
                 <div
                     class="bg-base-100/40 backdrop-blur-xl border-2 border-black dark:border-white rounded-[1.5rem] sm:rounded-[2rem] hover:-translate-y-1 transition-all flex flex-col overflow-hidden">
                     <div class="px-4 py-3.5 sm:px-8 sm:py-5 border-b border-base-content/10 bg-base-100/40">
-                        <h2 class="text-base sm:text-lg font-black text-base-content drop-shadow-sm">সাম্প্রতিক লেনদেন</h2>
+                        <h2 class="text-base sm:text-lg font-black text-base-content drop-shadow-sm">Recent Payments</h2>
                     </div>
                     <div class="flex-1 p-3 sm:p-4 overflow-y-auto max-h-[300px]">
                         @if($recentPayments->isEmpty())
                         <div class="text-center py-6 sm:py-8">
-                            <p class="font-bold text-base-content/60 text-xs sm:text-sm">কোনো লেনদেন নেই</p>
+                            <p class="font-bold text-base-content/60 text-xs sm:text-sm">No transactions</p>
                         </div>
                         @else
                         <div class="space-y-2">

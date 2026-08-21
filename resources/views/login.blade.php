@@ -39,7 +39,7 @@
                            bg-linear-to-br from-[#28666e] via-[#033f63] to-[#7c9885]
                            dark:from-[#4db6c1] dark:via-[#7ec8e3] dark:to-[#9ab8a5]
                            bg-clip-text text-transparent">MentorChai</h1>
-                <p class="text-xs sm:text-sm mt-0.5 text-[#033f63]/50 dark:text-[#7ec8e3]/50">আপনার অ্যাকাউন্টে লগইন করুন</p>
+                <p class="text-xs sm:text-sm mt-0.5 text-[#033f63]/50 dark:text-[#7ec8e3]/50">Login to your account</p>
             </div>
 
             {{-- Card Container --}}
@@ -79,7 +79,7 @@
                                 fill="#EA4335" />
                         </svg>
                         <span class="inline sm:hidden">Google</span>
-                        <span class="hidden sm:inline">Google দিয়ে লগইন করুন</span>
+                        <span class="hidden sm:inline">Login with Google</span>
                     </a>
 
                     {{-- GitHub --}}
@@ -98,7 +98,7 @@
                                 d="M12 0C5.37 0 0 5.373 0 12c0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.73.083-.73 1.205.085 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.76-1.604-2.665-.305-5.466-1.332-5.466-5.93 0-1.31.468-2.38 1.235-3.22-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.3 1.23a11.52 11.52 0 013.003-.404c1.02.005 2.046.138 3.003.404 2.29-1.552 3.297-1.23 3.297-1.23.653 1.652.242 2.873.118 3.176.77.84 1.233 1.91 1.233 3.22 0 4.61-2.804 5.622-5.476 5.92.43.372.814 1.103.814 2.222 0 1.606-.015 2.898-.015 3.293 0 .322.216.695.825.577C20.565 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
                         </svg>
                         <span class="inline sm:hidden">GitHub</span>
-                        <span class="hidden sm:inline">GitHub দিয়ে লগইন করুন</span>
+                        <span class="hidden sm:inline">Login with GitHub</span>
                     </a>
 
                 </div>
@@ -115,7 +115,7 @@
                             text-[#033f63]/40 dark:text-[#7ec8e3]/40 text-xs
                             before:flex-1 before:h-px before:bg-[#28666e]/12 dark:before:bg-[#4db6c1]/15
                             after:flex-1 after:h-px after:bg-[#28666e]/12 dark:after:bg-[#4db6c1]/15">
-                    অথবা
+                    OR
                 </div>
 
                 {{-- Login Form --}}
@@ -131,9 +131,9 @@
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
                             </svg>
-                            ই-মেইল
+                            Email
                         </label>
-                        <input type="email" name="email" placeholder="আপনার ই-মেইল" required class="w-full px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-[0.9rem]
+                        <input type="email" name="email" placeholder="Your Email" required class="w-full px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-[0.9rem]
                                       font-[Nunito,sans-serif] outline-none
                                       border-[1.5px] border-[#28666e]/18 dark:border-[#4db6c1]/20
                                       bg-white dark:bg-[#0f1f2e]/50
@@ -154,9 +154,9 @@
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
                             </svg>
-                            পাসওয়ার্ড
+                            Password
                         </label>
-                        <input type="password" name="password" placeholder="পাসওয়ার্ড" required class="w-full px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-[0.9rem]
+                        <input type="password" name="password" placeholder="Password" required class="w-full px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-[0.9rem]
                                       font-[Nunito,sans-serif] outline-none
                                       border-[1.5px] border-[#28666e]/18 dark:border-[#4db6c1]/20
                                       bg-white dark:bg-[#0f1f2e]/50
@@ -173,10 +173,10 @@
                         <label class="flex items-center gap-1.5 cursor-pointer">
                             <input type="checkbox" name="remember"
                                 class="accent-[#28666e] dark:accent-[#4db6c1] w-[14px] h-[14px] cursor-pointer" />
-                            <span class="text-[10px] sm:text-xs font-semibold text-[#033f63] dark:text-[#7ec8e3]">তথ্য সেভ রাখুন</span>
+                            <span class="text-[10px] sm:text-xs font-semibold text-[#033f63] dark:text-[#7ec8e3]">Remember me</span>
                         </label>
                         <a href="#" class="text-[10px] sm:text-xs font-semibold text-[#28666e] dark:text-[#4db6c1] hover:underline">
-                            পাসওয়ার্ড ভুলেছেন?
+                            Forgot password?
                         </a>
                     </div>
 
@@ -195,7 +195,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
                         </svg>
-                        লগইন করুন
+                        Login
                     </button>
 
                 </form>
@@ -203,12 +203,12 @@
                 {{-- Clean Inline Link Footer --}}
                 <div class="mt-6 text-center text-xs space-y-2.5 text-[#033f63]/60 dark:text-[#7ec8e3]/60">
                     <p>
-                        MentorChai-তে নতুন? 
-                        <a href="{{ route('student_register') }}" class="text-[#28666e] dark:text-[#4db6c1] font-bold hover:underline">নতুন অ্যাকাউন্ট খুলুন</a>
+                        New to MentorChai? 
+                        <a href="{{ route('student_register') }}" class="text-[#28666e] dark:text-[#4db6c1] font-bold hover:underline">Create an account</a>
                     </p>
                     <p>
-                        আপনি কি অ্যাডমিন? 
-                        <a href="{{ route('admin_login') }}" class="text-[#28666e] dark:text-[#4db6c1] font-bold hover:underline">এখানে লগইন করুন</a>
+                        Are you an admin? 
+                        <a href="{{ route('admin_login') }}" class="text-[#28666e] dark:text-[#4db6c1] font-bold hover:underline">Login here</a>
                     </p>
                 </div>
 

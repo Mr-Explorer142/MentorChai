@@ -6,16 +6,16 @@
             <div class="text-center mb-8 sm:mb-16">
                 <span class="badge badge-outline font-bold uppercase tracking-widest text-[10px] sm:text-xs px-3 py-2 sm:px-4 sm:py-3 mb-2 sm:mb-4"
                     style="border-color: var(--mc-border-teal); color: var(--mc-primary); background: rgba(40,102,110,0.08);">
-                    📬 সংযোগ
+                    📬 CONNECT
                 </span>
                 <h2 class="text-2xl sm:text-3xl md:text-5xl font-bold mt-2 sm:mt-4"
                     style="color: var(--mc-text); font-family: 'Lora', serif;">
-                    যোগাযোগ করুন
+                    Contact Us
                 </h2>
                 <div class="mx-auto mt-3 sm:mt-5 mb-3 sm:mb-5 h-1 w-12 sm:w-16 rounded-full"
                     style="background: linear-gradient(90deg, #1A9998, #155665);"></div>
                 <p class="text-xs sm:text-sm max-w-sm mx-auto leading-relaxed" style="color: var(--mc-text-muted);">
-                    আমরা সবসময় আপনার সেবায় প্রস্তুত। যেকোনো মাধ্যমে আমাদের সাথে যোগাযোগ করুন।
+                    We are always ready at your service. Connect with us through any platform.
                 </p>
             </div>
 
@@ -35,16 +35,16 @@
                                 </svg>
                             </div>
                             <div>
-                                <p class="text-[10px] sm:text-xs font-bold uppercase tracking-widest mb-0.5" style="color: var(--mc-text-muted);">মোবাইল নম্বর</p>
+                                <p class="text-[10px] sm:text-xs font-bold uppercase tracking-widest mb-0.5" style="color: var(--mc-text-muted);">Mobile Number</p>
                                 <p class="font-bold text-base sm:text-lg" style="color: var(--mc-text);">012345678901</p>
                             </div>
                         </div>
-                        <p class="text-[11px] sm:text-xs leading-relaxed" style="color: var(--mc-text-muted);">সরাসরি যোগাযোগ করতে কল করুন দিন-রাত যেকোনো সময়</p>
+                        <p class="text-[11px] sm:text-xs leading-relaxed" style="color: var(--mc-text-muted);">Call us directly anytime, day or night</p>
                         <div class="flex gap-2 flex-wrap pt-0.5 sm:pt-1">
                             <a href="tel:012345678901"
                                 class="btn btn-xs sm:btn-sm font-semibold text-xs px-4 sm:px-5 border-0 text-white hover:-translate-y-0.5 transition-all duration-200"
                                 style="background: linear-gradient(135deg, #1A9998, #155665);">
-                                📞 কল করুন
+                                📞 Call Now
                             </a>
                             <button class="btn btn-xs sm:btn-sm btn-ghost border text-xs px-3 sm:px-4 copy-btn" data-copy="012345678901"
                                 style="border-color: var(--mc-border-teal-sub); color: var(--mc-text-muted);">
@@ -52,7 +52,7 @@
                                     <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                                     <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                                 </svg>
-                                কপি
+                                Copy
                             </button>
                         </div>
                     </div>
@@ -72,18 +72,18 @@
                             </div>
                             <div class="min-w-0">
                                 <div class="flex items-center gap-1.5 sm:gap-2 mb-0.5">
-                                    <p class="text-[10px] sm:text-xs font-bold uppercase tracking-widest" style="color: var(--mc-text-muted);">সাপোর্ট ইমেইল</p>
-                                    <span class="text-[10px] sm:text-xs font-semibold px-2 py-0.5 rounded-full" style="background: rgba(26,153,143,0.12); color: #1A9998;">সহায়তা</span>
+                                    <p class="text-[10px] sm:text-xs font-bold uppercase tracking-widest" style="color: var(--mc-text-muted);">Support Email</p>
+                                    <span class="text-[10px] sm:text-xs font-semibold px-2 py-0.5 rounded-full" style="background: rgba(26,153,143,0.12); color: #1A9998;">Help</span>
                                 </div>
                                 <p class="font-bold text-xs sm:text-sm truncate" style="color: var(--mc-text);">support@xyz.com</p>
                             </div>
                         </div>
-                        <p class="text-[11px] sm:text-xs leading-relaxed" style="color: var(--mc-text-muted);">যেকোনো সমস্যা বা প্রশ্নের জন্য আমাদের সাপোর্ট টিমকে ইমেইল করুন</p>
+                        <p class="text-[11px] sm:text-xs leading-relaxed" style="color: var(--mc-text-muted);">Email our support team for any issues or queries</p>
                         <div class="flex gap-2 flex-wrap pt-0.5 sm:pt-1">
                             <a href="mailto:support@xyz.com"
                                 class="btn btn-xs sm:btn-sm font-semibold text-xs px-4 sm:px-5 border-0 text-white hover:-translate-y-0.5 transition-all duration-200"
                                 style="background: linear-gradient(135deg, #187F87, #155665);">
-                                ✉️ ইমেইল করুন
+                                ✉️ Email Us
                             </a>
                             <button class="btn btn-xs sm:btn-sm btn-ghost border text-xs px-3 sm:px-4 copy-btn" data-copy="support@xyz.com"
                                 style="border-color: var(--mc-border-teal-sub); color: var(--mc-text-muted);">
@@ -91,7 +91,7 @@
                                     <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                                     <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                                 </svg>
-                                কপি
+                                Copy
                             </button>
                         </div>
                     </div>
@@ -111,18 +111,18 @@
                             </div>
                             <div class="min-w-0">
                                 <div class="flex items-center gap-1.5 sm:gap-2 mb-0.5">
-                                    <p class="text-[10px] sm:text-xs font-bold uppercase tracking-widest" style="color: var(--mc-text-muted);">বিজনেস ইমেইল</p>
-                                    <span class="text-[10px] sm:text-xs font-semibold px-2 py-0.5 rounded-full" style="background: rgba(21,86,101,0.12); color: #155665;">ব্যবসায়িক</span>
+                                    <p class="text-[10px] sm:text-xs font-bold uppercase tracking-widest" style="color: var(--mc-text-muted);">Business Email</p>
+                                    <span class="text-[10px] sm:text-xs font-semibold px-2 py-0.5 rounded-full" style="background: rgba(21,86,101,0.12); color: #155665;">Business</span>
                                 </div>
                                 <p class="font-bold text-xs sm:text-sm truncate" style="color: var(--mc-text);">business@xyz.com</p>
                             </div>
                         </div>
-                        <p class="text-[11px] sm:text-xs leading-relaxed" style="color: var(--mc-text-muted);">পার্টনারশিপ, চুক্তি বা ব্যবসায়িক প্রস্তাবের জন্য এই ইমেইলে যোগাযোগ করুন</p>
+                        <p class="text-[11px] sm:text-xs leading-relaxed" style="color: var(--mc-text-muted);">Contact this email for partnerships, agreements, or business proposals</p>
                         <div class="flex gap-2 flex-wrap pt-0.5 sm:pt-1">
                             <a href="mailto:business@xyz.com"
                                 class="btn btn-xs sm:btn-sm font-semibold text-xs px-4 sm:px-5 border-0 text-white hover:-translate-y-0.5 transition-all duration-200"
                                 style="background: linear-gradient(135deg, #155665, #102E3C);">
-                                ✉️ ইমেইল করুন
+                                ✉️ Email Us
                             </a>
                             <button class="btn btn-xs sm:btn-sm btn-ghost border text-xs px-3 sm:px-4 copy-btn" data-copy="business@xyz.com"
                                 style="border-color: var(--mc-border-teal-sub); color: var(--mc-text-muted);">
@@ -130,7 +130,7 @@
                                     <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                                     <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                                 </svg>
-                                কপি
+                                Copy
                             </button>
                         </div>
                     </div>
@@ -153,12 +153,12 @@
                             </svg>
                         </div>
                         <div>
-                            <p class="font-bold text-xs sm:text-sm" style="color: var(--mc-text);">হোয়াটসঅ্যাপ</p>
+                            <p class="font-bold text-xs sm:text-sm" style="color: var(--mc-text);">WhatsApp</p>
                             <p class="text-[10px] sm:text-xs mt-0.5 sm:mt-1" style="color: var(--mc-text-muted);">012345678901</p>
                         </div>
-                        <p class="text-[10px] sm:text-xs leading-relaxed text-center" style="color: var(--mc-text-muted);">দ্রুত সাড়া পেতে হোয়াটসঅ্যাপে মেসেজ করুন</p>
+                        <p class="text-[10px] sm:text-xs leading-relaxed text-center" style="color: var(--mc-text-muted);">Message on WhatsApp for a quick response</p>
                         <span class="text-[10px] sm:text-xs font-semibold px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full"
-                            style="background: rgba(37,211,102,0.13); color: #15803d;">চ্যাট করুন →</span>
+                            style="background: rgba(37,211,102,0.13); color: #15803d;">Chat →</span>
                     </div>
                 </a>
 
@@ -174,12 +174,12 @@
                             </svg>
                         </div>
                         <div>
-                            <p class="font-bold text-xs sm:text-sm" style="color: var(--mc-text);">টেলিগ্রাম</p>
+                            <p class="font-bold text-xs sm:text-sm" style="color: var(--mc-text);">Telegram</p>
                             <p class="text-[10px] sm:text-xs mt-0.5 sm:mt-1" style="color: var(--mc-text-muted);">@yourusername</p>
                         </div>
-                        <p class="text-[10px] sm:text-xs leading-relaxed text-center" style="color: var(--mc-text-muted);">সর্বশেষ আপডেট সবার আগে পেতে আমাদের টেলিগ্রাম চ্যানেল ফলো করুন</p>
+                        <p class="text-[10px] sm:text-xs leading-relaxed text-center" style="color: var(--mc-text-muted);">Follow our Telegram channel to get the latest updates first</p>
                         <span class="text-[10px] sm:text-xs font-semibold px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full"
-                            style="background: rgba(38,169,224,0.13); color: #0369a1;">মেসেজ করুন →</span>
+                            style="background: rgba(38,169,224,0.13); color: #0369a1;">Message →</span>
                     </div>
                 </a>
 
@@ -195,12 +195,12 @@
                             </svg>
                         </div>
                         <div>
-                            <p class="font-bold text-xs sm:text-sm" style="color: var(--mc-text);">ফেসবুক পেজ</p>
+                            <p class="font-bold text-xs sm:text-sm" style="color: var(--mc-text);">Facebook Page</p>
                             <p class="text-[10px] sm:text-xs mt-0.5 sm:mt-1" style="color: var(--mc-text-muted);">fb.com/yourpage</p>
                         </div>
-                        <p class="text-[10px] sm:text-xs leading-relaxed text-center" style="color: var(--mc-text-muted);">নিয়মিত অফার এবং আপডেট পেতে ফলো করুন আমাদের ফেসবুক পেজ</p>
+                        <p class="text-[10px] sm:text-xs leading-relaxed text-center" style="color: var(--mc-text-muted);">Follow our Facebook page for regular offers and updates</p>
                         <span class="text-[10px] sm:text-xs font-semibold px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full"
-                            style="background: rgba(24,119,242,0.13); color: #1d4ed8;">পেজ দেখুন →</span>
+                            style="background: rgba(24,119,242,0.13); color: #1d4ed8;">View Page →</span>
                     </div>
                 </a>
             </div>
@@ -220,8 +220,8 @@
                                 </svg>
                             </div>
                             <div class="flex-1 min-w-0">
-                                <p class="text-[10px] sm:text-xs font-bold uppercase tracking-widest mb-0.5 sm:mb-1" style="color: var(--mc-text-muted);">আমাদের ঠিকানা</p>
-                                <p class="font-bold text-xs sm:text-base leading-snug" style="color: var(--mc-text);">১২৩ বিজনেস অ্যাভিনিউ, উত্তরা, ঢাকা ১২৩০, বাংলাদেশ</p>
+                                <p class="text-[10px] sm:text-xs font-bold uppercase tracking-widest mb-0.5 sm:mb-1" style="color: var(--mc-text-muted);">Our Address</p>
+                                <p class="font-bold text-xs sm:text-base leading-snug" style="color: var(--mc-text);">123 Business Avenue, Uttara, Dhaka 1230, Bangladesh</p>
                             </div>
                         </div>
                         <a href="https://www.google.com/maps/place/Uttara,+Dhaka/@23.8766874,90.3576454,14z"
@@ -232,7 +232,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
                             </svg>
-                            গুগল ম্যাপে দেখুন
+                            View on Google Maps
                         </a>
                     </div>
                 </div>
@@ -249,11 +249,11 @@
                         style="background: linear-gradient(to top, rgba(16,46,60,0.65) 0%, transparent 60%);">
                         <div class="flex items-center gap-2">
                             <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full shrink-0" style="background:#1A9998; display:inline-block;"></span>
-                            <span class="text-xs sm:text-sm font-bold text-white">উত্তরা, ঢাকা ১২৩০</span>
+                            <span class="text-xs sm:text-sm font-bold text-white">Uttara, Dhaka 1230</span>
                         </div>
                         <span class="text-[10px] sm:text-xs font-semibold px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full text-white border border-white/30"
                             style="background: rgba(26,153,143,0.45); backdrop-filter: blur(4px);">
-                            গুগল ম্যাপ খুলুন ↗
+                            Open Google Maps ↗
                         </span>
                     </div>
                 </div>
@@ -268,7 +268,7 @@
                 const text = btn.dataset.copy;
                 navigator.clipboard.writeText(text).then(() => {
                     const original = btn.innerHTML;
-                    btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg> হয়েছে`;
+                    btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg> Copied`;
                     btn.style.color = '#1A9998';
                     setTimeout(() => {
                         btn.innerHTML = original;

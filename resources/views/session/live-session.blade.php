@@ -4,8 +4,8 @@
 
         {{-- ── Page Header ── --}}
         <div class="mb-4 sm:mb-6">
-            <p class="text-[10px] sm:text-xs font-bold uppercase tracking-widest mb-0.5 text-[#1A9998] dark:text-[#4db6c1]">সক্রিয় সেশন</p>
-            <h1 class="text-lg sm:text-2xl font-extrabold text-[#0d3d3d] dark:text-[#d2f1ff]">লাইভ মেন্টরিং সেশন</h1>
+            <p class="text-[10px] sm:text-xs font-bold uppercase tracking-widest mb-0.5 text-[#1A9998] dark:text-[#4db6c1]">Active Session</p>
+            <h1 class="text-lg sm:text-2xl font-extrabold text-[#0d3d3d] dark:text-[#d2f1ff]">Live Mentoring Session</h1>
             <div class="flex items-center gap-2 mt-1.5 sm:mt-2">
                 <span class="text-xs sm:text-sm font-semibold text-[#155665]/60 dark:text-[#7ec8e3]/60">Topic :</span>
                 <span class="text-xs sm:text-sm font-bold px-2.5 py-0.5 rounded-full bg-[#1a9998]/10 dark:bg-[#4db6c1]/10 text-[#155665] dark:text-[#7ec8e3] border border-[#1a9998]/20 dark:border-[#4db6c1]/20">
@@ -30,7 +30,7 @@
                         <div>
                             <p class="font-bold text-xs sm:text-base text-[#0d3d3d] dark:text-[#d2f1ff]">{{ $session->topic->topic }}</p>
                             <p class="text-[11px] sm:text-sm mt-0.5 text-[#155665]/60 dark:text-[#7ec8e3]/60">
-                                শুরু হয়েছে {{ $session->started_at?->format('h:i A') ?? 'এখনই' }}
+                                Started at {{ $session->started_at?->format('h:i A') ?? 'Just now' }}
                             </p>
                         </div>
                         <span class="px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full text-[10px] sm:text-xs font-bold bg-[#1a9998]/10 dark:bg-[#4db6c1]/10 text-[#1A9998] dark:text-[#4db6c1] border border-[#1a9998]/25 dark:border-[#4db6c1]/25">
@@ -54,7 +54,7 @@
                         </div>
                         <div class="flex-1 text-left min-w-0">
                             <p class="font-bold text-sm sm:text-lg text-[#0d3d3d] dark:text-[#d2f1ff] truncate">{{ $session->mentor->name }}</p>
-                            <p class="text-xs text-[#155665]/60 dark:text-[#7ec8e3]/60">মেন্টর</p>
+                            <p class="text-xs text-[#155665]/60 dark:text-[#7ec8e3]/60">Mentor</p>
                             @if($session->mentor->profile?->bio)
                                 <p class="text-xs sm:text-sm mt-1 sm:mt-2 text-[#4a7070] dark:text-[#7ec8e3]/80 line-clamp-2">
                                     {{ Str::limit($session->mentor->profile->bio, 100) }}
@@ -74,24 +74,24 @@
 
                 {{-- Session Details --}}
                 <div class="bg-white dark:bg-[#1a2e3b] rounded-xl sm:rounded-2xl px-3.5 py-4 sm:px-5 sm:py-5 shadow-sm transition-colors duration-300 border border-[#1a9998]/15 dark:border-[#4db6c1]/15">
-                    <h2 class="font-bold text-xs sm:text-sm mb-3 sm:mb-4 text-[#0d3d3d] dark:text-[#d2f1ff]">সেশন বিবরণ</h2>
+                    <h2 class="font-bold text-xs sm:text-sm mb-3 sm:mb-4 text-[#0d3d3d] dark:text-[#d2f1ff]">Session Details</h2>
                     <div class="space-y-2.5 sm:space-y-3 pt-3 sm:pt-4 border-t border-[#1a9998]/10 dark:border-[#4db6c1]/15">
                         <div class="flex items-start gap-2">
                             <span class="text-[11px] sm:text-xs font-bold w-16 sm:w-20 shrink-0 pt-0.5 text-[#155665]/50 dark:text-[#7ec8e3]/50">Topic</span>
                             <span class="text-xs sm:text-sm font-medium text-[#2d6e6e] dark:text-[#d2f1ff]">{{ $session->topic->topic }}</span>
                         </div>
                         <div class="flex items-center gap-2">
-                            <span class="text-[11px] sm:text-xs font-bold w-16 sm:w-20 shrink-0 text-[#155665]/50 dark:text-[#7ec8e3]/50">মেন্টর</span>
+                            <span class="text-[11px] sm:text-xs font-bold w-16 sm:w-20 shrink-0 text-[#155665]/50 dark:text-[#7ec8e3]/50">Mentor</span>
                             <span class="text-xs sm:text-sm font-medium text-[#2d6e6e] dark:text-[#d2f1ff]">{{ $session->mentor->name }}</span>
                         </div>
                         <div class="flex items-center gap-2">
-                            <span class="text-[11px] sm:text-xs font-bold w-16 sm:w-20 shrink-0 text-[#155665]/50 dark:text-[#7ec8e3]/50">শিক্ষার্থী</span>
+                            <span class="text-[11px] sm:text-xs font-bold w-16 sm:w-20 shrink-0 text-[#155665]/50 dark:text-[#7ec8e3]/50">Student</span>
                             <span class="text-xs sm:text-sm font-medium text-[#2d6e6e] dark:text-[#d2f1ff]">{{ $session->student->name }}</span>
                         </div>
                         <div class="flex items-center gap-2">
-                            <span class="text-[11px] sm:text-xs font-bold w-16 sm:w-20 shrink-0 text-[#155665]/50 dark:text-[#7ec8e3]/50">শুরু</span>
+                            <span class="text-[11px] sm:text-xs font-bold w-16 sm:w-20 shrink-0 text-[#155665]/50 dark:text-[#7ec8e3]/50">Start</span>
                             <span class="text-xs sm:text-sm font-medium text-[#2d6e6e] dark:text-[#d2f1ff]">
-                                {{ $session->started_at?->format('d M Y, h:i A') ?? 'এখনই' }}
+                                {{ $session->started_at?->format('d M Y, h:i A') ?? 'Just now' }}
                             </span>
                         </div>
                         <div class="flex items-center gap-2">
@@ -99,7 +99,7 @@
                             <span class="text-xs sm:text-sm font-mono text-[#1A9998] dark:text-[#4db6c1]">{{ $roomId }}</span>
                         </div>
                         <div class="flex items-center gap-2">
-                            <span class="text-[11px] sm:text-xs font-bold w-16 sm:w-20 shrink-0 text-[#155665]/50 dark:text-[#7ec8e3]/50">পরিমাণ</span>
+                            <span class="text-[11px] sm:text-xs font-bold w-16 sm:w-20 shrink-0 text-[#155665]/50 dark:text-[#7ec8e3]/50">Amount</span>
                             <span class="text-xs sm:text-sm font-bold text-[#2d6e6e] dark:text-[#d2f1ff]">৳{{ number_format($session->amount, 2) }}</span>
                         </div>
                     </div>
@@ -107,7 +107,7 @@
 
                 {{-- Participants --}}
                 <div class="bg-white dark:bg-[#1a2e3b] rounded-xl sm:rounded-2xl px-3.5 py-4 sm:px-5 sm:py-5 shadow-sm transition-colors duration-300 border border-[#1a9998]/15 dark:border-[#4db6c1]/15">
-                    <h2 class="font-bold text-xs sm:text-sm mb-3 sm:mb-4 text-[#0d3d3d] dark:text-[#d2f1ff]">অংশগ্রহণকারী</h2>
+                    <h2 class="font-bold text-xs sm:text-sm mb-3 sm:mb-4 text-[#0d3d3d] dark:text-[#d2f1ff]">Participants</h2>
                     <div class="space-y-2.5 sm:space-y-3">
                         <div class="flex items-center gap-2.5 sm:gap-3">
                             <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-full grid place-items-center text-xs sm:text-sm font-bold text-white bg-gradient-to-br from-[#1A9998] to-[#155665] shrink-0">
@@ -115,7 +115,7 @@
                             </div>
                             <div class="flex-1 min-w-0">
                                 <p class="text-xs sm:text-sm font-bold truncate text-[#0d3d3d] dark:text-[#d2f1ff]">{{ $session->mentor->name }}</p>
-                                <p class="text-[10px] sm:text-xs text-[#155665]/50 dark:text-[#7ec8e3]/50">মেন্টর · Host</p>
+                                <p class="text-[10px] sm:text-xs text-[#155665]/50 dark:text-[#7ec8e3]/50">Mentor · Host</p>
                             </div>
                             <span class="w-2 h-2 rounded-full bg-green-400 shrink-0"></span>
                         </div>
@@ -125,7 +125,7 @@
                             </div>
                             <div class="flex-1 min-w-0">
                                 <p class="text-xs sm:text-sm font-bold truncate text-[#0d3d3d] dark:text-[#d2f1ff]">{{ $session->student->name }}</p>
-                                <p class="text-[10px] sm:text-xs text-[#155665]/50 dark:text-[#7ec8e3]/50">শিক্ষার্থী</p>
+                                <p class="text-[10px] sm:text-xs text-[#155665]/50 dark:text-[#7ec8e3]/50">Student</p>
                             </div>
                             <span class="w-2 h-2 rounded-full bg-green-400 shrink-0"></span>
                         </div>
@@ -159,9 +159,9 @@
                         </svg>
                     </div>
                     <div>
-                        <h2 class="text-base sm:text-xl font-bold text-[#0d3d3d] dark:text-[#d2f1ff]">সেশন কেমন ছিল?</h2>
+                        <h2 class="text-base sm:text-xl font-bold text-[#0d3d3d] dark:text-[#d2f1ff]">How was the session?</h2>
                         <p class="text-xs sm:text-sm text-[#155665]/60 dark:text-[#7ec8e3]/60 mt-0.5">
-                            {{ $session->mentor->name }}-কে রিভিউ দিন
+                            Leave a review for {{ $session->mentor->name }}
                         </p>
                     </div>
                 </div>
@@ -194,7 +194,7 @@
                     {{-- Star Rating --}}
                     <div>
                         <label class="block text-xs sm:text-sm font-bold mb-2 sm:mb-3 text-[#155665] dark:text-[#7ec8e3]">
-                            রেটিং দিন <span class="text-red-400">*</span>
+                            Give a rating <span class="text-red-400">*</span>
                         </label>
                         <div class="flex items-center justify-center sm:justify-start gap-1.5 sm:gap-2" id="starRating">
                             @for($i = 1; $i <= 5; $i++)
@@ -214,14 +214,14 @@
                     {{-- Comment --}}
                     <div>
                         <label class="block text-xs sm:text-sm font-bold mb-1.5 sm:mb-2 text-[#155665] dark:text-[#7ec8e3]">
-                            মন্তব্য
-                            <span class="font-normal text-[#155665]/50 dark:text-[#7ec8e3]/50">(ঐচ্ছিক)</span>
+                            Comment
+                            <span class="font-normal text-[#155665]/50 dark:text-[#7ec8e3]/50">(Optional)</span>
                         </label>
                         <textarea
                             name="comment"
                             rows="3"
                             maxlength="1000"
-                            placeholder="আপনার অভিজ্ঞতা সম্পর্কে লিখুন..."
+                            placeholder="Write about your experience..."
                             class="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 text-xs sm:text-sm rounded-xl sm:rounded-2xl resize-none focus:outline-none focus:ring-2 focus:ring-[#1a9998]/40
                                    bg-[#f7fdfd] dark:bg-[#122333]
                                    text-[#2d6e6e] dark:text-[#d2f1ff]
@@ -237,7 +237,7 @@
                                    border border-[#1a9998]/30 dark:border-[#4db6c1]/30
                                    text-[#155665]/70 dark:text-[#7ec8e3]/70
                                    hover:bg-[#1a9998]/5 dark:hover:bg-[#4db6c1]/5">
-                            এড়িয়ে যান
+                            Skip
                         </button>
                         <button type="submit"
                             class="flex-1 flex items-center justify-center gap-2 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl text-xs sm:text-sm font-bold
@@ -247,7 +247,7 @@
                             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.173c.969 0 1.371 1.24.588 1.81l-3.376 2.454a1 1 0 00-.364 1.118l1.286 3.967c.3.921-.755 1.688-1.54 1.118l-3.376-2.454a1 1 0 00-1.176 0l-3.376 2.454c-.784.57-1.838-.197-1.539-1.118l1.285-3.967a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.173a1 1 0 00.95-.69l1.287-3.967z" />
                             </svg>
-                            রিভিউ সাবমিট করুন
+                            Submit Review
                         </button>
                     </div>
                 </form>
@@ -261,7 +261,7 @@
         const stars     = document.querySelectorAll('#starRating label');
         const inputs    = document.querySelectorAll('#starRating input');
         const ratingLbl = document.getElementById('ratingLabel');
-        const labels    = ['', 'খুব খারাপ 😞', 'খারাপ 😕', 'ঠিক আছে 😐', 'ভালো 😊', 'অসাধারণ! 🤩'];
+        const labels    = ['', 'Very Bad 😞', 'Bad 😕', 'Okay 😐', 'Good 😊', 'Awesome! 🤩'];
 
         function paintStars(count) {
             stars.forEach((star, i) => {

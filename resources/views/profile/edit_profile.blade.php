@@ -19,10 +19,10 @@
                            bg-linear-to-br from-[#28666e] via-[#033f63] to-[#7c9885]
                            dark:from-[#4db6c1] dark:via-[#7ec8e3] dark:to-[#9ab8a5]
                            bg-clip-text text-transparent" style="font-family:'Lora',serif;">
-                    প্রোফাইল আপডেট করুন
+                    Update Profile
                 </h1>
                 <p class="text-xs sm:text-sm text-[#033f63]/55 dark:text-[#7ec8e3]/50">
-                    আপনার তথ্য হালনাগাদ করুন এবং প্রোফাইল সম্পূর্ণ করুন
+                    Update your information and complete your profile
                 </p>
             </div>
 
@@ -35,7 +35,7 @@
                 <div class="p-4 sm:p-8 lg:p-10">
                     @if ($errors->any())
                         <div class="mb-6 p-4 rounded-xl" style="background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2);">
-                            <div class="text-sm text-red-500 font-bold mb-2">অনুগ্রহ করে নিচের ভুলগুলো সংশোধন করুন:</div>
+                            <div class="text-sm text-red-500 font-bold mb-2">Please correct the following errors:</div>
                             <ul class="text-sm text-red-500 list-disc list-inside">
                                 @foreach ($errors->all() as $error)
                                     <li>{{ $error }}</li>
@@ -57,7 +57,7 @@
                                             dark:from-[#4db6c1] dark:to-[#9ab8a5]"></div>
                                 <h2 class="text-base sm:text-lg font-bold flex items-center gap-2
                                            text-[#033f63] dark:text-[#7ec8e3]" style="font-family:'Lora',serif;">
-                                    ব্যক্তিগত তথ্য
+                                    Personal Information
                                 </h2>
                             </div>
 
@@ -65,7 +65,7 @@
                                 <div>
                                     <label class="flex items-center gap-1.5 text-xs sm:text-sm font-bold mb-1.5
                                                   text-[#033f63] dark:text-[#7ec8e3]">
-                                        নাম
+                                        Name
                                     </label>
                                     <input type="text" name="name" class="w-full px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs sm:text-sm outline-none
                                                border-[1.5px] border-[#28666e]/20 dark:border-[#4db6c1]/20
@@ -75,7 +75,7 @@
                                                focus:border-[#28666e] dark:focus:border-[#4db6c1]
                                                focus:ring-[3px] focus:ring-[#28666e]/10 dark:focus:ring-[#4db6c1]/10
                                                focus:bg-white dark:focus:bg-[#243d4d]
-                                               transition-all duration-200" placeholder="সম্পূর্ণ নাম দিন"
+                                               transition-all duration-200" placeholder="Enter full name"
                                          value="{{ old('name', Auth::user()->name) }}" />
                                 </div>
 
@@ -86,10 +86,10 @@
                                 <label class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-0.5 sm:gap-1.5 mb-1.5">
                                     <span class="flex items-center gap-1.5 text-xs sm:text-sm font-bold
                                                  text-[#033f63] dark:text-[#7ec8e3]">
-                                        ছোট বায়ো (হেডলাইন)
+                                        Short Bio (Headline)
                                     </span>
                                     <span class="text-[10px] sm:text-xs text-[#033f63]/45 dark:text-[#7ec8e3]/40">
-                                        প্রোফাইল নামের নিচে দেখানোর জন্য (১-২ লাইন)
+                                        To show below profile name (1-2 lines)
                                     </span>
                                 </label>
                                 <textarea name="short_bio" rows="2" class="w-full px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs sm:text-sm outline-none resize-none
@@ -101,7 +101,7 @@
                                            focus:ring-[3px] focus:ring-[#28666e]/10 dark:focus:ring-[#4db6c1]/10
                                            focus:bg-white dark:focus:bg-[#243d4d]
                                            transition-all duration-200"
-                                    placeholder="আপনার শর্ট বায়ো/পেশা লিখুন">{{ old('short_bio', Auth::user()->profile?->short_bio) }}</textarea>
+                                    placeholder="Write your short bio/profession">{{ old('short_bio', Auth::user()->profile?->short_bio) }}</textarea>
                             </div>
                             @endif
 
@@ -112,10 +112,10 @@
                                 <label class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-0.5 sm:gap-1.5 mb-1.5">
                                     <span class="flex items-center gap-1.5 text-xs sm:text-sm font-bold
                                                  text-[#033f63] dark:text-[#7ec8e3]">
-                                        বিস্তারিত বায়ো
+                                        Detailed Bio
                                     </span>
                                     <span class="text-[10px] sm:text-xs text-[#033f63]/45 dark:text-[#7ec8e3]/40">
-                                        আপনার অভিজ্ঞতা ও দক্ষতা সম্পর্কে বিস্তারিত লিখুন
+                                        Write in detail about your experience and skills
                                     </span>
                                 </label>
                                 <textarea name="bio" rows="4" class="w-full px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs sm:text-sm outline-none resize-none
@@ -127,7 +127,7 @@
                                            focus:ring-[3px] focus:ring-[#28666e]/10 dark:focus:ring-[#4db6c1]/10
                                            focus:bg-white dark:focus:bg-[#243d4d]
                                            transition-all duration-200"
-                                    placeholder="নিজের সম্পর্কে বিস্তারিত লিখুন">{{ old('bio', Auth::user()->profile?->bio) }}</textarea>
+                                    placeholder="Write in detail about yourself">{{ old('bio', Auth::user()->profile?->bio) }}</textarea>
                             </div>
                             @endif
 
@@ -138,27 +138,27 @@
                                  <div>
                                      <label class="flex items-center gap-1.5 text-xs sm:text-sm font-bold mb-2
                                                    text-[#033f63] dark:text-[#7ec8e3]">
-                                         পড়ানোর ক্ষেত্রে কোন মাধ্যমটি আপনার জন্য সহজ ও সুবিধাজনক?
+                                         Which medium is easy and convenient for you to teach?
                                      </label>
                                      <div class="space-y-1.5 pl-2 sm:pl-5">
                                          @php
                                              $selectedMedium = old('preferred_teaching_medium', Auth::user()->profile?->preferred_teaching_medium);
                                          @endphp
                                          <label class="flex items-center gap-2 cursor-pointer">
-                                             <input type="radio" name="preferred_teaching_medium" value="ডিজিটাল কন্টেন্ট (স্লাইড/প্রেজেন্টেশন)" class="w-3.5 h-3.5 text-[#28666e] focus:ring-[#28666e]" {{ $selectedMedium === 'ডিজিটাল কন্টেন্ট (স্লাইড/প্রেজেন্টেশন)' ? 'checked' : '' }}>
-                                             <span class="text-xs sm:text-sm text-[#033f63] dark:text-[#7ec8e3]">ডিজিটাল কন্টেন্ট (স্লাইড/প্রেজেন্টেশন)</span>
+                                             <input type="radio" name="preferred_teaching_medium" value="Digital Content (Slide/Presentation)" class="w-3.5 h-3.5 text-[#28666e] focus:ring-[#28666e]" {{ $selectedMedium === 'Digital Content (Slide/Presentation)' || $selectedMedium === 'ডিজিটাল কন্টেন্ট (স্লাইড/প্রেজেন্টেশন)' ? 'checked' : '' }}>
+                                             <span class="text-xs sm:text-sm text-[#033f63] dark:text-[#7ec8e3]">Digital Content (Slide/Presentation)</span>
                                          </label>
                                          <label class="flex items-center gap-2 cursor-pointer">
-                                             <input type="radio" name="preferred_teaching_medium" value="হাতে লেখা/বোর্ডে বুঝানো" class="w-3.5 h-3.5 text-[#28666e] focus:ring-[#28666e]" {{ $selectedMedium === 'হাতে লেখা/বোর্ডে বুঝানো' ? 'checked' : '' }}>
-                                             <span class="text-xs sm:text-sm text-[#033f63] dark:text-[#7ec8e3]">হাতে লেখা/বোর্ডে বুঝানো</span>
+                                             <input type="radio" name="preferred_teaching_medium" value="Handwritten/Whiteboard" class="w-3.5 h-3.5 text-[#28666e] focus:ring-[#28666e]" {{ $selectedMedium === 'Handwritten/Whiteboard' || $selectedMedium === 'হাতে লেখা/বোর্ডে বুঝানো' ? 'checked' : '' }}>
+                                             <span class="text-xs sm:text-sm text-[#033f63] dark:text-[#7ec8e3]">Handwritten/Whiteboard</span>
                                          </label>
                                          <label class="flex items-center gap-2 cursor-pointer">
-                                             <input type="radio" name="preferred_teaching_medium" value="দুটোর মিশ্রণ (ডিজিটাল + হাতে লেখা)" class="w-3.5 h-3.5 text-[#28666e] focus:ring-[#28666e]" {{ $selectedMedium === 'দুটোর মিশ্রণ (ডিজিটাল + হাতে লেখা)' ? 'checked' : '' }}>
-                                             <span class="text-xs sm:text-sm text-[#033f63] dark:text-[#7ec8e3]">দুটোর মিশ্রণ (ডিজিটাল + হাতে লেখা)</span>
+                                             <input type="radio" name="preferred_teaching_medium" value="Mixture of both (Digital + Handwritten)" class="w-3.5 h-3.5 text-[#28666e] focus:ring-[#28666e]" {{ $selectedMedium === 'Mixture of both (Digital + Handwritten)' || $selectedMedium === 'দুটোর মিশ্রণ (ডিজিটাল + হাতে লেখা)' ? 'checked' : '' }}>
+                                             <span class="text-xs sm:text-sm text-[#033f63] dark:text-[#7ec8e3]">Mixture of both (Digital + Handwritten)</span>
                                          </label>
                                          <label class="flex items-center gap-2 cursor-pointer">
-                                             <input type="radio" name="preferred_teaching_medium" value="(ঐচ্ছিক) নির্দিষ্ট কোনো পছন্দ নেই" class="w-3.5 h-3.5 text-[#28666e] focus:ring-[#28666e]" {{ $selectedMedium === '(ঐচ্ছিক) নির্দিষ্ট কোনো পছন্দ নেই' ? 'checked' : '' }}>
-                                             <span class="text-xs sm:text-sm text-[#033f63] dark:text-[#7ec8e3]">(ঐচ্ছিক) নির্দিষ্ট কোনো পছন্দ নেই</span>
+                                             <input type="radio" name="preferred_teaching_medium" value="(Optional) No specific preference" class="w-3.5 h-3.5 text-[#28666e] focus:ring-[#28666e]" {{ $selectedMedium === '(Optional) No specific preference' || $selectedMedium === '(ঐচ্ছিক) নির্দিষ্ট কোনো পছন্দ নেই' ? 'checked' : '' }}>
+                                             <span class="text-xs sm:text-sm text-[#033f63] dark:text-[#7ec8e3]">(Optional) No specific preference</span>
                                          </label>
                                      </div>
                                  </div>
@@ -167,23 +167,23 @@
                                  <div>
                                      <label class="flex items-center gap-1.5 text-xs sm:text-sm font-bold mb-2
                                                    text-[#033f63] dark:text-[#7ec8e3]">
-                                         পড়ানোর সময় কোন ভাষায় আপনি স্বাচ্ছন্দ্য বোধ করেন?
+                                         Which language do you prefer to teach in?
                                      </label>
                                      <div class="space-y-1.5 pl-2 sm:pl-5">
                                          @php
                                              $selectedLanguage = old('preferred_language', Auth::user()->profile?->preferred_language);
                                          @endphp
                                          <label class="flex items-center gap-2 cursor-pointer">
-                                             <input type="radio" name="preferred_language" value="বাংলা" class="w-3.5 h-3.5 text-[#28666e] focus:ring-[#28666e]" {{ $selectedLanguage === 'বাংলা' ? 'checked' : '' }}>
-                                             <span class="text-xs sm:text-sm text-[#033f63] dark:text-[#7ec8e3]">বাংলা</span>
+                                             <input type="radio" name="preferred_language" value="Bengali" class="w-3.5 h-3.5 text-[#28666e] focus:ring-[#28666e]" {{ $selectedLanguage === 'Bengali' || $selectedLanguage === 'বাংলা' ? 'checked' : '' }}>
+                                             <span class="text-xs sm:text-sm text-[#033f63] dark:text-[#7ec8e3]">Bengali</span>
                                          </label>
                                          <label class="flex items-center gap-2 cursor-pointer">
-                                             <input type="radio" name="preferred_language" value="ইংরেজি" class="w-3.5 h-3.5 text-[#28666e] focus:ring-[#28666e]" {{ $selectedLanguage === 'ইংরেজি' ? 'checked' : '' }}>
-                                             <span class="text-xs sm:text-sm text-[#033f63] dark:text-[#7ec8e3]">ইংরেজি</span>
+                                             <input type="radio" name="preferred_language" value="English" class="w-3.5 h-3.5 text-[#28666e] focus:ring-[#28666e]" {{ $selectedLanguage === 'English' ? 'checked' : '' }}>
+                                             <span class="text-xs sm:text-sm text-[#033f63] dark:text-[#7ec8e3]">English</span>
                                          </label>
                                          <label class="flex items-center gap-2 cursor-pointer">
-                                             <input type="radio" name="preferred_language" value="বাংলা-ইংরেজি মিশ্রিত" class="w-3.5 h-3.5 text-[#28666e] focus:ring-[#28666e]" {{ $selectedLanguage === 'বাংলা-ইংরেজি মিশ্রিত' ? 'checked' : '' }}>
-                                             <span class="text-xs sm:text-sm text-[#033f63] dark:text-[#7ec8e3]">বাংলা-ইংরেজি মিশ্রিত</span>
+                                             <input type="radio" name="preferred_language" value="Bengali-English Mixed" class="w-3.5 h-3.5 text-[#28666e] focus:ring-[#28666e]" {{ $selectedLanguage === 'Bengali-English Mixed' ? 'checked' : '' }}>
+                                             <span class="text-xs sm:text-sm text-[#033f63] dark:text-[#7ec8e3]">Bengali-English Mixed</span>
                                          </label>
                                      </div>
                                  </div>
@@ -193,10 +193,10 @@
                                  <label class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-0.5 sm:gap-1.5 mb-1.5">
                                      <span class="flex items-center gap-1.5 text-xs sm:text-sm font-bold
                                                   text-[#033f63] dark:text-[#7ec8e3]">
-                                         আপনি কীভাবে শিখতে স্বাচ্ছন্দ্যবোধ করেন?
+                                         How do you prefer to learn?
                                      </span>
                                      <span class="text-[10px] sm:text-xs text-[#033f63]/45 dark:text-[#7ec8e3]/40">
-                                         এই তথ্য মেন্টরকে আপনার জন্য সেশন প্ল্যান করতে সাহায্য করবে।
+                                         This information will help the mentor plan the session for you.
                                      </span>
                                  </label>
                                  <textarea name="learning_style" rows="4" class="w-full px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs sm:text-sm outline-none resize-none
@@ -208,7 +208,7 @@
                                             focus:ring-[3px] focus:ring-[#28666e]/10 dark:focus:ring-[#4db6c1]/10
                                             focus:bg-white dark:focus:bg-[#243d4d]
                                             transition-all duration-200"
-                                     placeholder="আপনি কীভাবে সহজে বোঝেন এবং মেন্টরের পড়ানোর ধরণ কেমন হলে সুবিধা হবে তা লিখুন। যেমন: 'আমার বেসিক একটু দুর্বল, তাই শুরু থেকে ধরে ধরে বোঝালে ভালো হয়। একটু সময় নিয়ে বুঝি, তাড়াহুড়া না করলে খুশি হবো।' কিংবা 'আমি একটু ইঙ্গিত পেলেই বুঝে ফেলতে পারি, সহজ বিষয়গুলো দ্রুতগতিতে বুঝিয়ে দিলেও আমার কোনো সমস্যা হয় না।'">{{ old('learning_style', Auth::user()->profile?->learning_style) }}</textarea>
+                                     placeholder="Write how you easily understand and what teaching style from the mentor would be beneficial. e.g: 'My basics are a bit weak, so starting from scratch would be good.' or 'I can grasp concepts with small hints, so explaining easy topics fast is fine.'">{{ old('learning_style', Auth::user()->profile?->learning_style) }}</textarea>
                              </div>
                              @endif
                         </div>
@@ -223,7 +223,7 @@
                                             dark:from-[#4db6c1] dark:to-[#9ab8a5]"></div>
                                 <h2 class="text-base sm:text-lg font-bold flex items-center gap-2
                                            text-[#033f63] dark:text-[#7ec8e3]" style="font-family:'Lora',serif;">
-                                    শিক্ষা ও পেশাগত তথ্য
+                                    Education & Professional Information
                                 </h2>
                             </div>
                             @endif
@@ -234,7 +234,7 @@
                                 <div>
                                     <label class="flex items-center gap-1.5 text-xs sm:text-sm font-bold mb-1.5
                                                   text-[#033f63] dark:text-[#7ec8e3]">
-                                        শিক্ষাগত যোগ্যতা
+                                        Educational Qualification
                                     </label>
                                     <input type="text" name="highgest_education_level" class="w-full px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs sm:text-sm outline-none
                                                border-[1.5px] border-[#28666e]/20 dark:border-[#4db6c1]/20
@@ -244,7 +244,7 @@
                                                focus:border-[#3d8a8f] dark:focus:border-[#4db6c1]
                                                focus:ring-[3px] focus:ring-[#3d8a8f]/10 dark:focus:ring-[#4db6c1]/10
                                                focus:bg-white dark:focus:bg-[#243d4d]
-                                               transition-all duration-200" placeholder="সর্বোচ্চ শিক্ষাগত যোগ্যতা"
+                                               transition-all duration-200" placeholder="Highest Educational Qualification"
                                         value="{{ old('highgest_education_level', Auth::user()->profile?->highgest_education_level) }}" />
                                 </div>
 
@@ -252,7 +252,7 @@
                                 <div>
                                     <label class="flex items-center gap-1.5 text-xs sm:text-sm font-bold mb-1.5
                                                   text-[#033f63] dark:text-[#7ec8e3]">
-                                        শিক্ষাপ্রতিষ্ঠানের নাম
+                                        Institution Name
                                     </label>
                                     <input type="text" name="institution_name" class="w-full px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs sm:text-sm outline-none
                                                border-[1.5px] border-[#28666e]/20 dark:border-[#4db6c1]/20
@@ -262,7 +262,7 @@
                                                focus:border-[#3d8a8f] dark:focus:border-[#4db6c1]
                                                focus:ring-[3px] focus:ring-[#3d8a8f]/10 dark:focus:ring-[#4db6c1]/10
                                                focus:bg-white dark:focus:bg-[#243d4d]
-                                               transition-all duration-200" placeholder="শিক্ষাপ্রতিষ্ঠানের নাম"
+                                               transition-all duration-200" placeholder="Institution Name"
                                         value="{{ old('institution_name', Auth::user()->profile?->institution_name) }}" />
                                 </div>
 
@@ -270,7 +270,7 @@
                                 <div class="lg:col-span-2">
                                     <label class="flex items-center gap-1.5 text-xs sm:text-sm font-bold mb-1.5
                                                   text-[#033f63] dark:text-[#7ec8e3]">
-                                        অধ্যয়নের বিষয় (ডিপার্টমেন্ট)
+                                        Field of Study (Department)
                                     </label>
                                     <input type="text" name="department" class="w-full px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs sm:text-sm outline-none
                                                border-[1.5px] border-[#28666e]/20 dark:border-[#4db6c1]/20
@@ -280,7 +280,7 @@
                                                focus:border-[#3d8a8f] dark:focus:border-[#4db6c1]
                                                focus:ring-[3px] focus:ring-[#3d8a8f]/10 dark:focus:ring-[#4db6c1]/10
                                                focus:bg-white dark:focus:bg-[#243d4d]
-                                               transition-all duration-200" placeholder="যেমন: Computer Science"
+                                               transition-all duration-200" placeholder="e.g: Computer Science"
                                         value="{{ old('department', Auth::user()->profile?->department) }}" />
                                 </div>
 
@@ -289,7 +289,7 @@
                                 <div class="lg:col-span-2">
                                     <label class="flex items-center gap-1.5 text-xs sm:text-sm font-bold mb-2
                                                   text-[#033f63] dark:text-[#7ec8e3]">
-                                        শিক্ষকতার অভিজ্ঞতা
+                                        Teaching Experience
                                     </label>
                                     <div class="flex items-center gap-3 flex-wrap">
                                         {{-- Years --}}
@@ -302,10 +302,10 @@
                                                        focus:ring-[3px] focus:ring-[#28666e]/10 dark:focus:ring-[#4db6c1]/10
                                                        focus:bg-white dark:focus:bg-[#243d4d]
                                                        transition-all duration-200 cursor-pointer">
-                                                <option value="">-- বছর --</option>
+                                                <option value="">-- Years --</option>
                                                 @for($y = 0; $y <= 50; $y++)
                                                     <option value="{{ $y }}" {{ old('teaching_experience_years', Auth::user()->profile?->teaching_experience_years) == $y && old('teaching_experience_years', Auth::user()->profile?->teaching_experience_years) !== null ? 'selected' : '' }}>
-                                                        {{ $y }} বছর
+                                                        {{ $y }} Years
                                                     </option>
                                                 @endfor
                                             </select>
@@ -320,15 +320,15 @@
                                                        focus:ring-[3px] focus:ring-[#28666e]/10 dark:focus:ring-[#4db6c1]/10
                                                        focus:bg-white dark:focus:bg-[#243d4d]
                                                        transition-all duration-200 cursor-pointer">
-                                                <option value="">-- মাস --</option>
+                                                <option value="">-- Months --</option>
                                                 @for($m = 0; $m <= 11; $m++)
                                                     <option value="{{ $m }}" {{ old('teaching_experience_months', Auth::user()->profile?->teaching_experience_months) == $m && old('teaching_experience_months', Auth::user()->profile?->teaching_experience_months) !== null ? 'selected' : '' }}>
-                                                        {{ $m }} মাস
+                                                        {{ $m }} Months
                                                     </option>
                                                 @endfor
                                             </select>
                                         </div>
-                                        <p class="text-[10px] sm:text-xs text-[#033f63]/45 dark:text-[#7ec8e3]/40">যেমন: ২ বছর ৬ মাস</p>
+                                        <p class="text-[10px] sm:text-xs text-[#033f63]/45 dark:text-[#7ec8e3]/40">e.g: 2 Years 6 Months</p>
                                     </div>
                                 </div>
                                 @endif
@@ -339,7 +339,7 @@
                                 <div class="lg:col-span-2">
                                     <label class="flex items-center gap-1.5 text-xs sm:text-sm font-bold mb-1.5
                                                   text-[#033f63] dark:text-[#7ec8e3]">
-                                        ঘণ্টা প্রতি চার্জ (৳)
+                                        Hourly Rate (৳)
                                     </label>
                                     <input type="number" name="hourly_rate" class="w-full px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs sm:text-sm outline-none
                                                border-[1.5px] border-[#28666e]/20 dark:border-[#4db6c1]/20
@@ -349,7 +349,7 @@
                                                focus:border-green-500 dark:focus:border-green-400
                                                focus:ring-[3px] focus:ring-green-500/10 dark:focus:ring-green-400/10
                                                focus:bg-white dark:focus:bg-[#243d4d]
-                                               transition-all duration-200" placeholder="ঘণ্টা প্রতি চার্জ এন্ট্রি দিন"
+                                               transition-all duration-200" placeholder="Enter hourly rate"
                                         value="{{ old('hourly_rate', Auth::user()->profile?->hourly_rate) }}" />
                                 </div>
                                 @endif
@@ -362,10 +362,10 @@
                                 <label class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-0.5 sm:gap-1.5 mb-1.5">
                                     <span class="flex items-center gap-1.5 text-xs sm:text-sm font-bold
                                                  text-[#033f63] dark:text-[#7ec8e3]">
-                                        দক্ষতাসমূহ
+                                        Skills
                                     </span>
                                     <span class="text-[10px] sm:text-xs text-[#033f63]/45 dark:text-[#7ec8e3]/40">
-                                        কমা দিয়ে আলাদা করুন
+                                        Separate with commas
                                     </span>
                                 </label>
                                 <textarea name="skills" rows="3" class="w-full px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs sm:text-sm outline-none resize-none
@@ -377,7 +377,7 @@
                                            focus:ring-[3px] focus:ring-[#7c9885]/12 dark:focus:ring-[#9ab8a5]/10
                                            focus:bg-white dark:focus:bg-[#243d4d]
                                            transition-all duration-200"
-                                    placeholder="যেমন: Compiler Design, Algorithm, Data Structures">{{ old('skills', Auth::user()->profile?->skills) }}</textarea>
+                                    placeholder="e.g: Compiler Design, Algorithm, Data Structures">{{ old('skills', Auth::user()->profile?->skills) }}</textarea>
                                 <p class="mt-1.5 text-xs flex items-center gap-1
                                           text-[#033f63]/40 dark:text-[#7ec8e3]/35">
                                     <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke-width="2"
@@ -385,7 +385,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
                                     </svg>
-                                    প্রতিটি দক্ষতার মাঝে কমা (,) ব্যবহার করুন
+                                    Use comma (,) between each skill
                                 </p>
                             </div>
 
@@ -393,23 +393,23 @@
                             <div class="mt-4">
                                 <label class="flex items-center gap-1.5 text-xs sm:text-sm font-bold mb-2
                                               text-[#033f63] dark:text-[#7ec8e3]">
-                                    আপনি কোন ভাষায় পড়াতে স্বাচ্ছন্দ্য বোধ করেন?
+                                    Which language do you prefer to teach in?
                                 </label>
                                 <div class="flex gap-4 pl-1 flex-wrap">
                                     @php
                                         $selectedLanguage = old('preferred_language', Auth::user()->profile?->preferred_language);
                                     @endphp
                                     <label class="flex items-center gap-2 cursor-pointer">
-                                        <input type="radio" name="preferred_language" value="বাংলা" class="w-3.5 h-3.5 text-[#28666e] focus:ring-[#28666e]" {{ $selectedLanguage === 'বাংলা' ? 'checked' : '' }}>
-                                        <span class="text-xs sm:text-sm text-[#033f63] dark:text-[#7ec8e3]">বাংলা</span>
+                                        <input type="radio" name="preferred_language" value="Bengali" class="w-3.5 h-3.5 text-[#28666e] focus:ring-[#28666e]" {{ $selectedLanguage === 'Bengali' || $selectedLanguage === 'বাংলা' ? 'checked' : '' }}>
+                                        <span class="text-xs sm:text-sm text-[#033f63] dark:text-[#7ec8e3]">Bengali</span>
                                     </label>
                                     <label class="flex items-center gap-2 cursor-pointer">
-                                        <input type="radio" name="preferred_language" value="ইংরেজি" class="w-3.5 h-3.5 text-[#28666e] focus:ring-[#28666e]" {{ $selectedLanguage === 'ইংরেজি' ? 'checked' : '' }}>
-                                        <span class="text-xs sm:text-sm text-[#033f63] dark:text-[#7ec8e3]">ইংরেজি</span>
+                                        <input type="radio" name="preferred_language" value="English" class="w-3.5 h-3.5 text-[#28666e] focus:ring-[#28666e]" {{ $selectedLanguage === 'English' || $selectedLanguage === 'ইংরেজি' ? 'checked' : '' }}>
+                                        <span class="text-xs sm:text-sm text-[#033f63] dark:text-[#7ec8e3]">English</span>
                                     </label>
                                     <label class="flex items-center gap-2 cursor-pointer">
-                                        <input type="radio" name="preferred_language" value="বাংলা-ইংরেজি মিশ্রিত" class="w-3.5 h-3.5 text-[#28666e] focus:ring-[#28666e]" {{ $selectedLanguage === 'বাংলা-ইংরেজি মিশ্রিত' ? 'checked' : '' }}>
-                                        <span class="text-xs sm:text-sm text-[#033f63] dark:text-[#7ec8e3]">বাংলা-ইংরেজি মিশ্রিত</span>
+                                        <input type="radio" name="preferred_language" value="Bengali-English Mixed" class="w-3.5 h-3.5 text-[#28666e] focus:ring-[#28666e]" {{ $selectedLanguage === 'Bengali-English Mixed' || $selectedLanguage === 'বাংলা-ইংরেজি মিশ্রিত' ? 'checked' : '' }}>
+                                        <span class="text-xs sm:text-sm text-[#033f63] dark:text-[#7ec8e3]">Bengali-English Mixed</span>
                                     </label>
                                 </div>
                             </div>
@@ -426,7 +426,7 @@
                                             dark:from-[#4db6c1] dark:to-[#9ab8a5]"></div>
                                 <h2 class="text-base sm:text-lg font-bold flex items-center gap-2
                                            text-[#033f63] dark:text-[#7ec8e3]" style="font-family:'Lora',serif;">
-                                    নথিপত্র (Documents)
+                                    Documents
                                 </h2>
                             </div>
 
@@ -435,7 +435,7 @@
                                 <div>
                                     <label class="flex items-center gap-1.5 text-xs sm:text-sm font-bold mb-1.5
                                                   text-[#033f63] dark:text-[#7ec8e3]">
-                                        ন্যাশনাল আইডি (NID) - সামনের অংশ
+                                        National ID (NID) - Front
                                     </label>
                                     <input type="file" name="nid_front" accept="image/*" class="w-full px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs sm:text-sm outline-none
                                                border-[1.5px] border-[#28666e]/20 dark:border-[#4db6c1]/20
@@ -446,10 +446,10 @@
                                                transition-all duration-200" {{ Auth::user()->role === \App\Enums\UserRole::Student ? 'disabled' : '' }} />
                                     @if(Auth::user()->profile && Auth::user()->profile->nid_front)
                                         <div class="mt-2 flex items-center justify-between">
-                                            <p class="text-[10px] sm:text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded-md">আপলোড করা আছে।</p>
+                                            <p class="text-[10px] sm:text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded-md">Uploaded.</p>
                                             <label class="flex items-center gap-1.5 cursor-pointer group">
                                                 <input type="checkbox" name="remove_nid_front" value="1" class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-red-500 border-red-200 rounded focus:ring-red-500">
-                                                <span class="text-[10px] sm:text-xs text-red-500 group-hover:text-red-600 transition-colors">ছবি মুছে ফেলুন</span>
+                                                <span class="text-[10px] sm:text-xs text-red-500 group-hover:text-red-600 transition-colors">Remove Image</span>
                                             </label>
                                         </div>
                                     @endif
@@ -459,7 +459,7 @@
                                 <div>
                                     <label class="flex items-center gap-1.5 text-xs sm:text-sm font-bold mb-1.5
                                                   text-[#033f63] dark:text-[#7ec8e3]">
-                                        ন্যাশনাল আইডি (NID) - পিছনের অংশ
+                                        National ID (NID) - Back
                                     </label>
                                     <input type="file" name="nid_back" accept="image/*" class="w-full px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs sm:text-sm outline-none
                                                border-[1.5px] border-[#28666e]/20 dark:border-[#4db6c1]/20
@@ -470,10 +470,10 @@
                                                transition-all duration-200" {{ Auth::user()->role === \App\Enums\UserRole::Student ? 'disabled' : '' }} />
                                     @if(Auth::user()->profile && Auth::user()->profile->nid_back)
                                         <div class="mt-2 flex items-center justify-between">
-                                            <p class="text-[10px] sm:text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded-md">আপলোড করা আছে।</p>
+                                            <p class="text-[10px] sm:text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded-md">Uploaded.</p>
                                             <label class="flex items-center gap-1.5 cursor-pointer group">
                                                 <input type="checkbox" name="remove_nid_back" value="1" class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-red-500 border-red-200 rounded focus:ring-red-500">
-                                                <span class="text-[10px] sm:text-xs text-red-500 group-hover:text-red-600 transition-colors">ছবি মুছে ফেলুন</span>
+                                                <span class="text-[10px] sm:text-xs text-red-500 group-hover:text-red-600 transition-colors">Remove Image</span>
                                             </label>
                                         </div>
                                     @endif
@@ -488,7 +488,7 @@
                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                 d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z" />
                                         </svg>
-                                        স্টুডেন্ট আইডি - সামনের অংশ
+                                        Student ID - Front
                                     </label>
                                     <input type="file" name="student_id_front" accept="image/*" class="w-full px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs sm:text-sm outline-none
                                                border-[1.5px] border-[#28666e]/20 dark:border-[#4db6c1]/20
@@ -499,10 +499,10 @@
                                                transition-all duration-200" />
                                     @if(Auth::user()->profile && Auth::user()->profile->student_id_front)
                                         <div class="mt-2 flex items-center justify-between">
-                                            <p class="text-[10px] sm:text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded-md">আপলোড করা আছে।</p>
+                                            <p class="text-[10px] sm:text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded-md">Uploaded.</p>
                                             <label class="flex items-center gap-1.5 cursor-pointer group">
                                                 <input type="checkbox" name="remove_student_id_front" value="1" class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-red-500 border-red-200 rounded focus:ring-red-500">
-                                                <span class="text-[10px] sm:text-xs text-red-500 group-hover:text-red-600 transition-colors">ছবি মুছে ফেলুন</span>
+                                                <span class="text-[10px] sm:text-xs text-red-500 group-hover:text-red-600 transition-colors">Remove Image</span>
                                             </label>
                                         </div>
                                     @endif
@@ -517,7 +517,7 @@
                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                 d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z" />
                                         </svg>
-                                        স্টুডেন্ট আইডি - পিছনের অংশ
+                                        Student ID - Back
                                     </label>
                                     <input type="file" name="student_id_back" accept="image/*" class="w-full px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs sm:text-sm outline-none
                                                border-[1.5px] border-[#28666e]/20 dark:border-[#4db6c1]/20
@@ -528,10 +528,10 @@
                                                transition-all duration-200" />
                                     @if(Auth::user()->profile && Auth::user()->profile->student_id_back)
                                         <div class="mt-2 flex items-center justify-between">
-                                            <p class="text-[10px] sm:text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded-md">আপলোড করা আছে।</p>
+                                            <p class="text-[10px] sm:text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded-md">Uploaded.</p>
                                             <label class="flex items-center gap-1.5 cursor-pointer group">
                                                 <input type="checkbox" name="remove_student_id_back" value="1" class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-red-500 border-red-200 rounded focus:ring-red-500">
-                                                <span class="text-[10px] sm:text-xs text-red-500 group-hover:text-red-600 transition-colors">ছবি মুছে ফেলুন</span>
+                                                <span class="text-[10px] sm:text-xs text-red-500 group-hover:text-red-600 transition-colors">Remove Image</span>
                                             </label>
                                         </div>
                                     @endif
@@ -558,7 +558,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
-                                আপডেট করুন
+                                Update
                             </button>
                             <a href="{{ route('mentors') }}" class="flex-1 flex items-center justify-center gap-2
                                        px-3.5 py-2.5 rounded-xl
@@ -574,7 +574,7 @@
                                     stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                                 </svg>
-                                বাতিল করুন
+                                Cancel
                             </a>
                         </div>
 
@@ -591,7 +591,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
                     </svg>
-                    সকল তথ্য সঠিকভাবে পূরণ করুন
+                    Fill in all the information correctly
                 </span>
             </div>
 
