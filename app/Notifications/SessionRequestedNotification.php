@@ -36,15 +36,15 @@ class SessionRequestedNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->subject('নতুন সেশন অনুরোধ - ' . $this->session->topic)
-            ->greeting('হ্যালো ' . $notifiable->name . '!')
-            ->line($this->session->student->name . ' আপনার কাছে "' . $this->session->topic . '" বিষয়ে একটি সেশনের অনুরোধ পাঠিয়েছেন।')
-            ->line('নোট: ' . ($this->session->note ?? 'কোনো নোট নেই'))
-            ->line('মাধ্যম: ' . ($this->session->student->profile->preferred_teaching_medium ?? ' - '))
-            ->line('ভাষা: ' . ($this->session->student->profile->preferred_language ?? ' - '))
-            ->line('কীভাবে শিখতে স্বাচ্ছন্দ্যবোধ করেন: ' . ($this->session->student->profile->learning_style ?? 'দেওয়া হয়নি'))
-            ->action('অনুরোধ দেখুন', url('/dashboard/mentor'))
-            ->line('অনুগ্রহ করে দ্রুত সাড়া দিন।');
+            ->subject('New Session Request - ' . $this->session->topic)
+            ->greeting('Hello ' . $notifiable->name . '!')
+            ->line($this->session->student->name . ' has sent you a session request on "' . $this->session->topic . '".')
+            ->line('Note: ' . ($this->session->note ?? 'No notes'))
+            ->line('Medium: ' . ($this->session->student->profile->preferred_teaching_medium ?? ' - '))
+            ->line('Language: ' . ($this->session->student->profile->preferred_language ?? ' - '))
+            ->line('Learning Style: ' . ($this->session->student->profile->learning_style ?? 'Not provided'))
+            ->action('View Request', url('/dashboard/mentor'))
+            ->line('Please respond quickly.');
     }
 
     /**
@@ -56,7 +56,7 @@ class SessionRequestedNotification extends Notification
     {
         return [
             'type'        => 'session_requested',
-            'message'     => $this->session->student->name . ' "' . $this->session->topic . '" বিষয়ে সেশনের অনুরোধ করেছেন',
+            'message'     => $this->session->student->name . ' has requested a session on "' . $this->session->topic . '"',
             'session_id'  => $this->session->id,
             'student_id'  => $this->session->student_id,
             'student_name' => $this->session->student->name,

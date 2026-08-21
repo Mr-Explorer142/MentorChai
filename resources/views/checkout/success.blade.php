@@ -19,8 +19,8 @@
                     <div class="absolute inset-0 rounded-full blur-xl bg-[#1a9998]/15 dark:bg-[#4db6c1]/15"></div>
                 </div>
                 <div class="text-center space-y-1 sm:space-y-1.5">
-                    <p class="text-base sm:text-lg font-semibold text-[#0d3d3d] dark:text-[#d2f1ff]">পেমেন্ট প্রসেস করা হচ্ছে...</p>
-                    <p class="text-xs sm:text-sm text-[#155665]/60 dark:text-[#7ec8e3]/60">অনুগ্রহ করে অপেক্ষা করুন</p>
+                    <p class="text-base sm:text-lg font-semibold text-[#0d3d3d] dark:text-[#d2f1ff]">Processing payment...</p>
+                    <p class="text-xs sm:text-sm text-[#155665]/60 dark:text-[#7ec8e3]/60">Please wait</p>
                 </div>
             </div>
 
@@ -64,10 +64,10 @@
                             <h2 class="text-2xl sm:text-4xl font-extrabold bg-linear-to-br
                                        from-[#1A9998] to-[#155665] dark:from-[#4db6c1] dark:to-[#7ec8e3]
                                        bg-clip-text text-transparent">
-                                পেমেন্ট সফল!
+                                Payment Successful!
                             </h2>
                             <p class="text-xs sm:text-base font-medium text-[#4a7070] dark:text-[#7ec8e3]/80">
-                                আপনার লেনদেন সম্পূর্ণ হয়েছে 🎉
+                                Your transaction is complete 🎉
                             </p>
                         </div>
 
@@ -89,7 +89,7 @@
                                         </svg>
                                     </div>
                                     <span class="text-xs sm:text-sm font-medium text-[#155665]/70 dark:text-[#7ec8e3]/70">
-                                        পেমেন্ট মাধ্যম
+                                        Payment Method
                                     </span>
                                 </div>
                                 <span class="text-xs sm:text-sm font-bold text-[#0d3d3d] dark:text-[#d2f1ff]">
@@ -108,7 +108,7 @@
                                         </svg>
                                     </div>
                                     <span class="text-xs sm:text-sm font-medium text-[#155665]/70 dark:text-[#7ec8e3]/70">
-                                        পরিশোধিত পরিমাণ
+                                        Amount Paid
                                     </span>
                                 </div>
                                 <span class="text-lg sm:text-2xl font-extrabold text-[#1A9998] dark:text-[#4db6c1]">
@@ -127,7 +127,7 @@
                                         </svg>
                                     </div>
                                     <span class="text-xs sm:text-sm font-medium text-[#155665]/70 dark:text-[#7ec8e3]/70">
-                                        সেশনের বিষয়
+                                        Session Topic
                                     </span>
                                 </div>
                                 <span class="text-xs sm:text-sm font-bold truncate max-w-[150px] sm:max-w-none text-[#0d3d3d] dark:text-[#d2f1ff]">
@@ -146,7 +146,7 @@
                                         </svg>
                                     </div>
                                     <span class="text-xs sm:text-sm font-medium text-[#155665]/70 dark:text-[#7ec8e3]/70">
-                                        মেন্টর
+                                        Mentor
                                     </span>
                                 </div>
                                 <span class="text-xs sm:text-sm font-bold truncate max-w-[150px] sm:max-w-none text-[#0d3d3d] dark:text-[#d2f1ff]">
@@ -158,7 +158,7 @@
                             <div class="pt-3 sm:pt-4 flex items-center justify-between
                                         border-t border-[#1a9998]/10 dark:border-[#4db6c1]/15">
                                 <span class="text-[10px] sm:text-xs text-[#155665]/50 dark:text-[#7ec8e3]/50">
-                                    লেনদেন আইডি
+                                    Transaction ID
                                 </span>
                                 <span class="text-[10px] sm:text-xs font-mono text-[#2d6e6e] dark:text-[#4db6c1]">
                                     #{{ strtoupper($transactionId) }}
@@ -176,9 +176,9 @@
                                     d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                             <div>
-                                <p class="text-xs sm:text-sm font-bold text-[#155665] dark:text-[#d2f1ff]">সেশন সক্রিয়!</p>
+                                <p class="text-xs sm:text-sm font-bold text-[#155665] dark:text-[#d2f1ff]">Session Active!</p>
                                 <p class="text-[11px] sm:text-xs mt-0.5 text-[#155665]/70 dark:text-[#7ec8e3]/70">
-                                    আপনার সেশনটি সফলভাবে বুক করা হয়েছে এবং এখনই শুরু করতে পারবেন
+                                    Your session has been successfully booked and you can start right away
                                 </p>
                             </div>
                         </div>
@@ -197,7 +197,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
                                 </svg>
-                                সেশনে যুক্ত হন
+                                Join Session
                             </a>
 
                             <a href="{{ route('student_dashboard') }}" class="flex items-center justify-center gap-2 w-full py-2.5 sm:py-3 rounded-xl sm:rounded-2xl
@@ -211,7 +211,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
                                 </svg>
-                                ড্যাশবোর্ডে ফিরে যান এবং জয়েন করুন
+                                Return to Dashboard and Join
                             </a>
                         </div>
 
@@ -219,7 +219,7 @@
                         <div class="text-center mt-4 sm:mt-6 pt-4 sm:pt-5
                                     border-t border-[#1a9998]/10 dark:border-[#4db6c1]/15">
                             <p class="text-[11px] sm:text-xs text-[#155665]/45 dark:text-[#7ec8e3]/50">
-                                পেমেন্ট রিসিট আপনার ইমেইলে পাঠানো হয়েছে
+                                Payment receipt has been sent to your email
                             </p>
                         </div>
 

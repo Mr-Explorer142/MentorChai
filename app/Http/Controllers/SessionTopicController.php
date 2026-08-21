@@ -18,7 +18,7 @@ class SessionTopicController extends Controller
     {
         // Block booking sessions with unverified or inactive mentors
         if (!$mentor->profile || !$mentor->profile->is_verified || $mentor->status !== UserStatus::ACTIVE) {
-            abort(404, 'এই মেন্টরের প্রোফাইল ভেরিফাইড নয় অথবা মেন্টর বর্তমানে সক্রিয় নন।');
+            abort(404, 'This mentor\'s profile is not verified or the mentor is currently inactive.');
         }
 
         return view('session.request', compact('mentor'));
@@ -36,7 +36,7 @@ class SessionTopicController extends Controller
 
         $mentor = User::findOrFail($request->mentor_id);
         if (!$mentor->profile || !$mentor->profile->is_verified || $mentor->status !== UserStatus::ACTIVE) {
-            abort(404, 'এই মেন্টরের প্রোফাইল ভেরিফাইড নয় অথবা মেন্টর বর্তমানে সক্রিয় নন।');
+            abort(404, 'This mentor\'s profile is not verified or the mentor is currently inactive.');
         }
 
         $session = SessionTopic::create([
@@ -52,7 +52,7 @@ class SessionTopicController extends Controller
         $session->mentor->notify(new SessionRequestedNotification($session));
 
         return redirect()->route('student_dashboard')
-            ->with('success', 'সেশনের অনুরোধ সফলভাবে পাঠানো হয়েছে!');
+            ->with('success', 'Session request sent successfully!');
     }
 
     // Session approval
@@ -66,7 +66,7 @@ class SessionTopicController extends Controller
         // Notify the student
         $session->student->notify(new SessionApprovedNotification($session));
 
-        return back()->with('success', 'সেশন অনুমোদিত হয়েছে।');
+        return back()->with('success', 'Session approved.');
     }
 
     // checkout

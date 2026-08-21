@@ -20,9 +20,9 @@
                     </svg>
                 </div>
                 <h2 class="text-xl sm:text-3xl font-bold" style="color: var(--mc-text); font-family:'Lora',serif;">
-                    পেমেন্টের বিবরণ
+                    Payment Details
                 </h2>
-                <p class="text-xs sm:text-sm mt-1" style="color: var(--mc-text-faint);">সেশন নিশ্চিত করতে পেমেন্ট সম্পন্ন করুন</p>
+                <p class="text-xs sm:text-sm mt-1" style="color: var(--mc-text-faint);">Complete payment to confirm the session</p>
             </div>
 
             {{-- Main Card --}}
@@ -43,18 +43,18 @@
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
                                 </svg>
-                                শিক্ষার্থীর তথ্য
+                                Student Info
                             </h3>
                             <p class="text-xs sm:text-sm" style="color: var(--mc-text-muted);">
-                                <span class="font-semibold" style="color: var(--mc-text);">আইডি:</span>
+                                <span class="font-semibold" style="color: var(--mc-text);">ID:</span>
                                 #{{ $student->id }}
                             </p>
                             <p class="text-xs sm:text-sm mt-0.5 sm:mt-1 truncate" style="color: var(--mc-text-muted);">
-                                <span class="font-semibold" style="color: var(--mc-text);">নাম:</span>
+                                <span class="font-semibold" style="color: var(--mc-text);">Name:</span>
                                 {{ $student->name }}
                             </p>
                             <p class="text-xs sm:text-sm mt-0.5 sm:mt-1 truncate" style="color: var(--mc-text-muted);">
-                                <span class="font-semibold" style="color: var(--mc-text);">ইমেইল:</span>
+                                <span class="font-semibold" style="color: var(--mc-text);">Email:</span>
                                 {{ $student->email }}
                             </p>
                         </div>
@@ -69,18 +69,18 @@
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
                                 </svg>
-                                মেন্টরের তথ্য
+                                Mentor Info
                             </h3>
                             <p class="text-xs sm:text-sm" style="color: var(--mc-text-muted);">
-                                <span class="font-semibold" style="color: var(--mc-text);">আইডি:</span>
+                                <span class="font-semibold" style="color: var(--mc-text);">ID:</span>
                                 #{{ $mentor->id }}
                             </p>
                             <p class="text-xs sm:text-sm mt-0.5 sm:mt-1 truncate" style="color: var(--mc-text-muted);">
-                                <span class="font-semibold" style="color: var(--mc-text);">নাম:</span>
+                                <span class="font-semibold" style="color: var(--mc-text);">Name:</span>
                                 {{ $mentor->name }}
                             </p>
                             <p class="text-xs sm:text-sm mt-0.5 sm:mt-1 truncate" style="color: var(--mc-text-muted);">
-                                <span class="font-semibold" style="color: var(--mc-text);">প্রতিষ্ঠান:</span>
+                                <span class="font-semibold" style="color: var(--mc-text);">Institution:</span>
                                 {{ $mentor->profile?->institution_name ?? 'N/A' }}
                             </p>
                         </div>
@@ -90,7 +90,7 @@
                     <div class="flex items-center gap-3">
                         <div class="flex-1 h-px" style="background-color: var(--mc-border);"></div>
                         <span class="text-[10px] sm:text-xs font-semibold uppercase tracking-widest"
-                            style="color: var(--mc-text-faint);">সেশনের ধরন</span>
+                            style="color: var(--mc-text-faint);">Session Type</span>
                         <div class="flex-1 h-px" style="background-color: var(--mc-border);"></div>
                     </div>
 
@@ -104,7 +104,7 @@
                                 style="background-color: var(--mc-primary);"></span>
                         </span>
                         <p class="text-xs sm:text-sm font-medium" style="color: var(--mc-primary);">
-                            লাইভ সেশন - পেমেন্ট সম্পন্ন হলে মেন্টর সাথে সাথে সংযুক্ত হবেন
+                            Live Session - Mentor will join immediately after payment is completed
                         </p>
                     </div>
 
@@ -112,7 +112,7 @@
                     <div class="flex items-center gap-3">
                         <div class="flex-1 h-px" style="background-color: var(--mc-border);"></div>
                         <span class="text-[10px] sm:text-xs font-semibold uppercase tracking-widest"
-                            style="color: var(--mc-text-faint);">সেশনের বিস্তারিত</span>
+                            style="color: var(--mc-text-faint);">Session Details</span>
                         <div class="flex-1 h-px" style="background-color: var(--mc-border);"></div>
                     </div>
 
@@ -120,27 +120,27 @@
                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
                         <div class="rounded-xl p-2.5 sm:p-3 border text-center"
                             style="background: var(--mc-bg); border-color: var(--mc-border);">
-                            <p class="text-[10px] sm:text-xs font-semibold mb-0.5 sm:mb-1" style="color: var(--mc-text-faint);">বিষয়</p>
+                            <p class="text-[10px] sm:text-xs font-semibold mb-0.5 sm:mb-1" style="color: var(--mc-text-faint);">Topic</p>
                             <p class="text-xs sm:text-sm font-bold truncate" style="color: var(--mc-text);">{{ $topic }}</p>
                         </div>
                         <div class="rounded-xl p-2.5 sm:p-3 border text-center"
                             style="background: var(--mc-bg); border-color: var(--mc-border);">
-                            <p class="text-[10px] sm:text-xs font-semibold mb-0.5 sm:mb-1" style="color: var(--mc-text-faint);">ঘণ্টাপ্রতি</p>
+                            <p class="text-[10px] sm:text-xs font-semibold mb-0.5 sm:mb-1" style="color: var(--mc-text-faint);">Per Hour</p>
                             <p class="text-xs sm:text-sm font-bold" style="color: var(--mc-primary);">
                                 ৳{{ number_format($hourlyRate, 2) }}
                             </p>
                         </div>
                         <div class="rounded-xl p-2.5 sm:p-3 border text-center"
                             style="background: var(--mc-bg); border-color: var(--mc-border);">
-                            <p class="text-[10px] sm:text-xs font-semibold mb-0.5 sm:mb-1" style="color: var(--mc-text-faint);">মোট সময়</p>
+                            <p class="text-[10px] sm:text-xs font-semibold mb-0.5 sm:mb-1" style="color: var(--mc-text-faint);">Total Time</p>
                             <p class="text-xs sm:text-sm font-bold" style="color: var(--mc-text);">
-                                {{ $durationHours }}.০০ ঘণ্টা
+                                {{ $durationHours }}.00 Hours
                             </p>
                         </div>
                         <div class="rounded-xl p-2.5 sm:p-3 border text-center"
                             style="background: rgba(26,153,143,0.08); border-color: var(--mc-border-teal);">
                             <p class="text-[10px] sm:text-xs font-semibold mb-0.5 sm:mb-1" style="color: var(--mc-primary); opacity: 0.7;">
-                                পরিশোধযোগ্য
+                                Payable
                             </p>
                             <p class="text-xs sm:text-sm font-bold" style="color: var(--mc-primary);">
                                 ৳{{ number_format($totalAmount, 2) }}
@@ -163,28 +163,28 @@
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
                                 </svg>
-                                পেমেন্ট মেথড সিলেক্ট করুন
+                                Select Payment Method
                             </h3>
 
                             <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-3">
                                 @php
                                 $methods = [
-                                ['value' => 'bkash', 'label' => 'বিকাশ', 'img' => 'bkash.svg', 'fallback' => 'bKash',
+                                ['value' => 'bkash', 'label' => 'bKash', 'img' => 'bkash.svg', 'fallback' => 'bKash',
                                 'active_border' => '#ec4899', 'active_bg' => 'rgba(236,72,153,0.08)', 'fallback_color'
                                 => '#ec4899'],
-                                ['value' => 'nagad', 'label' => 'নগদ', 'img' => 'nagad.svg', 'fallback' => 'Nagad',
+                                ['value' => 'nagad', 'label' => 'Nagad', 'img' => 'nagad.svg', 'fallback' => 'Nagad',
                                 'active_border' => '#f97316', 'active_bg' => 'rgba(249,115,22,0.08)', 'fallback_color'
                                 => '#f97316'],
-                                ['value' => 'rocket', 'label' => 'রকেট', 'img' => 'rocket.png', 'fallback' =>
+                                ['value' => 'rocket', 'label' => 'Rocket', 'img' => 'rocket.png', 'fallback' =>
                                 'Rocket','active_border' => '#a855f7', 'active_bg' => 'rgba(168,85,247,0.08)',
                                 'fallback_color' => '#a855f7'],
-                                ['value' => 'card', 'label' => 'ডেবিট/ক্রেডিট কার্ড', 'img' => 'cards.svg', 'fallback'
+                                ['value' => 'card', 'label' => 'Debit/Credit Card', 'img' => 'cards.svg', 'fallback'
                                 => null, 'active_border' => '#1A9998', 'active_bg' => 'rgba(26,153,143,0.08)',
                                 'fallback_color' => '#1A9998'],
-                                ['value' => 'bank', 'label' => 'ব্যাংক ট্রান্সফার', 'img' => 'bank.svg', 'fallback' =>
+                                ['value' => 'bank', 'label' => 'Bank Transfer', 'img' => 'bank.svg', 'fallback' =>
                                 'Bank', 'active_border' => '#0284c7', 'active_bg' => 'rgba(2,132,199,0.08)',
                                 'fallback_color' => '#0284c7'],
-                                ['value' => 'pathaopay', 'label' => 'পাঠাও পে', 'img' => 'Pathao_Pay.svg', 'fallback' => 'Pathao Pay',
+                                ['value' => 'pathaopay', 'label' => 'Pathao Pay', 'img' => 'Pathao_Pay.svg', 'fallback' => 'Pathao Pay',
                                 'active_border' => '#e84525', 'active_bg' => 'rgba(232,69,37,0.08)', 'fallback_color' => '#e84525',
                                 'link' => 'https://pathaopay.me/@mr_explorer142/' . ($totalAmount + 0)],
                                 ];
@@ -264,7 +264,7 @@
                             <div>
                                 <p class="text-[10px] sm:text-xs font-semibold mb-0.5 sm:mb-1 uppercase tracking-wider"
                                     style="color: var(--mc-text-faint);">
-                                    সর্বমোট পরিশোধযোগ্য
+                                    Total Payable
                                 </p>
                                 <p class="text-2xl sm:text-3xl font-bold"
                                     style="color: var(--mc-primary); font-family:'Lora',serif;">
@@ -280,7 +280,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
-                                পরিশোধ করুন
+                                Pay Now
                             </button>
                         </div>
 
@@ -294,7 +294,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
                         </svg>
-                        SSL এনক্রিপশন দ্বারা সুরক্ষিত পেমেন্ট গেটওয়ে
+                        Secured Payment Gateway with SSL Encryption
                     </p>
 
                 </div>

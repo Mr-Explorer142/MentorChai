@@ -23,14 +23,13 @@
             </div>
 
             <h2 class="text-lg sm:text-xl font-extrabold text-gray-900 dark:text-gray-100 mb-1.5 sm:mb-2">
-                ইমেইল যাচাই করুন
+                Verify your email
             </h2>
             <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mb-4 sm:mb-6 leading-relaxed">
-                আপনার অ্যাকাউন্ট সক্রিয় করতে
+                To activate your account, please click the verification link sent to
                 <span class="font-semibold text-teal-600 dark:text-teal-400 break-all">
                     {{ auth()->user()->email }}
-                </span>
-                এ পাঠানো যাচাইকরণ লিঙ্কে ক্লিক করুন।
+                </span>.
             </p>
 
             {{-- Success messages --}}
@@ -40,7 +39,7 @@
                             border border-teal-200 dark:border-teal-800
                             text-teal-700 dark:text-teal-300
                             rounded-xl px-3 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm mb-4 sm:mb-5">
-                    ✅ যাচাইকরণ ইমেইল পুনরায় পাঠানো হয়েছে।
+                    ✅ A new verification link has been sent to your email address.
                 </div>
             @endif
 
@@ -52,14 +51,14 @@
                                 py-2.5 sm:py-3 rounded-xl font-semibold text-xs sm:text-sm
                                 hover:bg-teal-700 dark:hover:bg-teal-400
                                 transition-colors duration-200 mb-3">
-                    যাচাইকরণ ইমেইল পুনরায় পাঠান
+                    Resend Verification Email
                 </button>
             </form>
 
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button type="submit" class="text-xs text-gray-400 dark:text-gray-500 hover:underline py-1">
-                    লগআউট করুন
+                    Logout
                 </button>
             </form>
 

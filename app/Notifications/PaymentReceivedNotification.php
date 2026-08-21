@@ -23,18 +23,18 @@ class PaymentReceivedNotification extends Notification
         $roomUrl = url('/live-session?room=' . $this->session->session_code);
 
         return (new MailMessage)
-            ->subject('পেমেন্ট প্রাপ্ত হয়েছে - সেশন নিশ্চিত')
-            ->greeting('হ্যালো ' . $notifiable->name . '!')
-            ->line($this->session->student->name . ' "' . $this->session->topic->topic . '" বিষয়ক সেশনের পেমেন্ট সম্পন্ন করেছেন।')
-            ->action('সেশনে যুক্ত হন', $roomUrl)
-            ->line('সেশনের জন্য প্রস্তুত থাকুন।');
+            ->subject('Payment Received - Session Confirmed')
+            ->greeting('Hello ' . $notifiable->name . '!')
+            ->line($this->session->student->name . ' has completed payment for the session on "' . $this->session->topic->topic . '".')
+            ->action('Join Session', $roomUrl)
+            ->line('Be ready for the session.');
     }
 
     public function toDatabase(object $notifiable): array
     {
         return [
             'type'         => 'payment_received',
-            'message'      => $this->session->student->name . ' পেমেন্ট সম্পন্ন করেছেন। সেশন নিশ্চিত।',
+            'message'      => $this->session->student->name . ' has completed payment. Session confirmed.',
             'session_id'   => $this->session->id,
             'session_code' => $this->session->session_code,
             'room_url'     => '/live-session?room=' . $this->session->session_code,

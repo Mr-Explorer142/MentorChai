@@ -214,10 +214,10 @@ html.dark {
   /* gray-700 */
   --mc-border-subtle: #1f2937;
   /* gray-800 */
-  --mc-border-teal: #1f4f54;
+  --mc-border-teal: #245863;
+  /* teal-800 */
+  --mc-border-teal-sub: #1e3b4a;
   /* teal-900 */
-  --mc-border-teal-sub: #172f33;
-  /* teal-900/40 */
 
   /* Shadows */
   --mc-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);

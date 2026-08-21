@@ -245,9 +245,9 @@
                         @endphp
                         @foreach($infoItems as $item)
                         <div class="group flex items-start gap-3 p-3.5 sm:p-4 rounded-2xl border transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
-                            style="background: var(--mc-surface); border-color: var(--mc-border-teal-sub);"
+                            style="background: var(--mc-bg); border-color: var(--mc-border-teal-sub);"
                             onmouseover="this.style.background='var(--mc-surface-hover)'; this.style.borderColor='rgba(40,102,110,0.3)'"
-                            onmouseout="this.style.background='var(--mc-surface)'; this.style.borderColor='var(--mc-border-teal-sub)'">
+                            onmouseout="this.style.background='var(--mc-bg)'; this.style.borderColor='var(--mc-border-teal-sub)'">
                             <div class="p-2.5 sm:p-3 rounded-xl shrink-0 group-hover:scale-110 transition-transform duration-200"
                                 style="background: {{ $item['bg'] }};">
                                 <svg class="w-5 h-5 sm:w-5.5 sm:h-5.5" fill="none" viewBox="0 0 24 24"
@@ -274,9 +274,9 @@
                         $expValue = count($expParts) ? implode(' ', $expParts) : '-';
                         @endphp
                         <div class="group flex items-start gap-3 p-3.5 sm:p-4 rounded-2xl border transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
-                            style="background: var(--mc-surface); border-color: var(--mc-border-teal-sub);"
+                            style="background: var(--mc-bg); border-color: var(--mc-border-teal-sub);"
                             onmouseover="this.style.background='var(--mc-surface-hover)'; this.style.borderColor='rgba(40,102,110,0.3)'"
-                            onmouseout="this.style.background='var(--mc-surface)'; this.style.borderColor='var(--mc-border-teal-sub)'">
+                            onmouseout="this.style.background='var(--mc-bg)'; this.style.borderColor='var(--mc-border-teal-sub)'">
                             <div class="p-2.5 sm:p-3 rounded-xl shrink-0 group-hover:scale-110 transition-transform duration-200"
                                 style="background: rgba(14,165,233,0.12);">
                                 <svg class="w-5 h-5 sm:w-5.5 sm:h-5.5" fill="none" viewBox="0 0 24 24"
@@ -292,45 +292,27 @@
                                     $expValue }}</p>
                             </div>
                         </div>
-                    </div>
-
-                    {{-- ঘণ্টা প্রতি চার্জ — Special Highlighted Card --}}
-                    <div class="relative overflow-hidden rounded-2xl p-4 sm:p-5 mt-2"
-                        style="background: linear-gradient(135deg, rgba(40,102,110,0.15) 0%, rgba(26,153,143,0.1) 50%, rgba(40,102,110,0.08) 100%); border: 2px solid rgba(40,102,110,0.3); box-shadow: 0 4px 20px rgba(40,102,110,0.15);">
-
-
-                        <div class="relative flex flex-col sm:flex-row items-center sm:items-center gap-4">
-                            <div class="flex items-center gap-4 flex-1">
-                                <div class="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-2xl shadow-lg shrink-0"
-                                    style="background: linear-gradient(135deg, var(--mc-primary), #1A998F);">
-                                    <svg class="w-6 h-6 sm:w-7 sm:h-7" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.8" stroke="white">
+                        {{-- ঘণ্টা প্রতি চার্জ --}}
+                        <div class="md:col-span-2 xl:col-span-1 xl:col-start-2 flex justify-center xl:block">
+                            <div class="group flex items-start gap-3 p-3.5 sm:p-4 rounded-2xl transition-all duration-300 hover:-translate-y-1 w-full md:max-w-sm xl:max-w-none relative overflow-hidden"
+                                style="background: linear-gradient(135deg, rgba(16,185,129,0.08) 0%, rgba(16,185,129,0.02) 100%); border: 2px solid rgba(16,185,129,0.4); box-shadow: 0 4px 20px rgba(16,185,129,0.15);"
+                                onmouseover="this.style.borderColor='rgba(16,185,129,0.8)'; this.style.boxShadow='0 8px 25px rgba(16,185,129,0.25)';"
+                                onmouseout="this.style.borderColor='rgba(16,185,129,0.4)'; this.style.boxShadow='0 4px 20px rgba(16,185,129,0.15)';">
+                                <div class="absolute -right-4 -top-4 w-16 h-16 bg-emerald-500 rounded-full blur-3xl opacity-20 group-hover:opacity-40 transition-opacity duration-300"></div>
+                                <div class="p-2.5 sm:p-3 rounded-xl shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-md relative z-10"
+                                    style="background: linear-gradient(135deg, #10b981, #059669);">
+                                    <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="2" stroke="white">
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
                                 </div>
-                                <div>
-                                    <p class="text-sm font-bold uppercase tracking-wider mb-0.5"
-                                        style="color: var(--mc-primary);">ঘণ্টা প্রতি চার্জ</p>
-                                    <p class="text-2xl my-3 font-extrabold"
-                                        style="font-family:'Lora',serif; color: var(--mc-primary);">{{
+                                <div class="min-w-0 relative z-10">
+                                    <p class="text-xs sm:text-sm font-bold mb-0.5 uppercase tracking-wide" style="color: #10b981;">ঘণ্টা প্রতি চার্জ</p>
+                                    <p class="text-base sm:text-lg font-extrabold" style="color: var(--mc-text);">{{
                                         $mentor->profile->hourly_rate ? '৳ ' .
                                         number_format($mentor->profile->hourly_rate) : 'নির্ধারিত নয়' }}</p>
-                                    <p class="text-xs font-medium mt-0.5"
-                                        style="color: var(--mc-text-muted);">প্রতি ঘণ্টায় পাঠ্য মূল্য</p>
                                 </div>
-                            </div>
-                            <div class="shrink-0">
-                                <span
-                                    class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs sm:text-sm font-bold"
-                                    style="background: rgba(40,102,110,0.15); color: var(--mc-primary); border: 1.5px solid rgba(40,102,110,0.3);">
-                                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                                        stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
-                                    প্রতি ঘণ্টা
-                                </span>
                             </div>
                         </div>
                     </div>

@@ -30,6 +30,11 @@ class AppServiceProvider extends ServiceProvider
                     'notifications' => $user->notifications()->latest()->take(10)->get(),
                     'unreadCount'   => $user->unreadNotifications->count(),
                 ]);
+            } else {
+                $view->with([
+                    'notifications' => collect(),
+                    'unreadCount'   => 0,
+                ]);
             }
         });
     }

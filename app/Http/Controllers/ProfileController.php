@@ -120,7 +120,7 @@ class ProfileController extends Controller
             return back()->withErrors($validator)->withInput();
         }
 
-        return back()->with('success', 'প্রোফাইল সফলভাবে আপডেট করা হয়েছে।');
+        return back()->with('success', 'Profile updated successfully.');
     }
 
     function storeAchievement(Request $request)
@@ -137,7 +137,7 @@ class ProfileController extends Controller
 
         $request->user()->achievements()->create($data);
 
-        return back()->with('success', 'অর্জন সফলভাবে যোগ করা হয়েছে।');
+        return back()->with('success', 'Achievement added successfully.');
     }
 
     function updateAchievement(Request $request, Achievement $achievement)
@@ -162,7 +162,7 @@ class ProfileController extends Controller
 
         $achievement->update($data);
 
-        return back()->with('success', 'অর্জন সফলভাবে আপডেট করা হয়েছে।');
+        return back()->with('success', 'Achievement updated successfully.');
     }
 
     function deleteAchievement(Request $request, Achievement $achievement)
@@ -178,7 +178,7 @@ class ProfileController extends Controller
 
         $achievement->delete();
 
-        return back()->with('success', 'অর্জন সফলভাবে মুছে ফেলা হয়েছে।');
+        return back()->with('success', 'Achievement deleted successfully.');
     }
 
     function updateAvatar(Request $request)
@@ -203,7 +203,7 @@ class ProfileController extends Controller
             ['avatar' => $path]
         );
 
-        return back()->with('avatar_success', 'প্রোফাইল ছবি সফলভাবে আপডেট করা হয়েছে! 🎉');
+        return back()->with('avatar_success', 'Profile picture updated successfully! 🎉');
     }
 
     function removeAvatar()
@@ -215,6 +215,6 @@ class ProfileController extends Controller
             $user->profile->update(['avatar' => null]);
         }
 
-        return back()->with('avatar_success', 'প্রোফাইল ছবি সফলভাবে সরানো হয়েছে।');
+        return back()->with('avatar_success', 'Profile picture removed successfully.');
     }
 }

@@ -21,18 +21,18 @@ class SessionApprovedNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->subject('সেশন অনুমোদিত হয়েছে - পেমেন্ট করুন')
-            ->greeting('হ্যালো ' . $notifiable->name . '!')
-            ->line('আপনার "' . $this->session->topic . '" বিষয়ক সেশনের অনুরোধ ' . $this->session->mentor->name . ' অনুমোদন করেছেন।')
-            ->action('পেমেন্ট করুন', route('checkout', $this->session->id))
-            ->line('অনুগ্রহ করে পেমেন্ট সম্পন্ন করুন।');
+            ->subject('Session Approved - Please Make Payment')
+            ->greeting('Hello ' . $notifiable->name . '!')
+            ->line('Your session request on "' . $this->session->topic . '" has been approved by ' . $this->session->mentor->name . '.')
+            ->action('Make Payment', route('checkout', $this->session->id))
+            ->line('Please complete the payment.');
     }
 
     public function toDatabase(object $notifiable): array
     {
         return [
             'type'        => 'session_approved',
-            'message'     => $this->session->mentor->name . ' আপনার "' . $this->session->topic . '" সেশন অনুমোদন করেছেন। পেমেন্ট করুন।',
+            'message'     => $this->session->mentor->name . ' has approved your session on "' . $this->session->topic . '". Please make payment.',
             'session_id'  => $this->session->id,
             'mentor_id'   => $this->session->mentor_id,
             'mentor_name' => $this->session->mentor->name,
