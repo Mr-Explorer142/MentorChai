@@ -1,0 +1,62 @@
+<?php
+$file = 'c:\Users\Adib Bhai\Documents\GitHub\MentorChai\resources\views\profile\mentor_profile.blade.php';
+$content = file_get_contents($file);
+
+$replacements = [
+    "নিশ্চিতভাবে প্রোফাইল ছবি সরাবেন?" => "Are you sure you want to remove the profile picture?",
+    "ছবি সরিয়ে দিন" => "Remove Photo",
+    "ইউজার আইডি:" => "User ID:",
+    "ফটো আপলোড" => "Upload Photo",
+    "800×800 পিক্সেল · JPG বা PNG" => "800x800 pixels · JPG or PNG",
+    "800×800 পিক্সেল ·\n                            JPG বা PNG" => "800x800 pixels ·\n                            JPG or PNG",
+    "ব্যক্তিগত তথ্য" => "Personal Information",
+    "প্রোফাইল আপডেট" => "Update Profile",
+    "শিক্ষাগত যোগ্যতা" => "Educational Qualification",
+    "শিক্ষাপ্রতিষ্ঠানের নাম" => "Institution Name",
+    "অধ্যয়নের বিষয়\n                        (ডিপার্টমেন্ট)" => "Department\n                        (Field of Study)",
+    "অধ্যয়নের বিষয় (ডিপার্টমেন্ট)" => "Department (Field of Study)",
+    "মেন্টর হিসেবে যুক্ত হয়েছেন" => "Joined as Mentor",
+    "পড়ানোর ভাষা" => "Teaching Language",
+    "শিক্ষকতার\n                                    অভিজ্ঞতা" => "Teaching\n                                    Experience",
+    "শিক্ষকতার অভিজ্ঞতা" => "Teaching Experience",
+    " বছর" => " Years",
+    " মাস" => " Months",
+    "ঘণ্টা প্রতি চার্জ" => "Hourly Rate",
+    "নির্ধারিত নয়" => "Not set",
+    "দক্ষতাসমূহ" => "Skills",
+    "কোনো দক্ষতা যোগ করা হয়নি" => "No skills added",
+    "আমার সম্পর্কে" => "About Me",
+    "কোনো বিস্তারিত বায়ো যোগ করা হয়নি" => "No detailed bio added",
+    "এখনো শর্ট বায়ো যোগ করা হয়নি" => "No short bio added yet",
+    "অর্জনসমূহ" => "Achievements",
+    "নতুন অর্জন" => "New Achievement",
+    "এডিট করুন" => "Edit",
+    "ডিলিট করুন" => "Delete",
+    "আপনি কি নিশ্চিত যে এই অর্জনটি মুছে ফেলতে চান?" => "Are you sure you want to delete this achievement?",
+    "কোনো অর্জন যোগ করা হয়নি" => "No achievements added",
+    "শিক্ষার্থীদের রিভিউ" => "Student Reviews",
+    "শিক্ষার্থীদের মতামত ও অভিজ্ঞতা" => "Student feedback and experiences",
+    "শিক্ষার্থীদের মতামত ও\n                                অভিজ্ঞতা" => "Student feedback and\n                                experiences",
+    "টি রিভিউ থেকে" => "reviews",
+    "এখনো কোনো রিভিউ নেই" => "No reviews yet",
+    "সেশন সম্পন্ন হলে শিক্ষার্থীরা রিভিউ দিতে পারবেন" => "Students can give a review after completing a session",
+    "সেশন সম্পন্ন হলে শিক্ষার্থীরা রিভিউ\n                        দিতে পারবেন" => "Students can give a review\n                        after completing a session",
+    "যাচাইকৃত" => "Verified",
+    "কোনো মন্তব্য নেই" => "No comment",
+    "প্রোফাইল ছবি পরিবর্তন" => "Change Profile Picture",
+    "পূর্বরূপ" => "Preview",
+    "বর্তমান প্রোফাইল ছবি" => "Current Profile Picture",
+    "ছবি আপলোড করুন" => "Upload Picture",
+    "ড্র্যাগ করুন অথবা ক্লিক করুন" => "Drag or Click",
+    "সর্বোচ্চ ২ MB" => "Max 2 MB",
+    "বাতিল করুন" => "Cancel",
+    "সংরক্ষণ করুন" => "Save",
+    "বন্ধ" => "Close",
+    "আপলোড হচ্ছে..." => "Uploading...",
+    "মেন্টরের বিস্তারিত পরিচিতি ও যোগাযোগের তথ্য" => "Detailed profile and contact info of the mentor",
+    "মেন্টরের বিস্তারিত পরিচিতি ও যোগাযোগের তথ্য" => "Detailed profile and contact info of the mentor"
+];
+
+$content = str_replace(array_keys($replacements), array_values($replacements), $content);
+file_put_contents($file, $content);
+echo "Translation done.\n";

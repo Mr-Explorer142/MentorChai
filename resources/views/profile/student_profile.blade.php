@@ -55,10 +55,10 @@
                         @if(auth()->id() === $student->id && $student->profile && $student->profile->avatar)
                         <form action="{{ route('remove_avatar') }}" method="POST"
                             style="position:absolute; bottom:-4px; right:-4px; margin:0; z-index:10;"
-                            onsubmit="return confirm('নিশ্চিতভাবে প্রোফাইল ছবি সরাবেন?');">
+                            onsubmit="return confirm('Are you sure you want to remove the profile picture?');">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" title="ছবি সরিয়ে দিন" style="width:28px; height:28px; border-radius:9999px;
+                            <button type="submit" title="Remove Photo" style="width:28px; height:28px; border-radius:9999px;
                                            background:#ef4444; border:2px solid #fff; cursor:pointer;
                                            display:flex; align-items:center; justify-content:center;
                                            box-shadow:0 2px 8px rgba(239,68,68,0.4);
@@ -95,7 +95,7 @@
                                     {{ ucfirst($student->role->value) }}
                                 </span>
                                 <span class="text-xs sm:text-sm font-medium" style="color: var(--mc-text-muted);">
-                                    ইউজার আইডি: #{{ $student->id }}
+                                    User ID: #{{ $student->id }}
                                 </span>
                             </div>
                         </div>
@@ -114,9 +114,9 @@
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
                             </svg>
-                            ফটো আপলোড
+                            Upload Photo
                         </button>
-                        <p class="mt-1.5 text-[10px] sm:text-xs" style="color: var(--mc-text-faint);">800×800 পিক্সেল · JPG বা PNG</p>
+                        <p class="mt-1.5 text-[10px] sm:text-xs" style="color: var(--mc-text-faint);">800×800 pixels · JPG or PNG</p>
                     </div>
                     @endif
                 </div>
@@ -135,8 +135,7 @@
                     <div class="flex items-center gap-3">
                         <div class="w-1 h-7 rounded-full"
                             style="background: linear-gradient(to bottom, var(--mc-primary), var(--mc-sage));"></div>
-                        <h2 class="text-lg sm:text-xl font-bold" style="color: var(--mc-text); font-family:'Lora',serif;">ব্যক্তিগত
-                            তথ্য</h2>
+                        <h2 class="text-lg sm:text-xl font-bold" style="color: var(--mc-text); font-family:'Lora',serif;">Personal Information</h2>
                     </div>
                     @if (auth()->id() === $student->id)
                     <a href="{{ route('edit_profile', $student->id) }}"
@@ -148,28 +147,28 @@
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931z" />
                         </svg>
-                        প্রোফাইল আপডেট
+                        Update Profile
                     </a>
                     @endif
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4">
                     @foreach([
-                    ['ic'=>'#3b82f6', 'bg'=>'rgba(59,130,246,0.1)', 'label'=>'ই-মেইল', 'val'=>$student->email,
+                    ['ic'=>'#3b82f6', 'bg'=>'rgba(59,130,246,0.1)', 'label'=>'Email', 'val'=>$student->email,
                     'bold'=>false,
                     'path'=>'M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25
                     2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25
                     2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75'],
-                    ['ic'=>'var(--mc-primary)', 'bg'=>'rgba(40,102,110,0.1)', 'label'=>'শিক্ষাগত যোগ্যতা',
+                    ['ic'=>'var(--mc-primary)', 'bg'=>'rgba(40,102,110,0.1)', 'label'=>'Educational Qualification',
                     'val'=>$student->profile->highgest_education_level ?? '-', 'bold'=>false,
                     'path'=>'M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0
                     018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112
                     3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814'],
-                    ['ic'=>'var(--mc-sage)', 'bg'=>'rgba(124,152,133,0.12)', 'label'=>'শিক্ষাপ্রতিষ্ঠানের নাম',
+                    ['ic'=>'var(--mc-sage)', 'bg'=>'rgba(124,152,133,0.12)', 'label'=>'Institution Name',
                     'val'=>$student->profile->institution_name ?? '-', 'bold'=>false,
                     'path'=>'M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012
                     9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z'],
-                    ['ic'=>'#eab308', 'bg'=>'rgba(234,179,8,0.1)', 'label'=>'অধ্যয়নের বিষয় (ডিপার্টমেন্ট)',
+                    ['ic'=>'#eab308', 'bg'=>'rgba(234,179,8,0.1)', 'label'=>'Department (Field of Study)',
                     'val'=>$student->profile->department ?? '-', 'bold'=>false,
                     'path'=>'M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25'],
                     ] as $item)
@@ -198,18 +197,18 @@
                 <div class="flex items-center gap-3 mb-6">
                     <div class="w-1 h-7 rounded-full"
                         style="background: linear-gradient(to bottom, var(--mc-primary), var(--mc-sage));"></div>
-                    <h2 class="text-lg sm:text-xl font-bold" style="color: var(--mc-text); font-family:'Lora',serif;">শেখার ধরণ ও প্রত্যাশা</h2>
+                    <h2 class="text-lg sm:text-xl font-bold" style="color: var(--mc-text); font-family:'Lora',serif;">Learning Style & Preferences</h2>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-5 mb-5">
                     <div class="rounded-2xl p-4 sm:p-5 border" style="background: var(--mc-bg); border-color: var(--mc-border-teal-sub);">
-                        <p class="text-xs sm:text-sm font-bold mb-1.5 opacity-70" style="color: var(--mc-text);">পড়ানোর ক্ষেত্রে কোন মাধ্যমটি আপনার জন্য সহজ ও সুবিধাজনক?</p>
+                        <p class="text-xs sm:text-sm font-bold mb-1.5 opacity-70" style="color: var(--mc-text);">Which teaching medium is easiest and most convenient for you?</p>
                         <p class="text-sm sm:text-[15px] font-medium" style="color: var(--mc-text);">
                             {{ !empty($student->profile->preferred_teaching_medium) ? $student->profile->preferred_teaching_medium : ' - ' }}
                         </p>
                     </div>
                     <div class="rounded-2xl p-4 sm:p-5 border" style="background: var(--mc-bg); border-color: var(--mc-border-teal-sub);">
-                        <p class="text-xs sm:text-sm font-bold mb-1.5 opacity-70" style="color: var(--mc-text);">পড়ানোর সময় কোন ভাষায় আপনি স্বাচ্ছন্দ্য বোধ করেন?</p>
+                        <p class="text-xs sm:text-sm font-bold mb-1.5 opacity-70" style="color: var(--mc-text);">Which language do you prefer to learn in?</p>
                         <p class="text-sm sm:text-[15px] font-medium" style="color: var(--mc-text);">
                             {{ !empty($student->profile->preferred_language) ? $student->profile->preferred_language : ' - ' }}
                         </p>
@@ -218,9 +217,9 @@
 
                 <div class="rounded-2xl p-4 sm:p-6 border mt-4"
                     style="background: var(--mc-bg); border-color: var(--mc-border-teal-sub);">
-                    <p class="text-xs sm:text-sm font-bold mb-3 opacity-70" style="color: var(--mc-text);">আপনি কীভাবে শিখতে স্বাচ্ছন্দ্যবোধ করেন?</p>
+                    <p class="text-xs sm:text-sm font-bold mb-3 opacity-70" style="color: var(--mc-text);">How do you prefer to learn?</p>
                     <p class="text-xs sm:text-sm leading-relaxed whitespace-pre-line" style="color: var(--mc-text);">
-                        {{ !empty($student->profile->learning_style) ? $student->profile->learning_style : "আপনি কীভাবে সহজে বোঝেন এবং মেন্টরের পড়ানোর ধরণ কেমন হলে সুবিধা হবে তা লিখুন। যেমন: 'আমার বেসিক একটু দুর্বল, তাই শুরু থেকে ধরে ধরে বোঝালে ভালো হয়। একটু সময় নিয়ে বুঝি, তাড়াহুড়া না করলে খুশি হবো।' কিংবা 'আমি একটু ইঙ্গিত পেলেই বুঝে ফেলতে পারি, সহজ বিষয়গুলো দ্রুতগতিতে বুঝিয়ে দিলেও আমার কোনো সমস্যা হয় না।'" }}
+                        {{ !empty($student->profile->learning_style) ? $student->profile->learning_style : "Write about how you understand things easily and what kind of teaching style from the mentor would be helpful for you. For example: 'My basics are a bit weak, so it would be better if you explain everything step by step from the beginning. I take some time to understand, so I would be glad if you don't rush.' or 'I can understand quickly with just a hint, so I have no problem if simple topics are explained fast.'" }}
                     </p>
                 </div>
             </div>
@@ -248,7 +247,7 @@
                                 d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z" />
                         </svg>
                     </div>
-                    <h3 class="text-lg font-bold text-white">প্রোফাইল ছবি পরিবর্তন</h3>
+                    <h3 class="text-lg font-bold text-white">Change Profile Picture</h3>
                 </div>
                 <button type="button" onclick="closeProfileAvatarModal()"
                     class="btn btn-sm btn-ghost btn-circle text-white hover:bg-white/20">
@@ -274,8 +273,8 @@
                         @endif
                     </div>
                     <div id="profilePreviewBadge" class="hidden px-2 py-0.5 rounded-full text-xs font-bold text-white"
-                        style="background:#1A998F;">পূর্বরূপ</div>
-                    <p class="text-xs" style="color:var(--mc-text-muted);">বর্তমান প্রোফাইল ছবি</p>
+                        style="background:#1A998F;">Preview</div>
+                    <p class="text-xs" style="color:var(--mc-text-muted);">Current Profile Picture</p>
                 </div>
 
                 {{-- Drop Zone --}}
@@ -299,9 +298,9 @@
                             </svg>
                         </div>
                         <div class="text-center">
-                            <p class="font-semibold" style="color:var(--mc-text);">ছবি আপলোড করুন</p>
+                            <p class="font-semibold" style="color:var(--mc-text);">Upload Picture</p>
                             <p class="text-xs mt-1" style="color:var(--mc-text-muted);">
-                                ড্র্যাগ করুন অথবা ক্লিক করুন &bull; JPG, PNG, GIF, WebP &bull; সর্বোচ্চ ২ MB
+                                Drag or Click &bull; JPG, PNG, GIF, WebP &bull; Max 2 MB
                             </p>
                         </div>
                         <input id="profileAvatarFileInput" name="avatar" type="file"
@@ -338,7 +337,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M6 18L18 6M6 6l12 12" />
                             </svg>
-                            বাতিল করুন
+                            Cancel
                         </button>
                         <button type="submit" id="profileUploadSubmitBtn" disabled
                             class="btn flex-1 rounded-xl text-white border-0 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200"
@@ -347,14 +346,14 @@
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
                             </svg>
-                            সংরক্ষণ করুন
+                            Save
                         </button>
                     </div>
                 </form>
             </div>
         </div>
         <form method="dialog" class="modal-backdrop">
-            <button onclick="closeProfileAvatarModal()">বন্ধ</button>
+            <button onclick="closeProfileAvatarModal()">Close</button>
         </form>
     </dialog>
 
@@ -418,7 +417,7 @@
         document.getElementById('profileAvatarUploadForm').addEventListener('submit', function () {
             const btn = document.getElementById('profileUploadSubmitBtn');
             btn.disabled = true;
-            btn.innerHTML = '<span class="loading loading-spinner loading-sm"></span> আপলোড হচ্ছে...';
+            btn.innerHTML = '<span class="loading loading-spinner loading-sm"></span> Uploading...';
         });
 
         // Auto-dismiss flash banners

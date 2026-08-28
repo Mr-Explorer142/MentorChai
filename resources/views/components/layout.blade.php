@@ -296,14 +296,14 @@
                                       transition-all duration-150
                                       hover:bg-[#28666e]/8 dark:hover:bg-[#4db6c1]/12 hover:text-[#28666e] dark:hover:text-[#4db6c1]
                                       {{ Route::is('mentors') ? 'bg-![#28666e] text-white!' : '' }}">
-                                🎓 {{ Route::is('home', 'about', 'faq', 'terms') ? 'শিক্ষক খুঁজুন' : 'Find Mentors' }}
+                                {{ Route::is('home', 'about', 'faq', 'terms') ? 'শিক্ষক খুঁজুন' : 'Find Mentors' }}
                             </a>
                             <a href="{{ route('home') }}" class="block text-[0.9rem] font-semibold text-[#033f63] dark:text-[#7ec8e3] no-underline
                                       px-4 py-[0.65rem] rounded-xl
                                       transition-all duration-150
                                       hover:bg-[#28666e]/8 dark:hover:bg-[#4db6c1]/12 hover:text-[#28666e] dark:hover:text-[#4db6c1]
                                       {{ Route::is('home') ? 'bg-![#28666e] text-white!' : '' }}">
-                                🏠 Home
+                                Home
                             </a>
                             @guest
                             <a href="{{ route('student_register') }}" class="block text-[0.9rem] font-semibold text-[#033f63] dark:text-[#7ec8e3] no-underline
@@ -311,7 +311,7 @@
                                       transition-all duration-150
                                       hover:bg-[#28666e]/8 dark:hover:bg-[#4db6c1]/12 hover:text-[#28666e] dark:hover:text-[#4db6c1]
                                       {{ Route::is('student_register') ? 'bg-![#28666e] text-white!' : '' }}">
-                                ✨ Register
+                                Register
                             </a>
                             @endguest
                         </div>

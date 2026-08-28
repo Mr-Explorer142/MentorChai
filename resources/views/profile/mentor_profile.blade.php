@@ -56,10 +56,10 @@
                         @if(auth()->id() === $mentor->id && $mentor->profile && $mentor->profile->avatar)
                         <form action="{{ route('remove_avatar') }}" method="POST"
                             style="position:absolute; bottom:-4px; right:-4px; margin:0; z-index:10;"
-                            onsubmit="return confirm('নিশ্চিতভাবে প্রোফাইল ছবি সরাবেন?');">
+                            onsubmit="return confirm('Are you sure you want to remove the profile picture?');">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" title="ছবি সরিয়ে দিন" style="width:28px; height:28px; border-radius:9999px;
+                            <button type="submit" title="Remove Photo" style="width:28px; height:28px; border-radius:9999px;
                                            background:#ef4444; border:2px solid #fff; cursor:pointer;
                                            display:flex; align-items:center; justify-content:center;
                                            box-shadow:0 2px 8px rgba(239,68,68,0.4);
@@ -121,13 +121,13 @@
                                     {{ ucfirst($mentor->role->value) }}
                                 </span>
                                 <span class="text-xs sm:text-sm font-medium" style="color: var(--mc-text-muted);">
-                                    ইউজার আইডি: #{{ $mentor->id }}
+                                    User ID: #{{ $mentor->id }}
                                 </span>
                             </div>
                         </div>
                         <p class="text-sm sm:text-base md:text-lg font-medium italic leading-relaxed mt-1"
                             style="color: var(--mc-text);">
-                            {{ $mentor->profile->short_bio ?? 'এখনো শর্ট বায়ো যোগ করা হয়নি' }}
+                            {{ $mentor->profile->short_bio ?? 'No short bio added yet' }}
                         </p>
                     </div>
 
@@ -144,10 +144,10 @@
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
                             </svg>
-                            ফটো আপলোড
+                            Upload Photo
                         </button>
-                        <p class="mt-1.5 text-[10px] sm:text-xs" style="color: var(--mc-text-faint);">800×800 পিক্সেল ·
-                            JPG বা PNG</p>
+                        <p class="mt-1.5 text-[10px] sm:text-xs" style="color: var(--mc-text-faint);">800x800 pixels ·
+                            JPG or PNG</p>
                     </div>
                     @endif
                 </div>
@@ -179,10 +179,10 @@
                             <div>
                                 <h2 class="text-xl sm:text-2xl font-extrabold tracking-tight"
                                     style="font-family:'Lora',serif; background: linear-gradient(135deg, var(--mc-primary), #1A998F, var(--mc-navy)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">
-                                    ব্যক্তিগত তথ্য
+                                    Personal Information
                                 </h2>
                                 <p class="text-xs sm:text-sm mt-0.5 font-medium" style="color: var(--mc-text-muted);">
-                                    মেন্টরের বিস্তারিত পরিচিতি ও যোগাযোগের তথ্য</p>
+                                    Detailed profile and contact info of the mentor</p>
                             </div>
                         </div>
                         @if (auth()->id() === $mentor->id)
@@ -196,7 +196,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931z" />
                             </svg>
-                            প্রোফাইল আপডেট
+                            Update Profile
                         </a>
                         @endif
                     </div>
@@ -207,20 +207,20 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4">
                         @php
                         $infoItems = [
-                        ['icon_color'=>'#3b82f6', 'bg'=>'rgba(59,130,246,0.12)', 'label'=>'শিক্ষাগত যোগ্যতা',
+                        ['icon_color'=>'#3b82f6', 'bg'=>'rgba(59,130,246,0.12)', 'label'=>'Educational Qualification',
                         'value'=>$mentor->profile->highgest_education_level ?? '-', 'bold'=>false,
                         'icon'=>'M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0
                         018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0
                         0112
                         3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814'],
 
-                        ['icon_color'=>'#8b5cf6', 'bg'=>'rgba(139,92,246,0.12)', 'label'=>'শিক্ষাপ্রতিষ্ঠানের নাম',
+                        ['icon_color'=>'#8b5cf6', 'bg'=>'rgba(139,92,246,0.12)', 'label'=>'Institution Name',
                         'value'=>$mentor->profile->institution_name ?? '-', 'bold'=>false,
                         'icon'=>'M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012
                         9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18'],
 
-                        ['icon_color'=>'#eab308', 'bg'=>'rgba(234,179,8,0.12)', 'label'=>'অধ্যয়নের বিষয়
-                        (ডিপার্টমেন্ট)',
+                        ['icon_color'=>'#eab308', 'bg'=>'rgba(234,179,8,0.12)', 'label'=>'Department
+                        (Field of Study)',
                         'value'=>$mentor->profile->department ?? '-', 'bold'=>false,
                         'icon'=>'M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016
                         18c2.305
@@ -228,7 +228,7 @@
                         0018
                         18a8.967 8.967 0 00-6 2.292m0-14.25v14.25'],
 
-                        ['icon_color'=>'#10b981', 'bg'=>'rgba(16,185,129,0.12)', 'label'=>'মেন্টর হিসেবে যুক্ত হয়েছেন',
+                        ['icon_color'=>'#10b981', 'bg'=>'rgba(16,185,129,0.12)', 'label'=>'Joined as Mentor',
                         'value'=>$mentor->created_at->format('F Y'), 'bold'=>false,
                         'icon'=>'M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0
                         00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285
@@ -236,7 +236,7 @@
                         01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0
                         01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z'],
 
-                        ['icon_color'=>'#ec4899', 'bg'=>'rgba(236,72,153,0.12)', 'label'=>'পড়ানোর ভাষা',
+                        ['icon_color'=>'#ec4899', 'bg'=>'rgba(236,72,153,0.12)', 'label'=>'Teaching Language',
                         'value'=>$mentor->profile->preferred_language ?? '-', 'bold'=>false,
                         'icon'=>'M10.5 21l5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 016-.371m0 0c1.12 0
                         2.233.038 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138c.896.061
@@ -264,13 +264,13 @@
                         </div>
                         @endforeach
 
-                        {{-- শিক্ষকতার অভিজ্ঞতা --}}
+                        {{-- Teaching Experience --}}
                         @php
                         $expYears = $mentor->profile->teaching_experience_years ?? null;
                         $expMonths = $mentor->profile->teaching_experience_months ?? null;
                         $expParts = [];
-                        if ($expYears) $expParts[] = $expYears . ' বছর';
-                        if ($expMonths) $expParts[] = $expMonths . ' মাস';
+                        if ($expYears) $expParts[] = $expYears . ' Years';
+                        if ($expMonths) $expParts[] = $expMonths . ' Months';
                         $expValue = count($expParts) ? implode(' ', $expParts) : '-';
                         @endphp
                         <div class="group flex items-start gap-3 p-3.5 sm:p-4 rounded-2xl border transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
@@ -286,33 +286,31 @@
                                 </svg>
                             </div>
                             <div class="min-w-0">
-                                <p class="text-xs sm:text-sm font-bold mb-1" style="color: var(--mc-text);">শিক্ষকতার
-                                    অভিজ্ঞতা</p>
+                                <p class="text-xs sm:text-sm font-bold mb-1" style="color: var(--mc-text);">Teaching
+                                    Experience</p>
                                 <p class="text-sm sm:text-base font-medium" style="color: var(--mc-text-muted);">{{
                                     $expValue }}</p>
                             </div>
                         </div>
-                        {{-- ঘণ্টা প্রতি চার্জ --}}
-                        <div class="md:col-span-2 xl:col-span-1 xl:col-start-2 flex justify-center xl:block">
-                            <div class="group flex items-start gap-3 p-3.5 sm:p-4 rounded-2xl transition-all duration-300 hover:-translate-y-1 w-full md:max-w-sm xl:max-w-none relative overflow-hidden"
-                                style="background: linear-gradient(135deg, rgba(16,185,129,0.08) 0%, rgba(16,185,129,0.02) 100%); border: 2px solid rgba(16,185,129,0.4); box-shadow: 0 4px 20px rgba(16,185,129,0.15);"
-                                onmouseover="this.style.borderColor='rgba(16,185,129,0.8)'; this.style.boxShadow='0 8px 25px rgba(16,185,129,0.25)';"
-                                onmouseout="this.style.borderColor='rgba(16,185,129,0.4)'; this.style.boxShadow='0 4px 20px rgba(16,185,129,0.15)';">
-                                <div class="absolute -right-4 -top-4 w-16 h-16 bg-emerald-500 rounded-full blur-3xl opacity-20 group-hover:opacity-40 transition-opacity duration-300"></div>
-                                <div class="p-2.5 sm:p-3 rounded-xl shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-md relative z-10"
-                                    style="background: linear-gradient(135deg, #10b981, #059669);">
-                                    <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="2" stroke="white">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
-                                </div>
-                                <div class="min-w-0 relative z-10">
-                                    <p class="text-xs sm:text-sm font-bold mb-0.5 uppercase tracking-wide" style="color: #10b981;">ঘণ্টা প্রতি চার্জ</p>
-                                    <p class="text-base sm:text-lg font-extrabold" style="color: var(--mc-text);">{{
-                                        $mentor->profile->hourly_rate ? '৳ ' .
-                                        number_format($mentor->profile->hourly_rate) : 'নির্ধারিত নয়' }}</p>
-                                </div>
+                        {{-- Hourly Charge --}}
+                        <div class="group flex items-start gap-3 p-3.5 sm:p-4 rounded-2xl transition-all duration-300 hover:-translate-y-1 relative overflow-hidden"
+                            style="background: linear-gradient(135deg, rgba(16,185,129,0.08) 0%, rgba(16,185,129,0.02) 100%); border: 2px solid rgba(16,185,129,0.4); box-shadow: 0 4px 20px rgba(16,185,129,0.15);"
+                            onmouseover="this.style.borderColor='rgba(16,185,129,0.8)'; this.style.boxShadow='0 8px 25px rgba(16,185,129,0.25)';"
+                            onmouseout="this.style.borderColor='rgba(16,185,129,0.4)'; this.style.boxShadow='0 4px 20px rgba(16,185,129,0.15)';">
+                            <div class="absolute -right-4 -top-4 w-16 h-16 bg-emerald-500 rounded-full blur-3xl opacity-20 group-hover:opacity-40 transition-opacity duration-300"></div>
+                            <div class="p-2.5 sm:p-3 rounded-xl shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-md relative z-10"
+                                style="background: linear-gradient(135deg, #10b981, #059669);">
+                                <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="white">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <div class="min-w-0 relative z-10">
+                                <p class="text-xs sm:text-sm font-bold mb-0.5 uppercase tracking-wide" style="color: #10b981;">Hourly Charge</p>
+                                <p class="text-base sm:text-lg font-extrabold" style="color: var(--mc-text);">{{
+                                    $mentor->profile->hourly_rate ? '৳ ' .
+                                    number_format($mentor->profile->hourly_rate) : 'Not set' }}</p>
                             </div>
                         </div>
                     </div>
@@ -327,7 +325,7 @@
                             style="background: linear-gradient(to bottom, var(--mc-primary), var(--mc-sage));"></div>
                         <h2 class="text-lg sm:text-xl font-bold"
                             style="color: var(--mc-text); font-family:'Lora',serif;">
-                            দক্ষতাসমূহ</h2>
+                            Skills</h2>
                     </div>
                 </div>
                 <div class="flex flex-wrap gap-1.5 sm:gap-2">
@@ -351,7 +349,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38" />
                         </svg>
-                        <p class="text-sm" style="color: var(--mc-text-faint);">কোনো দক্ষতা যোগ করা হয়নি</p>
+                        <p class="text-sm" style="color: var(--mc-text-faint);">No skills added</p>
                     </div>
                     @endif
                 </div>
@@ -363,13 +361,13 @@
                     <div class="w-1 h-7 rounded-full"
                         style="background: linear-gradient(to bottom, var(--mc-primary), var(--mc-sage));"></div>
                     <h2 class="text-lg sm:text-xl font-bold" style="color: var(--mc-text); font-family:'Lora',serif;">
-                        আমার সম্পর্কে</h2>
+                        About Me</h2>
                 </div>
                 <div class="rounded-2xl px-4 pt-2.5 pb-4 sm:px-6 sm:pt-2 sm:pb-5 border shadow-sm"
                     style="background: var(--mc-bg); border-color: var(--mc-border-teal-sub);">
                     <p class="text-sm sm:text-base leading-relaxed tracking-wide"
                         style="color: var(--mc-text); white-space: pre-line;">
-                        {{ $mentor->profile->bio ?? 'কোনো বিস্তারিত বায়ো যোগ করা হয়নি' }}
+                        {{ $mentor->profile->bio ?? 'No detailed bio added' }}
                     </p>
                 </div>
             </div>
@@ -381,7 +379,7 @@
                         <div class="w-1 h-7 rounded-full"
                             style="background: linear-gradient(to bottom, #eab308, rgba(234,179,8,0.3));"></div>
                         <h2 class="text-lg sm:text-xl font-bold"
-                            style="color: var(--mc-text); font-family:'Lora',serif;">অর্জনসমূহ</h2>
+                            style="color: var(--mc-text); font-family:'Lora',serif;">Achievements</h2>
                     </div>
                     @if(auth()->id() === $mentor->id)
                     <button type="button" onclick="document.getElementById('addAchievementModal').showModal()"
@@ -393,7 +391,7 @@
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                         </svg>
-                        নতুন অর্জন
+                        New Achievement
                     </button>
                     @endif
                 </div>
@@ -414,7 +412,7 @@
                                 <button type="button"
                                     onclick="editAchievement({{ $ach->id }}, '{{ addslashes($ach->title) }}', '{{ addslashes($ach->description) }}')"
                                     class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-blue-50 text-blue-600 hover:bg-blue-100 hover:text-blue-700 transition-colors shadow-sm border border-blue-100"
-                                    title="এডিট করুন">
+                                    title="Edit">
                                     <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                                         stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -422,12 +420,12 @@
                                     </svg>
                                 </button>
                                 <form action="{{ route('achievements.delete', $ach->id) }}" method="POST"
-                                    onsubmit="return confirm('আপনি কি নিশ্চিত যে এই অর্জনটি মুছে ফেলতে চান?');"
+                                    onsubmit="return confirm('Are you sure you want to delete this achievement?');"
                                     class="inline">
                                     @csrf @method('DELETE')
                                     <button type="submit"
                                         class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-red-50 text-red-600 hover:bg-red-100 hover:text-red-700 transition-colors shadow-sm border border-red-100"
-                                        title="ডিলিট করুন">
+                                        title="Delete">
                                         <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                                             stroke-width="2">
                                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -447,7 +445,7 @@
                         @endif
                     </div>
                     @empty
-                    <p class="text-xs sm:text-sm" style="color: var(--mc-text-muted);">কোনো অর্জন যোগ করা হয়নি</p>
+                    <p class="text-xs sm:text-sm" style="color: var(--mc-text-muted);">No achievements added</p>
                     @endforelse
                 </div>
             </div>
@@ -479,10 +477,9 @@
                                     <path
                                         d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.173c.969 0 1.371 1.24.588 1.81l-3.376 2.454a1 1 0 00-.364 1.118l1.286 3.967c.3.921-.755 1.688-1.54 1.118l-3.376-2.454a1 1 0 00-1.176 0l-3.376 2.454c-.784.57-1.838-.197-1.539-1.118l1.285-3.967a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.173a1 1 0 00.95-.69l1.287-3.967z" />
                                 </svg>
-                                শিক্ষার্থীদের রিভিউ
+                                Student Reviews
                             </h2>
-                            <p class="text-xs mt-0.5" style="color: var(--mc-text-muted);">শিক্ষার্থীদের মতামত ও
-                                অভিজ্ঞতা</p>
+                            <p class="text-xs mt-0.5" style="color: var(--mc-text-muted);">Student feedback and experiences</p>
                         </div>
                     </div>
 
@@ -500,7 +497,7 @@
                                 </svg>
                                 @endfor
                         </div>
-                        <p class="text-[10px]" style="color: var(--mc-text-muted);">{{ $reviews->count() }}টি রিভিউ থেকে
+                        <p class="text-[10px]" style="color: var(--mc-text-muted);">From {{ $reviews->count() }} reviews
                         </p>
                     </div>
                     @endif
@@ -512,9 +509,8 @@
                         <path
                             d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.173c.969 0 1.371 1.24.588 1.81l-3.376 2.454a1 1 0 00-.364 1.118l1.286 3.967c.3.921-.755 1.688-1.54 1.118l-3.376-2.454a1 1 0 00-1.176 0l-3.376 2.454c-.784.57-1.838-.197-1.539-1.118l1.285-3.967a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.173a1 1 0 00.95-.69l1.287-3.967z" />
                     </svg>
-                    <p class="font-bold" style="color: var(--mc-text-muted);">এখনো কোনো রিভিউ নেই</p>
-                    <p class="text-sm mt-1" style="color: var(--mc-text-faint);">সেশন সম্পন্ন হলে শিক্ষার্থীরা রিভিউ
-                        দিতে পারবেন</p>
+                    <p class="font-bold" style="color: var(--mc-text-muted);">No reviews yet</p>
+                    <p class="text-sm mt-1" style="color: var(--mc-text-faint);">Students can give a review after completing a session</p>
                 </div>
 
                 @else
@@ -561,7 +557,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
-                                যাচাইকৃত
+                                Verified
                             </span>
                         </div>
 
@@ -570,7 +566,7 @@
                             $review->comment }}"
                         </p>
                         @else
-                        <p class="text-xs sm:text-sm italic" style="color: var(--mc-text-faint);">কোনো মন্তব্য নেই</p>
+                        <p class="text-xs sm:text-sm italic" style="color: var(--mc-text-faint);">No comment</p>
                         @endif
 
                         <div class="mt-3 pt-3 border-t flex items-center gap-2"
@@ -615,7 +611,7 @@
                                 d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z" />
                         </svg>
                     </div>
-                    <h3 class="text-lg font-bold text-white">প্রোফাইল ছবি পরিবর্তন</h3>
+                    <h3 class="text-lg font-bold text-white">Change Profile Picture</h3>
                 </div>
                 <button type="button" onclick="closeProfileAvatarModal()"
                     class="btn btn-sm btn-ghost btn-circle text-white hover:bg-white/20">
@@ -641,8 +637,8 @@
                         @endif
                     </div>
                     <div id="profilePreviewBadge" class="hidden px-2 py-0.5 rounded-full text-xs font-bold text-white"
-                        style="background:#1A998F;">পূর্বরূপ</div>
-                    <p class="text-xs" style="color:var(--mc-text-muted);">বর্তমান প্রোফাইল ছবি</p>
+                        style="background:#1A998F;">Preview</div>
+                    <p class="text-xs" style="color:var(--mc-text-muted);">Current Profile Picture</p>
                 </div>
 
                 {{-- Drop Zone --}}
@@ -666,9 +662,9 @@
                             </svg>
                         </div>
                         <div class="text-center">
-                            <p class="font-semibold" style="color:var(--mc-text);">ছবি আপলোড করুন</p>
+                            <p class="font-semibold" style="color:var(--mc-text);">Upload Picture</p>
                             <p class="text-xs mt-1" style="color:var(--mc-text-muted);">
-                                ড্র্যাগ করুন অথবা ক্লিক করুন &bull; JPG, PNG, GIF, WebP &bull; সর্বোচ্চ ২ MB
+                                Drag or Click &bull; JPG, PNG, GIF, WebP &bull; Max 2 MB
                             </p>
                         </div>
                         <input id="profileAvatarFileInput" name="avatar" type="file"
@@ -704,7 +700,7 @@
                             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                             </svg>
-                            বাতিল করুন
+                            Cancel
                         </button>
                         <button type="submit" id="profileUploadSubmitBtn" disabled
                             class="btn flex-1 rounded-xl text-white border-0 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200"
@@ -713,14 +709,14 @@
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
                             </svg>
-                            সংরক্ষণ করুন
+                            Save
                         </button>
                     </div>
                 </form>
             </div>
         </div>
         <form method="dialog" class="modal-backdrop">
-            <button onclick="closeProfileAvatarModal()">বন্ধ</button>
+            <button onclick="closeProfileAvatarModal()">Close</button>
         </form>
     </dialog>
 
@@ -784,7 +780,7 @@
         document.getElementById('profileAvatarUploadForm').addEventListener('submit', function () {
             const btn = document.getElementById('profileUploadSubmitBtn');
             btn.disabled = true;
-            btn.innerHTML = '<span class="loading loading-spinner loading-sm"></span> আপলোড হচ্ছে...';
+            btn.innerHTML = '<span class="loading loading-spinner loading-sm"></span> Uploading...';
         });
 
         // Auto-dismiss flash banners
@@ -814,33 +810,30 @@
     <dialog id="addAchievementModal" class="modal modal-bottom sm:modal-middle">
         <div class="modal-box p-6 rounded-3xl"
             style="background:var(--mc-surface);border:1px solid var(--mc-border-teal-sub);">
-            <h3 class="font-bold text-lg mb-4 text-[#033f63] dark:text-[#7ec8e3]">নতুন অর্জন যোগ করুন</h3>
+            <h3 class="font-bold text-lg mb-4 text-[#033f63] dark:text-[#7ec8e3]">Add New Achievement</h3>
             <form action="{{ route('achievements.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="space-y-4">
                     <div>
-                        <label class="block text-sm font-bold mb-1 text-[#033f63] dark:text-[#7ec8e3]">শিরোনাম</label>
+                        <label class="block text-sm font-bold mb-1 text-[#033f63] dark:text-[#7ec8e3]">Title</label>
                         <input type="text" name="title" required
                             class="w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-transparent text-sm">
                     </div>
                     <div>
-                        <label class="block text-sm font-bold mb-1 text-[#033f63] dark:text-[#7ec8e3]">বিবরণ (ছোট
-                            করে)</label>
+                        <label class="block text-sm font-bold mb-1 text-[#033f63] dark:text-[#7ec8e3]">Description (short)</label>
                         <textarea name="description" rows="3" required
                             class="w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-transparent text-sm"></textarea>
                     </div>
                     <div>
-                        <label class="block text-sm font-bold mb-1 text-[#033f63] dark:text-[#7ec8e3]">ছবি
-                            (সার্টিফিকেট/ক্রেস্ট)</label>
+                        <label class="block text-sm font-bold mb-1 text-[#033f63] dark:text-[#7ec8e3]">Image (Certificate/Crest)</label>
                         <input type="file" name="image" accept="image/*"
                             class="w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-transparent text-sm">
                     </div>
                 </div>
                 <div class="modal-action">
                     <button type="button" onclick="document.getElementById('addAchievementModal').close()"
-                        class="btn btn-ghost rounded-xl">বাতিল</button>
-                    <button type="submit" class="btn rounded-xl text-white" style="background:#eab308;border:none;">যোগ
-                        করুন</button>
+                        class="btn btn-ghost rounded-xl">Cancel</button>
+                    <button type="submit" class="btn rounded-xl text-white" style="background:#eab308;border:none;">Add</button>
                 </div>
             </form>
         </div>
@@ -850,34 +843,32 @@
     <dialog id="editAchievementModal" class="modal modal-bottom sm:modal-middle">
         <div class="modal-box p-6 rounded-3xl"
             style="background:var(--mc-surface);border:1px solid var(--mc-border-teal-sub);">
-            <h3 class="font-bold text-lg mb-4 text-[#033f63] dark:text-[#7ec8e3]">অর্জন সম্পাদনা করুন</h3>
+            <h3 class="font-bold text-lg mb-4 text-[#033f63] dark:text-[#7ec8e3]">Edit Achievement</h3>
             <form id="editAchievementForm" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="space-y-4">
                     <div>
-                        <label class="block text-sm font-bold mb-1 text-[#033f63] dark:text-[#7ec8e3]">শিরোনাম</label>
+                        <label class="block text-sm font-bold mb-1 text-[#033f63] dark:text-[#7ec8e3]">Title</label>
                         <input type="text" name="title" id="editAchTitle" required
                             class="w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-transparent text-sm">
                     </div>
                     <div>
-                        <label class="block text-sm font-bold mb-1 text-[#033f63] dark:text-[#7ec8e3]">বিবরণ (ছোট
-                            করে)</label>
+                        <label class="block text-sm font-bold mb-1 text-[#033f63] dark:text-[#7ec8e3]">Description (short)</label>
                         <textarea name="description" id="editAchDesc" rows="3" required
                             class="w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-transparent text-sm"></textarea>
                     </div>
                     <div>
-                        <label class="block text-sm font-bold mb-1 text-[#033f63] dark:text-[#7ec8e3]">নতুন ছবি
-                            (ঐচ্ছিক)</label>
+                        <label class="block text-sm font-bold mb-1 text-[#033f63] dark:text-[#7ec8e3]">New Image (Optional)</label>
                         <input type="file" name="image" accept="image/*"
                             class="w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-transparent text-sm">
                     </div>
                 </div>
                 <div class="modal-action">
                     <button type="button" onclick="document.getElementById('editAchievementModal').close()"
-                        class="btn btn-ghost rounded-xl">বাতিল</button>
+                        class="btn btn-ghost rounded-xl">Cancel</button>
                     <button type="submit" class="btn rounded-xl text-white"
-                        style="background:#eab308;border:none;">আপডেট করুন</button>
+                        style="background:#eab308;border:none;">Update</button>
                 </div>
             </form>
         </div>
