@@ -184,43 +184,10 @@
                                 ['value' => 'bank', 'label' => 'Bank Transfer', 'img' => 'bank.svg', 'fallback' =>
                                 'Bank', 'active_border' => '#0284c7', 'active_bg' => 'rgba(2,132,199,0.08)',
                                 'fallback_color' => '#0284c7'],
-                                ['value' => 'pathaopay', 'label' => 'Pathao Pay', 'img' => 'Pathao_Pay.svg', 'fallback' => 'Pathao Pay',
-                                'active_border' => '#e84525', 'active_bg' => 'rgba(232,69,37,0.08)', 'fallback_color' => '#e84525',
-                                'link' => 'https://pathaopay.me/@mr_explorer142/' . ($totalAmount + 0)],
                                 ];
                                 @endphp
 
                                 @foreach($methods as $i => $m)
-                                @if(isset($m['link']))
-                                <a href="{{ $m['link'] }}" target="_blank" class="cursor-pointer payment-label block" style="text-decoration: none;"
-                                    data-active-border="{{ $m['active_border'] }}"
-                                    data-active-bg="{{ $m['active_bg'] }}">
-                                    <div class="payment-card rounded-xl p-2.5 sm:p-4 border-2 text-center transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
-                                        style="background: var(--mc-bg); border-color: var(--mc-border);">
-                                        <div class="h-6 sm:h-7 flex items-center justify-center mb-1.5 sm:mb-2">
-                                            @if($m['fallback'])
-                                            <img src="{{ asset('images/Checkout Page/' . $m['img']) }}"
-                                                class="h-6 sm:h-7 mx-auto" alt="{{ $m['label'] }}"
-                                                onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                                            <span class="text-base sm:text-lg font-black hidden"
-                                                style="color: {{ $m['fallback_color'] }};">{{ $m['fallback'] }}</span>
-                                            @else
-                                            <img src="{{ asset('images/Checkout Page/' . $m['img']) }}"
-                                                class="h-6 sm:h-7 mx-auto" alt="{{ $m['label'] }}"
-                                                onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 sm:w-7 sm:h-7 hidden" fill="none"
-                                                viewBox="0 0 24 24" stroke-width="1.8" stroke="#1A9998">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
-                                            </svg>
-                                            @endif
-                                        </div>
-                                        <p class="text-[11px] sm:text-xs font-semibold" style="color: var(--mc-text-muted);">
-                                            {{ $m['label'] }}
-                                        </p>
-                                    </div>
-                                </a>
-                                @else
                                 <label class="cursor-pointer payment-label"
                                     data-active-border="{{ $m['active_border'] }}"
                                     data-active-bg="{{ $m['active_bg'] }}">
@@ -251,7 +218,6 @@
                                         </p>
                                     </div>
                                 </label>
-                                @endif
                                 @endforeach
                             </div>
                         </div>
@@ -307,14 +273,11 @@
         document.querySelectorAll('.payment-label').forEach(label => {
             const radio = label.querySelector('.payment-radio');
             const card  = label.querySelector('.payment-card');
-            if (radio && radio.checked) {
+            if (radio.checked) {
                 card.style.borderColor = label.dataset.activeBorder;
                 card.style.background  = label.dataset.activeBg;
                 // ✅ sync hidden input whenever a card is active
                 document.getElementById('selected-payment-method').value = radio.value;
-            } else if (radio) {
-                card.style.borderColor = 'var(--mc-border)';
-                card.style.background  = 'var(--mc-bg)';
             } else {
                 card.style.borderColor = 'var(--mc-border)';
                 card.style.background  = 'var(--mc-bg)';
