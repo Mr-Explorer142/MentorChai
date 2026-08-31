@@ -20,7 +20,7 @@ MentorChai is built on a scalable, three-tier architecture ensuring secure data 
 ### 1. Three-Tier Architecture
 * **Client Presentation Tier:** Built with HTML5, Tailwind CSS v4, DaisyUI, and JavaScript utilizing a Teal and Blue color palette. Includes a separate dedicated Admin panel.
 * **Backend Engine Tier:** Powered by PHP-Laravel, handling core business logic including OAuth authentication, user roles, mentor matching, session booking, push notifications, secure 1-to-1 live sessions, and review systems.
-* **Data Storage & Infrastructure Tier:** Hosted on Laravel Cloud, utilizing a MySQL database (16 structured tables), OAuth2 (GitHub/Google), and third-party APIs (SSLCommerz for payments, ZegoCloud for video).
+* **Data Storage & Infrastructure Tier:** Hosted on Laravel Cloud, utilizing a MySQL database (16 structured tables), OAuth2 (GitHub/Google), and third-party APIs (SSLCommerz for payments, ZegoCloud for Live video session and Mailtrap for e-mail verification).
 
 <img width="1280" height="720" alt="Slide1" src="https://github.com/user-attachments/assets/a349c523-8f0a-4249-b709-895bfa6443b4" />
 
