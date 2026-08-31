@@ -1,6 +1,6 @@
 # MentorChai - Virtual Mentorship Platform
 
-🔗 **[Live Demo: https://mentorchai-production-cdw3if.laravel.cloud/]**
+🔗 **Live Demo: https://mentorchai-production-cdw3if.laravel.cloud/**
 
 A web-based virtual mentorship platform supporting real-time features for both mentors and students simultaneously. This platform is designed to facilitate flexible, short-time based virtual sessions to make education more accessible and affordable for everyone.
 
@@ -175,15 +175,16 @@ php artisan queue:work
 
 ## Tech Stack & Tools
 
-- **Frontend**: HTML, Tailwind CSS(DaisyUI), JavaScript
+- **Frontend**: HTML, Tailwind CSS, Daisy UI, JavaScript
 - **Backend**: PHP-Laravel
 - **Database**: MySQL
 - **Version Control System**: Git & GitHub 
 - **Notification System**: Laravel Echo and Pusher 
 - **Email Verification Platform**: MailTrap
 - **Video Calling API kit**: ZegoCloud 
-- **Payment Gateway**: SSLCommerz(Sandbox), PathaoPay(Real time transaction)
+- **Payment Gateway**: SSLCommerz(Sandbox)
 - **Package Manager**: Composer, NPM
+- **Testing Framework**: PHPUnit
 - **Hosting and Cloud platform**: Laravel Cloud
 
 ## 📂 Project Structure
