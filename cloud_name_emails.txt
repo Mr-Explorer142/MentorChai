@@ -4,6 +4,7 @@ Command to get :
 php artisan tinker --execute="echo App\Models\User::select('name','email', 'role')->get()->map(fn(\$u) => \$u->name.' | '.\$u->email.' | '.\$u->role)->implode(PHP_EOL)"
 
 
+
 ----------------------------------
 
 Super Admin | superadmin@gmail.com |
