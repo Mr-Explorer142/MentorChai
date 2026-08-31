@@ -13,6 +13,20 @@ This Laravel application enables seamless interaction between mentors and studen
 * Enhanced educational accessibility
 * Cost-effective virtual learning solutions
 
+## Tech Stack & Tools
+
+- **Frontend**: HTML, Tailwind CSS, Daisy UI, JavaScript
+- **Backend**: PHP-Laravel
+- **Database**: MySQL
+- **Version Control System**: Git & GitHub 
+- **Notification System**: Laravel Echo and Pusher 
+- **Email Verification Platform**: MailTrap
+- **Video Calling API kit**: ZegoCloud 
+- **Payment Gateway**: SSLCommerz(Sandbox)
+- **Package Manager**: Composer, NPM
+- **Testing Framework**: PHPUnit
+- **Hosting and Cloud platform**: Laravel Cloud
+
 ## System Design & Architecture
 
 MentorChai is built on a scalable, three-tier architecture ensuring secure data flow, efficient session management, and robust third-party integrations.
@@ -172,20 +186,6 @@ php artisan test
 ```bash
 php artisan queue:work
 ```
-
-## Tech Stack & Tools
-
-- **Frontend**: HTML, Tailwind CSS, Daisy UI, JavaScript
-- **Backend**: PHP-Laravel
-- **Database**: MySQL
-- **Version Control System**: Git & GitHub 
-- **Notification System**: Laravel Echo and Pusher 
-- **Email Verification Platform**: MailTrap
-- **Video Calling API kit**: ZegoCloud 
-- **Payment Gateway**: SSLCommerz(Sandbox)
-- **Package Manager**: Composer, NPM
-- **Testing Framework**: PHPUnit
-- **Hosting and Cloud platform**: Laravel Cloud
 
 ## 📂 Project Structure
 
