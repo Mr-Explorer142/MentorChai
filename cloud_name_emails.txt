@@ -1,0 +1,39 @@
+Command to get :
+-------------------
+
+php artisan tinker --execute="echo App\Models\User::select('name','email', 'role')->get()->map(fn(\$u) => \$u->name.' | '.\$u->email.' | '.\$u->role)->implode(PHP_EOL)"
+
+
+----------------------------------
+
+Super Admin | superadmin@gmail.com |
+Miss Kathlyn Robel DDS | kip87@example.net |
+Helga Lowe | cgislason@example.org |
+Miss Edwina Bechtelar IV | benedict31@example.org |
+Dr. Jazmyne Kiehn | reynolds.devan@example.org |
+Gia Gaylord V | lauren.murray@example.org |
+Morris Hansen | brenna.reichert@example.com |
+Imani Hermann | vernice.cole@example.org |
+Ursula Dach Jr. | wschimmel@example.net |
+Dr. Fernando Jacobson II | lweber@example.com |
+Kayli Ortiz MD | hane.robert@example.org |
+Mr. Alvis Corkery PhD | leffler.lora@example.org |
+Miss Zaria Fadel | dcasper@example.net |
+Una Kertzmann | hackett.kobe@example.net |
+Rosalinda Connelly | white.camren@example.com |
+Dr. Michael Boyle I | qjohns@example.net |
+Mozell Keeling | gschamberger@example.org |
+Madeline Champlin | dmurray@example.net |
+Willy Cartwright II | katlynn77@example.org |
+Dr. Cleve Hayes IV | bud00@example.org |
+Josiane Mayert | kenneth69@example.org |
+Eriberto Beatty DVM | wmckenzie@example.net |
+Edmund Rath | mateo20@example.com |
+Dr. Hayley Marquardt III | hane.minerva@example.com |
+Bo Dietrich | zmayert@example.org |
+Laurie Miller | white.rosetta@example.com |
+Allene Hackett | lwiegand@example.com |
+Prof. Skylar Fisher DDS | orin.zulauf@example.org |
+Kaylin Trantow | bins.leta@example.org |
+Oliver Pagac | tfay@example.com |
+Betty Wehner I | vschroeder@example.org |
