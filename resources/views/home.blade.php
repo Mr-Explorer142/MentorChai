@@ -107,7 +107,7 @@
                         </div>
 
                         <div class="relative w-full max-w-[260px] sm:max-w-none mx-auto sm:mx-0">
-                            <img src="{{ asset('images/Home Page/mentorship-session.png') }}" alt="Mentorship session"
+                            <img src="{{ asset('images/Home Page/mentorship-session.jpg') }}" alt="Mentorship session"
                                 class="relative w-full rounded-3xl"
                                 style="border: 1px solid var(--mc-border-teal); box-shadow: 0 24px 60px rgba(26,153,152,0.15), 0 4px 16px rgba(0,0,0,0.08);" />
 
@@ -457,12 +457,12 @@
                         class="flex flex-col items-center sm:items-start text-center sm:text-left space-y-5 sm:space-y-7">
                         <h2 class="text-xl sm:text-3xl font-extrabold leading-tight tracking-tight lg:text-4xl"
                             style="color: var(--mc-text);">
-                            যুক্ত হোন আমাদের
+                            আমাদের
                             <span
                                 style="background: linear-gradient(135deg, var(--mc-primary), var(--mc-sage)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
                                 মেন্টর হিসেবে
                             </span>
-                            <br />এবং ঘরে বসে উপার্জন করুন
+                            <br />যুক্ত হোন এবং ঘরে বসে উপার্জন করুন
                         </h2>
 
                         <div class="space-y-2 sm:space-y-3 max-w-xl mx-auto sm:mx-0">
