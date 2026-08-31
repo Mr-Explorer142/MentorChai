@@ -76,7 +76,7 @@
                         {{ $faq['a'] }}
                         @else
                         মেন্টর হিসাবে যুক্ত হওয়ার নিয়মকানুন সম্পর্কে বিস্তারিত জানতে
-                        <a href="https://example.com" target="_blank" rel="noopener noreferrer"
+                        <a href="{{ route('terms') }}"
                             class="font-bold underline underline-offset-2" style="color: var(--mc-primary);">
                             এই লিংকে ক্লিক করুন
                         </a>।

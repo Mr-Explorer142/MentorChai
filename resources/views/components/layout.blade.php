@@ -210,7 +210,7 @@
                                               px-4 py-[0.55rem] rounded-[10px] no-underline
                                               transition-all duration-150
                                               hover:bg-[#28666e]/8 dark:hover:bg-[#4db6c1]/12 hover:text-[#28666e] dark:hover:text-[#4db6c1]
-                                              {{ Route::is('mentor_profile') ? 'bg-![#28666e] text-gray-500!' : '' }}">
+                                              {{ Route::is('mentor_profile') ? '!bg-[#28666e] !text-white' : '' }}">
                                         Profile
                                     </a>
                                     <a href="{{ route('mentor_dashboard') }}"
@@ -219,7 +219,7 @@
                                               px-4 py-[0.55rem] rounded-[10px] no-underline
                                               transition-all duration-150
                                               hover:bg-[#28666e]/8 dark:hover:bg-[#4db6c1]/12 hover:text-[#28666e] dark:hover:text-[#4db6c1]
-                                              {{ Route::is('mentor_dashboard') ? 'bg-![#28666e] text-gray-500!' : '' }}">
+                                              {{ Route::is('mentor_dashboard') ? '!bg-[#28666e] !text-white' : '' }}">
                                         Dashboard
                                     </a>
                                     @elseif (isStudent())
@@ -229,7 +229,7 @@
                                               px-4 py-[0.55rem] rounded-[10px] no-underline
                                               transition-all duration-150
                                               hover:bg-[#28666e]/8 dark:hover:bg-[#4db6c1]/12 hover:text-[#28666e] dark:hover:text-[#4db6c1]
-                                              {{ Route::is('student_profile') ? 'bg-![#28666e] text-gray-500!' : '' }}">
+                                              {{ Route::is('student_profile') ? '!bg-[#28666e] !text-white' : '' }}">
                                         Profile
                                     </a>
                                     <a href="{{ route('student_dashboard') }}"
@@ -238,7 +238,7 @@
                                               px-4 py-[0.55rem] rounded-[10px] no-underline
                                               transition-all duration-150
                                               hover:bg-[#28666e]/8 dark:hover:bg-[#4db6c1]/12 hover:text-[#28666e] dark:hover:text-[#4db6c1]
-                                              {{ Route::is('student_dashboard') ? 'bg-![#28666e] text-gray-500!' : '' }}">
+                                              {{ Route::is('student_dashboard') ? '!bg-[#28666e] !text-white' : '' }}">
                                         Dashboard
                                     </a>
                                     @endif
@@ -295,14 +295,14 @@
                                       px-4 py-[0.65rem] rounded-xl
                                       transition-all duration-150
                                       hover:bg-[#28666e]/8 dark:hover:bg-[#4db6c1]/12 hover:text-[#28666e] dark:hover:text-[#4db6c1]
-                                      {{ Route::is('mentors') ? 'bg-![#28666e] text-white!' : '' }}">
+                                      {{ Route::is('mentors') ? '!bg-[#28666e] !text-white' : '' }}">
                                 {{ Route::is('home', 'about', 'faq', 'terms') ? 'শিক্ষক খুঁজুন' : 'Find Mentors' }}
                             </a>
                             <a href="{{ route('home') }}" class="block text-[0.9rem] font-semibold text-[#033f63] dark:text-[#7ec8e3] no-underline
                                       px-4 py-[0.65rem] rounded-xl
                                       transition-all duration-150
                                       hover:bg-[#28666e]/8 dark:hover:bg-[#4db6c1]/12 hover:text-[#28666e] dark:hover:text-[#4db6c1]
-                                      {{ Route::is('home') ? 'bg-![#28666e] text-white!' : '' }}">
+                                      {{ Route::is('home') ? '!bg-[#28666e] !text-white' : '' }}">
                                 Home
                             </a>
                             @guest
@@ -310,7 +310,7 @@
                                       px-4 py-[0.65rem] rounded-xl
                                       transition-all duration-150
                                       hover:bg-[#28666e]/8 dark:hover:bg-[#4db6c1]/12 hover:text-[#28666e] dark:hover:text-[#4db6c1]
-                                      {{ Route::is('student_register') ? 'bg-![#28666e] text-white!' : '' }}">
+                                      {{ Route::is('student_register') ? '!bg-[#28666e] !text-white' : '' }}">
                                 Register
                             </a>
                             @endguest
