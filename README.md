@@ -2,7 +2,7 @@
 
 A web-based virtual mentorship platform supporting real-time features for both mentors and students simultaneously. This platform is designed to facilitate flexible, short-time based virtual sessions to make education more accessible and affordable for everyone.
 
-## 📋 Project Description
+## Project Description
 
 This Laravel application enables seamless interaction between mentors and students through:
 - Real-time communication features
@@ -11,7 +11,7 @@ This Laravel application enables seamless interaction between mentors and studen
 - Enhanced educational accessibility
 - Cost-effective virtual learning solutions
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -29,7 +29,7 @@ git clone https://github.com/Mr-Explorer142/MentorChai.git
 cd <project-directory-name>
 ```
 
-## ⚙️ Setup Instructions
+## Setup Instructions
 
 ### 1. Install PHP Dependencies
 
@@ -114,7 +114,7 @@ php artisan serve
 
 The application will be available at `http://localhost:8000`
 
-## 📝 Additional Commands
+## Additional Commands
 
 ### Clear Cache
 
@@ -137,7 +137,7 @@ php artisan test
 php artisan queue:work
 ```
 
-## 🛠️ Tech Stack & Tools
+## Tech Stack & Tools
 
 - **Frontend**: HTML, Tailwind CSS(DaisyUI), JavaScript
 - **Backend**: PHP-Laravel
