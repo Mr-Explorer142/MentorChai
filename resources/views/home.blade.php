@@ -70,7 +70,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7-7 7" />
                                 </svg>
                             </a>
-                            <a href="#"
+                            <a href="{{ route('about') }}"
                                 class="inline-flex items-center justify-center gap-1.5 sm:gap-2 rounded-xl px-3 py-2.5 text-xs sm:px-7 sm:py-3.5 sm:text-base font-semibold transition-all duration-300 hover:-translate-y-0.5"
                                 style="border: 1.5px solid rgba(26,153,152,0.4); color: var(--mc-primary); background: var(--mc-surface);">
                                 কীভাবে কাজ করে?
