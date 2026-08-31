@@ -114,52 +114,6 @@ php artisan serve
 
 The application will be available at `http://localhost:8000`
 
-## 🔄 Pushing Changes to Repository
-
-### First Time Setup
-
-1. Initialize git (if not already done):
-```bash
-git init
-```
-
-2. Add remote repository:
-```bash
-git remote add origin <your-repository-url>
-```
-
-### Regular Workflow
-
-1. Check current status:
-```bash
-git status
-```
-
-2. Add files to staging:
-```bash
-git add .
-```
-
-Or add specific files:
-```bash
-git add <file-name>
-```
-
-3. Commit your changes:
-```bash
-git commit -m "Your descriptive commit message"
-```
-
-4. Pull latest changes (recommended before pushing):
-```bash
-git pull origin main
-```
-
-5. Push your changes:
-```bash
-git push origin main
-```
-
 ## 📝 Additional Commands
 
 ### Clear Cache
@@ -194,6 +148,7 @@ php artisan queue:work
 - **Video Calling API kit**: ZegoCloud 
 - **Payment Gateway**: SSLCommerz(Sandbox), PathaoPay(Real time transaction)
 - **Package Manager**: Composer, NPM
+- - **Hosting and Cloud platform**: Laravel Cloud
 
 ## 📂 Project Structure
 
