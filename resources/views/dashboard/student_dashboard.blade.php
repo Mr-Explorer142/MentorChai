@@ -207,6 +207,13 @@
                                                 Join
                                             </a>
                                             @endif
+                                             {{-- Pay Now button for approved session requests --}}
+                                             @if($topic->status === \App\Enums\SessionStatus::Approved && !$mentoringSession)
+                                             <a href="{{ route('checkout', $topic->id) }}"
+                                                 class="badge badge-success font-black text-[10px] sm:text-xs py-2 px-2.5 sm:py-2.5 sm:px-4 shadow-sm border-0 gap-1 hover:scale-105 transition-transform">
+                                                 Pay Now &rarr;
+                                             </a>
+                                             @endif
                                             <div
                                                 class="badge {{ $s['cls'] }} font-black text-[10px] sm:text-xs py-2 px-2.5 sm:py-2.5 sm:px-4 shadow-sm border-0">
                                                 @if($mentoringSession)
