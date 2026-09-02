@@ -37,7 +37,7 @@ class SessionApprovedNotification extends Notification
             'mentor_id'   => $this->session->mentor_id,
             'mentor_name' => $this->session->mentor->name,
             'topic'       => $this->session->topic,
-            'checkout_url' => route('checkout', $this->session->id),
+            'checkout_url' => route('checkout', $this->session->id, false),
         ];
     }
 }

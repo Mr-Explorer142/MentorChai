@@ -84,12 +84,25 @@
             @endif
 
             {{-- Student: Pay button for approved sessions --}}
-            @if($type === 'session_approved' &&
-            isset($notification->data['checkout_url']))
-            <a href="{{ $notification->data['checkout_url'] }}" onclick="markAsRead('{{ $notification->id }}')" class="inline-flex items-center gap-1 mt-1 text-xs font-semibold
+            @if($type === 'session_approved')
+            @php
+                $sessionId = $notification->data['session_id'] ?? null;
+                if ($sessionId) {
+                    $payUrl = route('checkout', $sessionId, false);
+                } elseif (!empty($notification->data['checkout_url'])) {
+                    $payUrl = \Illuminate\Support\Str::startsWith($notification->data['checkout_url'], 'http')
+                        ? '/checkout/' . \Illuminate\Support\Str::afterLast($notification->data['checkout_url'], '/checkout/')
+                        : $notification->data['checkout_url'];
+                } else {
+                    $payUrl = null;
+                }
+            @endphp
+            @if($payUrl)
+            <a href="{{ $payUrl }}" onclick="markAsRead('{{ $notification->id }}')" class="inline-flex items-center gap-1 mt-1 text-xs font-semibold
                                    text-teal-600 dark:text-teal-400 hover:underline">
                 Pay Now &rarr;
             </a>
+            @endif
             @endif
 
             {{-- Mentor: Approve button for session requests --}}
