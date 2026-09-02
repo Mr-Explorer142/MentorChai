@@ -9,11 +9,19 @@ return new class extends Migration
 {
     public function up(): void
     {
+        if (DB::getDriverName() === 'sqlite') {
+            return;
+        }
+
         DB::statement("ALTER TABLE payments MODIFY COLUMN method ENUM('bkash','nagad','rocket','card','bank') NOT NULL");
     }
 
     public function down(): void
     {
+        if (DB::getDriverName() === 'sqlite') {
+            return;
+        }
+
         DB::statement("ALTER TABLE payments MODIFY COLUMN method ENUM('bKash','Nagad','card','bank') NOT NULL");
     }
 };

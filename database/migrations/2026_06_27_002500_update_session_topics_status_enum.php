@@ -10,6 +10,10 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (DB::getDriverName() === 'sqlite') {
+            return;
+        }
+
         // Add 'ended_by_admin' to the ENUM values for the status column
         DB::statement("ALTER TABLE session_topics MODIFY COLUMN status ENUM('pending', 'approved', 'ongoing', 'rejected', 'completed', 'ended_by_admin') DEFAULT 'pending'");
     }
@@ -19,6 +23,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        if (DB::getDriverName() === 'sqlite') {
+            return;
+        }
+
         DB::statement("ALTER TABLE session_topics MODIFY COLUMN status ENUM('pending', 'approved', 'ongoing', 'rejected', 'completed') DEFAULT 'pending'");
     }
 };
