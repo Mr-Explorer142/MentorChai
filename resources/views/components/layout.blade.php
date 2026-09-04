@@ -111,37 +111,38 @@
                                 </button>
 
                                 {{-- Notification Panel --}}
-                                <div id="notificationPanel" class="hidden fixed md:absolute left-4 right-4 md:left-auto md:right-0
-        top-16 md:top-auto md:mt-2 w-auto md:w-88
-        rounded-3xl bg-white dark:bg-[#122333]
+                                <div id="notificationPanel" class="hidden fixed md:absolute left-auto right-2 md:right-0
+        top-14 md:top-full md:mt-2 w-[290px] sm:w-80
+        rounded-xl bg-white dark:bg-[#122333]
         border border-[#28666e]/15 dark:border-[#4db6c1]/20
-        shadow-[0_20px_45px_rgba(40,102,110,0.12)] dark:shadow-[0_20px_45px_rgba(0,0,0,0.35)]
-        z-999 overflow-hidden">
+        shadow-[0_8px_24px_rgba(40,102,110,0.15)] dark:shadow-[0_8px_24px_rgba(0,0,0,0.4)]
+        z-[999] overflow-hidden">
 
                                     {{-- Panel Header --}}
-                                    <div class="px-4 py-3 bg-[#eaf7f8] dark:bg-[#102d3b]
+                                    <div class="px-3 py-2 bg-[#eaf7f8] dark:bg-[#102d3b]
             border-b border-[#28666e]/10 dark:border-[#4db6c1]/10">
-                                        <div class="flex items-center justify-between gap-3">
-                                            <p class="font-semibold text-[#033f63] dark:text-[#7ec8e3]">Notifications</p>
-                                            <div class="flex items-center gap-2">
+                                        <div class="flex items-center justify-between gap-2">
+                                            <p class="font-bold text-xs text-[#033f63] dark:text-[#7ec8e3]">Notifications</p>
+                                            <div class="flex items-center gap-1.5">
                                                 <button id="markAllBtn" onclick="markAllAsRead()"
-                                                    class="{{ $unreadCount > 0 ? '' : 'hidden' }} text-[0.7rem] font-semibold text-[#033f63] dark:text-[#d2f1ff]
-                                                           bg-[#28666e]/10 dark:bg-[#4db6c1]/15 px-2 py-1 rounded-full
+                                                    class="flex items-center justify-center gap-1 text-[10px] font-semibold text-[#033f63] dark:text-[#d2f1ff]
+                                                           bg-[#28666e]/10 dark:bg-[#4db6c1]/15 px-2 py-0.5 rounded-md
                                                            hover:bg-[#28666e]/15 dark:hover:bg-[#4db6c1]/25 transition-colors">
-                                                    Mark all as read
+                                                    <svg class="w-2.5 h-2.5 text-[#28666e] dark:text-[#4db6c1] shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    <span class="whitespace-nowrap">Mark all read</span>
                                                 </button>
                                                 <span id="notificationCount"
-                                                    class="{{ $unreadCount > 0 ? '' : 'hidden' }} badge badge-sm bg-[#28666e] text-white border-0">
+                                                    class="{{ $unreadCount > 0 ? '' : 'hidden' }} badge badge-xs bg-[#28666e] text-white border-0 shrink-0">
                                                     {{ $unreadCount }}
                                                 </span>
                                             </div>
                                         </div>
-                                        <p class="text-xs text-[#28666e]/70 dark:text-[#7ec8e3]/70 mt-1">Latest Updates
-                                        </p>
                                     </div>
 
                                     {{-- Notification List --}}
-                                    <div class="p-3 space-y-2 max-h-80 overflow-y-auto" id="notificationList">
+                                    <div class="p-2 space-y-1.5 max-h-56 sm:max-h-72 overflow-y-auto" id="notificationList">
                                         @include('partials.notification-items', ['notifications' => $notifications])
                                     </div>
 
@@ -515,10 +516,6 @@ const count = document.getElementById('notificationCount');
 const dot = document.getElementById('notificationDot');
 if (count) count.classList.add('hidden');
 if (dot) dot.classList.add('hidden');
-
-// Hide the mark all button itself (not remove!)
-const markAllBtn = document.getElementById('markAllBtn');
-if (markAllBtn) markAllBtn.classList.add('hidden');
 }).catch(err => console.error('Mark all read failed:', err));
 }
 
@@ -556,16 +553,13 @@ if (current <= 0) { badge.classList.add('hidden'); if (dot) dot.classList.add('h
 
             const badge   = document.getElementById('notificationCount');
             const dot     = document.getElementById('notificationDot');
-            const markAll = document.getElementById('markAllBtn');
 
             if (data.unreadCount > 0) {
                 if (badge) { badge.textContent = data.unreadCount; badge.classList.remove('hidden'); }
                 if (dot)   dot.classList.remove('hidden');
-                if (markAll) markAll.classList.remove('hidden');
             } else {
                 if (badge) badge.classList.add('hidden');
                 if (dot)   dot.classList.add('hidden');
-                if (markAll) markAll.classList.add('hidden');
             }
 
             if (data.unreadCount > previousUnreadCount) {

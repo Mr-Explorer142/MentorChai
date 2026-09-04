@@ -122,7 +122,7 @@ class PaymentController extends Controller
 
         Log::info('Step 2 - Validation passed');
 
-        $sessionTopic = SessionTopic::with(['mentor.profile', 'student'])
+        $sessionTopic = SessionTopic::with(['mentor.profile', 'student', 'mentoringSession.payment'])
             ->findOrFail($request->session_topic_id);
 
         Log::info('Step 3 - Session topic found', ['id' => $sessionTopic->id]);
@@ -130,6 +130,23 @@ class PaymentController extends Controller
         abort_unless((int) Auth::id() === (int) $sessionTopic->student_id, 403);
 
         Log::info('Step 4 - Auth check passed');
+
+        $isPaid = $sessionTopic->status === SessionStatus::Completed ||
+            MentoringSession::where('topic_id', $sessionTopic->id)
+                ->where(function ($q) {
+                    $q->whereIn('status', [
+                        SessionStatus::Ongoing,
+                        SessionStatus::Completed,
+                        SessionStatus::EndedByAdmin
+                    ])->orWhereHas('payment', function ($pq) {
+                        $pq->where('status', \App\Enums\PaymentStatus::Paid);
+                    });
+                })->exists();
+
+        if ($isPaid) {
+            return redirect()->route('student_dashboard')
+                ->with('error', 'Payment for this session has already been completed.');
+        }
 
         abort_if($sessionTopic->status !== SessionStatus::Approved, 403);
 

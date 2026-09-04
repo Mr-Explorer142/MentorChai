@@ -89,7 +89,9 @@ class MentorsController extends Controller
             }
         }
 
-        // Sorting
+        // Sorting — Online mentors prioritized first by default
+        $query->orderByRaw('(CASE WHEN users.last_seen_at IS NOT NULL AND users.last_seen_at >= ? THEN 1 ELSE 0 END) DESC', [now()->subMinutes(5)]);
+
         if ($request->sort === 'price_asc') {
             $query->orderByRaw('CAST(profiles.hourly_rate AS UNSIGNED) asc');
         } elseif ($request->sort === 'price_desc') {
@@ -98,7 +100,12 @@ class MentorsController extends Controller
             $query->orderBy('users.created_at', 'desc');
         }
 
-        $mentors = $query->paginate(9)->withQueryString();
+        $userAgent = $request->header('User-Agent') ?? '';
+        $secChUaMobile = $request->header('Sec-CH-UA-Mobile') ?? '';
+        $isMobile = (bool) preg_match('/mobile|android|iphone|ipad|ipod|blackberry|iemobile|opera mini/i', $userAgent) || $secChUaMobile === '?1';
+        $perPage = (int) $request->input('per_page', $isMobile ? 10 : 9);
+
+        $mentors = $query->paginate($perPage)->withQueryString();
         $totalMentors = $mentors->total();
 
         return view('mentors', compact('mentors', 'totalMentors', 'allSkills', 'allDepartments'));

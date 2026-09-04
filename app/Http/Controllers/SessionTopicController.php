@@ -58,6 +58,10 @@ class SessionTopicController extends Controller
     // Session approval
     public function approve(SessionTopic $session)
     {
+        if ($session->status !== SessionStatus::Pending) {
+            return back()->with('error', 'This session request has already been processed.');
+        }
+
         $session->update([
             'status'      => SessionStatus::Approved,
             'approved_at' => now(),
@@ -74,6 +78,24 @@ class SessionTopicController extends Controller
     {
         // Make sure only the student who owns this session can access it
         abort_unless((int) Auth::id() === (int) $sessionTopic->student_id, 403);
+
+        // Check if session has already been paid for or completed
+        $isPaid = $sessionTopic->status === SessionStatus::Completed ||
+            \App\Models\MentoringSession::where('topic_id', $sessionTopic->id)
+                ->where(function ($q) {
+                    $q->whereIn('status', [
+                        SessionStatus::Ongoing,
+                        SessionStatus::Completed,
+                        SessionStatus::EndedByAdmin
+                    ])->orWhereHas('payment', function ($pq) {
+                        $pq->where('status', \App\Enums\PaymentStatus::Paid);
+                    });
+                })->exists();
+
+        if ($isPaid) {
+            return redirect()->route('student_dashboard')
+                ->with('error', 'Payment for this session has already been completed.');
+        }
 
         // Make sure session is approved before allowing payment
         abort_if($sessionTopic->status !== SessionStatus::Approved, 403);

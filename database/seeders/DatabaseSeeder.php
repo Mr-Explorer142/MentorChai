@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Enums\UserRole;
+use App\Enums\UserStatus;
 use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -13,49 +14,491 @@ class DatabaseSeeder extends Seeder
     /**
      * Seed the application's database.
      *
-     * 15 users total:
-     *  - 8 students
-     *  - 7 mentors
-     *
-     * Each user gets a role-appropriate profile.
-     * All passwords are: password
+     * Total 27 Users:
+     *  - 1 Super Admin (superadmin@gmail.com / 11111111)
+     *  - 1 Student (student@gmail.com / 11111111)
+     *  - 25 Mentors (mentor1@gmail.com .. mentor25@gmail.com / 11111111)
      */
     public function run(): void
     {
-        // Super Admin — master access
-        User::updateOrCreate(
+        $password = Hash::make('11111111');
+
+        // 1. Super Admin — Fixed in system
+        $adminUser = User::updateOrCreate(
             ['email' => 'superadmin@gmail.com'],
             [
                 'name'              => 'Super Admin',
-                'password'          => Hash::make('admin123'),
+                'password'          => $password,
                 'role'              => UserRole::Admin,
                 'is_super_admin'    => true,
+                'status'            => UserStatus::ACTIVE,
                 'email_verified_at' => now(),
             ]
         );
 
-        // ── 8 Students ────────────────────────────────────────────────
-        User::factory()
-            ->count(18)
-            ->student()
-            ->create()
-            ->each(function (User $user) {
-                $user->profile()->create(
-                    Profile::factory()->student()->make()->toArray()
-                );
-            });
+        Profile::updateOrCreate(
+            ['user_id' => $adminUser->id],
+            [
+                'bio'                        => 'System Super Administrator managing MentorChai platform.',
+                'phone'                      => '01700000000',
+                'address'                    => 'Dhaka, Bangladesh',
+                'highgest_education_level'   => 'Master of Science',
+                'skills'                     => 'System Administration, Platform Management',
+                'institution_name'           => 'BUET',
+                'department'                 => 'CSE',
+                'short_bio'                  => 'Platform Super Admin',
+                'is_verified'                => true,
+                'documents_submitted_at'     => now(),
+            ]
+        );
 
-        // ── 7 Mentors ─────────────────────────────────────────────────
-        User::factory()
-            ->count(12)
-            ->mentor()
-            ->create()
-            ->each(function (User $user) {
-                $user->profile()->create(
-                    Profile::factory()->mentor()->make()->toArray()
-                );
-            });
+        // 2. Student Account (Bangladeshi male)
+        $studentUser = User::updateOrCreate(
+            ['email' => 'student@gmail.com'],
+            [
+                'name'              => 'Tanvir Rahman',
+                'password'          => $password,
+                'role'              => UserRole::Student,
+                'is_super_admin'    => false,
+                'status'            => UserStatus::ACTIVE,
+                'email_verified_at' => now(),
+            ]
+        );
 
-        $this->command->info('✅ 1 Super Admin + 30 users seeded: 18 students + 12 mentors (password: password)');
+        Profile::updateOrCreate(
+            ['user_id' => $studentUser->id],
+            [
+                'bio'                        => 'Computer Science student passionate about software engineering and machine learning.',
+                'phone'                      => '01812345678',
+                'address'                    => 'Dhanmondi, Dhaka, Bangladesh',
+                'highgest_education_level'   => 'Bachelor of Science',
+                'institution_name'           => 'University of Dhaka',
+                'department'                 => 'CSE',
+                'short_bio'                  => 'Student Learner',
+                'learning_style'             => 'Practical hands-on projects with step-by-step guidance.',
+                'preferred_teaching_medium'  => 'Online',
+                'preferred_language'         => 'Bengali',
+                'is_verified'                => true,
+                'documents_submitted_at'     => now(),
+            ]
+        );
+
+        // 3. 25 Male Mentors with Bangladeshi names and profiles (Hourly rates between 100 to 480 BDT)
+        $mentorsData = [
+            [
+                'name' => 'Md. Anisur Rahman',
+                'institution' => 'Bangladesh University of Engineering and Technology (BUET)',
+                'dept' => 'CSE',
+                'education' => 'M.Sc. in Computer Science',
+                'skills' => 'Laravel, PHP, Vue.js, MySQL, System Design',
+                'rate' => 350,
+                'exp_yrs' => 5,
+                'phone' => '01711122334',
+                'address' => 'Mirpur, Dhaka',
+                'bio' => 'Senior Full Stack Developer specializing in Laravel ecosystem and microservices architecture with 5+ years of industry experience.',
+                'short_bio' => 'Senior Laravel & Vue.js Architect',
+                'medium' => 'Online',
+                'lang' => 'Bengali-English Mixed',
+            ],
+            [
+                'name' => 'Kazi Kamrul Hasan',
+                'institution' => 'University of Dhaka (DU)',
+                'dept' => 'SWE',
+                'education' => 'B.Sc. in Software Engineering',
+                'skills' => 'React, Next.js, TypeScript, Node.js, Tailwind CSS',
+                'rate' => 320,
+                'exp_yrs' => 4,
+                'phone' => '01811223344',
+                'address' => 'Dhanmondi, Dhaka',
+                'bio' => 'Frontend & Full Stack Specialist with expertise in modern React ecosystems, SSR frameworks, and performance optimization.',
+                'short_bio' => 'React & Next.js Full Stack Engineer',
+                'medium' => 'Online',
+                'lang' => 'Bengali',
+            ],
+            [
+                'name' => 'Md. Saifullah Mansur',
+                'institution' => 'Shahjalal University of Science and Technology (SUST)',
+                'dept' => 'CSE',
+                'education' => 'M.Sc. in Data Science',
+                'skills' => 'Python, Machine Learning, Data Science, TensorFlow, PyTorch',
+                'rate' => 450,
+                'exp_yrs' => 6,
+                'phone' => '01911223344',
+                'address' => 'Zindabazar, Sylhet',
+                'bio' => 'AI Researcher & Data Scientist helping students master machine learning algorithms, deep learning models, and real-world AI pipelines.',
+                'short_bio' => 'Machine Learning & AI Engineer',
+                'medium' => 'Online',
+                'lang' => 'Bengali-English Mixed',
+            ],
+            [
+                'name' => 'Shakil Ahmed',
+                'institution' => 'Islamic University of Technology (IUT)',
+                'dept' => 'EEE',
+                'education' => 'B.Sc. in EEE',
+                'skills' => 'Embedded Systems, IoT, C++, Robotics, Arduino',
+                'rate' => 250,
+                'exp_yrs' => 3,
+                'phone' => '01611223344',
+                'address' => 'Board Bazar, Gazipur',
+                'bio' => 'IoT Systems Engineer guiding students through embedded C++, circuit design, microcontrollers, and smart device prototypes.',
+                'short_bio' => 'IoT & Embedded Systems Engineer',
+                'medium' => 'Hybrid',
+                'lang' => 'Bengali',
+            ],
+            [
+                'name' => 'Syed Naimur Rahman',
+                'institution' => 'North South University (NSU)',
+                'dept' => 'CSE',
+                'education' => 'B.Sc. in Computer Science',
+                'skills' => 'Flutter, Dart, Mobile App Development, Firebase',
+                'rate' => 300,
+                'exp_yrs' => 4,
+                'phone' => '01511223344',
+                'address' => 'Bashundhara R/A, Dhaka',
+                'bio' => 'Cross-platform mobile developer with 10+ published Apps on Play Store and App Store using Flutter & Firebase backend.',
+                'short_bio' => 'Flutter & Mobile App Specialist',
+                'medium' => 'Online',
+                'lang' => 'English',
+            ],
+            [
+                'name' => 'Mahmudul Haque',
+                'institution' => 'BRAC University',
+                'dept' => 'Computer Science',
+                'education' => 'B.Sc. in Computer Science',
+                'skills' => 'Competitive Programming, Data Structures, Algorithms, C++',
+                'rate' => 200,
+                'exp_yrs' => 3,
+                'phone' => '01311223344',
+                'address' => 'Mohakhali, Dhaka',
+                'bio' => 'Candidate Master on Codeforces and ICPC Regionalist offering rigorous coaching in DSA, problem solving, and competitive coding.',
+                'short_bio' => 'DSA & Competitive Programming Coach',
+                'medium' => 'In-Person',
+                'lang' => 'Bengali',
+            ],
+            [
+                'name' => 'Asif Ikbal Chowdhury',
+                'institution' => 'Chittagong University of Engineering and Technology (CUET)',
+                'dept' => 'CSE',
+                'education' => 'M.Sc. in Cyber Security',
+                'skills' => 'Cyber Security, Ethical Hacking, Network Security, Penetration Testing',
+                'rate' => 480,
+                'exp_yrs' => 7,
+                'phone' => '01722334455',
+                'address' => 'Chawkbazar, Chittagong',
+                'bio' => 'Certified Ethical Hacker (CEH) with hands-on experience in vulnerability assessment, web app security, and SOC operations.',
+                'short_bio' => 'Cyber Security & Ethical Hacking Consultant',
+                'medium' => 'Online',
+                'lang' => 'Bengali-English Mixed',
+            ],
+            [
+                'name' => 'Rakibul Islam',
+                'institution' => 'Rajshahi University of Engineering and Technology (RUET)',
+                'dept' => 'CSE',
+                'education' => 'B.Sc. in CSE',
+                'skills' => 'DevOps, Docker, Kubernetes, AWS, CI/CD',
+                'rate' => 400,
+                'exp_yrs' => 5,
+                'phone' => '01822334455',
+                'address' => 'Kazla, Rajshahi',
+                'bio' => 'DevOps Cloud Engineer helping software developers automate deployments with Docker containers, Kubernetes orchestration, and AWS infrastructure.',
+                'short_bio' => 'DevOps & AWS Cloud Specialist',
+                'medium' => 'Online',
+                'lang' => 'Bengali',
+            ],
+            [
+                'name' => 'Shafiul Alam Khan',
+                'institution' => 'Ahsanullah University of Science and Technology (AUST)',
+                'dept' => 'CSE',
+                'education' => 'B.Sc. in CSE',
+                'skills' => 'Django, Python, REST APIs, PostgreSQL, Redis',
+                'rate' => 280,
+                'exp_yrs' => 4,
+                'phone' => '01922334455',
+                'address' => 'Tejgaon, Dhaka',
+                'bio' => 'Backend developer specializing in Python Django frameworks, scalable API architecture, database indexing, and Redis caching.',
+                'short_bio' => 'Python Django Backend Developer',
+                'medium' => 'Hybrid',
+                'lang' => 'Bengali',
+            ],
+            [
+                'name' => 'Faisal Ahmed',
+                'institution' => 'Jahangirnagar University (JU)',
+                'dept' => 'IT',
+                'education' => 'M.Sc. in IIT',
+                'skills' => 'Java, Spring Boot, Microservices, Hibernate, Oracle',
+                'rate' => 380,
+                'exp_yrs' => 5,
+                'phone' => '01622334455',
+                'address' => 'Savar, Dhaka',
+                'bio' => 'Enterprise Java Architect specialized in Spring Boot microservices, security protocols, and enterprise software engineering.',
+                'short_bio' => 'Java Spring Boot Enterprise Developer',
+                'medium' => 'Online',
+                'lang' => 'Bengali-English Mixed',
+            ],
+            [
+                'name' => 'Md. Zahidul Islam',
+                'institution' => 'BUET',
+                'dept' => 'CSE',
+                'education' => 'B.Sc. in CSE',
+                'skills' => 'System Design, Software Architecture, SQL, Scalability',
+                'rate' => 460,
+                'exp_yrs' => 8,
+                'phone' => '01522334455',
+                'address' => 'Uttara, Dhaka',
+                'bio' => 'Lead Software Architect providing high-level system design mentorship for tech interviews, distributed databases, and fault-tolerant systems.',
+                'short_bio' => 'Lead Software Architect & Tech Mentor',
+                'medium' => 'Online',
+                'lang' => 'English',
+            ],
+            [
+                'name' => 'Md. Mehedi Hasan',
+                'institution' => 'Independent University, Bangladesh (IUB)',
+                'dept' => 'Computer Science',
+                'education' => 'B.Sc. in Computer Science',
+                'skills' => 'UI/UX Design, Figma, Design Systems, User Research',
+                'rate' => 180,
+                'exp_yrs' => 3,
+                'phone' => '01322334455',
+                'address' => 'Bashundhara, Dhaka',
+                'bio' => 'Product Designer offering practical training in Figma prototyping, wireframing, component design systems, and UX research methodologies.',
+                'short_bio' => 'UI/UX & Product Designer',
+                'medium' => 'Hybrid',
+                'lang' => 'Bengali',
+            ],
+            [
+                'name' => 'Tanjim Hossain',
+                'institution' => 'East West University (EWU)',
+                'dept' => 'CSE',
+                'education' => 'B.Sc. in CSE',
+                'skills' => 'Node.js, Express, MongoDB, GraphQL, JavaScript',
+                'rate' => 220,
+                'exp_yrs' => 3,
+                'phone' => '01733445566',
+                'address' => 'Aftabnagar, Dhaka',
+                'bio' => 'Full stack MERN developer focused on asynchronous JavaScript, REST & GraphQL APIs, and real-time Socket.io applications.',
+                'short_bio' => 'Node.js & MERN Stack Developer',
+                'medium' => 'Online',
+                'lang' => 'Bengali',
+            ],
+            [
+                'name' => 'Md. Shahriar Nafis',
+                'institution' => 'Khulna University of Engineering & Technology (KUET)',
+                'dept' => 'CSE',
+                'education' => 'B.Sc. in CSE',
+                'skills' => 'C++, Object Oriented Programming, Software Engineering',
+                'rate' => 150,
+                'exp_yrs' => 2,
+                'phone' => '01833445566',
+                'address' => 'Fulbarigate, Khulna',
+                'bio' => 'Helping university students master fundamental C++ OOP concepts, memory management, and clean code principles.',
+                'short_bio' => 'C++ & Fundamentals Instructor',
+                'medium' => 'Online',
+                'lang' => 'Bengali',
+            ],
+            [
+                'name' => 'Imran Hossain',
+                'institution' => 'United International University (UIU)',
+                'dept' => 'CSE',
+                'education' => 'B.Sc. in CSE',
+                'skills' => 'Laravel, PHP, Livewire, Alpine.js, Tailwind CSS',
+                'rate' => 240,
+                'exp_yrs' => 3,
+                'phone' => '01933445566',
+                'address' => 'Badda, Dhaka',
+                'bio' => 'TALL Stack developer building modern reactive web apps with Laravel, Livewire, Alpine.js, and Tailwind CSS.',
+                'short_bio' => 'TALL Stack Web Developer',
+                'medium' => 'Online',
+                'lang' => 'Bengali',
+            ],
+            [
+                'name' => 'Farhan Tanvir',
+                'institution' => 'University of Chittagong (CU)',
+                'dept' => 'CSE',
+                'education' => 'M.Sc. in CSE',
+                'skills' => 'Data Analytics, SQL, Tableau, Power BI, Excel',
+                'rate' => 300,
+                'exp_yrs' => 4,
+                'phone' => '01633445566',
+                'address' => 'Halisahar, Chittagong',
+                'bio' => 'Data Analyst helping students analyze complex datasets, build interactive dashboards, and master advanced SQL queries.',
+                'short_bio' => 'Data Analyst & Business Intelligence Specialist',
+                'medium' => 'Online',
+                'lang' => 'Bengali-English Mixed',
+            ],
+            [
+                'name' => 'S. M. Minhajul Abedin',
+                'institution' => 'University of Rajshahi (RU)',
+                'dept' => 'CSE',
+                'education' => 'B.Sc. in CSE',
+                'skills' => 'Android, Kotlin, Jetpack Compose, MVVM Architecture',
+                'rate' => 250,
+                'exp_yrs' => 3,
+                'phone' => '01533445566',
+                'address' => 'Motihar, Rajshahi',
+                'bio' => 'Native Android App developer creating clean MVVM architecture apps with Kotlin & Jetpack Compose.',
+                'short_bio' => 'Native Android (Kotlin) Developer',
+                'medium' => 'Online',
+                'lang' => 'Bengali',
+            ],
+            [
+                'name' => 'Towhidul Islam',
+                'institution' => 'Daffodil International University (DIU)',
+                'dept' => 'SWE',
+                'education' => 'B.Sc. in SWE',
+                'skills' => 'Software Testing, SQA, Automation, Selenium, Postman',
+                'rate' => 190,
+                'exp_yrs' => 3,
+                'phone' => '01333445566',
+                'address' => 'Dhanmondi, Dhaka',
+                'bio' => 'SQA Engineer guiding students through automated web testing, API testing with Postman, and quality assurance life cycles.',
+                'short_bio' => 'Software Quality Assurance (SQA) Engineer',
+                'medium' => 'Hybrid',
+                'lang' => 'Bengali',
+            ],
+            [
+                'name' => 'Md. Jubayer Hossain',
+                'institution' => 'MIST (Military Institute of Science and Technology)',
+                'dept' => 'CSE',
+                'education' => 'B.Sc. in CSE',
+                'skills' => 'Cyber Security, Linux Administration, Bash Scripting',
+                'rate' => 330,
+                'exp_yrs' => 4,
+                'phone' => '01744556677',
+                'address' => 'Mirpur Cantonment, Dhaka',
+                'bio' => 'Linux System Administrator & Security Analyst teaching shell scripting, server hardening, and system maintenance.',
+                'short_bio' => 'Linux Admin & Security Analyst',
+                'medium' => 'Online',
+                'lang' => 'Bengali',
+            ],
+            [
+                'name' => 'Rezoan Ahmed',
+                'institution' => 'BUET',
+                'dept' => 'CSE',
+                'education' => 'B.Sc. in CSE',
+                'skills' => 'Blockchain, Solidity, Smart Contracts, Web3.js',
+                'rate' => 470,
+                'exp_yrs' => 5,
+                'phone' => '01844556677',
+                'address' => 'Lalbagh, Dhaka',
+                'bio' => 'Web3 & Blockchain developer specializing in Ethereum Smart Contracts, Solidity, and decentralized application (dApp) development.',
+                'short_bio' => 'Blockchain & Web3 Developer',
+                'medium' => 'Online',
+                'lang' => 'English',
+            ],
+            [
+                'name' => 'Ashraful Hoque',
+                'institution' => 'North South University (NSU)',
+                'dept' => 'Business & Econ',
+                'education' => 'MBA in Finance',
+                'skills' => 'Financial Modeling, FinTech, Stock Analysis, Valuation',
+                'rate' => 360,
+                'exp_yrs' => 5,
+                'phone' => '01944556677',
+                'address' => 'Gulshan, Dhaka',
+                'bio' => 'Financial Analyst teaching financial statement analysis, equity valuation, corporate finance, and business modeling.',
+                'short_bio' => 'Financial Modeling & FinTech Mentor',
+                'medium' => 'In-Person',
+                'lang' => 'Bengali-English Mixed',
+            ],
+            [
+                'name' => 'Naimul Islam',
+                'institution' => 'BRAC University',
+                'dept' => 'CSE',
+                'education' => 'B.Sc. in CSE',
+                'skills' => 'React Native, Mobile Development, Expo, JavaScript',
+                'rate' => 270,
+                'exp_yrs' => 3,
+                'phone' => '01644556677',
+                'address' => 'Badda, Dhaka',
+                'bio' => 'React Native engineer building cross-platform iOS & Android mobile applications with modern JavaScript frameworks.',
+                'short_bio' => 'React Native Mobile Developer',
+                'medium' => 'Online',
+                'lang' => 'Bengali',
+            ],
+            [
+                'name' => 'Sajjad Hossain',
+                'institution' => 'University of Dhaka (DU)',
+                'dept' => 'Applied Statistics',
+                'education' => 'M.Sc. in Applied Statistics',
+                'skills' => 'Statistics, R Programming, Data Science, Hypothesis Testing',
+                'rate' => 290,
+                'exp_yrs' => 4,
+                'phone' => '01544556677',
+                'address' => 'Nilkhet, Dhaka',
+                'bio' => 'Statistician & Data Researcher providing academic and professional guidance in statistical modeling, R, and research data analysis.',
+                'short_bio' => 'Statistical Data Analysis & R Expert',
+                'medium' => 'Online',
+                'lang' => 'Bengali',
+            ],
+            [
+                'name' => 'Tariqul Islam',
+                'institution' => 'SUST',
+                'dept' => 'CSE',
+                'education' => 'B.Sc. in CSE',
+                'skills' => 'Go (Golang), Microservices, GRPC, Docker',
+                'rate' => 410,
+                'exp_yrs' => 4,
+                'phone' => '01344556677',
+                'address' => 'Akhalia, Sylhet',
+                'bio' => 'Backend Golang Engineer building high-throughput microservices, gRPC services, and concurrent backend systems.',
+                'short_bio' => 'Golang Backend Engineer',
+                'medium' => 'Online',
+                'lang' => 'Bengali-English Mixed',
+            ],
+            [
+                'name' => 'Abrar Fahad',
+                'institution' => 'BUET',
+                'dept' => 'CSE',
+                'education' => 'B.Sc. in CSE',
+                'skills' => 'Competitive Programming, Algorithms, Graph Theory, DP',
+                'rate' => 260,
+                'exp_yrs' => 3,
+                'phone' => '01755667788',
+                'address' => 'Palashi, Dhaka',
+                'bio' => 'Codeforces Master offering targeted algorithmic problem-solving sessions on Graph Theory, Dynamic Programming, and Number Theory.',
+                'short_bio' => 'Algorithms & DP Specialist',
+                'medium' => 'Online',
+                'lang' => 'Bengali',
+            ],
+        ];
+
+        foreach ($mentorsData as $index => $data) {
+            $mentorNum = $index + 1;
+            $email = "mentor{$mentorNum}@gmail.com";
+
+            $user = User::updateOrCreate(
+                ['email' => $email],
+                [
+                    'name'              => $data['name'],
+                    'password'          => $password,
+                    'role'              => UserRole::Mentor,
+                    'is_super_admin'    => false,
+                    'status'            => UserStatus::ACTIVE,
+                    'email_verified_at' => now(),
+                ]
+            );
+
+            Profile::updateOrCreate(
+                ['user_id' => $user->id],
+                [
+                    'bio'                        => $data['bio'],
+                    'phone'                      => $data['phone'],
+                    'address'                    => $data['address'] . ', Bangladesh',
+                    'highgest_education_level'   => $data['education'],
+                    'skills'                     => $data['skills'],
+                    'institution_name'           => $data['institution'],
+                    'hourly_rate'                => $data['rate'],
+                    'department'                 => $data['dept'],
+                    'short_bio'                  => $data['short_bio'],
+                    'preferred_teaching_medium'  => $data['medium'],
+                    'preferred_language'         => $data['lang'],
+                    'teaching_experience_years'  => $data['exp_yrs'],
+                    'is_verified'                => true,
+                    'documents_submitted_at'     => now(),
+                ]
+            );
+        }
+
+        $this->command->info('✅ 27 Users seeded successfully into DatabaseSeeder (1 Super Admin, 1 Student, 25 Mentors). Password: 11111111');
     }
 }
