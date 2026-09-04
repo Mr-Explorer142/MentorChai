@@ -49,7 +49,11 @@ class SessionTopicController extends Controller
         ]);
 
         // Notify the mentor
-        $session->mentor->notify(new SessionRequestedNotification($session));
+        try {
+            $session->mentor->notify(new SessionRequestedNotification($session));
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::error('Failed to send SessionRequestedNotification email: ' . $e->getMessage());
+        }
 
         return redirect()->route('student_dashboard')
             ->with('success', 'Session request sent successfully!');
@@ -68,7 +72,11 @@ class SessionTopicController extends Controller
         ]);
 
         // Notify the student
-        $session->student->notify(new SessionApprovedNotification($session));
+        try {
+            $session->student->notify(new SessionApprovedNotification($session));
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::error('Failed to send SessionApprovedNotification email: ' . $e->getMessage());
+        }
 
         return back()->with('success', 'Session approved.');
     }
@@ -123,7 +131,11 @@ class SessionTopicController extends Controller
         ]);
 
         // Notify the mentor
-        $session->mentor->notify(new PaymentReceivedNotification($session));
+        try {
+            $session->mentor->notify(new PaymentReceivedNotification($session));
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::error('Failed to send PaymentReceivedNotification email: ' . $e->getMessage());
+        }
 
         return redirect()->route('success');
     }

@@ -93,57 +93,49 @@
                     $sessionId = (int) \Illuminate\Support\Str::afterLast($notification->data['checkout_url'], '/checkout/');
                 }
 
-                $isPaid = false;
+                $canPay = false;
                 $payUrl = null;
 
                 if ($sessionId) {
                     $sessionTopic = \App\Models\SessionTopic::find($sessionId);
-                    if ($sessionTopic) {
-                        $isPaid = $sessionTopic->status === \App\Enums\SessionStatus::Completed ||
-                            \App\Models\MentoringSession::where('topic_id', $sessionTopic->id)
-                                ->where(function ($q) {
-                                    $q->whereIn('status', [
-                                        \App\Enums\SessionStatus::Ongoing,
-                                        \App\Enums\SessionStatus::Completed,
-                                        \App\Enums\SessionStatus::EndedByAdmin
-                                    ])->orWhereHas('payment', function ($pq) {
-                                        $pq->where('status', \App\Enums\PaymentStatus::Paid);
-                                    });
-                                })->exists();
+                    if ($sessionTopic && $sessionTopic->status === \App\Enums\SessionStatus::Approved) {
+                        $alreadyPaid = \App\Models\MentoringSession::where('topic_id', $sessionTopic->id)
+                            ->where(function ($q) {
+                                $q->whereIn('status', [
+                                    \App\Enums\SessionStatus::Ongoing,
+                                    \App\Enums\SessionStatus::Completed,
+                                    \App\Enums\SessionStatus::EndedByAdmin
+                                ])->orWhereHas('payment', function ($pq) {
+                                    $pq->where('status', \App\Enums\PaymentStatus::Paid);
+                                });
+                            })->exists();
 
-                        if (!$isPaid) {
+                        if (!$alreadyPaid) {
+                            $canPay = true;
                             $payUrl = route('checkout', $sessionTopic->id, false);
                         }
                     }
                 }
             @endphp
-            @if($isPaid)
-            <button type="button" onclick="alert('Payment for this session has already been completed.')" class="inline-flex items-center gap-0.5 mt-0.5 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 opacity-80 cursor-pointer">
-                Paid ✓
-            </button>
-            @elseif($payUrl)
-            <a href="{{ $payUrl }}" onclick="markAsRead('{{ $notification->id }}')" class="inline-flex items-center gap-0.5 mt-0.5 text-[11px] font-semibold
-                                   text-teal-600 dark:text-teal-400 hover:underline">
+            @if($canPay && $payUrl)
+            <a href="{{ $payUrl }}" onclick="markAsRead('{{ $notification->id }}')" class="inline-flex items-center gap-0.5 mt-0.5 text-[11px] font-semibold text-teal-600 dark:text-teal-400 hover:underline">
                 Pay Now &rarr;
             </a>
+            @else
+            <button type="button" onclick="showNotificationModal('Payment for this session has already been completed.')" class="inline-flex items-center gap-0.5 mt-0.5 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 opacity-80 cursor-pointer">
+                Paid ✓
+            </button>
             @endif
             @endif
 
             {{-- Mentor: Approve button for session requests --}}
-            @if($type === 'session_requested' && isset($notification->data['session_id']))
+            @if($type === 'session_requested')
             @php
-                $reqSessionId = $notification->data['session_id'];
-                $reqTopic = \App\Models\SessionTopic::find($reqSessionId);
-                $isApproved = $reqTopic && $reqTopic->status !== \App\Enums\SessionStatus::Pending;
+                $reqSessionId = $notification->data['session_id'] ?? null;
+                $reqTopic = $reqSessionId ? \App\Models\SessionTopic::find($reqSessionId) : null;
+                $canApprove = $reqTopic && $reqTopic->status === \App\Enums\SessionStatus::Pending;
             @endphp
-            @if($isApproved)
-            <button type="button" onclick="alert('This session request has already been approved.')" class="inline-flex items-center gap-1 mt-0.5 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 opacity-80 cursor-pointer">
-                <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                </svg>
-                Approved ✓
-            </button>
-            @else
+            @if($canApprove && $reqSessionId)
             <form method="POST" action="{{ route('session.approve', $reqSessionId) }}" class="mt-0.5">
                 @csrf
                 <button type="submit" onclick="markAsRead('{{ $notification->id }}')" class="inline-flex items-center gap-1 text-[11px] font-semibold
@@ -157,11 +149,18 @@
                     Approve
                 </button>
             </form>
+            @else
+            <button type="button" onclick="showNotificationModal('This session request has already been approved.')" class="inline-flex items-center gap-1 mt-0.5 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 opacity-80 cursor-pointer">
+                <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                Approved ✓
+            </button>
             @endif
             @endif
 
             {{-- Mentor + Student: Join session button for payment_received --}}
-            @if($type === 'payment_received' && isset($notification->data['room_url']))
+            @if($type === 'payment_received')
             @php
                 $msId = $notification->data['session_id'] ?? null;
                 $roomCode = $notification->data['session_code'] ?? null;
@@ -169,7 +168,6 @@
                     $roomCode = \Illuminate\Support\Str::afterLast($notification->data['room_url'], 'room=');
                 }
 
-                $isSessionEnded = false;
                 $mSession = null;
                 if ($msId) {
                     $mSession = \App\Models\MentoringSession::find($msId);
@@ -177,15 +175,15 @@
                     $mSession = \App\Models\MentoringSession::where('session_code', $roomCode)->first();
                 }
 
-                if ($mSession && ($mSession->status === \App\Enums\SessionStatus::Completed || $mSession->status === \App\Enums\SessionStatus::EndedByAdmin || $mSession->ended_at)) {
-                    $isSessionEnded = true;
+                $canJoin = false;
+                if ($mSession) {
+                    $canJoin = ($mSession->status === \App\Enums\SessionStatus::Ongoing || $mSession->status === \App\Enums\SessionStatus::Pending)
+                        && is_null($mSession->ended_at);
+                } else {
+                    $canJoin = !empty($notification->data['room_url']) && $notification->created_at->diffInHours(now()) < 12;
                 }
             @endphp
-            @if($isSessionEnded)
-            <button type="button" onclick="alert('This live session has already ended.')" class="inline-flex items-center gap-1 mt-0.5 text-[11px] font-semibold text-gray-400 dark:text-gray-500 opacity-80 cursor-pointer">
-                Session Ended
-            </button>
-            @else
+            @if($canJoin && !empty($notification->data['room_url']))
             <a href="{{ $notification->data['room_url'] }}" onclick="markAsRead('{{ $notification->id }}')" class="inline-flex items-center gap-1 mt-0.5 text-[11px] font-semibold
                                    text-white bg-teal-600 dark:bg-teal-500
                                    px-2.5 py-0.5 rounded-md
@@ -197,6 +195,10 @@
                 </svg>
                 Join Session
             </a>
+            @else
+            <button type="button" onclick="showNotificationModal('This live session has already ended.')" class="inline-flex items-center gap-1 mt-0.5 text-[11px] font-semibold text-gray-400 dark:text-gray-500 opacity-80 cursor-pointer">
+                Session Ended
+            </button>
             @endif
             @endif
 

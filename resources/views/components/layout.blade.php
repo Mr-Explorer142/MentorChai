@@ -292,19 +292,17 @@
 
                         {{-- Drawer Links --}}
                         <div class="flex-1 overflow-y-auto p-4 flex flex-col gap-1.5 mt-2">
-                            <a href="{{ route('mentors') }}" class="block text-[0.9rem] font-semibold text-[#033f63] dark:text-[#7ec8e3] no-underline
-                                      px-4 py-[0.65rem] rounded-xl
-                                      transition-all duration-150
-                                      hover:bg-[#28666e]/8 dark:hover:bg-[#4db6c1]/12 hover:text-[#28666e] dark:hover:text-[#4db6c1]
-                                      {{ Route::is('mentors') ? '!bg-[#28666e] !text-white' : '' }}">
-                                {{ Route::is('home', 'about', 'faq', 'terms') ? 'শিক্ষক খুঁজুন' : 'Find Mentors' }}
-                            </a>
-                            <a href="{{ route('home') }}" class="block text-[0.9rem] font-semibold text-[#033f63] dark:text-[#7ec8e3] no-underline
-                                      px-4 py-[0.65rem] rounded-xl
-                                      transition-all duration-150
-                                      hover:bg-[#28666e]/8 dark:hover:bg-[#4db6c1]/12 hover:text-[#28666e] dark:hover:text-[#4db6c1]
-                                      {{ Route::is('home') ? '!bg-[#28666e] !text-white' : '' }}">
-                                Home
+                            <a href="{{ route('mentors') }}" class="flex items-center justify-between text-[0.9rem] font-bold no-underline
+                                      px-4 py-2.5 rounded-xl
+                                      bg-linear-to-r from-[#28666e] to-[#033f63] dark:from-[#4db6c1] dark:to-[#7ec8e3]
+                                      text-white dark:text-[#0f1f2e]
+                                      shadow-sm shadow-[#28666e]/20 dark:shadow-[#4db6c1]/20
+                                      hover:opacity-95 active:scale-[0.98]
+                                      transition-all duration-150">
+                                <span>{{ Route::is('home', 'about', 'faq', 'terms') ? 'শিক্ষক খুঁজুন' : 'Find Mentors' }}</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                                </svg>
                             </a>
                             @guest
                             <a href="{{ route('student_register') }}" class="block text-[0.9rem] font-semibold text-[#033f63] dark:text-[#7ec8e3] no-underline
@@ -447,12 +445,55 @@
             {{-- Copyright --}}
             <p class="text-xs text-[#033f63]/50 dark:text-[#7ec8e3]/40">Copyright © MentorChai - All rights reserved
             </p>
-        </div>
     </footer>
 
-
+    {{-- ═══════════════ NOTIFICATION INFO MODAL ═══════════════ --}}
+    <dialog id="notificationInfoModal" class="modal modal-bottom sm:modal-middle z-[99999]">
+        <div class="modal-box p-5 max-w-sm rounded-2xl bg-white dark:bg-[#162a38] border border-[#28666e]/20 dark:border-[#4db6c1]/20 shadow-xl">
+            <div class="flex items-center justify-between pb-2.5 mb-3 border-b border-teal-100 dark:border-teal-900/40">
+                <div class="flex items-center gap-2">
+                    <div class="w-7 h-7 rounded-full bg-teal-50 dark:bg-teal-900/40 flex items-center justify-center shrink-0">
+                        <svg class="w-4 h-4 text-[#28666e] dark:text-[#4db6c1]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+                        </svg>
+                    </div>
+                    <h3 class="font-bold text-sm text-[#033f63] dark:text-[#d2f1ff]">Notification</h3>
+                </div>
+                <form method="dialog">
+                    <button class="w-7 h-7 rounded-lg flex items-center justify-center text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">✕</button>
+                </form>
+            </div>
+            <p id="notificationInfoModalText" class="text-xs sm:text-sm text-[#033f63]/80 dark:text-[#7ec8e3]/90 py-1 leading-relaxed"></p>
+            <div class="modal-action mt-4 justify-end">
+                <form method="dialog">
+                    <button class="px-4 py-1.5 rounded-lg text-xs font-semibold text-white bg-[#28666e] hover:bg-[#1f5057] dark:bg-[#4db6c1] dark:hover:bg-[#3ba0ab] dark:text-[#0f1f2e] transition-colors shadow-sm cursor-pointer">
+                        Got it
+                    </button>
+                </form>
+            </div>
+        </div>
+        <form method="dialog" class="modal-backdrop bg-black/40 backdrop-blur-xs">
+            <button>close</button>
+        </form>
+    </dialog>
 
     <script>
+        // ─── Notification Info Modal ──────────────────────────────────────
+        window.showNotificationModal = function(message) {
+            const modal = document.getElementById('notificationInfoModal');
+            const textEl = document.getElementById('notificationInfoModalText');
+            if (modal && textEl) {
+                textEl.textContent = message;
+                if (typeof modal.showModal === 'function') {
+                    modal.showModal();
+                } else {
+                    modal.classList.remove('hidden');
+                }
+            } else {
+                alert(message);
+            }
+        };
+
         // ─── Profile Dropdown ───────────────────────────────────────────
     function toggleDropdown() {
         const menu = document.getElementById('dropdown-menu');
