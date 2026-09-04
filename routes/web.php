@@ -243,6 +243,11 @@ Route::middleware('auth')->group(function () {
                 abort(403);
             }
 
+            if ($session->status === \App\Enums\SessionStatus::Completed || $session->status === \App\Enums\SessionStatus::EndedByAdmin || $session->ended_at) {
+                $redirectRoute = $user->id === $session->mentor_id ? 'mentor_dashboard' : 'student_dashboard';
+                return redirect()->route($redirectRoute)->with('error', 'This live session has already ended.');
+            }
+
             return view('session.live-session', [
                 'session'  => $session,
                 'roomId'   => $roomId,

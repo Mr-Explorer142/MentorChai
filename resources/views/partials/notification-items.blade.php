@@ -1,24 +1,26 @@
 @forelse($notifications as $notification)
-<div id="notification-{{ $notification->id }}" class="rounded-2xl p-3 border transition-colors duration-200
+<div id="notification-{{ $notification->id }}" class="rounded-xl p-2 sm:p-2.5 border transition-colors duration-200
                 {{ is_null($notification->read_at)
-                    ? 'bg-teal-50 dark:bg-teal-900/20 border-[#28666e]/20 dark:border-[#4db6c1]/20'
+                    ? 'bg-teal-50/80 dark:bg-teal-900/25 border-[#28666e]/20 dark:border-[#4db6c1]/20'
                     : 'bg-[#f6fbfb] dark:bg-[#0f2430] border-[#28666e]/10 dark:border-[#4db6c1]/10' }}">
 
-    <div class="flex items-start justify-between gap-2">
-        <div class="flex-1">
+    <div class="flex items-start justify-between gap-1.5">
+        <div class="flex-1 min-w-0">
 
             @php $type = $notification->data['type'] ?? ''; @endphp
 
-            {{-- Color dot by type --}}
-            <div class="flex items-center gap-2 mb-1">
-                @if($type === 'session_requested')
-                <span class="w-2 h-2 rounded-full bg-amber-400 shrink-0"></span>
-                @elseif($type === 'session_approved')
-                <span class="w-2 h-2 rounded-full bg-green-400 shrink-0"></span>
-                @elseif($type === 'payment_received')
-                <span class="w-2 h-2 rounded-full bg-teal-400 shrink-0"></span>
-                @else
-                <span class="w-2 h-2 rounded-full bg-gray-400 shrink-0"></span>
+            {{-- Color dot for unread notifications --}}
+            <div class="flex items-center gap-1.5 mb-0.5">
+                @if(is_null($notification->read_at))
+                    @if($type === 'session_requested')
+                    <span class="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0" title="Unread"></span>
+                    @elseif($type === 'session_approved')
+                    <span class="w-1.5 h-1.5 rounded-full bg-green-400 shrink-0" title="Unread"></span>
+                    @elseif($type === 'payment_received')
+                    <span class="w-1.5 h-1.5 rounded-full bg-teal-400 shrink-0" title="Unread"></span>
+                    @else
+                    <span class="w-1.5 h-1.5 rounded-full bg-gray-400 shrink-0" title="Unread"></span>
+                    @endif
                 @endif
 
                 @php
@@ -28,16 +30,16 @@
                     $topic = e($notification->data['topic'] ?? '');
 
                     if ($studentName && str_contains($message, $studentName)) {
-                        $message = str_replace($studentName, "<strong>{$studentName}</strong>", $message);
+                        $message = str_replace($studentName, "<strong class='font-semibold text-[#033f63] dark:text-white'>{$studentName}</strong>", $message);
                     }
                     if ($mentorName && str_contains($message, $mentorName)) {
-                        $message = str_replace($mentorName, "<strong>{$mentorName}</strong>", $message);
+                        $message = str_replace($mentorName, "<strong class='font-semibold text-[#033f63] dark:text-white'>{$mentorName}</strong>", $message);
                     }
                     if ($topic && str_contains($message, $topic)) {
-                        $message = str_replace($topic, "<strong>{$topic}</strong>", $message);
+                        $message = str_replace($topic, "<strong class='font-semibold text-[#033f63] dark:text-white'>{$topic}</strong>", $message);
                     }
                 @endphp
-                <p class="text-sm text-[#033f63] dark:text-[#d2f1ff] leading-snug">
+                <p class="text-xs text-[#033f63] dark:text-[#d2f1ff] leading-tight">
                     {!! $message !!}
                 </p>
             </div>
@@ -46,9 +48,9 @@
             @if($type === 'session_requested')
             @if(!empty($notification->data['note']))
             <div
-                class="mt-2 mb-1.5 p-2 rounded-lg bg-teal-500/5 border border-teal-500/10 text-[11px] leading-relaxed text-[#033f63]/80 dark:text-[#7ec8e3]/80">
+                class="mt-1 mb-1 p-1.5 rounded-md bg-teal-500/5 border border-teal-500/10 text-[10px] leading-snug text-[#033f63]/80 dark:text-[#7ec8e3]/80">
                 <strong class="text-[#033f63] dark:text-[#7ec8e3]">Note:</strong> {{
-                \Illuminate\Support\Str::limit($notification->data['note'], 80) }}
+                \Illuminate\Support\Str::limit($notification->data['note'], 60) }}
             </div>
             @endif
 
@@ -67,7 +69,7 @@
             @endphp
             @if(!empty($pm) || !empty($pl))
             <div
-                class="mt-1.5 mb-1.5 p-2 rounded-lg bg-teal-500/5 border border-teal-500/10 text-[11px] leading-relaxed text-[#033f63]/80 dark:text-[#7ec8e3]/80 space-y-1">
+                class="mt-1 mb-1 p-1.5 rounded-md bg-teal-500/5 border border-teal-500/10 text-[10px] leading-snug text-[#033f63]/80 dark:text-[#7ec8e3]/80 space-y-0.5">
                 @if(!empty($pm))<div><strong class="text-[#033f63] dark:text-[#7ec8e3]">Medium:</strong> {{ $pm }}</div>
                 @endif
                 @if(!empty($pl))<div><strong class="text-[#033f63] dark:text-[#7ec8e3]">Language:</strong> {{ $pl }}</div>
@@ -76,9 +78,9 @@
             @endif
             @if(!empty($ls))
             <div
-                class="mt-1.5 mb-2 p-2 rounded-lg bg-teal-500/5 border border-teal-500/10 text-[11px] leading-relaxed text-[#033f63]/80 dark:text-[#7ec8e3]/80">
+                class="mt-1 mb-1 p-1.5 rounded-md bg-teal-500/5 border border-teal-500/10 text-[10px] leading-snug text-[#033f63]/80 dark:text-[#7ec8e3]/80">
                 <strong class="text-[#033f63] dark:text-[#7ec8e3]">Learning Style:</strong> {{
-                \Illuminate\Support\Str::limit($ls, 100) }}
+                \Illuminate\Support\Str::limit($ls, 70) }}
             </div>
             @endif
             @endif
@@ -87,18 +89,40 @@
             @if($type === 'session_approved')
             @php
                 $sessionId = $notification->data['session_id'] ?? null;
+                if (!$sessionId && !empty($notification->data['checkout_url'])) {
+                    $sessionId = (int) \Illuminate\Support\Str::afterLast($notification->data['checkout_url'], '/checkout/');
+                }
+
+                $isPaid = false;
+                $payUrl = null;
+
                 if ($sessionId) {
-                    $payUrl = route('checkout', $sessionId, false);
-                } elseif (!empty($notification->data['checkout_url'])) {
-                    $payUrl = \Illuminate\Support\Str::startsWith($notification->data['checkout_url'], 'http')
-                        ? '/checkout/' . \Illuminate\Support\Str::afterLast($notification->data['checkout_url'], '/checkout/')
-                        : $notification->data['checkout_url'];
-                } else {
-                    $payUrl = null;
+                    $sessionTopic = \App\Models\SessionTopic::find($sessionId);
+                    if ($sessionTopic) {
+                        $isPaid = $sessionTopic->status === \App\Enums\SessionStatus::Completed ||
+                            \App\Models\MentoringSession::where('topic_id', $sessionTopic->id)
+                                ->where(function ($q) {
+                                    $q->whereIn('status', [
+                                        \App\Enums\SessionStatus::Ongoing,
+                                        \App\Enums\SessionStatus::Completed,
+                                        \App\Enums\SessionStatus::EndedByAdmin
+                                    ])->orWhereHas('payment', function ($pq) {
+                                        $pq->where('status', \App\Enums\PaymentStatus::Paid);
+                                    });
+                                })->exists();
+
+                        if (!$isPaid) {
+                            $payUrl = route('checkout', $sessionTopic->id, false);
+                        }
+                    }
                 }
             @endphp
-            @if($payUrl)
-            <a href="{{ $payUrl }}" onclick="markAsRead('{{ $notification->id }}')" class="inline-flex items-center gap-1 mt-1 text-xs font-semibold
+            @if($isPaid)
+            <button type="button" onclick="alert('Payment for this session has already been completed.')" class="inline-flex items-center gap-0.5 mt-0.5 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 opacity-80 cursor-pointer">
+                Paid ✓
+            </button>
+            @elseif($payUrl)
+            <a href="{{ $payUrl }}" onclick="markAsRead('{{ $notification->id }}')" class="inline-flex items-center gap-0.5 mt-0.5 text-[11px] font-semibold
                                    text-teal-600 dark:text-teal-400 hover:underline">
                 Pay Now &rarr;
             </a>
@@ -106,52 +130,89 @@
             @endif
 
             {{-- Mentor: Approve button for session requests --}}
-            @if($type === 'session_requested' &&
-            isset($notification->data['session_id']))
-            <form method="POST" action="{{ route('session.approve', $notification->data['session_id']) }}" class="mt-1">
+            @if($type === 'session_requested' && isset($notification->data['session_id']))
+            @php
+                $reqSessionId = $notification->data['session_id'];
+                $reqTopic = \App\Models\SessionTopic::find($reqSessionId);
+                $isApproved = $reqTopic && $reqTopic->status !== \App\Enums\SessionStatus::Pending;
+            @endphp
+            @if($isApproved)
+            <button type="button" onclick="alert('This session request has already been approved.')" class="inline-flex items-center gap-1 mt-0.5 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 opacity-80 cursor-pointer">
+                <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                Approved ✓
+            </button>
+            @else
+            <form method="POST" action="{{ route('session.approve', $reqSessionId) }}" class="mt-0.5">
                 @csrf
-                <button type="submit" onclick="markAsRead('{{ $notification->id }}')" class="inline-flex items-center gap-1 text-xs font-semibold
+                <button type="submit" onclick="markAsRead('{{ $notification->id }}')" class="inline-flex items-center gap-1 text-[11px] font-semibold
                                        text-white bg-teal-600 dark:bg-teal-500
-                                       px-3 py-1 rounded-full
+                                       px-2.5 py-0.5 rounded-md
                                        hover:bg-teal-700 dark:hover:bg-teal-400
                                        transition-colors duration-200">
-                    <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                     Approve
                 </button>
             </form>
             @endif
+            @endif
 
             {{-- Mentor + Student: Join session button for payment_received --}}
-            @if($type === 'payment_received' &&
-            isset($notification->data['room_url']))
-            <a href="{{ $notification->data['room_url'] }}" onclick="markAsRead('{{ $notification->id }}')" class="inline-flex items-center gap-1 mt-1 text-xs font-semibold
+            @if($type === 'payment_received' && isset($notification->data['room_url']))
+            @php
+                $msId = $notification->data['session_id'] ?? null;
+                $roomCode = $notification->data['session_code'] ?? null;
+                if (!$roomCode && !empty($notification->data['room_url'])) {
+                    $roomCode = \Illuminate\Support\Str::afterLast($notification->data['room_url'], 'room=');
+                }
+
+                $isSessionEnded = false;
+                $mSession = null;
+                if ($msId) {
+                    $mSession = \App\Models\MentoringSession::find($msId);
+                } elseif ($roomCode) {
+                    $mSession = \App\Models\MentoringSession::where('session_code', $roomCode)->first();
+                }
+
+                if ($mSession && ($mSession->status === \App\Enums\SessionStatus::Completed || $mSession->status === \App\Enums\SessionStatus::EndedByAdmin || $mSession->ended_at)) {
+                    $isSessionEnded = true;
+                }
+            @endphp
+            @if($isSessionEnded)
+            <button type="button" onclick="alert('This live session has already ended.')" class="inline-flex items-center gap-1 mt-0.5 text-[11px] font-semibold text-gray-400 dark:text-gray-500 opacity-80 cursor-pointer">
+                Session Ended
+            </button>
+            @else
+            <a href="{{ $notification->data['room_url'] }}" onclick="markAsRead('{{ $notification->id }}')" class="inline-flex items-center gap-1 mt-0.5 text-[11px] font-semibold
                                    text-white bg-teal-600 dark:bg-teal-500
-                                   px-3 py-1 rounded-full
+                                   px-2.5 py-0.5 rounded-md
                                    hover:bg-teal-700 dark:hover:bg-teal-400
                                    transition-colors duration-200">
-                <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
                 </svg>
                 Join Session
             </a>
             @endif
+            @endif
 
-            <p class="text-xs text-[#28666e]/60 dark:text-[#7ec8e3]/70 mt-1">
+            <p class="text-[10px] text-[#28666e]/50 dark:text-[#7ec8e3]/60 mt-0.5">
                 {{ $notification->created_at->diffForHumans() }}
             </p>
         </div>
 
         {{-- Mark single as read button --}}
         @if(is_null($notification->read_at))
-        <button onclick="markAsRead('{{ $notification->id }}')" class="shrink-0 w-5 h-5 rounded-full
-                               bg-teal-100 dark:bg-teal-900/40
-                               hover:bg-teal-200 dark:hover:bg-teal-800
-                               flex items-center justify-center
-                               transition-colors duration-150" title="Mark as read">
-            <svg class="w-3 h-3 text-teal-600 dark:text-teal-400" fill="none" stroke="currentColor" stroke-width="2.5"
+        <button onclick="markAsRead('{{ $notification->id }}')" class="shrink-0 w-4 h-4 rounded-full
+                                bg-teal-100 dark:bg-teal-900/40
+                                hover:bg-teal-200 dark:hover:bg-teal-800
+                                flex items-center justify-center
+                                transition-colors duration-150" title="Mark as read">
+            <svg class="w-2.5 h-2.5 text-teal-600 dark:text-teal-400" fill="none" stroke="currentColor" stroke-width="2.5"
                 viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
             </svg>
