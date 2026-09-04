@@ -272,9 +272,13 @@ class PaymentController extends Controller
                 ]);
 
                 // Notify mentor
-                $mentoringSession->mentor->notify(
-                    new PaymentReceivedNotification($mentoringSession)
-                );
+                try {
+                    $mentoringSession->mentor->notify(
+                        new PaymentReceivedNotification($mentoringSession)
+                    );
+                } catch (\Throwable $e) {
+                    Log::error('Failed to send PaymentReceivedNotification email: ' . $e->getMessage());
+                }
 
                 // ✅ Re-authenticate the user to bypass browser SameSite cookie blocking
                 Auth::loginUsingId($payment->student_id);
@@ -359,9 +363,13 @@ class PaymentController extends Controller
                     'started_at' => now(),
                 ]);
 
-                $payment->session->mentor->notify(
-                    new PaymentReceivedNotification($payment->session)
-                );
+                try {
+                    $payment->session->mentor->notify(
+                        new PaymentReceivedNotification($payment->session)
+                    );
+                } catch (\Throwable $e) {
+                    Log::error('Failed to send PaymentReceivedNotification email: ' . $e->getMessage());
+                }
 
                 return response('Transaction Successful', 200);
             }
