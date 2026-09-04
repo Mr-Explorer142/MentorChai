@@ -286,15 +286,13 @@
                 <div class="grid grid-cols-2 gap-2 sm:grid-cols-2 xl:grid-cols-3 sm:gap-5">
 
                     @forelse ($mentors as $mentor)
-                    <div class="group relative bg-white dark:bg-[#132533]
+                    <div class="relative bg-white dark:bg-[#132533]
                                 rounded-2xl border border-[#28666e]/15 dark:border-[#4db6c1]/20
                                 shadow-[0_4px_20px_rgba(40,102,110,0.06)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)]
-                                hover:shadow-[0_12px_32px_rgba(40,102,110,0.16)] dark:hover:shadow-[0_12px_32px_rgba(0,0,0,0.6)]
-                                hover:border-[#28666e]/40 dark:hover:border-[#4db6c1]/45
-                                transition-all duration-300 transform hover:-translate-y-1 flex flex-col overflow-hidden">
+                                flex flex-col overflow-hidden">
 
                         {{-- Top Accent Strip --}}
-                        <div class="h-1.5 w-full bg-linear-to-r from-[#28666e] via-[#033f63] to-[#7c9885] dark:from-[#4db6c1] dark:via-[#7ec8e3] dark:to-[#4db6c1] opacity-80 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div class="h-1.5 w-full bg-linear-to-r from-[#28666e] via-[#033f63] to-[#7c9885] dark:from-[#4db6c1] dark:via-[#7ec8e3] dark:to-[#4db6c1]"></div>
 
                         <div class="p-3.5 sm:p-5 flex flex-col flex-1">
 
@@ -310,7 +308,7 @@
                                                     text-xs sm:text-lg font-bold text-[#28666e] dark:text-[#4db6c1]">
                                             @if($mentor->profile && $mentor->profile->avatar)
                                             <img src="{{ asset('storage/' . $mentor->profile->avatar) }}" alt="Avatar"
-                                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                                                class="w-full h-full object-cover">
                                             @else
                                             {{ strtoupper(substr($mentor->name, 0, 1)) }}
                                             @endif
@@ -330,7 +328,7 @@
                                 {{-- Details --}}
                                 <div class="min-w-0 flex-1">
                                     <div class="flex items-center gap-1">
-                                        <h3 class="font-bold text-[#033f63] dark:text-[#d2f1ff] text-xs sm:text-base leading-snug truncate group-hover:text-[#28666e] dark:group-hover:text-[#4db6c1] transition-colors">
+                                        <h3 class="font-bold text-[#033f63] dark:text-[#d2f1ff] text-xs sm:text-base leading-snug truncate">
                                             {{ $mentor->name }}
                                         </h3>
                                         @if($mentor->profile && $mentor->profile->is_verified)
