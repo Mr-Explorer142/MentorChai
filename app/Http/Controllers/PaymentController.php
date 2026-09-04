@@ -343,7 +343,7 @@ class PaymentController extends Controller
                 ]);
 
                 $payment->session->mentor->notify(
-                    new PaymentReceivedNotification($payment->session->topic)
+                    new PaymentReceivedNotification($payment->session)
                 );
 
                 return response('Transaction Successful', 200);
