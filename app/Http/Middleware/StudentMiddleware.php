@@ -25,6 +25,10 @@ class StudentMiddleware
             return $next($request);
         }
 
+        if (Auth::user()->isAdmin()) {
+            return redirect()->route('admin_dashboard');
+        }
+
         return redirect()->route('mentor_dashboard')->with('error', 'Access denied, Only Students are allowed here😢');
     }
 }
