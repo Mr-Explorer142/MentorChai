@@ -1,7 +1,7 @@
 import { ZegoUIKitPrebuilt } from "@zegocloud/zego-uikit-prebuilt";
 import { initAudioDetection, stopAudioDetection } from "./audio-detection.js";
 
-const { appID, roomID, userID, userName, userRole } = window.ZEGO_CONFIG;
+const { appID, roomID, sessionCode, userID, userName, userRole } = window.ZEGO_CONFIG;
 
 async function startCall() {
     const response = await fetch("/zego/token");
@@ -30,7 +30,8 @@ async function startCall() {
         showPreJoinView: true,
         onJoinRoom: () => {
             // Start audio detection once the user has joined the room
-            initAudioDetection(roomID, Number(userID));
+            // sessionCode is the raw "SS-XXXX" value stored in the DB (without the "mc-" prefix)
+            initAudioDetection(sessionCode, userID);
         },
         onLeaveRoom: async () => {
             // Stop audio detection immediately when leaving

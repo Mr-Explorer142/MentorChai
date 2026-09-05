@@ -181,6 +181,7 @@ Route::prefix('admin')->name('admin_')->group(function () {
         Route::get('/dashboard/mentors',  [AdminController::class, 'mentors'])->name('mentors');
         Route::get('/dashboard/sessions', [AdminController::class, 'sessions'])->name('sessions');
         Route::get('/dashboard/payments', [AdminController::class, 'payments'])->name('payments');
+        Route::get('/dashboard/security', [AdminController::class, 'securityEvents'])->name('security');
 
         // Action routes
         Route::post('/mentor/{id}/approve', [AdminController::class, 'approveMentor'])->name('mentor.approve');
@@ -418,7 +419,4 @@ Route::post('/audio-detection/webhook', [AssemblyAIWebhookController::class, 'ha
     ->name('audio-detection.webhook')
     ->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
 
-// Admin: security events panel
-Route::prefix('admin')->name('admin_')->middleware(['auth', 'admin'])->group(function () {
-    Route::get('/dashboard/security', [AdminController::class, 'securityEvents'])->name('security');
-});
+

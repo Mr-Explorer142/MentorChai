@@ -313,12 +313,13 @@
 
     <script>
         window.ZEGO_CONFIG = {
-            appID:    {{ $appId }},
-            appSign:  "{{ $appSign }}",
-            roomID:   "mc-{{ $roomId }}",
-            userID:   "{{ $userId }}",
-            userName: "{{ $userName }}",
-            userRole: "{{ $userRole }}",
+            appID:       {{ $appId }},
+            appSign:     "{{ $appSign }}",
+            roomID:      "mc-{{ $roomId }}",
+            sessionCode: "{{ $roomId }}",
+            userID:      {{ $userId }},
+            userName:    "{{ $userName }}",
+            userRole:    "{{ $userRole }}",
         };
     </script>
     @vite(['resources/js/video-call.js'])

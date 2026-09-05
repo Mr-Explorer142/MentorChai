@@ -288,7 +288,7 @@ function showWarningModal(detectionType) {
                 }
             </style>
 
-            {{-- Icon + title row --}}
+            <!-- Icon + title row -->
             <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px;">
                 <div style="
                     width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;

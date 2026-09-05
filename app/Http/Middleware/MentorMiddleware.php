@@ -17,8 +17,16 @@ class MentorMiddleware
      */
     public function handle(Request $request, Closure $next) :Response
     {
-        if (Auth::check() && Auth::user()->role === UserRole::Mentor) {
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+
+        if (Auth::user()->role === UserRole::Mentor) {
             return $next($request);
+        }
+
+        if (Auth::user()->isAdmin()) {
+            return redirect()->route('admin_dashboard');
         }
 
         return redirect()->route('student_dashboard')->with('error', 'Access denied, Only Mentors are allowed here😢');
