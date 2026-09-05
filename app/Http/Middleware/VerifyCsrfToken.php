@@ -13,5 +13,6 @@ class VerifyCsrfToken extends Middleware
         'payment/fail',
         'payment/cancel',
         'payment/ipn',
+        'audio-detection/webhook',
     ];
 }

@@ -29,6 +29,7 @@
     <a class="nav-item @if(($adminInitialSection ?? '') === 'sessions') active @endif" href="{{ route('admin_sessions') }}" onclick="nav('sessions',this)"><x-heroicon name="video-camera" class="h-icon" style="width:20px;height:20px" />সেশনগুলো</a>
     <a class="nav-item @if(($adminInitialSection ?? '') === 'payments') active @endif" href="{{ route('admin_payments') }}" onclick="nav('payments',this)"><x-heroicon name="credit-card" class="h-icon" style="width:20px;height:20px" />পেমেন্টস</a>
     <div class="nav-section">সিস্টেম</div>
+    <a class="nav-item @if(($adminInitialSection ?? '') === 'security') active @endif" href="{{ route('admin_security') }}" onclick="nav('security',this)"><x-heroicon name="shield-exclamation" class="h-icon" style="width:20px;height:20px" />সিকিউরিটি ইভেন্ট</a>
     <a class="nav-item @if(($adminInitialSection ?? '') === 'settings') active @endif" onclick="nav('settings',this)"><x-heroicon name="cog-6-tooth" class="h-icon" style="width:20px;height:20px" />সেটিংস</a>
   </div>
   <div class="sidebar-bottom">
@@ -929,6 +930,116 @@
       @endif
     </div>
   </div>
+
+  {{-- ═══════════════════════════════════
+       PAGE: SECURITY EVENTS (Audio Detection)
+  ═══════════════════════════════════ --}}
+  <div class="page @if(($adminInitialSection ?? '') === 'security') active @endif" id="p-security">
+    <div class="pg-hd">
+      <div>
+        <h2>সিকিউরিটি ইভেন্ট</h2>
+        <div class="pg-hd-sub">অডিও ডিটেকশন — কন্ট্যাক্ট তথ্য শেয়ার সনাক্তকরণ</div>
+      </div>
+    </div>
+
+    {{-- Stats --}}
+    <div class="sgrid g3" style="margin-bottom:20px">
+      <div class="stat-card">
+        <div class="stat-head">
+          <div class="s-label" style="margin-bottom:0">মোট ইভেন্ট</div>
+          <span class="stat-icon" style="background:var(--red-bg);color:var(--red)">
+            <x-heroicon name="shield-exclamation" class="h-icon h-icon--md" />
+          </span>
+        </div>
+        <div class="s-val" style="color:var(--red)">{{ number_format($totalSecurityEvents ?? 0) }}</div>
+        <div class="s-sub">সর্বমোট ডিটেকশন</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-head">
+          <div class="s-label" style="margin-bottom:0">আজকের ইভেন্ট</div>
+          <span class="stat-icon"><x-heroicon name="calendar-days" class="h-icon h-icon--md" /></span>
+        </div>
+        <div class="s-val">{{ number_format(collect($securityEvents ?? [])->filter(fn($e) => str_starts_with($e['detected_at'], now()->format('d M Y')))->count()) }}</div>
+        <div class="s-sub">আজ শনাক্ত হয়েছে</div>
+      </div>
+    </div>
+
+    {{-- Table --}}
+    <div class="card">
+      <div class="card-head">
+        <h3>সাম্প্রতিক সিকিউরিটি ইভেন্টসমূহ</h3>
+        <span style="font-size:12px;color:var(--text3)">সর্বশেষ ২০০টি ইভেন্ট · অডিও ডিটেকশন</span>
+      </div>
+      <div class="tbl">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>সময়</th>
+              <th>সেশন কোড</th>
+              <th>ব্যবহারকারী</th>
+              <th>ভূমিকা</th>
+              <th>ডিটেকশন টাইপ</th>
+              <th>সোর্স</th>
+            </tr>
+          </thead>
+          <tbody>
+            @forelse($securityEvents ?? [] as $event)
+            <tr>
+              <td class="td-mono">#{{ $event['id'] }}</td>
+              <td style="font-size:12px;white-space:nowrap">{{ $event['detected_at'] }}</td>
+              <td class="td-mono">{{ $event['session_code'] }}</td>
+              <td>
+                <div class="td-with-av">
+                  <span class="t-av">{{ strtoupper(substr($event['user_name'], 0, 1)) }}</span>
+                  {{ $event['user_name'] }}
+                </div>
+              </td>
+              <td>
+                <span class="badge {{ $event['participant_role'] === 'mentor' ? 'b-active' : 'b-offline' }}">
+                  {{ $event['participant_role'] === 'mentor' ? 'মেন্টর' : ($event['participant_role'] === 'student' ? 'শিক্ষার্থী' : $event['participant_role']) }}
+                </span>
+              </td>
+              <td>
+                @php
+                  $dtLabels = [
+                    'phone_number'         => ['label' => 'ফোন নম্বর',        'class' => 'b-banned'],
+                    'phone_number_context' => ['label' => 'ফোন প্রসঙ্গ',       'class' => 'b-pending'],
+                    'email_address'        => ['label' => 'ইমেইল এড্রেস',      'class' => 'b-banned'],
+                    'email_context'        => ['label' => 'ইমেইল প্রসঙ্গ',     'class' => 'b-pending'],
+                    'whatsapp'             => ['label' => 'হোয়াটসঅ্যাপ',      'class' => 'b-cancelled'],
+                    'telegram'             => ['label' => 'টেলিগ্রাম',         'class' => 'b-cancelled'],
+                  ];
+                  $dt = $dtLabels[$event['detection_type']] ?? ['label' => $event['detection_type'], 'class' => 'b-offline'];
+                @endphp
+                <span class="badge {{ $dt['class'] }}">{{ $dt['label'] }}</span>
+              </td>
+              <td><span class="badge b-offline">{{ $event['source'] }}</span></td>
+            </tr>
+            @empty
+            <tr>
+              <td colspan="7" style="text-align:center;padding:30px;color:var(--text3)">
+                কোনো সিকিউরিটি ইভেন্ট নেই ✓
+              </td>
+            </tr>
+            @endforelse
+          </tbody>
+        </table>
+      </div>
+      <div class="card-foot">
+        <span style="font-size:12px;color:var(--text3)">
+          দেখানো হচ্ছে {{ count($securityEvents ?? []) }} টি ইভেন্ট · অডিও-ভিত্তিক কন্ট্যাক্ট তথ্য ডিটেকশন
+        </span>
+      </div>
+    </div>
+
+    {{-- Info box --}}
+    <div class="info-tip" style="margin-top:16px">
+      <x-heroicon name="information-circle" class="h-icon h-icon--md" />
+      এই প্যানেলটি লাইভ কলের সময় AI-মুক্ত, রুল-ভিত্তিক অডিও বিশ্লেষণের মাধ্যমে শনাক্ত করা যোগাযোগের তথ্য প্রদর্শন করে। সম্পূর্ণ ট্রান্সক্রিপ্ট বা ফোন নম্বর সংরক্ষিত হয় না।
+    </div>
+  </div>
+
 </div>
 
 {{-- ═══════════════ MODALS ═══════════════ --}}
@@ -1039,7 +1150,7 @@ const qs = s => document.querySelector(s);
 const later = fn => setTimeout(fn, 60);
 
 /* ── navigation ── */
-const titles = {dashboard:'ড্যাশবোর্ড',users:'শিক্ষার্থী ব্যবস্থাপনা',mentors:'মেন্টর ব্যবস্থাপনা',topics:'টপিক এবং ক্যাটাগরি',sessions:'সেশন পর্যবেক্ষণ',payments:'পেমেন্ট ম্যানেজমেন্ট',settings:'সেটিংস'};
+const titles = {dashboard:'ড্যাশবোর্ড',users:'শিক্ষার্থী ব্যবস্থাপনা',mentors:'মেন্টর ব্যবস্থাপনা',topics:'টপিক এবং ক্যাটাগরি',sessions:'সেশন পর্যবেক্ষণ',payments:'পেমেন্ট ম্যানেজমেন্ট',security:'সিকিউরিটি ইভেন্ট',settings:'সেটিংস'};
 function nav(id, el){
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('p-'+id).classList.add('active');

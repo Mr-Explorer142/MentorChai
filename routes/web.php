@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AudioDetectionController;
+use App\Http\Controllers\AssemblyAIWebhookController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
@@ -395,3 +397,28 @@ Route::post('/payment/success', [PaymentController::class, 'success'])->name('pa
 Route::post('/payment/fail',    [PaymentController::class, 'fail'])->name('payment.fail');
 Route::post('/payment/cancel',  [PaymentController::class, 'cancel'])->name('payment.cancel');
 Route::post('/payment/ipn',     [PaymentController::class, 'ipn'])->name('payment.ipn');
+
+/*
+|--------------------------------------------------------------------------
+| Audio Detection Routes
+|--------------------------------------------------------------------------
+*/
+
+// Authenticated routes (browser during a live call)
+Route::middleware('auth')->group(function () {
+    // Upload a short audio segment for transcription
+    Route::post('/audio-detection', [AudioDetectionController::class, 'store'])->name('audio-detection.store');
+
+    // Poll for new security events for the current call
+    Route::get('/audio-detection/poll', [AudioDetectionController::class, 'poll'])->name('audio-detection.poll');
+});
+
+// AssemblyAI webhook — no CSRF (add this path to VerifyCsrfToken $except)
+Route::post('/audio-detection/webhook', [AssemblyAIWebhookController::class, 'handle'])
+    ->name('audio-detection.webhook')
+    ->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
+
+// Admin: security events panel
+Route::prefix('admin')->name('admin_')->middleware(['auth', 'admin'])->group(function () {
+    Route::get('/dashboard/security', [AdminController::class, 'securityEvents'])->name('security');
+});

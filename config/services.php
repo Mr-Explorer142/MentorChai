@@ -47,4 +47,15 @@ return [
         'redirect'      => env('GITHUB_REDIRECT_URI', '/auth/github/callback'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | AssemblyAI
+    |--------------------------------------------------------------------------
+    | Set ASSEMBLYAI_API_KEY in your .env file.
+    | Get your key at: https://www.assemblyai.com/
+    */
+    'assemblyai' => [
+        'key' => env('ASSEMBLYAI_API_KEY', ''),
+    ],
+
 ];

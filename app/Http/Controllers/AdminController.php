@@ -7,6 +7,7 @@ use App\Enums\SessionStatus;
 use App\Enums\UserRole;
 use App\Enums\UserStatus;
 use App\Models\Payment;
+use App\Models\SecurityEvent;
 use App\Models\SessionTopic;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -522,6 +523,38 @@ class AdminController extends Controller
         // Removed: We should keep the historical topic name in session_topics even if the topic is deleted from global list.
 
         return redirect()->route('admin_dashboard')->with('success', 'টপিকটি সফলভাবে মুছে ফেলা হয়েছে।');
+    }
+
+    /* ──────────────────────────────────────────
+     | Security Events (Audio Detection)
+    ────────────────────────────────────────── */
+
+    public function securityEvents()
+    {
+        $base = $this->baseData();
+
+        $events = SecurityEvent::with('user')
+            ->latest('detected_at')
+            ->take(200)
+            ->get()
+            ->map(fn($e) => [
+                'id'               => $e->id,
+                'detected_at'      => $e->detected_at?->format('d M Y, H:i:s') ?? '—',
+                'session_code'     => $e->session_code,
+                'user_name'        => $e->user?->name ?? '—',
+                'user_id'          => $e->user_id,
+                'participant_role' => $e->participant_role ?? '—',
+                'detection_type'   => $e->detection_type,
+                'source'           => $e->source,
+            ]);
+
+        $totalEvents = SecurityEvent::count();
+
+        return view('dashboard.admin-dashboard', array_merge($base, [
+            'securityEvents'      => $events,
+            'totalSecurityEvents' => $totalEvents,
+            'adminInitialSection' => 'security',
+        ]));
     }
 
     /* ──────────────────────────────────────────
