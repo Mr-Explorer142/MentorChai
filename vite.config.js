@@ -9,6 +9,7 @@ export default defineConfig({
                 "resources/css/app.css",
                 "resources/js/app.js",
                 "resources/js/video-call.js",
+                "resources/js/audio-detection.js",
             ],
             refresh: true,
         }),
