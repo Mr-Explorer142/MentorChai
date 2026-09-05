@@ -68,6 +68,8 @@ class ProfileController extends Controller
             'nid_back' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
             'student_id_front' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
             'student_id_back' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
+            'cv' => 'nullable|file|mimes:pdf,doc,docx|max:10240',
+            'demo_video_link' => ['nullable', 'url', 'regex:/^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be|drive\.google\.com)\/.+$/i'],
         ]);
 
         // Get only the fields that passed validation
@@ -77,9 +79,9 @@ class ProfileController extends Controller
             $user->update(['name' => $validData['name']]);
         }
 
-        $profileData = collect($validData)->except(['name', 'nid_front', 'nid_back', 'student_id_front', 'student_id_back'])->toArray();
+        $profileData = collect($validData)->except(['name', 'nid_front', 'nid_back', 'student_id_front', 'student_id_back', 'cv'])->toArray();
 
-        foreach (['nid_front', 'nid_back', 'student_id_front', 'student_id_back'] as $field) {
+        foreach (['nid_front', 'nid_back', 'student_id_front', 'student_id_back', 'cv'] as $field) {
             // Check if removal was requested
             if ($request->input('remove_' . $field) == '1') {
                 if ($user->profile && $user->profile->$field) {
@@ -100,7 +102,7 @@ class ProfileController extends Controller
         $user->profile()->updateOrCreate(['user_id' => $user->id], $profileData);
 
         // If mentor uploaded new documents, mark as pending verification
-        $docFields = ['nid_front', 'nid_back', 'student_id_front', 'student_id_back'];
+        $docFields = ['nid_front', 'nid_back', 'student_id_front', 'student_id_back', 'cv'];
         $uploadedNewDoc = false;
         foreach ($docFields as $field) {
             if ($request->hasFile($field) && isset($validData[$field])) {

@@ -572,7 +572,13 @@
                 <div class="doc-label">ID পেছনে</div>
               </div>
               @endif
-              @if(!$mentor['nid_front'] && !$mentor['nid_back'] && !$mentor['student_id_front'] && !$mentor['student_id_back'])
+              @if($mentor['cv'])
+              <div class="doc-img-box" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px;text-align:center" onclick="window.open('{{ asset('storage/' . $mentor['cv']) }}', '_blank')">
+                <x-heroicon name="document-text" class="h-icon" style="width:32px;height:32px;color:var(--accent)" />
+                <div class="doc-label" style="position:static;background:none;color:var(--text);padding-top:4px">CV দেখুন</div>
+              </div>
+              @endif
+              @if(!$mentor['nid_front'] && !$mentor['nid_back'] && !$mentor['student_id_front'] && !$mentor['student_id_back'] && !$mentor['cv'])
               <span class="doc-no-img"><x-heroicon name="document" class="h-icon h-icon--sm" />কোনো ডকুমেন্ট আপলোড হয়নি</span>
               @endif
             </div>

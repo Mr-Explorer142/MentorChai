@@ -284,8 +284,9 @@ Route::middleware('auth')->group(function () {
             return response()->json(['success' => true]);
         })->name('session.complete');
 
-        // ✏️ CHANGED: approve route moved here (both mentor and student need access)
+        // ✏️ CHANGED: approve and reject routes (both mentor and student need access)
         Route::post('/session/{session}/approve', [SessionTopicController::class, 'approve'])->name('session.approve');
+        Route::post('/session/{session}/reject', [SessionTopicController::class, 'reject'])->name('session.reject');
 
         // Notification routes
         Route::post('/notifications/mark-all-read', function (Request $request) {

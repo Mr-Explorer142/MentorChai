@@ -16,6 +16,8 @@
                     <span class="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0" title="Unread"></span>
                     @elseif($type === 'session_approved')
                     <span class="w-1.5 h-1.5 rounded-full bg-green-400 shrink-0" title="Unread"></span>
+                    @elseif($type === 'session_rejected')
+                    <span class="w-1.5 h-1.5 rounded-full bg-rose-400 shrink-0" title="Unread"></span>
                     @elseif($type === 'payment_received')
                     <span class="w-1.5 h-1.5 rounded-full bg-teal-400 shrink-0" title="Unread"></span>
                     @else
@@ -128,34 +130,58 @@
             @endif
             @endif
 
-            {{-- Mentor: Approve button for session requests --}}
+            {{-- Mentor: Approve / Reject buttons for session requests --}}
             @if($type === 'session_requested')
             @php
                 $reqSessionId = $notification->data['session_id'] ?? null;
                 $reqTopic = $reqSessionId ? \App\Models\SessionTopic::find($reqSessionId) : null;
-                $canApprove = $reqTopic && $reqTopic->status === \App\Enums\SessionStatus::Pending;
+                $canAction = $reqTopic && $reqTopic->status === \App\Enums\SessionStatus::Pending;
             @endphp
-            @if($canApprove && $reqSessionId)
-            <form method="POST" action="{{ route('session.approve', $reqSessionId) }}" class="mt-0.5">
-                @csrf
-                <button type="submit" onclick="markAsRead('{{ $notification->id }}')" class="inline-flex items-center gap-1 text-[11px] font-semibold
-                                       text-white bg-teal-600 dark:bg-teal-500
-                                       px-2.5 py-0.5 rounded-md
-                                       hover:bg-teal-700 dark:hover:bg-teal-400
-                                       transition-colors duration-200">
-                    <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                    Approve
-                </button>
-            </form>
+            @if($canAction && $reqSessionId)
+            <div class="flex items-center gap-1.5 mt-0.5">
+                <form method="POST" action="{{ route('session.approve', $reqSessionId) }}" class="inline-flex">
+                    @csrf
+                    <button type="submit" onclick="markAsRead('{{ $notification->id }}')" class="inline-flex items-center gap-1 text-[11px] font-semibold
+                                           text-white bg-teal-600 dark:bg-teal-500
+                                           px-2.5 py-0.5 rounded-md
+                                           hover:bg-teal-700 dark:hover:bg-teal-400
+                                           transition-colors duration-200 cursor-pointer">
+                        <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                        Approve
+                    </button>
+                </form>
+                <form method="POST" action="{{ route('session.reject', $reqSessionId) }}" class="inline-flex">
+                    @csrf
+                    <button type="submit" onclick="markAsRead('{{ $notification->id }}')" class="inline-flex items-center gap-1 text-[11px] font-semibold
+                                           text-white bg-rose-600 dark:bg-rose-500
+                                           px-2.5 py-0.5 rounded-md
+                                           hover:bg-rose-700 dark:hover:bg-rose-400
+                                           transition-colors duration-200 cursor-pointer">
+                        <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                        Reject
+                    </button>
+                </form>
+            </div>
             @else
-            <button type="button" onclick="showNotificationModal('This session request has already been approved.')" class="inline-flex items-center gap-1 mt-0.5 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 opacity-80 cursor-pointer">
+            @if($reqTopic && $reqTopic->status === \App\Enums\SessionStatus::Rejected)
+            <button type="button" onclick="showNotificationModal('This session request has been declined.')" class="inline-flex items-center gap-1 mt-0.5 text-[11px] font-semibold text-rose-600 dark:text-rose-400 opacity-80 cursor-pointer">
+                <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                Declined ✗
+            </button>
+            @else
+            <button type="button" onclick="showNotificationModal('This session request has already been processed.')" class="inline-flex items-center gap-1 mt-0.5 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 opacity-80 cursor-pointer">
                 <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                 </svg>
                 Approved ✓
             </button>
+            @endif
             @endif
             @endif
 

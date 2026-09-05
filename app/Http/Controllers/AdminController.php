@@ -253,6 +253,7 @@ class AdminController extends Controller
                 'nid_back'         => $u->profile->nid_back ?? null,
                 'student_id_front' => $u->profile->student_id_front ?? null,
                 'student_id_back'  => $u->profile->student_id_back ?? null,
+                'cv'               => $u->profile->cv ?? null,
             ]);
 
         $bannedMentors = User::where('role', UserRole::Mentor)
@@ -366,7 +367,7 @@ class AdminController extends Controller
         $user = User::where('role', UserRole::Mentor)->findOrFail($id);
         if ($user->profile) {
             // Delete document files
-            foreach (['nid_front', 'nid_back', 'student_id_front', 'student_id_back'] as $field) {
+            foreach (['nid_front', 'nid_back', 'student_id_front', 'student_id_back', 'cv'] as $field) {
                 if ($user->profile->$field) {
                     Storage::disk('public')->delete($user->profile->$field);
                 }
@@ -376,6 +377,7 @@ class AdminController extends Controller
                 'nid_back'              => null,
                 'student_id_front'      => null,
                 'student_id_back'       => null,
+                'cv'                    => null,
                 'is_verified'           => false,
                 'documents_submitted_at'=> null,
             ]);

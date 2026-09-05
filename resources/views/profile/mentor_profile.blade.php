@@ -185,20 +185,43 @@
                                     Detailed profile and contact info of the mentor</p>
                             </div>
                         </div>
-                        @if (auth()->id() === $mentor->id)
-                        <a href="{{ route('edit_profile', $mentor->id) }}"
-                            class="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl border-2 transition-all duration-200 hover:shadow-md hover:-translate-y-0.5 flex-shrink-0"
-                            style="border-color: var(--mc-primary); color: var(--mc-primary);"
-                            onmouseover="this.style.background='var(--mc-primary)';this.style.color='white'"
-                            onmouseout="this.style.background='transparent';this.style.color='var(--mc-primary)'">
-                            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931z" />
-                            </svg>
-                            Update Profile
-                        </a>
-                        @endif
+                        <div class="flex items-center gap-2 sm:gap-3 flex-wrap flex-shrink-0">
+                            {{-- Watch Teaching Demo Button --}}
+                            @if($mentor->profile && $mentor->profile->demo_video_link)
+                                <a href="{{ $mentor->profile->demo_video_link }}" target="_blank"
+                                   class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold shadow-sm transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
+                                   style="background-color: #eab308; color: #0f1f2e; border: 1px solid #ca8a04;">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M8 5v14l11-7z" />
+                                    </svg>
+                                    Watch Teaching Demo
+                                </a>
+                            @else
+                                <button type="button" onclick="document.getElementById('noDemoVideoModal').showModal()"
+                                   class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold shadow-sm transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
+                                   style="background-color: #eab308; color: #0f1f2e; border: 1px solid #ca8a04;">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M8 5v14l11-7z" />
+                                    </svg>
+                                    Watch Teaching Demo
+                                </button>
+                            @endif
+
+                            @if (auth()->id() === $mentor->id)
+                            <a href="{{ route('edit_profile', $mentor->id) }}"
+                                class="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl border-2 transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
+                                style="border-color: var(--mc-primary); color: var(--mc-primary); background: transparent;"
+                                onmouseover="this.style.background='var(--mc-primary)';this.style.color='white'"
+                                onmouseout="this.style.background='transparent';this.style.color='var(--mc-primary)'">
+                                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931z" />
+                                </svg>
+                                Update Profile
+                            </a>
+                            @endif
+                        </div>
                     </div>
                 </div>
 
@@ -371,6 +394,29 @@
                     </p>
                 </div>
             </div>
+
+            @if($mentor->profile && $mentor->profile->cv && (Auth::id() === $mentor->id || (Auth::check() && Auth::user()->isAdmin())))
+            {{-- Resume/CV --}}
+            <div class="p-4 sm:p-8 border-b" style="border-color: var(--mc-border-subtle);">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-1 h-7 rounded-full"
+                        style="background: linear-gradient(to bottom, var(--mc-primary), var(--mc-sage));"></div>
+                    <h2 class="text-lg sm:text-xl font-bold" style="color: var(--mc-text); font-family:'Lora',serif;">
+                        Resume / CV</h2>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="{{ asset('storage/' . $mentor->profile->cv) }}" target="_blank"
+                       class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold shadow-sm transition-all duration-200 hover:-translate-y-0.5"
+                       style="background: var(--mc-primary); color: white;">
+                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m3.75 9v6m3-3H9m1.5-12H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                        </svg>
+                        View / Download CV
+                    </a>
+                    <span class="text-xs" style="color: var(--mc-text-faint);">(Only visible to you and Admin)</span>
+                </div>
+            </div>
+            @endif
 
             {{-- Achievements --}}
             <div class="p-4 sm:p-8 border-b" style="border-color: var(--mc-border-subtle);">
@@ -907,5 +953,30 @@
             document.getElementById('viewAchievementImageModal').showModal();
         }
     </script>
+
+    {{-- No Demo Video Modal --}}
+    <dialog id="noDemoVideoModal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box p-6 rounded-2xl shadow-xl max-w-sm text-center"
+            style="background: var(--mc-surface); border: 1px solid var(--mc-border-teal-sub);">
+            <div class="w-16 h-16 mx-auto rounded-full mb-4 flex items-center justify-center"
+                style="background: rgba(239, 68, 68, 0.1);">
+                <svg class="w-8 h-8 text-red-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+            </div>
+            <h3 class="font-bold text-lg mb-2" style="color: var(--mc-text);">No Demo Video Available</h3>
+            <p class="text-sm mb-6" style="color: var(--mc-text-muted);">The mentor has not uploaded a teaching demo video yet.</p>
+            <div class="modal-action mt-0 justify-center">
+                <form method="dialog">
+                    <button class="btn border-none rounded-xl text-white px-6 shadow-md hover:shadow-lg transition-all"
+                        style="background: linear-gradient(135deg, var(--mc-primary), var(--mc-navy));">Close</button>
+                </form>
+            </div>
+        </div>
+        <form method="dialog" class="modal-backdrop">
+            <button>close</button>
+        </form>
+    </dialog>
 
 </x-layout>
