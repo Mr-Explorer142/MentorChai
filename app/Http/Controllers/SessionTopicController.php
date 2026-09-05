@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Notifications\PaymentReceivedNotification;
 use App\Notifications\SessionRequestedNotification;
 use App\Notifications\SessionApprovedNotification;
+use App\Notifications\SessionRejectedNotification;
 use App\Enums\SessionStatus;
 use App\Enums\UserStatus;
 use App\Models\SessionTopic;
@@ -79,6 +80,27 @@ class SessionTopicController extends Controller
         }
 
         return back()->with('success', 'Session approved.');
+    }
+
+    // Session rejection
+    public function reject(SessionTopic $session)
+    {
+        if ($session->status !== SessionStatus::Pending) {
+            return back()->with('error', 'This session request has already been processed.');
+        }
+
+        $session->update([
+            'status' => SessionStatus::Rejected,
+        ]);
+
+        // Notify the student
+        try {
+            $session->student->notify(new SessionRejectedNotification($session));
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::error('Failed to send SessionRejectedNotification email: ' . $e->getMessage());
+        }
+
+        return back()->with('success', 'Session request declined.');
     }
 
     // checkout

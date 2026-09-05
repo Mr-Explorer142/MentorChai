@@ -187,6 +187,15 @@
                                             Approve
                                         </button>
                                     </form>
+                                    <form method="POST" action="{{ route('session.reject', $topic->id) }}" class="inline-flex">
+                                        @csrf
+                                        <button type="submit" class="badge badge-error text-white font-black text-[10px] py-1 px-2 shadow-2xs border-0 gap-1 hover:scale-105 transition-transform cursor-pointer">
+                                            <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                            </svg>
+                                            Reject
+                                        </button>
+                                    </form>
                                     @endif
                                     @if($mentoringSession && $mentoringSession->status === \App\Enums\SessionStatus::Ongoing)
                                     <a href="{{ route('live-session', ['room' => $mentoringSession->session_code]) }}"
@@ -311,7 +320,7 @@
                                     </td>
                                     <td class="py-4 text-right pr-6">
                                         <div class="flex items-center justify-end gap-2">
-                                            {{-- Approve button for pending session requests --}}
+                                            {{-- Approve/Reject buttons for pending session requests --}}
                                             @if($topic->status === \App\Enums\SessionStatus::Pending)
                                             <form method="POST" action="{{ route('session.approve', $topic->id) }}" class="inline-flex">
                                                 @csrf
@@ -320,6 +329,15 @@
                                                         <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                                                     </svg>
                                                     Approve
+                                                </button>
+                                            </form>
+                                            <form method="POST" action="{{ route('session.reject', $topic->id) }}" class="inline-flex">
+                                                @csrf
+                                                <button type="submit" class="badge badge-error text-white font-black text-xs py-2.5 px-4 shadow-sm border-0 gap-1 hover:scale-105 transition-all cursor-pointer">
+                                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                                    </svg>
+                                                    Reject
                                                 </button>
                                             </form>
                                             @endif

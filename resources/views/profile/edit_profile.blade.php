@@ -353,6 +353,37 @@
                                         value="{{ old('hourly_rate', Auth::user()->profile?->hourly_rate) }}" />
                                 </div>
                                 @endif
+
+                                {{-- Demo Video Link --}}
+                                @if(Auth::user()->role === \App\Enums\UserRole::Mentor)
+                                <div class="lg:col-span-2 mt-2">
+                                    <label class="flex items-center gap-1.5 text-xs sm:text-sm font-bold mb-1.5
+                                                  text-[#033f63] dark:text-[#7ec8e3]">
+                                        <svg class="w-3.5 h-3.5 text-[#28666e] dark:text-[#4db6c1]" fill="none"
+                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z" />
+                                        </svg>
+                                        Demo Video Link <span class="text-[10px] font-normal text-[#033f63]/60 dark:text-[#7ec8e3]/60 ml-1">(Optional)</span>
+                                    </label>
+                                    <p class="text-[10px] sm:text-xs text-[#033f63]/45 dark:text-[#7ec8e3]/40 mb-1.5">Please provide a valid YouTube or Google Drive link showcasing your teaching style.</p>
+                                    <input type="url" name="demo_video_link" class="w-full px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs sm:text-sm outline-none
+                                               border-[1.5px] border-[#28666e]/20 dark:border-[#4db6c1]/20
+                                               bg-[#eef7f8]/50 dark:bg-[#0f1f2e]/50
+                                               text-[#033f63] dark:text-[#7ec8e3]
+                                               placeholder:text-[#033f63]/35 dark:placeholder:text-[#7ec8e3]/30
+                                               focus:border-[#28666e] dark:focus:border-[#4db6c1]
+                                               focus:ring-[3px] focus:ring-[#28666e]/10 dark:focus:ring-[#4db6c1]/10
+                                               focus:bg-white dark:focus:bg-[#243d4d]
+                                               transition-all duration-200" placeholder="e.g: https://youtube.com/watch?v=..."
+                                        value="{{ old('demo_video_link', Auth::user()->profile?->demo_video_link) }}" />
+                                    @error('demo_video_link')
+                                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                @endif
                             </div>
 
                             {{-- Skills --}}
@@ -435,7 +466,7 @@
                                 <div>
                                     <label class="flex items-center gap-1.5 text-xs sm:text-sm font-bold mb-1.5
                                                   text-[#033f63] dark:text-[#7ec8e3]">
-                                        National ID (NID) - Front
+                                        National ID (NID) - Front <span class="text-red-500">*</span>
                                     </label>
                                     <input type="file" name="nid_front" accept="image/*" class="w-full px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs sm:text-sm outline-none
                                                border-[1.5px] border-[#28666e]/20 dark:border-[#4db6c1]/20
@@ -443,7 +474,7 @@
                                                text-[#033f63] dark:text-[#7ec8e3]
                                                focus:border-[#28666e] dark:focus:border-[#4db6c1]
                                                focus:ring-[3px] focus:ring-[#28666e]/10 dark:focus:ring-[#4db6c1]/10
-                                               transition-all duration-200" {{ Auth::user()->role === \App\Enums\UserRole::Student ? 'disabled' : '' }} />
+                                               transition-all duration-200" {{ Auth::user()->role === \App\Enums\UserRole::Student ? 'disabled' : '' }} {{ (!Auth::user()->profile || !Auth::user()->profile->nid_front) && Auth::user()->role === \App\Enums\UserRole::Mentor ? 'required' : '' }} />
                                     @if(Auth::user()->profile && Auth::user()->profile->nid_front)
                                         <div class="mt-2 flex items-center justify-between">
                                             <p class="text-[10px] sm:text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded-md">Uploaded.</p>
@@ -459,7 +490,7 @@
                                 <div>
                                     <label class="flex items-center gap-1.5 text-xs sm:text-sm font-bold mb-1.5
                                                   text-[#033f63] dark:text-[#7ec8e3]">
-                                        National ID (NID) - Back
+                                        National ID (NID) - Back <span class="text-red-500">*</span>
                                     </label>
                                     <input type="file" name="nid_back" accept="image/*" class="w-full px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs sm:text-sm outline-none
                                                border-[1.5px] border-[#28666e]/20 dark:border-[#4db6c1]/20
@@ -467,7 +498,7 @@
                                                text-[#033f63] dark:text-[#7ec8e3]
                                                focus:border-[#28666e] dark:focus:border-[#4db6c1]
                                                focus:ring-[3px] focus:ring-[#28666e]/10 dark:focus:ring-[#4db6c1]/10
-                                               transition-all duration-200" {{ Auth::user()->role === \App\Enums\UserRole::Student ? 'disabled' : '' }} />
+                                               transition-all duration-200" {{ Auth::user()->role === \App\Enums\UserRole::Student ? 'disabled' : '' }} {{ (!Auth::user()->profile || !Auth::user()->profile->nid_back) && Auth::user()->role === \App\Enums\UserRole::Mentor ? 'required' : '' }} />
                                     @if(Auth::user()->profile && Auth::user()->profile->nid_back)
                                         <div class="mt-2 flex items-center justify-between">
                                             <p class="text-[10px] sm:text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded-md">Uploaded.</p>
@@ -488,7 +519,12 @@
                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                 d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z" />
                                         </svg>
-                                        Student ID - Front
+                                        @if(Auth::user()->role === \App\Enums\UserRole::Mentor)
+                                            Student/Employee ID Card - Front
+                                        @else
+                                            Student ID - Front
+                                        @endif
+                                        <span class="text-[10px] font-normal text-[#033f63]/60 dark:text-[#7ec8e3]/60 ml-1">(Optional)</span>
                                     </label>
                                     <input type="file" name="student_id_front" accept="image/*" class="w-full px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs sm:text-sm outline-none
                                                border-[1.5px] border-[#28666e]/20 dark:border-[#4db6c1]/20
@@ -517,7 +553,12 @@
                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                 d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z" />
                                         </svg>
-                                        Student ID - Back
+                                        @if(Auth::user()->role === \App\Enums\UserRole::Mentor)
+                                            Student/Employee ID Card - Back
+                                        @else
+                                            Student ID - Back
+                                        @endif
+                                        <span class="text-[10px] font-normal text-[#033f63]/60 dark:text-[#7ec8e3]/60 ml-1">(Optional)</span>
                                     </label>
                                     <input type="file" name="student_id_back" accept="image/*" class="w-full px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs sm:text-sm outline-none
                                                border-[1.5px] border-[#28666e]/20 dark:border-[#4db6c1]/20
@@ -532,6 +573,37 @@
                                             <label class="flex items-center gap-1.5 cursor-pointer group">
                                                 <input type="checkbox" name="remove_student_id_back" value="1" class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-red-500 border-red-200 rounded focus:ring-red-500">
                                                 <span class="text-[10px] sm:text-xs text-red-500 group-hover:text-red-600 transition-colors">Remove Image</span>
+                                            </label>
+                                        </div>
+                                    @endif
+                                </div>
+
+                                {{-- CV Upload --}}
+                                <div class="lg:col-span-2 mt-2">
+                                    <label class="flex items-center gap-1.5 text-xs sm:text-sm font-bold mb-1.5
+                                                  text-[#033f63] dark:text-[#7ec8e3]">
+                                        <svg class="w-3.5 h-3.5 text-[#28666e] dark:text-[#4db6c1]" fill="none"
+                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m3.75 9v6m3-3H9m1.5-12H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                                        </svg>
+                                        Resume/CV <span class="text-[10px] font-normal text-[#033f63]/60 dark:text-[#7ec8e3]/60 ml-1">(Optional, PDF/DOC/DOCX)</span>
+                                    </label>
+                                    <input type="file" name="cv" accept=".pdf,.doc,.docx" class="w-full px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs sm:text-sm outline-none
+                                               border-[1.5px] border-[#28666e]/20 dark:border-[#4db6c1]/20
+                                               bg-[#eef7f8]/50 dark:bg-[#0f1f2e]/50
+                                               text-[#033f63] dark:text-[#7ec8e3]
+                                               focus:border-[#28666e] dark:focus:border-[#4db6c1]
+                                               focus:ring-[3px] focus:ring-[#28666e]/10 dark:focus:ring-[#4db6c1]/10
+                                               transition-all duration-200" />
+                                    @if(Auth::user()->profile && Auth::user()->profile->cv)
+                                        <div class="mt-2 flex items-center justify-between">
+                                            <p class="text-[10px] sm:text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded-md">
+                                                <a href="{{ asset('storage/' . Auth::user()->profile->cv) }}" target="_blank" class="hover:underline">View Uploaded CV</a>
+                                            </p>
+                                            <label class="flex items-center gap-1.5 cursor-pointer group">
+                                                <input type="checkbox" name="remove_cv" value="1" class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-red-500 border-red-200 rounded focus:ring-red-500">
+                                                <span class="text-[10px] sm:text-xs text-red-500 group-hover:text-red-600 transition-colors">Remove CV</span>
                                             </label>
                                         </div>
                                     @endif

@@ -33,6 +33,8 @@ class Profile extends Model
         'preferred_language',
         'teaching_experience_years',
         'teaching_experience_months',
+        'cv',
+        'demo_video_link',
     ];
 
     protected $casts = [
@@ -44,7 +46,7 @@ class Profile extends Model
     {
         return ! $this->is_verified
             && $this->documents_submitted_at !== null
-            && ($this->nid_front || $this->nid_back || $this->student_id_front || $this->student_id_back);
+            && ($this->nid_front || $this->nid_back || $this->student_id_front || $this->student_id_back || $this->cv);
     }
 
 

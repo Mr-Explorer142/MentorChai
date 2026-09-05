@@ -12,6 +12,9 @@
             </div>
 
             <form method="GET" action="{{ route('mentors') }}" class="flex items-center gap-1.5 w-full sm:w-auto">
+                @if(request('per_page'))
+                <input type="hidden" name="per_page" value="{{ request('per_page') }}">
+                @endif
 
                 <div class="relative flex-1 sm:flex-initial">
                     <div class="flex items-center
@@ -118,6 +121,9 @@
                     @endif
                     @if(request('sort'))
                     <input type="hidden" name="sort" value="{{ request('sort') }}">
+                    @endif
+                    @if(request('per_page'))
+                    <input type="hidden" name="per_page" value="{{ request('per_page') }}">
                     @endif
 
                     <div class="bg-white dark:bg-[#1a2e3b]
@@ -556,6 +562,9 @@
                 @if(request('sort'))
                 <input type="hidden" name="sort" value="{{ request('sort') }}">
                 @endif
+                @if(request('per_page'))
+                <input type="hidden" name="per_page" value="{{ request('per_page') }}">
+                @endif
 
                 {{-- Panel Header --}}
                 <div class="flex items-center justify-between px-5 py-4
@@ -716,19 +725,7 @@
 
     @push('scripts')
     <script>
-    (function () {
-        const url = new URL(window.location.href);
-        const isMobileWidth = window.innerWidth < 1024;
-        const currentPerPage = url.searchParams.get('per_page');
 
-        if (isMobileWidth && currentPerPage !== '10') {
-            url.searchParams.set('per_page', '10');
-            window.location.replace(url.toString());
-        } else if (!isMobileWidth && currentPerPage === '10') {
-            url.searchParams.delete('per_page');
-            window.location.replace(url.toString());
-        }
-    })();
 
     const input = document.getElementById('search-input');
     const dropdown = document.getElementById('search-suggestions');

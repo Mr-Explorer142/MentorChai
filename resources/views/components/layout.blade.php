@@ -292,7 +292,7 @@
 
                         {{-- Drawer Links --}}
                         <div class="flex-1 overflow-y-auto p-4 flex flex-col gap-1.5 mt-2">
-                            <a href="{{ route('mentors') }}" class="flex items-center justify-between text-[0.9rem] font-bold no-underline
+                            <a href="{{ route('mentors') }}" onclick="document.getElementById('mobile-menu').checked = false;" class="flex items-center justify-between text-[0.9rem] font-bold no-underline
                                       px-4 py-2.5 rounded-xl
                                       bg-linear-to-r from-[#28666e] to-[#033f63] dark:from-[#4db6c1] dark:to-[#7ec8e3]
                                       text-white dark:text-[#0f1f2e]
@@ -305,7 +305,7 @@
                                 </svg>
                             </a>
                             @guest
-                            <a href="{{ route('student_register') }}" class="block text-[0.9rem] font-semibold text-[#033f63] dark:text-[#7ec8e3] no-underline
+                            <a href="{{ route('student_register') }}" onclick="document.getElementById('mobile-menu').checked = false;" class="block text-[0.9rem] font-semibold text-[#033f63] dark:text-[#7ec8e3] no-underline
                                       px-4 py-[0.65rem] rounded-xl
                                       transition-all duration-150
                                       hover:bg-[#28666e]/8 dark:hover:bg-[#4db6c1]/12 hover:text-[#28666e] dark:hover:text-[#4db6c1]

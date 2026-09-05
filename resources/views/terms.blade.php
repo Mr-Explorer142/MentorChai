@@ -94,7 +94,7 @@
                                 </div>
                             </div>
                             <p class="text-xs sm:text-sm leading-relaxed" style="color: var(--mc-text-muted);">
-                                প্রতিটি সেশনের মোট ফী থেকে <span class="font-extrabold" style="color: var(--mc-primary);">২0% প্ল্যাটফর্ম কমিশন</span> কেটে নেওয়া হবে। অবশিষ্ট <span class="font-extrabold" style="color: var(--mc-primary);">৭৫%</span> নির্দিষ্ট সময়ের মধ্যে মেন্টরের অ্যাকাউন্ট ব্যালেন্সে জমা হবে।
+                                প্রতিটি সেশনের মোট ফী থেকে <span class="font-extrabold" style="color: var(--mc-primary);">২০% প্ল্যাটফর্ম কমিশন</span> কেটে নেওয়া হবে। অবশিষ্ট <span class="font-extrabold" style="color: var(--mc-primary);">৮০%</span> নির্দিষ্ট সময়ের মধ্যে মেন্টরের অ্যাকাউন্ট ব্যালেন্সে জমা হবে।
                             </p>
                         </div>
 
