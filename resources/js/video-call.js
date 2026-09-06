@@ -29,8 +29,7 @@ async function startCall() {
         showScreenSharingButton: true,
         showPreJoinView: true,
         onJoinRoom: () => {
-            // Start audio detection once the user has joined the room
-            // sessionCode is the raw "SS-XXXX" value stored in the DB (without the "mc-" prefix)
+            console.log("[AudioDetection] ZEGOCLOUD onJoinRoom triggered. Starting detection for session:", sessionCode);
             initAudioDetection(sessionCode, userID);
         },
         onLeaveRoom: async () => {

@@ -66,7 +66,7 @@ class AudioDetectionController extends Controller
             uniqid('seg_', true) . '.' . $extension,
             'local'
         );
-        $fullPath   = storage_path('app/' . $tmpPath);
+        $fullPath = Storage::disk('local')->path($tmpPath);
 
         // ── 4. Upload to AssemblyAI ───────────────────────────────────
         Log::info('[AudioDetection] Uploading to AssemblyAI', [
@@ -113,7 +113,63 @@ class AudioDetectionController extends Controller
             'submitted_at'  => now()->toISOString(),
         ]);
 
-        // Return immediately — detection result arrives via webhook
+        // ── 6. Direct Polling Fallback (for localhost / rapid detection) ───────
+        // Poll AssemblyAI directly up to 6 times (max ~3.0 seconds) so detection
+        // works locally on localhost where webhooks cannot reach.
+        $transcriptText = null;
+        for ($i = 0; $i < 6; $i++) {
+            usleep(500000); // 500ms
+            $res = $this->assemblyAI->getTranscript($transcriptId);
+            $status = $res['status'] ?? '';
+            if ($status === 'completed') {
+                $transcriptText = $res['text'] ?? '';
+                break;
+            }
+            if ($status === 'error') {
+                Log::warning('[AudioDetection] AssemblyAI transcript error', ['id' => $transcriptId]);
+                break;
+            }
+        }
+
+        if ($transcriptText !== null && trim($transcriptText) !== '') {
+            Log::info('[AudioDetection] Synchronous transcript text received', [
+                'transcript_id' => $transcriptId,
+                'text'          => $transcriptText,
+            ]);
+
+            $detector = new \App\Services\AudioContactDetector();
+            $analysis = $detector->analyse($transcriptText);
+
+            if ($analysis['detected']) {
+                // Cooldown check (25 seconds)
+                $recent = SecurityEvent::where('session_code', $sessionCode)
+                    ->where('user_id', $userId)
+                    ->where('detected_at', '>=', now()->subSeconds(25))
+                    ->first();
+
+                if (!$recent) {
+                    $event = SecurityEvent::create([
+                        'session_code'       => $sessionCode,
+                        'user_id'            => $userId,
+                        'participant_role'   => $authUser->id === $session->mentor_id ? 'mentor' : 'student',
+                        'detection_type'     => $analysis['type'],
+                        'detection_category' => $analysis['category'],
+                        'raw_transcript'     => $transcriptText,
+                        'matched_fragment'   => $analysis['fragment'],
+                        'source'             => 'audio_detection',
+                        'detected_at'        => now(),
+                    ]);
+
+                    Log::warning('[AudioDetection] Security Event created synchronously!', [
+                        'event_id'       => $event->id,
+                        'type'           => $analysis['type'],
+                        'matched'        => $analysis['fragment'],
+                    ]);
+                }
+            }
+        }
+
+        // Return immediately
         return response()->json([
             'accepted'      => true,
             'transcript_id' => $transcriptId,

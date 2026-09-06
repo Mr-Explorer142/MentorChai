@@ -46,9 +46,14 @@ class AssemblyAIService
     public function uploadFile(string $localPath): ?string
     {
         try {
+            if (!file_exists($localPath)) {
+                Log::error('[AssemblyAI] Audio file path does not exist', ['path' => $localPath]);
+                return null;
+            }
+
             $audioContent = file_get_contents($localPath);
-            if ($audioContent === false) {
-                Log::error('[AssemblyAI] Could not read audio file', ['path' => $localPath]);
+            if ($audioContent === false || strlen($audioContent) === 0) {
+                Log::error('[AssemblyAI] Could not read audio content or empty file', ['path' => $localPath]);
                 return null;
             }
 
