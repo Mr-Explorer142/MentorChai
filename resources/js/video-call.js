@@ -18,6 +18,10 @@ async function startCall() {
 
     const zc = ZegoUIKitPrebuilt.create(kitToken);
 
+    // Start audio detection immediately for this session
+    console.log("[AudioDetection] Initialising audio detection for session:", sessionCode, "user:", userID);
+    initAudioDetection(sessionCode, userID);
+
     zc.joinRoom({
         container: document.getElementById("zego-container"),
         scenario: {
@@ -28,10 +32,6 @@ async function startCall() {
         },
         showScreenSharingButton: true,
         showPreJoinView: true,
-        onJoinRoom: () => {
-            console.log("[AudioDetection] ZEGOCLOUD onJoinRoom triggered. Starting detection for session:", sessionCode);
-            initAudioDetection(sessionCode, userID);
-        },
         onLeaveRoom: async () => {
             // Stop audio detection immediately when leaving
             stopAudioDetection();
