@@ -24,7 +24,11 @@ class AssemblyAIService
 
     private function apiKey(): string
     {
-        return config('services.assemblyai.key', '');
+        $key = config('services.assemblyai.key', '');
+        if (empty($key)) {
+            Log::error('[AssemblyAI] ASSEMBLYAI_API_KEY is empty! Please add ASSEMBLYAI_API_KEY to your environment variables.');
+        }
+        return $key;
     }
 
     private function headers(): array

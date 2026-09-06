@@ -152,18 +152,15 @@ class AudioDetectionController extends Controller
                         'session_code'       => $sessionCode,
                         'user_id'            => $userId,
                         'participant_role'   => $authUser->id === $session->mentor_id ? 'mentor' : 'student',
-                        'detection_type'     => $analysis['type'],
-                        'detection_category' => $analysis['category'],
-                        'raw_transcript'     => $transcriptText,
-                        'matched_fragment'   => $analysis['fragment'],
-                        'source'             => 'audio_detection',
+                        'detection_type'     => $analysis['detection_type'],
+                        'detection_category' => $analysis['detection_category'],
+                        'source'             => 'audio',
                         'detected_at'        => now(),
                     ]);
 
                     Log::warning('[AudioDetection] Security Event created synchronously!', [
-                        'event_id'       => $event->id,
-                        'type'           => $analysis['type'],
-                        'matched'        => $analysis['fragment'],
+                        'event_id' => $event->id,
+                        'type'     => $analysis['detection_type'],
                     ]);
                 }
             }

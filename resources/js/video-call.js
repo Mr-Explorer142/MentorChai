@@ -1,9 +1,14 @@
 import { ZegoUIKitPrebuilt } from "@zegocloud/zego-uikit-prebuilt";
 import { initAudioDetection, stopAudioDetection } from "./audio-detection.js";
 
-const { appID, roomID, sessionCode, userID, userName, userRole } = window.ZEGO_CONFIG;
-
 async function startCall() {
+    const config = window.ZEGO_CONFIG || {};
+    const { appID, roomID, sessionCode, userID, userName, userRole } = config;
+
+    if (!appID || !roomID) {
+        console.error("[AudioDetection] ZEGO_CONFIG is missing or invalid:", config);
+        return;
+    }
     const response = await fetch("/zego/token");
     const data = await response.json();
     const serverSecret = data.serverSecret;
