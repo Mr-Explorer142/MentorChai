@@ -29,19 +29,36 @@ class AudioContactDetector
      */
     private function normalise(string $text): string
     {
-        // Lowercase English characters only
+        // Lowercase English characters
         $text = mb_strtolower($text, 'UTF-8');
 
+        // Convert Bengali numerals to English digits
+        $bengaliNumerals = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+        $englishDigits   = ['0','1','2','3','4','5','6','7','8','9'];
+        $text = str_replace($bengaliNumerals, $englishDigits, $text);
+
         // Remove punctuation that commonly appears between phone digits
-        // e.g. "017-123 4567" → "017 123 4567"
         $text = preg_replace('/[.\-,;:!?()[\]{}|\\\\\/]/', ' ', $text);
+
+        // Convert spoken word-digits to numeric digits (both EN and BN spoken formats)
+        $wordDigits = [
+            'zero' => '0', 'oh' => '0', 'one' => '1', 'two' => '2', 'three' => '3',
+            'four' => '4', 'five' => '5', 'six' => '6', 'seven' => '7', 'eight' => '8', 'nine' => '9',
+            'শূন্য' => '0', 'এক' => '1', 'দুই' => '2', 'তিন' => '3', 'চার' => '4',
+            'পাঁচ' => '5', 'ছয়' => '6', 'সাত' => '7', 'আট' => '8', 'নয়' => '9'
+        ];
+
+        // Replace whole word digits with numbers
+        foreach ($wordDigits as $word => $digit) {
+            $text = preg_replace('/\b' . preg_quote($word, '/') . '\b/u', $digit, $text);
+        }
 
         // Collapse multiple whitespace
         $text = preg_replace('/\s+/', ' ', $text);
 
         // Normalise common WhatsApp misspellings / transliterations
         $text = str_replace(
-            ['whats app', 'what\'s app', 'whatsap', 'watsapp', 'wattsapp'],
+            ['whats app', 'what\'s app', 'whatsap', 'watsapp', 'wattsapp', 'what app'],
             'whatsapp',
             $text
         );

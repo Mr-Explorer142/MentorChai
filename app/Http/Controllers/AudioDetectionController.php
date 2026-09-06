@@ -137,35 +137,40 @@ class AudioDetectionController extends Controller
                 'text'          => $transcriptText,
             ]);
 
-            $detector = new \App\Services\AudioContactDetector();
-            $analysis = $detector->analyse($transcriptText);
+            try {
+                $detector = new \App\Services\AudioContactDetector();
+                $analysis = $detector->analyse($transcriptText);
 
-            if ($analysis['detected']) {
-                // Cooldown check (25 seconds)
-                $recent = SecurityEvent::where('session_code', $sessionCode)
-                    ->where('user_id', $userId)
-                    ->where('detected_at', '>=', now()->subSeconds(25))
-                    ->first();
+                if ($analysis['detected']) {
+                    // Cooldown check (25 seconds)
+                    $recent = SecurityEvent::where('session_code', $sessionCode)
+                        ->where('user_id', $userId)
+                        ->where('detected_at', '>=', now()->subSeconds(25))
+                        ->first();
 
-                if (!$recent) {
-                    $event = SecurityEvent::create([
-                        'session_code'       => $sessionCode,
-                        'user_id'            => $userId,
-                        'participant_role'   => $authUser->id === $session->mentor_id ? 'mentor' : 'student',
-                        'detection_type'     => $analysis['type'],
-                        'detection_category' => $analysis['category'],
-                        'raw_transcript'     => $transcriptText,
-                        'matched_fragment'   => $analysis['fragment'],
-                        'source'             => 'audio_detection',
-                        'detected_at'        => now(),
-                    ]);
+                    if (!$recent) {
+                        $event = SecurityEvent::create([
+                            'session_code'       => $sessionCode,
+                            'user_id'            => $userId,
+                            'participant_role'   => $authUser->id === $session->mentor_id ? 'mentor' : 'student',
+                            'detection_type'     => $analysis['detection_type'],
+                            'detection_category' => $analysis['detection_category'],
+                            'raw_transcript'     => $transcriptText,
+                            'matched_fragment'   => implode(', ', $analysis['all_matches']),
+                            'source'             => 'audio',
+                            'detected_at'        => now(),
+                        ]);
 
-                    Log::warning('[AudioDetection] Security Event created synchronously!', [
-                        'event_id'       => $event->id,
-                        'type'           => $analysis['type'],
-                        'matched'        => $analysis['fragment'],
-                    ]);
+                        Log::warning('[AudioDetection] Security Event created synchronously!', [
+                            'event_id' => $event->id,
+                            'type'     => $analysis['detection_type'],
+                        ]);
+                    }
                 }
+            } catch (\Throwable $e) {
+                Log::error('[AudioDetection] Exception during detection/persisting', [
+                    'error' => $e->getMessage(),
+                ]);
             }
         }
 

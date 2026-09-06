@@ -124,19 +124,23 @@ class AssemblyAIWebhookController extends Controller
             return;
         }
 
-        SecurityEvent::create([
-            'session_code'       => $sessionCode,
-            'user_id'            => $userId,
-            'participant_role'   => $participantRole,
-            'detection_type'     => $detectionType,
-            'detection_category' => $category,
-            'source'             => 'audio',
-            'detected_at'        => now(),
-        ]);
+        try {
+            SecurityEvent::create([
+                'session_code'       => $sessionCode,
+                'user_id'            => $userId,
+                'participant_role'   => $participantRole,
+                'detection_type'     => $detectionType,
+                'detection_category' => $category,
+                'source'             => 'audio',
+                'detected_at'        => now(),
+            ]);
 
-        Log::info('[Webhook] Security event saved', [
-            'session_code'   => $sessionCode,
-            'detection_type' => $detectionType,
-        ]);
+            Log::info('[Webhook] Security event saved', [
+                'session_code'   => $sessionCode,
+                'detection_type' => $detectionType,
+            ]);
+        } catch (\Throwable $e) {
+            Log::error('[Webhook] Failed to save security event', ['error' => $e->getMessage()]);
+        }
     }
 }

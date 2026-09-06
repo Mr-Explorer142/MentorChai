@@ -12,6 +12,8 @@ class SecurityEvent extends Model
         'participant_role',
         'detection_type',
         'detection_category',
+        'raw_transcript',
+        'matched_fragment',
         'source',
         'detected_at',
     ];
