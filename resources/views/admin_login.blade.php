@@ -70,13 +70,12 @@
                                        value="{{ old('email') }}"
                                        class="w-full pl-10 pr-4 py-2.5 rounded-xl
                                               text-sm font-[Nunito,sans-serif] outline-none
-                                              border-[1.5px] border-[#C4CFCE] dark:border-[#4db6c1]/20
+                                              border-[1.5px] @error('email') border-red-500 dark:border-red-400 focus:border-red-500 dark:focus:border-red-400 focus:ring-red-500/10 @else border-[#C4CFCE] dark:border-[#4db6c1]/20 focus:border-[#1A998F] dark:focus:border-[#4db6c1] focus:ring-[#1A998F]/15 dark:focus:ring-[#4db6c1]/10 @enderror
                                               bg-[#fafcfc] dark:bg-[#0f1f2e]/60
                                               text-[#102E3C] dark:text-[#7ec8e3]
                                               placeholder:text-[#155665]/40 dark:placeholder:text-[#7ec8e3]/30
                                               transition-all duration-200
-                                              focus:border-[#1A998F] dark:focus:border-[#4db6c1]
-                                              focus:ring-[3px] focus:ring-[#1A998F]/15 dark:focus:ring-[#4db6c1]/10
+                                              focus:ring-[3px]
                                               focus:bg-white dark:focus:bg-[#243d4d]" />
                                 <span class="absolute left-3 top-1/2 -translate-y-1/2
                                              text-[#155665]/50 dark:text-[#4db6c1]/50">
@@ -87,6 +86,14 @@
                                     </svg>
                                 </span>
                             </div>
+                            @error('email')
+                                <p class="mt-1.5 text-xs text-red-600 dark:text-red-400 flex items-center gap-1 font-[Nunito,sans-serif]">
+                                    <svg class="w-3.5 h-3.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                                    </svg>
+                                    <span>{{ $message }}</span>
+                                </p>
+                            @enderror
                         </div>
 
                         {{-- Password --}}
@@ -99,13 +106,12 @@
                                 <input type="password" name="password" placeholder="••••••••" required
                                        class="w-full pl-10 pr-4 py-2.5 rounded-xl
                                               text-sm font-[Nunito,sans-serif] outline-none
-                                              border-[1.5px] border-[#C4CFCE] dark:border-[#4db6c1]/20
+                                              border-[1.5px] @error('password') border-red-500 dark:border-red-400 focus:border-red-500 dark:focus:border-red-400 focus:ring-red-500/10 @else border-[#C4CFCE] dark:border-[#4db6c1]/20 focus:border-[#1A998F] dark:focus:border-[#4db6c1] focus:ring-[#1A998F]/15 dark:focus:ring-[#4db6c1]/10 @enderror
                                               bg-[#fafcfc] dark:bg-[#0f1f2e]/60
                                               text-[#102E3C] dark:text-[#7ec8e3]
                                               placeholder:text-[#155665]/40 dark:placeholder:text-[#7ec8e3]/30
                                               transition-all duration-200
-                                              focus:border-[#1A998F] dark:focus:border-[#4db6c1]
-                                              focus:ring-[3px] focus:ring-[#1A998F]/15 dark:focus:ring-[#4db6c1]/10
+                                              focus:ring-[3px]
                                               focus:bg-white dark:focus:bg-[#243d4d]" />
                                 <span class="absolute left-3 top-1/2 -translate-y-1/2
                                              text-[#155665]/50 dark:text-[#4db6c1]/50">
@@ -118,6 +124,14 @@
                                     </svg>
                                 </span>
                             </div>
+                            @error('password')
+                                <p class="mt-1.5 text-xs text-red-600 dark:text-red-400 flex items-center gap-1 font-[Nunito,sans-serif]">
+                                    <svg class="w-3.5 h-3.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                                    </svg>
+                                    <span>{{ $message }}</span>
+                                </p>
+                            @enderror
                         </div>
 
                         {{-- Remember me --}}
