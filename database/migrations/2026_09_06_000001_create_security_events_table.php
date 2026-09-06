@@ -15,6 +15,8 @@ return new class extends Migration
             $table->string('participant_role')->nullable(); // 'mentor' or 'student'
             $table->string('detection_type');              // phone_number, whatsapp, telegram, email, etc.
             $table->string('detection_category')->nullable(); // broader category for grouping
+            $table->text('raw_transcript')->nullable();
+            $table->text('matched_fragment')->nullable();
             $table->string('source')->default('audio');
             $table->timestamp('detected_at')->useCurrent();
             $table->timestamps();
