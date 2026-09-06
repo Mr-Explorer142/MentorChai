@@ -23,7 +23,7 @@
                 <div class="bg-white dark:bg-[#1a2e3b] rounded-xl sm:rounded-2xl overflow-hidden shadow-sm transition-colors duration-300 border border-[#1a9998]/15 dark:border-[#4db6c1]/15 shadow-[0_4px_20px_rgba(26,153,152,0.08)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
 
                     {{-- ZegoCloud mounts here --}}
-                    <div id="zego-container" class="w-full h-[320px] sm:h-[480px] md:h-[520px] rounded-t-xl sm:rounded-t-2xl overflow-hidden"></div>
+                    <div id="zego-container" class="relative w-full h-[400px] sm:h-[480px] md:h-[520px] rounded-t-xl sm:rounded-t-2xl overflow-hidden" style="transform: translateZ(0);"></div>
 
                     {{-- Session meta --}}
                     <div class="px-3.5 py-3 sm:px-5 sm:py-4 flex flex-wrap justify-between items-center gap-2 sm:gap-3">
