@@ -155,8 +155,6 @@ class AudioDetectionController extends Controller
                             'participant_role'   => $authUser->id === $session->mentor_id ? 'mentor' : 'student',
                             'detection_type'     => $analysis['detection_type'],
                             'detection_category' => $analysis['detection_category'],
-                            'raw_transcript'     => $transcriptText,
-                            'matched_fragment'   => implode(', ', $analysis['all_matches']),
                             'source'             => 'audio',
                             'detected_at'        => now(),
                         ]);
