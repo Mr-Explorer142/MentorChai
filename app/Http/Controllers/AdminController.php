@@ -47,7 +47,12 @@ class AdminController extends Controller
             return back()->withErrors(['email' => 'এই অ্যাকাউন্টে অ্যাডমিন পারমিশন নেই।'])->withInput();
         }
 
-        return back()->withErrors(['email' => 'ইমেইল বা পাসওয়ার্ড সঠিক নয়।'])->withInput();
+        $adminExists = User::where('email', $request->email)->exists();
+        if (!$adminExists) {
+            return back()->withErrors(['email' => 'এই ইমেইলে কোনো অ্যাকাউন্ট পাওয়া যায়নি।'])->withInput();
+        }
+
+        return back()->withErrors(['password' => 'ভুল পাসওয়ার্ড। আবার চেষ্টা করুন।'])->withInput();
     }
 
     public function logout(Request $request)

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\UserRole;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +16,7 @@ class AuthController extends Controller
 
     public function login(Request $request) {
         $request->validate([
-            'email' => 'required | email',
+            'email' => 'required|email',
             'password' => 'required',
         ]);
 
@@ -37,8 +38,14 @@ class AuthController extends Controller
             return redirect()->route('student_dashboard');
         }
 
-        // Error message
-        return back()->withErrors(['email' => 'Invalid Credentials!', 'password' => 'Incorrect Password, Please re-check!']);
+        // Check if account with email exists to determine specific error box
+        $userExists = User::where('email', $request->email)->exists();
+
+        if (!$userExists) {
+            return back()->withErrors(['email' => 'No account found with this email address.'])->withInput();
+        }
+
+        return back()->withErrors(['password' => 'Incorrect password. Please try again.'])->withInput();
     }
 
     // Logout

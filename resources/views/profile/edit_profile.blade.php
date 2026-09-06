@@ -654,6 +654,117 @@
                 </div>
             </div>
 
+            {{-- Change Password Card --}}
+            <div class="mt-8 bg-white dark:bg-[#1a2e3b]
+                        rounded-2xl
+                        border border-teal-100 dark:border-[#4db6c1]/15
+                        shadow-sm dark:shadow-[0_8px_40px_rgba(0,0,0,0.4)]
+                        transition-colors duration-300">
+                <div class="p-4 sm:p-8 lg:p-10">
+                    <div class="flex items-center gap-3 pb-3 sm:pb-4 mb-4 sm:mb-6
+                                border-b border-teal-50 dark:border-[#4db6c1]/10">
+                        <div class="w-1 h-6 sm:h-7 rounded-full
+                                    bg-linear-to-b from-[#28666e] to-[#7c9885]
+                                    dark:from-[#4db6c1] dark:to-[#9ab8a5]"></div>
+                        <h2 class="text-base sm:text-lg font-bold flex items-center gap-2
+                                   text-[#033f63] dark:text-[#7ec8e3]" style="font-family:'Lora',serif;">
+                            Security Settings
+                        </h2>
+                    </div>
+                    
+                    @if (session('password_success'))
+                        <div class="mb-6 p-4 rounded-xl" style="background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.2);">
+                            <div class="text-sm text-green-600 dark:text-green-400 font-bold">{{ session('password_success') }}</div>
+                        </div>
+                    @endif
+
+                    <form action="{{ route('update_password') }}" method="POST" class="space-y-5 sm:space-y-6">
+                        @csrf
+                        @method('PUT')
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                            {{-- Current Password --}}
+                            <div class="md:col-span-2">
+                                <label class="flex items-center gap-1.5 text-xs sm:text-sm font-bold mb-1.5
+                                              text-[#033f63] dark:text-[#7ec8e3]">
+                                    Current Password <span class="text-red-500">*</span>
+                                </label>
+                                <input type="password" name="current_password" class="w-full px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs sm:text-sm outline-none
+                                           border-[1.5px] border-[#28666e]/20 dark:border-[#4db6c1]/20
+                                           bg-[#eef7f8]/50 dark:bg-[#0f1f2e]/50
+                                           text-[#033f63] dark:text-[#7ec8e3]
+                                           placeholder:text-[#033f63]/35 dark:placeholder:text-[#7ec8e3]/30
+                                           focus:border-[#28666e] dark:focus:border-[#4db6c1]
+                                           focus:ring-[3px] focus:ring-[#28666e]/10 dark:focus:ring-[#4db6c1]/10
+                                           focus:bg-white dark:focus:bg-[#243d4d]
+                                           transition-all duration-200" placeholder="Enter current password" required />
+                                @error('current_password')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            {{-- New Password --}}
+                            <div>
+                                <label class="flex items-center gap-1.5 text-xs sm:text-sm font-bold mb-1.5
+                                              text-[#033f63] dark:text-[#7ec8e3]">
+                                    New Password <span class="text-red-500">*</span>
+                                </label>
+                                <input type="password" name="password" class="w-full px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs sm:text-sm outline-none
+                                           border-[1.5px] border-[#28666e]/20 dark:border-[#4db6c1]/20
+                                           bg-[#eef7f8]/50 dark:bg-[#0f1f2e]/50
+                                           text-[#033f63] dark:text-[#7ec8e3]
+                                           placeholder:text-[#033f63]/35 dark:placeholder:text-[#7ec8e3]/30
+                                           focus:border-[#28666e] dark:focus:border-[#4db6c1]
+                                           focus:ring-[3px] focus:ring-[#28666e]/10 dark:focus:ring-[#4db6c1]/10
+                                           focus:bg-white dark:focus:bg-[#243d4d]
+                                           transition-all duration-200" placeholder="Enter new password (min 8 char)" required />
+                                @error('password')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            {{-- Confirm Password --}}
+                            <div>
+                                <label class="flex items-center gap-1.5 text-xs sm:text-sm font-bold mb-1.5
+                                              text-[#033f63] dark:text-[#7ec8e3]">
+                                    Confirm New Password <span class="text-red-500">*</span>
+                                </label>
+                                <input type="password" name="password_confirmation" class="w-full px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs sm:text-sm outline-none
+                                           border-[1.5px] border-[#28666e]/20 dark:border-[#4db6c1]/20
+                                           bg-[#eef7f8]/50 dark:bg-[#0f1f2e]/50
+                                           text-[#033f63] dark:text-[#7ec8e3]
+                                           placeholder:text-[#033f63]/35 dark:placeholder:text-[#7ec8e3]/30
+                                           focus:border-[#28666e] dark:focus:border-[#4db6c1]
+                                           focus:ring-[3px] focus:ring-[#28666e]/10 dark:focus:ring-[#4db6c1]/10
+                                           focus:bg-white dark:focus:bg-[#243d4d]
+                                           transition-all duration-200" placeholder="Confirm new password" required />
+                            </div>
+                        </div>
+
+                        {{-- Action Buttons --}}
+                        <div class="flex pt-4 border-t border-teal-50 dark:border-[#4db6c1]/10">
+                            <button type="submit" class="flex items-center justify-center gap-2
+                                       px-5 py-2.5 rounded-xl
+                                       bg-slate-800 dark:bg-slate-700
+                                       text-white
+                                       text-xs sm:text-sm font-bold
+                                       border-none cursor-pointer
+                                       shadow-md hover:shadow-lg
+                                       hover:bg-slate-900 dark:hover:bg-slate-600
+                                       hover:-translate-y-0.5 active:translate-y-0
+                                       transition-all duration-200">
+                                <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                                </svg>
+                                Change Password
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
             {{-- Help note --}}
             <div class="text-center mt-5">
                 <span class="inline-flex items-center gap-1.5 text-xs px-4 py-2 rounded-full

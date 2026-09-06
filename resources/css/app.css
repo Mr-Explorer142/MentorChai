@@ -10,7 +10,7 @@
 @source '../**/*.js';
 
 @theme {
-  --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+  --font-sans: 'Hind Siliguri', 'Noto Sans Bengali', 'Nunito', 'Instrument Sans', 'SolaimanLipi', 'Kalpurush', 'Nikosh', 'Siyam Rupali', 'Vrinda', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
     'Segoe UI Symbol', 'Noto Color Emoji';
   --animate-fade-up: fade-up 0.35s ease both;
 

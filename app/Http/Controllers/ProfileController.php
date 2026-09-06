@@ -122,7 +122,8 @@ class ProfileController extends Controller
             return back()->withErrors($validator)->withInput();
         }
 
-        return back()->with('success', 'Profile updated successfully.');
+        $route = $user->role === \App\Enums\UserRole::Mentor ? 'mentor_profile' : 'student_profile';
+        return redirect()->route($route, $user->id)->with('success', 'Profile updated successfully.');
     }
 
     function storeAchievement(Request $request)
@@ -218,5 +219,19 @@ class ProfileController extends Controller
         }
 
         return back()->with('avatar_success', 'Profile picture removed successfully.');
+    }
+
+    function updatePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => ['required', 'current_password'],
+            'password' => ['required', 'min:8', 'confirmed'],
+        ]);
+
+        $request->user()->update([
+            'password' => \Illuminate\Support\Facades\Hash::make($request->password),
+        ]);
+
+        return back()->with('password_success', 'Password updated successfully.');
     }
 }

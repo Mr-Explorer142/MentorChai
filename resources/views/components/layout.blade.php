@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Nunito:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Hind+Siliguri:wght@400;500;600;700&family=Lora:wght@400;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&display=swap"
         rel="stylesheet">
     @vite(['resources/css/app.css'])
     @vite(['resources/js/app.js'])
@@ -28,7 +28,7 @@
 </head>
 
 <body
-    class="font-[Nunito,sans-serif] bg-[#eef7f8] dark:bg-[#0f1f2e] min-h-screen flex flex-col transition-colors duration-300">
+    class="font-[Nunito,'Hind_Siliguri','Noto_Sans_Bengali','SolaimanLipi','Kalpurush','Nikosh','Siyam_Rupali','Vrinda',sans-serif] bg-[#eef7f8] dark:bg-[#0f1f2e] min-h-screen flex flex-col transition-colors duration-300">
 
     {{-- ═══════════════ HEADER ═══════════════ --}}
     <header class="sticky top-0 z-50">

@@ -7,6 +7,7 @@ use App\Http\Controllers\AssemblyAIWebhookController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\SocialAuthController;
 use App\Http\Controllers\MentorsController;
 use App\Http\Controllers\PaymentController;
@@ -128,6 +129,13 @@ Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+Route::middleware('guest')->group(function () {
+    Route::get('/forgot-password', [PasswordResetController::class, 'showLinkRequestForm'])->name('password.request');
+    Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLinkEmail'])->name('password.email');
+    Route::get('/reset-password/{token}', [PasswordResetController::class, 'showResetForm'])->name('password.reset');
+    Route::post('/reset-password', [PasswordResetController::class, 'reset'])->name('password.update');
+});
+
 Route::get('/register/student', [RegisterController::class, 'showStudentForm'])->name('student_register');
 Route::get('/register/teacher', [RegisterController::class, 'showTeacherForm'])->name('teacher_register');
 Route::post('/register', [RegisterController::class, 'register'])->name('register');
@@ -220,7 +228,8 @@ Route::middleware('auth')->group(function () {
     Route::middleware('verified')->group(function () {
 
         Route::get('/profile/edit', [ProfileController::class, 'editProfile'])->name('edit_profile');
-        Route::put('/profile', [ProfileController::class, 'updateprofile'])->name('update_profile');
+        Route::put('/profile', [ProfileController::class, 'updateProfile'])->name('update_profile');
+        Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('update_password');
         Route::post('/profile/avatar', [ProfileController::class, 'updateAvatar'])->name('update_avatar');
         Route::delete('/profile/avatar', [ProfileController::class, 'removeAvatar'])->name('remove_avatar');
 
