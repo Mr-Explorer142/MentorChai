@@ -37,7 +37,7 @@ let csrfToken       = null;
 // ── Latency logging ──────────────────────────────────────────────────────────
 
 function logTs(label) {
-    console.debug(`[AudioDetection] ${label} @ ${new Date().toISOString()}`);
+    console.log(`[AudioDetection] ${label} @ ${new Date().toISOString()}`);
 }
 
 // ── Initialise ───────────────────────────────────────────────────────────────
