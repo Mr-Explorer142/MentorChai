@@ -53,19 +53,18 @@
 
                         {{-- Small red dustbin button at the bottom-right corner --}}
                         @if(auth()->id() === $student->id && $student->profile && $student->profile->avatar)
-                        <form action="{{ route('remove_avatar') }}" method="POST"
-                            style="position:absolute; bottom:-4px; right:-4px; margin:0; z-index:10;"
-                            onsubmit="return confirm('Are you sure you want to remove the profile picture?');">
+                        <form id="removeAvatarForm" action="{{ route('remove_avatar') }}" method="POST"
+                            style="position:absolute; bottom:-4px; right:-4px; margin:0; z-index:10;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" title="Remove Photo" style="width:28px; height:28px; border-radius:9999px;
+                            <button type="button" title="Remove Photo" style="width:28px; height:28px; border-radius:9999px;
                                            background:#ef4444; border:2px solid #fff; cursor:pointer;
                                            display:flex; align-items:center; justify-content:center;
                                            box-shadow:0 2px 8px rgba(239,68,68,0.4);
                                            transition:all 0.2s;"
                                 onmouseover="this.style.background='#dc2626'; this.style.transform='scale(1.15)';"
                                 onmouseout="this.style.background='#ef4444'; this.style.transform='scale(1)';"
-                                onclick="event.stopPropagation();">
+                                onclick="event.stopPropagation(); document.getElementById('removeAvatarModal').showModal();">
                                 <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
                                     stroke="#fff">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -437,6 +436,38 @@
             });
         @endif
     </script>
+    @endif
+
+    {{-- Remove Avatar Modal --}}
+    @if(auth()->id() === $student->id && $student->profile && $student->profile->avatar)
+    <dialog id="removeAvatarModal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box max-w-sm p-6 overflow-hidden rounded-3xl shadow-2xl border text-center"
+            style="background:var(--mc-surface);border-color:var(--mc-border-teal-sub);">
+            
+            <div class="mb-4 inline-flex items-center justify-center w-16 h-16 rounded-full" style="background:rgba(26,153,143,0.1);">
+                <svg class="w-8 h-8" style="color:#1A998F;" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                </svg>
+            </div>
+            
+            <h3 class="font-bold text-xl mb-2" style="color:var(--mc-text);">Remove Profile Picture?</h3>
+            <p class="text-sm mb-6" style="color:var(--mc-text-muted);">
+                Are you sure you want to remove your profile picture? This action cannot be undone.
+            </p>
+            
+            <div class="flex gap-3 w-full">
+                <form method="dialog" class="flex-1">
+                    <button class="btn btn-warning w-full rounded-xl">Cancel</button>
+                </form>
+                <button type="button" onclick="document.getElementById('removeAvatarForm').submit()" class="btn flex-1 rounded-xl text-white border-0 transition-all duration-200" style="background:#1A998F;">
+                    Yes, Remove
+                </button>
+            </div>
+        </div>
+        <form method="dialog" class="modal-backdrop">
+            <button>close</button>
+        </form>
+    </dialog>
     @endif
 
 </x-layout>
