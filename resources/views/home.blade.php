@@ -107,7 +107,7 @@
                         </div>
 
                         <div class="relative w-full max-w-[260px] sm:max-w-none mx-auto sm:mx-0">
-                            <img src="{{ asset('images/Home Page/mentorship-session.jpg') }}" alt="Mentorship session"
+                            <img src="{{ asset('images/Home Page/Homepagetop.jpg') }}" alt="Mentorship session"
                                 class="relative w-full rounded-3xl"
                                 style="border: 1px solid var(--mc-border-teal); box-shadow: 0 24px 60px rgba(26,153,152,0.15), 0 4px 16px rgba(0,0,0,0.08);" />
 
