@@ -1,5 +1,5 @@
 import { ZegoUIKitPrebuilt } from "@zegocloud/zego-uikit-prebuilt";
-import { initAudioDetection, stopAudioDetection } from "./audio-detection.js";
+import { initAudioDetection, stopAudioDetection, setAudioDetectionMuted } from "./audio-detection.js";
 
 async function startCall() {
     const config = window.ZEGO_CONFIG || {};
@@ -37,6 +37,16 @@ async function startCall() {
         },
         showScreenSharingButton: true,
         showPreJoinView: true,
+        onMicrophoneStateUpdate: (state) => {
+            const isMuted = (state === 'MUTE' || state === false || state === 0);
+            console.log("[AudioDetection] ZEGOCLOUD onMicrophoneStateUpdate:", state, "isMuted:", isMuted);
+            setAudioDetectionMuted(isMuted);
+        },
+        onTurnOnMicrophoneDevice: (turnOn) => {
+            const isMuted = !turnOn;
+            console.log("[AudioDetection] ZEGOCLOUD onTurnOnMicrophoneDevice:", turnOn, "isMuted:", isMuted);
+            setAudioDetectionMuted(isMuted);
+        },
         onLeaveRoom: async () => {
             // Stop audio detection immediately when leaving
             stopAudioDetection();
@@ -64,6 +74,20 @@ async function startCall() {
             }
         },
     });
+
+    // Fallback listener for UI clicks on mute button inside container
+    const zegoContainer = document.getElementById("zego-container");
+    if (zegoContainer) {
+        zegoContainer.addEventListener("click", () => {
+            setTimeout(() => {
+                if (typeof zc.isMicrophoneMuted === 'function') {
+                    const muted = zc.isMicrophoneMuted();
+                    console.log("[AudioDetection] Checked zc.isMicrophoneMuted():", muted);
+                    setAudioDetectionMuted(muted);
+                }
+            }, 250);
+        });
+    }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
