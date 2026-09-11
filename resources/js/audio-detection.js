@@ -66,7 +66,7 @@ export function initAudioDetection(roomId, userId) {
 let isMicMutedState = false;
 
 /**
- * Detects if the microphone is currently muted in ZEGOCLOUD UI or state.
+ * Detects if the microphone is currently muted in ZEGOCLOUD UI or media track state.
  * @returns {boolean}
  */
 export function isZegoMicrophoneMutedInUI() {
@@ -75,23 +75,47 @@ export function isZegoMicrophoneMutedInUI() {
     const container = document.getElementById('zego-container');
     if (!container) return false;
 
-    // 1. Search for buttons or elements with title/aria-label/data-tip indicating "Turn on mic" or "Unmute"
+    // 1. Direct WebRTC Track Inspection from ZEGOCLOUD media elements
+    const mediaElements = container.querySelectorAll('video, audio');
+    for (const el of mediaElements) {
+        if (el.srcObject && typeof el.srcObject.getAudioTracks === 'function') {
+            const tracks = el.srcObject.getAudioTracks();
+            for (const track of tracks) {
+                if (track.enabled === false || track.muted === true) {
+                    return true;
+                }
+            }
+        }
+    }
+
+    // 2. Search for elements with title/aria-label/data-tip indicating "Turn on mic" or "Unmute"
     const elements = container.querySelectorAll('button, div[role="button"], [title], [aria-label], [data-tip]');
     for (const el of elements) {
-        const text = ((el.getAttribute('title') || '') + ' ' + (el.getAttribute('aria-label') || '') + ' ' + (el.getAttribute('data-tip') || '') + ' ' + (el.innerText || '')).toLowerCase();
-        if (text.includes('turn on mic') || text.includes('unmute') || text.includes('enable mic') || text.includes('open mic')) {
+        const title = (el.getAttribute('title') || '').toLowerCase();
+        const aria  = (el.getAttribute('aria-label') || '').toLowerCase();
+        const tip   = (el.getAttribute('data-tip') || '').toLowerCase();
+
+        if (title.includes('turn on mic') || title.includes('unmute') || title.includes('enable mic') ||
+            aria.includes('turn on mic') || aria.includes('unmute') || aria.includes('enable mic') ||
+            tip.includes('turn on mic') || tip.includes('unmute') || tip.includes('enable mic')) {
             return true;
         }
     }
 
-    // 2. Search for SVG icons containing slash lines or muted mic symbols inside zego-container
+    // 3. Search for SVG icons containing slash lines or muted mic symbols inside zego-container
     const svgs = container.querySelectorAll('svg');
     for (const svg of svgs) {
-        const parent = svg.closest('button, div');
-        const parentHtml = (parent ? parent.outerHTML : svg.outerHTML).toLowerCase();
+        const svgHtml = svg.outerHTML.toLowerCase();
+        const hasLineTag = svg.querySelector('line') !== null || svgHtml.includes('<line');
+        const hasSlashPath = svgHtml.includes('slash') || svgHtml.includes('strike') || 
+                             svgHtml.includes('m3 3') || svgHtml.includes('m4 4') || svgHtml.includes('m1.5') ||
+                             svgHtml.includes('l21 21') || svgHtml.includes('l20 20') || svgHtml.includes('l19 19') ||
+                             svgHtml.includes('21 21') || svgHtml.includes('20 20') || svgHtml.includes('19 19');
 
-        if (parentHtml.includes('mic') || parentHtml.includes('audio') || parentHtml.includes('m12 14c1.66') || parentHtml.includes('m19 10v2a7') || parentHtml.includes('m12 3c-1.66')) {
-            if (svg.querySelector('line') || parentHtml.includes('<line') || parentHtml.includes('slash') || parentHtml.includes('strike') || parentHtml.includes('m1.5') || parentHtml.includes('m3 3') || parentHtml.includes('m4 4') || parentHtml.includes('off')) {
+        if (hasLineTag || hasSlashPath) {
+            const parent = svg.closest('button, div');
+            const parentText = parent ? (parent.outerHTML + ' ' + (parent.innerText || '')).toLowerCase() : svgHtml;
+            if (!parentText.includes('camera') && !parentText.includes('video')) {
                 return true;
             }
         }
