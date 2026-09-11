@@ -63,6 +63,22 @@ export function initAudioDetection(roomId, userId) {
     startCapture();
 }
 
+let isMicMutedState = false;
+
+/**
+ * Enable or disable audio detection microphone tracks based on ZEGOCLOUD mic state.
+ * @param {boolean} isMuted
+ */
+export function setAudioDetectionMuted(isMuted) {
+    isMicMutedState = !!isMuted;
+    if (mediaStream) {
+        mediaStream.getAudioTracks().forEach(t => {
+            t.enabled = !isMicMutedState;
+        });
+    }
+    logTs(`microphone_track_${isMicMutedState ? 'disabled (muted)' : 'enabled (unmuted)'}`);
+}
+
 /**
  * Call this when the ZEGOCLOUD call ends to clean everything up.
  */
@@ -89,6 +105,9 @@ export function stopAudioDetection() {
 async function startCapture() {
     try {
         mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+        if (isMicMutedState) {
+            mediaStream.getAudioTracks().forEach(t => { t.enabled = false; });
+        }
         logTs('microphone_acquired');
         recordingActive = true;
         startRecordingCycle();
