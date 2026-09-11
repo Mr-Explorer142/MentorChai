@@ -64,6 +64,9 @@ export function initAudioDetection(roomId, userId) {
 }
 
 let isMicMutedState = false;
+let audioContext    = null;
+let audioAnalyser   = null;
+let maxRmsVolume    = 0;
 
 /**
  * Detects if the microphone is currently muted in ZEGOCLOUD UI or media track state.
@@ -102,20 +105,22 @@ export function isZegoMicrophoneMutedInUI() {
         }
     }
 
-    // 3. Search for SVG icons containing slash lines or muted mic symbols inside zego-container
+    // 3. Search for SVG icons with slash lines (multiple paths or line tags) inside ZEGOCLOUD control bar
     const svgs = container.querySelectorAll('svg');
     for (const svg of svgs) {
+        const paths = svg.querySelectorAll('path');
+        const lines = svg.querySelectorAll('line');
         const svgHtml = svg.outerHTML.toLowerCase();
-        const hasLineTag = svg.querySelector('line') !== null || svgHtml.includes('<line');
-        const hasSlashPath = svgHtml.includes('slash') || svgHtml.includes('strike') || 
-                             svgHtml.includes('m3 3') || svgHtml.includes('m4 4') || svgHtml.includes('m1.5') ||
-                             svgHtml.includes('l21 21') || svgHtml.includes('l20 20') || svgHtml.includes('l19 19') ||
-                             svgHtml.includes('21 21') || svgHtml.includes('20 20') || svgHtml.includes('19 19');
 
-        if (hasLineTag || hasSlashPath) {
+        const hasSlash = lines.length > 0 || paths.length >= 2 || svgHtml.includes('<line') ||
+                         svgHtml.includes('slash') || svgHtml.includes('strike') || 
+                         svgHtml.includes('l21 21') || svgHtml.includes('l20 20') || svgHtml.includes('l19 19');
+
+        if (hasSlash) {
             const parent = svg.closest('button, div');
             const parentText = parent ? (parent.outerHTML + ' ' + (parent.innerText || '')).toLowerCase() : svgHtml;
-            if (!parentText.includes('camera') && !parentText.includes('video')) {
+            // Ignore red end call button or video button
+            if (!parentText.includes('red') && !parentText.includes('hangup') && !parentText.includes('camera') && !parentText.includes('video')) {
                 return true;
             }
         }
@@ -155,6 +160,12 @@ export function stopAudioDetection() {
         mediaStream = null;
     }
 
+    if (audioContext) {
+        try { audioContext.close(); } catch (_) {}
+        audioContext = null;
+        audioAnalyser = null;
+    }
+
     logTs('stopped');
 }
 
@@ -165,7 +176,34 @@ async function startCapture() {
         mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
         logTs('microphone_acquired');
         recordingActive = true;
-        
+
+        // Setup Web Audio Analyser to monitor real-time volume RMS
+        try {
+            const AudioCtx = window.AudioContext || window.webkitAudioContext;
+            if (AudioCtx) {
+                audioContext  = new AudioCtx();
+                const source  = audioContext.createMediaStreamSource(mediaStream);
+                audioAnalyser = audioContext.createAnalyser();
+                audioAnalyser.fftSize = 256;
+                source.connect(audioAnalyser);
+            }
+        } catch (e) {
+            console.warn('[AudioDetection] Web Audio Analyser setup failed:', e);
+        }
+
+        // Attach touch & click listeners on zego-container for mobile button taps
+        const zegoContainer = document.getElementById('zego-container');
+        if (zegoContainer) {
+            const handleTouch = () => {
+                setTimeout(() => {
+                    const muted = isZegoMicrophoneMutedInUI();
+                    setAudioDetectionMuted(muted);
+                }, 150);
+            };
+            zegoContainer.addEventListener('click', handleTouch, true);
+            zegoContainer.addEventListener('touchstart', handleTouch, true);
+        }
+
         // 500ms interval scanner to continuously sync ZEGOCLOUD mic UI mute state
         setInterval(() => {
             if (!recordingActive) return;
@@ -192,7 +230,6 @@ function startRecordingCycle() {
         if (mediaStream) {
             mediaStream.getAudioTracks().forEach(t => { t.enabled = false; });
         }
-        // Do NOT record or upload anything while muted. Re-check in 2 seconds.
         cycleTimer = setTimeout(startRecordingCycle, 2000);
         return;
     } else {
@@ -202,6 +239,23 @@ function startRecordingCycle() {
     }
 
     logTs('recording_started');
+    maxRmsVolume = 0;
+
+    // Monitor volume RMS during cycle
+    let volumeCheckInterval = null;
+    if (audioAnalyser) {
+        const dataArray = new Uint8Array(audioAnalyser.frequencyBinCount);
+        volumeCheckInterval = setInterval(() => {
+            if (!audioAnalyser) return;
+            audioAnalyser.getByteFrequencyData(dataArray);
+            let sum = 0;
+            for (let i = 0; i < dataArray.length; i++) {
+                sum += dataArray[i];
+            }
+            const avg = sum / dataArray.length;
+            if (avg > maxRmsVolume) maxRmsVolume = avg;
+        }, 100);
+    }
 
     // Pick a supported MIME type
     const mimeType = getSupportedMimeType();
@@ -212,6 +266,7 @@ function startRecordingCycle() {
         recorder = new MediaRecorder(mediaStream, options);
     } catch (err) {
         console.error('[AudioDetection] MediaRecorder creation failed:', err);
+        if (volumeCheckInterval) clearInterval(volumeCheckInterval);
         return;
     }
 
@@ -226,10 +281,19 @@ function startRecordingCycle() {
 
     recorder.onstop = async () => {
         logTs('recording_stopped');
+        if (volumeCheckInterval) clearInterval(volumeCheckInterval);
 
-        // If mic became muted during recording, discard chunks & abort upload
+        // Guard 1: Abort if mic was muted in UI during cycle
         if (isZegoMicrophoneMutedInUI()) {
             logTs('mic_muted_during_cycle_aborting_upload');
+            scheduleNextCycle();
+            return;
+        }
+
+        // Guard 2: Abort if average audio volume was silent / below noise floor
+        // maxRmsVolume < 3.0 means virtually silence / muted mic input
+        if (audioAnalyser && maxRmsVolume < 3.0) {
+            logTs(`audio_silent_skipping_upload (max_vol: ${maxRmsVolume})`);
             scheduleNextCycle();
             return;
         }
