@@ -66,6 +66,41 @@ export function initAudioDetection(roomId, userId) {
 let isMicMutedState = false;
 
 /**
+ * Detects if the microphone is currently muted in ZEGOCLOUD UI or state.
+ * @returns {boolean}
+ */
+export function isZegoMicrophoneMutedInUI() {
+    if (isMicMutedState) return true;
+
+    const container = document.getElementById('zego-container');
+    if (!container) return false;
+
+    // 1. Search for buttons or elements with title/aria-label/data-tip indicating "Turn on mic" or "Unmute"
+    const elements = container.querySelectorAll('button, div[role="button"], [title], [aria-label], [data-tip]');
+    for (const el of elements) {
+        const text = ((el.getAttribute('title') || '') + ' ' + (el.getAttribute('aria-label') || '') + ' ' + (el.getAttribute('data-tip') || '') + ' ' + (el.innerText || '')).toLowerCase();
+        if (text.includes('turn on mic') || text.includes('unmute') || text.includes('enable mic') || text.includes('open mic')) {
+            return true;
+        }
+    }
+
+    // 2. Search for SVG icons containing slash lines or muted mic symbols inside zego-container
+    const svgs = container.querySelectorAll('svg');
+    for (const svg of svgs) {
+        const parent = svg.closest('button, div');
+        const parentHtml = (parent ? parent.outerHTML : svg.outerHTML).toLowerCase();
+
+        if (parentHtml.includes('mic') || parentHtml.includes('audio') || parentHtml.includes('m12 14c1.66') || parentHtml.includes('m19 10v2a7') || parentHtml.includes('m12 3c-1.66')) {
+            if (svg.querySelector('line') || parentHtml.includes('<line') || parentHtml.includes('slash') || parentHtml.includes('strike') || parentHtml.includes('m1.5') || parentHtml.includes('m3 3') || parentHtml.includes('m4 4') || parentHtml.includes('off')) {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+/**
  * Enable or disable audio detection microphone tracks based on ZEGOCLOUD mic state.
  * @param {boolean} isMuted
  */
@@ -76,7 +111,6 @@ export function setAudioDetectionMuted(isMuted) {
             t.enabled = !isMicMutedState;
         });
     }
-    logTs(`microphone_track_${isMicMutedState ? 'disabled (muted)' : 'enabled (unmuted)'}`);
 }
 
 /**
@@ -105,11 +139,16 @@ export function stopAudioDetection() {
 async function startCapture() {
     try {
         mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
-        if (isMicMutedState) {
-            mediaStream.getAudioTracks().forEach(t => { t.enabled = false; });
-        }
         logTs('microphone_acquired');
         recordingActive = true;
+        
+        // 500ms interval scanner to continuously sync ZEGOCLOUD mic UI mute state
+        setInterval(() => {
+            if (!recordingActive) return;
+            const muted = isZegoMicrophoneMutedInUI();
+            setAudioDetectionMuted(muted);
+        }, 500);
+
         startRecordingCycle();
         startPolling();
     } catch (err) {
@@ -120,17 +159,23 @@ async function startCapture() {
 
 // ── Recording cycle ───────────────────────────────────────────────────────────
 
-/**
- * One recording cycle:
- *   1. Create a MediaRecorder for the current stream
- *   2. Collect all Blob chunks
- *   3. After SEGMENT_DURATION_MS, stop the recorder
- *   4. Wait for the final `dataavailable` event to get a complete Blob
- *   5. Upload the Blob
- *   6. Schedule the next cycle
- */
 function startRecordingCycle() {
     if (!recordingActive || !mediaStream) return;
+
+    // Check if microphone is muted in ZEGOCLOUD UI or state
+    if (isZegoMicrophoneMutedInUI()) {
+        logTs('mic_is_muted_skipping_recording_cycle');
+        if (mediaStream) {
+            mediaStream.getAudioTracks().forEach(t => { t.enabled = false; });
+        }
+        // Do NOT record or upload anything while muted. Re-check in 2 seconds.
+        cycleTimer = setTimeout(startRecordingCycle, 2000);
+        return;
+    } else {
+        if (mediaStream) {
+            mediaStream.getAudioTracks().forEach(t => { t.enabled = true; });
+        }
+    }
 
     logTs('recording_started');
 
@@ -157,6 +202,13 @@ function startRecordingCycle() {
 
     recorder.onstop = async () => {
         logTs('recording_stopped');
+
+        // If mic became muted during recording, discard chunks & abort upload
+        if (isZegoMicrophoneMutedInUI()) {
+            logTs('mic_muted_during_cycle_aborting_upload');
+            scheduleNextCycle();
+            return;
+        }
 
         if (chunks.length === 0) {
             scheduleNextCycle();
