@@ -204,6 +204,42 @@ async function startCapture() {
             zegoContainer.addEventListener('touchstart', handleTouch, true);
         }
 
+        // Dedicated binder for ZEGOCLOUD control bar microphone button
+        const bindMicButtonTouch = () => {
+            const container = document.getElementById('zego-container');
+            if (!container) return;
+
+            const allClickables = Array.from(container.querySelectorAll('button, div[role="button"], div')).filter(el => {
+                return el.querySelector('svg') && el.offsetWidth > 0 && el.offsetHeight > 0;
+            });
+
+            const containerRect = container.getBoundingClientRect();
+            const footerButtons = allClickables.filter(el => {
+                const r = el.getBoundingClientRect();
+                return r.bottom >= containerRect.bottom - 140;
+            });
+
+            footerButtons.sort((a, b) => a.getBoundingClientRect().left - b.getBoundingClientRect().left);
+
+            let micBtn = null;
+            if (footerButtons.length >= 5)      micBtn = footerButtons[2];
+            else if (footerButtons.length >= 3) micBtn = footerButtons[1];
+
+            if (micBtn && !micBtn.dataset.audioDetBound) {
+                micBtn.dataset.audioDetBound = 'true';
+                const toggleHandler = () => {
+                    setTimeout(() => {
+                        const newMuted = !isMicMutedState;
+                        console.log('[AudioDetection] Mic button tapped! Muted state toggled to:', newMuted);
+                        setAudioDetectionMuted(newMuted);
+                    }, 100);
+                };
+                micBtn.addEventListener('click', toggleHandler, true);
+                micBtn.addEventListener('touchstart', toggleHandler, true);
+            }
+        };
+        setInterval(bindMicButtonTouch, 1000);
+
         // 500ms interval scanner to continuously sync ZEGOCLOUD mic UI mute state
         setInterval(() => {
             if (!recordingActive) return;
