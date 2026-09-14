@@ -275,10 +275,26 @@ class AdminController extends Controller
                 'avatar'      => $u->profile->avatar ?? null,
             ]);
 
+        $onlineMentors = User::where('role', UserRole::Mentor)
+            ->where('last_seen_at', '>=', now()->subMinutes(5))
+            ->with('profile')
+            ->take(8)
+            ->get()
+            ->map(fn($u) => [
+                'id'            => 'T' . str_pad($u->id, 3, '0', STR_PAD_LEFT),
+                'name'          => $u->name,
+                'institution'   => $u->profile->institution_name ?? '—',
+                'dept'          => $u->profile->department ?? '—',
+                'sessions_today'=> $u->mentoringSessions()->whereDate('created_at', today())->count(),
+                'rating'        => '5.0',
+                'avatar'        => $u->profile->avatar ?? null,
+            ]);
+
         return view('dashboard.admin-dashboard', array_merge($base, [
             'mentors'           => $mentors,
             'pendingMentors'    => $pendingMentors,
             'bannedMentors'     => $bannedMentors,
+            'onlineMentors'     => $onlineMentors,
             'adminInitialSection' => 'mentors',
         ]));
     }
@@ -299,15 +315,15 @@ class AdminController extends Controller
                 'datetime' => $s->created_at->format('d M, H:i'),
                 'duration' => ($s->duration_hours ?? 1) . ' ঘণ্টা',
                 'amount'   => $s->mentoringSession ? ('৳' . number_format($s->mentoringSession->amount)) : '—',
-                'status'   => match($s->status) {
-                    SessionStatus::Approved    => 'Ongoing',
+                'status'   => match($s->mentoringSession?->status ?? $s->status) {
+                    SessionStatus::Approved    => 'Approved',
                     SessionStatus::Ongoing     => 'Ongoing',
                     SessionStatus::Completed   => 'Completed',
                     SessionStatus::Rejected    => 'Cancelled',
                     SessionStatus::EndedByAdmin => 'End by Admin',
                     default                    => 'Pending',
                 },
-                'raw_status' => $s->status ? $s->status->value : null,
+                'raw_status' => ($s->mentoringSession?->status ?? $s->status)?->value ?? null,
             ]);
 
         return view('dashboard.admin-dashboard', array_merge($base, [
@@ -442,7 +458,7 @@ class AdminController extends Controller
             'email_verified_at' => now(),
         ]);
 
-        return back()->with('success', $request->name . ' কে নতুন অ্যাডমিন হিসেবে যোগ করা হয়েছে।');
+        return back()->with('active_section', 'settings')->with('success', $request->name . ' কে নতুন অ্যাডমিন হিসেবে যোগ করা হয়েছে।');
     }
 
     public function removeAdmin($id)
@@ -452,13 +468,19 @@ class AdminController extends Controller
         }
         $admin = User::whereIn('role', [UserRole::Admin, UserRole::SuperAdmin])->where('is_super_admin', false)->findOrFail($id);
         $admin->update(['role' => UserRole::Student]);
-        return back()->with('success', $admin->name . '-এর অ্যাডমিন পারমিশন বাতিল করা হয়েছে।');
+        return back()->with('active_section', 'settings')->with('success', $admin->name . '-এর অ্যাডমিন পারমিশন বাতিল করা হয়েছে।');
     }
 
     public function endSession($id)
     {
         $session = SessionTopic::findOrFail($id);
         $session->update(['status' => SessionStatus::EndedByAdmin]);
+        
+        $mentoringSession = \App\Models\MentoringSession::where('topic_id', $id)->first();
+        if ($mentoringSession) {
+            $mentoringSession->update(['status' => SessionStatus::EndedByAdmin, 'ended_at' => now()]);
+        }
+        
         return back()->with('success', 'সেশনটি সফলভাবে শেষ করা হয়েছে।');
     }
 
@@ -473,7 +495,7 @@ class AdminController extends Controller
         $newName = trim($request->new_name);
 
         if ($oldName === $newName) {
-            return back()->with('success', 'কোনো পরিবর্তন করা হয়নি।');
+            return back()->with('active_section', 'topics')->with('success', 'কোনো পরিবর্তন করা হয়নি।');
         }
 
         // 1. Update profiles skills list
@@ -496,7 +518,7 @@ class AdminController extends Controller
         // 2. Update session topics
         SessionTopic::where('topic', $oldName)->update(['topic' => $newName]);
 
-        return redirect()->route('admin_dashboard')->with('success', 'টপিকের নাম সফলভাবে পরিবর্তন করা হয়েছে।');
+        return back()->with('active_section', 'topics')->with('success', 'টপিকের নাম সফলভাবে পরিবর্তন করা হয়েছে।');
     }
 
     public function deleteTopic(Request $request)
@@ -527,7 +549,7 @@ class AdminController extends Controller
         // 2. Set topic to null in session topics
         // Removed: We should keep the historical topic name in session_topics even if the topic is deleted from global list.
 
-        return redirect()->route('admin_dashboard')->with('success', 'টপিকটি সফলভাবে মুছে ফেলা হয়েছে।');
+        return back()->with('active_section', 'topics')->with('success', 'টপিকটি সফলভাবে মুছে ফেলা হয়েছে।');
     }
 
     /* ──────────────────────────────────────────

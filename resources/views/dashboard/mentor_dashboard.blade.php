@@ -157,30 +157,34 @@
                         @endphp
                         <div class="p-3 bg-base-100/60 dark:bg-base-200/50 rounded-2xl border border-base-content/10 shadow-xs space-y-2.5">
                             {{-- Header: Avatar + Student Info + Badges --}}
-                            <div class="flex items-start justify-between gap-2">
-                                <div class="flex items-center gap-2.5 min-w-0">
-                                    <div class="avatar shrink-0">
-                                        <div class="w-9 h-9 rounded-full border-2 border-white shadow-xs">
-                                            @if($topic->student?->profile?->avatar)
-                                            <img src="{{ asset('storage/' . $topic->student->profile->avatar) }}" alt="{{ $topic->student->name }}" />
-                                            @else
-                                            <img src="https://ui-avatars.com/api/?name={{ urlencode($topic->student?->name ?? 'S') }}&background=random" alt="Avatar" />
-                                            @endif
+                            <div class="flex flex-col gap-3">
+                                <div class="flex items-center justify-between gap-2">
+                                    <div class="flex items-center gap-2.5 min-w-0">
+                                        <div class="avatar shrink-0">
+                                            <div class="w-9 h-9 rounded-full border-2 border-white shadow-xs">
+                                                @if($topic->student?->profile?->avatar)
+                                                <img src="{{ asset('storage/' . $topic->student->profile->avatar) }}" alt="{{ $topic->student->name }}" />
+                                                @else
+                                                <img src="https://ui-avatars.com/api/?name={{ urlencode($topic->student?->name ?? 'S') }}&background=random" alt="Avatar" />
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="min-w-0 flex-1">
+                                            <div class="font-black text-xs text-base-content truncate">{{ $topic->student?->name ?? 'N/A' }}</div>
+                                            <div class="text-[10px] font-bold text-base-content/60 mt-0.5 truncate">{{ $topic->topic }}</div>
                                         </div>
                                     </div>
-                                    <div class="min-w-0">
-                                        <div class="font-black text-xs text-base-content truncate">{{ $topic->student?->name ?? 'N/A' }}</div>
-                                        <div class="text-[10px] font-bold text-base-content/60 mt-0.5 wrap-break-word">{{ $topic->topic }}</div>
+                                    <div class="shrink-0">
+                                        <div class="px-2 py-0.5 bg-base-100/80 rounded-lg text-[10px] font-black shadow-2xs border border-base-content/5">
+                                            {{ $topic->duration_hours ?? 1 }} Hour(s)
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="flex items-center gap-1.5 shrink-0">
-                                    <div class="px-2 py-0.5 bg-base-100/80 rounded-lg text-[10px] font-black shadow-2xs">
-                                        {{ $topic->duration_hours ?? 1 }} Hour(s)
-                                    </div>
+                                <div class="flex flex-wrap items-center gap-1.5">
                                     @if($topic->status === \App\Enums\SessionStatus::Pending)
                                     <form method="POST" action="{{ route('session.approve', $topic->id) }}" class="inline-flex">
                                         @csrf
-                                        <button type="submit" class="badge badge-success text-white font-black text-[10px] py-1 px-2 shadow-2xs border-0 gap-1 hover:scale-105 transition-transform cursor-pointer">
+                                        <button type="submit" class="badge badge-success text-white font-black text-[10px] py-1 px-2 shadow-2xs border-0 gap-1 cursor-pointer">
                                             <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                                             </svg>
@@ -189,7 +193,7 @@
                                     </form>
                                     <form method="POST" action="{{ route('session.reject', $topic->id) }}" class="inline-flex">
                                         @csrf
-                                        <button type="submit" class="badge badge-error text-white font-black text-[10px] py-1 px-2 shadow-2xs border-0 gap-1 hover:scale-105 transition-transform cursor-pointer">
+                                        <button type="submit" class="badge bg-red-600 text-white font-black text-[10px] py-1 px-2 shadow-2xs border-0 gap-1 cursor-pointer">
                                             <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                                             </svg>
@@ -324,7 +328,7 @@
                                             @if($topic->status === \App\Enums\SessionStatus::Pending)
                                             <form method="POST" action="{{ route('session.approve', $topic->id) }}" class="inline-flex">
                                                 @csrf
-                                                <button type="submit" class="badge badge-success text-white font-black text-xs py-2.5 px-4 shadow-sm border-0 gap-1 hover:scale-105 transition-all cursor-pointer">
+                                                <button type="submit" class="badge badge-success text-white font-black text-xs py-2.5 px-4 shadow-sm border-0 gap-1 cursor-pointer">
                                                     <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                                                     </svg>
@@ -333,7 +337,7 @@
                                             </form>
                                             <form method="POST" action="{{ route('session.reject', $topic->id) }}" class="inline-flex">
                                                 @csrf
-                                                <button type="submit" class="badge badge-error text-white font-black text-xs py-2.5 px-4 shadow-sm border-0 gap-1 hover:scale-105 transition-all cursor-pointer">
+                                                <button type="submit" class="badge bg-red-600 text-white font-black text-xs py-2.5 px-4 shadow-sm border-0 gap-1 cursor-pointer">
                                                     <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                                                     </svg>

@@ -146,7 +146,79 @@
                         <p class="font-bold text-xs sm:text-base text-base-content/70">No requests found</p>
                     </div>
                     @else
-                    <div class="overflow-x-auto">
+                    {{-- Mobile View: Cards --}}
+                    <div class="block sm:hidden space-y-3 p-2">
+                        @php
+                        $statusConfig = [
+                        'pending' => ['label' => 'Pending', 'cls' => 'badge-warning'],
+                        'approved' => ['label' => 'Approved', 'cls' => 'badge-success'],
+                        'rejected' => ['label' => 'Rejected', 'cls' => 'badge-error'],
+                        'completed' => ['label' => 'Completed', 'cls' => 'badge-info'],
+                        ];
+                        @endphp
+                        @foreach($sessionTopics as $topic)
+                        @php
+                        $mentoringSession = $mentoringSessions->first(fn($s) => $s->topic_id === $topic->id);
+                        $s = $statusConfig[$topic->status->value] ?? $statusConfig['pending'];
+                        @endphp
+                        <div class="p-3 bg-base-100/60 dark:bg-base-200/50 rounded-2xl border border-base-content/10 shadow-xs space-y-2.5">
+                            <div class="flex flex-col gap-3">
+                                <div class="flex items-center justify-between gap-2">
+                                    <div class="flex items-center gap-2.5 min-w-0">
+                                        <div class="avatar shrink-0">
+                                            <div class="w-9 h-9 rounded-full border-2 border-white shadow-xs">
+                                                @if($topic->mentor?->profile?->avatar)
+                                                <img src="{{ asset('storage/' . $topic->mentor->profile->avatar) }}" alt="{{ $topic->mentor->name }}" />
+                                                @else
+                                                <img src="https://ui-avatars.com/api/?name={{ urlencode($topic->mentor?->name ?? 'M') }}&background=random" alt="Avatar" />
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="min-w-0 flex-1">
+                                            <div class="font-black text-xs text-base-content truncate">{{ $topic->mentor?->name ?? 'N/A' }}</div>
+                                            <div class="text-[10px] font-bold text-base-content/60 mt-0.5 truncate">{{ $topic->topic }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="shrink-0">
+                                        <div class="px-2 py-0.5 bg-base-100/80 rounded-lg text-[10px] font-black shadow-2xs border border-base-content/5">
+                                            {{ $topic->duration_hours ?? 1 }} Hour(s)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex flex-wrap items-center gap-1.5">
+                                    @if($mentoringSession && $mentoringSession->status === \App\Enums\SessionStatus::Ongoing)
+                                    <a href="{{ route('live-session', ['room' => $mentoringSession->session_code]) }}"
+                                        class="badge badge-info font-black text-[10px] py-1 px-2 shadow-2xs border-0 gap-1">
+                                        <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
+                                        </svg>
+                                        Join
+                                    </a>
+                                    @endif
+                                    @if($topic->status === \App\Enums\SessionStatus::Approved && !$mentoringSession)
+                                    <a href="{{ route('checkout', $topic->id) }}"
+                                        class="badge badge-success font-black text-[10px] py-1 px-2 shadow-2xs border-0 gap-1 cursor-pointer text-white">
+                                        Pay Now &rarr;
+                                    </a>
+                                    @endif
+                                    <div class="badge {{ $s['cls'] }} font-black text-[10px] py-1 px-2 shadow-2xs border-0">
+                                        @if($mentoringSession)
+                                        @php
+                                        $sessionStatusLabels = ['ongoing' => 'Ongoing', 'completed' => 'Completed'];
+                                        @endphp
+                                        {{ $sessionStatusLabels[$mentoringSession->status->value] ?? $s['label'] }}
+                                        @else
+                                        {{ $s['label'] }}
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+
+                    {{-- Desktop View: Table --}}
+                    <div class="hidden sm:block overflow-x-auto">
                         <table class="table w-full border-none text-base-content">
                             <tbody>
                                 @php
@@ -164,10 +236,10 @@
                                 @endphp
                                 <tr
                                     class="hover:bg-base-content/10 transition-colors border-b border-base-content/5 last:border-0">
-                                    <td class="py-3 pl-3 sm:pl-6">
-                                        <div class="flex items-center gap-2.5 sm:gap-4">
-                                            <div class="avatar">
-                                                <div class="w-9 h-9 sm:w-12 sm:h-12 rounded-full border-2 border-white shadow-md">
+                                    <td class="py-4 pl-6">
+                                        <div class="flex items-start gap-4">
+                                            <div class="avatar shrink-0 mt-0.5">
+                                                <div class="w-12 h-12 rounded-full border-2 border-white shadow-md">
                                                     @if($topic->mentor?->profile?->avatar)
                                                     <img src="{{ asset('storage/' . $topic->mentor->profile->avatar) }}"
                                                         alt="{{ $topic->mentor->name }}" />
@@ -177,28 +249,28 @@
                                                     @endif
                                                 </div>
                                             </div>
-                                            <div>
-                                                <div class="font-black text-xs sm:text-base">{{ $topic->mentor?->name ?? 'N/A' }}
+                                            <div class="flex-1 min-w-0">
+                                                <div class="font-black text-base">{{ $topic->mentor?->name ?? 'N/A' }}
                                                 </div>
                                                 <div
-                                                    class="text-[10px] sm:text-xs font-bold text-base-content/60 mt-0.5 wrap-break-word max-w-[150px] sm:max-w-[200px]">
+                                                    class="text-xs font-bold text-base-content/60 mt-0.5 wrap-break-word max-w-[200px]">
                                                     {{ $topic->topic }}</div>
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="py-3">
+                                    <td class="py-4">
                                         <div
-                                            class="px-2 py-0.5 sm:px-3 sm:py-1 bg-base-100/50 rounded-lg inline-block text-[10px] sm:text-xs font-black shadow-sm">
+                                            class="px-3 py-1 bg-base-100/50 rounded-lg inline-block text-xs font-black shadow-sm">
                                             {{ $topic->duration_hours ?? 1 }} Hour(s)
                                         </div>
                                     </td>
-                                    <td class="py-3 text-right pr-3 sm:pr-6">
-                                        <div class="flex items-center justify-end gap-1.5 sm:gap-2">
+                                    <td class="py-4 text-right pr-6">
+                                        <div class="flex items-center justify-end gap-2">
                                             {{-- Join button for ongoing sessions --}}
                                             @if($mentoringSession && $mentoringSession->status ===
                                             \App\Enums\SessionStatus::Ongoing)
                                             <a href="{{ route('live-session', ['room' => $mentoringSession->session_code]) }}"
-                                                class="badge badge-info font-black text-[10px] sm:text-xs py-2 px-2.5 sm:py-2.5 sm:px-4 shadow-sm border-0 gap-1">
+                                                class="badge badge-info font-black text-xs py-2.5 px-4 shadow-sm border-0 gap-1">
                                                 <svg class="w-3 h-3" fill="none" stroke="currentColor"
                                                     stroke-width="2.5" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -210,12 +282,12 @@
                                              {{-- Pay Now button for approved session requests --}}
                                              @if($topic->status === \App\Enums\SessionStatus::Approved && !$mentoringSession)
                                              <a href="{{ route('checkout', $topic->id) }}"
-                                                 class="badge badge-success font-black text-[10px] sm:text-xs py-2 px-2.5 sm:py-2.5 sm:px-4 shadow-sm border-0 gap-1 hover:scale-105 transition-transform">
+                                                 class="badge badge-success font-black text-xs py-2.5 px-4 shadow-sm border-0 gap-1 cursor-pointer text-white">
                                                  Pay Now &rarr;
                                              </a>
                                              @endif
                                             <div
-                                                class="badge {{ $s['cls'] }} font-black text-[10px] sm:text-xs py-2 px-2.5 sm:py-2.5 sm:px-4 shadow-sm border-0">
+                                                class="badge {{ $s['cls'] }} font-black text-xs py-2.5 px-4 shadow-sm border-0">
                                                 @if($mentoringSession)
                                                 @php
                                                 $sessionStatusLabels = [

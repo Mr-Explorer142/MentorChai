@@ -30,8 +30,10 @@ class ProfileController extends Controller
     {
         $mentor = User::with(['profile', 'achievements', 'reviews.student.profile', 'reviews.session.topic'])->findOrFail($id);
 
-        // Block access to unverified or inactive mentors unless the user is viewing their own profile
-        if ((!$mentor->profile || !$mentor->profile->is_verified || $mentor->status !== UserStatus::ACTIVE) && Auth::id() !== $mentor->id) {
+        $isAdmin = Auth::user() && Auth::user()->isAdmin();
+        
+        // Block access to unverified or inactive mentors unless the user is viewing their own profile or is an admin
+        if (!$isAdmin && (!$mentor->profile || !$mentor->profile->is_verified || $mentor->status !== UserStatus::ACTIVE) && Auth::id() !== $mentor->id) {
             abort(404);
         }
 
