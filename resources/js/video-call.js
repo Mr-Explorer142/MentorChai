@@ -1,17 +1,96 @@
 import { ZegoUIKitPrebuilt } from "@zegocloud/zego-uikit-prebuilt";
-import { initAudioDetection, stopAudioDetection, setAudioDetectionMuted } from "./audio-detection.js";
+import { initAudioDetection, stopAudioDetection, setMicMuted } from "./audio-detection.js";
+
+// ─── Single source-of-truth for mic mute state ───────────────────────────────
+let isMicMuted = false;
+
+// Reference to the ZEGOCLOUD instance – set after create(), before joinRoom
+let zegoInstance = null;
+
+// True only after the user passes the pre-join view and is inside the room.
+// False again after onLeaveRoom fires.
+let hasJoinedRoom = false;
+
+/**
+ * Apply isMicMuted to:
+ *  1. ZEGOCLOUD's own local MediaStream (stops outgoing RTP audio)
+ *     Only safe AFTER hasJoinedRoom=true AND localStream is populated.
+ *     If localStream is not yet available (still being set up by ZEGOCLOUD
+ *     asynchronously after join), we skip it here — onLocalStreamUpdated will
+ *     fire and call applyMicState() again once the stream is live.
+ *  2. AssemblyAI audio detection module (stops/resumes audio chunks)
+ *  3. Custom button UI
+ */
+function applyMicState() {
+    // ── 1. Mute/unmute ZEGOCLOUD outgoing audio ──────────────────────────────
+    if (zegoInstance && zegoInstance.localStream && hasJoinedRoom) {
+        zegoInstance.localStream.getAudioTracks().forEach((track) => {
+            track.enabled = !isMicMuted;
+        });
+        console.log("[MicControl] ZEGOCLOUD localStream tracks set, enabled =", !isMicMuted);
+    }
+
+    // ── 2. Tell AssemblyAI audio detection to pause/resume ───────────────────
+    setMicMuted(isMicMuted);
+
+    // ── 3. Update the custom button UI ───────────────────────────────────────
+    updateMicButtonUI();
+}
+
+/**
+ * Toggle the microphone. Called by the custom mic button.
+ */
+function toggleMicrophone() {
+    isMicMuted = !isMicMuted;
+    console.log("[MicControl] Toggled isMicMuted →", isMicMuted);
+    applyMicState();
+}
+
+/**
+ * Update the custom mic button appearance to reflect current isMicMuted.
+ */
+function updateMicButtonUI() {
+    const btn = document.getElementById("custom-mic-btn");
+    if (!btn) return;
+
+    const icon  = btn.querySelector(".mic-icon");
+    const label = btn.querySelector(".mic-label");
+
+    if (isMicMuted) {
+        btn.setAttribute("aria-pressed", "true");
+        btn.classList.add("mic-muted");
+        if (icon)  icon.textContent  = "🔇";
+        if (label) label.textContent = "Microphone";
+    } else {
+        btn.setAttribute("aria-pressed", "false");
+        btn.classList.remove("mic-muted");
+        if (icon)  icon.textContent  = "🎤";
+        if (label) label.textContent = "Microphone";
+    }
+}
+
+// ─── Main call initialisation ─────────────────────────────────────────────────
 
 async function startCall() {
     const config = window.ZEGO_CONFIG || {};
     const { appID, roomID, sessionCode, userID, userName, userRole } = config;
 
     if (!appID || !roomID) {
-        console.error("[AudioDetection] ZEGO_CONFIG is missing or invalid:", config);
+        console.error("[MicControl] ZEGO_CONFIG is missing or invalid:", config);
         return;
     }
-    const response = await fetch("/zego/token");
-    const data = await response.json();
-    const serverSecret = data.serverSecret;
+
+    // ── Fetch server token ───────────────────────────────────────────────────
+    let serverSecret;
+    try {
+        const response = await fetch("/zego/token");
+        if (!response.ok) throw new Error(`Token fetch failed: ${response.status}`);
+        const data = await response.json();
+        serverSecret = data.serverSecret;
+    } catch (err) {
+        console.error("[MicControl] Could not obtain ZEGOCLOUD token:", err);
+        return;
+    }
 
     const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(
         Number(appID),
@@ -22,10 +101,10 @@ async function startCall() {
     );
 
     const zc = ZegoUIKitPrebuilt.create(kitToken);
+    zegoInstance = zc;
 
-    // Start audio detection immediately for this session
-    console.log("[AudioDetection] Initialising audio detection for session:", sessionCode, "user:", userID);
-    initAudioDetection(sessionCode, userID);
+    // Ensure the custom button shows the correct initial state (unmuted)
+    updateMicButtonUI();
 
     zc.joinRoom({
         container: document.getElementById("zego-container"),
@@ -37,61 +116,102 @@ async function startCall() {
         },
         showScreenSharingButton: true,
         showPreJoinView: true,
-        onMicrophoneStateUpdate: (state) => {
-            const isMuted = (state === 'MUTE' || state === false || state === 0);
-            console.log("[AudioDetection] ZEGOCLOUD onMicrophoneStateUpdate:", state, "isMuted:", isMuted);
-            setAudioDetectionMuted(isMuted);
-        },
-        onTurnOnMicrophoneDevice: (turnOn) => {
-            const isMuted = !turnOn;
-            console.log("[AudioDetection] ZEGOCLOUD onTurnOnMicrophoneDevice:", turnOn, "isMuted:", isMuted);
-            setAudioDetectionMuted(isMuted);
-        },
-        onLeaveRoom: async () => {
-            // Stop audio detection immediately when leaving
-            stopAudioDetection();
 
-            // Mark session complete
-            await fetch("/session/complete", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRF-TOKEN": document.querySelector(
-                        'meta[name="csrf-token"]',
-                    ).content,
-                },
-                body: JSON.stringify({ room: window.ZEGO_CONFIG.roomID }),
-            });
+        // ── Hide the default ZEGOCLOUD microphone toggle button ─────────────
+        // Official documented ZegoCloudRoomConfig property (index.d.ts line 134).
+        // All other controls remain unchanged.
+        showMyMicrophoneToggleButton: false,
+
+        // ── onJoinRoom — fires when the user passes the pre-join view ────────
+        // We set hasJoinedRoom=true and start AssemblyAI audio detection here.
+        // We DO NOT rely on localStream being populated yet — ZEGOCLOUD sets
+        // localStream asynchronously after room join. onLocalStreamUpdated below
+        // handles the stream-level muting at the correct moment.
+        onJoinRoom: () => {
+            hasJoinedRoom = true;
+            console.log("[MicControl] User joined room. Starting audio detection.");
+            initAudioDetection(sessionCode, userID);
+
+            // Apply AssemblyAI and button state now; ZEGOCLOUD stream muting
+            // will happen in onLocalStreamUpdated once localStream is available.
+            setMicMuted(isMicMuted);
+            updateMicButtonUI();
+        },
+
+        // ── onLocalStreamUpdated — fires when ZEGOCLOUD's local stream is live ─
+        // This is the ONLY reliable moment to mute/unmute the ZEGOCLOUD RTP track,
+        // because localStream is guaranteed to be set by the time this fires.
+        // index.d.ts line 244: (state: "created"|"published"|"stopped", streamId, stream?)
+        onLocalStreamUpdated: (state) => {
+            console.log("[MicControl] onLocalStreamUpdated state:", state);
+            if ((state === "created" || state === "published") && zegoInstance && zegoInstance.localStream) {
+                // Apply the current mute state to the freshly available stream
+                zegoInstance.localStream.getAudioTracks().forEach((track) => {
+                    track.enabled = !isMicMuted;
+                });
+                console.log("[MicControl] Applied mute to localStream on", state, "— enabled =", !isMicMuted);
+            }
+        },
+
+        // ── onMicrophoneStateUpdated — SDK fires when it changes mic state ───
+        // Typed in index.d.ts (v2.17.x): state is "ON" | "OFF".
+        // Syncs our isMicMuted when ZEGOCLOUD internally changes the mic
+        // (e.g., system interrupt, permission revoked, pre-join view toggle).
+        onMicrophoneStateUpdated: (state) => {
+            const nowMuted = (state === "OFF");
+            console.log("[MicControl] onMicrophoneStateUpdated:", state, "→ isMicMuted:", nowMuted);
+            if (isMicMuted !== nowMuted) {
+                isMicMuted = nowMuted;
+                applyMicState();
+            }
+        },
+
+        onLeaveRoom: async () => {
+            hasJoinedRoom = false;
+
+            // Stop audio detection synchronously before any async work.
+            // This sets captureAborted=true inside audio-detection.js so that
+            // any in-flight getUserMedia promise knows to abort instead of
+            // starting a new recording cycle post-call.
+            stopAudioDetection();
+            zegoInstance = null;
+
+            // Mark session complete on the server
+            const csrfMeta = document.querySelector('meta[name="csrf-token"]');
+            if (csrfMeta) {
+                try {
+                    await fetch("/session/complete", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-CSRF-TOKEN": csrfMeta.content,
+                        },
+                        body: JSON.stringify({ room: window.ZEGO_CONFIG.roomID }),
+                    });
+                } catch (err) {
+                    console.warn("[MicControl] session/complete fetch failed:", err);
+                }
+            }
 
             if (userRole === "student") {
-                // Show review modal for student
-                document
-                    .getElementById("reviewModal")
-                    .classList.remove("hidden");
+                document.getElementById("reviewModal")?.classList.remove("hidden");
             } else {
-                // Mentor goes straight to dashboard
                 window.location.href = "/dashboard/mentor";
             }
         },
     });
-
-    // Fallback listener for UI clicks on mute button inside container
-    const zegoContainer = document.getElementById("zego-container");
-    if (zegoContainer) {
-        zegoContainer.addEventListener("click", () => {
-            setTimeout(() => {
-                if (typeof zc.isMicrophoneMuted === 'function') {
-                    const muted = zc.isMicrophoneMuted();
-                    console.log("[AudioDetection] Checked zc.isMicrophoneMuted():", muted);
-                    setAudioDetectionMuted(muted);
-                }
-            }, 250);
-        });
-    }
 }
 
+// ─── Wire the custom mic button ───────────────────────────────────────────────
+
 document.addEventListener("DOMContentLoaded", () => {
-    if (document.getElementById("zego-container")) {
-        startCall();
+    if (!document.getElementById("zego-container")) return;
+
+    // Attach the custom button click handler
+    const micBtn = document.getElementById("custom-mic-btn");
+    if (micBtn) {
+        micBtn.addEventListener("click", toggleMicrophone);
     }
+
+    startCall();
 });

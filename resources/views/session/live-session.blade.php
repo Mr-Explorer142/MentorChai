@@ -25,6 +25,20 @@
                     {{-- ZegoCloud mounts here --}}
                     <div id="zego-container" class="relative w-full h-[400px] sm:h-[480px] md:h-[520px] rounded-t-xl sm:rounded-t-2xl overflow-hidden" style="transform: translateZ(0);"></div>
 
+                    {{-- Custom Microphone Button --}}
+                    <div class="flex justify-center py-3 sm:py-4 border-t border-[#1a9998]/10 dark:border-[#4db6c1]/10">
+                        <button
+                            id="custom-mic-btn"
+                            type="button"
+                            aria-pressed="false"
+                            aria-label="Toggle microphone"
+                            class="custom-mic-btn inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full text-sm font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1a9998]/50"
+                        >
+                            <span class="mic-icon text-base" aria-hidden="true">🎤</span>
+                            <span class="mic-label">Microphone</span>
+                        </button>
+                    </div>
+
                     {{-- Session meta --}}
                     <div class="px-3.5 py-3 sm:px-5 sm:py-4 flex flex-wrap justify-between items-center gap-2 sm:gap-3">
                         <div>
@@ -310,6 +324,42 @@
         });
     </script>
     @endif
+
+    <style>
+        /* ── Custom Microphone Button ── */
+        .custom-mic-btn {
+            background: linear-gradient(135deg, #1A9998, #155665);
+            color: #ffffff;
+            box-shadow: 0 4px 14px rgba(26,153,152,0.35);
+            border: none;
+        }
+        .custom-mic-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(26,153,152,0.45);
+        }
+        .custom-mic-btn:active {
+            transform: translateY(0);
+        }
+        /* Muted state */
+        .custom-mic-btn.mic-muted {
+            background: linear-gradient(135deg, #64748b, #475569);
+            box-shadow: 0 4px 14px rgba(100,116,139,0.35);
+        }
+        .custom-mic-btn.mic-muted:hover {
+            box-shadow: 0 6px 20px rgba(100,116,139,0.45);
+        }
+        /* Dark mode adjustments */
+        .dark .custom-mic-btn {
+            background: linear-gradient(135deg, #4db6c1, #28666e);
+            color: #0f1f2e;
+            box-shadow: 0 4px 14px rgba(77,182,193,0.35);
+        }
+        .dark .custom-mic-btn.mic-muted {
+            background: linear-gradient(135deg, #475569, #334155);
+            color: #d2f1ff;
+            box-shadow: 0 4px 14px rgba(71,85,105,0.35);
+        }
+    </style>
 
     <script>
         window.ZEGO_CONFIG = {
