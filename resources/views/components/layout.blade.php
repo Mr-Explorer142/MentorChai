@@ -524,8 +524,8 @@ el.classList.remove(
 el.classList.add(
 'bg-[#f6fbfb]', 'border-[#28666e]/10'
 );
-const btn = el.querySelector('button');
-if (btn) btn.remove(); // fine to remove — it's a per-item button, not the dot/badge
+const btn = el.querySelector('button[title="Mark as read"]');
+if (btn) btn.remove();
 }
 updateUnreadCount(-1);
 }).catch(err => console.error('Mark read failed:', err));
@@ -548,7 +548,7 @@ el.classList.add(
 'bg-[#f6fbfb]', 'dark:bg-[#0f2430]',
 'border-[#28666e]/10', 'dark:border-[#4db6c1]/10'
 );
-const btn = el.querySelector('button[onclick^="markAsRead"]');
+const btn = el.querySelector('button[title="Mark as read"]');
 if (btn) btn.remove();
 });
 

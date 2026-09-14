@@ -13,6 +13,7 @@
 <body class="admin-dashboard-view">
 
 {{-- ═══════════════════ SIDEBAR ═══════════════════ --}}
+<div class="sidebar-overlay" onclick="document.body.classList.remove('sidebar-open')"></div>
 <aside id="sidebar" class="sidebar-wrap">
   <a href="{{ route('home') }}" class="logo-wrap" title="Go to homepage">
     <div class="logo-icon"><x-heroicon name="academic-cap" class="h-icon" style="width:17px;height:17px" /></div>
@@ -61,6 +62,9 @@
 
   {{-- TOPBAR --}}
   <div id="topbar" class="topbar-wrap">
+    <button class="tb-btn mobile-menu-btn" style="display:none" onclick="document.body.classList.add('sidebar-open')" title="Menu">
+      <svg class="h-icon" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path></svg>
+    </button>
     <span class="topbar-title" id="pg-title">ড্যাশবোর্ড</span>
     <div class="searchbar">
       <x-heroicon name="magnifying-glass" class="h-icon h-icon--md" style="color:var(--text3)" />
@@ -470,7 +474,7 @@
             <tbody>
               @forelse($mentors ?? [] as $mentor)
               <tr>
-                <td class="td-mono">{{ $mentor['id'] }}</td>
+                <td class="td-mono"><a href="{{ route('mentor_profile', $mentor['user_id']) }}" target="_blank" style="color: var(--mc-primary); text-decoration: underline; font-weight: 500;">{{ $mentor['id'] }}</a></td>
                 <td>
                   <div class="td-with-av">
                     <span class="t-av">
@@ -591,8 +595,8 @@
           <form method="POST" action="{{ route('admin_mentor.approve', $mentor['id']) }}">@csrf
             <button type="submit" class="btn btn-success btn-sm"><x-heroicon name="check" class="h-icon h-icon--sm" />অ্যাপ্রুভ</button>
           </form>
-          <form method="POST" action="{{ route('admin_mentor.reject', $mentor['id']) }}">@csrf
-            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('ডকুমেন্ট রিজেক্ট করতে নিশ্চিত?')"><x-heroicon name="x-mark" class="h-icon h-icon--sm" />রিজেক্ট</button>
+          <form method="POST" action="{{ route('admin_mentor.reject', $mentor['id']) }}" onsubmit="event.preventDefault(); customConfirm('ডকুমেন্ট রিজেক্ট করতে নিশ্চিত?', this)">@csrf
+            <button type="submit" class="btn btn-danger btn-sm"><x-heroicon name="x-mark" class="h-icon h-icon--sm" />রিজেক্ট</button>
           </form>
         </div>
       </div>
@@ -678,9 +682,6 @@
   <div class="page" id="p-topics">
     <div class="pg-hd">
       <h2>টপিক এবং ক্যাটাগরি</h2>
-      <div class="pg-hd-actions">
-        <button class="btn btn-primary" style="opacity: 0.6; cursor: not-allowed" title="মেন্টরদের প্রোফাইল স্কিল থেকে টপিক স্বয়ংক্রিয়ভাবে তৈরি হয়" disabled><x-heroicon name="plus" class="h-icon h-icon--sm" />টপিক যোগ করুন</button>
-      </div>
     </div>
     
     <div class="card">
@@ -718,7 +719,7 @@
                   <button type="button" class="btn btn-ghost btn-sm" onclick="openEditTopic('{{ addslashes($topic['name']) }}')">
                     <x-heroicon name="pencil-square" class="h-icon h-icon--sm" />সম্পাদনা
                   </button>
-                  <form method="POST" action="{{ route('admin_topics.delete') }}" style="display:inline" onsubmit="return confirm('টপিকটি ডিলিট করতে নিশ্চিত?')">
+                  <form method="POST" action="{{ route('admin_topics.delete') }}" style="display:inline" onsubmit="event.preventDefault(); customConfirm('টপিকটি ডিলিট করতে নিশ্চিত?', this)">
                     @csrf
                     <input type="hidden" name="name" value="{{ $topic['name'] }}" />
                     <button type="submit" class="btn btn-danger btn-sm">
@@ -783,13 +784,13 @@
               <td>
                 @if($session['raw_status'] === 'approved' || $session['raw_status'] === 'ongoing')
                   <div class="dropdown dropdown-bottom">
-                    <div tabindex="0" role="button" class="badge b-ongoing cursor-pointer hover:opacity-80">Ongoing ▾</div>
+                    <div tabindex="0" role="button" class="badge {{ $session['raw_status'] === 'approved' ? 'b-verified' : 'b-ongoing' }} cursor-pointer hover:opacity-80">{{ $session['status'] }} ▾</div>
                     <ul tabindex="0" class="dropdown-content menu bg-[var(--surface)] text-[var(--text)] rounded-box z-50 w-44 p-2 shadow-lg border border-[var(--border)] mt-1">
                       <li>
-                        <form method="POST" action="{{ route('admin_session.end', $session['db_id']) }}" style="margin:0;padding:0;width:100%" onsubmit="return confirm('সেশনটি শেষ করতে নিশ্চিত?')">
+                        <form method="POST" action="{{ route('admin_session.end', $session['db_id']) }}" style="margin:0;padding:0;width:100%" onsubmit="event.preventDefault(); customConfirm('সেশনটি শেষ/বাতিল করতে নিশ্চিত?', this)">
                           @csrf
                           <button type="submit" style="width:100%;text-align:left;color:var(--red);background:none;border:none;cursor:pointer;padding:8px 12px;font-size:12px;font-weight:500" class="hover:bg-[var(--surface2)] rounded-md">
-                            End ongoing session
+                            End session / cancel
                           </button>
                         </form>
                       </li>
@@ -798,7 +799,7 @@
                 @elseif($session['raw_status'] === 'ended_by_admin')
                   <span class="badge b-cancelled" style="background-color: var(--red-bg); color: var(--red)">End by Admin</span>
                 @elseif($session['raw_status'] === 'completed')
-                  <span class="badge b-completed" style="background-color: var(--bg); color: var(--text3)">Completed</span>
+                  <span class="badge" style="background-color: var(--mc-badge-blue-bg); color: var(--mc-badge-blue-text); border: 1px solid var(--mc-badge-blue-border);">Completed</span>
                 @elseif($session['raw_status'] === 'rejected')
                   <span class="badge b-cancelled">Cancelled</span>
                 @else
@@ -907,10 +908,10 @@
                 <td><span class="badge {{ $admin['is_super_admin'] ? 'b-active' : 'b-offline' }}">{{ $admin['is_super_admin'] ? 'সুপার অ্যাডমিন' : 'অ্যাডমিন' }}</span></td>
                 <td>
                   @if(!$admin['is_super_admin'] && $admin['id'] !== auth()->id())
-                  <form method="POST" action="{{ route('admin_admin.remove', $admin['id']) }}">
+                  <form method="POST" action="{{ route('admin_admin.remove', $admin['id']) }}" onsubmit="event.preventDefault(); customConfirm('অ্যাডমিন পারমিশন বাতিল করতে নিশ্চিত?', this)">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('অ্যাডমিন পারমিশন বাতিল করতে নিশ্চিত?')"><x-heroicon name="trash" class="h-icon h-icon--sm" />সরান</button>
+                    <button type="submit" class="btn btn-danger btn-sm"><x-heroicon name="trash" class="h-icon h-icon--sm" />সরান</button>
                   </form>
                   @else
                   <span style="font-size:11px;color:var(--text3)">-</span>
@@ -1146,6 +1147,24 @@
   </div>
 </div>
 
+{{-- Generic Confirm Modal --}}
+<div class="modal-ov" id="m-confirm">
+  <div class="mc-modal">
+    <div class="modal-hd">
+      <x-heroicon name="exclamation-triangle" class="h-icon" style="width:18px;height:18px;color:var(--primary)" />
+      <h3>নিশ্চিত করুন</h3>
+      <button type="button" style="background:none;border:none;cursor:pointer;color:var(--text3);font-size:20px;line-height:1" onclick="closeModal('m-confirm')"><x-heroicon name="x-mark" class="h-icon h-icon--sm" /></button>
+    </div>
+    <div class="modal-bd">
+      <p id="m-confirm-msg" style="font-size:14px;color:var(--text2);margin:0;padding-bottom:10px;"></p>
+    </div>
+    <div class="modal-ft">
+      <button type="button" class="btn btn-ghost" onclick="closeModal('m-confirm')">বাতিল</button>
+      <button type="button" class="btn btn-primary" id="m-confirm-btn">হ্যাঁ, নিশ্চিত</button>
+    </div>
+  </div>
+</div>
+
 <script>
 /* ── helpers ── */
 const qs = s => document.querySelector(s);
@@ -1154,6 +1173,7 @@ const later = fn => setTimeout(fn, 60);
 /* ── navigation ── */
 const titles = {dashboard:'ড্যাশবোর্ড',users:'শিক্ষার্থী ব্যবস্থাপনা',mentors:'মেন্টর ব্যবস্থাপনা',topics:'টপিক এবং ক্যাটাগরি',sessions:'সেশন পর্যবেক্ষণ',payments:'পেমেন্ট ম্যানেজমেন্ট',security:'সিকিউরিটি ইভেন্ট',settings:'সেটিংস'};
 function nav(id, el){
+  document.body.classList.remove('sidebar-open');
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('p-'+id).classList.add('active');
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
@@ -1191,6 +1211,14 @@ function switchTab(section, tabId, btn){
 function openModal(id){ document.getElementById(id).classList.add('open') }
 function closeModal(id){ document.getElementById(id).classList.remove('open') }
 document.querySelectorAll('.modal-ov').forEach(o => o.addEventListener('click', function(e){ if(e.target===this) this.classList.remove('open') }));
+
+function customConfirm(msg, formEl) {
+  document.getElementById('m-confirm-msg').innerText = msg;
+  document.getElementById('m-confirm-btn').onclick = function() {
+    formEl.submit();
+  };
+  openModal('m-confirm');
+}
 
 /* ── ban ── */
 function openBan(name, uid, actionUrl){
@@ -1258,16 +1286,9 @@ function toggleTheme(){
 
 /* ── deep-link: /admin/dashboard/sessions, /users, etc. ── */
 (function(){
-  var phpSection = @json($adminInitialSection ?? 'dashboard');
+  var phpSection = @json(session('active_section') ?? $adminInitialSection ?? 'dashboard');
   function go(){
     let section = phpSection;
-    // If the section is dashboard (default) but we have a saved section in localStorage, let's restore it
-    try {
-      const savedSection = localStorage.getItem('mc-admin-section');
-      if (savedSection && phpSection === 'dashboard') {
-        section = savedSection;
-      }
-    } catch(e){}
     
     // Always navigate to the resolved section
     var items = document.querySelectorAll('#sidebar a.nav-item');
