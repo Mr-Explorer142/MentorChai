@@ -13,14 +13,17 @@
  *
  * This module is PASSIVE — it does NOT modify the ZEGOCLOUD call in any way.
  * It is loaded via @vite in live-session.blade.php after ZEGO_CONFIG is set.
+ *
+ * Microphone mute state is driven exclusively by video-call.js via setMicMuted().
+ * No DOM heuristics, no SVG-path polling, no interval scanners.
  */
 
-// ── Configuration ───────────────────────────────────────────────────────────
+// ── Configuration ────────────────────────────────────────────────────────────
 
-const SEGMENT_DURATION_MS  = 4000;   // length of each audio recording cycle
-const POLL_INTERVAL_MS     = 4000;   // how often to ask Laravel for new events
-const UPLOAD_ENDPOINT      = '/audio-detection';
-const POLL_ENDPOINT        = '/audio-detection/poll';
+const SEGMENT_DURATION_MS = 4000;   // length of each audio recording cycle
+const POLL_INTERVAL_MS    = 4000;   // how often to ask Laravel for new events
+const UPLOAD_ENDPOINT     = '/audio-detection';
+const POLL_ENDPOINT       = '/audio-detection/poll';
 
 // ── State ────────────────────────────────────────────────────────────────────
 
@@ -34,27 +37,70 @@ let sessionCode     = null;
 let currentUserId   = null;
 let csrfToken       = null;
 
+// ── Mute state ───────────────────────────────────────────────────────────────
+// This is the ONLY source of truth for mute state in this module.
+// It is set exclusively by setMicMuted() called from video-call.js.
+let isMicMuted = false;
+
+// ── Capture abort flag ─────────────────────────────────────────────────────
+// Set to true by stopAudioDetection() to signal that any in-flight
+// getUserMedia() call should release its stream and not start a recording
+// cycle. Without this, if the user leaves while getUserMedia is still
+// pending, the resolved stream would start recording after the call ends.
+let captureAborted = false;
+
+// ── Web Audio (volume RMS) ───────────────────────────────────────────────────
+// Declared here (above stopAudioDetection) so they are in scope when that
+// function runs — avoids referencing variables before their declaration.
+let audioContext  = null;
+let audioAnalyser = null;
+let maxRmsVolume  = 0;
+
 // ── Latency logging ──────────────────────────────────────────────────────────
 
 function logTs(label) {
     console.log(`[AudioDetection] ${label} @ ${new Date().toISOString()}`);
 }
 
-// ── Initialise ───────────────────────────────────────────────────────────────
+// ── Public API ───────────────────────────────────────────────────────────────
 
 /**
- * Called from live-session.blade.php once the call starts.
+ * Set the microphone mute state. Called from video-call.js whenever the
+ * custom mic button is toggled or ZEGOCLOUD reports a state change.
+ *
+ * When muted:
+ *  - The AssemblyAI media stream audio tracks are disabled (no audio captured)
+ *  - Any in-progress recording cycle will abort before uploading
+ *
+ * When unmuted:
+ *  - The audio tracks are re-enabled and recording resumes normally
+ *
+ * @param {boolean} muted
+ */
+export function setMicMuted(muted) {
+    isMicMuted = !!muted;
+    console.log('[AudioDetection] setMicMuted →', isMicMuted);
+
+    if (mediaStream) {
+        mediaStream.getAudioTracks().forEach((track) => {
+            track.enabled = !isMicMuted;
+        });
+    }
+}
+
+/**
+ * Called from video-call.js once the call starts.
  * @param {string} roomId  - The ZEGOCLOUD room ID (= session_code)
  * @param {number} userId  - The authenticated user's ID
  */
 export function initAudioDetection(roomId, userId) {
-    sessionCode   = roomId;
-    currentUserId = userId;
-    csrfToken     = document.querySelector('meta[name="csrf-token"]')?.content ?? '';
+    sessionCode     = roomId;
+    currentUserId   = userId;
+    csrfToken       = document.querySelector('meta[name="csrf-token"]')?.content ?? '';
+    captureAborted  = false;  // reset abort flag for this new call session
 
     logTs('init');
 
-    // Check browser support
     if (typeof MediaRecorder === 'undefined') {
         console.warn('[AudioDetection] MediaRecorder not supported. Detection disabled.');
         return;
@@ -63,90 +109,12 @@ export function initAudioDetection(roomId, userId) {
     startCapture();
 }
 
-let isMicMutedState = false;
-let audioContext    = null;
-let audioAnalyser   = null;
-let maxRmsVolume    = 0;
-
-/**
- * Detects if the microphone is currently muted in ZEGOCLOUD UI or media track state.
- * @returns {boolean}
- */
-export function isZegoMicrophoneMutedInUI() {
-    if (isMicMutedState) return true;
-
-    const container = document.getElementById('zego-container');
-    if (!container) return false;
-
-    // 1. Direct WebRTC Track Inspection from ZEGOCLOUD media elements
-    const mediaElements = container.querySelectorAll('video, audio');
-    for (const el of mediaElements) {
-        if (el.srcObject && typeof el.srcObject.getAudioTracks === 'function') {
-            const tracks = el.srcObject.getAudioTracks();
-            for (const track of tracks) {
-                if (track.enabled === false || track.muted === true) {
-                    return true;
-                }
-            }
-        }
-    }
-
-    // 2. Search for elements with title/aria-label/data-tip indicating "Turn on mic" or "Unmute"
-    const elements = container.querySelectorAll('button, div[role="button"], [title], [aria-label], [data-tip]');
-    for (const el of elements) {
-        const title = (el.getAttribute('title') || '').toLowerCase();
-        const aria  = (el.getAttribute('aria-label') || '').toLowerCase();
-        const tip   = (el.getAttribute('data-tip') || '').toLowerCase();
-
-        if (title.includes('turn on mic') || title.includes('unmute') || title.includes('enable mic') ||
-            aria.includes('turn on mic') || aria.includes('unmute') || aria.includes('enable mic') ||
-            tip.includes('turn on mic') || tip.includes('unmute') || tip.includes('enable mic')) {
-            return true;
-        }
-    }
-
-    // 3. Search for SVG icons with slash lines (multiple paths or line tags) inside ZEGOCLOUD control bar
-    const svgs = container.querySelectorAll('svg');
-    for (const svg of svgs) {
-        const paths = svg.querySelectorAll('path');
-        const lines = svg.querySelectorAll('line');
-        const svgHtml = svg.outerHTML.toLowerCase();
-
-        const hasSlash = lines.length > 0 || paths.length >= 2 || svgHtml.includes('<line') ||
-                         svgHtml.includes('slash') || svgHtml.includes('strike') || 
-                         svgHtml.includes('l21 21') || svgHtml.includes('l20 20') || svgHtml.includes('l19 19');
-
-        if (hasSlash) {
-            const parent = svg.closest('button, div');
-            const parentText = parent ? (parent.outerHTML + ' ' + (parent.innerText || '')).toLowerCase() : svgHtml;
-            // Ignore red end call button or video button
-            if (!parentText.includes('red') && !parentText.includes('hangup') && !parentText.includes('camera') && !parentText.includes('video')) {
-                return true;
-            }
-        }
-    }
-
-    return false;
-}
-
-/**
- * Enable or disable audio detection microphone tracks based on ZEGOCLOUD mic state.
- * @param {boolean} isMuted
- */
-export function setAudioDetectionMuted(isMuted) {
-    isMicMutedState = !!isMuted;
-    if (mediaStream) {
-        mediaStream.getAudioTracks().forEach(t => {
-            t.enabled = !isMicMutedState;
-        });
-    }
-}
-
 /**
  * Call this when the ZEGOCLOUD call ends to clean everything up.
  */
 export function stopAudioDetection() {
     recordingActive = false;
+    captureAborted  = true;  // signal any pending getUserMedia to abort
 
     if (cycleTimer) { clearTimeout(cycleTimer);  cycleTimer  = null; }
     if (pollTimer)  { clearInterval(pollTimer);   pollTimer   = null; }
@@ -156,13 +124,13 @@ export function stopAudioDetection() {
     }
 
     if (mediaStream) {
-        mediaStream.getTracks().forEach(t => t.stop());
+        mediaStream.getTracks().forEach((t) => t.stop());
         mediaStream = null;
     }
 
     if (audioContext) {
         try { audioContext.close(); } catch (_) {}
-        audioContext = null;
+        audioContext  = null;
         audioAnalyser = null;
     }
 
@@ -172,87 +140,51 @@ export function stopAudioDetection() {
 // ── Audio capture ─────────────────────────────────────────────────────────────
 
 async function startCapture() {
+    let stream;
     try {
-        mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
-        logTs('microphone_acquired');
-        recordingActive = true;
-
-        // Setup Web Audio Analyser to monitor real-time volume RMS
-        try {
-            const AudioCtx = window.AudioContext || window.webkitAudioContext;
-            if (AudioCtx) {
-                audioContext  = new AudioCtx();
-                const source  = audioContext.createMediaStreamSource(mediaStream);
-                audioAnalyser = audioContext.createAnalyser();
-                audioAnalyser.fftSize = 256;
-                source.connect(audioAnalyser);
-            }
-        } catch (e) {
-            console.warn('[AudioDetection] Web Audio Analyser setup failed:', e);
-        }
-
-        // Attach touch & click listeners on zego-container for mobile button taps
-        const zegoContainer = document.getElementById('zego-container');
-        if (zegoContainer) {
-            const handleTouch = () => {
-                setTimeout(() => {
-                    const muted = isZegoMicrophoneMutedInUI();
-                    setAudioDetectionMuted(muted);
-                }, 150);
-            };
-            zegoContainer.addEventListener('click', handleTouch, true);
-            zegoContainer.addEventListener('touchstart', handleTouch, true);
-        }
-
-        // Dedicated binder for ZEGOCLOUD control bar microphone button
-        const bindMicButtonTouch = () => {
-            const container = document.getElementById('zego-container');
-            if (!container) return;
-
-            const allClickables = Array.from(container.querySelectorAll('button, div[role="button"], div')).filter(el => {
-                return el.querySelector('svg') && el.offsetWidth > 0 && el.offsetHeight > 0;
-            });
-
-            const containerRect = container.getBoundingClientRect();
-            const footerButtons = allClickables.filter(el => {
-                const r = el.getBoundingClientRect();
-                return r.bottom >= containerRect.bottom - 140;
-            });
-
-            footerButtons.sort((a, b) => a.getBoundingClientRect().left - b.getBoundingClientRect().left);
-
-            let micBtn = null;
-            if (footerButtons.length >= 5)      micBtn = footerButtons[2];
-            else if (footerButtons.length >= 3) micBtn = footerButtons[1];
-
-            if (micBtn && !micBtn.dataset.audioDetBound) {
-                micBtn.dataset.audioDetBound = 'true';
-                const toggleHandler = () => {
-                    setTimeout(() => {
-                        const newMuted = !isMicMutedState;
-                        console.log('[AudioDetection] Mic button tapped! Muted state toggled to:', newMuted);
-                        setAudioDetectionMuted(newMuted);
-                    }, 100);
-                };
-                micBtn.addEventListener('click', toggleHandler, true);
-                micBtn.addEventListener('touchstart', toggleHandler, true);
-            }
-        };
-        setInterval(bindMicButtonTouch, 1000);
-
-        // 500ms interval scanner to continuously sync ZEGOCLOUD mic UI mute state
-        setInterval(() => {
-            if (!recordingActive) return;
-            const muted = isZegoMicrophoneMutedInUI();
-            setAudioDetectionMuted(muted);
-        }, 500);
-
-        startRecordingCycle();
-        startPolling();
+        stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
     } catch (err) {
         console.error('[AudioDetection] Could not get microphone:', err);
-        // Do not break the call — just disable detection silently
+        return; // Do not break the call — disable detection silently
     }
+
+    // ── Critical race-condition guard ────────────────────────────────────────
+    // stopAudioDetection() may have been called while getUserMedia was pending
+    // (e.g. user joins then immediately leaves). If so, abort and release the
+    // microphone — never start a recording cycle after the call has ended.
+    if (captureAborted) {
+        stream.getTracks().forEach((t) => t.stop());
+        logTs('capture_aborted_after_getUserMedia');
+        return;
+    }
+
+    mediaStream = stream;
+    logTs('microphone_acquired');
+
+    // Apply the current mute state immediately (user may have muted before
+    // microphone permission was granted)
+    mediaStream.getAudioTracks().forEach((track) => {
+        track.enabled = !isMicMuted;
+    });
+
+    recordingActive = true;
+
+    // Set up Web Audio analyser for silence detection
+    try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (AudioCtx) {
+            audioContext  = new AudioCtx();
+            const source  = audioContext.createMediaStreamSource(mediaStream);
+            audioAnalyser = audioContext.createAnalyser();
+            audioAnalyser.fftSize = 256;
+            source.connect(audioAnalyser);
+        }
+    } catch (e) {
+        console.warn('[AudioDetection] Web Audio Analyser setup failed:', e);
+    }
+
+    startRecordingCycle();
+    startPolling();
 }
 
 // ── Recording cycle ───────────────────────────────────────────────────────────
@@ -260,24 +192,17 @@ async function startCapture() {
 function startRecordingCycle() {
     if (!recordingActive || !mediaStream) return;
 
-    // Check if microphone is muted in ZEGOCLOUD UI or state
-    if (isZegoMicrophoneMutedInUI()) {
+    // If muted, skip this cycle and reschedule
+    if (isMicMuted) {
         logTs('mic_is_muted_skipping_recording_cycle');
-        if (mediaStream) {
-            mediaStream.getAudioTracks().forEach(t => { t.enabled = false; });
-        }
         cycleTimer = setTimeout(startRecordingCycle, 2000);
         return;
-    } else {
-        if (mediaStream) {
-            mediaStream.getAudioTracks().forEach(t => { t.enabled = true; });
-        }
     }
 
     logTs('recording_started');
     maxRmsVolume = 0;
 
-    // Monitor volume RMS during cycle
+    // Monitor volume RMS during cycle for silence detection
     let volumeCheckInterval = null;
     if (audioAnalyser) {
         const dataArray = new Uint8Array(audioAnalyser.frequencyBinCount);
@@ -285,9 +210,7 @@ function startRecordingCycle() {
             if (!audioAnalyser) return;
             audioAnalyser.getByteFrequencyData(dataArray);
             let sum = 0;
-            for (let i = 0; i < dataArray.length; i++) {
-                sum += dataArray[i];
-            }
+            for (let i = 0; i < dataArray.length; i++) sum += dataArray[i];
             const avg = sum / dataArray.length;
             if (avg > maxRmsVolume) maxRmsVolume = avg;
         }, 100);
@@ -310,24 +233,21 @@ function startRecordingCycle() {
     const chunks  = [];
 
     recorder.ondataavailable = (e) => {
-        if (e.data && e.data.size > 0) {
-            chunks.push(e.data);
-        }
+        if (e.data && e.data.size > 0) chunks.push(e.data);
     };
 
     recorder.onstop = async () => {
         logTs('recording_stopped');
         if (volumeCheckInterval) clearInterval(volumeCheckInterval);
 
-        // Guard 1: Abort if mic was muted in UI during cycle
-        if (isZegoMicrophoneMutedInUI()) {
+        // Guard 1: Abort if mic was muted at any point during this cycle
+        if (isMicMuted) {
             logTs('mic_muted_during_cycle_aborting_upload');
             scheduleNextCycle();
             return;
         }
 
-        // Guard 2: Abort if average audio volume was silent / below noise floor
-        // maxRmsVolume < 3.0 means virtually silence / muted mic input
+        // Guard 2: Abort if audio was virtually silent (muted mic input)
         if (audioAnalyser && maxRmsVolume < 3.0) {
             logTs(`audio_silent_skipping_upload (max_vol: ${maxRmsVolume})`);
             scheduleNextCycle();
@@ -349,26 +269,28 @@ function startRecordingCycle() {
         scheduleNextCycle();
     };
 
-    // Start recording — collect everything into one blob when stopped
     recorder.start();
 
-    // Stop after SEGMENT_DURATION_MS to finalize the blob
     cycleTimer = setTimeout(() => {
-        if (recorder.state === 'recording') {
-            recorder.stop();
-        }
+        if (recorder.state === 'recording') recorder.stop();
     }, SEGMENT_DURATION_MS);
 }
 
 function scheduleNextCycle() {
     if (!recordingActive) return;
-    // Small gap so the browser finishes the previous stop cleanly
-    setTimeout(startRecordingCycle, 200);
+    // Store the handle so stopAudioDetection() can cancel this gap timer too
+    cycleTimer = setTimeout(startRecordingCycle, 200);
 }
 
 // ── Upload ─────────────────────────────────────────────────────────────────────
 
 async function uploadSegment(blob, mimeType) {
+    // Final safety guard: never upload while muted
+    if (isMicMuted) {
+        logTs('upload_skipped_mic_muted');
+        return;
+    }
+
     logTs('upload_started');
 
     const ext      = mimeTypeToExtension(mimeType);
@@ -414,7 +336,7 @@ async function pollForEvents() {
 
         if (!res.ok) return;
 
-        const data = await res.json();
+        const data   = await res.json();
         const events = data.events ?? [];
 
         for (const event of events) {
@@ -441,7 +363,6 @@ const DETECTION_LABELS = {
 };
 
 function showWarningModal(detectionType) {
-    // Remove any existing modal first
     const existing = document.getElementById('audio-detection-modal');
     if (existing) existing.remove();
 
@@ -545,7 +466,6 @@ function showWarningModal(detectionType) {
 
     document.body.appendChild(modal);
 
-    // Auto-dismiss after 12 seconds
     const autoDismiss = setTimeout(() => closeWarningModal(), 12000);
 
     document.getElementById('adm-close')?.addEventListener('click', () => {
@@ -587,8 +507,8 @@ function getSupportedMimeType() {
 }
 
 function mimeTypeToExtension(mimeType) {
-    if (!mimeType) return 'webm';
-    if (mimeType.includes('ogg'))  return 'ogg';
-    if (mimeType.includes('mp4'))  return 'mp4';
+    if (!mimeType)               return 'webm';
+    if (mimeType.includes('ogg')) return 'ogg';
+    if (mimeType.includes('mp4')) return 'mp4';
     return 'webm';
 }
