@@ -23,11 +23,15 @@ let hasJoinedRoom = false;
  */
 function applyMicState() {
     // ── 1. Mute/unmute ZEGOCLOUD outgoing audio ──────────────────────────────
-    if (zegoInstance && zegoInstance.localStream && hasJoinedRoom) {
-        zegoInstance.localStream.getAudioTracks().forEach((track) => {
-            track.enabled = !isMicMuted;
-        });
-        console.log("[MicControl] ZEGOCLOUD localStream tracks set, enabled =", !isMicMuted);
+    if (zegoInstance && hasJoinedRoom) {
+        if (typeof zegoInstance.turnMicrophoneOn === "function") {
+            zegoInstance.turnMicrophoneOn(!isMicMuted);
+        } else if (zegoInstance.localStream) {
+            zegoInstance.localStream.getAudioTracks().forEach((track) => {
+                track.enabled = !isMicMuted;
+            });
+        }
+        console.log("[MicControl] ZEGOCLOUD mic state set to enabled =", !isMicMuted);
     }
 
     // ── 2. Tell AssemblyAI audio detection to pause/resume ───────────────────
@@ -160,12 +164,8 @@ async function startCall() {
         // index.d.ts line 244: (state: "created"|"published"|"stopped", streamId, stream?)
         onLocalStreamUpdated: (state) => {
             console.log("[MicControl] onLocalStreamUpdated state:", state);
-            if ((state === "created" || state === "published") && zegoInstance && zegoInstance.localStream) {
-                // Apply the current mute state to the freshly available stream
-                zegoInstance.localStream.getAudioTracks().forEach((track) => {
-                    track.enabled = !isMicMuted;
-                });
-                console.log("[MicControl] Applied mute to localStream on", state, "— enabled =", !isMicMuted);
+            if (state === "created" || state === "published") {
+                applyMicState();
             }
         },
 
