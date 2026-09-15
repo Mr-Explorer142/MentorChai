@@ -341,7 +341,7 @@
                                                   text-[#033f63] dark:text-[#7ec8e3]">
                                         Hourly Rate (৳)
                                     </label>
-                                    <input type="number" name="hourly_rate" class="w-full px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs sm:text-sm outline-none
+                                    <input type="number" name="hourly_rate" min="0" max="450" class="w-full px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs sm:text-sm outline-none
                                                border-[1.5px] border-[#28666e]/20 dark:border-[#4db6c1]/20
                                                bg-[#eef7f8]/50 dark:bg-[#0f1f2e]/50
                                                text-[#033f63] dark:text-[#7ec8e3]

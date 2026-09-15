@@ -242,6 +242,16 @@
                                               {{ Route::is('student_dashboard') ? '!bg-[#28666e] !text-white' : '' }}">
                                         Dashboard
                                     </a>
+                                    @elseif (auth()->user()->isAdmin())
+                                    <a href="{{ route('admin_dashboard') }}"
+                                        class="block w-full text-center text-sm font-semibold
+                                              text-[#033f63] dark:text-[#7ec8e3]
+                                              px-4 py-[0.55rem] rounded-[10px] no-underline
+                                              transition-all duration-150
+                                              hover:bg-[#28666e]/8 dark:hover:bg-[#4db6c1]/12 hover:text-[#28666e] dark:hover:text-[#4db6c1]
+                                              {{ Route::is('admin_dashboard') ? '!bg-[#28666e] !text-white' : '' }}">
+                                        Dashboard
+                                    </a>
                                     @endif
 
                                     {{-- Dropdown divider --}}
