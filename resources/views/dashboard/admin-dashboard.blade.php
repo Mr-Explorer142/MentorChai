@@ -883,11 +883,19 @@
         <div style="padding:18px">
           <form method="POST" action="{{ route('admin_admin.add') }}">
             @csrf
+            <input type="hidden" name="role_type" id="add-admin-role-type" value="admin" />
             <div class="fg"><label>Full Name</label><input type="text" class="fc" name="name" required placeholder="Admin Name" /></div>
             <div class="fg"><label>Email</label><input type="email" class="fc" name="email" required placeholder="admin@example.com" /></div>
             <div class="fg"><label>Password</label><input type="password" class="fc" name="password" required placeholder="••••••••" /></div>
             <div class="fg" style="margin-bottom:14px"><label>Confirm Password</label><input type="password" class="fc" name="password_confirmation" required placeholder="••••••••" /></div>
-            <button type="submit" class="btn btn-primary"><x-heroicon name="user-plus" class="h-icon h-icon--sm" />Add New Admin</button>
+            <div style="display:flex;gap:10px;flex-wrap:wrap">
+              <button type="submit" onclick="document.getElementById('add-admin-role-type').value='admin'" class="btn btn-primary">
+                <x-heroicon name="user-plus" class="h-icon h-icon--sm" />Add New Admin
+              </button>
+              <button type="submit" onclick="document.getElementById('add-admin-role-type').value='super_admin'" class="btn btn-warning" style="background:var(--amber);color:#000;border:none">
+                <x-heroicon name="shield-check" class="h-icon h-icon--sm" />Add New Super Admin
+              </button>
+            </div>
           </form>
         </div>
       </div>
@@ -907,12 +915,41 @@
                 <td>{{ $admin['created_at'] }}</td>
                 <td><span class="badge {{ $admin['is_super_admin'] ? 'b-active' : 'b-offline' }}">{{ $admin['is_super_admin'] ? 'Super Admin' : 'Admin' }}</span></td>
                 <td>
-                  @if(!$admin['is_super_admin'] && $admin['id'] !== auth()->id())
-                  <form method="POST" action="{{ route('admin_admin.remove', $admin['id']) }}" onsubmit="event.preventDefault(); customConfirm('Are you sure you want to remove admin permissions?', this)">
+                  @php
+                    $isTargetSuper = $admin['is_super_admin'];
+                    $isSelf = $admin['id'] === auth()->id();
+                    $canRemoveTarget = false;
+                    $removeConfirmMsg = 'Are you sure you want to remove this admin?';
+                    $buttonLabel = 'Remove';
+                    
+                    if (auth()->user()?->isSuperAdmin()) {
+                        if (!$isTargetSuper) {
+                            $canRemoveTarget = true;
+                            $removeConfirmMsg = "Are you sure you want to remove {$admin['name']}'s admin account?";
+                        } elseif ($isTargetSuper) {
+                            if (($superAdminCount ?? 1) > 1) {
+                                $canRemoveTarget = true;
+                                if ($isSelf) {
+                                    $buttonLabel = 'Leave Super Admin Access';
+                                    $removeConfirmMsg = "Are you sure you want to remove your own Super Admin access? You will be logged out.";
+                                } else {
+                                    $removeConfirmMsg = "Are you sure you want to remove Super Admin access for {$admin['name']}?";
+                                }
+                            }
+                        }
+                    }
+                  @endphp
+
+                  @if($canRemoveTarget)
+                  <form method="POST" action="{{ route('admin_admin.remove', $admin['id']) }}" onsubmit="event.preventDefault(); customConfirm('{{ addslashes($removeConfirmMsg) }}', this)">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger btn-sm"><x-heroicon name="trash" class="h-icon h-icon--sm" />Remove</button>
+                    <button type="submit" class="btn btn-danger btn-sm">
+                      <x-heroicon name="trash" class="h-icon h-icon--sm" />{{ $buttonLabel }}
+                    </button>
                   </form>
+                  @elseif($isTargetSuper && ($superAdminCount ?? 1) <= 1)
+                  <span class="badge b-pending" title="Cannot remove the only Super Admin" style="font-size:11px">Sole Super Admin</span>
                   @else
                   <span style="font-size:11px;color:var(--text3)">-</span>
                   @endif
