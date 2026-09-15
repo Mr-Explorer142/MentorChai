@@ -39,10 +39,10 @@
                     </svg>
                 </div>
                 <h1 class="text-3xl font-bold tracking-tight text-[#102E3C] dark:text-[#7ec8e3]">
-                    অ্যাডমিন প্যানেল
+                    Admin Panel
                 </h1>
                 <p class="text-sm mt-1 text-[#155665]/70 dark:text-[#4db6c1]/70">
-                    নিরাপদ অ্যাডমিন লগইন
+                    Secure Admin Login
                 </p>
             </div>
 
@@ -63,7 +63,7 @@
                         <div>
                             <label class="block text-xs font-semibold mb-1.5
                                           text-[#155665] dark:text-[#7ec8e3]">
-                                অ্যাডমিন ই-মেইল
+                                Admin Email
                             </label>
                             <div class="relative">
                                 <input type="email" name="email" placeholder="admin@email.com" required
@@ -100,7 +100,7 @@
                         <div>
                             <label class="block text-xs font-semibold mb-1.5
                                           text-[#155665] dark:text-[#7ec8e3]">
-                                পাসওয়ার্ড
+                                Password
                             </label>
                             <div class="relative">
                                 <input type="password" name="password" placeholder="••••••••" required
@@ -140,7 +140,7 @@
                                           text-[#155665] dark:text-[#7ec8e3]">
                                 <input type="checkbox" name="remember" class="w-4 h-4 rounded cursor-pointer
                                               accent-[#1A998F] dark:accent-[#4db6c1]" />
-                                তথ্য সেভ রাখুন
+                                Remember me
                             </label>
                         </div>
 
@@ -161,7 +161,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                             </svg>
-                            অ্যাডমিন হিসেবে লগইন করুন
+                            Login as Admin
                         </button>
 
                     </form>
@@ -170,16 +170,16 @@
                     {{-- Divider --}}
                     <div class="flex items-center gap-3">
                         <div class="flex-1 h-px bg-[#C4CFCE] dark:bg-[#4db6c1]/15"></div>
-                        <span class="text-xs text-[#155665]/60 dark:text-[#7ec8e3]/40">অথবা</span>
+                        <span class="text-xs text-[#155665]/60 dark:text-[#7ec8e3]/40">Or</span>
                         <div class="flex-1 h-px bg-[#C4CFCE] dark:bg-[#4db6c1]/15"></div>
                     </div>
 
                     {{-- Back link --}}
                     <p class="text-center text-sm text-[#155665]/80 dark:text-[#7ec8e3]/60">
-                        অ্যাডমিন নন?
+                        Not an admin?
                         <a href="{{ route('login') }}"
                             class="font-semibold text-[#1A998F] dark:text-[#4db6c1] hover:underline">
-                            ইউজার লগইন
+                            User Login
                         </a>
                     </p>
 

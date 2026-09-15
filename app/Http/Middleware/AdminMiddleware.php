@@ -19,6 +19,6 @@ class AdminMiddleware
             return $next($request);
         }
 
-        return redirect()->route('admin_login')->with('error', 'এই পেজটি শুধুমাত্র অ্যাডমিনদের জন্য।');
+        return redirect()->route('admin_login')->with('error', 'This page is accessible to admins only.');
     }
 }

@@ -44,15 +44,15 @@ class AdminController extends Controller
                 return redirect()->route('admin_dashboard');
             }
             Auth::logout();
-            return back()->withErrors(['email' => 'এই অ্যাকাউন্টে অ্যাডমিন পারমিশন নেই।'])->withInput();
+            return back()->withErrors(['email' => 'This account does not have admin permissions.'])->withInput();
         }
 
         $adminExists = User::where('email', $request->email)->exists();
         if (!$adminExists) {
-            return back()->withErrors(['email' => 'এই ইমেইলে কোনো অ্যাকাউন্ট পাওয়া যায়নি।'])->withInput();
+            return back()->withErrors(['email' => 'No account found with this email.'])->withInput();
         }
 
-        return back()->withErrors(['password' => 'ভুল পাসওয়ার্ড। আবার চেষ্টা করুন।'])->withInput();
+        return back()->withErrors(['password' => 'Incorrect password. Please try again.'])->withInput();
     }
 
     public function logout(Request $request)
@@ -124,7 +124,7 @@ class AdminController extends Controller
             ->map(fn($u) => [
                 'id'   => $u->id,
                 'name' => $u->name,
-                'role' => $u->role === UserRole::Student ? 'শিক্ষার্থী' : 'মেন্টর',
+                'role' => $u->role === UserRole::Student ? 'Student' : 'Mentor',
                 'date' => $u->banned_at ? \Carbon\Carbon::parse($u->banned_at)->format('d/m/y') : '—',
                 'avatar' => $u->profile->avatar ?? null,
             ])->toArray();
@@ -313,7 +313,7 @@ class AdminController extends Controller
                 'student'  => $s->student->name ?? '—',
                 'topic'    => $s->topic ?? '—',
                 'datetime' => $s->created_at->format('d M, H:i'),
-                'duration' => ($s->duration_hours ?? 1) . ' ঘণ্টা',
+                'duration' => ($s->duration_hours ?? 1) . ' hours',
                 'amount'   => $s->mentoringSession ? ('৳' . number_format($s->mentoringSession->amount)) : '—',
                 'status'   => match($s->mentoringSession?->status ?? $s->status) {
                     SessionStatus::Approved    => 'Approved',
@@ -381,7 +381,7 @@ class AdminController extends Controller
                 'documents_submitted_at'=> null,
             ]);
         }
-        return back()->with('success', $user->name . '-এর প্রোফাইল ভেরিফাই করা হয়েছে।');
+        return back()->with('success', $user->name . '\'s profile has been verified.');
     }
 
     public function rejectMentor(Request $request, $id)
@@ -404,14 +404,14 @@ class AdminController extends Controller
                 'documents_submitted_at'=> null,
             ]);
         }
-        return back()->with('success', $user->name . '-এর আবেদন বাতিল করা হয়েছে।');
+        return back()->with('success', $user->name . '\'s application has been rejected.');
     }
 
     public function approveUser($id)
     {
         $user = User::where('role', UserRole::Student)->findOrFail($id);
         $user->update(['status' => UserStatus::ACTIVE]);
-        return back()->with('success', $user->name . '-এর অ্যাকাউন্ট অ্যাপ্রুভ করা হয়েছে।');
+        return back()->with('success', $user->name . '\'s account has been approved.');
     }
 
     public function banUser(Request $request, $id)
@@ -420,9 +420,9 @@ class AdminController extends Controller
         $user->update([
             'status'        => UserStatus::BANNED,
             'banned_at'     => now(),
-            'banned_reason' => $request->input('reason', 'নীতি লঙ্ঘন'),
+            'banned_reason' => $request->input('reason', 'Policy violation'),
         ]);
-        return back()->with('success', $user->name . '-কে ব্যান করা হয়েছে।');
+        return back()->with('success', $user->name . ' has been banned.');
     }
 
     public function unbanUser($id)
@@ -433,7 +433,7 @@ class AdminController extends Controller
             'banned_at'     => null,
             'banned_reason' => null,
         ]);
-        return back()->with('success', $user->name . '-এর ব্যান তুলে নেওয়া হয়েছে।');
+        return back()->with('success', $user->name . '\'s ban has been lifted.');
     }
 
     public function addAdmin(Request $request)
@@ -458,7 +458,7 @@ class AdminController extends Controller
             'email_verified_at' => now(),
         ]);
 
-        return back()->with('active_section', 'settings')->with('success', $request->name . ' কে নতুন অ্যাডমিন হিসেবে যোগ করা হয়েছে।');
+        return back()->with('active_section', 'settings')->with('success', $request->name . ' has been added as a new admin.');
     }
 
     public function removeAdmin($id)
@@ -468,7 +468,7 @@ class AdminController extends Controller
         }
         $admin = User::whereIn('role', [UserRole::Admin, UserRole::SuperAdmin])->where('is_super_admin', false)->findOrFail($id);
         $admin->delete();
-        return back()->with('active_section', 'settings')->with('success', $admin->name . '-এর অ্যাডমিন অ্যাকাউন্ট মুছে ফেলা হয়েছে।');
+        return back()->with('active_section', 'settings')->with('success', $admin->name . '\'s admin account has been removed.');
     }
 
     public function endSession($id)
@@ -481,7 +481,7 @@ class AdminController extends Controller
             $mentoringSession->update(['status' => SessionStatus::EndedByAdmin, 'ended_at' => now()]);
         }
         
-        return back()->with('success', 'সেশনটি সফলভাবে শেষ করা হয়েছে।');
+        return back()->with('success', 'Session ended successfully.');
     }
 
     public function editTopic(Request $request)
@@ -495,7 +495,7 @@ class AdminController extends Controller
         $newName = trim($request->new_name);
 
         if ($oldName === $newName) {
-            return back()->with('active_section', 'topics')->with('success', 'কোনো পরিবর্তন করা হয়নি।');
+            return back()->with('active_section', 'topics')->with('success', 'No changes were made.');
         }
 
         // 1. Update profiles skills list
@@ -518,7 +518,7 @@ class AdminController extends Controller
         // 2. Update session topics
         SessionTopic::where('topic', $oldName)->update(['topic' => $newName]);
 
-        return back()->with('active_section', 'topics')->with('success', 'টপিকের নাম সফলভাবে পরিবর্তন করা হয়েছে।');
+        return back()->with('active_section', 'topics')->with('success', 'Topic name updated successfully.');
     }
 
     public function deleteTopic(Request $request)
@@ -549,7 +549,7 @@ class AdminController extends Controller
         // 2. Set topic to null in session topics
         // Removed: We should keep the historical topic name in session_topics even if the topic is deleted from global list.
 
-        return back()->with('active_section', 'topics')->with('success', 'টপিকটি সফলভাবে মুছে ফেলা হয়েছে।');
+        return back()->with('active_section', 'topics')->with('success', 'Topic deleted successfully.');
     }
 
     /* ──────────────────────────────────────────
