@@ -53,19 +53,31 @@ function updateMicButtonUI() {
     const btn = document.getElementById("custom-mic-btn");
     if (!btn) return;
 
-    const icon  = btn.querySelector(".mic-icon");
-    const label = btn.querySelector(".mic-label");
+    const icon = btn.querySelector(".mic-icon");
 
     if (isMicMuted) {
         btn.setAttribute("aria-pressed", "true");
         btn.classList.add("mic-muted");
-        if (icon)  icon.textContent  = "🔇";
-        if (label) label.textContent = "Microphone";
+        
+        if (icon) {
+            icon.innerHTML = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="1" y1="1" x2="23" y2="23"></line>
+                <path d="M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V4a3 3 0 0 0-5.94-.6"></path>
+                <path d="M17 16.95A7 7 0 0 1 5 12v-2m14 0v2a7 7 0 0 1-.11 1.23"></path>
+                <line x1="12" y1="19" x2="12" y2="22"></line>
+            </svg>`;
+        }
     } else {
         btn.setAttribute("aria-pressed", "false");
         btn.classList.remove("mic-muted");
-        if (icon)  icon.textContent  = "🎤";
-        if (label) label.textContent = "Microphone";
+        
+        if (icon) {
+            icon.innerHTML = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"></path>
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                <line x1="12" y1="19" x2="12" y2="22"></line>
+            </svg>`;
+        }
     }
 }
 
@@ -132,6 +144,10 @@ async function startCall() {
             console.log("[MicControl] User joined room. Starting audio detection.");
             initAudioDetection(sessionCode, userID);
 
+            // Show the custom mic button now that we are in the call
+            const micWrapper = document.getElementById("custom-mic-wrapper");
+            if (micWrapper) micWrapper.classList.remove("hidden");
+
             // Apply AssemblyAI and button state now; ZEGOCLOUD stream muting
             // will happen in onLocalStreamUpdated once localStream is available.
             setMicMuted(isMicMuted);
@@ -168,6 +184,10 @@ async function startCall() {
 
         onLeaveRoom: async () => {
             hasJoinedRoom = false;
+
+            // Hide the custom mic button
+            const micWrapper = document.getElementById("custom-mic-wrapper");
+            if (micWrapper) micWrapper.classList.add("hidden");
 
             // Stop audio detection synchronously before any async work.
             // This sets captureAborted=true inside audio-detection.js so that

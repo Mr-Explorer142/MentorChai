@@ -13,7 +13,6 @@
                 </span>
             </div>
         </div>
-
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6">
 
             {{-- ══════════ MAIN VIDEO AREA ══════════ --}}
@@ -22,21 +21,29 @@
                 {{-- Live Video Card --}}
                 <div class="bg-white dark:bg-[#1a2e3b] rounded-xl sm:rounded-2xl overflow-hidden shadow-sm transition-colors duration-300 border border-[#1a9998]/15 dark:border-[#4db6c1]/15 shadow-[0_4px_20px_rgba(26,153,152,0.08)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
 
-                    {{-- ZegoCloud mounts here --}}
-                    <div id="zego-container" class="relative w-full h-[400px] sm:h-[480px] md:h-[520px] rounded-t-xl sm:rounded-t-2xl overflow-hidden" style="transform: translateZ(0);"></div>
-
-                    {{-- Custom Microphone Button --}}
-                    <div class="flex justify-center py-3 sm:py-4 border-t border-[#1a9998]/10 dark:border-[#4db6c1]/10">
-                        <button
-                            id="custom-mic-btn"
-                            type="button"
-                            aria-pressed="false"
-                            aria-label="Toggle microphone"
-                            class="custom-mic-btn inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full text-sm font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1a9998]/50"
-                        >
-                            <span class="mic-icon text-base" aria-hidden="true">🎤</span>
-                            <span class="mic-label">Microphone</span>
-                        </button>
+                    {{-- Video Container Wrapper --}}
+                    <div class="relative w-full rounded-t-xl sm:rounded-t-2xl overflow-hidden bg-[#1c1f2e]">
+                        {{-- ZegoCloud mounts here --}}
+                        <div id="zego-container" class="w-full h-[400px] sm:h-[480px] md:h-[520px]" style="transform: translateZ(0);"></div>
+                        
+                        {{-- Custom Microphone Button (Floating over Zego, hidden until joined) --}}
+                        <div id="custom-mic-wrapper" class="hidden absolute bottom-4 left-4 sm:left-1/2 sm:-ml-[278px] sm:bottom-[17px] z-[99]">
+                            <button
+                                id="custom-mic-btn"
+                                type="button"
+                                aria-pressed="false"
+                                aria-label="Toggle microphone"
+                                class="custom-mic-btn flex items-center justify-center w-[42px] h-[42px] text-white transition-all duration-200 focus:outline-none"
+                            >
+                                <span class="mic-icon flex items-center justify-center" aria-hidden="true">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"></path>
+                                        <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                                        <line x1="12" y1="19" x2="12" y2="22"></line>
+                                    </svg>
+                                </span>
+                            </button>
+                        </div>
                     </div>
 
                     {{-- Session meta --}}
@@ -328,36 +335,24 @@
     <style>
         /* ── Custom Microphone Button ── */
         .custom-mic-btn {
-            background: linear-gradient(135deg, #1A9998, #155665);
-            color: #ffffff;
-            box-shadow: 0 4px 14px rgba(26,153,152,0.35);
-            border: none;
+            background-color: rgba(255, 255, 255, 0.06) !important;
+            border: none !important;
+            border-radius: 10px !important;
+            color: #ffffff !important;
+            box-shadow: none !important;
+            transition: all 0.2s !important;
         }
         .custom-mic-btn:hover {
+            background-color: rgba(255, 255, 255, 0.12) !important;
             transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(26,153,152,0.45);
         }
         .custom-mic-btn:active {
-            transform: translateY(0);
-        }
-        /* Muted state */
-        .custom-mic-btn.mic-muted {
-            background: linear-gradient(135deg, #64748b, #475569);
-            box-shadow: 0 4px 14px rgba(100,116,139,0.35);
-        }
-        .custom-mic-btn.mic-muted:hover {
-            box-shadow: 0 6px 20px rgba(100,116,139,0.45);
+            transform: scale(0.96);
         }
         /* Dark mode adjustments */
         .dark .custom-mic-btn {
-            background: linear-gradient(135deg, #4db6c1, #28666e);
-            color: #0f1f2e;
-            box-shadow: 0 4px 14px rgba(77,182,193,0.35);
-        }
-        .dark .custom-mic-btn.mic-muted {
-            background: linear-gradient(135deg, #475569, #334155);
-            color: #d2f1ff;
-            box-shadow: 0 4px 14px rgba(71,85,105,0.35);
+            background-color: rgba(255, 255, 255, 0.06) !important;
+            color: #ffffff !important;
         }
     </style>
 
