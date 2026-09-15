@@ -237,7 +237,7 @@
                                     ৳{{ number_format($totalAmount, 2) }}
                                 </p>
                             </div>
-                            <button type="submit" class="w-full sm:w-auto px-8 py-3 rounded-xl text-sm sm:text-base font-bold text-white border-0
+                            <button type="submit" class="cursor-pointer w-full sm:w-auto px-8 py-3 rounded-xl text-sm sm:text-base font-bold text-white border-0
                    flex items-center justify-center gap-2
                    hover:opacity-90 hover:-translate-y-0.5 transition-all duration-200" style="background: linear-gradient(135deg, #1A9998, #155665);
                    box-shadow: 0 8px 24px rgba(26,153,143,0.35);">

@@ -99,7 +99,7 @@
                     text-teal-600 dark:text-teal-400
                     bg-white dark:bg-[#1a2e3b] rounded-xl
                     hover:bg-teal-50 dark:hover:bg-teal-900/20
-                    transition-colors duration-200">
+                    transition-colors duration-200 cursor-pointer">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3 4h18M7 8h10M11 12h4" />
                     </svg>
@@ -260,7 +260,7 @@
                         <button type="submit" class="w-full bg-teal-600 dark:bg-teal-500 text-white
                            py-2.5 rounded-xl font-semibold
                            hover:bg-teal-700 dark:hover:bg-teal-400
-                           transition text-sm">
+                           transition text-sm cursor-pointer">
                             Apply Filters
                         </button>
 
@@ -714,7 +714,7 @@
                     <button type="submit" class="w-full bg-teal-600 dark:bg-teal-500 text-white
                                    py-2.5 rounded-xl font-semibold
                                    hover:bg-teal-700 dark:hover:bg-teal-400
-                                   transition text-sm">
+                                   transition text-sm cursor-pointer">
                         Apply Filters
                     </button>
                 </div>

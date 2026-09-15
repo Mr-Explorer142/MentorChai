@@ -120,7 +120,7 @@
                 }
             @endphp
             @if($canPay && $payUrl)
-            <a href="{{ $payUrl }}" onclick="markAsRead('{{ $notification->id }}')" class="inline-flex items-center gap-0.5 mt-0.5 text-[11px] font-semibold text-teal-600 dark:text-teal-400 hover:underline">
+            <a href="{{ $payUrl }}" onclick="markAsRead('{{ $notification->id }}')" class="inline-flex items-center gap-0.5 mt-0.5 text-[11px] font-semibold text-teal-600 dark:text-teal-400 hover:underline cursor-pointer">
                 Pay Now &rarr;
             </a>
             @else
