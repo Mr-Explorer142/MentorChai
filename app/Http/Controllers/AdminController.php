@@ -444,31 +444,57 @@ class AdminController extends Controller
         }
 
         $request->validate([
-            'name'     => 'required|string|max:255',
-            'email'    => 'required|email|unique:users,email',
-            'password' => 'required|min:8|confirmed',
+            'name'      => 'required|string|max:255',
+            'email'     => 'required|email|unique:users,email',
+            'password'  => 'required|min:8|confirmed',
+            'role_type' => 'nullable|in:admin,super_admin',
         ]);
+
+        $isSuperAdmin = $request->role_type === 'super_admin';
 
         User::create([
             'name'              => $request->name,
             'email'             => $request->email,
             'password'          => Hash::make($request->password),
-            'role'              => UserRole::Admin,
-            'is_super_admin'    => false,
+            'role'              => $isSuperAdmin ? UserRole::SuperAdmin : UserRole::Admin,
+            'is_super_admin'    => $isSuperAdmin,
             'email_verified_at' => now(),
         ]);
 
-        return back()->with('active_section', 'settings')->with('success', $request->name . ' has been added as a new admin.');
+        $roleLabel = $isSuperAdmin ? 'Super Admin' : 'Admin';
+        return back()->with('active_section', 'settings')->with('success', $request->name . " has been added as a new {$roleLabel}.");
     }
 
-    public function removeAdmin($id)
+    public function removeAdmin(Request $request, $id)
     {
         if (!Auth::user()->isSuperAdmin()) {
             abort(403);
         }
-        $admin = User::whereIn('role', [UserRole::Admin, UserRole::SuperAdmin])->where('is_super_admin', false)->findOrFail($id);
+
+        $admin = User::whereIn('role', [UserRole::Admin, UserRole::SuperAdmin])
+            ->orWhere('is_super_admin', true)
+            ->findOrFail($id);
+
+        if ($admin->isSuperAdmin()) {
+            $superAdminCount = User::all()->filter(fn($u) => $u->isSuperAdmin())->count();
+
+            if ($superAdminCount <= 1) {
+                return back()->with('active_section', 'settings')->with('error', 'Cannot remove the only Super Admin on the platform. Please assign another Super Admin first.');
+            }
+        }
+
+        $isSelf = $admin->id === Auth::id();
+        $adminName = $admin->name;
         $admin->delete();
-        return back()->with('active_section', 'settings')->with('success', $admin->name . '\'s admin account has been removed.');
+
+        if ($isSelf) {
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+            return redirect()->route('admin_login')->with('success', 'You have successfully removed your Super Admin account.');
+        }
+
+        return back()->with('active_section', 'settings')->with('success', $adminName . '\'s admin account has been removed.');
     }
 
     public function endSession($id)
@@ -660,8 +686,10 @@ class AdminController extends Controller
             return $b['mentor_count'] <=> $a['mentor_count'];
         });
 
+        $superAdminCount = User::all()->filter(fn($u) => $u->isSuperAdmin())->count();
+
         return compact('stats', 'pendingUsersCount', 'pendingMentorsCount',
-            'bannedUsersCount', 'bannedMentorsCount', 'onlineMentorsCount', 'adminsList', 'topicsList');
+            'bannedUsersCount', 'bannedMentorsCount', 'onlineMentorsCount', 'adminsList', 'topicsList', 'superAdminCount');
     }
 
     private function formatCurrency($amount)
