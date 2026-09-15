@@ -467,8 +467,8 @@ class AdminController extends Controller
             abort(403);
         }
         $admin = User::whereIn('role', [UserRole::Admin, UserRole::SuperAdmin])->where('is_super_admin', false)->findOrFail($id);
-        $admin->update(['role' => UserRole::Student]);
-        return back()->with('active_section', 'settings')->with('success', $admin->name . '-এর অ্যাডমিন পারমিশন বাতিল করা হয়েছে।');
+        $admin->delete();
+        return back()->with('active_section', 'settings')->with('success', $admin->name . '-এর অ্যাডমিন অ্যাকাউন্ট মুছে ফেলা হয়েছে।');
     }
 
     public function endSession($id)
