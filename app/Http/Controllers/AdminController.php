@@ -471,9 +471,10 @@ class AdminController extends Controller
             abort(403);
         }
 
-        $admin = User::whereIn('role', [UserRole::Admin, UserRole::SuperAdmin])
-            ->orWhere('is_super_admin', true)
-            ->findOrFail($id);
+        $admin = User::where(function ($query) {
+            $query->whereIn('role', [UserRole::Admin, UserRole::SuperAdmin])
+                  ->orWhere('is_super_admin', true);
+        })->findOrFail($id);
 
         if ($admin->isSuperAdmin()) {
             $superAdminCount = User::all()->filter(fn($u) => $u->isSuperAdmin())->count();

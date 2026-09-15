@@ -60,7 +60,7 @@ class ProfileController extends Controller
             'institution_name' => 'nullable|string|max:200',
             'department' => 'nullable|string|max:200',
             'skills' => 'nullable|string|max:200',
-            'hourly_rate' => 'nullable|string|max:200',
+            'hourly_rate' => 'nullable|numeric|min:0|max:450',
             'learning_style' => 'nullable|string|max:2000',
             'preferred_teaching_medium' => 'nullable|string|max:100',
             'preferred_language' => 'nullable|string|max:100',
