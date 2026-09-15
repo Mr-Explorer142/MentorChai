@@ -27,7 +27,8 @@
                         <div id="zego-container" class="w-full h-[400px] sm:h-[480px] md:h-[520px]" style="transform: translateZ(0);"></div>
                         
                         {{-- Custom Microphone Button (Floating over Zego, hidden until joined) --}}
-                        <div id="custom-mic-wrapper" class="hidden absolute bottom-4 left-4 sm:left-1/2 sm:-ml-[278px] sm:bottom-[17px] z-[99]">
+                        {{-- 
+                        <div id="custom-mic-wrapper" class="hidden absolute bottom-4 left-[76px] sm:left-1/2 sm:-ml-[278px] sm:bottom-[17px] z-[99]">
                             <button
                                 id="custom-mic-btn"
                                 type="button"
@@ -44,6 +45,7 @@
                                 </span>
                             </button>
                         </div>
+                        --}}
                     </div>
 
                     {{-- Session meta --}}
@@ -333,7 +335,8 @@
     @endif
 
     <style>
-        /* ── Custom Microphone Button ── */
+        /* ── Custom Microphone Button (COMMENTED OUT) ── */
+        /*
         .custom-mic-btn {
             background-color: rgba(255, 255, 255, 0.06) !important;
             border: none !important;
@@ -349,11 +352,11 @@
         .custom-mic-btn:active {
             transform: scale(0.96);
         }
-        /* Dark mode adjustments */
         .dark .custom-mic-btn {
             background-color: rgba(255, 255, 255, 0.06) !important;
             color: #ffffff !important;
         }
+        */
     </style>
 
     <script>

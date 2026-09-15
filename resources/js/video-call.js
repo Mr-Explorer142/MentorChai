@@ -34,52 +34,52 @@ function applyMicState() {
     setMicMuted(isMicMuted);
 
     // ── 3. Update the custom button UI ───────────────────────────────────────
-    updateMicButtonUI();
+    // updateMicButtonUI();
 }
 
 /**
  * Toggle the microphone. Called by the custom mic button.
  */
-function toggleMicrophone() {
-    isMicMuted = !isMicMuted;
-    console.log("[MicControl] Toggled isMicMuted →", isMicMuted);
-    applyMicState();
-}
+// function toggleMicrophone() {
+//     isMicMuted = !isMicMuted;
+//     console.log("[MicControl] Toggled isMicMuted →", isMicMuted);
+//     applyMicState();
+// }
 
 /**
  * Update the custom mic button appearance to reflect current isMicMuted.
  */
-function updateMicButtonUI() {
-    const btn = document.getElementById("custom-mic-btn");
-    if (!btn) return;
-
-    const icon = btn.querySelector(".mic-icon");
-
-    if (isMicMuted) {
-        btn.setAttribute("aria-pressed", "true");
-        btn.classList.add("mic-muted");
-        
-        if (icon) {
-            icon.innerHTML = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="1" y1="1" x2="23" y2="23"></line>
-                <path d="M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V4a3 3 0 0 0-5.94-.6"></path>
-                <path d="M17 16.95A7 7 0 0 1 5 12v-2m14 0v2a7 7 0 0 1-.11 1.23"></path>
-                <line x1="12" y1="19" x2="12" y2="22"></line>
-            </svg>`;
-        }
-    } else {
-        btn.setAttribute("aria-pressed", "false");
-        btn.classList.remove("mic-muted");
-        
-        if (icon) {
-            icon.innerHTML = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"></path>
-                <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
-                <line x1="12" y1="19" x2="12" y2="22"></line>
-            </svg>`;
-        }
-    }
-}
+// function updateMicButtonUI() {
+//     const btn = document.getElementById("custom-mic-btn");
+//     if (!btn) return;
+//
+//     const icon = btn.querySelector(".mic-icon");
+//
+//     if (isMicMuted) {
+//         btn.setAttribute("aria-pressed", "true");
+//         btn.classList.add("mic-muted");
+//         
+//         if (icon) {
+//             icon.innerHTML = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+//                 <line x1="1" y1="1" x2="23" y2="23"></line>
+//                 <path d="M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V4a3 3 0 0 0-5.94-.6"></path>
+//                 <path d="M17 16.95A7 7 0 0 1 5 12v-2m14 0v2a7 7 0 0 1-.11 1.23"></path>
+//                 <line x1="12" y1="19" x2="12" y2="22"></line>
+//             </svg>`;
+//         }
+//     } else {
+//         btn.setAttribute("aria-pressed", "false");
+//         btn.classList.remove("mic-muted");
+//         
+//         if (icon) {
+//             icon.innerHTML = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+//                 <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"></path>
+//                 <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+//                 <line x1="12" y1="19" x2="12" y2="22"></line>
+//             </svg>`;
+//         }
+//     }
+// }
 
 // ─── Main call initialisation ─────────────────────────────────────────────────
 
@@ -116,7 +116,7 @@ async function startCall() {
     zegoInstance = zc;
 
     // Ensure the custom button shows the correct initial state (unmuted)
-    updateMicButtonUI();
+    // updateMicButtonUI();
 
     zc.joinRoom({
         container: document.getElementById("zego-container"),
@@ -131,8 +131,8 @@ async function startCall() {
 
         // ── Hide the default ZEGOCLOUD microphone toggle button ─────────────
         // Official documented ZegoCloudRoomConfig property (index.d.ts line 134).
-        // All other controls remain unchanged.
-        showMyMicrophoneToggleButton: false,
+        // Set to true to use Zego's native mic button which flawlessly triggers onMicrophoneStateUpdated
+        showMyMicrophoneToggleButton: true,
 
         // ── onJoinRoom — fires when the user passes the pre-join view ────────
         // We set hasJoinedRoom=true and start AssemblyAI audio detection here.
@@ -145,13 +145,13 @@ async function startCall() {
             initAudioDetection(sessionCode, userID);
 
             // Show the custom mic button now that we are in the call
-            const micWrapper = document.getElementById("custom-mic-wrapper");
-            if (micWrapper) micWrapper.classList.remove("hidden");
+            // const micWrapper = document.getElementById("custom-mic-wrapper");
+            // if (micWrapper) micWrapper.classList.remove("hidden");
 
             // Apply AssemblyAI and button state now; ZEGOCLOUD stream muting
             // will happen in onLocalStreamUpdated once localStream is available.
             setMicMuted(isMicMuted);
-            updateMicButtonUI();
+            // updateMicButtonUI();
         },
 
         // ── onLocalStreamUpdated — fires when ZEGOCLOUD's local stream is live ─
@@ -186,8 +186,8 @@ async function startCall() {
             hasJoinedRoom = false;
 
             // Hide the custom mic button
-            const micWrapper = document.getElementById("custom-mic-wrapper");
-            if (micWrapper) micWrapper.classList.add("hidden");
+            // const micWrapper = document.getElementById("custom-mic-wrapper");
+            // if (micWrapper) micWrapper.classList.add("hidden");
 
             // Stop audio detection synchronously before any async work.
             // This sets captureAborted=true inside audio-detection.js so that
