@@ -9,6 +9,7 @@ use App\Library\SslCommerz\SslCommerzNotification;
 use App\Models\MentoringSession;
 use App\Models\Payment;
 use App\Models\SessionTopic;
+use App\Models\UserRefreshSignal;
 use App\Notifications\PaymentReceivedNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -280,6 +281,16 @@ class PaymentController extends Controller
                     Log::error('Failed to send PaymentReceivedNotification email: ' . $e->getMessage());
                 }
 
+                // Create refresh signal for the mentor
+                try {
+                    UserRefreshSignal::create([
+                        'user_id' => $mentoringSession->mentor_id,
+                        'reason'  => 'payment_received',
+                    ]);
+                } catch (\Throwable $e) {
+                    Log::error('Failed to create UserRefreshSignal: ' . $e->getMessage());
+                }
+
                 // ✅ Re-authenticate the user to bypass browser SameSite cookie blocking
                 Auth::loginUsingId($payment->student_id);
 
@@ -369,6 +380,15 @@ class PaymentController extends Controller
                     );
                 } catch (\Throwable $e) {
                     Log::error('Failed to send PaymentReceivedNotification email: ' . $e->getMessage());
+                }
+
+                try {
+                    UserRefreshSignal::create([
+                        'user_id' => $payment->session->mentor_id,
+                        'reason'  => 'payment_received',
+                    ]);
+                } catch (\Throwable $e) {
+                    Log::error('Failed to create UserRefreshSignal: ' . $e->getMessage());
                 }
 
                 return response('Transaction Successful', 200);

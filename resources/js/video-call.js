@@ -58,7 +58,7 @@ function updateMicButtonUI() {
     if (isMicMuted) {
         btn.setAttribute("aria-pressed", "true");
         btn.classList.add("mic-muted");
-        
+
         if (icon) {
             icon.innerHTML = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="1" y1="1" x2="23" y2="23"></line>
@@ -70,7 +70,7 @@ function updateMicButtonUI() {
     } else {
         btn.setAttribute("aria-pressed", "false");
         btn.classList.remove("mic-muted");
-        
+
         if (icon) {
             icon.innerHTML = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"></path>

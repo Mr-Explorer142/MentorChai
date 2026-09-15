@@ -619,11 +619,18 @@ if (current <= 0) { badge.classList.add('hidden'); if (dot) dot.classList.add('h
                 });
             }
             previousUnreadCount = data.unreadCount;
+
+            if (data.shouldRefresh) {
+                notificationSound.play().catch(() => {});
+                setTimeout(function () {
+                    window.location.reload();
+                }, 300);
+            }
         })
         .catch(err => console.error('Notification poll failed:', err));
     }
 
-    setInterval(refreshNotifications, 12000);
+    setInterval(refreshNotifications, 8000);
     @endauth
 
     // ─── Close dropdowns when clicking outside ──────────────────────

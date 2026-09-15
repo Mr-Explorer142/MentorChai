@@ -10,6 +10,7 @@ use App\Enums\SessionStatus;
 use App\Enums\UserStatus;
 use App\Models\SessionTopic;
 use App\Models\User;
+use App\Models\UserRefreshSignal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -49,6 +50,16 @@ class SessionTopicController extends Controller
             'status'         => SessionStatus::Pending,
         ]);
 
+        // Create refresh signal for the mentor
+        try {
+            UserRefreshSignal::create([
+                'user_id' => $session->mentor_id,
+                'reason'  => 'session_requested',
+            ]);
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::error('Failed to create UserRefreshSignal: ' . $e->getMessage());
+        }
+
         // Notify the mentor
         try {
             $session->mentor->notify(new SessionRequestedNotification($session));
@@ -72,6 +83,16 @@ class SessionTopicController extends Controller
             'approved_at' => now(),
         ]);
 
+        // Create refresh signal for the student
+        try {
+            UserRefreshSignal::create([
+                'user_id' => $session->student_id,
+                'reason'  => 'session_approved',
+            ]);
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::error('Failed to create UserRefreshSignal: ' . $e->getMessage());
+        }
+
         // Notify the student
         try {
             $session->student->notify(new SessionApprovedNotification($session));
@@ -92,6 +113,16 @@ class SessionTopicController extends Controller
         $session->update([
             'status' => SessionStatus::Rejected,
         ]);
+
+        // Create refresh signal for the student
+        try {
+            UserRefreshSignal::create([
+                'user_id' => $session->student_id,
+                'reason'  => 'session_rejected',
+            ]);
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::error('Failed to create UserRefreshSignal: ' . $e->getMessage());
+        }
 
         // Notify the student
         try {
@@ -151,6 +182,16 @@ class SessionTopicController extends Controller
         $session->update([
             'status' => SessionStatus::Completed,
         ]);
+
+        // Create refresh signal for the mentor
+        try {
+            UserRefreshSignal::create([
+                'user_id' => $session->mentor_id,
+                'reason'  => 'payment_received',
+            ]);
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::error('Failed to create UserRefreshSignal: ' . $e->getMessage());
+        }
 
         // Notify the mentor
         try {

@@ -13,6 +13,7 @@ use App\Http\Controllers\MentorsController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\SessionTopicController;
 use App\Http\Controllers\SslCommerzPaymentController;
+use App\Models\UserRefreshSignal;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -312,17 +313,31 @@ Route::middleware('auth')->group(function () {
         })->name('notifications.markRead');
 
         Route::get('/notifications/poll', function (Request $request) {
-            $notifications = $request->user()
+            $user = $request->user();
+
+            $notifications = $user
                 ->notifications()
                 ->latest()
                 ->take(10)
                 ->get();
 
-            $unreadCount = $request->user()->unreadNotifications()->count();
+            $unreadCount = $user->unreadNotifications()->count();
+
+            $shouldRefresh = false;
+            try {
+                $signal = UserRefreshSignal::where('user_id', $user->id)->first();
+                if ($signal) {
+                    $shouldRefresh = true;
+                    UserRefreshSignal::where('user_id', $user->id)->delete();
+                }
+            } catch (\Throwable $e) {
+                \Illuminate\Support\Facades\Log::error('Failed to check UserRefreshSignal: ' . $e->getMessage());
+            }
 
             return response()->json([
-                'html'        => view('partials.notification-items', compact('notifications'))->render(),
-                'unreadCount' => $unreadCount,
+                'html'          => view('partials.notification-items', compact('notifications'))->render(),
+                'unreadCount'   => $unreadCount,
+                'shouldRefresh' => $shouldRefresh,
             ]);
         })->middleware('auth')->name('notifications.poll');
 
