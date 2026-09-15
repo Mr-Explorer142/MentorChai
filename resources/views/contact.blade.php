@@ -156,7 +156,7 @@
                             <p class="font-bold text-xs sm:text-sm" style="color: var(--mc-text);">WhatsApp</p>
                             <p class="text-[10px] sm:text-xs mt-0.5 sm:mt-1" style="color: var(--mc-text-muted);">012345678901</p>
                         </div>
-                        <p class="text-[10px] sm:text-xs leading-relaxed text-center" style="color: var(--mc-text-muted);">Message on WhatsApp for a quick response</p>
+                        <p class="text-[10px] sm:text-xs leading-relaxed text-center" style="color: var(--mc-text-muted);">Message on Whatsapp for a quick response</p>
                         <span class="text-[10px] sm:text-xs font-semibold px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full"
                             style="background: rgba(37,211,102,0.13); color: #15803d;">Chat →</span>
                     </div>
