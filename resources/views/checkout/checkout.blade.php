@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="min-h-screen flex items-center justify-center p-3 sm:p-6 md:p-10 py-6 sm:py-10 transition-colors duration-300"
+    <div class="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-6 sm:py-10 transition-colors duration-300"
         style="background-color: var(--mc-bg);">
 
         {{-- Subtle grid texture overlay --}}

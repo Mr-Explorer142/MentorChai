@@ -24,7 +24,7 @@
                 style="background-image: radial-gradient(rgba(26,153,152,0.1) 1px, transparent 1px); background-size: 28px 28px; opacity: 0.6;">
             </div>
 
-            <div class="container relative z-10 mx-auto px-4 sm:px-6 lg:px-12">
+            <div class="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="grid items-center gap-8 sm:gap-14 lg:grid-cols-2">
 
                     {{-- LEFT CONTENT --}}
@@ -150,7 +150,7 @@
         POPULAR TOPICS CAROUSEL
         ═══════════════════════════════════════════ --}}
         <section class="py-12 sm:py-24 transition-colors duration-300" style="background-color: var(--mc-surface);">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
                 {{-- Heading --}}
                 <div class="mb-8 sm:mb-14 text-center">
@@ -346,7 +346,7 @@
         FEATURES SECTION
         ═══════════════════════════════════════════ --}}
         <section class="py-12 sm:py-24 transition-colors duration-300" >
-            <div class="mx-auto max-w-6xl px-4 sm:px-6">
+            <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
 
                 {{-- Heading --}}
                 <div class="mb-8 sm:mb-14 text-center">
@@ -440,7 +440,7 @@
                 </div>
             </div>
 
-            <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6">
+            <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
                 {{-- Heading --}}
                 <div class="mb-8 sm:mb-12 text-center">

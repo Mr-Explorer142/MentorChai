@@ -4,7 +4,7 @@
     MENTOR REGISTER PAGE
     ═══════════════════════════════════════════ --}}
 
-    <div class="relative min-h-screen overflow-hidden flex items-center justify-center px-4 py-8 sm:py-16
+    <div class="relative min-h-screen overflow-hidden flex items-center justify-center px-4 sm:px-6 lg:px-8 py-8 sm:py-16
                 bg-linear-to-br from-[#eef7f8] via-[#f8fdfe] to-[#f0f9f4]
                 dark:from-[#0f1f2e] dark:via-[#1a2e3b] dark:to-[#0f2a20]
                 transition-colors duration-300">

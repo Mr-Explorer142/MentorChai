@@ -1,6 +1,6 @@
 <x-layout>
     <div
-        class="min-h-screen p-3 sm:p-6 md:p-8 transition-colors duration-300 bg-gradient-to-br from-[#f0fafa] via-[#e8f7f6] to-[#f0fafa] dark:from-[#0f1f2e] dark:via-[#152a3b] dark:to-[#0f1f2e]">
+        class="min-h-screen px-4 sm:px-6 lg:px-8 py-3 sm:py-6 md:py-8 transition-colors duration-300 bg-gradient-to-br from-[#f0fafa] via-[#e8f7f6] to-[#f0fafa] dark:from-[#0f1f2e] dark:via-[#152a3b] dark:to-[#0f1f2e]">
 
         {{-- ── Page Header ── --}}
         <div class="mb-4 sm:mb-6">

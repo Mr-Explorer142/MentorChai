@@ -2,7 +2,7 @@
     <div class="min-h-screen transition-colors duration-300" style="background-color: var(--mc-bg);">
 
         {{-- Header --}}
-        <section class="max-w-3xl mx-auto px-4 sm:px-5 pt-8 pb-6 sm:pt-16 sm:pb-10 text-center">
+        <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-6 sm:pt-16 sm:pb-10 text-center">
             <span class="badge badge-outline font-bold uppercase tracking-widest text-[10px] sm:text-xs px-3 py-2 sm:px-4 sm:py-3 mb-2 sm:mb-4"
                 style="border-color: var(--mc-border-teal); color: var(--mc-primary); background: rgba(40,102,110,0.08);">
                 ❓ সহায়তা কেন্দ্র
@@ -21,7 +21,7 @@
         </section>
 
         {{-- FAQ List --}}
-        <section class="max-w-3xl mx-auto px-4 sm:px-5 pb-10 sm:pb-20 flex flex-col gap-2.5 sm:gap-3">
+        <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 sm:pb-20 flex flex-col gap-2.5 sm:gap-3">
 
             @php
             $faqs = [

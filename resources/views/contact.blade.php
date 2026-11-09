@@ -1,6 +1,6 @@
 <x-layout>
     <div class="min-h-screen transition-colors duration-300" style="background-color: var(--mc-bg);">
-        <section class="max-w-6xl mx-auto px-4 sm:px-5 py-8 sm:py-16 md:py-24">
+        <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-16 md:py-24">
 
             {{-- Section Header --}}
             <div class="text-center mb-8 sm:mb-16">

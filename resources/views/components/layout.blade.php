@@ -44,7 +44,7 @@
                             shadow-[0_2px_16px_rgba(40,102,110,0.07)] dark:shadow-[0_2px_16px_rgba(0,0,0,0.3)]
                             transition-colors duration-300">
 
-                    <div class="flex items-center justify-between px-2 sm:px-10 py-3 mx-auto w-full">
+                    <div class="flex items-center justify-between px-4 sm:px-6 lg:px-8 py-3 mx-auto w-full">
 
                         {{-- LEFT: Hamburger + Brand --}}
                         <div class="flex items-center gap-1.5 sm:gap-3">
@@ -171,9 +171,15 @@
 
                             {{-- Language Toggle --}}
                             <button id="language-toggle" type="button" data-language-toggle
-                                class="px-2 py-1.5 rounded-lg text-xs sm:text-sm font-bold text-[#28666e] dark:text-[#4db6c1] hover:bg-teal-50 dark:hover:bg-teal-900/30 transition-colors"
+                                class="relative inline-flex h-9 w-20 items-center rounded-full bg-[#e3efed] p-1 text-xs font-bold shadow-inner transition-colors hover:bg-[#d6e8e5] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#28666e] focus-visible:ring-offset-2 dark:bg-[#203d45] dark:hover:bg-[#294b54] dark:focus-visible:ring-[#4db6c1] cursor-pointer"
                                 aria-label="Switch to Bengali" title="Switch to Bengali">
-                                <span id="language-toggle-label">বাংলা</span>
+                                <span id="language-toggle-indicator" aria-hidden="true"
+                                    class="absolute left-1 top-1 h-7 w-9 rounded-full bg-[#28666e] shadow-sm transition-transform duration-200 dark:bg-[#4db6c1]"></span>
+                                <span data-language-option="en"
+                                    class="relative z-10 flex-1 text-center text-white dark:text-[#0f1f2e]">EN</span>
+                                <span data-language-option="bn"
+                                    class="relative z-10 flex-1 text-center text-[#28666e] dark:text-[#4db6c1]">বাংলা</span>
+                                <span id="language-toggle-label" class="sr-only">বাংলা</span>
                             </button>
 
                             {{-- Vertical divider --}}
@@ -349,7 +355,7 @@
     <footer class="border-t border-[#28666e]/10 dark:border-[#4db6c1]/10
                    shadow-[0_-2px_16px_rgba(40,102,110,0.05)] dark:shadow-[0_-2px_16px_rgba(0,0,0,0.2)]
                    mt-auto transition-colors duration-300">
-        <div class="max-w-7xl mx-auto px-6 py-10 flex flex-col items-center gap-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex flex-col items-center gap-6">
 
             {{-- Brand --}}
             <span class="font-[Lora,serif] text-xl font-bold tracking-[-0.3px]

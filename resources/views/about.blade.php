@@ -4,7 +4,7 @@
         {{-- ══════════════════════════════════════════
         HERO / ABOUT SECTION
         ══════════════════════════════════════════ --}}
-        <section class="relative overflow-hidden pt-8 pb-12 px-4 sm:pt-16 sm:pb-20 md:px-14">
+        <section class="relative overflow-hidden pt-8 pb-12 sm:pt-16 sm:pb-20">
 
             {{-- Decorative blobs --}}
             <div class="pointer-events-none absolute -top-32 -right-32 w-96 h-96 rounded-full"
@@ -14,7 +14,7 @@
                 style="background: radial-gradient(circle, rgba(21,86,101,0.08), transparent 70%); filter: blur(50px);">
             </div>
 
-            <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-center">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-center">
 
                 {{-- Text Content --}}
                 <div class="space-y-4 sm:space-y-6">
@@ -92,7 +92,7 @@
         ══════════════════════════════════════════ --}}
         <section class="py-10 sm:py-20 transition-colors duration-300"
             style="background: linear-gradient(180deg, var(--mc-surface) 0%, var(--mc-bg) 100%);">
-            <div class="max-w-6xl mx-auto px-4 sm:px-5">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
                 <div class="text-center mb-8 sm:mb-14">
                     <span class="badge badge-outline font-bold uppercase tracking-widest text-[10px] sm:text-xs px-3 py-2 sm:px-4 sm:py-3 mb-2 sm:mb-4"
@@ -173,7 +173,7 @@
         TEAM SECTION
         ══════════════════════════════════════════ --}}
         <section class="py-10 pb-14 sm:py-20 sm:pb-28" style="background-color: var(--mc-bg);">
-            <div class="max-w-5xl mx-auto px-4 sm:px-5">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
                 <div class="text-center mb-8 sm:mb-16">
                     <h2 class="text-xl sm:text-2xl lg:text-4xl font-bold mt-2 sm:mt-3"

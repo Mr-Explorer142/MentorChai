@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="min-h-screen px-4 py-8 md:px-10 space-y-6 transition-colors duration-300"
+    <div class="min-h-screen px-4 py-8 sm:px-6 lg:px-8 space-y-6 transition-colors duration-300"
         style="background-color: var(--mc-bg);">
 
         {{-- ══════════════════════

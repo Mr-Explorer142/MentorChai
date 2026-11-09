@@ -13,6 +13,9 @@ const translations = [
     ["FAQs", "সাধারণ জিজ্ঞাসা"],
     ["Terms & Conditions", "শর্তাবলী"],
     ["Browse", "ব্রাউজ করুন"],
+    ["Browse our community", "আমাদের কমিউনিটি ঘুরে দেখুন"],
+    ["Learn one-to-one from experienced mentors, on your schedule and at your pace.", "অভিজ্ঞ মেন্টরের কাছ থেকে নিজের সুবিধামতো সময়ে ও গতিতে একান্তভাবে শিখুন।"],
+    ["Search mentors or subjects...", "মেন্টর বা বিষয় খুঁজুন..."],
     ["Search", "খুঁজুন"],
     ["Search...", "খুঁজুন..."],
     ["Sort by", "সাজান"],
@@ -532,6 +535,8 @@ const translatableAttributes = [
     "title",
     "value",
 ];
+const translationSkipSelector =
+    "[data-language-toggle], [data-language-skip], code, pre, script, style, textarea";
 const ignoredElements = new Set([
     "CODE",
     "PRE",
@@ -613,13 +618,19 @@ function localizeDigits(value, language) {
           );
 }
 
+function translateAttributes(element, language) {
+    for (const attribute of translatableAttributes) {
+        const value = element.getAttribute(attribute);
+        if (!value) continue;
+
+        const translated = translateValue(value, language);
+        if (translated !== value) element.setAttribute(attribute, translated);
+    }
+}
+
 function translateNode(node, language) {
     if (node.nodeType === Node.TEXT_NODE) {
-        if (
-            node.parentElement?.closest(
-                "[data-language-toggle], [data-language-skip]",
-            )
-        ) {
+        if (node.parentElement?.closest(translationSkipSelector)) {
             return;
         }
         const translated = translateValue(node.nodeValue ?? "", language);
@@ -632,18 +643,20 @@ function translateNode(node, language) {
     const element = node;
     if (
         ignoredElements.has(element.tagName) ||
-        element.closest("[data-language-toggle], [data-language-skip]")
+        element.closest(translationSkipSelector)
     ) {
         return;
     }
 
-    for (const attribute of translatableAttributes) {
-        const value = element.getAttribute(attribute);
-        if (value) {
-            const translated = translateValue(value, language);
-            if (translated !== value) element.setAttribute(attribute, translated);
+    translateAttributes(element, language);
+    element.querySelectorAll("*").forEach((descendant) => {
+        if (
+            !ignoredElements.has(descendant.tagName) &&
+            !descendant.closest(translationSkipSelector)
+        ) {
+            translateAttributes(descendant, language);
         }
-    }
+    });
 
     const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT, {
         acceptNode(textNode) {
@@ -651,7 +664,7 @@ function translateNode(node, language) {
             if (!parent || ignoredElements.has(parent.tagName)) {
                 return NodeFilter.FILTER_REJECT;
             }
-            if (parent.closest("[data-language-toggle], [data-language-skip]")) {
+            if (parent.closest(translationSkipSelector)) {
                 return NodeFilter.FILTER_REJECT;
             }
             return NodeFilter.FILTER_ACCEPT;
@@ -669,12 +682,24 @@ export function initializeLanguageToggle() {
 
     let language = readSavedLanguage();
     const label = document.getElementById("language-toggle-label");
+    const indicator = document.getElementById("language-toggle-indicator");
+    const options = button.querySelectorAll("[data-language-option]");
 
     function updateToggle() {
         document.documentElement.lang = language;
         document.documentElement.dataset.language = language;
-        if (label) label.textContent = language === "en" ? "বাংলা" : "English";
+        button.dataset.language = language;
+        const labelText = language === "en" ? "বাংলা" : "English";
+        if (label && label.textContent !== labelText) label.textContent = labelText;
         button.setAttribute("aria-pressed", String(language === "bn"));
+        indicator?.classList.toggle("translate-x-9", language === "bn");
+        options.forEach((option) => {
+            const isActive = option.dataset.languageOption === language;
+            option.classList.toggle("text-white", isActive);
+            option.classList.toggle("text-[#28666e]", !isActive);
+            option.classList.toggle("dark:text-[#0f1f2e]", isActive);
+            option.classList.toggle("dark:text-[#4db6c1]", !isActive);
+        });
 
         const targetLanguage = language === "en" ? "Bengali" : "English";
         button.setAttribute("aria-label", `Switch to ${targetLanguage}`);
@@ -706,7 +731,6 @@ export function initializeLanguageToggle() {
                 mutation.addedNodes.forEach((node) => translateNode(node, language));
             }
         }
-        updateToggle();
     });
     observer.observe(document.body, {
         characterData: true,

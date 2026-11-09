@@ -3,7 +3,7 @@
         class="min-h-screen flex items-center justify-center
                 bg-linear-to-br from-teal-50 via-white to-white
                 dark:from-[#0f1f2e] dark:via-[#1a2e3b] dark:to-[#0f1f2e]
-                px-3.5 sm:px-6 py-6 sm:py-10">
+                px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
 
         <div
             class="bg-white dark:bg-[#1a2e3b]

@@ -4,7 +4,7 @@
     ADMIN LOGIN PAGE
     ═══════════════════════════════════════════ --}}
 
-    <div class="relative min-h-screen overflow-hidden flex items-center justify-center px-4 py-16
+    <div class="relative min-h-screen overflow-hidden flex items-center justify-center px-4 sm:px-6 lg:px-8 py-16
                 bg-[#f0f4f4] dark:bg-[#0f1f2e]
                 transition-colors duration-300">
 
