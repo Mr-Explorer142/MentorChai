@@ -1,5 +1,9 @@
 import "./bootstrap";
 import Alpine from "alpinejs";
+import { initializeLanguageToggle } from "./language";
+
+initializeLanguageToggle();
+
 window.Alpine = Alpine;
 Alpine.start();
 

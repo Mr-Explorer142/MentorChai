@@ -36,4 +36,13 @@ class RouteTest extends TestCase
 
         $response->assertOk();
     }
+
+    public function test_language_toggle_defaults_to_english(): void
+    {
+        $this->get('/')
+            ->assertOk()
+            ->assertSee('<html lang="en"', false)
+            ->assertSee('id="language-toggle"', false)
+            ->assertSee('aria-label="Switch to Bengali"', false);
+    }
 }

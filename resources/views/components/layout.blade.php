@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="bn" data-theme="light">
+<html lang="en" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
@@ -167,6 +167,13 @@
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" />
                                 </svg>
+                            </button>
+
+                            {{-- Language Toggle --}}
+                            <button id="language-toggle" type="button" data-language-toggle
+                                class="px-2 py-1.5 rounded-lg text-xs sm:text-sm font-bold text-[#28666e] dark:text-[#4db6c1] hover:bg-teal-50 dark:hover:bg-teal-900/30 transition-colors"
+                                aria-label="Switch to Bengali" title="Switch to Bengali">
+                                <span id="language-toggle-label">বাংলা</span>
                             </button>
 
                             {{-- Vertical divider --}}

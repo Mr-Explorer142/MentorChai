@@ -212,12 +212,11 @@ Route::prefix('admin')->name('admin_')->group(function () {
 | Authenticated Routes
 |--------------------------------------------------------------------------
 */
+// Profile — no verification needed to view profiles
+Route::get('/profile/student/{id}', [ProfileController::class, 'showStudentProfile'])->name('student_profile');
+Route::get('/profile/mentor/{id}', [ProfileController::class, 'showMentorProfile'])->name('mentor_profile');
 
 Route::middleware('auth')->group(function () {
-
-    // Profile — no verification needed to view profiles
-    Route::get('/profile/student/{id}', [ProfileController::class, 'showStudentProfile'])->name('student_profile');
-    Route::get('/profile/mentor/{id}', [ProfileController::class, 'showMentorProfile'])->name('mentor_profile');
 
     // zegocloud - return server secret for client-side token generation
     Route::get('/zego/token', function () {
@@ -427,5 +426,3 @@ Route::middleware('auth')->group(function () {
 Route::post('/audio-detection/webhook', [AssemblyAIWebhookController::class, 'handle'])
     ->name('audio-detection.webhook')
     ->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
-
-
