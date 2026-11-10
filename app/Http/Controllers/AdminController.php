@@ -10,13 +10,15 @@ use App\Models\Payment;
 use App\Models\SecurityEvent;
 use App\Models\SessionTopic;
 use App\Models\User;
+use App\Services\CloudinaryStorage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
+    public function __construct(private CloudinaryStorage $cloud) {}
+
     /* ──────────────────────────────────────────
      | Auth
     ────────────────────────────────────────── */
@@ -391,7 +393,7 @@ class AdminController extends Controller
             // Delete document files
             foreach (['nid_front', 'nid_back', 'student_id_front', 'student_id_back', 'cv'] as $field) {
                 if ($user->profile->$field) {
-                    Storage::disk('public')->delete($user->profile->$field);
+                    $this->cloud->delete($user->profile->$field);
                 }
             }
             $user->profile->update([

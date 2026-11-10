@@ -42,7 +42,7 @@
                                     shadow-[var(--mc-shadow-md)] ring-2 sm:ring-3 ring-[var(--mc-border-teal)]
                                     transition:box-shadow .2s;">
                             @if($student->profile && $student->profile->avatar)
-                            <img id="profileAvatarImg" src="{{ asset('storage/' . $student->profile->avatar) }}"
+                            <img id="profileAvatarImg" src="{{ media_url($student->profile->avatar) }}"
                                 alt="Profile Photo" class="w-full h-full object-cover block" />
                             @else
                             <img id="profileAvatarImg"
@@ -263,7 +263,7 @@
                     <div class="w-28 h-28 rounded-full overflow-hidden ring-4 shadow-xl"
                         style="ring-color:rgba(26,153,143,0.4);">
                         @if($student->profile && $student->profile->avatar)
-                        <img id="profileModalPreview" src="{{ asset('storage/' . $student->profile->avatar) }}"
+                        <img id="profileModalPreview" src="{{ media_url($student->profile->avatar) }}"
                             alt="Preview" class="w-full h-full object-cover transition-all duration-300" />
                         @else
                         <img id="profileModalPreview"

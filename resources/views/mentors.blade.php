@@ -318,7 +318,7 @@
                                                     flex items-center justify-center
                                                     text-lg sm:text-xl font-bold text-[#28666e] dark:text-[#71c6c8]">
                                             @if($mentor->profile && $mentor->profile->avatar)
-                                            <img src="{{ asset('storage/' . $mentor->profile->avatar) }}" alt="Avatar"
+                                            <img src="{{ media_url($mentor->profile->avatar) }}" alt="Avatar"
                                                 class="w-full h-full object-cover">
                                             @else
                                             {{ strtoupper(substr($mentor->name, 0, 1)) }}

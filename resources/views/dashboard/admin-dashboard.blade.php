@@ -40,7 +40,7 @@
       @php $adminUser = auth()->user(); @endphp
       <div class="admin-av">
         @if($adminUser?->profile?->avatar)
-          <img src="{{ asset('storage/' . $adminUser->profile->avatar) }}" alt="{{ $adminUser->name }}" onerror="this.style.display='none'; this.parentNode.innerText='{{ strtoupper(substr($adminUser->name ?? 'A', 0, 2)) }}'">
+          <img src="{{ media_url($adminUser->profile->avatar) }}" alt="{{ $adminUser->name }}" onerror="this.style.display='none'; this.parentNode.innerText='{{ strtoupper(substr($adminUser->name ?? 'A', 0, 2)) }}'">
         @else
           {{ strtoupper(substr($adminUser?->name ?? 'A', 0, 2)) }}
         @endif
@@ -75,7 +75,7 @@
     <div class="dropdown dropdown-end">
       <div tabindex="0" role="button" class="tb-av">
         @if($adminUser?->profile?->avatar)
-          <img src="{{ asset('storage/' . $adminUser->profile->avatar) }}" alt="{{ $adminUser->name }}" onerror="this.style.display='none'; this.parentNode.innerText='{{ strtoupper(substr($adminUser->name ?? 'A', 0, 1)) }}'">
+          <img src="{{ media_url($adminUser->profile->avatar) }}" alt="{{ $adminUser->name }}" onerror="this.style.display='none'; this.parentNode.innerText='{{ strtoupper(substr($adminUser->name ?? 'A', 0, 1)) }}'">
         @else
           {{ strtoupper(substr($adminUser?->name ?? 'A', 0, 1)) }}
         @endif
@@ -158,7 +158,7 @@
         <div class="mini-row">
           <div class="av av-amber">
             @if($user['avatar'])
-              <img src="{{ asset('storage/' . $user['avatar']) }}" alt="{{ $user['name'] }}" onerror="this.style.display='none'; this.parentNode.innerText='{{ strtoupper(substr($user['name'], 0, 1)) }}'">
+              <img src="{{ media_url($user['avatar']) }}" alt="{{ $user['name'] }}" onerror="this.style.display='none'; this.parentNode.innerText='{{ strtoupper(substr($user['name'], 0, 1)) }}'">
             @else
               {{ strtoupper(substr($user['name'], 0, 1)) }}{{ strtoupper(substr(strstr($user['name'], ' '), 1, 1)) }}
             @endif
@@ -190,7 +190,7 @@
         <div class="mini-row">
           <div class="av av-blue">
             @if($student['avatar'])
-              <img src="{{ asset('storage/' . $student['avatar']) }}" alt="{{ $student['name'] }}" onerror="this.style.display='none'; this.parentNode.innerText='{{ strtoupper(substr($student['name'], 0, 1)) }}'">
+              <img src="{{ media_url($student['avatar']) }}" alt="{{ $student['name'] }}" onerror="this.style.display='none'; this.parentNode.innerText='{{ strtoupper(substr($student['name'], 0, 1)) }}'">
             @else
               {{ strtoupper(substr($student['name'], 0, 1)) }}{{ strtoupper(substr(strstr($student['name'], ' '), 1, 1)) }}
             @endif
@@ -222,7 +222,7 @@
         <div class="mini-row">
           <div class="av av-amber">
             @if($mentor['avatar'])
-              <img src="{{ asset('storage/' . $mentor['avatar']) }}" alt="{{ $mentor['name'] }}" onerror="this.style.display='none'; this.parentNode.innerText='{{ strtoupper(substr($mentor['name'], 0, 1)) }}'">
+              <img src="{{ media_url($mentor['avatar']) }}" alt="{{ $mentor['name'] }}" onerror="this.style.display='none'; this.parentNode.innerText='{{ strtoupper(substr($mentor['name'], 0, 1)) }}'">
             @else
               {{ strtoupper(substr($mentor['name'], 0, 1)) }}{{ strtoupper(substr(strstr($mentor['name'], ' '), 1, 1)) }}
             @endif
@@ -254,7 +254,7 @@
         <div class="mini-row">
           <div class="av av-red">
             @if($banned['avatar'])
-              <img src="{{ asset('storage/' . $banned['avatar']) }}" alt="{{ $banned['name'] }}" onerror="this.style.display='none'; this.parentNode.innerText='{{ strtoupper(substr($banned['name'], 0, 1)) }}'">
+              <img src="{{ media_url($banned['avatar']) }}" alt="{{ $banned['name'] }}" onerror="this.style.display='none'; this.parentNode.innerText='{{ strtoupper(substr($banned['name'], 0, 1)) }}'">
             @else
               {{ strtoupper(substr($banned['name'], 0, 1)) }}{{ strtoupper(substr(strstr($banned['name'], ' '), 1, 1)) }}
             @endif
@@ -294,7 +294,7 @@
                 <div class="td-with-av">
                   <span class="t-av">
                     @if($mentor['avatar'])
-                      <img src="{{ asset('storage/' . $mentor['avatar']) }}" alt="{{ $mentor['name'] }}" onerror="this.style.display='none'; this.parentNode.innerText='{{ strtoupper(substr($mentor['name'], 0, 1)) }}'">
+                      <img src="{{ media_url($mentor['avatar']) }}" alt="{{ $mentor['name'] }}" onerror="this.style.display='none'; this.parentNode.innerText='{{ strtoupper(substr($mentor['name'], 0, 1)) }}'">
                     @else
                       {{ strtoupper(substr($mentor['name'], 0, 1)) }}
                     @endif
@@ -349,7 +349,7 @@
                   <div class="td-with-av">
                     <span class="t-av">
                       @if($student['avatar'])
-                        <img src="{{ asset('storage/' . $student['avatar']) }}" alt="{{ $student['name'] }}" onerror="this.style.display='none'; this.parentNode.innerText='{{ strtoupper(substr($student['name'], 0, 1)) }}'">
+                        <img src="{{ media_url($student['avatar']) }}" alt="{{ $student['name'] }}" onerror="this.style.display='none'; this.parentNode.innerText='{{ strtoupper(substr($student['name'], 0, 1)) }}'">
                       @else
                         {{ strtoupper(substr($student['name'], 0, 1)) }}
                       @endif
@@ -388,7 +388,7 @@
       <div class="appr-card">
         <div class="appr-av av-amber">
           @if($user['avatar'])
-            <img src="{{ asset('storage/' . $user['avatar']) }}" alt="{{ $user['name'] }}">
+            <img src="{{ media_url($user['avatar']) }}" alt="{{ $user['name'] }}">
           @else
             {{ strtoupper(substr($user['name'], 0, 1)) }}{{ strtoupper(substr(strstr($user['name'], ' '), 1, 1)) }}
           @endif
@@ -428,7 +428,7 @@
       <div class="ban-card">
         <div class="ban-av">
           @if($user['avatar'])
-            <img src="{{ asset('storage/' . $user['avatar']) }}" alt="{{ $user['name'] }}">
+            <img src="{{ media_url($user['avatar']) }}" alt="{{ $user['name'] }}">
           @else
             {{ strtoupper(substr($user['name'], 0, 1)) }}{{ strtoupper(substr(strstr($user['name'], ' '), 1, 1)) }}
           @endif
@@ -479,7 +479,7 @@
                   <div class="td-with-av">
                     <span class="t-av">
                       @if($mentor['avatar'])
-                        <img src="{{ asset('storage/' . $mentor['avatar']) }}" alt="{{ $mentor['name'] }}" onerror="this.style.display='none'; this.parentNode.innerText='{{ strtoupper(substr($mentor['name'], 0, 1)) }}'">
+                        <img src="{{ media_url($mentor['avatar']) }}" alt="{{ $mentor['name'] }}" onerror="this.style.display='none'; this.parentNode.innerText='{{ strtoupper(substr($mentor['name'], 0, 1)) }}'">
                       @else
                         {{ strtoupper(substr($mentor['name'], 0, 1)) }}
                       @endif
@@ -529,7 +529,7 @@
       <div class="appr-card">
         <div class="appr-av av-amber">
           @if($mentor['avatar'])
-            <img src="{{ asset('storage/' . $mentor['avatar']) }}" alt="{{ $mentor['name'] }}">
+            <img src="{{ media_url($mentor['avatar']) }}" alt="{{ $mentor['name'] }}">
           @else
             {{ strtoupper(substr($mentor['name'], 0, 1)) }}{{ strtoupper(substr(strstr($mentor['name'], ' '), 1, 1)) }}
           @endif
@@ -556,31 +556,31 @@
             <div style="font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Submitted Documents</div>
             <div class="doc-imgs">
               @if($mentor['nid_front'])
-              <div class="doc-img-box" onclick="openDocViewer('{{ asset('storage/' . $mentor['nid_front']) }}','NID Front')">
-                <img src="{{ asset('storage/' . $mentor['nid_front']) }}" alt="NID Front">
+              <div class="doc-img-box" onclick="openDocViewer('{{ media_url($mentor['nid_front']) }}','NID Front')">
+                <img src="{{ media_url($mentor['nid_front']) }}" alt="NID Front">
                 <div class="doc-label">NID Front</div>
               </div>
               @endif
               @if($mentor['nid_back'])
-              <div class="doc-img-box" onclick="openDocViewer('{{ asset('storage/' . $mentor['nid_back']) }}','NID Back')">
-                <img src="{{ asset('storage/' . $mentor['nid_back']) }}" alt="NID Back">
+              <div class="doc-img-box" onclick="openDocViewer('{{ media_url($mentor['nid_back']) }}','NID Back')">
+                <img src="{{ media_url($mentor['nid_back']) }}" alt="NID Back">
                 <div class="doc-label">NID Back</div>
               </div>
               @endif
               @if($mentor['student_id_front'])
-              <div class="doc-img-box" onclick="openDocViewer('{{ asset('storage/' . $mentor['student_id_front']) }}','Student ID Front')">
-                <img src="{{ asset('storage/' . $mentor['student_id_front']) }}" alt="Student ID Front">
+              <div class="doc-img-box" onclick="openDocViewer('{{ media_url($mentor['student_id_front']) }}','Student ID Front')">
+                <img src="{{ media_url($mentor['student_id_front']) }}" alt="Student ID Front">
                 <div class="doc-label">ID Front</div>
               </div>
               @endif
               @if($mentor['student_id_back'])
-              <div class="doc-img-box" onclick="openDocViewer('{{ asset('storage/' . $mentor['student_id_back']) }}','Student ID Back')">
-                <img src="{{ asset('storage/' . $mentor['student_id_back']) }}" alt="Student ID Back">
+              <div class="doc-img-box" onclick="openDocViewer('{{ media_url($mentor['student_id_back']) }}','Student ID Back')">
+                <img src="{{ media_url($mentor['student_id_back']) }}" alt="Student ID Back">
                 <div class="doc-label">ID Back</div>
               </div>
               @endif
               @if($mentor['cv'])
-              <div class="doc-img-box" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px;text-align:center" onclick="window.open('{{ asset('storage/' . $mentor['cv']) }}', '_blank')">
+              <div class="doc-img-box" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px;text-align:center" onclick="window.open('{{ media_url($mentor['cv']) }}', '_blank')">
                 <x-heroicon name="document-text" class="h-icon" style="width:32px;height:32px;color:var(--accent)" />
                 <div class="doc-label" style="position:static;background:none;color:var(--text);padding-top:4px">View CV</div>
               </div>
@@ -616,7 +616,7 @@
       <div class="ban-card">
         <div class="ban-av">
           @if($mentor['avatar'])
-            <img src="{{ asset('storage/' . $mentor['avatar']) }}" alt="{{ $mentor['name'] }}">
+            <img src="{{ media_url($mentor['avatar']) }}" alt="{{ $mentor['name'] }}">
           @else
             {{ strtoupper(substr($mentor['name'], 0, 1)) }}{{ strtoupper(substr(strstr($mentor['name'], ' '), 1, 1)) }}
           @endif
@@ -653,7 +653,7 @@
                   <div class="td-with-av">
                     <span class="t-av">
                       @if($mentor['avatar'])
-                        <img src="{{ asset('storage/' . $mentor['avatar']) }}" alt="{{ $mentor['name'] }}" onerror="this.style.display='none'; this.parentNode.innerText='{{ strtoupper(substr($mentor['name'], 0, 1)) }}'">
+                        <img src="{{ media_url($mentor['avatar']) }}" alt="{{ $mentor['name'] }}" onerror="this.style.display='none'; this.parentNode.innerText='{{ strtoupper(substr($mentor['name'], 0, 1)) }}'">
                       @else
                         {{ strtoupper(substr($mentor['name'], 0, 1)) }}
                       @endif

@@ -59,7 +59,7 @@
                                     shadow-[var(--mc-shadow-md)] ring-2 sm:ring-3 ring-[var(--mc-border-teal)]
                                     transition:box-shadow .2s;">
                             @if($mentor->profile && $mentor->profile->avatar)
-                            <img id="profileAvatarImg" src="{{ asset('storage/' . $mentor->profile->avatar) }}"
+                            <img id="profileAvatarImg" src="{{ media_url($mentor->profile->avatar) }}"
                                 alt="Profile Photo" class="w-full h-full object-cover block" />
                             @else
                             <img id="profileAvatarImg"
@@ -420,7 +420,7 @@
                         Resume / CV</h2>
                 </div>
                 <div class="flex items-center gap-4">
-                    <a href="{{ asset('storage/' . $mentor->profile->cv) }}" target="_blank"
+                    <a href="{{ media_url($mentor->profile->cv) }}" target="_blank"
                        class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold shadow-sm transition-all duration-200 hover:-translate-y-0.5"
                        style="background: var(--mc-primary); color: white;">
                         <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
@@ -499,8 +499,8 @@
                         </div>
                         @if($ach->image)
                         <div class="absolute right-3.5 top-3.5 shrink-0 w-10 h-10 rounded-lg overflow-hidden cursor-pointer border border-yellow-200"
-                            onclick="showAchievementImage('{{ asset('storage/' . $ach->image) }}')">
-                            <img src="{{ asset('storage/' . $ach->image) }}" alt="Achievement Image"
+                            onclick="showAchievementImage('{{ media_url($ach->image) }}')">
+                            <img src="{{ media_url($ach->image) }}" alt="Achievement Image"
                                 class="w-full h-full object-cover">
                         </div>
                         @endif
@@ -584,7 +584,7 @@
                                 <div class="w-9 h-9 rounded-full overflow-hidden shrink-0 border-2"
                                     style="border-color: var(--mc-border-teal);">
                                     @if($review->student->profile?->avatar)
-                                    <img src="{{ asset('storage/' . $review->student->profile->avatar) }}"
+                                    <img src="{{ media_url($review->student->profile->avatar) }}"
                                         alt="{{ $review->student->name }}" class="w-full h-full object-cover">
                                     @else
                                     <img src="https://ui-avatars.com/api/?name={{ urlencode($review->student->name) }}&background=28666e&color=fff&size=80&bold=true"
@@ -689,7 +689,7 @@
                     <div class="w-28 h-28 rounded-full overflow-hidden ring-4 shadow-xl"
                         style="ring-color:rgba(26,153,143,0.4);">
                         @if($mentor->profile && $mentor->profile->avatar)
-                        <img id="profileModalPreview" src="{{ asset('storage/' . $mentor->profile->avatar) }}"
+                        <img id="profileModalPreview" src="{{ media_url($mentor->profile->avatar) }}"
                             alt="Preview" class="w-full h-full object-cover transition-all duration-300" />
                         @else
                         <img id="profileModalPreview"

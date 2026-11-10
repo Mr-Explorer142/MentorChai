@@ -599,7 +599,7 @@
                                     @if(Auth::user()->profile && Auth::user()->profile->cv)
                                         <div class="mt-2 flex items-center justify-between">
                                             <p class="text-[10px] sm:text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded-md">
-                                                <a href="{{ asset('storage/' . Auth::user()->profile->cv) }}" target="_blank" class="hover:underline">View Uploaded CV</a>
+                                                <a href="{{ media_url(Auth::user()->profile->cv) }}" target="_blank" class="hover:underline">View Uploaded CV</a>
                                             </p>
                                             <label class="flex items-center gap-1.5 cursor-pointer group">
                                                 <input type="checkbox" name="remove_cv" value="1" class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-red-500 border-red-200 rounded focus:ring-red-500">

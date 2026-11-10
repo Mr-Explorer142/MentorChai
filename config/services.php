@@ -47,6 +47,12 @@ return [
         'redirect'      => env('GITHUB_REDIRECT_URI', '/auth/github/callback'),
     ],
 
+    'cloudinary' => [
+        'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+        'api_key'    => env('CLOUDINARY_API_KEY'),
+        'api_secret' => env('CLOUDINARY_API_SECRET'),
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | AssemblyAI

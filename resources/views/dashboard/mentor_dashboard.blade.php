@@ -17,7 +17,7 @@
                         <div
                             class="w-20 h-20 sm:w-40 sm:h-40 rounded-full border-2 sm:border-4 border-white/50 bg-base-100 shadow-2xl relative overflow-hidden">
                             @if($mentor->profile && $mentor->profile->avatar)
-                            <img src="{{ asset('storage/' . $mentor->profile->avatar) }}" alt="Avatar"
+                            <img src="{{ media_url($mentor->profile->avatar) }}" alt="Avatar"
                                 class="w-full h-full object-cover" />
                             @else
                             <img src="https://ui-avatars.com/api/?name={{ urlencode($mentor->name) }}&background=random&color=fff&size=200&bold=true"
@@ -163,7 +163,7 @@
                                         <div class="avatar shrink-0">
                                             <div class="w-9 h-9 rounded-full border-2 border-white shadow-xs">
                                                 @if($topic->student?->profile?->avatar)
-                                                <img src="{{ asset('storage/' . $topic->student->profile->avatar) }}" alt="{{ $topic->student->name }}" />
+                                                <img src="{{ media_url($topic->student->profile->avatar) }}" alt="{{ $topic->student->name }}" />
                                                 @else
                                                 <img src="https://ui-avatars.com/api/?name={{ urlencode($topic->student?->name ?? 'S') }}&background=random" alt="Avatar" />
                                                 @endif
@@ -276,7 +276,7 @@
                                             <div class="avatar shrink-0 mt-0.5">
                                                 <div class="w-12 h-12 rounded-full border-2 border-white shadow-md">
                                                     @if($topic->student?->profile?->avatar)
-                                                    <img src="{{ asset('storage/' . $topic->student->profile->avatar) }}"
+                                                    <img src="{{ media_url($topic->student->profile->avatar) }}"
                                                         alt="{{ $topic->student->name }}" />
                                                     @else
                                                     <img src="https://ui-avatars.com/api/?name={{ urlencode($topic->student?->name ?? 'S') }}&background=random"
@@ -438,7 +438,7 @@
                                     <div class="avatar">
                                         <div class="w-9 h-9 sm:w-12 sm:h-12 rounded-full border-2 border-white shadow-md">
                                             @if($payment->student?->profile?->avatar)
-                                            <img src="{{ asset('storage/' . $payment->student->profile->avatar) }}"
+                                            <img src="{{ media_url($payment->student->profile->avatar) }}"
                                                 alt="{{ $payment->student->name }}" />
                                             @else
                                             <img src="https://ui-avatars.com/api/?name={{ urlencode($payment->student?->name ?? 'S') }}&background=random"

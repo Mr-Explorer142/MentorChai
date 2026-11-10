@@ -67,7 +67,7 @@
                     <div class="flex flex-row sm:flex-row gap-3 sm:gap-4 items-center sm:items-start">
                         <div class="avatar placeholder shrink-0">
                             @if($session->mentor->profile?->avatar)
-                                <img src="{{ asset('storage/' . $session->mentor->profile->avatar) }}"
+                                <img src="{{ media_url($session->mentor->profile->avatar) }}"
                                     class="w-12 h-12 sm:w-16 sm:h-16 rounded-full object-cover" alt="{{ $session->mentor->name }}">
                             @else
                                 <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-full font-bold text-base sm:text-2xl grid place-items-center text-white bg-gradient-to-br from-[#1A9998] to-[#155665] dark:from-[#4db6c1] dark:to-[#155665]">
@@ -195,7 +195,7 @@
                             border border-[#1a9998]/10 dark:border-[#4db6c1]/10">
                     <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden shrink-0">
                         @if($session->mentor->profile?->avatar)
-                            <img src="{{ asset('storage/' . $session->mentor->profile->avatar) }}"
+                            <img src="{{ media_url($session->mentor->profile->avatar) }}"
                                 class="w-full h-full object-cover" alt="{{ $session->mentor->name }}">
                         @else
                             <div class="w-full h-full grid place-items-center font-bold text-white text-xs sm:text-sm
