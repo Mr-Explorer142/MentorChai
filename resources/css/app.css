@@ -27,6 +27,147 @@
   }
 }
 
+/* ═══════════════════════════════════════════════════
+   HERO SECTION — ANIMATION KEYFRAMES
+   ═══════════════════════════════════════════════════ */
+
+@keyframes hero-slide-up {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes hero-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes hero-float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33%       { transform: translateY(-12px) rotate(1deg); }
+  66%       { transform: translateY(-6px) rotate(-0.5deg); }
+}
+
+@keyframes hero-float-reverse {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33%       { transform: translateY(-8px) rotate(-1deg); }
+  66%       { transform: translateY(-16px) rotate(0.5deg); }
+}
+
+@keyframes hero-pulse-glow {
+  0%, 100% { box-shadow: 0 8px 32px rgba(26,153,152,0.4), 0 0 0 0 rgba(26,153,152,0.3); }
+  50%       { box-shadow: 0 12px 48px rgba(26,153,152,0.65), 0 0 0 10px rgba(26,153,152,0); }
+}
+
+@keyframes hero-shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes hero-spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes hero-bounce-in {
+  0%   { opacity: 0; transform: scale(0.6) translateY(20px); }
+  60%  { transform: scale(1.05) translateY(-4px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes hero-particle-drift {
+  0%   { transform: translateY(0) translateX(0) scale(1); opacity: 0.7; }
+  50%  { transform: translateY(-20px) translateX(10px) scale(1.2); opacity: 1; }
+  100% { transform: translateY(0) translateX(0) scale(1); opacity: 0.7; }
+}
+
+@keyframes hero-wave {
+  0%, 100% { transform: scaleY(1); }
+  50%       { transform: scaleY(0.95); }
+}
+
+@keyframes hero-counter-up {
+  from { transform: translateY(100%); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+/* ── Utility classes for hero animations ── */
+.hero-animate-slide-up     { animation: hero-slide-up 0.7s cubic-bezier(0.22,1,0.36,1) both; }
+.hero-animate-fade-in      { animation: hero-fade-in 0.6s ease both; }
+.hero-animate-float        { animation: hero-float 6s ease-in-out infinite; }
+.hero-animate-float-rev    { animation: hero-float-reverse 7s ease-in-out infinite; }
+.hero-animate-pulse-glow   { animation: hero-pulse-glow 2.4s ease-in-out infinite; }
+.hero-animate-shimmer      { animation: hero-shimmer 3s linear infinite; }
+.hero-animate-spin-slow    { animation: hero-spin-slow 20s linear infinite; }
+.hero-animate-bounce-in    { animation: hero-bounce-in 0.65s cubic-bezier(0.22,1,0.36,1) both; }
+.hero-animate-particle     { animation: hero-particle-drift 4s ease-in-out infinite; }
+
+/* Stagger delays */
+.hero-delay-100 { animation-delay: 0.1s; }
+.hero-delay-200 { animation-delay: 0.2s; }
+.hero-delay-300 { animation-delay: 0.3s; }
+.hero-delay-400 { animation-delay: 0.4s; }
+.hero-delay-500 { animation-delay: 0.5s; }
+.hero-delay-600 { animation-delay: 0.6s; }
+.hero-delay-700 { animation-delay: 0.7s; }
+.hero-delay-800 { animation-delay: 0.8s; }
+.hero-delay-900 { animation-delay: 0.9s; }
+.hero-delay-1000 { animation-delay: 1.0s; }
+.hero-delay-1200 { animation-delay: 1.2s; }
+.hero-delay-1400 { animation-delay: 1.4s; }
+
+/* Shimmer text gradient */
+.hero-text-shimmer {
+  background: linear-gradient(
+    90deg,
+    #1A9998 0%,
+    #4db6c1 25%,
+    #7ec8e3 50%,
+    #4db6c1 75%,
+    #1A9998 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: hero-shimmer 3.5s linear infinite;
+}
+
+/* Particle dots */
+.hero-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(26,153,152,0.6);
+  pointer-events: none;
+}
+
+/* Grid pattern overlay */
+.hero-grid-pattern {
+  background-image:
+    linear-gradient(rgba(26,153,152,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26,153,152,0.07) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Glowing ring for image */
+.hero-image-ring {
+  box-shadow:
+    0 0 0 3px rgba(26,153,152,0.3),
+    0 0 0 8px rgba(26,153,152,0.08),
+    0 32px 80px rgba(26,153,152,0.25),
+    0 8px 24px rgba(0,0,0,0.12);
+}
+
+/* CTA button glow */
+.hero-cta-glow {
+  background: linear-gradient(135deg, #1A9998, #155665);
+  animation: hero-pulse-glow 2.4s ease-in-out infinite;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+.hero-cta-glow:hover {
+  transform: translateY(-2px) scale(1.03);
+  filter: brightness(1.1);
+}
+
 @utility mesh-bg-student {
   background-color: var(--mc-bg);
   background-image:

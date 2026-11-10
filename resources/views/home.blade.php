@@ -2,148 +2,237 @@
     <div class="min-h-screen transition-colors duration-300" style="background-color: var(--mc-bg);">
 
         {{-- ═══════════════════════════════════════════
-        HERO SECTION
+        HERO SECTION  —  Immersive animated hero
         ═══════════════════════════════════════════ --}}
-        <section class="relative overflow-hidden pt-8 pb-14 sm:pt-12 sm:pb-28 lg:pt-16 lg:pb-36" style="background-color: var(--mc-bg);">
+        <section class="relative overflow-hidden" style="background: linear-gradient(160deg, #033f63 0%, #0a5a6a 35%, #155665 60%, #0f3a4a 100%);">
 
-            {{-- Decorative blobs --}}
-            <div class="pointer-events-none absolute inset-0 overflow-hidden">
-                <div class="absolute -top-32 -right-32 h-[250px] w-[250px] sm:h-[500px] sm:w-[500px] rounded-full"
-                    style="background: radial-gradient(circle, rgba(26,153,152,0.18), transparent 70%); filter: blur(60px);">
-                </div>
-                <div class="absolute -bottom-24 -left-24 h-[200px] w-[200px] sm:h-[380px] sm:w-[380px] rounded-full"
-                    style="background: radial-gradient(circle, rgba(21,86,101,0.12), transparent 70%); filter: blur(50px);">
-                </div>
-                <div class="absolute right-1/3 top-1/4 h-[250px] w-[250px] rounded-full"
-                    style="background: radial-gradient(circle, rgba(26,153,152,0.1), transparent 70%); filter: blur(70px);">
-                </div>
+            {{-- ── Full-width background image with dark overlay ── --}}
+            <div class="absolute inset-0 z-0">
+                <img src="{{ asset('images/Home Page/Homepagetop.jpg') }}"
+                    alt=""
+                    class="h-full w-full object-cover object-center"
+                    style="filter: brightness(0.22) saturate(1.4);" />
             </div>
 
-            {{-- Subtle dot pattern --}}
-            <div class="pointer-events-none absolute inset-0"
-                style="background-image: radial-gradient(rgba(26,153,152,0.1) 1px, transparent 1px); background-size: 28px 28px; opacity: 0.6;">
+            {{-- ── Gradient overlay (teal brand tones on top of darkened image) ── --}}
+            <div class="absolute inset-0 z-0"
+                style="background: linear-gradient(160deg, rgba(3,63,99,0.82) 0%, rgba(21,86,101,0.72) 45%, rgba(10,55,65,0.88) 100%);"></div>
+
+            {{-- ── Grid pattern overlay ── --}}
+            <div class="hero-grid-pattern pointer-events-none absolute inset-0 z-0 opacity-40"></div>
+
+            {{-- ── Animated glowing blobs ── --}}
+            <div class="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+                <div class="hero-animate-float absolute -top-20 -right-20 h-[400px] w-[400px] rounded-full"
+                    style="background: radial-gradient(circle, rgba(26,153,152,0.22), transparent 65%); filter: blur(70px);"></div>
+                <div class="hero-animate-float-rev absolute -bottom-32 -left-32 h-[500px] w-[500px] rounded-full"
+                    style="background: radial-gradient(circle, rgba(77,182,193,0.16), transparent 65%); filter: blur(80px);"></div>
+                <div class="hero-animate-float hero-delay-500 absolute top-1/2 left-1/2 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full"
+                    style="background: radial-gradient(circle, rgba(126,200,227,0.08), transparent 65%); filter: blur(60px);"></div>
             </div>
 
-            <div class="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid items-center gap-8 sm:gap-14 lg:grid-cols-2">
+            {{-- ── Animated particles ── --}}
+            <div class="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+                <span class="hero-particle hero-animate-particle" style="width:6px;height:6px;top:12%;left:8%;animation-delay:0s;"></span>
+                <span class="hero-particle hero-animate-particle" style="width:4px;height:4px;top:28%;left:18%;animation-delay:1.2s;"></span>
+                <span class="hero-particle hero-animate-particle" style="width:5px;height:5px;top:55%;left:5%;animation-delay:2.1s;"></span>
+                <span class="hero-particle hero-animate-particle" style="width:7px;height:7px;top:75%;left:22%;animation-delay:0.6s;"></span>
+                <span class="hero-particle hero-animate-particle" style="width:4px;height:4px;top:18%;left:88%;animation-delay:1.8s;"></span>
+                <span class="hero-particle hero-animate-particle" style="width:6px;height:6px;top:65%;left:92%;animation-delay:0.3s;"></span>
+                <span class="hero-particle hero-animate-particle" style="width:3px;height:3px;top:40%;left:95%;animation-delay:2.5s;"></span>
+                <span class="hero-particle hero-animate-particle" style="width:5px;height:5px;top:85%;left:72%;animation-delay:1.0s;"></span>
+            </div>
 
-                    {{-- LEFT CONTENT --}}
-                    <div
-                        class="flex flex-col items-center sm:items-start text-center sm:text-left space-y-5 sm:space-y-8">
-                        {{-- Badge --}}
-                        <span
-                            class="inline-flex items-center gap-1.5 sm:gap-2 rounded-full px-3.5 py-1.5 text-xs sm:text-sm font-bold tracking-wide shadow-xs"
-                            style="background: linear-gradient(135deg, rgba(26,153,152,0.12), rgba(21,86,101,0.06)); border: 1.5px solid rgba(26,153,152,0.3); color: var(--mc-primary);">
-                            <span class="h-2 w-2 animate-pulse rounded-full shadow-[0_0_8px_rgba(26,153,152,0.8)]"
-                                style="background: var(--mc-primary);"></span>
-                            পরীক্ষার আগে শেষ মুহূর্তের সহায়তা
-                        </span>
+            {{-- ── Spinning decorative ring (top-right corner) ── --}}
+            <div class="pointer-events-none absolute -top-16 -right-16 z-0 opacity-10 hidden lg:block">
+                <div class="hero-animate-spin-slow h-[320px] w-[320px] rounded-full"
+                    style="border: 2px dashed rgba(77,182,193,0.8);"></div>
+            </div>
+            <div class="pointer-events-none absolute -bottom-20 -left-20 z-0 opacity-10 hidden lg:block">
+                <div class="hero-animate-spin-slow h-[260px] w-[260px] rounded-full"
+                    style="border: 2px dashed rgba(26,153,152,0.8); animation-direction: reverse;"></div>
+            </div>
 
-                        {{-- Heading --}}
-                        <h1 class="text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl md:text-5xl lg:text-6xl"
-                            style="color: var(--mc-text);">
-                            জরুরি মুহূর্তে হঠাৎ <br class="inline sm:hidden" />
-                            <span
-                                class="bg-gradient-to-r from-[#1A9998] to-[#155665] dark:from-[#4db6c1] dark:to-[#7ec8e3] bg-clip-text text-transparent">
-                                শিক্ষকের সাহায্য
-                            </span> প্রয়োজন?
-                            <br class="hidden sm:inline" />
-                            <span class="text-slate-800 dark:text-slate-200">MentorChai আছে আপনার সাথে</span>
-                        </h1>
+            {{-- ── MAIN CONTENT ── --}}
+            <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 pb-10 sm:pt-24 sm:pb-16 lg:pt-28 lg:pb-20">
+                <div class="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+
+                    {{-- ══ LEFT: Text content ══ --}}
+                    <div class="flex flex-col items-center sm:items-start text-center sm:text-left space-y-6 sm:space-y-8">
+
+                        {{-- Live badge --}}
+                        <div class="hero-animate-bounce-in hero-delay-100 inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs sm:text-sm font-bold tracking-wide backdrop-blur-sm"
+                            style="background: rgba(26,153,152,0.2); border: 1.5px solid rgba(77,182,193,0.45); color: #7ec8e3;">
+                            <span class="relative flex h-2.5 w-2.5">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
+                                    style="background: #4db6c1;"></span>
+                                <span class="relative inline-flex h-2.5 w-2.5 rounded-full"
+                                    style="background: #4ade80;"></span>
+                            </span>
+                            পরীক্ষার আগে শেষ মুহূর্তের সহায়তা • এখনই পাওয়া যাচ্ছে
+                        </div>
+
+                        {{-- Main heading with shimmer on key phrase --}}
+                        <div class="space-y-2 sm:space-y-3">
+                            <h1 class="hero-animate-slide-up hero-delay-200 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-[1.12] tracking-tight text-white">
+                                জরুরি মুহূর্তে হঠাৎ
+                            </h1>
+                            <h1 class="hero-animate-slide-up hero-delay-300 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-[1.12] tracking-tight">
+                                <span class="hero-text-shimmer">শিক্ষকের সাহায্য</span>
+                                <span class="text-white"> প্রয়োজন?</span>
+                            </h1>
+                            <h1 class="hero-animate-slide-up hero-delay-400 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-[1.15] tracking-tight"
+                                style="color: #7ec8e3;">
+                                MentorChai আছে আপনার সাথে
+                            </h1>
+                        </div>
 
                         {{-- Subtext --}}
-                        <p class="max-w-xl mx-auto sm:mx-0 text-sm sm:text-lg leading-relaxed font-medium"
-                            style="color: var(--mc-text-muted);">
+                        <p class="hero-animate-slide-up hero-delay-500 max-w-xl text-sm sm:text-base lg:text-lg leading-relaxed"
+                            style="color: rgba(200,235,245,0.82);">
                             পরীক্ষার আগের রাতে হঠাৎ Calculus বুঝতে অসুবিধা হচ্ছে? কিংবা Binary Search Algorithm?
                             শুধুমাত্র Kirchhoff's Laws বুঝতে মাত্র এক ঘণ্টার জন্য একজন শিক্ষকের সহায়তা দরকার?
                         </p>
 
                         {{-- CTA Buttons --}}
-                        <div
-                            class="grid grid-cols-2 gap-2 sm:flex sm:flex-row sm:gap-4 pt-1 sm:pt-2 w-full max-w-md sm:max-w-none justify-center sm:justify-start">
+                        <div class="hero-animate-slide-up hero-delay-600 flex flex-col sm:flex-row gap-3 sm:gap-4 w-full max-w-sm sm:max-w-none">
                             <a href="{{ route('mentors') }}"
-                                class="inline-flex items-center justify-center gap-1.5 sm:gap-2 rounded-xl px-3 py-2.5 text-xs sm:px-7 sm:py-3.5 sm:text-base font-bold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5"
-                                style="background: linear-gradient(135deg, #1A9998, #155665); box-shadow: 0 8px 24px rgba(26,153,152,0.35);">
+                                class="hero-cta-glow inline-flex items-center justify-center gap-2 rounded-2xl px-6 py-3.5 sm:px-8 sm:py-4 text-sm sm:text-base font-bold text-white shadow-2xl"
+                                style="">
+                                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
                                 এখনই শিক্ষক খুঁজুন
-                                <svg class="h-3.5 w-3.5 sm:h-4 sm:w-4" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24" stroke-width="2.5">
+                                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7-7 7" />
                                 </svg>
                             </a>
                             <a href="{{ route('about') }}"
-                                class="inline-flex items-center justify-center gap-1.5 sm:gap-2 rounded-xl px-3 py-2.5 text-xs sm:px-7 sm:py-3.5 sm:text-base font-semibold transition-all duration-300 hover:-translate-y-0.5"
-                                style="border: 1.5px solid rgba(26,153,152,0.4); color: var(--mc-primary); background: var(--mc-surface);">
+                                class="inline-flex items-center justify-center gap-2 rounded-2xl px-6 py-3.5 sm:px-8 sm:py-4 text-sm sm:text-base font-semibold backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:bg-white/20"
+                                style="border: 1.5px solid rgba(77,182,193,0.5); color: #c8ebf5; background: rgba(255,255,255,0.08);">
                                 কীভাবে কাজ করে?
-                                <svg class="h-3.5 w-3.5 sm:h-4 sm:w-4" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                             </a>
                         </div>
 
                         {{-- Trust pills --}}
-                        <div class="flex flex-wrap justify-center sm:justify-start gap-2 pt-1.5 sm:gap-5 sm:pt-3">
+                        <div class="hero-animate-fade-in hero-delay-800 flex flex-wrap justify-center sm:justify-start gap-2 sm:gap-3">
                             @php
                             $trustPills = [
-                                ['icon' => '<svg class="w-3.5 h-3.5 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>', 'text' => '২৪/৭ সাপোর্ট'],
-                                ['icon' => '<svg class="w-3.5 h-3.5 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>', 'text' => 'সাশ্রয়ী'],
-                                ['icon' => '<svg class="w-3.5 h-3.5 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" /></svg>', 'text' => 'টপিক ভিত্তিক']
+                                ['icon' => '<svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>', 'text' => '২৪/৭ সাপোর্ট'],
+                                ['icon' => '<svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>', 'text' => 'সাশ্রয়ী মূল্য'],
+                                ['icon' => '<svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" /></svg>', 'text' => 'টপিক ভিত্তিক'],
+                                ['icon' => '<svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" /></svg>', 'text' => 'যাচাইকৃত মেন্টর'],
                             ];
                             @endphp
                             @foreach($trustPills as $pill)
-                            <div class="flex cursor-pointer items-center gap-1 sm:gap-1.5 rounded-full px-2.5 py-1.5 sm:px-6 sm:py-3 text-[11px] sm:text-base font-extrabold tracking-wide transition-all duration-300 hover:-translate-y-1 hover:scale-105 hover:shadow-lg border border-[#1A9998]/50 sm:border-2 sm:border-[#1A9998]/75 shadow-md sm:shadow-lg"
-                                style="background: linear-gradient(135deg, rgba(26,153,152,0.15), rgba(21,86,101,0.08)); color: var(--mc-primary);">
+                            <div class="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold backdrop-blur-sm transition-all duration-300 hover:scale-105"
+                                style="background: rgba(26,153,152,0.22); border: 1px solid rgba(77,182,193,0.35); color: #c8ebf5;">
                                 {!! $pill['icon'] !!}
                                 <span>{{ $pill['text'] }}</span>
                             </div>
                             @endforeach
                         </div>
+
+                        {{-- Stats row --}}
+                        <div class="hero-animate-fade-in hero-delay-900 flex flex-wrap justify-center sm:justify-start gap-6 sm:gap-10 pt-2 border-t w-full"
+                            style="border-color: rgba(77,182,193,0.2);">
+                            @php
+                            $stats = [
+                                ['num' => '৫০০+', 'label' => 'যাচাইকৃত মেন্টর'],
+                                ['num' => '৯৮%',  'label' => 'সন্তুষ্টির হার'],
+                                ['num' => '৩০+',  'label' => 'বিষয় উপলব্ধ'],
+                            ];
+                            @endphp
+                            @foreach($stats as $stat)
+                            <div class="flex flex-col items-center sm:items-start">
+                                <span class="text-xl sm:text-2xl font-extrabold leading-tight"
+                                    style="color: #4db6c1;">{{ $stat['num'] }}</span>
+                                <span class="text-[11px] sm:text-xs font-medium"
+                                    style="color: rgba(200,235,245,0.65);">{{ $stat['label'] }}</span>
+                            </div>
+                            @endforeach
+                        </div>
                     </div>
 
-                    {{-- RIGHT IMAGE --}}
-                    <div class="relative flex justify-center lg:justify-end mt-4 lg:mt-0">
-                        <div class="absolute inset-4 rounded-3xl"
-                            style="background: radial-gradient(ellipse, rgba(26,153,152,0.2), transparent 70%); filter: blur(40px);">
+                    {{-- ══ RIGHT: Floating card visual ══ --}}
+                    <div class="relative flex justify-center lg:justify-end mt-6 lg:mt-0">
+
+                        {{-- Glow behind card --}}
+                        <div class="absolute inset-6 rounded-3xl"
+                            style="background: radial-gradient(ellipse, rgba(26,153,152,0.35), transparent 70%); filter: blur(50px);">
                         </div>
 
-                        <div class="relative w-full max-w-[260px] sm:max-w-none mx-auto sm:mx-0">
-                            <img src="{{ asset('images/Home Page/Homepagetop.jpg') }}" alt="Mentorship session"
-                                class="relative w-full rounded-3xl"
-                                style="border: 1px solid var(--mc-border-teal); box-shadow: 0 24px 60px rgba(26,153,152,0.15), 0 4px 16px rgba(0,0,0,0.08);" />
+                        {{-- Main image card --}}
+                        <div class="hero-animate-float relative w-full max-w-[300px] sm:max-w-[420px] lg:max-w-none mx-auto">
+                            <div class="relative rounded-3xl overflow-hidden hero-image-ring">
+                                {{-- Inner gradient overlay on image --}}
+                                <div class="absolute inset-0 z-10"
+                                    style="background: linear-gradient(to bottom, transparent 50%, rgba(3,63,99,0.55) 100%);"></div>
+                                <img src="{{ asset('images/Home Page/Homepagetop.jpg') }}"
+                                    alt="Mentorship session"
+                                    class="relative w-full object-cover"
+                                    style="max-height: 460px;" />
+                            </div>
 
-                            {{-- Floating rating --}}
-                            <div class="absolute -bottom-10 left-2 sm:-bottom-14 sm:-left-5 flex items-center gap-2 sm:gap-3 rounded-xl sm:rounded-2xl px-3 py-2 sm:px-4 sm:py-3 shadow-xl"
-                                style="background: var(--mc-surface); border: 1px solid var(--mc-border-teal);">
-                                <div class="flex h-7 w-7 sm:h-9 sm:w-9 items-center justify-center rounded-lg sm:rounded-xl"
+                            {{-- Floating rating badge --}}
+                            <div class="hero-animate-bounce-in hero-delay-700 absolute -bottom-5 -left-4 sm:-bottom-8 sm:-left-8 flex items-center gap-3 rounded-2xl px-4 py-3 shadow-2xl backdrop-blur-sm"
+                                style="background: rgba(255,255,255,0.12); border: 1px solid rgba(77,182,193,0.4);">
+                                <div class="flex h-10 w-10 items-center justify-center rounded-xl flex-shrink-0"
                                     style="background: linear-gradient(135deg, #1A9998, #155665);">
-                                    <svg class="h-4 w-4 sm:h-5 sm:w-5 text-white" fill="currentColor"
-                                        viewBox="0 0 20 20">
-                                        <path
-                                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                    <svg class="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                     </svg>
                                 </div>
                                 <div>
-                                    <p class="text-xs sm:text-sm font-bold" style="color: var(--mc-primary);">4.9 Rated
-                                    </p>
-                                    <p class="text-[10px] sm:text-xs" style="color: var(--mc-text-muted);">Verified
-                                        Mentors</p>
+                                    <p class="text-sm font-extrabold text-white">4.9 ★ রেটিং</p>
+                                    <p class="text-[11px] font-medium" style="color: rgba(200,235,245,0.75);">যাচাইকৃত মেন্টরদের দ্বারা</p>
                                 </div>
                             </div>
 
-                            {{-- Online badge --}}
-                            <div class="absolute right-2 -top-4 sm:-right-4 sm:-top-6 flex items-center gap-1.5 sm:gap-2 rounded-lg sm:rounded-xl px-2.5 py-1.5 sm:px-3 sm:py-2 shadow-lg"
-                                style="background: var(--mc-surface); border: 1px solid var(--mc-border-teal);">
-                                <span class="h-2 w-2 animate-pulse rounded-full"
-                                    style="background: var(--mc-online);"></span>
-                                <span class="text-[10px] sm:text-xs font-semibold" style="color: var(--mc-primary);">৩২
-                                    জন
-                                    অনলাইন</span>
+                            {{-- Online indicator badge --}}
+                            <div class="hero-animate-bounce-in hero-delay-800 absolute -top-4 -right-2 sm:-top-6 sm:-right-6 flex items-center gap-2 rounded-xl px-3 py-2 shadow-xl backdrop-blur-sm"
+                                style="background: rgba(255,255,255,0.12); border: 1px solid rgba(74,222,128,0.4);">
+                                <span class="relative flex h-3 w-3">
+                                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
+                                        style="background: #4ade80;"></span>
+                                    <span class="relative inline-flex h-3 w-3 rounded-full"
+                                        style="background: #4ade80;"></span>
+                                </span>
+                                <span class="text-xs font-bold text-white">৩২ জন অনলাইন</span>
+                            </div>
+
+                            {{-- Session card (floating top-left) --}}
+                            <div class="hero-animate-float-rev hero-delay-300 absolute -top-6 left-4 sm:-top-10 sm:left-2 flex items-center gap-2.5 rounded-2xl px-3.5 py-2.5 shadow-xl backdrop-blur-sm hidden sm:flex"
+                                style="background: rgba(255,255,255,0.1); border: 1px solid rgba(77,182,193,0.35);">
+                                <div class="flex h-8 w-8 items-center justify-center rounded-lg"
+                                    style="background: linear-gradient(135deg, rgba(26,153,152,0.6), rgba(21,86,101,0.6));">
+                                    <svg class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.069A1 1 0 0121 8.82v6.361a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-[11px] font-bold text-white">লাইভ সেশন</p>
+                                    <p class="text-[10px]" style="color: rgba(200,235,245,0.7);">এখনই শুরু করুন</p>
+                                </div>
                             </div>
                         </div>
                     </div>
 
                 </div>
             </div>
+
+            {{-- ── SVG wave at the bottom ── --}}
+            <div class="absolute bottom-0 left-0 right-0 z-10 overflow-hidden leading-none" style="height: 60px;">
+                <svg viewBox="0 0 1440 60" preserveAspectRatio="none" class="w-full h-full"
+                    style="display:block;">
+                    <path d="M0,40 C360,80 1080,0 1440,40 L1440,60 L0,60 Z"
+                        style="fill: var(--mc-bg);"></path>
+                </svg>
+            </div>
+
         </section>
 
         {{-- ═══════════════════════════════════════════
