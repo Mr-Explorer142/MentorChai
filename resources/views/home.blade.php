@@ -120,6 +120,17 @@
                             শুধুমাত্র Kirchhoff's Laws বুঝতে মাত্র এক ঘণ্টার জন্য একজন শিক্ষকের সহায়তা দরকার?
                         </p>
 
+                        {{-- Mobile image placement: keep it directly after the hero description. --}}
+                        <div class="hero-animate-float relative w-full max-w-[300px] sm:max-w-[420px] mx-auto lg:hidden">
+                            <div class="relative rounded-3xl overflow-hidden"
+                                style="border: 1px solid var(--mc-border-teal); box-shadow: 0 0 0 4px color-mix(in srgb, var(--mc-primary) 10%, transparent), 0 32px 80px rgba(26,153,152,0.18), 0 8px 24px rgba(0,0,0,0.08);">
+                                <img src="{{ asset('images/Home Page/Homepagetop.jpg') }}"
+                                    alt="Mentorship session"
+                                    class="relative w-full object-cover"
+                                    style="max-height: 460px;" />
+                            </div>
+                        </div>
+
                         {{-- CTA Buttons --}}
                         <div class="hero-animate-slide-up hero-delay-600 flex flex-col sm:flex-row gap-3 sm:gap-4 w-full max-w-sm sm:max-w-none">
                             <a href="{{ route('mentors') }}"
@@ -183,7 +194,7 @@
                     </div>
 
                     {{-- ══ RIGHT: Floating card visual ══ --}}
-                    <div class="relative flex justify-center lg:justify-end mt-6 lg:mt-0">
+                    <div class="hidden lg:flex relative justify-center lg:justify-end mt-6 lg:mt-0">
 
                         {{-- Glow behind card --}}
                         <div class="absolute inset-6 rounded-3xl"
