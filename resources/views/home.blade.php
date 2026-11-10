@@ -42,7 +42,7 @@
                         {{-- Heading --}}
                         <h1 class="text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl md:text-5xl lg:text-6xl"
                             style="color: var(--mc-text);">
-                            জরুরি মূহুর্তে হঠাৎ <br class="inline sm:hidden" />
+                            জরুরি মুহূর্তে হঠাৎ <br class="inline sm:hidden" />
                             <span
                                 class="bg-gradient-to-r from-[#1A9998] to-[#155665] dark:from-[#4db6c1] dark:to-[#7ec8e3] bg-clip-text text-transparent">
                                 শিক্ষকের সাহায্য
