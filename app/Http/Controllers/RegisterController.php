@@ -17,6 +17,41 @@ class RegisterController extends Controller
 
     public function __construct(private CloudinaryStorage $cloud) {}
 
+    public function showStudentForm()
+    {
+        return view('auth.student_register');
+    }
+
+    public function showTeacherForm()
+    {
+        return view('auth.teacher_register');
+    }
+
+    public function register(Request $request)
+    {
+        $data = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'role' => ['required', 'in:student,mentor'],
+        ]);
+
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => $data['password'],
+            'role' => UserRole::from($data['role']),
+            'status' => UserStatus::ACTIVE,
+        ]);
+
+        $user->profile()->create();
+
+        return redirect()->route('login')->with(
+            'status',
+            'Registration successful. You can now log in.'
+        );
+    }
+
     function showStudentProfile(int $id)
     {
         $student = User::with('profile')->findOrFail($id);
