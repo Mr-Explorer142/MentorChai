@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-class ProfileController extends Controller
+class RegisterController extends Controller
 {
     use AuthorizesRequests;
 
